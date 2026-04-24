@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical Business Case Generator | Rob Dull</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0e0f11;--paper:#f5f2ec;--warm:#f0ebe0;--rule:#d4cfc4;
+  --accent:#1a3a5c;--accent2:#c8662a;--muted:#7a7569;
+  --dark:#1c2030;--dark2:#252a3a;--darkborder:#2a2f42;
+  --font-d:'Cormorant Garamond',serif;--font-m:'DM Mono',monospace;--font-b:'DM Sans',sans-serif;
+}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-b);font-size:14px;line-height:1.6;}
+
+nav{position:sticky;top:0;z-index:100;padding:14px 32px;display:flex;justify-content:space-between;align-items:center;
+  background:rgba(245,242,236,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
+.nb{font-family:var(--font-m);font-size:11px;letter-spacing:.1em;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color .2s;}
+.nb:hover{color:var(--accent);}
+.nt{font-family:var(--font-m);font-size:11px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;}
+.nc{font-family:var(--font-m);font-size:10px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;text-decoration:none;transition:color .2s;}
+.nc:hover{color:var(--ink);}
+
+.ph{background:var(--accent);padding:40px 32px 36px;position:relative;overflow:hidden;}
+.ph::after{content:'';position:absolute;right:-60px;top:-60px;width:240px;height:240px;border:1px solid rgba(255,255,255,.06);border-radius:50%;pointer-events:none;}
+.ey{font-family:var(--font-m);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:8px;}
+.ph h1{font-family:var(--font-d);font-size:30px;font-weight:300;color:white;margin-bottom:6px;}
+.ph p{color:rgba(255,255,255,.55);font-size:13px;max-width:620px;}
+
+.tabs{background:var(--warm);border-bottom:1px solid var(--rule);padding:0 32px;display:flex;}
+.tab{font-family:var(--font-m);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  padding:16px 24px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;transition:all .2s;}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.tab:hover:not(.active){color:var(--ink);}
+
+.main{display:grid;grid-template-columns:360px 1fr;min-height:calc(100vh - 220px);}
+
+.fpanel{background:var(--dark);overflow-y:auto;max-height:calc(100vh - 220px);position:sticky;top:57px;padding:22px;}
+.fplabel{font-family:var(--font-m);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#4a6080;margin-bottom:14px;}
+.ff{margin-bottom:12px;}
+.fl{font-size:10px;color:#4a6080;font-family:var(--font-m);letter-spacing:.06em;margin-bottom:3px;text-transform:uppercase;}
+.fv{background:var(--dark2);border:1px solid var(--darkborder);border-radius:4px;color:#c8d0e0;font-size:12px;padding:7px 9px;line-height:1.6;white-space:pre-wrap;}
+.fp{display:flex;justify-content:space-between;font-size:11px;color:#8090a8;margin-bottom:2px;}
+
+.opanel{background:var(--paper);overflow-y:auto;max-height:calc(100vh - 220px);padding:26px 30px;}
+.oh{margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:10px;}
+.oey{font-family:var(--font-m);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:4px;}
+.oh h2{font-family:var(--font-d);font-size:22px;font-weight:300;color:var(--ink);}
+.cpbtn{background:transparent;border:1px solid var(--rule);border-radius:3px;color:var(--muted);cursor:pointer;
+  font-family:var(--font-m);font-size:9px;letter-spacing:.1em;padding:6px 12px;text-transform:uppercase;transition:all .15s;}
+.cpbtn:hover{border-color:var(--accent);color:var(--accent);}
+
+.out-section{margin-bottom:14px;border:1px solid var(--rule);border-radius:6px;overflow:hidden;}
+.out-head{padding:10px 16px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--rule);background:rgba(0,0,0,.02);}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.sec-name{font-family:var(--font-m);font-size:9px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;}
+.out-body{padding:15px;font-size:13px;line-height:1.8;color:#2a2a2a;white-space:pre-wrap;background:white;}
+
+.dn{background:var(--accent);padding:56px 32px;margin-top:0;}
+.dn-inner{max-width:900px;margin:0 auto;}
+.dn h2{font-family:var(--font-d);font-size:32px;font-weight:300;color:white;margin-bottom:22px;}
+.ng{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;}
+.nc2{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:20px;}
+.nc2 h3{font-family:var(--font-m);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:9px;}
+.nc2 p{font-size:13px;color:rgba(255,255,255,.7);line-height:1.7;}
+
+.cs{padding:26px 32px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+.cs p{font-family:var(--font-m);font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;}
+.rl{font-family:var(--font-m);font-size:10px;letter-spacing:.1em;color:var(--accent);text-decoration:none;
+  border:1px solid var(--accent);border-radius:3px;padding:8px 16px;text-transform:uppercase;transition:all .2s;}
+.rl:hover{background:var(--accent);color:white;}
+
+@media(max-width:800px){
+  .main{grid-template-columns:1fr;}
+  .fpanel{max-height:none;position:static;}
+  .opanel{max-height:none;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nb">&#8592; Portfolio</a>
+  <span class="nt">Business Case Generator</span>
+  <a href="mailto:rob.dull@gmail.com" class="nc">Contact</a>
+</nav>
+
+<div class="ph">
+  <div class="ey">AI-Augmented Tool / Example Output</div>
+  <h1>Technical Business Case Generator</h1>
+  <p>Two worked examples showing how the tool translates technical project inputs into executive-ready business justifications. The form adapts based on project complexity, expanding sections where more detail strengthens the case.</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="show(1)">Example 1: AI Data Pipeline</button>
+  <button class="tab" onclick="show(2)">Example 2: CI/CD Modernization</button>
+</div>
+
+<div class="main">
+  <div class="fpanel" id="fp">
+    <div class="fplabel">Inputs (full analysis mode)</div>
+    <div id="fc1"><div class="ff"><div class="fl">Project Name</div><div class="fv">Real-Time AI Data Pipeline Modernization</div></div>
+<div class="ff"><div class="fl">Description</div><div class="fv">Replace batch-processing data infrastructure with real-time event streaming to support AI feature development, reduce model inference latency from 4 seconds to under 200ms, and enable personalization capabilities currently blocked by data freshness limitations.</div></div>
+<div class="ff"><div class="fl">Business Problem</div><div class="fv">Our batch pipeline processes customer data in 6-hour cycles, meaning AI models make decisions on stale data. This blocks real-time personalization features, causes our recommendation engine to miss recent user signals, and is driving measurable churn among power users.</div></div>
+<div class="ff"><div class="fl">Estimated Cost</div><div class="fv">$340,000</div></div>
+<div class="ff"><div class="fl">Timeline</div><div class="fv">8 months</div></div>
+<div class="ff"><div class="fl">Expected Return / Savings</div><div class="fv">$1.2M new feature revenue in Year 1; $180K/year infrastructure savings; 22% power-user churn reduction (~$620K ARR protected)</div></div>
+<div class="ff"><div class="fl">Pain Points</div><div class="fv">4 AI features blocked in backlog; data science team spends 35% of time on workarounds; customer complaints about stale recommendations up 60% over 12 months</div></div>
+<div class="ff"><div class="fl">Productivity Gains</div><div class="fv">Data science team reclaims 35% of capacity; engineering eliminates 12 hours/week of manual batch job monitoring</div></div>
+<div class="ff"><div class="fl">End Users</div><div class="fv">2.3 million active users; internal data science team of 8</div></div>
+<div class="ff"><div class="fl">User Impact</div><div class="fv">Recommendations shift from 6-hour-old to real-time signals; personalization features launch that are currently unavailable; AI response time drops from 4s to under 200ms</div></div>
+<div class="ff"><div class="fl">Technical Complexity</div><div class="fv">High</div></div>
+<div class="ff"><div class="fl">Technical Details</div><div class="fv">Migrating from Spark batch jobs to Apache Kafka event streaming, rebuilding 14 downstream data consumers, 3-month parallel run</div></div>
+<div class="ff"><div class="fl">Risks of Inaction</div><div class="fv">4 AI product features blocked indefinitely; data science at 65% capacity; competitor personalization gap widens; power user churn compounds at $620K ARR/year</div></div>
+<div class="ff"><div class="fl">How Returns Evolve</div><div class="fv">Months 1-3: investment phase. Month 4: first AI features launch. Month 6: full migration, legacy costs eliminated. Year 2: full personalization suite, compounding ARR recovery. Year 3+: supports 10x data volume at no additional cost.</div></div>
+<div class="ff"><div class="fl">Audience</div><div class="fv">Chief Product Officer, CFO, VP of Engineering</div></div>
+<div class="ff"><div class="fl">Impacted Employees</div><div class="fv"><div class="fp"><span>8x Data Scientists</span><span>$165,000</span></div><div class="fp"><span>6x ML Engineers</span><span>$185,000</span></div><div class="fp"><span>4x Backend Engineers</span><span>$155,000</span></div></div></div>
+</div>
+    <div id="fc2" style="display:none;"><div class="ff"><div class="fl">Project Name</div><div class="fv">CI/CD Pipeline Modernization</div></div>
+<div class="ff"><div class="fl">Description</div><div class="fv">Replace our fragmented, manually-managed deployment system with a unified, automated CI/CD pipeline that reduces deployment time from 4 hours to under 15 minutes, eliminates the 3-day release cycle bottleneck, and enables teams to ship validated features to production safely on demand.</div></div>
+<div class="ff"><div class="fl">Business Problem</div><div class="fv">Deployments take 4 hours of engineer time per release, limit us to shipping twice per month, and have caused 7 production incidents in 6 months from manual errors. Engineering is losing 30% of capacity to deployment overhead and incident response.</div></div>
+<div class="ff"><div class="fl">Estimated Cost</div><div class="fv">$210,000</div></div>
+<div class="ff"><div class="fl">Timeline</div><div class="fv">5 months</div></div>
+<div class="ff"><div class="fl">Expected Return / Savings</div><div class="fv">$420K/year in recovered engineering productivity; $190K/year in reduced incident response; 6x release frequency enabling faster product iteration</div></div>
+<div class="ff"><div class="fl">Pain Points</div><div class="fv">7 production incidents in 6 months from manual deployment errors; engineers routinely work evenings on release days; 3-week average lag to get customer-validated fixes to production; two enterprise customers have escalated</div></div>
+<div class="ff"><div class="fl">Productivity Gains</div><div class="fv">Engineers reclaim 30% of capacity; release managers eliminate 8 hours per cycle of manual coordination; on-call burden drops as deployment incidents decline</div></div>
+<div class="ff"><div class="fl">End Users</div><div class="fv">Engineering team of 23 directly; all customers benefit from faster fixes and features</div></div>
+<div class="ff"><div class="fl">User Impact</div><div class="fv">Bug fixes reach production in hours vs. 3 weeks; new features ship within days of customer validation; production stability improves as human error is eliminated from deployment</div></div>
+<div class="ff"><div class="fl">Technical Complexity</div><div class="fv">Medium</div></div>
+<div class="ff"><div class="fl">Technical Details</div><div class="fv">Modernizing Jenkins to GitHub Actions, containerizing 12 services with Docker, implementing automated testing gates and rollback procedures</div></div>
+<div class="ff"><div class="fl">Risks of Inaction</div><div class="fv">Incident rate continues; two at-risk enterprise customers may churn ($380K combined ARR); engineering talent retention at risk; competitor release velocity advantage compounds</div></div>
+<div class="ff"><div class="fl">How Returns Evolve</div><div class="fv">Month 1-2: first pipelines live for low-risk services. Month 3: majority migrated, incidents decline. Month 5: full migration. Year 1: complete ROI recovery. Year 2+: compounding velocity advantage at 6x release rate.</div></div>
+<div class="ff"><div class="fl">Audience</div><div class="fv">CTO, VP of Engineering, CFO</div></div>
+<div class="ff"><div class="fl">Impacted Employees</div><div class="fv"><div class="fp"><span>18x Software Engineers</span><span>$155,000</span></div><div class="fp"><span>3x DevOps Engineers</span><span>$165,000</span></div><div class="fp"><span>2x Release Managers</span><span>$120,000</span></div></div></div>
+</div>
+  </div>
+
+  <div class="opanel" id="op">
+    <div id="ex1">
+      <div class="oh">
+        <div><div class="oey">Generated Output</div><h2>Real-Time AI Data Pipeline Modernization</h2></div>
+        <button class="cpbtn" onclick="cp(1)">Copy document</button>
+      </div>
+      <div class="out-section"><div class="out-head" style="border-left:3px solid #1a3a5c;"><span class="dot" style="background:#1a3a5c;"></span><span class="sec-name" style="color:#1a3a5c;">Executive Pitch</span></div><div class="out-body">Our AI-powered features are only as good as the data feeding them. Today, every recommendation, personalization signal, and model prediction your customers receive is based on data that is six hours old. In a world where user behavior changes by the minute, we are asking our AI to navigate with an outdated map. The result is a recommendation engine that frustrates power users, a product team with four high-value features stuck in the backlog, and a data science team spending more than a third of their time working around infrastructure that was never designed to support real-time AI.
+
+The Real-Time AI Data Pipeline Modernization addresses this directly. By replacing our batch-processing architecture with event streaming infrastructure, we eliminate the six-hour lag that is limiting our AI capabilities and unlock a product roadmap that has been stalled for over a year. This is not a technology upgrade for its own sake. It is the foundation that four approved, customer-validated AI features are waiting on before they can ship.
+
+The financial case is compelling and multi-dimensional. We are protecting $620,000 in at-risk ARR from power-user churn, eliminating $180,000 in annual infrastructure costs from legacy batch systems, and unlocking $1.2 million in projected new feature revenue in the first year alone. Against a total investment of $340,000 over eight months, the project delivers full payback before the end of Year 1 and positions us to scale AI capabilities tenfold without additional infrastructure investment.</div></div>
+<div class="out-section"><div class="out-head" style="border-left:3px solid #d4922a;"><span class="dot" style="background:#d4922a;"></span><span class="sec-name" style="color:#d4922a;">Cost / Benefit Analysis</span></div><div class="out-body">Total Investment: $340,000 over 8 months, comprising engineering time, infrastructure buildout, and tooling licenses.
+
+Direct Financial Returns:
+
+New Feature Revenue: Four AI personalization features currently blocked by data freshness limitations are projected to generate $1,200,000 in Year 1 revenue, based on conversion modeling from the product team. This assumes a conservative 60-day post-launch ramp.
+
+Infrastructure Cost Reduction: Retiring legacy batch processing jobs eliminates $180,000 in annual infrastructure costs beginning in Month 6 of the project.
+
+Churn Protection: Power-user churn attributable to stale AI recommendations is currently costing $620,000 per year in lost ARR. A 22% reduction in this churn rate protects $136,400 in ARR annually.
+
+Salary-Based Productivity ROI: The 8 Data Scientists ($165,000 average salary) and 6 ML Engineers ($185,000 average salary) currently spending 35% of their time on batch workarounds represent $1,008,000 in fully-loaded annual compensation directed at non-productive work. Recovering that 35% recaptures approximately $352,800 in productive capacity per year. Additionally, 4 Backend Engineers ($155,000 average) eliminating 12 hours per week of manual monitoring recover approximately $71,760 per year.
+
+Total Annual Return (Year 1): $1,200,000 + $180,000 + $136,400 + $352,800 + $71,760 = $1,940,960
+
+ROI: 471% first-year ROI
+Payback Period: Month 9 from project start
+
+Assumption note: New feature revenue is based on internal product modeling. Productivity figures use fully-loaded salary estimates at 1.4x base.</div></div>
+<div class="out-section"><div class="out-head" style="border-left:3px solid #2a8a6a;"><span class="dot" style="background:#2a8a6a;"></span><span class="sec-name" style="color:#2a8a6a;">End-User and Employee Impact</span></div><div class="out-body">For our 2.3 million active users, the impact is immediate and tangible. Every AI-powered feature they interact with today operates on data that is up to six hours old. Recommendations reflect what a user did this morning, not what they did five minutes ago. The upgrade transforms this experience: AI features respond to real-time signals, recommendations reflect current intent, and the four new personalization capabilities that have been waiting in the product backlog become available for the first time.
+
+For our internal data science team of eight, the change is equally significant. Today, 35% of their working time is consumed by workarounds required to coax useful outputs from a batch system not designed for AI workloads. Recovering that capacity effectively gives the organization the equivalent of nearly three additional data scientists without hiring.
+
+For ML Engineers and Backend Engineers, the elimination of daily batch job monitoring and routine failure remediation represents a meaningful shift away from reactive operations toward proactive development. The team that was spending Friday evenings managing batch windows refocuses on building the next generation of AI capabilities.</div></div>
+<div class="out-section"><div class="out-head" style="border-left:3px solid #c0392b;"><span class="dot" style="background:#c0392b;"></span><span class="sec-name" style="color:#c0392b;">Risks of Inaction</span></div><div class="out-body">The most immediate consequence of not proceeding is that four approved, customer-validated AI features remain blocked indefinitely. They have been scoped, resourced, and validated. They are waiting exclusively on infrastructure. Each quarter the delay continues, we absorb the full opportunity cost of those features not generating revenue while competitors continue to widen their personalization advantage.
+
+The churn signal is already measurable. Customer complaints about stale AI recommendations increased 60% over the past twelve months. Power-user churn attributable to this issue costs $620,000 per year today, and that figure grows as the gap between user expectations and our AI capabilities widens. Delaying this project by one year is a decision to absorb an additional $620,000 in churn loss while the competitive gap compounds.
+
+The talent risk is real. Data scientists who spend 35% of their time on infrastructure workarounds are not doing the work they were hired to do. In a market where AI talent is scarce, operational friction of this kind is a retention risk. The cost of replacing a single data scientist, including recruiting and ramp time, typically exceeds $200,000.
+
+Finally, this infrastructure decision becomes more expensive the longer it is deferred. Every month, additional downstream systems are built on top of the existing batch architecture, increasing the complexity and cost of the eventual migration.</div></div>
+<div class="out-section"><div class="out-head" style="border-left:3px solid #7c4fff;"><span class="dot" style="background:#7c4fff;"></span><span class="sec-name" style="color:#7c4fff;">Technical Complexity and Delivery Confidence</span></div><div class="out-body">This project is rated high complexity, which we want to characterize accurately. High complexity does not mean high risk of failure. It means the technical path requires careful sequencing, experienced execution, and a structured transition period. All three are planned for.
+
+The core technical change is migrating from Apache Spark batch processing to Apache Kafka event streaming. Kafka is a mature, widely deployed technology with a well-established implementation pattern. The complexity comes from scope: 14 downstream data consumers must be rebuilt to operate on streaming data rather than batch snapshots.
+
+Our mitigation approach is a three-month parallel run period in which both systems operate simultaneously. During this window, teams validate streaming outputs against batch outputs and build confidence before any consumer is cut over. No downstream system is migrated until it has been fully validated on the new pipeline.
+
+The team executing this project has direct experience with the existing batch architecture and has completed two prior infrastructure migrations of comparable scope. The eight-month timeline is conservative, with two months of buffer built in.</div></div>
+<div class="out-section"><div class="out-head" style="border-left:3px solid #c8662a;"><span class="dot" style="background:#c8662a;"></span><span class="sec-name" style="color:#c8662a;">How Returns and Risks Evolve Over Time</span></div><div class="out-body">Months 1 through 3 represent the investment phase. The new streaming infrastructure is being built while the existing batch system continues operating. Costs are at their highest point. No revenue benefits have been realized yet, though the data science team begins recovering some capacity as the first streaming pipelines reduce their workaround burden.
+
+Month 4 marks the first inflection point. The initial AI features launch on the new pipeline. Revenue generation begins. The product backlog starts clearing. User-facing AI experiences improve for the segments served by the first features to go live.
+
+Month 6 is full migration. The legacy batch system is retired. The $180,000 annual infrastructure cost saving begins. The data science and engineering teams are operating fully on the new architecture.
+
+Year 2 represents full return realization. All four blocked AI features are live and generating revenue. The personalization suite operates at full capability. Power-user churn has stabilized at the projected lower rate.
+
+Year 3 and beyond: The infrastructure is designed to scale to ten times the current data volume without additional capital investment. The organization that was exposed to compounding churn loss is now operating with a durable infrastructure advantage that competitors on legacy batch systems cannot easily replicate.</div></div>
+
+    </div>
+    <div id="ex2" style="display:none;">
+      <div class="oh">
+        <div><div class="oey">Generated Output</div><h2>CI/CD Pipeline Modernization</h2></div>
+        <button class="cpbtn" onclick="cp(2)">Copy document</button>
+      </div>
+      <div class="out-section"><div class="out-head" style="border-left:3px solid #1a3a5c;"><span class="dot" style="background:#1a3a5c;"></span><span class="sec-name" style="color:#1a3a5c;">Executive Pitch</span></div><div class="out-body">Every two weeks, our engineering organization spends the equivalent of a full workday preparing for a deployment that takes four hours to execute and has a one-in-three chance of requiring emergency intervention. Our release process is not a controlled, confident operation. It is a high-stakes manual procedure that engineers dread, customers notice, and the business absorbs in measurable and growing ways.
+
+The CI/CD Pipeline Modernization replaces this with an automated, validated, on-demand deployment capability. Deployments that take four hours today take fifteen minutes. Releases that happen twice a month happen whenever a feature is ready. Production incidents traced to missed manual steps are structurally eliminated because the steps are no longer manual. The engineering organization stops managing deployments and starts managing products.
+
+The financial returns are concrete and near-term. We recover $420,000 per year in engineering productivity currently consumed by deployment overhead. We eliminate approximately $190,000 in annual incident response cost. We remove the deployment bottleneck that is causing two enterprise customers to escalate, whose combined ARR is $380,000. Against a $210,000 investment over five months, the project pays back in full within the first year of operation.</div></div>
+<div class="out-section"><div class="out-head" style="border-left:3px solid #d4922a;"><span class="dot" style="background:#d4922a;"></span><span class="sec-name" style="color:#d4922a;">Cost / Benefit Analysis</span></div><div class="out-body">Total Investment: $210,000 over 5 months, covering engineering time, tooling, and training.
+
+Engineering Productivity Recovery: 18 Software Engineers at $155,000 average, 3 DevOps Engineers at $165,000, and 2 Release Managers at $120,000 currently lose 30% of productive capacity to deployment overhead and incident response. Total fully-loaded compensation for these 23 people is approximately $3,990,000 annually. Recovering 30% of that capacity returns $1,197,000 in productive engineering time per year. Committed recovery based on time-tracking data: $420,000 per year.
+
+Incident Response Cost Reduction: Seven production incidents in six months, each requiring an average of 18 engineer-hours to remediate, represents approximately 126 engineer-hours of unplanned work. At blended engineering rates, this costs approximately $190,000 annually. Automated testing gates and rollback procedures eliminate the manual error sources responsible for these incidents.
+
+Enterprise Customer Retention: Two enterprise customers have formally escalated about slow bug resolution. Their combined ARR is $380,000. Reducing time-to-production for fixes from three weeks to hours directly addresses their stated concerns. This retention value is not included in the primary ROI calculation as it is contingent on customer response, but it represents significant upside.
+
+Summary:
+Total committed annual return: $610,000 ($420K productivity + $190K incident reduction)
+Investment: $210,000
+Payback period: 4.1 months from project completion, or Month 9 from start
+Year 1 ROI: 190%</div></div>
+<div class="out-section"><div class="out-head" style="border-left:3px solid #2a8a6a;"><span class="dot" style="background:#2a8a6a;"></span><span class="sec-name" style="color:#2a8a6a;">End-User and Employee Impact</span></div><div class="out-body">For the engineering team of 23, the change is experienced immediately and daily. Release days today are anxiety events. Engineers coordinate across Slack threads, follow multi-page manual runbooks, and stay online through the evening to manage what should be a routine operation. Seven times in the past six months, something went wrong and required emergency response. The modernized pipeline eliminates this. Deployments run automatically, test gates catch issues before they reach production, and rollback is an automated one-command operation.
+
+For customers, the most visible change is how quickly problems get resolved and how frequently new capabilities become available. Bug fixes that currently take three weeks to reach production reach production within hours of being validated. Feature improvements that customers request in feedback sessions ship within days rather than months. The two enterprise customers who have escalated about slow resolution times experience a fundamentally different level of responsiveness.
+
+For Release Managers specifically, the role shifts from coordination and execution of manual steps to oversight of an automated process. The eight hours of manual coordination work per release cycle is replaced by monitoring and exception handling. Their expertise redirects toward improving the system rather than operating it.</div></div>
+<div class="out-section"><div class="out-head" style="border-left:3px solid #c0392b;"><span class="dot" style="background:#c0392b;"></span><span class="sec-name" style="color:#c0392b;">Risks of Inaction</span></div><div class="out-body">The production incident rate is the most immediate and quantifiable risk of maintaining the current system. Seven incidents in six months is not an anomaly. It is the predictable output of a deployment process that requires humans to execute dozens of sequential steps correctly under time pressure. The rate will not improve without structural change. If it stays constant, we absorb $190,000 in incident response cost every year indefinitely.
+
+The enterprise customer risk is time-sensitive. Two accounts representing $380,000 in combined ARR have formally escalated. Escalations of this type have a resolution window. Customers who escalate and see no improvement within one or two quarters make contract decisions accordingly. Leaving the deployment bottleneck in place is a decision to accept that risk without a mitigation strategy.
+
+Engineering talent retention is a slower-moving but equally real risk. Deployment frustration has appeared in exit interviews. In a market where experienced engineers have options, organizations that require their best people to spend Friday evenings managing manual deployments are at a structural disadvantage in retention. The cost of replacing an experienced software engineer typically exceeds $200,000 when recruiting, onboarding, and ramp time are included.</div></div>
+<div class="out-section"><div class="out-head" style="border-left:3px solid #7c4fff;"><span class="dot" style="background:#7c4fff;"></span><span class="sec-name" style="color:#7c4fff;">Technical Complexity and Delivery Confidence</span></div><div class="out-body">This project is rated medium complexity, which reflects an accurate assessment. We are modernizing from Jenkins to GitHub Actions and containerizing 12 services with Docker. Both technologies are mature, well-documented, and widely deployed across organizations of our size. The implementation path is well-understood with low novelty risk.
+
+The primary complexity comes from scope rather than technology uncertainty. Twelve services need to be containerized and automated testing gates designed for each. This is methodical work rather than exploratory work, and methodical work with a clear scope is the most predictable kind to deliver.
+
+Our sequencing approach manages risk by starting with low-stakes services in Months 1 and 2. We build team familiarity and refine our approach before migrating high-criticality services. By the time we reach the most sensitive parts of the system, the team has run dozens of deployments through the new pipeline and the process is routine.
+
+The five-month timeline includes a one-month buffer. The team executing this has direct experience with the existing Jenkins infrastructure and has containerized services in prior projects.</div></div>
+<div class="out-section"><div class="out-head" style="border-left:3px solid #c8662a;"><span class="dot" style="background:#c8662a;"></span><span class="sec-name" style="color:#c8662a;">How Returns and Risks Evolve Over Time</span></div><div class="out-body">Months 1 and 2 are the setup phase. The new GitHub Actions infrastructure is configured. The first four to five low-criticality services are containerized and running through automated pipelines. The team builds familiarity and refines the approach. No broad productivity gains yet, but engineering confidence in the new system builds with each successful automated deployment.
+
+Month 3 marks a visible inflection. The majority of services have migrated. The production incident rate begins declining. The two enterprise customers begin to see faster resolution times as their most frequently touched services go through the new pipeline.
+
+Month 5 is full migration. Every service runs through the automated pipeline. The legacy Jenkins infrastructure is decommissioned. The $420,000 annual productivity recovery begins in full. The $190,000 annual incident cost reduction begins. Engineering is shipping on demand rather than on a release calendar.
+
+Year 1 delivers complete ROI recovery. The $210,000 investment is returned by Month 9. The organization closes the year with a deployment capability structurally superior to where it started.
+
+Year 2 and beyond is where compounding becomes most significant. An organization that ships twice per month today ships whenever features are ready. Over a year, that is the difference between 24 releases and potentially 200 or more. The competitive advantage of that velocity compounds with every customer feedback cycle addressed in days rather than weeks, and every feature that ships while the market opportunity is still fresh.</div></div>
+
+    </div>
+  </div>
+</div>
+
+<div class="dn">
+  <div class="dn-inner">
+    <h2>Design decisions behind this tool</h2>
+    <div class="ng">
+      <div class="nc2"><h3>Adaptive complexity</h3><p>Three form modes: Quick Pitch (3 core fields for a fast summary), Standard (adds pain points and salary-based ROI), and Full Analysis (all sections). Users only see fields relevant to their depth of analysis.</p></div>
+      <div class="nc2"><h3>Audience-first framing</h3><p>The model is instructed to write in business language, not technical jargon. Every output section is designed for a reader who does not know what Kafka or Docker is, but understands ARR, churn, and payback period.</p></div>
+      <div class="nc2"><h3>Salary-based ROI</h3><p>One of the most persuasive numbers in any technical business case is the salary cost of work that will no longer need to happen. The People Impacted section makes this calculation explicit and automatic.</p></div>
+      <div class="nc2"><h3>Temporal arc</h3><p>Most business cases present a snapshot. This tool forces a longitudinal view: when costs hit, when returns begin, how they compound, and how risk evolves if the project is delayed. The timeline section is the most differentiating output.</p></div>
+      <div class="nc2"><h3>Conservative by design</h3><p>Where numbers are missing, the model estimates conservatively and surfaces its assumptions explicitly. A business case honest about what it does not know is more credible than one that projects false precision.</p></div>
+      <div class="nc2"><h3>API proxy architecture</h3><p>In production, API calls route through a Cloudflare Worker proxy rather than directly from the browser, keeping the API key server-side. The worker enforces model and token limits as an additional cost control layer.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="cs">
+  <p>Rob Dull &mdash; Product Operations &bull; San Francisco, CA</p>
+  <a href="mailto:rob.dull@gmail.com?subject=Business Case Generator access request" class="rl">Request access for team use</a>
+</div>
+
+<script>
+function show(n){
+  document.getElementById('ex1').style.display=n===1?'':'none';
+  document.getElementById('ex2').style.display=n===2?'':'none';
+  document.getElementById('fc1').style.display=n===1?'':'none';
+  document.getElementById('fc2').style.display=n===2?'':'none';
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===n-1));
+  document.getElementById('op').scrollTop=0;
+  document.getElementById('fp').scrollTop=0;
+}
+function cp(n){
+  const bodies=document.querySelectorAll('#ex'+n+' .out-body');
+  const names=document.querySelectorAll('#ex'+n+' .sec-name');
+  let out='';
+  names.forEach((nm,i)=>{out+='\n\n'+nm.textContent.toUpperCase()+'\n'+'='.repeat(nm.textContent.length)+'\n\n'+(bodies[i]?.textContent||'');});
+  navigator.clipboard.writeText(out.trim()).then(()=>{
+    const btn=document.querySelectorAll('.cpbtn')[n-1];
+    if(btn){btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy document',2000);}
+  });
+}
+</script>
+</body>
+</html>
