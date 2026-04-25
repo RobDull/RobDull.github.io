@@ -4,117 +4,128 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rob Dull | Product Operations</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --ink:#0e0f11;--paper:#f5f2ec;--warm:#f0ebe0;--rule:#d4cfc4;
-  --accent:#1a3a5c;--accent2:#c8662a;--muted:#7a7569;
-  --font-d:'Cormorant Garamond',serif;--font-m:'DM Mono',monospace;--font-b:'DM Sans',sans-serif;
+  --ink:#0a0a0a;--white:#ffffff;--off:#f7f7f7;--rule:#e8e8e8;
+  --accent:#1a3a5c;--accent2:#c8662a;--muted:#6b6b6b;
+  --font:'Inter',sans-serif;
 }
 html{scroll-behavior:smooth;}
-body{background:var(--paper);color:var(--ink);font-family:var(--font-b);font-size:15px;line-height:1.65;min-height:100vh;}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(245,242,236,0.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
-.nn{font-family:var(--font-m);font-size:12px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;text-decoration:none;}
-.nl{display:flex;gap:32px;}
-.nl a{font-family:var(--font-m);font-size:11px;letter-spacing:.08em;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color .2s;}
-.nl a:hover{color:var(--ink);}
-.hero{position:relative;z-index:1;padding:160px 48px 100px;max-width:1100px;margin:0 auto;}
-.he{font-family:var(--font-m);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:20px;animation:fu .6s ease both;}
-.hero h1{font-family:var(--font-d);font-size:clamp(48px,6vw,80px);font-weight:300;line-height:1.08;color:var(--ink);margin-bottom:32px;animation:fu .6s .1s ease both;}
-.hero h1 em{font-style:italic;color:var(--accent);}
-.hb{max-width:560px;color:var(--muted);font-size:16px;line-height:1.75;margin-bottom:48px;animation:fu .6s .2s ease both;}
-.hc{display:flex;gap:16px;flex-wrap:wrap;animation:fu .6s .3s ease both;}
-.bp{background:var(--accent);color:white;border:none;border-radius:4px;font-family:var(--font-m);font-size:11px;letter-spacing:.1em;padding:12px 24px;text-decoration:none;text-transform:uppercase;transition:all .2s;display:inline-block;}
-.bp:hover{background:#0f2540;}
-.bg{background:transparent;color:var(--muted);border:1px solid var(--rule);border-radius:4px;font-family:var(--font-m);font-size:11px;letter-spacing:.1em;padding:12px 24px;text-decoration:none;text-transform:uppercase;transition:all .2s;display:inline-block;}
-.bg:hover{border-color:var(--muted);color:var(--ink);}
-.sd{max-width:1100px;margin:0 auto;padding:0 48px;border-top:1px solid var(--rule);}
-.ph{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:80px 48px;display:grid;grid-template-columns:200px 1fr;gap:60px;align-items:start;}
-.pl{font-family:var(--font-m);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding-top:6px;}
-.pc h2{font-family:var(--font-d);font-size:32px;font-weight:300;line-height:1.3;color:var(--ink);margin-bottom:20px;}
-.pc h2 em{font-style:italic;color:var(--accent);}
-.pc p{color:var(--muted);font-size:15px;line-height:1.8;margin-bottom:14px;}
-.ts{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:80px 48px;}
-.th{display:flex;align-items:baseline;gap:24px;margin-bottom:48px;}
-.th h2{font-family:var(--font-d);font-size:36px;font-weight:300;color:var(--ink);}
-.tc{font-family:var(--font-m);font-size:11px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;}
-.tg{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2px;}
-a.card{background:var(--warm);border:1px solid var(--rule);padding:32px;text-decoration:none;color:inherit;display:block;transition:all .2s;position:relative;overflow:hidden;}
-a.card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s ease;}
-a.card:hover{background:#ede9e0;}
-a.card:hover::after{transform:scaleX(1);}
-.ctag{font-family:var(--font-m);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:14px;}
-a.card h3{font-family:var(--font-d);font-size:22px;font-weight:400;color:var(--ink);margin-bottom:10px;line-height:1.2;}
-a.card p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:20px;}
-.cm{display:flex;gap:14px;flex-wrap:wrap;}
-.chip{font-family:var(--font-m);font-size:10px;letter-spacing:.08em;color:var(--muted);background:rgba(0,0,0,.05);border-radius:2px;padding:3px 8px;}
-.ca{position:absolute;top:32px;right:32px;font-size:18px;color:var(--rule);transition:all .2s;}
-a.card:hover .ca{color:var(--accent);transform:translate(3px,-3px);}
-.ph-card{background:transparent;border:1px dashed var(--rule);padding:32px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:200px;}
-.ph-card p{font-family:var(--font-m);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--rule);}
-.as{position:relative;z-index:1;background:var(--accent);padding:80px 48px;margin-top:80px;}
-.ai{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 400px;gap:80px;align-items:start;}
-.as h2{font-family:var(--font-d);font-size:40px;font-weight:300;color:white;line-height:1.2;margin-bottom:24px;}
-.as h2 em{font-style:italic;color:rgba(255,255,255,.6);}
-.as p{color:rgba(255,255,255,.7);font-size:15px;line-height:1.8;margin-bottom:14px;}
-.as p strong{color:white;font-weight:500;}
-.alk{display:flex;flex-direction:column;gap:12px;}
-.al{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border:1px solid rgba(255,255,255,.15);border-radius:4px;text-decoration:none;color:white;font-size:13px;transition:all .2s;}
-.al:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3);}
-.al span:first-child{font-family:var(--font-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);}
-.al span:last-child{color:rgba(255,255,255,.8);font-size:12px;}
-footer{position:relative;z-index:1;padding:32px 48px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;}
-footer p{font-family:var(--font-m);font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;}
-@keyframes fu{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-@media(max-width:768px){
-  nav{padding:16px 24px;} .nl{display:none;}
-  .hero,.ts,.sd{padding-left:24px;padding-right:24px;}
-  .ph{grid-template-columns:1fr;padding:60px 24px;gap:20px;}
-  .ai{grid-template-columns:1fr;gap:40px;} .as{padding:60px 24px;}
-  footer{padding:24px;flex-direction:column;gap:8px;text-align:center;}
+body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;min-height:100vh;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
+.nn{font-size:15px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
+.nl{display:flex;gap:10px;align-items:center;}
+.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--ink);border-radius:6px;transition:all .15s;letter-spacing:-.01em;}
+.nl a:hover{background:var(--ink);color:white;}
+.nl a.li-btn{background:var(--accent);color:white;border-color:var(--accent);}
+.nl a.li-btn:hover{background:#0f2540;border-color:#0f2540;}
+
+.hero{padding:140px 40px 100px;max-width:900px;margin:0 auto;text-align:center;}
+.he{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:20px;animation:fu .5s ease both;}
+.hero h1{font-size:clamp(42px,6vw,74px);font-weight:900;line-height:1.0;letter-spacing:-.03em;color:var(--ink);margin-bottom:28px;animation:fu .5s .08s ease both;}
+.hero h1 em{font-style:normal;color:var(--accent);}
+.hb{max-width:580px;margin:0 auto 44px;color:var(--muted);font-size:17px;line-height:1.7;font-weight:400;animation:fu .5s .16s ease both;}
+.hc{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;animation:fu .5s .24s ease both;}
+.bp{background:var(--ink);color:white;border:2px solid var(--ink);border-radius:6px;font-size:13px;font-weight:700;letter-spacing:-.01em;padding:12px 28px;text-decoration:none;transition:all .15s;display:inline-block;}
+.bp:hover{background:#2a2a2a;border-color:#2a2a2a;}
+.bg{background:transparent;color:var(--ink);border:2px solid var(--ink);border-radius:6px;font-size:13px;font-weight:700;letter-spacing:-.01em;padding:12px 28px;text-decoration:none;transition:all .15s;display:inline-block;}
+.bg:hover{background:var(--ink);color:white;}
+
+.sd{max-width:860px;margin:0 auto;padding:0 40px;border-top:1px solid var(--rule);}
+
+.approach{max-width:760px;margin:0 auto;padding:80px 40px;text-align:center;}
+.approach h2{font-size:clamp(26px,3.5vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1.15;color:var(--ink);margin-bottom:20px;}
+.approach h2 em{font-style:normal;color:var(--accent);}
+.approach p{color:var(--muted);font-size:16px;line-height:1.8;margin-bottom:14px;}
+
+.ts{max-width:1000px;margin:0 auto;padding:80px 40px;text-align:center;}
+.th{margin-bottom:48px;}
+.th h2{font-size:clamp(28px,3.5vw,42px);font-weight:800;letter-spacing:-.03em;color:var(--ink);margin-bottom:6px;}
+.tc{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.tg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;text-align:left;}
+
+a.card{background:var(--off);border:2px solid var(--rule);border-radius:10px;padding:28px;text-decoration:none;color:inherit;display:block;transition:all .18s;position:relative;overflow:hidden;}
+a.card:hover{border-color:var(--ink);background:white;box-shadow:0 4px 20px rgba(0,0,0,.08);}
+.ctag{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;}
+a.card h3{font-size:18px;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin-bottom:10px;line-height:1.2;}
+a.card p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:18px;}
+.cm{display:flex;gap:8px;flex-wrap:wrap;}
+.chip{font-size:10px;font-weight:600;letter-spacing:.04em;color:var(--ink);background:var(--rule);border-radius:4px;padding:3px 9px;}
+.ca{position:absolute;top:24px;right:24px;font-size:16px;color:var(--rule);transition:all .18s;}
+a.card:hover .ca{color:var(--ink);transform:translate(2px,-2px);}
+.ph-card{background:transparent;border:2px dashed var(--rule);border-radius:10px;padding:28px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:180px;}
+.ph-card p{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--rule);}
+
+.as{background:var(--ink);padding:80px 40px;margin-top:80px;}
+.as-inner{max-width:700px;margin:0 auto;text-align:center;}
+.as h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.03em;color:white;line-height:1.15;margin-bottom:20px;}
+.as h2 em{font-style:normal;color:rgba(255,255,255,.4);}
+.as p{color:rgba(255,255,255,.65);font-size:15px;line-height:1.8;margin-bottom:14px;}
+.as p strong{color:white;font-weight:700;}
+.as-li-btn{display:inline-flex;align-items:center;gap:8px;margin-top:28px;background:white;color:var(--ink);border:2px solid white;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:-.01em;padding:12px 28px;text-decoration:none;transition:all .15s;}
+.as-li-btn:hover{background:rgba(255,255,255,.85);}
+
+footer{padding:28px 40px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+footer p{font-size:12px;font-weight:500;color:var(--muted);}
+
+@keyframes fu{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:680px){
+  nav{padding:14px 20px;}
+  .nl a{padding:7px 12px;font-size:12px;}
+  .hero{padding:120px 24px 80px;}
+  .approach,.ts{padding:60px 24px;}
+  .sd{padding:0 24px;}
+  .as{padding:60px 24px;}
+  footer{padding:20px 24px;flex-direction:column;text-align:center;}
 }
 </style>
 </head>
 <body>
+
 <nav>
   <a href="/" class="nn">Rob Dull</a>
   <div class="nl">
     <a href="#tools">Tools</a>
     <a href="#about">About</a>
-    <a href="mailto:rob.dull@gmail.com">Contact</a>
+    <a href="https://linkedin.com/in/robdull" target="_blank" class="li-btn">LinkedIn &#8599;</a>
   </div>
 </nav>
+
 <section class="hero">
   <div class="he">Product Operations Portfolio</div>
-  <h1>Building the systems that<br>make <em>product teams</em><br>work better.</h1>
+  <h1>Building the systems that make<br><em>product teams</em> work better.</h1>
   <p class="hb">I design and build AI-augmented operational tools and workflows that reduce friction, improve decision quality, and let product organizations move faster. These are working examples of how I think about that work.</p>
   <div class="hc">
     <a href="#tools" class="bp">View Tools</a>
     <a href="#about" class="bg">About This Work</a>
   </div>
 </section>
+
 <div class="sd"></div>
-<section class="ph">
-  <div class="pl">Approach</div>
-  <div class="pc">
-    <h2>AI as operational infrastructure,<br>not a <em>productivity tip</em>.</h2>
-    <p>The tools here are built on a specific conviction: AI becomes most valuable when it is embedded directly into the workflows where decisions get made, not bolted on as an afterthought. Each tool in this portfolio reflects a real operational problem that product and technical teams face, redesigned with AI as a first-class participant.</p>
-    <p>Every interface adapts to what the user is actually doing. Fields expand when more context is needed, simplify when the path is clear. The output is calibrated for a specific audience and a specific decision. That is the design principle behind everything here.</p>
-  </div>
+
+<section class="approach">
+  <h2>AI as operational infrastructure,<br>not a <em>productivity tip</em>.</h2>
+  <p>The tools here are built on a specific conviction: AI becomes most valuable when it is embedded directly into the workflows where decisions get made, not bolted on as an afterthought. Each tool reflects a real operational problem that product and technical teams face, redesigned with AI as a first-class participant.</p>
+  <p>Every interface adapts to what the user is actually doing. Fields expand when more context is needed, simplify when the path is clear. The output is calibrated for a specific audience and a specific decision.</p>
 </section>
+
 <div class="sd"></div>
+
 <section class="ts" id="tools">
   <div class="th">
     <h2>Tools and Interfaces</h2>
-    <span class="tc">Active collection</span>
+    <div class="tc">Active collection</div>
   </div>
   <div class="tg">
     <a href="business-case/index.html" class="card">
       <div class="ca">&#8599;</div>
       <div class="ctag">Business Justification</div>
       <h3>Technical Business Case Generator</h3>
-      <p>Translates backend development and infrastructure upgrade proposals into executive-ready business justifications. Adaptive fields expand based on project complexity and depth of analysis needed.</p>
+      <p>Translates backend development and infrastructure upgrade proposals into executive-ready business justifications. Adaptive fields expand based on project complexity.</p>
       <div class="cm">
         <span class="chip">AI-generated</span>
         <span class="chip">Adaptive UI</span>
@@ -126,25 +137,21 @@ footer p{font-family:var(--font-m);font-size:10px;letter-spacing:.1em;color:var(
     <div class="ph-card"><p>Coming<br>soon</p></div>
   </div>
 </section>
+
 <section class="as" id="about">
-  <div class="ai">
-    <div>
-      <h2>12 years building the operating systems that make <em>product organizations</em> run.</h2>
-      <p>I have spent my career embedded inside engineering, product, and infrastructure teams during periods of rapid growth and organizational change, at <strong>Salesforce</strong> and <strong>Delta Dental of California</strong>. My work has always been at the intersection of how teams plan, how they communicate, and how they use tooling to make better decisions faster.</p>
-      <p>The tools in this portfolio represent a new dimension of that work: designing AI-augmented interfaces that bring the same operational discipline to individual decisions and workflows. Each one started as a real problem I observed in the field.</p>
-      <p>I am currently exploring senior product operations, program management, and organizational effectiveness roles where this combination of operational depth and AI-enabled workflow design would be most useful.</p>
-    </div>
-    <div class="alk">
-      <a href="mailto:rob.dull@gmail.com" class="al"><span>Email</span><span>rob.dull@gmail.com</span></a>
-      <a href="https://linkedin.com/in/robdull" target="_blank" class="al"><span>LinkedIn</span><span>linkedin.com/in/robdull</span></a>
-      <a href="tel:_______" class="al"><span>Phone</span><span>(___) ___-____</span></a>
-      <a class="al"><span>Location</span><span>San Francisco, CA</span></a>
-    </div>
+  <div class="as-inner">
+    <h2>12 years building the operating systems that make <em>product organizations</em> run.</h2>
+    <p>I have spent my career embedded inside engineering, product, and infrastructure teams during periods of rapid growth and organizational change, at <strong>Salesforce</strong> and <strong>Delta Dental of California</strong>. My work has always been at the intersection of how teams plan, how they communicate, and how they use tooling to make better decisions faster.</p>
+    <p>The tools in this portfolio represent a new dimension of that work: designing AI-augmented interfaces that bring the same operational discipline to individual decisions and workflows. Each one started as a real problem I observed in the field.</p>
+    <p>I am currently exploring senior product operations, program management, and organizational effectiveness roles where this combination of operational depth and AI-enabled workflow design would be most useful.</p>
+    <a href="https://linkedin.com/in/robdull" target="_blank" class="as-li-btn">Connect on LinkedIn &#8599;</a>
   </div>
 </section>
+
 <footer>
   <p>Rob Dull &mdash; Product Operations</p>
-  <p>San Francisco, CA &bull; rob.dull@gmail.com</p>
+  <p>San Francisco, CA</p>
 </footer>
+
 </body>
 </html>
