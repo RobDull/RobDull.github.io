@@ -176,7 +176,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 <section class="ph">
   <div class="ey">AI-Augmented Tool</div>
   <h1>Technical Business Case Generator</h1>
-  <p>Translates backend development and infrastructure proposals into executive-ready business justifications, written for non-technical stakeholders. The form adapts based on how much detail you need. Output is intended to be used, carefully, to give product managers a head start with businsess case presentations. I recommend simplifying the output, and focusing on talking points that will be most relevant to specific audiences.</p>
+  <p>Translates backend development and infrastructure proposals into executive-ready business justifications, written for non-technical stakeholders. The form adapts based on how much detail you need.</p>
 </section>
 
 <!-- COMPLEXITY SELECTOR -->
@@ -368,12 +368,13 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 <section class="examples-area">
   <div class="ex-header">
     <h2>Example Outputs</h2>
-    <p>Two worked examples showing the full analysis mode output for realistic technical projects.</p>
+    <p>Three worked examples showing the full analysis mode output for realistic technical projects.</p>
   </div>
 
   <div class="ex-tabs">
     <button class="ex-tab active" onclick="showEx(1)">AI Data Pipeline Modernization</button>
     <button class="ex-tab" onclick="showEx(2)">CI/CD Pipeline Modernization</button>
+    <button class="ex-tab" onclick="showEx(3)">Datadog Observability Platform</button>
   </div>
 
   <!-- EXAMPLE 1 -->
@@ -459,7 +460,6 @@ Year 2 represents full return realization. All four blocked AI features are live
 Year 3 and beyond: The infrastructure is designed to scale to ten times the current data volume without additional capital investment. The organization that was exposed to compounding churn loss is now operating with a durable infrastructure advantage that competitors on legacy batch systems cannot easily replicate.</div></div>
 
     </div>
-    <div
   </div>
 
   <!-- EXAMPLE 2 -->
@@ -538,10 +538,86 @@ Year 2 and beyond is where compounding becomes most significant. An organization
 
     </div>
   </div>
-</div>
 
-<div
+  <!-- EXAMPLE 3 -->
+  <div class="ex-block" id="exb3">
+    <div class="ex-meta">
+      <div class="ex-meta-label">Inputs used (full analysis mode)</div>
+      <div class="ex-meta-grid">
+<div class="ff"><div class="fl">Project Name</div><div class="fv">Datadog Observability Platform — Unified Pipeline Monitoring</div></div>
+<div class="ff"><div class="fl">Description</div><div class="fv">Deploy Datadog as the centralized observability and monitoring platform across 10 delivery pipelines, replacing a fragmented mix of custom scripts, Splunk alerts, and manual log reviews. All pipelines gain unified dashboards, anomaly detection, and real-time alerting with automated incident routing.</div></div>
+<div class="ff"><div class="fl">Business Problem</div><div class="fv">Engineers monitor 10 delivery pipelines across 4 disconnected tools, with no single view of system health. Incident detection relies on customer reports or manual log checks. Mean time to detect (MTTD) averages 47 minutes; mean time to resolve (MTTR) averages 3.2 hours. On-call engineers spend 12 hours per week on monitoring overhead that adds no value.</div></div>
+<div class="ff"><div class="fl">Estimated Cost</div><div class="fv">$165,000 (Year 1 including platform licensing, implementation, and training)</div></div>
+<div class="ff"><div class="fl">Timeline</div><div class="fv">4 months to full deployment across all 10 pipelines</div></div>
+<div class="ff"><div class="fl">Expected Return / Savings</div><div class="fv">$310K/year in recovered engineering time; $240K/year in reduced incident impact; MTTD reduced from 47 min to under 3 min; MTTR reduced from 3.2 hours to under 45 minutes</div></div>
+<div class="ff"><div class="fl">Pain Points</div><div class="fv">5 major incidents in 90 days first detected by customers, not engineering; on-call burnout contributing to attrition; compliance audit flagged monitoring gaps in 3 regulated pipelines; no post-incident trend analysis capability</div></div>
+<div class="ff"><div class="fl">Productivity Gains</div><div class="fv">On-call engineers reclaim 12 hours/week of monitoring overhead; incident response teams eliminate 40% of manual triage steps through automated root cause suggestions; SRE team redirects from reactive monitoring to proactive reliability work</div></div>
+<div class="ff"><div class="fl">End Users</div><div class="fv">Engineering team of 34 across 6 squads; SRE team of 4; compliance and audit stakeholders</div></div>
+<div class="ff"><div class="fl">User Impact</div><div class="fv">Single pane of glass replaces 4 disconnected tools; anomaly detection fires before customer impact; automated runbooks handle 60% of common alert types without human intervention; compliance dashboards are audit-ready continuously</div></div>
+<div class="ff"><div class="fl">Technical Complexity</div><div class="fv">Medium</div></div>
+<div class="ff"><div class="fl">Technical Details</div><div class="fv">Datadog agent deployment across 10 pipelines (AWS, GCP, and on-prem), custom dashboard build for each pipeline team, APM and log ingestion configuration, PagerDuty integration, decommission of legacy Splunk alerts and monitoring scripts</div></div>
+<div class="ff"><div class="fl">Risks of Inaction</div><div class="fv">Compliance exposure in 3 regulated pipelines flagged in audit; continued customer-detected incidents damage SLA reputation; on-call burnout accelerates attrition in SRE team; each undetected incident averages $48K in engineering response and customer impact cost</div></div>
+<div class="ff"><div class="fl">How Returns Evolve</div><div class="fv">Month 1: first 3 highest-risk pipelines instrumented, compliance gaps closed. Month 2-3: remaining 7 pipelines live, unified dashboards operational. Month 4: legacy tools decommissioned, full savings begin. Year 1: complete ROI. Year 2+: ML-based anomaly detection matures, MTTD continues to improve, platform scales to new pipelines at near-zero marginal cost.</div></div>
+<div class="ff"><div class="fl">Audience</div><div class="fv">VP of Engineering, CTO, CFO, Compliance Officer</div></div>
+<div class="ff"><div class="fl">Impacted Employees</div><div class="fv"><div class="fp"><span>4x Site Reliability Engineers</span><span>$175,000</span></div><div class="fp"><span>12x Backend/Platform Engineers</span><span>$160,000</span></div><div class="fp"><span>6x On-Call Engineers (rotating)</span><span>$150,000</span></div></div></div>
+      </div>
+    </div>
+    <div class="ex-output-label">
+      <span>Generated Output &mdash; Datadog Observability Platform</span>
+      <button class="cp-btn" onclick="copyEx(3)">Copy document</button>
+    </div>
+    <div class="out-section"><div class="out-head" style="border-left:3px solid #1a3a5c;"><span class="dot" style="background:#1a3a5c;"></span><span class="sec-name" style="color:#1a3a5c;">Executive Pitch</span></div><div class="out-body">Five of our last eight major production incidents were reported to us by customers before our engineering team detected them. That is not a monitoring gap. That is a monitoring failure, and it is costing the organization $48,000 per incident in engineering response time, customer remediation, and SLA exposure. Across 10 delivery pipelines managed through four disconnected tools, our engineers have no unified view of system health. Detecting a problem today means a customer complaint, a manual log check, or an on-call engineer catching something at 2am while reviewing dashboards that were never designed to work together.
+
+The Datadog Observability Platform deployment changes this structurally. A single platform, deployed across all 10 pipelines within four months, replaces the fragmented tool landscape with unified dashboards, real-time anomaly detection, and automated incident routing. Mean time to detect drops from 47 minutes to under 3. Mean time to resolve drops from 3.2 hours to under 45 minutes. On-call engineers stop spending 12 hours per week on monitoring overhead and redirect that capacity to reliability work that actually improves the systems.
+
+The financial case is grounded and near-term. We recover $310,000 per year in engineering time currently consumed by monitoring overhead and manual triage. We eliminate $240,000 per year in incident response cost and customer impact. We close the compliance monitoring gaps that were flagged in our last audit across three regulated pipelines. Against a $165,000 Year 1 investment, the project pays back in full before the end of the first year and scales to additional pipelines at near-zero marginal cost.</div></div>
+<div class="out-section"><div class="out-head" style="border-left:3px solid #d4922a;"><span class="dot" style="background:#d4922a;"></span><span class="sec-name" style="color:#d4922a;">Cost / Benefit Analysis</span></div><div class="out-body">Total Year 1 Investment: $165,000, covering Datadog platform licensing, implementation engineering, dashboard configuration across 10 pipelines, PagerDuty integration, and team training.
+
+Engineering Time Recovery: 4 SREs ($175,000 average), 12 Platform Engineers ($160,000 average), and 6 rotating on-call engineers ($150,000 average) currently spend a combined 12 hours per week on monitoring overhead that produces no improvement to system reliability. At blended fully-loaded rates, this represents approximately $310,000 per year in engineering capacity directed at non-value-added work. Datadog's automated alerting and anomaly detection eliminates this overhead.
+
+Incident Cost Reduction: Five major incidents in 90 days, each averaging $48,000 in combined engineering response time and customer impact cost, represents a run rate of $960,000 per year in unplanned incident expense. Reducing MTTD from 47 minutes to under 3 minutes and MTTR from 3.2 hours to 45 minutes is projected to reduce major incident frequency by 50% and severity by 40%, yielding $240,000 in annual savings based on conservative incident rate assumptions.
+
+Compliance Risk Mitigation: Three regulated pipelines were flagged in the most recent audit for insufficient monitoring coverage. The cost of a compliance finding in a regulated environment typically ranges from $150,000 to $500,000 in remediation, legal review, and operational disruption. Datadog provides continuously audit-ready dashboards and log retention that eliminates this exposure.
+
+Summary:
+Total committed annual return: $550,000 ($310K productivity + $240K incident reduction)
+Investment: $165,000
+Payback period: 3.6 months from project completion, or Month 8 from start
+Year 1 ROI: 233%
+
+Assumption note: Incident savings use a conservative 50% frequency reduction. Productivity figures use fully-loaded salary at 1.4x base. Compliance risk mitigation value excluded from primary ROI calculation.</div></div>
+<div class="out-section"><div class="out-head" style="border-left:3px solid #2a8a6a;"><span class="dot" style="background:#2a8a6a;"></span><span class="sec-name" style="color:#2a8a6a;">End-User and Employee Impact</span></div><div class="out-body">For the SRE team of four, the change is a fundamental shift in how they spend their working hours. Today, the majority of their on-call burden is reactive: watching dashboards, correlating alerts across four tools, and manually triaging incidents that automated systems should have caught and routed. Datadog consolidates this into a single interface with ML-based anomaly detection that surfaces issues before they become incidents. The SRE team stops being a manual detection layer and starts being a reliability engineering team.
+
+For the 12 platform and backend engineers rotating through on-call, the 12 hours per week of monitoring overhead disappears. Alert fatigue, caused by disconnected tools generating redundant and low-signal notifications, is replaced by a consolidated alert stream with automated runbooks that handle 60% of common alert types without human intervention. Engineers who were spending Friday nights checking dashboards are spending that time building.
+
+For compliance and audit stakeholders, three regulated pipelines currently flagged for monitoring gaps become continuously audit-ready. Datadog's log retention and dashboard export capabilities provide the evidence chain that audit requires without manual report generation each quarter.
+
+For end customers, the most meaningful change is invisible: problems are detected and resolved before they experience them. The shift from a 47-minute average detection time to under 3 minutes means the majority of anomalies are contained before they cause user-facing degradation.</div></div>
+<div class="out-section"><div class="out-head" style="border-left:3px solid #c0392b;"><span class="dot" style="background:#c0392b;"></span><span class="sec-name" style="color:#c0392b;">Risks of Inaction</span></div><div class="out-body">The compliance exposure is the most time-sensitive risk. Three regulated pipelines were flagged in the most recent audit. Audit findings that remain open across a subsequent audit cycle escalate in severity and in the cost of remediation. The window to close these gaps before the next review is measured in months, not quarters. Datadog closes all three gaps within the first month of deployment, prioritized in the rollout sequencing.
+
+The incident trajectory is the most financially significant risk. Five major incidents in 90 days at $48,000 average cost represents a $960,000 annualized run rate in unplanned expense. This rate assumes nothing changes. In practice, fragmented monitoring systems tend to degrade as pipeline complexity grows. As the organization adds services and traffic, the probability and cost of undetected incidents increases. Inaction is not a neutral choice; it is a decision to absorb escalating incident costs on a growing infrastructure base.
+
+The SRE retention risk is immediate. On-call burnout has been cited in two recent exit interviews. Replacing an experienced SRE, including recruiting, onboarding, and the six-month ramp to full productivity, costs upward of $250,000. The current on-call experience is a structural contributor to that attrition risk. Datadog materially improves on-call quality of life by reducing alert noise and eliminating the manual triage work that currently dominates incident response.
+
+Finally, the monitoring gap creates asymmetric reputational risk. Customer-detected incidents, in which the customer contacts support before engineering is aware, damage SLA credibility in ways that are difficult to recover. Two enterprise accounts have noted slow incident awareness in quarterly business reviews.</div></div>
+<div class="out-section"><div class="out-head" style="border-left:3px solid #7c4fff;"><span class="dot" style="background:#7c4fff;"></span><span class="sec-name" style="color:#7c4fff;">Technical Complexity and Delivery Confidence</span></div><div class="out-body">This project is rated medium complexity. Datadog is a mature, widely deployed platform with established implementation patterns for AWS, GCP, and on-premises environments. The technical path is well-understood. Complexity arises from breadth, not novelty: 10 pipelines across three infrastructure environments require individual agent deployment, custom dashboard configuration for each pipeline team, and careful sequencing to avoid monitoring gaps during the transition from legacy tools.
+
+The implementation approach manages this through a phased pipeline rollout. The three highest-risk regulated pipelines go live in Month 1, closing the compliance gaps immediately and giving the implementation team a controlled environment to refine the Datadog configuration before scaling. The remaining seven pipelines are instrumented in Months 2 and 3, with the legacy Splunk alerts and monitoring scripts decommissioned only after each pipeline's Datadog configuration has been validated in production.
+
+PagerDuty integration is configured pipeline by pipeline rather than as a cutover, ensuring on-call routing is validated for each team's alerting profile before the legacy routing is retired. This sequencing means no pipeline is ever in a state of degraded monitoring coverage during the transition.
+
+The four-month timeline includes a two-week buffer at the end of Month 3 for any configuration refinement before final legacy decommission. The implementation team has prior Datadog deployments in two of the three infrastructure environments involved.</div></div>
+<div class="out-section"><div class="out-head" style="border-left:3px solid #c8662a;"><span class="dot" style="background:#c8662a;"></span><span class="sec-name" style="color:#c8662a;">How Returns and Risks Evolve Over Time</span></div><div class="out-body">Month 1 is the highest-impact phase relative to effort. The three regulated pipelines are instrumented first. Compliance gaps close. The audit exposure that has been open since the last review is resolved before it can escalate. The SRE team gets its first experience with unified Datadog dashboards and begins validating the anomaly detection configuration against known incident patterns.
+
+Months 2 and 3 expand coverage across the remaining seven pipelines. Unified dashboards are operational for all 10 pipeline teams. Alert volumes from legacy tools begin declining as Datadog routing takes over. On-call engineers start experiencing the reduction in monitoring overhead. Automated runbooks handle their first real incidents without human triage.
+
+Month 4 is full decommission. Legacy Splunk alerts and monitoring scripts are retired. The $310,000 annual productivity recovery begins in full. The estimated $240,000 in annual incident cost reduction begins as MTTD and MTTR improvements are realized across the full pipeline portfolio.
+
+Year 1 delivers complete ROI recovery. The $165,000 investment is returned by Month 8 from project start. The organization closes the year with a monitoring capability that is structurally superior, compliance-ready, and operating with materially lower on-call burden.
+
+Year 2 and beyond is where the platform advantage compounds. Datadog's ML-based anomaly detection improves with each month of operational data, reducing false positive rates and improving detection precision. New pipelines or services added to the infrastructure are instrumented at near-zero marginal cost. The organization that was absorbing $48,000 incidents regularly is operating with proactive detection that catches anomalies before they become incidents, and an SRE team focused on reliability engineering rather than manual monitoring.</div></div>
   </div>
+
 </section>
 
 <!-- DESIGN DECISIONS -->
@@ -775,10 +851,10 @@ function copyOutput() {
 
 // EXAMPLES
 function showEx(n) {
-  document.getElementById('exb1').classList.toggle('visible',n===1);
-  document.getElementById('exb2').classList.toggle('visible',n===2);
-  document.getElementById('exb1').style.display=n===1?'block':'none';
-  document.getElementById('exb2').style.display=n===2?'block':'none';
+  [1,2,3].forEach(i => {
+    const el = document.getElementById('exb'+i);
+    if (el) el.style.display = (i===n) ? 'block' : 'none';
+  });
   document.querySelectorAll('.ex-tab').forEach((t,i)=>t.classList.toggle('active',i===n-1));
 }
 function copyEx(n) {
@@ -798,6 +874,7 @@ setMode('quick');
 addPerson();
 document.getElementById('exb1').style.display='block';
 document.getElementById('exb2').style.display='none';
+document.getElementById('exb3').style.display='none';
 </script>
 </body>
 </html>
