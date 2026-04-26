@@ -7,14 +7,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-:root{
-  --ink:#0a0a0a;--white:#ffffff;--off:#f7f7f7;--rule:#e8e8e8;
-  --accent:#1a3a5c;--accent2:#c8662a;--muted:#6b6b6b;
-  --font:'Inter',sans-serif;
-}
+:root{--ink:#0a0a0a;--white:#ffffff;--off:#f7f7f7;--rule:#e8e8e8;--accent:#1a3a5c;--accent2:#c8662a;--muted:#6b6b6b;--font:'Inter',sans-serif;}
 html{scroll-behavior:smooth;}
 body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;min-height:100vh;}
-
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
 .nn{font-size:15px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
 .nl{display:flex;gap:10px;align-items:center;}
@@ -22,42 +17,72 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .nl a:hover{background:var(--ink);color:white;}
 .nl a.li-btn{background:var(--accent);color:white;border-color:var(--accent);}
 .nl a.li-btn:hover{background:#0f2540;border-color:#0f2540;}
-
-.bc{max-width:1000px;margin:0 auto;padding:100px 40px 0;}
+.bc{max-width:1080px;margin:0 auto;padding:100px 40px 0;}
 .bc-inner{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--muted);}
 .bc-inner a{color:var(--muted);text-decoration:none;transition:color .15s;}
 .bc-inner a:hover{color:var(--ink);}
 .bc-sep{color:var(--rule);}
-
-.ph{max-width:1000px;margin:0 auto;padding:28px 40px 60px;}
+.hero{max-width:1080px;margin:0 auto;padding:28px 40px 56px;}
 .ey{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:14px;}
-.ph h1{font-size:clamp(32px,4.5vw,54px);font-weight:900;letter-spacing:-.03em;line-height:1.05;color:var(--ink);margin-bottom:16px;}
-.ph p{color:var(--muted);font-size:16px;line-height:1.75;max-width:600px;}
-
-.divider{max-width:1000px;margin:0 auto;padding:0 40px;border-top:1px solid var(--rule);}
-
-.empty{max-width:1000px;margin:0 auto;padding:80px 40px;}
-.empty-inner{border:2px dashed var(--rule);border-radius:12px;padding:72px 40px;text-align:center;}
-.empty-inner h2{font-size:18px;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin-bottom:12px;}
-.empty-inner p{font-size:14px;color:var(--muted);line-height:1.75;max-width:440px;margin:0 auto 28px;}
-.empty-inner a{display:inline-block;font-size:13px;font-weight:700;color:var(--ink);text-decoration:none;border:2px solid var(--ink);border-radius:6px;padding:10px 22px;transition:all .15s;}
-.empty-inner a:hover{background:var(--ink);color:white;}
-
-.about-strip{background:var(--off);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:40px;}
-.about-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
-.about-inner p{font-size:14px;color:var(--muted);line-height:1.7;max-width:600px;}
-.about-inner a{flex-shrink:0;font-size:13px;font-weight:700;color:var(--accent);text-decoration:none;border:2px solid var(--accent);border-radius:6px;padding:10px 20px;transition:all .15s;white-space:nowrap;}
-.about-inner a:hover{background:var(--accent);color:white;}
-
+.hero h1{font-size:clamp(32px,4.5vw,54px);font-weight:900;letter-spacing:-.03em;line-height:1.05;color:var(--ink);margin-bottom:20px;}
+.hero-sub{font-size:17px;color:var(--muted);line-height:1.8;max-width:640px;}
+.benefits{background:var(--ink);padding:56px 40px;}
+.benefits-inner{max-width:1080px;margin:0 auto;}
+.benefits-inner h2{font-size:clamp(22px,3vw,34px);font-weight:900;letter-spacing:-.03em;color:white;margin-bottom:8px;}
+.benefits-sub{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:40px;}
+.benefits-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+.benefit-col h3{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:20px;}
+.benefit-item{display:flex;gap:14px;margin-bottom:20px;}
+.benefit-icon{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;margin-top:2px;}
+.benefit-text h4{font-size:14px;font-weight:700;color:white;margin-bottom:4px;letter-spacing:-.01em;}
+.benefit-text p{font-size:13px;color:rgba(255,255,255,.6);line-height:1.65;}
+.divider{max-width:1080px;margin:0 auto;padding:0 40px;border-top:1px solid var(--rule);}
+.sec-nav{max-width:1080px;margin:0 auto;padding:36px 40px 0;}
+.sec-nav-inner{display:flex;gap:8px;flex-wrap:wrap;}
+.sec-nav-inner a{font-size:12px;font-weight:700;color:var(--muted);text-decoration:none;border:2px solid var(--rule);border-radius:20px;padding:6px 16px;transition:all .15s;}
+.sec-nav-inner a:hover{border-color:var(--ink);color:var(--ink);}
+.cat-section{max-width:1080px;margin:0 auto;padding:56px 40px;}
+.cat-header{margin-bottom:32px;}
+.cat-tag{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px;}
+.cat-header h2{font-size:clamp(22px,3vw,32px);font-weight:900;letter-spacing:-.03em;color:var(--ink);margin-bottom:10px;}
+.cat-header p{font-size:15px;color:var(--muted);line-height:1.75;max-width:680px;}
+.workshop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
+.w-card{background:var(--off);border:2px solid var(--rule);border-radius:12px;padding:28px;transition:all .18s;}
+.w-card:hover{border-color:var(--ink);background:white;box-shadow:0 4px 20px rgba(0,0,0,.07);}
+.w-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px;}
+.w-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.w-format{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+.w-card h3{font-size:16px;font-weight:800;letter-spacing:-.02em;color:var(--ink);line-height:1.25;margin-bottom:10px;}
+.w-card p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:16px;}
+.w-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.w-tag{font-size:10px;font-weight:600;letter-spacing:.03em;color:var(--ink);background:var(--rule);border-radius:4px;padding:3px 8px;}
+.w-card-wide{background:var(--off);border:2px solid var(--rule);border-radius:12px;padding:32px;transition:all .18s;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;margin-bottom:16px;}
+.w-card-wide:hover{border-color:var(--ink);background:white;box-shadow:0 4px 20px rgba(0,0,0,.07);}
+.w-card-wide h3{font-size:18px;font-weight:800;letter-spacing:-.02em;color:var(--ink);line-height:1.25;margin-bottom:12px;}
+.w-card-wide p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px;}
+.w-card-wide-right h4{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.topic-list{list-style:none;}
+.topic-list li{font-size:12px;color:var(--muted);padding:6px 0;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:8px;}
+.topic-list li:last-child{border-bottom:none;}
+.topic-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent2);flex-shrink:0;}
+.callout-section{background:var(--off);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:56px 40px;}
+.callout-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
+.callout-inner h2{font-size:clamp(22px,3vw,34px);font-weight:900;letter-spacing:-.03em;color:var(--ink);margin-bottom:12px;}
+.callout-inner p{font-size:15px;color:var(--muted);line-height:1.75;max-width:580px;}
+.callout-cta{display:flex;flex-direction:column;gap:10px;align-items:center;flex-shrink:0;}
+.cta-btn{display:inline-block;font-size:13px;font-weight:700;color:white;background:var(--ink);text-decoration:none;border:2px solid var(--ink);border-radius:6px;padding:12px 24px;transition:all .15s;white-space:nowrap;text-align:center;}
+.cta-btn:hover{background:#2a2a2a;border-color:#2a2a2a;}
+.cta-btn-ghost{display:inline-block;font-size:13px;font-weight:700;color:var(--ink);text-decoration:none;border:2px solid var(--ink);border-radius:6px;padding:12px 24px;transition:all .15s;white-space:nowrap;text-align:center;}
+.cta-btn-ghost:hover{background:var(--ink);color:white;}
 footer{padding:28px 40px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
 footer p{font-size:12px;font-weight:500;color:var(--muted);}
-
-@media(max-width:680px){
-  nav{padding:14px 20px;}
-  .nl a{padding:7px 12px;font-size:12px;}
-  .bc,.ph,.empty,.divider{padding-left:20px;padding-right:20px;}
-  .about-strip{padding:32px 20px;}
-  .empty-inner{padding:48px 24px;}
+@media(max-width:780px){
+  nav{padding:14px 20px;}.nl a{padding:7px 12px;font-size:12px;}
+  .bc,.hero,.cat-section,.sec-nav,.divider{padding-left:20px;padding-right:20px;}
+  .benefits{padding:40px 20px;}.benefits-grid{grid-template-columns:1fr;}
+  .w-card-wide{grid-template-columns:1fr;}
+  .callout-section{padding:40px 20px;}.callout-inner{grid-template-columns:1fr;}
+  .callout-cta{align-items:flex-start;}
   footer{padding:20px 24px;flex-direction:column;text-align:center;}
 }
 </style>
@@ -82,26 +107,304 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   </div>
 </div>
 
-<div class="ph">
+<div class="hero">
   <div class="ey">Facilitation</div>
   <h1>Training and Workshops</h1>
-  <p>Structured sessions for product teams on roadmap planning, stakeholder communication, and embedding AI into delivery workflows.</p>
+  <p class="hero-sub">Practical, customized programs for product and delivery organizations &mdash; built from 12 years of hands-on coaching at Salesforce and Delta Dental. Every session is designed for the actual people in the room and the specific problems they are trying to solve.</p>
+</div>
+
+<div class="benefits">
+  <div class="benefits-inner">
+    <h2>Built for the people and the organization</h2>
+    <p class="benefits-sub">Every engagement is customized &mdash; not a standard curriculum applied generically.</p>
+    <div class="benefits-grid">
+      <div class="benefit-col">
+        <h3>For Individuals and Teams</h3>
+        <div class="benefit-item">
+          <div class="benefit-icon">&#127919;</div>
+          <div class="benefit-text"><h4>Clarity of purpose and role</h4><p>Walk away knowing exactly where your role fits, what decisions you own, and where to strengthen your partnerships.</p></div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">&#9881;</div>
+          <div class="benefit-text"><h4>Practical skills, immediately applicable</h4><p>Every session produces artifacts, frameworks, or habits you can use in your next sprint, planning cycle, or stakeholder conversation.</p></div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">&#128172;</div>
+          <div class="benefit-text"><h4>Language and alignment across disciplines</h4><p>Shared vocabulary between Product, Engineering, and Business stakeholders reduces friction and speeds up every conversation that follows.</p></div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">&#128200;</div>
+          <div class="benefit-text"><h4>Metrics that mean something</h4><p>Move from activity tracking to decision-support &mdash; dashboards and data practices grounded in what teams actually need to improve.</p></div>
+        </div>
+      </div>
+      <div class="benefit-col">
+        <h3>For Organizations and Leaders</h3>
+        <div class="benefit-item">
+          <div class="benefit-icon">&#127757;</div>
+          <div class="benefit-text"><h4>Delivery velocity that compounds</h4><p>Structured adoption of Agile, Kanban, and DevOps practices produces measurable throughput gains that accelerate as teams mature.</p></div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">&#129520;</div>
+          <div class="benefit-text"><h4>Reduced dependency on heroics</h4><p>Sustainable operating models replace the individual knowledge silos, fire drills, and manual coordination that quietly drain organizational capacity.</p></div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">&#128279;</div>
+          <div class="benefit-text"><h4>Cross-functional alignment</h4><p>Sales, Marketing, Architecture, and Engineering aligned on continuous deployment means faster customer value and fewer missed opportunities.</p></div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">&#127381;</div>
+          <div class="benefit-text"><h4>AI-ready delivery infrastructure</h4><p>Organizations that build the DevOps and feedback loop foundations now are the ones positioned to leverage AI-accelerated development without losing control of quality and release risk.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec-nav">
+  <div class="sec-nav-inner">
+    <a href="#product-ops">Product Operations</a>
+    <a href="#product-mgmt">Product Management</a>
+    <a href="#delivery-pipeline">Intake to Deployment</a>
+    <a href="#agile-team">Agile Team Practices</a>
+    <a href="#coaching">Coaching and Leadership</a>
+  </div>
+</div>
+
+<!-- CATEGORY 1: PRODUCT OPERATIONS -->
+<div class="cat-section" id="product-ops">
+  <div class="cat-header">
+    <div class="cat-tag">Category 01</div>
+    <h2>Product Operations</h2>
+    <p>Frameworks and practices for the operational infrastructure that connects strategy to delivery &mdash; planning systems, tooling, metrics, and the coordination models that keep multi-team organizations moving.</p>
+  </div>
+  <div class="workshop-grid">
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#1a3a5c18;">&#128203;</div><div class="w-format">Workshop Series</div></div>
+      <h3>Project Playbook: Multi-Team Program Management</h3>
+      <p>Communication plans, documentation templates, and coordination models for cross-team IT initiatives. Based on Disciplined Agile Delivery, LeSS, and practical field experience &mdash; adapted for your organization's scale and culture.</p>
+      <div class="w-tags"><span class="w-tag">Program management</span><span class="w-tag">Communication plans</span><span class="w-tag">Multi-team</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#c8662a18;">&#128202;</div><div class="w-format">Workshop + Coaching</div></div>
+      <h3>Dashboard Implementation for Data-Driven Decisions</h3>
+      <p>Build dashboards that answer real questions &mdash; not just display activity. Covers decision-to-be-made framing, Jira, Tableau, and PowerBI implementation, and adoption practices that make the data actually used.</p>
+      <div class="w-tags"><span class="w-tag">Jira</span><span class="w-tag">Tableau</span><span class="w-tag">PowerBI</span><span class="w-tag">Metrics</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#2a7a5a18;">&#128101;</div><div class="w-format">Facilitated Program</div></div>
+      <h3>Communities of Practice: Design and Launch</h3>
+      <p>Structured creation and ongoing facilitation of Communities of Practice for Product Management, DevOps, Quality Assurance, and Scrum Masters &mdash; building the internal knowledge networks that reduce siloing and accelerate organizational learning.</p>
+      <div class="w-tags"><span class="w-tag">Product management</span><span class="w-tag">DevOps</span><span class="w-tag">QA</span><span class="w-tag">Scrum Masters</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#5a30b018;">&#128218;</div><div class="w-format">Assessment + Roadmap</div></div>
+      <h3>Coaching Roadmap Visualization for Agile Coaches</h3>
+      <p>Training Agile Coaches to use Kanban boards in Miro for structured tracking of coaching progress &mdash; near to mid-term activity management for teams and individual roles including PMs, SMs, and Engineering Leads.</p>
+      <div class="w-tags"><span class="w-tag">Agile coaching</span><span class="w-tag">Miro</span><span class="w-tag">Kanban</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#b5810a18;">&#129302;</div><div class="w-format">Workshop + Adoption</div></div>
+      <h3>AI for Product Backlogs: CoPilot and Prompt Design</h3>
+      <p>Practical training for Product Managers, Product Owners, and Scrum Masters on using AI prompts with meeting transcripts and documentation to create complete, consistent Features and Issues in Jira &mdash; including user context, business context, key metrics, and technical acceptance criteria.</p>
+      <div class="w-tags"><span class="w-tag">AI / CoPilot</span><span class="w-tag">Jira</span><span class="w-tag">Backlog management</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#b0303018;">&#127758;</div><div class="w-format">Workshop Series</div></div>
+      <h3>Operating Models for Distributed and International Teams</h3>
+      <p>Guidelines, training, and adoption support for IT managers leading teams across time zones &mdash; preserving collaboration culture while managing the logistics of distributed delivery.</p>
+      <div class="w-tags"><span class="w-tag">Distributed teams</span><span class="w-tag">International collaboration</span><span class="w-tag">Operating model</span></div>
+    </div>
+  </div>
 </div>
 
 <div class="divider"></div>
 
-<div class="empty">
-  <div class="empty-inner">
-    <h2>Details coming soon</h2>
-    <p>Workshop formats, topics, and availability are being documented here. If you have a team that could benefit from a session now, reach out directly and we can talk through what would be most useful.</p>
-    <a href="mailto:rob.dull@gmail.com">Get in touch &#8599;</a>
+<!-- CATEGORY 2: PRODUCT MANAGEMENT -->
+<div class="cat-section" id="product-mgmt">
+  <div class="cat-header">
+    <div class="cat-tag">Category 02</div>
+    <h2>Product Management</h2>
+    <p>Role-specific training and certification for the PM job family &mdash; from foundational Agile practices for Product Owners to strategic alignment programs for senior PMs and Product Directors.</p>
+  </div>
+  <div class="workshop-grid">
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#1a3a5c18;">&#127891;</div><div class="w-format">Certification Program</div></div>
+      <h3>Product Owner and Product Manager Certification (SAFe 6)</h3>
+      <p>A structured certification program based on SAFe 6, including role-specific training, team observation, facilitated feedback sessions, and formal examination. Covers Product Owner and Product Manager roles, their distinct responsibilities in a scaled Agile organization, and the collaboration patterns between them. Modeled on the program developed at Salesforce R&D and refined at Delta Dental.</p>
+      <div class="w-tags"><span class="w-tag">SAFe 6</span><span class="w-tag">Product Owner</span><span class="w-tag">Product Manager</span><span class="w-tag">Certification</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#c8662a18;">&#128295;</div><div class="w-format">Training + Assessment</div></div>
+      <h3>Agile Training for the Full PM Job Family</h3>
+      <p>Customized training for IT Leadership, Scrum Teams, Scrum Masters, Product Owners, and Business Stakeholders &mdash; adapted from Salesforce's Adaptive Delivery Methodology and refined for your organization's methodology and cadence.</p>
+      <div class="w-tags"><span class="w-tag">Agile</span><span class="w-tag">Scrum</span><span class="w-tag">SAFe</span><span class="w-tag">Role-specific</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#2a7a5a18;">&#9997;</div><div class="w-format">Workshop</div></div>
+      <h3>Feature and Story Writing with Acceptance Criteria</h3>
+      <p>Hands-on workshop covering Definition of Refined, Definition of Ready, and Definition of Done at the Feature, Story, and Dependency level. Participants write and critique real Features and Stories from their own backlog, build structured acceptance criteria, and leave with repeatable templates. Includes collaborative pre-work and guided homework to reinforce the practice between sessions.</p>
+      <div class="w-tags"><span class="w-tag">Features</span><span class="w-tag">User stories</span><span class="w-tag">Acceptance criteria</span><span class="w-tag">Refinement</span><span class="w-tag">DoR / DoD</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#5a30b018;">&#128200;</div><div class="w-format">Assessment + Roadmap</div></div>
+      <h3>Team Practice Maturity Assessments</h3>
+      <p>Creation and facilitation of maturity surveys, leader and team presentations, AI-assisted insight identification, and follow-up coaching roadmaps. Produces dashboards and progress plans grounded in actual team data.</p>
+      <div class="w-tags"><span class="w-tag">Maturity model</span><span class="w-tag">AI insights</span><span class="w-tag">Coaching plan</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#b5810a18;">&#128270;</div><div class="w-format">Workshop</div></div>
+      <h3>Estimation Methods and Calibration</h3>
+      <p>Practical training on Story Points, T-Shirt Sizes, control chart confirmation of consistency, estimation calibration, and estimating in ranges at the Feature or Project level using Sum of Squares methods.</p>
+      <div class="w-tags"><span class="w-tag">Estimation</span><span class="w-tag">Story points</span><span class="w-tag">Calibration</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#b0303018;">&#128337;</div><div class="w-format">Workshop Series</div></div>
+      <h3>Meeting Effectiveness for Delivery Teams</h3>
+      <p>Transforms standups from status reports to handoff facilitation, separates Refinement from Sprint Planning, establishes effective internal versus stakeholder demo formats, and builds four retrospective types for different team needs.</p>
+      <div class="w-tags"><span class="w-tag">Standups</span><span class="w-tag">Refinement</span><span class="w-tag">Retrospectives</span><span class="w-tag">Sprint reviews</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#b5810a18;">&#128506;</div><div class="w-format">Workshop Series</div></div>
+      <h3>Product Discovery Documentation: Journey Maps, Story Maps, and Value Canvases</h3>
+      <p>Hands-on creation of the high-level Product Management artifacts that align teams before a line of code is written. Covers customer journey mapping (current and future state), user story mapping for release planning and MVP scoping, Business Value Canvases, Opportunity Solution Trees, and lean product briefs. Participants produce working versions of each artifact for their own product area during the session.</p>
+      <div class="w-tags"><span class="w-tag">Journey mapping</span><span class="w-tag">Story mapping</span><span class="w-tag">Business Value Canvas</span><span class="w-tag">Opportunity Solution Tree</span><span class="w-tag">Product discovery</span><span class="w-tag">MVP scoping</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#1a3a5c18;">&#127908;</div><div class="w-format">Workshop Series</div></div>
+      <h3>Presentation Skills for Product Managers</h3>
+      <p>Targeted coaching for PMs presenting to executives, business stakeholders, and non-technical audiences &mdash; including quarterly business reviews, roadmap presentations, investment pitches, and hackathon panels. Covers narrative structure, data storytelling, slide design principles, handling difficult questions, and reading the room under pressure. Participants workshop real presentations from their own pipeline.</p>
+      <div class="w-tags"><span class="w-tag">Executive communication</span><span class="w-tag">Storytelling</span><span class="w-tag">Roadmap presentations</span><span class="w-tag">Hackathon panels</span><span class="w-tag">Stakeholder alignment</span></div>
+    </div>
   </div>
 </div>
 
-<div class="about-strip">
-  <div class="about-inner">
-    <p>Workshop topics draw from the same operational depth as the tools and writing on this site — roadmap facilitation, stakeholder alignment, AI workflow design, and organizational effectiveness for product teams.</p>
-    <a href="../index.html#about">About this work &#8599;</a>
+<div class="divider"></div>
+
+<!-- CATEGORY 3: INTAKE TO DEPLOYMENT -->
+<div class="cat-section" id="delivery-pipeline">
+  <div class="cat-header">
+    <div class="cat-tag">Category 03</div>
+    <h2>Intake to Deployment Pipeline Improvement</h2>
+    <p>End-to-end delivery pipeline transformation &mdash; from how work enters the system to how value reaches customers. These programs address the technical and organizational gaps that prevent fast, low-risk, continuous delivery.</p>
+  </div>
+  <div class="w-card-wide">
+    <div>
+      <div class="cat-tag" style="margin-bottom:10px;">Flagship Program</div>
+      <h3>DevOps Assessment and Continuous Deployment Roadmap</h3>
+      <p>A structured program covering DevOps maturity assessment, gap analysis, progress roadmapping, and practice implementation &mdash; starting with Culture of Collective Ownership (the "C" in CALMR) as the organizational foundation. Includes demos for peers and leaders and ongoing progress tracking.</p>
+      <p>Most organizations know DevOps as a technical topic. This program makes the business case visible: a DevOps transformation culminates in non-technical people &mdash; Sales, Marketing, Operations &mdash; performing low-effort, low-risk releases. That shift has profound implications for revenue cycle, customer feedback speed, and competitive agility.</p>
+      <div class="w-tags" style="margin-top:4px;"><span class="w-tag">DevOps</span><span class="w-tag">CALMR</span><span class="w-tag">Continuous deployment</span><span class="w-tag">Release on demand</span><span class="w-tag">DORA metrics</span></div>
+    </div>
+    <div class="w-card-wide-right">
+      <h4>Program covers</h4>
+      <ul class="topic-list">
+        <li>Culture of collective ownership (CALMR foundation)</li>
+        <li>Continuous deployment pipeline maturity survey</li>
+        <li>Release on demand: frequency, risk, and business alignment</li>
+        <li>DORA metrics: deployment rate, lead time, change failure rate, MTTR</li>
+        <li>Kanban board scaling for upstream and downstream activities</li>
+        <li>Stakeholder alignment: Sales, Marketing, Architecture, Security</li>
+        <li>Progress roadmap and implementation coaching</li>
+        <li>Peer and leadership demos</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workshop-grid">
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#1a3a5c18;">&#128260;</div><div class="w-format">Training + Adoption</div></div>
+      <h3>Kanban Board Enablement and Flow Metrics</h3>
+      <p>Partnered implementation with tooling teams in Jira, Jira Align, or equivalent platforms &mdash; covering team and portfolio-level Kanban adoption, flow metrics, control charts, cumulative flow diagrams, value stream maps, and waste elimination.</p>
+      <div class="w-tags"><span class="w-tag">Kanban</span><span class="w-tag">Jira</span><span class="w-tag">Flow metrics</span><span class="w-tag">Waste reduction</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#c8662a18;">&#128257;</div><div class="w-format">Transformation Program</div></div>
+      <h3>Scrum-to-Kanban Team Transformation</h3>
+      <p>A structured delivery team transition that includes training, identification of short and long-term rewards, and team-generated progress plans for the evolution of team practices &mdash; moving from sprint-cadence delivery toward continuous flow.</p>
+      <div class="w-tags"><span class="w-tag">Scrum to Kanban</span><span class="w-tag">Flow</span><span class="w-tag">Team transformation</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#2a7a5a18;">&#128200;</div><div class="w-format">Key Metrics Workshop</div></div>
+      <h3>Delivery Metrics That Drive Decisions</h3>
+      <p>Practical training on the metrics that matter at each level &mdash; from velocity trend and sprint completion rates to lead time, takt time, dependency completion rate, bug intake-to-velocity ratio, automated code coverage, and production validation.</p>
+      <div class="w-tags"><span class="w-tag">Velocity</span><span class="w-tag">Lead time</span><span class="w-tag">Takt time</span><span class="w-tag">DORA</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#5a30b018;">&#128472;</div><div class="w-format">Transformation Program</div></div>
+      <h3>Waterfall-to-Scrum Delivery Team Transformation</h3>
+      <p>Acculturation of software teams, managers, and stakeholders transitioning from waterfall methods &mdash; including role redefinition, ceremony adoption, stakeholder education, and the organizational change management that makes the transition stick.</p>
+      <div class="w-tags"><span class="w-tag">Waterfall to Agile</span><span class="w-tag">Change management</span><span class="w-tag">Stakeholder education</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CATEGORY 4: AGILE TEAM PRACTICES -->
+<div class="cat-section" id="agile-team">
+  <div class="cat-header">
+    <div class="cat-tag">Category 04</div>
+    <h2>Agile Team Practices</h2>
+    <p>Targeted sessions on the everyday practices that determine whether an Agile team actually functions &mdash; collaboration, estimation, and the rituals that generate alignment rather than just occupying calendar time.</p>
+  </div>
+  <div class="workshop-grid">
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#1a3a5c18;">&#129309;</div><div class="w-format">Workshop</div></div>
+      <h3>Team Health and Inclusion</h3>
+      <p>Practical sessions using the SCARF model (Status, Certainty, Autonomy, Relatedness, Fairness), Scrum Values, and the 5 Dysfunctions of a Team framework to build the psychological safety and collective accountability that high-performing teams require.</p>
+      <div class="w-tags"><span class="w-tag">SCARF</span><span class="w-tag">5 Dysfunctions</span><span class="w-tag">Scrum values</span><span class="w-tag">Inclusion</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#c8662a18;">&#128336;</div><div class="w-format">Workshop Series</div></div>
+      <h3>Retrospective Formats for Every Context</h3>
+      <p>Four retrospective types for different team maturity levels and needs: Lean Coffee for open exploration, five-step with facilitated games for team building, training retrospectives for skill development, and data-driven retros for performance-focused teams.</p>
+      <div class="w-tags"><span class="w-tag">Retrospectives</span><span class="w-tag">Lean Coffee</span><span class="w-tag">Data-driven</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CATEGORY 5: COACHING AND LEADERSHIP -->
+<div class="cat-section" id="coaching">
+  <div class="cat-header">
+    <div class="cat-tag">Category 05</div>
+    <h2>Coaching and Leadership Development</h2>
+    <p>Individual and small-group coaching for people managers and high-performers navigating interpersonal complexity, role transitions, and organizational change &mdash; using evidence-based frameworks adapted to the specific person and context.</p>
+  </div>
+  <div class="workshop-grid">
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#1a3a5c18;">&#127775;</div><div class="w-format">1:1 and Small Group</div></div>
+      <h3>Deep Coaching for Managers and Individual Contributors</h3>
+      <p>On-request coaching using the GROW framework, Enneagram personality profiling, Crucial Conversations, and Powerful Questions &mdash; for interpersonal dynamics, performance improvement, and role clarity at any level.</p>
+      <div class="w-tags"><span class="w-tag">GROW framework</span><span class="w-tag">Enneagram</span><span class="w-tag">Crucial conversations</span><span class="w-tag">Powerful questions</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#c8662a18;">&#128481;</div><div class="w-format">Assessment + Coaching</div></div>
+      <h3>Agile Coach Capability Development</h3>
+      <p>Training and mentorship for Agile Coaches themselves &mdash; on coaching methodology, maturity assessment design, roadmap facilitation, and how to move from being activity-focused to measurably outcome-focused in their coaching engagements.</p>
+      <div class="w-tags"><span class="w-tag">Agile coaching</span><span class="w-tag">Mentorship</span><span class="w-tag">Coach development</span></div>
+    </div>
+    <div class="w-card">
+      <div class="w-card-head"><div class="w-icon" style="background:#2a7a5a18;">&#128196;</div><div class="w-format">Assessment + Roadmap</div></div>
+      <h3>Organizational Readiness for AI-Native Delivery</h3>
+      <p>A diagnostic and planning engagement for leadership teams &mdash; assessing current DevOps and feedback loop maturity, identifying the specific operational gaps that will limit AI adoption, and building a sequenced roadmap to close them before the gaps compound.</p>
+      <div class="w-tags"><span class="w-tag">AI readiness</span><span class="w-tag">DevOps</span><span class="w-tag">Leadership</span><span class="w-tag">Roadmap</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="callout-section">
+  <div class="callout-inner">
+    <div>
+      <h2>Every engagement starts with your context</h2>
+      <p>None of these programs are delivered off the shelf. The first conversation is about your organization, your teams, and the specific problems you are trying to solve. Format, depth, and content are all adjusted from there.</p>
+      <p style="margin-top:12px;">Group workshops, individual coaching, multi-quarter programs, and one-off sessions are all on the table.</p>
+    </div>
+    <div class="callout-cta">
+      <a href="mailto:rob.dull@gmail.com" class="cta-btn">Get in touch &#8599;</a>
+      <a href="https://linkedin.com/in/robdull" target="_blank" class="cta-btn-ghost">LinkedIn &#8599;</a>
+    </div>
   </div>
 </div>
 
