@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rob Dull | Product Management & Operations</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0a0a0a;--white:#fff;--off:#f7f7f7;--rule:#e8e8e8;
+  --accent:#1a3a5c;--accent2:#c8662a;--muted:#5a5a5a;--light:#8a8a8a;
+  --font:'Inter',sans-serif;
+}
+@media print{
+  body{font-size:11pt;}
+  nav,.print-hide{display:none!important;}
+  .page{max-width:100%;padding:0;}
+  a{color:inherit;text-decoration:none;}
+  .section{page-break-inside:avoid;}
+}
+body{background:var(--off);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.6;min-height:100vh;}
+
+/* NAV */
+nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;}
+.nav-name{font-size:14px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
+.nav-links{display:flex;gap:10px;}
+.nav-links a{font-size:12px;font-weight:600;color:var(--ink);text-decoration:none;padding:7px 14px;border:2px solid var(--ink);border-radius:5px;transition:all .15s;}
+.nav-links a:hover{background:var(--ink);color:white;}
+.nav-links a.accent{background:var(--accent);color:white;border-color:var(--accent);}
+.nav-links a.accent:hover{background:#0f2540;border-color:#0f2540;}
+
+/* PAGE WRAPPER */
+.page{max-width:860px;margin:32px auto;background:var(--white);border:1px solid var(--rule);border-radius:12px;overflow:hidden;}
+
+/* HEADER */
+.resume-header{padding:40px 48px 36px;border-bottom:3px solid var(--ink);}
+.name{font-size:38px;font-weight:800;letter-spacing:-.04em;color:var(--ink);line-height:1;margin-bottom:6px;}
+.title{font-size:15px;font-weight:600;color:var(--accent);letter-spacing:-.01em;margin-bottom:16px;}
+.contact-row{display:flex;gap:20px;flex-wrap:wrap;}
+.contact-row a,.contact-row span{font-size:12px;font-weight:500;color:var(--muted);text-decoration:none;}
+.contact-row a:hover{color:var(--accent);}
+.sep{color:var(--rule);}
+
+/* SUMMARY */
+.summary-block{padding:28px 48px;background:var(--off);border-bottom:1px solid var(--rule);}
+.summary-block p{font-size:13.5px;line-height:1.75;color:var(--muted);max-width:720px;}
+
+/* SECTIONS */
+.section{padding:28px 48px;border-bottom:1px solid var(--rule);}
+.section:last-child{border-bottom:none;}
+.section-title{font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.section-title::after{content:'';flex:1;height:1px;background:var(--rule);}
+
+/* SKILLS GRID */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+.skill-item{font-size:12px;font-weight:500;color:var(--ink);background:var(--off);border:1px solid var(--rule);border-radius:5px;padding:6px 10px;}
+
+/* EXPERIENCE */
+.job{margin-bottom:28px;}
+.job:last-child{margin-bottom:0;}
+.job-header{margin-bottom:8px;}
+.job-company{font-size:15px;font-weight:800;letter-spacing:-.02em;color:var(--ink);}
+.job-meta{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-top:2px;}
+.job-title{font-size:13px;font-weight:600;color:var(--accent);font-style:italic;}
+.job-date{font-size:11px;font-weight:600;color:var(--light);letter-spacing:.02em;}
+.job-location{font-size:11px;color:var(--light);}
+.job-context{font-size:12.5px;color:var(--muted);margin:8px 0 10px;line-height:1.6;font-style:italic;}
+
+/* ROLE GROUPS */
+.role-group{margin-bottom:16px;}
+.role-group-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:7px;}
+.bullets{list-style:none;padding:0;}
+.bullets li{font-size:12.5px;line-height:1.65;color:var(--muted);padding-left:14px;position:relative;margin-bottom:5px;}
+.bullets li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;}
+.bullets li strong{color:var(--ink);font-weight:600;}
+
+/* EARLIER ROLES */
+.earlier-roles{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.earlier-role{background:var(--off);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;}
+.er-company{font-size:13px;font-weight:700;color:var(--ink);}
+.er-title{font-size:11px;font-weight:600;color:var(--accent);margin:2px 0 4px;}
+.er-date{font-size:10px;color:var(--light);font-weight:500;}
+.er-desc{font-size:11.5px;color:var(--muted);line-height:1.6;margin-top:6px;}
+
+/* EDUCATION */
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.edu-item{}
+.edu-degree{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+.edu-school{font-size:12px;color:var(--muted);}
+
+/* CERTS */
+.cert-groups{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.cert-group-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--light);margin-bottom:8px;}
+.cert-list{list-style:none;}
+.cert-list li{font-size:12px;color:var(--muted);padding-left:12px;position:relative;margin-bottom:3px;line-height:1.5;}
+.cert-list li::before{content:'';position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%;background:var(--rule);}
+
+/* METRICS */
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.metric-card{background:var(--off);border:1px solid var(--rule);border-radius:8px;padding:14px;text-align:center;}
+.metric-num{font-size:20px;font-weight:800;color:var(--accent);letter-spacing:-.03em;line-height:1;margin-bottom:5px;}
+.metric-label{font-size:10px;font-weight:600;color:var(--muted);line-height:1.4;}
+
+@media(max-width:700px){
+  .page{margin:0;border-radius:0;}
+  .resume-header,.summary-block,.section{padding-left:24px;padding-right:24px;}
+  .skills-grid{grid-template-columns:1fr 1fr;}
+  .earlier-roles,.cert-groups,.edu-grid{grid-template-columns:1fr;}
+  .metrics-grid{grid-template-columns:1fr 1fr;}
+  nav{padding:12px 20px;}
+}
+</style>
+</head>
+<body>
+
+<nav class="print-hide">
+  <a href="../index.html" class="nav-name">Rob Dull</a>
+  <div class="nav-links">
+    <a href="https://linkedin.com/in/robdull" target="_blank" class="accent">LinkedIn &#8599;</a>
+    <a href="javascript:window.print()">Print / PDF</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="resume-header">
+    <div class="name">Rob Dull</div>
+    <div class="title">Product Management &amp; Product Operations</div>
+    <div class="contact-row">
+      <span>San Francisco, CA</span>
+      <span class="sep">|</span>
+      <a href="mailto:rob.dull@gmail.com">rob.dull@gmail.com</a>
+      <span class="sep">|</span>
+      <a href="https://linkedin.com/in/robdull" target="_blank">linkedin.com/in/robdull</a>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-block">
+    <p>Product manager and operations leader with 20+ years working at the intersection of product strategy, customer insight, and delivery. At Salesforce and Delta Dental, I worked embedded within product and engineering organizations during periods of rapid growth, helping teams prioritize more clearly, ship more predictably, and stay closely connected to the customers they were building for. Earlier in my career I held direct PM roles in mobile and consumer software, managing products from customer research through engineering delivery. I bring genuine curiosity about what users need, a practical orientation toward outcomes over process, and experience applying AI tools to accelerate and improve product work.</p>
+  </div>
+
+  <!-- CORE SKILLS -->
+  <div class="section">
+    <div class="section-title">Core Skills</div>
+    <div class="skills-grid">
+      <div class="skill-item">Product Roadmap Planning</div>
+      <div class="skill-item">Synthesis of market research and customer-centric discovery</div>
+      <div class="skill-item">Feature Prioritization &amp; Trade-offs</div>
+      <div class="skill-item">OKR / KPI Framework Design</div>
+      <div class="skill-item">Lean Cadences for Dependency and Risk Management</div>
+      <div class="skill-item">Cross-functional Stakeholder Alignment</div>
+      <div class="skill-item">Backlog Management &amp; Requirements</div>
+      <div class="skill-item">Delivery Health &amp; Dependency Tracking</div>
+      <div class="skill-item">AI-Augmented Product Workflows</div>
+      <div class="skill-item">ROI Analysis &amp; Cost-of-Delay Modeling</div>
+      <div class="skill-item">User Journey &amp; Empathy Mapping</div>
+      <div class="skill-item">PM Enablement &amp; Community of Practice</div>
+      <div class="skill-item">Agile &amp; Kanban Delivery Practices</div>
+      <div class="skill-item">DevOps Maturity &amp; Pipeline Assessment</div>
+      <div class="skill-item">Executive &amp; Board-Level Communication</div>
+    </div>
+  </div>
+
+  <!-- TOOLS -->
+  <div class="section">
+    <div class="section-title">Tools &amp; Technology</div>
+    <div class="skills-grid">
+      <div class="skill-item">Jira &amp; Jira Align</div>
+      <div class="skill-item">Confluence</div>
+      <div class="skill-item">Miro (power user)</div>
+      <div class="skill-item">Tableau &amp; PowerBI</div>
+      <div class="skill-item">Salesforce Platform &amp; Einstein AI</div>
+      <div class="skill-item">GitHub CoPilot</div>
+      <div class="skill-item">ChatGPT</div>
+      <div class="skill-item">Planview</div>
+      <div class="skill-item">Google Suite</div>
+      <div class="skill-item">Slack</div>
+      <div class="skill-item">SharePoint</div>
+      <div class="skill-item">Microsoft Teams</div>
+      <div class="skill-item">Salesforce</div>
+      <div class="skill-item">Prompt Engineering for Product Workflows</div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Experience</div>
+
+    <!-- DELTA DENTAL -->
+    <div class="job">
+      <div class="job-header">
+        <div class="job-company">Delta Dental of California</div>
+        <div class="job-meta">
+          <div>
+            <span class="job-title">Expert Agile Coach &amp; Product Operations Lead</span>
+            <span class="job-location"> &nbsp;|&nbsp; San Francisco, CA</span>
+          </div>
+          <div class="job-date">March 2021 – April 2025</div>
+        </div>
+      </div>
+      <div class="job-context">Embedded product and operations partner across 35+ teams and 5 portfolios covering insurance systems, consumer mobile app, and member and provider portals. Worked closely with Product Managers, engineering leads, and VP-level stakeholders to improve how the product organization planned, prioritized, and delivered.</div>
+
+      <div class="role-group">
+        <div class="role-group-label">Product Strategy &amp; Prioritization</div>
+        <ul class="bullets">
+          <li>Introduced <strong>cost-of-delay analysis and OKR/KPI frameworks</strong> that shifted portfolio prioritization from stakeholder preference toward financially grounded, customer-outcome decisions — increasing ROI transparency across product and business audiences</li>
+          <li>Worked with product leaders to identify and track <strong>North Star metrics</strong> for acquisition, conversion, and retention, connecting team-level delivery decisions to business goals</li>
+          <li>Developed product strategy templates and facilitation approaches — including business canvases, value proposition frameworks, and empathy-based user research methods — that gave product managers practical tools for grounding roadmap decisions in customer needs</li>
+          <li>Partnered with product managers on quarterly planning across all five portfolios, improving the quality of roadmap commitments and reducing planning cycle time by 70% through better pre-work and stakeholder alignment</li>
+        </ul>
+      </div>
+
+      <div class="role-group">
+        <div class="role-group-label">Product Operations &amp; Delivery Health</div>
+        <ul class="bullets">
+          <li>Improved backlog intake and refinement processes, reducing scope creep by <strong>90%</strong> through clearer requirements, incremental validation, and earlier dependency identification</li>
+          <li>Strengthened cross-team dependency coordination across all portfolios, achieving <strong>100% visibility</strong> into interdependencies through structured tracking and proactive communication</li>
+          <li>Increased team delivery velocity by up to <strong>80%</strong> and on-time story completion to 90–100% by addressing root causes in backlog quality and dependency management rather than adding process overhead</li>
+          <li>Implemented Jira and Jira Align for real-time portfolio visibility, replacing ad hoc reporting with consistent delivery health metrics across all five portfolios</li>
+          <li>Led Scrum-to-Kanban transitions for multiple teams where continuous flow better matched the nature of the work, improving throughput and release frequency</li>
+        </ul>
+      </div>
+
+      <div class="role-group">
+        <div class="role-group-label">AI-Augmented Product Workflows</div>
+        <ul class="bullets">
+          <li>Championed early adoption of generative AI (GitHub CoPilot, ChatGPT) in product workflows, developing <strong>prompt engineering templates</strong> for feature specifications, acceptance criteria, and requirements documentation</li>
+          <li>Established behavior-driven development practices using Given-When-Then specifications as both a product quality standard and as the foundation for AI-assisted code generation, tightening the connection between product intent and engineering output</li>
+          <li>Drove adoption of AI-generated technical design specifications, reducing documentation overhead for product managers while improving precision</li>
+        </ul>
+      </div>
+
+      <div class="role-group">
+        <div class="role-group-label">DevOps Maturity &amp; Engineering Partnership</div>
+        <ul class="bullets">
+          <li>Co-developed an Engineering Excellence assessment framework covering 24 practices across 11 stages of the deployment pipeline, giving product and engineering teams a shared picture of maturity gaps and an 18-month improvement roadmap</li>
+          <li>Championed product manager ownership of built-in telemetry and feature value measurement — establishing the expectation that a feature is not done when it ships, but when usage data confirms it delivered the intended customer value</li>
+          <li>Worked with engineering and product leaders to shift release cadences toward continuous delivery, decoupling deployment from market release and enabling more responsive feature rollout</li>
+        </ul>
+      </div>
+
+      <div class="role-group">
+        <div class="role-group-label">PM Coaching &amp; Organizational Development</div>
+        <ul class="bullets">
+          <li>Provided 1:1 coaching to product managers and scrum masters on product strategy, stakeholder communication, and difficult conversations — including contributing to formal performance evaluations and improvement plans</li>
+          <li>Participated in the Lean-Agile Center of Excellence, coaching VP-level Engineering and Product leaders on transformation priorities and organizational decision-making</li>
+          <li>Developed role maturity frameworks and capability benchmarks for Product Owners and Scrum Masters, giving managers a structured foundation for development conversations</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SALESFORCE -->
+    <div class="job">
+      <div class="job-header">
+        <div class="job-company">Salesforce</div>
+        <div class="job-meta">
+          <div>
+            <span class="job-title">Sr. Agile Coach &amp; Product Operations Lead, IT</span>
+            <span class="job-location"> &nbsp;|&nbsp; San Francisco, CA</span>
+          </div>
+          <div class="job-date">January 2014 – July 2020</div>
+        </div>
+      </div>
+      <div class="job-context">Served as the primary product operations and agile coaching resource for Salesforce IT through a period of rapid growth — from 25 to 115+ teams across US, Ireland, and India — during 30%+ annual headcount growth. Worked closely with product, engineering, and program leadership to improve how the organization planned, delivered, and learned.</div>
+
+      <div class="role-group">
+        <div class="role-group-label">Product Operating Model &amp; Delivery Standards</div>
+        <ul class="bullets">
+          <li>Developed the IT Product Delivery Playbook — a practical operating guide covering product workflows, delivery standards, and cross-functional coordination — that became the reference document for new teams and leaders onboarding into the organization</li>
+          <li>Published a Global Scrum Operating Model and Agile Quality Management Playbook, establishing consistent delivery and quality practices across US, Ireland, and India offices while leaving room for local adaptation</li>
+          <li>Partnered with PMO to adapt delivery practices for large ERP implementations (Oracle RMB, Workday), designing hybrid approaches that maintained agile principles within compliance-gated delivery contexts</li>
+        </ul>
+      </div>
+
+      <div class="role-group">
+        <div class="role-group-label">PM Enablement &amp; Customer-Centered Product Practice</div>
+        <ul class="bullets">
+          <li>Designed and delivered a Product Owner and Product Manager training program to <strong>250+ practitioners</strong>, covering product strategy, roadmap planning, stakeholder engagement, user research methods, and Salesforce-specific tools — including SAFe POPM certification</li>
+          <li>Trained product managers on customer-centered research practices including user interviews, persona development, journey mapping, and jobs-to-be-done analysis — practical methods for grounding product decisions in real user needs rather than internal assumptions</li>
+          <li>Established a Product Management Community of Practice supporting <strong>50+ Product Owners</strong> with peer learning, shared tools, and ongoing operational guidance</li>
+          <li>Created and administered PM maturity assessments and internal certifications, giving managers clear benchmarks for product capability and development pathways for their teams</li>
+        </ul>
+      </div>
+
+      <div class="role-group">
+        <div class="role-group-label">Metrics, Visibility &amp; Continuous Improvement</div>
+        <ul class="bullets">
+          <li>Designed a metrics framework and executive dashboards (Tableau, Salesforce Platform/GUS) providing leadership with real-time product health and delivery visibility across all portfolios</li>
+          <li>Developed and administered an annual Agile Maturity Survey across 5 capability dimensions; at peak, <strong>500+ respondents</strong>, with results analyzed using Einstein AI to identify systemic improvement opportunities and prioritize coaching investment</li>
+          <li>Hosted <strong>72+ multi-day training events</strong> over 6 years (~1,300 total attendees), covering agile delivery, product management, and customer-centered product practices; managed all coordination, logistics, and virtual transition at COVID onset</li>
+        </ul>
+      </div>
+
+      <div class="role-group">
+        <div class="role-group-label">Cross-functional Alignment &amp; Change Leadership</div>
+        <ul class="bullets">
+          <li>Led product and delivery integration for the ExactTarget acquisition, unifying product processes and delivery practices across two merged organizations — achieving 80% improvement in delivery velocity through alignment rather than mandate</li>
+          <li>Contributed to executive briefings for enterprise customers (Anthem, Dell, HP) at the Salesforce Executive Briefing Center, presenting on product operating models, delivery metrics, and transformation approach</li>
+          <li>Supported Hyderabad office expansion by onboarding and enabling local delivery coaches, extending consistent product operations practices to a new geographic population</li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- end experience section -->
+
+  <!-- EARLIER EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Earlier Experience</div>
+    <div class="earlier-roles">
+
+      <div class="earlier-role">
+        <div class="er-company">Nokia</div>
+        <div class="er-title">Product Manager — Consumer Mobile Platform</div>
+        <div class="er-date">San Francisco, CA &nbsp;|&nbsp; 2007–2009</div>
+        <div class="er-desc">PM for Nokia's Community Games consumer mobile platform. Defined SDK and certification requirements for third-party game developers, collaborated directly with engineering on feature delivery, and built mobile interface prototypes to validate UX decisions before committing to implementation. Reduced developer onboarding time by 75% through process redesign informed by direct developer feedback.</div>
+      </div>
+
+      <div class="earlier-role">
+        <div class="er-company">Portrait Displays, Inc.</div>
+        <div class="er-title">Product Manager — Consumer Software &amp; Firmware</div>
+        <div class="er-date">Pleasanton, CA &nbsp;|&nbsp; 2004–2006</div>
+        <div class="er-desc">Full PM ownership of consumer software and firmware products for OEM customers including Fujitsu-Siemens, Sony, and Acer. Translated customer requirements into engineering specifications, managed delivery, and owned international deployment across 25 language localizations. Applied rapid iterative delivery based on direct customer feedback.</div>
+      </div>
+
+      <div class="earlier-role">
+        <div class="er-company">Bio-Rad Laboratories</div>
+        <div class="er-title">Web Publishing Manager — E-commerce &amp; CMS</div>
+        <div class="er-date">Hercules, CA &nbsp;|&nbsp; 2012</div>
+        <div class="er-desc">Managed 30+ releases for a global medical diagnostics e-commerce site. Implemented Lean process improvements to content change and defect workflows, reducing lead time by 80% through structured root cause analysis and process redesign.</div>
+      </div>
+
+      <div class="earlier-role">
+        <div class="er-company">Independent Consulting</div>
+        <div class="er-title">Business Process &amp; Marketing Consultant</div>
+        <div class="er-date">Bay Area &nbsp;|&nbsp; 2010–2013</div>
+        <div class="er-desc">Provided product operations and digital marketing advisory to technology and non-profit clients. Engagements included SEM strategy for a mobile app marketplace (750,000+ titles) and business process standardization for an established services company during a transitional period.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- METRICS -->
+  <div class="section">
+    <div class="section-title">Selected Outcomes</div>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-num">90%</div>
+        <div class="metric-label">Reduction in scope creep through improved backlog intake and requirements validation</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">70%</div>
+        <div class="metric-label">Faster quarterly planning: 3.5 days to 8 hours through better pre-work and alignment</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">80%</div>
+        <div class="metric-label">Delivery velocity improvement through backlog quality and dependency management</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">115+</div>
+        <div class="metric-label">Teams supported at Salesforce IT, growing from 25 across US, Ireland, and India</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">250+</div>
+        <div class="metric-label">Product managers trained on customer-centered product practice and delivery methods</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">1,300+</div>
+        <div class="metric-label">Training attendees across 72+ multi-day events over 6 years at Salesforce</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">500+</div>
+        <div class="metric-label">Annual survey respondents, analyzed with Einstein AI to prioritize improvement areas</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">100%</div>
+        <div class="metric-label">Cross-team dependency visibility through structured coordination and proactive tracking</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <div class="section-title">Education</div>
+    <div class="edu-grid">
+      <div class="edu-item">
+        <div class="edu-degree">MBA — Managing Technology &amp; Innovation; Marketing</div>
+        <div class="edu-school">Santa Clara University, Santa Clara, CA</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-degree">BA — Swarthmore College</div>
+        <div class="edu-school">Swarthmore, PA</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CERTIFICATIONS -->
+  <div class="section">
+    <div class="section-title">Certifications &amp; Training</div>
+    <div class="cert-groups">
+      <div>
+        <div class="cert-group-title">Agile &amp; Product Delivery</div>
+        <ul class="cert-list">
+          <li>SAFe Program Consultant 6.0 (SPC) — trainer-certified, all modules including Product, Portfolio, DevOps</li>
+          <li>Certified Scrum Professional — Product Owner (CSP-PO)</li>
+          <li>Kanban Management Professional (KMP) &amp; Enterprise Services Planning (ESP)</li>
+          <li>PMI Agile Certified Practitioner (PMI-ACP)</li>
+          <li>Project Management Professional (PMP)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="cert-group-title">Customer Practice &amp; Human-Centered Methods</div>
+        <ul class="cert-list">
+          <li>MIT/Sloane — Mastering Design Thinking</li>
+          <li>IDEO Human-Centered Design (HCD) methodology</li>
+          <li>Salesforce Ignite! Innovation Facilitation</li>
+          <li>ICF Life Coaching &amp; GROW Coaching Model</li>
+          <li>Crucial Conversations &amp; 5 Dysfunctions of a Team</li>
+        </ul>
+      </div>
+      <div>
+        <div class="cert-group-title">AI &amp; Analytics</div>
+        <ul class="cert-list">
+          <li>Google AI Essentials (Coursera)</li>
+          <li>Microsoft CoPilot for Productivity (Coursera)</li>
+          <li>Salesforce Einstein AI &amp; Platform Analytics</li>
+          <li>Prompt Engineering for Product Workflows</li>
+        </ul>
+      </div>
+      <div>
+        <div class="cert-group-title">Volunteering</div>
+        <ul class="cert-list">
+          <li>Taproot Foundation — Project Manager for pro-bono consulting teams serving non-profit organizations</li>
+          <li>Salesforce.org — Agile coaching for social entrepreneurship and non-profit technology teams</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page -->
+
+</body>
+</html>
