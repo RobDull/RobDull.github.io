@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visualizing Product Management Roles and AI-related Operations Gaps | Rob Dull</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0a0a0a;--white:#ffffff;--off:#f7f7f7;--rule:#e8e8e8;
+  --accent:#1a3a5c;--accent2:#c8662a;--muted:#6b6b6b;
+  --font:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;min-height:100vh;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
+.nn{font-size:15px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
+.nl{display:flex;gap:10px;align-items:center;}
+.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--ink);border-radius:6px;transition:all .15s;letter-spacing:-.01em;}
+.nl a:hover{background:var(--ink);color:white;}
+.nl a.li-btn{background:var(--accent);color:white;border-color:var(--accent);}
+.nl a.li-btn:hover{background:#0f2540;border-color:#0f2540;}
+
+/* BREADCRUMB */
+.bc{max-width:780px;margin:0 auto;padding:100px 40px 0;}
+.bc-inner{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--muted);}
+.bc-inner a{color:var(--muted);text-decoration:none;transition:color .15s;}
+.bc-inner a:hover{color:var(--ink);}
+.bc-sep{color:var(--rule);}
+
+/* ARTICLE HEADER */
+.art-header{max-width:780px;margin:0 auto;padding:28px 40px 48px;}
+.art-tag{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:14px;}
+.art-header h1{font-size:clamp(28px,4vw,48px);font-weight:900;letter-spacing:-.03em;line-height:1.08;color:var(--ink);margin-bottom:20px;}
+.art-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.art-date{font-size:12px;font-weight:600;color:var(--muted);}
+.art-source{font-size:12px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px;}
+.art-source a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(26,58,92,.25);transition:border-color .15s;}
+.art-source a:hover{border-color:var(--accent);}
+.art-dot{width:3px;height:3px;border-radius:50%;background:var(--rule);}
+
+/* ARTICLE BODY */
+.art-body{max-width:780px;margin:0 auto;padding:0 40px 80px;}
+
+.art-body p{font-size:16px;line-height:1.85;color:#1a1a1a;margin-bottom:24px;}
+
+.art-body h2{font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin:44px 0 16px;}
+
+/* TABLES */
+.art-body table{width:100%;border-collapse:collapse;margin:28px 0;font-size:14px;}
+.art-body th{background:var(--ink);color:white;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:12px 16px;text-align:left;}
+.art-body td{padding:11px 16px;border-bottom:1px solid var(--rule);color:#2a2a2a;line-height:1.6;vertical-align:top;}
+.art-body tr:last-child td{border-bottom:none;}
+.art-body tr:nth-child(even) td{background:var(--off);}
+
+/* VERTICAL TABLE (PM vs PO split) */
+.art-body .v-table{width:100%;border-collapse:collapse;margin:28px 0;font-size:14px;}
+.art-body .v-table th{background:var(--ink);color:white;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:12px 16px;text-align:left;width:50%;}
+.art-body .v-table td{padding:10px 16px;border-bottom:1px solid var(--rule);vertical-align:top;color:#2a2a2a;}
+.art-body .v-table tr:last-child td{border-bottom:none;}
+
+/* CALLOUT */
+.callout{background:var(--off);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:20px 24px;margin:32px 0;font-size:15px;line-height:1.8;color:#2a2a2a;}
+.callout strong{color:var(--ink);}
+
+/* DIAGRAM */
+.diagram-wrap{margin:36px 0;border:2px solid var(--rule);border-radius:12px;overflow:hidden;}
+.diagram-label{background:var(--off);border-bottom:1px solid var(--rule);padding:10px 18px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.diagram-body{padding:32px;display:flex;justify-content:center;}
+
+/* QUADRANT DIAGRAM */
+.quadrant{position:relative;width:100%;max-width:560px;aspect-ratio:1;border:2px solid var(--ink);}
+.q-axis-top{position:absolute;top:-28px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.q-axis-bottom{position:absolute;bottom:-28px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.q-axis-left{position:absolute;left:-72px;top:50%;transform:translateY(-50%) rotate(-90deg);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.q-axis-right{position:absolute;right:-80px;top:50%;transform:translateY(-50%) rotate(90deg);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.q-center-h{position:absolute;top:50%;left:0;right:0;height:1px;background:var(--rule);}
+.q-center-v{position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--rule);}
+
+/* BUBBLE */
+.bubble{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;font-size:11px;font-weight:700;line-height:1.3;padding:8px;}
+
+/* QUESTIONS LIST */
+.q-list{list-style:none;margin:0 0 24px;}
+.q-list li{padding:12px 0;border-bottom:1px solid var(--rule);font-size:15px;line-height:1.7;color:#2a2a2a;padding-left:20px;position:relative;}
+.q-list li::before{content:'?';position:absolute;left:0;font-weight:800;color:var(--accent2);font-size:13px;}
+.q-list li:last-child{border-bottom:none;}
+
+/* DIVIDER */
+.art-divider{max-width:780px;margin:0 auto;padding:0 40px;border-top:1px solid var(--rule);margin-bottom:0;}
+
+/* NEXT/BACK NAV */
+.art-nav{max-width:780px;margin:0 auto;padding:40px 40px 80px;display:flex;justify-content:space-between;align-items:center;gap:16px;}
+.art-nav a{font-size:13px;font-weight:700;color:var(--muted);text-decoration:none;border:2px solid var(--rule);border-radius:6px;padding:10px 18px;transition:all .15s;}
+.art-nav a:hover{border-color:var(--ink);color:var(--ink);}
+
+footer{padding:28px 40px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+footer p{font-size:12px;font-weight:500;color:var(--muted);}
+
+@media(max-width:680px){
+  nav{padding:14px 20px;}
+  .nl a{padding:7px 12px;font-size:12px;}
+  .bc,.art-header,.art-body,.art-nav,.art-divider{padding-left:20px;padding-right:20px;}
+  .q-axis-left{left:-60px;}
+  .q-axis-right{right:-68px;}
+  .diagram-body{padding:48px 20px 20px;}
+  footer{padding:20px 24px;flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nn">Rob Dull</a>
+  <div class="nl">
+    <a href="../index.html#tools">Work</a>
+    <a href="../index.html#about">About</a>
+    <a href="mailto:rob.dull@gmail.com">Email Me</a>
+    <a href="https://linkedin.com/in/robdull" target="_blank" class="li-btn">LinkedIn &#8599;</a>
+  </div>
+</nav>
+
+<div class="bc">
+  <div class="bc-inner">
+    <a href="../index.html">Rob Dull</a>
+    <span class="bc-sep">&#8250;</span>
+    <a href="perspectives-index.html">Perspectives</a>
+    <span class="bc-sep">&#8250;</span>
+    <span>PM Roles and AI</span>
+  </div>
+</div>
+
+<div class="art-header">
+  <div class="art-tag">Product Operations</div>
+  <h1>Visualizing Product Management Roles and AI-related Operations Gaps</h1>
+  <div class="art-meta">
+    <span class="art-date">November 2025</span>
+    <span class="art-dot"></span>
+    <span class="art-source">Originally published on <a href="https://linkedin.com/in/robdull" target="_blank">LinkedIn &#8599;</a></span>
+  </div>
+</div>
+
+<div class="art-body">
+
+  <p>There has always been lively debate about how to define the role of Product Manager. In one early meeting of the Silicon Valley Product Management association, this was the topic of a presentation. How do we describe our job? Is it a development or business function, or both? The slide deck showed a universal translator from Star Trek, and everyone was looking around to see who got the reference and who didn't.</p>
+
+  <p>Ever since I heard the terms "inbound" and "outbound" to describe technology-facing versus market-facing Product Management, I have thought of it as a left-right split. The focus areas listed here are just examples, not meant to be fully representative.</p>
+
+  <table>
+    <thead>
+      <tr><th>Inbound</th><th>Outbound</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Researching new technology</td><td>Market research</td></tr>
+      <tr><td>Exploring viable use cases</td><td>Go-to-market strategies</td></tr>
+      <tr><td>Cutting costs</td><td>Growth champion</td></tr>
+      <tr><td>Compliance</td><td>Responding to customers</td></tr>
+    </tbody>
+  </table>
+
+  <p>I also think of Product Management in a vertical sense, because the core Product Management output is a top-down backlog from Portfolio Themes to User Stories. There are differing tales about whether the term "Product Owner" was accidentally or deliberately created to be separate from the role of Product Manager. The general understanding now is that Product Managers are more senior and focused on long-term strategy, while Product Owners are the main point-of-contact between delivery teams and business stakeholders on a daily basis. If you have to draw a line, from a planning and backlog management perspective, it is usually drawn somewhere around Feature-level concerns.</p>
+
+  <table>
+    <thead>
+      <tr><th>Role</th><th>Focus Area</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>PM</strong></td><td>Multi-year Vision, Portfolio Planning, Roadmapping (Epics), Quarterly Goals (Epics and Features)</td></tr>
+      <tr><td><strong>PO</strong></td><td>Quarterly Product Backlog (Features), Release Backlog (Features and Stories), Iteration Backlog (Stories), Daily review and acceptance sign-off</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    This is general context for differentiating the roles, not a hard line. The job family is more than these two roles. Just in the last week, I have seen several LinkedIn posts proposing different titles and responsibilities within the PM job family. The role of Technical Product Manager is on the rise, which may or may not be a good thing depending on whether it reduces or increases organizational complexity. The role of BA as "assistant PO" seems to be on the way out, but this or a close variant is liable to come roaring back.
+  </div>
+
+  <h2>Where PMs and POs Operate — and Where They Don't</h2>
+
+  <p>A Product Owner can have a totally appropriate sense of where they operate, then transition to a different area with equal effectiveness. Inbound versus Outbound orientation is partially due to background, whether they come from the technical side or more of a business stakeholder role. It is not discussed enough that the product lifecycle draws focus one way or the other depending on the maturity of the technology. If the goal is potential niche revenue from new technology, the focus is mainly inbound. Enhancing solutions and scaling is mainly outbound. Maintaining service while cutting costs swings back to mainly inbound.</p>
+
+  <p>I like using the quadrant diagram below with anyone in the Product Management job family, to help visualize where they are, how much scope they cover, where they think they should be covering, and where they might look to strengthen their partnerships.</p>
+
+  <div class="diagram-wrap">
+    <div class="diagram-label">PM Job Family — Scope and Coverage</div>
+    <div class="diagram-body">
+      <svg viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px;">
+        <!-- Axis labels -->
+        <text x="260" y="18" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#6b6b6b" letter-spacing="1">LONG TERM STRATEGY</text>
+        <text x="260" y="510" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#6b6b6b" letter-spacing="1">DAILY IMPLEMENTATION</text>
+        <text x="14" y="260" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#6b6b6b" letter-spacing="1" transform="rotate(-90,14,260)">TECHNOLOGY-FACING</text>
+        <text x="506" y="260" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#6b6b6b" letter-spacing="1" transform="rotate(90,506,260)">BUSINESS-FACING</text>
+
+        <!-- Quadrant box -->
+        <rect x="36" y="28" width="448" height="448" fill="none" stroke="#e8e8e8" stroke-width="2" rx="2"/>
+        <!-- Center lines -->
+        <line x1="36" y1="252" x2="484" y2="252" stroke="#e8e8e8" stroke-width="1"/>
+        <line x1="260" y1="28" x2="260" y2="476" stroke="#e8e8e8" stroke-width="1"/>
+
+        <!-- CPO bubble — top right -->
+        <ellipse cx="350" cy="100" rx="88" ry="52" fill="#1a3a5c" fill-opacity="0.12" stroke="#1a3a5c" stroke-width="1.5" stroke-opacity="0.3"/>
+        <text x="350" y="96" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="800" fill="#1a3a5c">CPO</text>
+        <text x="350" y="111" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#1a3a5c">Long-Term Market Strategy</text>
+
+        <!-- Product Director bubble — top center -->
+        <ellipse cx="268" cy="138" rx="110" ry="58" fill="#c8662a" fill-opacity="0.10" stroke="#c8662a" stroke-width="1.5" stroke-opacity="0.3"/>
+        <text x="268" y="133" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="800" fill="#c8662a">Product Director</text>
+        <text x="268" y="148" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#c8662a">Enterprise Architecture Vision</text>
+
+        <!-- Sr PM bubble — center -->
+        <ellipse cx="290" cy="230" rx="105" ry="58" fill="#2a7a5a" fill-opacity="0.12" stroke="#2a7a5a" stroke-width="1.5" stroke-opacity="0.3"/>
+        <text x="290" y="225" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="800" fill="#2a7a5a">Sr. Product Manager</text>
+        <text x="290" y="240" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#2a7a5a">Quarterly Roadmap Milestones</text>
+
+        <!-- Technical PM bubble — left center -->
+        <ellipse cx="168" cy="252" rx="90" ry="50" fill="#5a30b0" fill-opacity="0.10" stroke="#5a30b0" stroke-width="1.5" stroke-opacity="0.3"/>
+        <text x="168" y="247" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="800" fill="#5a30b0">Technical PM</text>
+        <text x="168" y="262" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#5a30b0">Technical Feature Backlog</text>
+
+        <!-- Product Owner bubble — lower center -->
+        <ellipse cx="248" cy="340" rx="108" ry="60" fill="#b5810a" fill-opacity="0.12" stroke="#b5810a" stroke-width="1.5" stroke-opacity="0.3"/>
+        <text x="248" y="335" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="800" fill="#b5810a">Product Owner</text>
+        <text x="248" y="350" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#b5810a">Business Feature Backlog</text>
+
+        <!-- Prod Support label -->
+        <text x="100" y="418" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#9a9a9a">Prod Support</text>
+        <!-- Daily sign-off label -->
+        <text x="390" y="440" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#9a9a9a">Daily Story Sign-off</text>
+        <!-- Quarterly enablement label -->
+        <text x="130" y="200" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#9a9a9a">Quarterly Enablement</text>
+      </svg>
+    </div>
+  </div>
+
+  <p>This is for illustration purposes. I left the Product Manager out of this example because it would have been too distracting. I think it is a fair example of how things could be working in an average Product Org these days. I use these quadrants, with a blank slate and sticky notes, as a conversation starter with people in the PM job family. This leads into more detail about what is in the bubbles, and the borders of responsibilities.</p>
+
+  <ul class="q-list">
+    <li>Does the Product Owner do daily release sign-off?</li>
+    <li>Does the Sr. Product Manager own or co-own milestones on a technical roadmap, and is it clearly aligned with the business roadmap?</li>
+    <li>Do the PO and PM have the context and feedback loops that they need, horizontally, to fulfill their technical and non-technical areas of responsibility?</li>
+    <li>Do the PO and PM have the context and feedback loops that they need, vertically, for alignment and transparency of short and long-term goals?</li>
+    <li>Where does AI call for accelerated coordination, from idea to production, to keep up with AI-accelerated prototyping and development?</li>
+  </ul>
+
+  <h2>The Two Gaps AI Makes Urgent</h2>
+
+  <p>Whether or not these example bubbles represent the situation at your company, there is a common pattern. The Product Management job family tends to run in a line from the upper right to a bit left of center at the bottom. There are two obvious gaps in coverage, in the corners of the quadrant.</p>
+
+  <p>Regarding the bottom right, toward weekly or daily customer recognition of incremental value: how frequently do your Scrum and Kanban teams demo new customer-facing functionality and get direct feedback? A typical two-week sprint is starting to seem like slow turnaround.</p>
+
+  <p>For the upper left, toward technical strategy: are Architecture, Sales, Marketing, Security and Product all aligned on the benefits of a continuous deployment pipeline, with frequent release-on-demand? DevOps may be a big topic on the architecture and engineering side at your company, but does everyone understand that a DevOps transformation culminates in non-technical people performing low-effort, low-risk product releases? Sales and Marketing should be clamoring for business-driven push-button releases and expedited customer feedback loops. Most Sales and Marketing people do not know about the business relationship to DevOps. The urgency is rising, and organizations should be getting on board with DevOps and Kanban if they are getting on board with AI.</p>
+
+  <div class="diagram-wrap">
+    <div class="diagram-label">Key Focus Areas for Product Operations to Leverage AI-native Development</div>
+    <div class="diagram-body">
+      <svg viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px;">
+        <!-- Axis labels -->
+        <text x="260" y="18" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#6b6b6b" letter-spacing="1">LONG TERM STRATEGY</text>
+        <text x="260" y="510" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#6b6b6b" letter-spacing="1">DAILY IMPLEMENTATION</text>
+        <text x="14" y="260" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#6b6b6b" letter-spacing="1" transform="rotate(-90,14,260)">TECHNOLOGY-FACING</text>
+        <text x="506" y="260" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#6b6b6b" letter-spacing="1" transform="rotate(90,506,260)">BUSINESS-FACING</text>
+
+        <!-- Quadrant box -->
+        <rect x="36" y="28" width="448" height="448" fill="none" stroke="#e8e8e8" stroke-width="2" rx="2"/>
+        <line x1="36" y1="252" x2="484" y2="252" stroke="#e8e8e8" stroke-width="1"/>
+        <line x1="260" y1="28" x2="260" y2="476" stroke="#e8e8e8" stroke-width="1"/>
+
+        <!-- PM Job Family — center diagonal band -->
+        <ellipse cx="280" cy="240" rx="130" ry="185" fill="#1a3a5c" fill-opacity="0.08" stroke="#1a3a5c" stroke-width="1.5" stroke-opacity="0.2" transform="rotate(-20,280,240)"/>
+        <text x="310" y="160" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="800" fill="#1a3a5c">PM Job Family</text>
+
+        <!-- Gap 1: Upper left — DevOps/CTO -->
+        <ellipse cx="140" cy="148" rx="90" ry="96" fill="#b03030" fill-opacity="0.10" stroke="#b03030" stroke-width="1.5" stroke-opacity="0.35"/>
+        <text x="140" y="120" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="800" fill="#b03030">CTO, Enterprise</text>
+        <text x="140" y="134" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="800" fill="#b03030">Architecture</text>
+        <text x="140" y="152" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#b03030">Enabling Continuous</text>
+        <text x="140" y="165" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#b03030">Deployment, Release</text>
+        <text x="140" y="178" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#b03030">on Demand (DevOps)</text>
+
+        <!-- Gap 2: Lower right — Customer Success -->
+        <ellipse cx="390" cy="378" rx="82" ry="80" fill="#2a7a5a" fill-opacity="0.12" stroke="#2a7a5a" stroke-width="1.5" stroke-opacity="0.35"/>
+        <text x="390" y="358" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="800" fill="#2a7a5a">Customer</text>
+        <text x="390" y="372" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="800" fill="#2a7a5a">Success groups</text>
+        <text x="390" y="390" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#2a7a5a">Rapid Rollout</text>
+        <text x="390" y="403" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#2a7a5a">and Feedback</text>
+
+        <!-- Corner labels -->
+        <text x="72" y="435" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#9a9a9a">Refactoring</text>
+        <text x="440" y="460" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#9a9a9a">Story Sign-off</text>
+        <text x="96" y="70" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#9a9a9a">Enterprise Arch Vision</text>
+      </svg>
+    </div>
+  </div>
+
+  <h2>What Product Operations Needs to Do Now</h2>
+
+  <p>In order to fully leverage AI-native Product Management and software delivery operations, the technical and customer-facing gaps need to be addressed. As AI accelerates development, organizations must evolve to accelerate prototype feedback, continuous deployment, frequent release on demand, and rapid value recognition.</p>
+
+  <p>Geoffrey Moore, known for <em>Crossing the Chasm</em>, recently wrote about making way for a new model of Customer Success and proposed the idea of Use Case Teams (UTCs). I highly recommend the read for anyone thinking through how the customer-facing gap gets closed.</p>
+
+  <p>Scrum and Agile were designed to leverage the rapid delivery and feedback that was made possible by extreme programming. Product Management had to become Agile, and business agility lagged behind technical agility for years. This lag could happen again with AI. Product Operations should evolve quickly. Kanban boards can scale out to include more upstream architecture enablement, and more downstream release activities. Engineering-Product sync meetings will need to be streamlined, with recurring cadences and supporting assets like metrics and virtual collaboration tools. Key stakeholders will need to be more available for responding to rapid prototyping.</p>
+
+  <div class="callout">
+    <strong>Evolution will happen, whether it is controlled or not — and that is up to Product Operations.</strong> Successful Product Managers will have ways to cover these customer success and DevOps gaps, to accelerate ideation and value recognition on pace with AI-native development.
+  </div>
+
+</div>
+
+<div class="art-divider"></div>
+
+<div class="art-nav">
+  <a href="perspectives-index.html">&#8592; All Perspectives</a>
+  <a href="mailto:rob.dull@gmail.com">Discuss this &#8599;</a>
+</div>
+
+<footer>
+  <p>Rob Dull &mdash; Product Operations &bull; San Francisco, CA</p>
+  <p><a href="mailto:rob.dull@gmail.com" style="color:var(--muted);text-decoration:none;">rob.dull@gmail.com</a></p>
+</footer>
+
+</body>
+</html>
