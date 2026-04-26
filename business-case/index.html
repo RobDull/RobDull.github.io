@@ -940,8 +940,7 @@ async function generate() {
   content.innerHTML = '<div class="loading-bar"><div class="loading-fill"></div></div><div class="loading-msg">Building your business case...</div>';
   area.scrollIntoView({behavior:'smooth',block:'start'});
 
-  const peopleStr = persons.filter(p=>p.role).map(p=>`- ${p.count}x ${p.role} at avg ${p.salary}`).join('
-');
+  const peopleStr = persons.filter(p=>p.role).map(p=>`- ${p.count}x ${p.role} at avg ${p.salary}`).join('\n');
   const modeInstr = {
     quick:'Generate 3 sections only: EXECUTIVE PITCH, COST/BENEFIT ANALYSIS, RISKS OF INACTION. Keep each punchy and persuasive.',
     standard:'Generate 5 sections: EXECUTIVE PITCH, COST/BENEFIT ANALYSIS (include salary-based employee ROI), END-USER AND EMPLOYEE IMPACT, RISKS OF INACTION, HOW RETURNS AND RISKS EVOLVE OVER TIME.',
@@ -964,8 +963,7 @@ Revenue Opportunity: ${v('revenue')||'Not specified'}
 Cost Savings: ${v('savings')||'Not specified'}
 Productivity Gains: ${v('productivity')||'Not provided'}
 Pain Points: ${v('painPoints')||'Not provided'}
-${currentMode!=='quick'&&peopleStr?'Impacted Employees:
-'+peopleStr:''}
+${currentMode!=='quick'&&peopleStr?'Impacted Employees:\n'+peopleStr:''}
 End Users: ${currentMode==='full'?v('endUsers')||'Not specified':''}
 User Impact: ${currentMode==='full'?v('userImpact')||'Not provided':''}
 Technical Complexity: ${currentMode==='full'?v('complexity')||'Not specified':''}
