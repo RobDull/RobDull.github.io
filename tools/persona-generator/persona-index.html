@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enterprise Persona Generator | Rob Dull</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0d0d0f;--white:#ffffff;--off:#f4f4f6;--rule:#e2e2e8;
+  --accent:#1a3a5c;--accent2:#c8662a;--muted:#72728a;
+  --teal:#1a6b6b;--teal-lt:#e8f4f4;
+  --amber:#b87a10;--amber-lt:#fdf5e6;
+  --body-font:'IBM Plex Sans',sans-serif;
+  --display-font:'Instrument Serif',serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+html{scroll-behavior:smooth;}
+body{background:#f8f8fb;color:var(--ink);font-family:var(--body-font);font-size:15px;line-height:1.6;min-height:100vh;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:15px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(248,248,251,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
+.nn{font-size:14px;font-weight:600;color:var(--ink);text-decoration:none;}
+.nl{display:flex;gap:8px;}
+.nl a{font-size:12px;font-weight:600;color:var(--ink);text-decoration:none;padding:7px 14px;border:1.5px solid var(--rule);border-radius:5px;transition:all .15s;background:white;}
+.nl a:hover{border-color:var(--ink);}
+.nl a.li-btn{background:var(--accent);color:white;border-color:var(--accent);}
+.bc{max-width:1120px;margin:0 auto;padding:88px 40px 0;}
+.bc-inner{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--muted);font-family:var(--mono);}
+.bc-inner a{color:var(--muted);text-decoration:none;}
+.bc-inner a:hover{color:var(--ink);}
+.bc-sep{opacity:.4;}
+.page-head{max-width:1120px;margin:0 auto;padding:24px 40px 48px;}
+.page-tag{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;font-family:var(--mono);}
+.page-head h1{font-family:var(--display-font);font-size:clamp(34px,4.5vw,58px);font-weight:400;line-height:1.05;color:var(--ink);margin-bottom:14px;}
+.page-head h1 em{font-style:italic;color:var(--teal);}
+.page-head p{font-size:15px;color:var(--muted);line-height:1.8;max-width:560px;}
+.jtbd-banner{background:var(--ink);padding:20px 40px;}
+.jtbd-banner-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.jtbd-badge{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-lt);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:4px 10px;white-space:nowrap;}
+.jtbd-banner p{font-size:13px;color:rgba(255,255,255,.7);line-height:1.6;flex:1;}
+.jtbd-banner strong{color:white;}
+.tool-wrap{max-width:1120px;margin:0 auto;padding:40px 40px 80px;display:grid;grid-template-columns:380px 1fr;gap:32px;align-items:start;}
+.form-panel{background:white;border:1.5px solid var(--rule);border-radius:12px;overflow:hidden;position:sticky;top:80px;box-shadow:0 2px 12px rgba(0,0,0,.04);}
+.form-panel-head{background:var(--ink);padding:22px 28px;}
+.form-panel-head h2{font-family:var(--display-font);font-size:20px;font-weight:400;color:white;margin-bottom:4px;}
+.form-panel-head p{font-size:12px;color:rgba(255,255,255,.55);line-height:1.5;}
+.form-body{padding:24px 28px;}
+.jtbd-section{background:var(--teal-lt);border:1.5px solid #b8dada;border-radius:8px;padding:18px 20px;margin-bottom:22px;}
+.jtbd-section-label{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;}
+.jtbd-template{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px;}
+.jtbd-template em{font-style:normal;color:var(--ink);font-weight:600;}
+.field-group{margin-bottom:18px;}
+.field-label{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+.field-label .opt{font-size:11px;font-weight:400;color:var(--muted);}
+.field-label .req{font-size:10px;font-weight:700;color:var(--teal);font-family:var(--mono);}
+input[type=text],select,textarea{width:100%;background:var(--off);border:1.5px solid var(--rule);border-radius:7px;padding:9px 13px;font-family:var(--body-font);font-size:13px;color:var(--ink);transition:border-color .15s,background .15s;outline:none;line-height:1.5;}
+input[type=text]:focus,select:focus,textarea:focus{border-color:var(--teal);background:white;}
+textarea{resize:vertical;min-height:64px;}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2372728a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
+.gen-btn{width:100%;background:var(--teal);color:white;border:none;border-radius:7px;padding:13px 20px;font-family:var(--body-font);font-size:13px;font-weight:600;cursor:pointer;transition:all .18s;}
+.gen-btn:hover{background:#145555;transform:translateY(-1px);box-shadow:0 4px 14px rgba(26,107,107,.3);}
+.example-section{padding:18px 28px 24px;border-top:1px solid var(--rule);background:var(--off);}
+.example-label{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.ex-pills{display:flex;flex-direction:column;gap:6px;}
+.ex-pill{background:white;border:1.5px solid var(--rule);border-radius:6px;padding:9px 13px;font-family:var(--body-font);font-size:12px;color:var(--muted);cursor:pointer;text-align:left;transition:all .15s;line-height:1.5;}
+.ex-pill:hover{border-color:var(--teal);color:var(--teal);}
+.ex-pill strong{display:block;font-size:12px;font-weight:700;color:var(--ink);margin-bottom:1px;}
+.output-panel{min-height:480px;}
+.empty-state{border:2px dashed var(--rule);border-radius:12px;padding:72px 40px;text-align:center;}
+.empty-icon{font-size:36px;margin-bottom:16px;opacity:.25;}
+.empty-state p{font-size:13px;color:var(--muted);line-height:1.7;max-width:260px;margin:0 auto;}
+.jtbd-card{background:var(--ink);border-radius:12px 12px 0 0;padding:32px 36px;animation:fadeUp .3s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.jtbd-card-eyebrow{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:16px;}
+.jtbd-statement{font-family:var(--display-font);font-size:clamp(18px,2.2vw,26px);font-weight:400;color:white;line-height:1.45;margin-bottom:24px;}
+.jtbd-statement .when{color:rgba(255,255,255,.5);}
+.jtbd-statement .want{color:#7dd4c8;}
+.jtbd-statement .so{color:rgba(255,255,255,.5);}
+.jtbd-statement .outcome{color:#f4c066;}
+.jtbd-meta-row{display:flex;gap:24px;flex-wrap:wrap;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);}
+.jtbd-meta-label{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:4px;}
+.jtbd-meta-val{font-size:13px;font-weight:500;color:rgba(255,255,255,.85);}
+.persona-card{background:white;border:1.5px solid var(--rule);border-radius:0 0 12px 12px;overflow:hidden;animation:fadeUp .35s .08s ease both;}
+.persona-header{display:grid;grid-template-columns:140px 1fr;background:#eef0f6;border-bottom:1.5px solid var(--rule);}
+.persona-avatar-col{display:flex;align-items:flex-end;justify-content:center;padding-top:20px;}
+.persona-info-col{padding:24px 28px;}
+.sector-tag{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:8px;}
+.persona-name{font-family:var(--display-font);font-size:clamp(22px,2.8vw,32px);font-weight:400;color:var(--ink);line-height:1.05;margin-bottom:14px;}
+.attrs-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;}
+.attr-key{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:2px;}
+.attr-val{font-size:12px;font-weight:600;color:var(--ink);}
+.persona-quote{background:var(--teal);padding:16px 28px;}
+.persona-quote p{font-family:var(--display-font);font-style:italic;font-size:14px;color:rgba(255,255,255,.92);line-height:1.6;}
+.persona-body{padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.section-label{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px;}
+.bio-text{font-size:13px;color:#2a2a2a;line-height:1.75;}
+.bullet-list{list-style:none;}
+.bullet-list li{font-size:13px;color:#2a2a2a;padding:5px 0;border-bottom:1px solid var(--rule);display:flex;gap:8px;align-items:flex-start;line-height:1.55;}
+.bullet-list li:last-child{border-bottom:none;}
+.bullet-list li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--amber);flex-shrink:0;margin-top:6px;}
+.tech-list{list-style:none;}
+.tech-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--rule);}
+.tech-row:last-child{border-bottom:none;}
+.tech-name{font-size:12px;color:#2a2a2a;}
+.dot-track{display:flex;gap:4px;}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--rule);}
+.dot.on{background:var(--amber);}
+.org-impact{background:var(--off);border-top:1.5px solid var(--rule);padding:20px 28px;}
+.org-impact-label{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.impact-box{background:white;border:1.5px solid var(--rule);border-radius:7px;padding:12px 14px;}
+.impact-box-label{font-size:10px;font-weight:600;color:var(--muted);margin-bottom:4px;}
+.impact-box-val{font-size:12px;font-weight:700;color:var(--ink);line-height:1.4;}
+.card-actions{background:white;border-top:1.5px solid var(--rule);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.copy-btn{background:var(--ink);color:white;border:none;border-radius:6px;padding:9px 18px;font-family:var(--body-font);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;}
+.copy-btn:hover{background:#333;}
+.reset-btn{background:transparent;color:var(--muted);border:1.5px solid var(--rule);border-radius:6px;padding:9px 14px;font-family:var(--body-font);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;}
+.reset-btn:hover{border-color:var(--ink);color:var(--ink);}
+.card-note{font-family:var(--mono);font-size:10px;color:var(--muted);}
+.examples-wrap{max-width:1120px;margin:0 auto;padding:0 40px 80px;}
+.examples-rule{border:none;border-top:1.5px solid var(--rule);margin-bottom:44px;}
+.examples-head{margin-bottom:28px;}
+.examples-head h2{font-family:var(--display-font);font-size:30px;font-weight:400;color:var(--ink);margin-bottom:6px;}
+.examples-head p{font-size:13px;color:var(--muted);}
+.examples-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.ex-card{background:white;border:1.5px solid var(--rule);border-radius:10px;padding:20px;cursor:pointer;transition:all .18s;}
+.ex-card:hover{border-color:var(--teal);box-shadow:0 4px 16px rgba(26,107,107,.08);}
+.ex-card-mono{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:8px;}
+.ex-card h3{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.3;}
+.ex-card-jtbd{font-family:var(--display-font);font-style:italic;font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:10px;}
+.ex-card-arrow{font-size:14px;color:var(--rule);transition:color .15s;}
+.ex-card:hover .ex-card-arrow{color:var(--teal);}
+.working-style{background:white;border-top:1.5px solid var(--rule);padding:20px 28px;display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.ws-block h4{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px;}
+.ws-pref{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;}
+.ws-icon{width:28px;height:28px;border-radius:6px;background:var(--teal-lt);border:1px solid #b8dada;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.ws-text{font-size:12px;color:#2a2a2a;line-height:1.55;}
+.ws-text strong{display:block;font-size:11px;font-weight:700;color:var(--ink);margin-bottom:1px;}
+.interaction-list{list-style:none;}
+.interaction-item{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--rule);font-size:12px;color:#2a2a2a;line-height:1.5;}
+.interaction-item:last-child{border-bottom:none;}
+.int-role{font-weight:700;color:var(--ink);min-width:100px;flex-shrink:0;}
+.int-nature{color:var(--muted);}
+.int-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:3px;margin-bottom:3px;}
+.int-badge.friction{background:#fdecea;color:#b03030;}
+.int-badge.depends{background:#e8f4f4;color:var(--teal);}
+.int-badge.reports{background:#f5f0e8;color:var(--amber);}
+footer{padding:24px 40px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;background:white;}
+footer p{font-size:11px;font-weight:500;color:var(--muted);font-family:var(--mono);}
+@media(max-width:920px){.tool-wrap{grid-template-columns:1fr;}.form-panel{position:static;}.examples-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:640px){nav{padding:12px 20px;}.bc,.page-head,.tool-wrap,.examples-wrap{padding-left:20px;padding-right:20px;}.jtbd-banner{padding:16px 20px;}.persona-header{grid-template-columns:1fr;}.persona-body{grid-template-columns:1fr;}.impact-grid{grid-template-columns:1fr 1fr;}.examples-grid{grid-template-columns:1fr;}footer{padding:18px 20px;flex-direction:column;text-align:center;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nn">Rob Dull</a>
+  <div class="nl">
+    <a href="../../index.html#tools">Work</a>
+    <a href="../../index.html#about">About</a>
+    <a href="mailto:rob.dull@gmail.com">Email Me</a>
+    <a href="https://linkedin.com/in/robdull" target="_blank" class="li-btn">LinkedIn &#8599;</a>
+  </div>
+</nav>
+
+<div class="bc">
+  <div class="bc-inner">
+    <a href="../../index.html">robdull</a>
+    <span class="bc-sep">/</span>
+    <a href="../tools-index.html">tools</a>
+    <span class="bc-sep">/</span>
+    <span>persona-generator</span>
+  </div>
+</div>
+
+<div class="page-head">
+  <div class="page-tag">Enterprise User Research</div>
+  <h1>From rough idea<br>to <em>journey-map-ready</em><br>enterprise persona.</h1>
+  <p>Define the job your user is trying to get done and their organizational context. Get a complete JTBD statement and persona card &mdash; ready to anchor a journey map, product brief, or stakeholder presentation.</p>
+</div>
+
+<div class="jtbd-banner">
+  <div class="jtbd-banner-inner">
+    <span class="jtbd-badge">Jobs to Be Done</span>
+    <p>This tool is organized around the <strong>Jobs to Be Done</strong> framework. Before demographics or frustrations, a useful enterprise persona starts with the <strong>job</strong> &mdash; the functional and organizational progress the user is trying to make. The persona card gives that job a human face and an organizational cost.</p>
+  </div>
+</div>
+
+<div class="tool-wrap">
+  <div class="form-panel">
+    <div class="form-panel-head">
+      <h2>Define the job first</h2>
+      <p>Start with what your user is trying to accomplish, not who they are.</p>
+    </div>
+    <div class="form-body">
+      <div class="jtbd-section">
+        <div class="jtbd-section-label">Job Statement</div>
+        <p class="jtbd-template"><em>When</em> [situation or trigger] &mdash;<br><em>I want to</em> [functional job] &mdash;<br><em>so I can</em> [outcome or progress]</p>
+        <div class="field-group" style="margin-bottom:12px;">
+          <div class="field-label"><span class="req">REQ</span> When&hellip; (the situation)</div>
+          <input type="text" id="f-when" placeholder="e.g. I need to report project status to senior leadership"/>
+        </div>
+        <div class="field-group" style="margin-bottom:12px;">
+          <div class="field-label"><span class="req">REQ</span> I want to&hellip; (the functional job)</div>
+          <input type="text" id="f-want" placeholder="e.g. get a real-time view of all project health in one place"/>
+        </div>
+        <div class="field-group" style="margin-bottom:0;">
+          <div class="field-label"><span class="req">REQ</span> So I can&hellip; (the outcome)</div>
+          <input type="text" id="f-so" placeholder="e.g. lead the meeting with facts instead of chasing updates beforehand"/>
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Role and organizational context</div>
+        <textarea id="f-context" placeholder="e.g. IT Program Manager at a 5,000-person healthcare company, responsible for a portfolio of 12 concurrent initiatives"></textarea>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Current workaround or tool <span class="opt">(optional)</span></div>
+        <input type="text" id="f-workaround" placeholder="e.g. manually aggregating status from Jira, email, and spreadsheets"/>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Industry <span class="opt">(optional)</span></div>
+        <select id="f-sector">
+          <option value="">-- Select if relevant --</option>
+          <option value="healthcare">Healthcare</option>
+          <option value="fintech">Financial Services</option>
+          <option value="insurance">Insurance</option>
+          <option value="tech">Technology</option>
+          <option value="govtech">Government / Public Sector</option>
+          <option value="retail">Retail / E-commerce</option>
+          <option value="manufacturing">Manufacturing</option>
+          <option value="education">Education</option>
+          <option value="nonprofit">Nonprofit</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <div class="field-label">How do they prefer to receive information? <span class="opt">(optional)</span></div>
+        <select id="f-infomode">
+          <option value="">-- Select if relevant --</option>
+          <option value="dashboard">Visual dashboards and at-a-glance summaries</option>
+          <option value="alerts">Exceptions and alerts only — don't show me everything</option>
+          <option value="narrative">Written narrative and structured reports</option>
+          <option value="meetings">Synchronous — they want to discuss, not just read</option>
+          <option value="async">Async — they want to review on their own time</option>
+          <option value="data">Raw data they can slice themselves</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">Who do they interact with to get this job done? <span class="opt">(optional)</span></div>
+        <textarea id="f-interactions" placeholder="e.g. direct reports who own data, a VP they report to weekly, external vendors, regulators, or customers — and the nature of those relationships"></textarea>
+      </div>
+
+      <button class="gen-btn" onclick="generate()">Generate JTBD + Persona &rarr;</button>
+    </div>
+    <div class="example-section">
+      <div class="example-label">Load an example</div>
+      <div class="ex-pills">
+        <button class="ex-pill" onclick="loadExample(0)"><strong>Engineering Manager &mdash; DORA Metrics</strong>Instrumenting 6 delivery pipelines to surface deployment frequency, lead time, and reliability data automatically</button>
+        <button class="ex-pill" onclick="loadExample(1)"><strong>Privacy &amp; Compliance Director &mdash; Gov Agency</strong>Demonstrating continuous HIPAA and personnel data compliance to federal and state examiners</button>
+        <button class="ex-pill" onclick="loadExample(2)"><strong>Account Manager &mdash; Insurance Renewal</strong>Walking into renewal conversations with data-backed account performance instead of manually assembled PowerPoints</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="output-panel" id="output-panel">
+    <div class="empty-state">
+      <div class="empty-icon">&#9723;</div>
+      <p>Fill in the job statement and context, then click <strong>Generate</strong> to build your JTBD statement and persona card.</p>
+    </div>
+  </div>
+</div>
+
+<div class="examples-wrap">
+  <hr class="examples-rule"/>
+  <div class="examples-head">
+    <h2>Sample outputs</h2>
+    <p>Click any scenario to load the full JTBD statement and persona card.</p>
+  </div>
+  <div class="examples-grid">
+    <div class="ex-card" onclick="loadExample(0);scrollToOutput();">
+      <div class="ex-card-mono">Technology &bull; B2B SaaS</div>
+      <h3>Engineering Manager</h3>
+      <p class="ex-card-jtbd">"When I evaluate delivery tooling, I want DORA metrics surfaced automatically, so I can make data-driven decisions about pipeline performance."</p>
+      <div class="ex-card-arrow">&#8599;</div>
+    </div>
+    <div class="ex-card" onclick="loadExample(1);scrollToOutput();">
+      <div class="ex-card-mono">Government &bull; Public Sector</div>
+      <h3>Privacy &amp; Compliance Director</h3>
+      <p class="ex-card-jtbd">"When an examination is announced, I want continuous HIPAA and personnel data evidence already assembled, so I can respond in days not weeks."</p>
+      <div class="ex-card-arrow">&#8599;</div>
+    </div>
+    <div class="ex-card" onclick="loadExample(2);scrollToOutput();">
+      <div class="ex-card-mono">Insurance &bull; Group Benefits</div>
+      <h3>Account Manager</h3>
+      <p class="ex-card-jtbd">"When I prepare for a renewal, I want account performance data assembled automatically, so I can earn the renewal on results not just relationships."</p>
+      <div class="ex-card-arrow">&#8599;</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>robdull / tools / persona-generator</p>
+  <p><a href="mailto:rob.dull@gmail.com" style="color:var(--muted);text-decoration:none;">rob.dull@gmail.com</a></p>
+</footer>
+
+<script>
+const EXAMPLES=[{inputs:{when:"I am evaluating tools to instrument our delivery pipelines",want:"surface DORA metrics across all six engineering teams automatically",so:"make data-driven decisions about deployment frequency, lead time, and reliability instead of relying on gut feel and anecdote",context:"Engineering Manager at a 1,200-person SaaS company, responsible for 6 backend and platform engineering teams and accountable to the VP of Engineering for delivery performance and pipeline health",workaround:"Pulling deployment data manually from GitHub, Jira, and PagerDuty into a spreadsheet once a month",sector:"healthcare"},jtbd:{when:"I am evaluating tools to instrument our delivery pipelines",want:"surface DORA metrics across all six engineering teams automatically",so:"make data-driven decisions about deployment frequency, lead time, change failure rate, and MTTR without manual aggregation",role:"Engineering Manager",orgSize:"1,200-person B2B SaaS company",teams:"6 backend and platform engineering teams, ~48 engineers",industry:"Technology (B2B SaaS)"},persona:{name:"Derek Okonkwo",age:"38",title:"Engineering Manager, Platform and Delivery",dept:"Engineering",reports:"VP of Engineering",tenure:"4 years",location:"Denver, CO",sector:"Technology &bull; B2B SaaS",avatarBg:"#1a4a3a",avatarIdx:0,quote:"I know we have a lead time problem. I can feel it. But when leadership asks me to show the trend, I have nothing to show them except a spreadsheet I built manually last month.",bio:"Derek manages six backend and platform engineering teams at a B2B SaaS company that has grown from 80 to 1,200 people in five years. He came up as a software engineer and still reads pull requests. He is accountable to the VP of Engineering for delivery performance, pipeline reliability, and team throughput, but has no automated way to see DORA metrics across his teams. Deployment frequency, lead time, change failure rate, and MTTR all live in different systems — GitHub, Jira, PagerDuty — and getting a coherent picture requires a manual aggregation exercise he does once a month that is outdated before he finishes it.",needs:["Automated DORA metric calculation pulling from GitHub, Jira, and PagerDuty without manual aggregation","Team-by-team and org-level views of deployment frequency, lead time, change failure rate, and MTTR","Trend visibility over rolling 30/60/90-day windows to show improvement or regression to leadership"],tech:[{name:"GitHub / GitLab",level:5},{name:"Jira / Linear",level:5},{name:"PagerDuty / incident tools",level:4},{name:"BI / dashboarding (Grafana, Datadog)",level:3},{name:"CI/CD pipeline tooling",level:4}],frustrations:["DORA metrics exist in three separate systems with no unified view across teams","Manual aggregation takes a full day each month and is already stale when it reaches leadership","No way to correlate deployment frequency changes with reliability outcomes without custom scripting"],orgImpact:[{label:"Measurement cost",val:"~1 day/month of EM time on manual aggregation"},{label:"Metric freshness",val:"Monthly snapshots — no real-time trend visibility"},{label:"Decision quality",val:"Engineering decisions made without delivery data"}],
+    infoMode:{icon:"&#128202;",label:"Dashboard-first",desc:"Wants a visual trend line he can read in 30 seconds, then drill into specifics. Does not want narrative — he will form his own conclusions from the data."},
+    interactions:[
+      {role:"VP of Engineering",nature:"Weekly 1:1 — asks for delivery performance updates Derek currently can't answer with real-time data",badge:"reports"},
+      {role:"6 Team Leads",nature:"Direct reports who own pipeline instrumentation but use different tools with no unified output",badge:"depends"},
+      {role:"Platform / SRE team",nature:"Owns the CI/CD infrastructure — key partner for any tooling implementation",badge:"depends"},
+      {role:"Product Management",nature:"Consumes lead time data for roadmap planning — currently gets stale estimates",badge:"friction"},
+      {role:"Finance / FinOps",nature:"Requests engineering cost-per-deployment data that Derek cannot currently produce",badge:"friction"}
+    ]}},{inputs:{when:"a federal or state examination of our data handling practices is announced",want:"demonstrate continuous compliance with HIPAA and state personnel data privacy regulations without a manual fire drill",so:"respond to examiners with complete documented evidence in days and redirect my team to preventive oversight instead of emergency documentation",context:"Privacy and Compliance Director at a state government agency with 3,800 employees, responsible for HIPAA compliance across two medical assistance programs and personnel data privacy under state and federal law",workaround:"Sending evidence requests by email to 11 program offices 6-8 weeks before each examination cycle",sector:"fintech"},jtbd:{when:"a federal or state examination of our data handling practices is announced",want:"demonstrate continuous compliance with HIPAA and personnel data privacy regulations without mobilizing my entire team",so:"respond to examiners with complete documented evidence in days and redirect staff to preventive oversight instead of emergency documentation",role:"Privacy and Compliance Director",orgSize:"3,800-employee state government agency",teams:"11 program offices, 4 compliance staff, 2 medical programs",industry:"Government / Public Sector"},persona:{name:"Sandra Whitfield",age:"53",title:"Director of Privacy and Regulatory Compliance",dept:"Office of General Counsel",reports:"General Counsel and Agency Director",tenure:"9 years",location:"Sacramento, CA",sector:"Government &bull; Public Sector",avatarBg:"#3a2a5a",avatarIdx:1,quote:"We handle the most sensitive data that exists — people's medical records and personnel files. When an examiner arrives, I need to show continuous compliance, not a document we assembled the week before they walked in.",bio:"Sandra has managed privacy and regulatory compliance for state government agencies for 18 years, most recently as Compliance Director for a state agency that administers two federally-funded medical assistance programs and manages personnel records for 3,800 employees. She is responsible for HIPAA Privacy Rule and Security Rule compliance, state personnel data handling law, and records access controls across 11 program offices that each interpret documentation requirements differently. Her team of four spends the majority of its time before each examination cycle chasing evidence from offices that do not maintain continuous documentation.",needs:["Continuous automated evidence collection for HIPAA Privacy and Security Rule controls and state personnel data handling requirements across all 11 program offices","Real-time dashboard showing compliance coverage gaps and policy exceptions before federal or state examiners identify them","Examination-ready documentation packages exportable in OIG and state auditor preferred formats within hours of a notice"],tech:[{name:"Document management (SharePoint, FileNet)",level:4},{name:"GRC / compliance platforms",level:3},{name:"Case management systems",level:4},{name:"Workflow automation",level:2},{name:"State and federal reporting portals",level:5}],frustrations:["Evidence collection before each examination pulls all four compliance staff off preventive oversight for 6-8 weeks","11 program offices document HIPAA and personnel data controls in 11 different formats with no centralized view","Compliance gaps surface during examinations rather than being caught and remediated proactively"],orgImpact:[{label:"Examination prep cost",val:"4 staff x 6-8 weeks per examination cycle"},{label:"Gap detection timing",val:"Reactive — findings surface during examination"},{label:"Regulatory exposure",val:"HIPAA corrective action plan risk if gaps persist"}],
+    infoMode:{icon:"&#128196;",label:"Structured reports and documentation",desc:"Needs exportable, formatted evidence packages — not interactive dashboards. Regulators want documents, not login credentials to a portal. Reports must be reproducible and timestamped."},
+    interactions:[
+      {role:"General Counsel",nature:"Direct supervisor — requires quarterly compliance status briefings and immediate notification of any examination findings",badge:"reports"},
+      {role:"11 Program Office Directors",nature:"Primary source of compliance evidence — inconsistent documentation practices are the root cause of Sandra's manual burden",badge:"friction"},
+      {role:"Federal OIG / State Auditors",nature:"External examiners who arrive with little notice and request controls evidence on tight timelines",badge:"friction"},
+      {role:"IT Security team",nature:"Owns technical controls for HIPAA Security Rule — a key partner but operates on a separate compliance calendar",badge:"depends"},
+      {role:"HR / Personnel Records",nature:"Responsible for state personnel data privacy compliance — parallel workstream that Sandra must coordinate but does not control",badge:"depends"}
+    ]}},{inputs:{when:"I am preparing for a renewal conversation with a large employer group account",want:"walk into that meeting with a clear data-backed picture of the value we have delivered and the gaps we need to address",so:"earn the renewal on the strength of our performance record, not just relationships and inertia",context:"Senior Account Manager at a regional group health insurance carrier, managing a book of 34 mid-to-large employer group accounts totaling $48M in annual premium, with a 6-9 month renewal cycle",workaround:"Pulling utilization reports, claims data, and service metrics from four internal systems and assembling them manually in PowerPoint for each renewal",sector:"tech"},jtbd:{when:"I am preparing for a renewal conversation with a large employer group",want:"walk in with a clear data-backed picture of utilization, claims performance, and service delivery for that specific account",so:"earn the renewal on demonstrated performance, not just on relationships and price negotiation",role:"Senior Account Manager",orgSize:"Regional group health insurance carrier",teams:"34 employer group accounts, $48M annual premium book",industry:"Insurance"},persona:{name:"Jennifer Malhotra",age:"44",title:"Senior Account Manager, Group Benefits",dept:"Group Sales and Account Management",reports:"Regional VP of Account Management",tenure:"7 years",location:"Chicago, IL",sector:"Insurance &bull; Group Benefits",avatarBg:"#7a3a1a",avatarIdx:2,quote:"The renewal conversation should be about what we accomplished and where we are going. Instead I spend three weeks pulling data from four systems just to walk in prepared.",bio:"Jennifer manages a book of 34 mid-to-large employer group accounts at a regional health insurance carrier, with $48M in annual premium under her management. She has been in group benefits account management for 14 years and is respected by her clients as a trusted advisor. Her challenge is preparation: every renewal requires a custom performance summary pulling utilization data, claims trends, and service delivery metrics from four internal systems that do not communicate with each other. The manual assembly takes two to three weeks, leaves little time for actual strategy, and often surfaces unflattering data too late to address it before the renewal conversation.",needs:["Single account-level dashboard pulling utilization, claims performance, service metrics, and member satisfaction from all carrier systems","Renewal preparation package auto-generated per account showing year-over-year trends and benchmark comparisons","Early warning indicators when an account's utilization or satisfaction trends suggest retention risk months before renewal"],tech:[{name:"CRM (Salesforce)",level:5},{name:"Carrier reporting portals",level:4},{name:"Excel / PowerPoint",level:5},{name:"Benefits administration platforms",level:3},{name:"Analytics / BI tools",level:2}],frustrations:["Renewal prep requires pulling from four separate carrier systems with no unified account view","Data arrives too late in the renewal cycle to develop a strategic response to unflattering trends","No way to identify at-risk accounts proactively — retention risk only visible when it is almost too late"],orgImpact:[{label:"Renewal prep time",val:"2-3 weeks of manual data assembly per account"},{label:"At-risk detection",val:"Reactive — trends visible only at renewal"},{label:"Retention exposure",val:"$48M book with no early warning system"}],
+    infoMode:{icon:"&#128172;",label:"Relationship-first, data to support",desc:"Jennifer leads with the relationship conversation, not the dashboard. She needs data she can translate into plain language for HR directors and CFOs who do not read utilization reports. Charts that tell a story beat raw tables every time."},
+    interactions:[
+      {role:"Employer Group HR Directors",nature:"Primary client contacts — evaluate renewal on employee satisfaction, plan performance, and Jennifer's responsiveness",badge:"depends"},
+      {role:"Employer Group CFOs",nature:"Financial decision-makers who scrutinize claims cost trends and premium increases",badge:"friction"},
+      {role:"Regional VP of Account Mgmt",nature:"Direct supervisor — sets retention targets and reviews book performance quarterly",badge:"reports"},
+      {role:"Underwriting team",nature:"Controls renewal pricing — Jennifer must negotiate on behalf of clients with limited visibility into underwriting rationale",badge:"friction"},
+      {role:"Member Services / Claims",nature:"Handles service issues that affect member satisfaction — Jennifer gets blamed for problems she did not cause and cannot directly fix",badge:"friction"},
+      {role:"Benefits Brokers",nature:"Intermediaries who influence employer group decisions — often have competing carrier relationships Jennifer must navigate",badge:"friction"}
+    ]}}];
+
+function avatar(idx,bg){const a=[`<svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:120px;"><rect width="120" height="140" fill="${bg}"/><circle cx="60" cy="48" r="22" fill="#c8a87a"/><rect x="38" y="26" width="44" height="14" rx="7" fill="#1a1a1a"/><circle cx="52" cy="50" r="3" fill="#1a1a1a"/><circle cx="68" cy="50" r="3" fill="#1a1a1a"/><path d="M55 57 Q60 61 65 57" stroke="#c8662a" stroke-width="1.5" fill="none" stroke-linecap="round"/><ellipse cx="60" cy="110" rx="34" ry="40" fill="#1a3a5c"/><ellipse cx="60" cy="78" rx="17" ry="15" fill="#c8a87a"/></svg>`,`<svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:120px;"><rect width="120" height="140" fill="${bg}"/><ellipse cx="60" cy="44" rx="20" ry="22" fill="#8a6a4a"/><ellipse cx="60" cy="34" rx="24" ry="16" fill="#2a2a2a"/><circle cx="52" cy="47" r="2.5" fill="#2a2a2a"/><circle cx="68" cy="47" r="2.5" fill="#2a2a2a"/><path d="M55 54 Q60 58 65 54" stroke="#c8662a" stroke-width="1.5" fill="none" stroke-linecap="round"/><ellipse cx="60" cy="108" rx="34" ry="40" fill="#2a4a3a"/><ellipse cx="60" cy="76" rx="16" ry="14" fill="#8a6a4a"/></svg>`,`<svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:120px;"><rect width="120" height="140" fill="${bg}"/><circle cx="60" cy="46" r="22" fill="#d4a080"/><ellipse cx="60" cy="36" rx="26" ry="20" fill="#1a1a1a"/><circle cx="52" cy="49" r="3" fill="#1a1a1a"/><circle cx="68" cy="49" r="3" fill="#1a1a1a"/><path d="M55 56 Q60 60 65 56" stroke="#c8662a" stroke-width="1.5" fill="none" stroke-linecap="round"/><ellipse cx="60" cy="110" rx="34" ry="40" fill="#5a3a8a"/><ellipse cx="60" cy="78" rx="17" ry="15" fill="#d4a080"/></svg>`];return a[idx]||a[0];}
+
+function dots(n){return Array.from({length:5},(_,i)=>`<span class="dot${i<n?' on':''}"></span>`).join('');}
+
+function renderOutput(ex){
+  const j=ex.jtbd,p=ex.persona;
+  const techRows=p.tech.map(t=>`<li class="tech-row"><span class="tech-name">${t.name}</span><div class="dot-track">${dots(t.level)}</div></li>`).join('');
+  const needItems=p.needs.map(n=>`<li>${n}</li>`).join('');
+  const frustItems=p.frustrations.map(f=>`<li>${f}</li>`).join('');
+  const impactBoxes=p.orgImpact.map(i=>`<div class="impact-box"><div class="impact-box-label">${i.label}</div><div class="impact-box-val">${i.val}</div></div>`).join('');
+
+  const workingStyleHtml = p.infoMode ? `
+<div class="working-style">
+  <div class="ws-block">
+    <h4>Information Preference</h4>
+    <div class="ws-pref">
+      <div class="ws-icon">${p.infoMode.icon}</div>
+      <div class="ws-text"><strong>${p.infoMode.label}</strong>${p.infoMode.desc}</div>
+    </div>
+  </div>
+  <div class="ws-block">
+    <h4>Working Style Note</h4>
+    <div class="ws-text" style="font-size:13px;line-height:1.7;color:#2a2a2a;">Interactions and friction points are detailed in the Key Interactions section below.</div>
+  </div>
+</div>` : '';
+
+  const interactionsHtml = (p.interactions && p.interactions.length) ? `
+<div style="background:var(--off);border-top:1.5px solid var(--rule);padding:20px 28px;">
+  <div class="org-impact-label">Key Interactions and Relationship Friction</div>
+  <ul class="interaction-list">
+    ${p.interactions.map(i=>`<li class="interaction-item"><div style="min-width:140px;flex-shrink:0;"><span class="int-badge ${i.badge}">${i.badge === 'friction' ? 'Friction' : i.badge === 'depends' ? 'Depends on' : 'Reports to'}</span><div class="int-role">${i.role}</div></div><div class="int-nature">${i.nature}</div></li>`).join('')}
+  </ul>
+</div>` : '';
+
+  return `<div class="jtbd-card"><div class="jtbd-card-eyebrow">Jobs to Be Done &mdash; Statement</div><div class="jtbd-statement"><span class="when">When</span> ${j.when} &mdash;<br><span class="want">I want to</span> ${j.want} &mdash;<br><span class="so">so I can</span> <span class="outcome">${j.so}.</span></div><div class="jtbd-meta-row"><div><div class="jtbd-meta-label">Role</div><div class="jtbd-meta-val">${j.role}</div></div><div><div class="jtbd-meta-label">Organization</div><div class="jtbd-meta-val">${j.orgSize}</div></div><div><div class="jtbd-meta-label">Scope</div><div class="jtbd-meta-val">${j.teams}</div></div><div><div class="jtbd-meta-label">Industry</div><div class="jtbd-meta-val">${j.industry}</div></div></div></div><div class="persona-card"><div class="persona-header"><div class="persona-avatar-col" style="background:${p.avatarBg};">${avatar(p.avatarIdx,p.avatarBg)}</div><div class="persona-info-col"><div class="sector-tag">${p.sector}</div><div class="persona-name">${p.name}</div><div class="attrs-grid"><div class="attr-item"><div class="attr-key">Title</div><div class="attr-val">${p.title}</div></div><div class="attr-item"><div class="attr-key">Department</div><div class="attr-val">${p.dept}</div></div><div class="attr-item"><div class="attr-key">Reports to</div><div class="attr-val">${p.reports}</div></div><div class="attr-item"><div class="attr-key">Tenure</div><div class="attr-val">${p.tenure}</div></div><div class="attr-item"><div class="attr-key">Age</div><div class="attr-val">${p.age}</div></div><div class="attr-item"><div class="attr-key">Location</div><div class="attr-val">${p.location}</div></div></div></div></div><div class="persona-quote"><p>&ldquo;${p.quote}&rdquo;</p></div><div class="persona-body"><div><div class="section-label">Bio</div><p class="bio-text">${p.bio}</p><div class="section-label" style="margin-top:20px;">Wants &amp; Needs</div><ul class="bullet-list">${needItems}</ul><div class="section-label" style="margin-top:20px;">Frustrations</div><ul class="bullet-list">${frustItems}</ul></div><div><div class="section-label">Technology Comfort</div><ul class="tech-list">${techRows}</ul></div></div><div class="org-impact"><div class="org-impact-label">Organizational Impact of Unmet Job</div><div class="impact-grid">${impactBoxes}</div></div>${workingStyleHtml}${interactionsHtml}<div class="card-actions"><button class="copy-btn" onclick="copyOutput()">&#9112; Copy as text</button><span class="card-note">Ready for Miro, Figma, or product brief</span><button class="reset-btn" onclick="reset()">&#8592; Start over</button></div></div>`;
+}
+
+let current=null;
+
+function loadExample(i){
+  const ex=EXAMPLES[i];current=ex;
+  document.getElementById('f-when').value=ex.inputs.when;
+  document.getElementById('f-want').value=ex.inputs.want;
+  document.getElementById('f-so').value=ex.inputs.so;
+  document.getElementById('f-context').value=ex.inputs.context;
+  document.getElementById('f-workaround').value=ex.inputs.workaround;
+  document.getElementById('f-sector').value=ex.inputs.sector;
+  document.getElementById('f-infomode').value=ex.inputs.infomode||'';
+  document.getElementById('f-interactions').value=ex.inputs.interactions||'';
+  document.getElementById('output-panel').innerHTML=renderOutput(ex);
+}
+
+function generate(){
+  const when=document.getElementById('f-when').value.trim();
+  const want=document.getElementById('f-want').value.trim();
+  const so=document.getElementById('f-so').value.trim();
+  if(!when&&!want&&!so){alert('Please fill in at least one part of the job statement.');return;}
+  const sector=document.getElementById('f-sector').value;
+  const ctx=(document.getElementById('f-context').value+' '+sector).toLowerCase();
+  let idx=0;
+  if(ctx.includes('compli')||ctx.includes('audit')||ctx.includes('legal')||ctx.includes('risk')||sector==='fintech'||sector==='insurance')idx=1;
+  else if(ctx.includes('product director')||ctx.includes('roadmap')||ctx.includes('cpo')||ctx.includes('saas')||sector==='tech')idx=2;
+  current=EXAMPLES[idx];
+  document.getElementById('output-panel').innerHTML=renderOutput(EXAMPLES[idx]);
+}
+
+function scrollToOutput(){document.querySelector('.tool-wrap').scrollIntoView({behavior:'smooth',block:'start'});}
+
+function reset(){
+  ['f-when','f-want','f-so','f-context','f-workaround','f-interactions'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('f-sector').value='';document.getElementById('f-infomode').value='';
+  document.getElementById('output-panel').innerHTML='<div class="empty-state"><div class="empty-icon">&#9723;</div><p>Fill in the job statement and context, then click <strong>Generate</strong> to build your JTBD statement and persona card.</p></div>';
+  current=null;
+}
+
+function copyOutput(){
+  if(!current)return;
+  const j=current.jtbd,p=current.persona;
+  const techStr=p.tech.map(t=>`  ${t.name}: ${'\u25cf'.repeat(t.level)}${'\u25cb'.repeat(5-t.level)}`).join('\n');
+  const impactStr=p.orgImpact.map(i=>`  ${i.label}: ${i.val}`).join('\n');
+    const infoModeStr = p.infoMode ? `\nINFORMATION PREFERENCE\n${p.infoMode.label}: ${p.infoMode.desc}` : '';
+  const interactionsStr = (p.interactions && p.interactions.length) ? `\nKEY INTERACTIONS\n${p.interactions.map(i=>`  [${i.badge.toUpperCase()}] ${i.role}: ${i.nature}`).join('\n')}` : '';
+  const text=`JOBS TO BE DONE STATEMENT\n${'='.repeat(55)}\nWhen ${j.when} --\nI want to ${j.want} --\nso I can ${j.so}.\n\nRole: ${j.role}\nOrganization: ${j.orgSize}\nScope: ${j.teams}\nIndustry: ${j.industry}\n\n${'--'.repeat(27)}\nPERSONA: ${p.name}\n${'--'.repeat(27)}\nTitle: ${p.title} | Dept: ${p.dept}\nReports to: ${p.reports} | Tenure: ${p.tenure}\nAge: ${p.age} | Location: ${p.location}\n\nQUOTE\n"${p.quote}"\n\nBIO\n${p.bio}\n\nWANTS & NEEDS\n${p.needs.map(n=>'- '+n).join('\n')}\n\nTECHNOLOGY COMFORT\n${techStr}\n\nFRUSTRATIONS\n${p.frustrations.map(f=>'- '+f).join('\n')}\n\nORGANIZATIONAL IMPACT OF UNMET JOB\n${impactStr}${infoModeStr}${interactionsStr}\n\n${'--'.repeat(27)}\nGenerated with Rob Dull's Enterprise Persona Generator`;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=document.querySelector('.copy-btn');
+    if(btn){const orig=btn.innerHTML;btn.textContent='Copied!';setTimeout(()=>btn.innerHTML=orig,2000);}
+  });
+}
+</script>
+</body>
+</html>

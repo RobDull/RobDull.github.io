@@ -4,75 +4,116 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tools and Interfaces | Rob Dull</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --ink:#0a0a0a;--white:#ffffff;--off:#f7f7f7;--rule:#e8e8e8;
-  --accent:#1a3a5c;--accent2:#c8662a;--muted:#6b6b6b;
-  --font:'Inter',sans-serif;
+  --ink:#0d0d0f;--white:#ffffff;--off:#f4f4f6;--rule:#e2e2e8;
+  --accent:#1a3a5c;--accent2:#c8662a;--muted:#72728a;
+  --teal:#1a6b6b;--teal-lt:#e8f4f4;
+  --amber:#b87a10;
+  --body-font:'IBM Plex Sans',sans-serif;
+  --display-font:'Instrument Serif',serif;
+  --mono:'IBM Plex Mono',monospace;
 }
 html{scroll-behavior:smooth;}
-body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;min-height:100vh;}
+body{background:#f8f8fb;color:var(--ink);font-family:var(--body-font);font-size:15px;line-height:1.6;min-height:100vh;}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
-.nn{font-size:15px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
-.nl{display:flex;gap:10px;align-items:center;}
-.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--ink);border-radius:6px;transition:all .15s;letter-spacing:-.01em;}
-.nl a:hover{background:var(--ink);color:white;}
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:15px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(248,248,251,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
+.nn{font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--ink);text-decoration:none;}
+.nl{display:flex;gap:8px;align-items:center;}
+.nl a{font-size:12px;font-weight:600;color:var(--ink);text-decoration:none;padding:7px 14px;border:1.5px solid var(--rule);border-radius:5px;transition:all .15s;background:white;}
+.nl a:hover{border-color:var(--ink);}
 .nl a.li-btn{background:var(--accent);color:white;border-color:var(--accent);}
-.nl a.li-btn:hover{background:#0f2540;border-color:#0f2540;}
+.nl a.li-btn:hover{background:#0f2540;}
 
-/* BREADCRUMB */
-.bc{max-width:1000px;margin:0 auto;padding:100px 40px 0;}
-.bc-inner{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--muted);}
-.bc-inner a{color:var(--muted);text-decoration:none;transition:color .15s;}
+/* ── BREADCRUMB ── */
+.bc{max-width:1080px;margin:0 auto;padding:88px 40px 0;}
+.bc-inner{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--muted);font-family:var(--mono);letter-spacing:.02em;}
+.bc-inner a{color:var(--muted);text-decoration:none;}
 .bc-inner a:hover{color:var(--ink);}
-.bc-sep{color:var(--rule);}
+.bc-sep{opacity:.4;}
 
-/* PAGE HERO */
-.ph{max-width:1000px;margin:0 auto;padding:28px 40px 60px;}
-.ey{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:14px;}
-.ph h1{font-size:clamp(32px,4.5vw,54px);font-weight:900;letter-spacing:-.03em;line-height:1.05;color:var(--ink);margin-bottom:16px;}
-.ph p{color:var(--muted);font-size:16px;line-height:1.75;max-width:600px;}
+/* ── HERO ── */
+.hero{max-width:1080px;margin:0 auto;padding:28px 40px 0;}
+.hero-tag{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:14px;font-family:var(--mono);}
+.hero h1{font-family:var(--display-font);font-size:clamp(38px,5vw,66px);font-weight:400;line-height:1.03;color:var(--ink);margin-bottom:0;}
+.hero h1 em{font-style:italic;color:var(--teal);}
 
-/* DIVIDER */
-.divider{max-width:1000px;margin:0 auto;padding:0 40px;border-top:1px solid var(--rule);}
+/* ── HERO STRIP ── */
+.hero-strip{max-width:1080px;margin:0 auto;padding:28px 40px 56px;display:flex;align-items:flex-end;justify-content:space-between;gap:40px;border-bottom:1.5px solid var(--rule);}
+.hero-desc{font-size:16px;color:var(--muted);line-height:1.8;max-width:520px;}
+.hero-stat-row{display:flex;gap:32px;flex-shrink:0;}
+.hero-stat{text-align:right;}
+.hero-stat-num{font-family:var(--display-font);font-size:36px;color:var(--ink);line-height:1;}
+.hero-stat-label{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
 
-/* TOOL GRID */
-.tg-wrap{max-width:1000px;margin:0 auto;padding:56px 40px 80px;}
-.tg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+/* ── TOOL LIST ── */
+.tool-list{max-width:1080px;margin:0 auto;padding:0 40px 80px;}
 
-a.card{background:var(--off);border:2px solid var(--rule);border-radius:10px;padding:28px;text-decoration:none;color:inherit;display:block;transition:all .18s;position:relative;overflow:hidden;}
-a.card:hover{border-color:var(--ink);background:white;box-shadow:0 4px 20px rgba(0,0,0,.08);}
-.ctag{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;}
-a.card h3{font-size:18px;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin-bottom:10px;line-height:1.2;}
-a.card p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:18px;}
-.cm{display:flex;gap:8px;flex-wrap:wrap;}
-.chip{font-size:10px;font-weight:600;letter-spacing:.04em;color:var(--ink);background:var(--rule);border-radius:4px;padding:3px 9px;}
-.ca{position:absolute;top:24px;right:24px;font-size:16px;color:var(--rule);transition:all .18s;}
-a.card:hover .ca{color:var(--ink);transform:translate(2px,-2px);}
+/* TOOL ROW */
+.tool-row{display:grid;grid-template-columns:1fr 340px;gap:0;border-bottom:1.5px solid var(--rule);padding:48px 0;animation:fadeUp .4s ease both;}
+.tool-row:first-child{padding-top:56px;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 
-/* PLACEHOLDER CARD */
-.ph-card{background:transparent;border:2px dashed var(--rule);border-radius:10px;padding:28px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:200px;}
-.ph-card p{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--rule);}
+.tool-left{}
+.tool-num{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;color:var(--muted);margin-bottom:14px;}
+.tool-category{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px;}
+.tool-name{font-family:var(--display-font);font-size:clamp(24px,3vw,36px);font-weight:400;color:var(--ink);line-height:1.1;margin-bottom:16px;}
+.tool-name em{font-style:italic;color:var(--teal);}
+.tool-desc{font-size:14px;color:var(--muted);line-height:1.8;max-width:520px;margin-bottom:20px;}
+.tool-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px;}
+.chip{font-family:var(--mono);font-size:10px;font-weight:500;color:var(--ink);background:white;border:1.5px solid var(--rule);border-radius:4px;padding:3px 9px;}
+.tool-cta{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:white;text-decoration:none;border-radius:7px;padding:11px 22px;font-size:13px;font-weight:600;font-family:var(--body-font);transition:all .18s;}
+.tool-cta:hover{background:#2a2a2a;transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.15);}
+.tool-cta-arrow{font-size:16px;transition:transform .15s;}
+.tool-cta:hover .tool-cta-arrow{transform:translate(2px,-2px);}
 
-/* ABOUT STRIP */
-.about-strip{background:var(--off);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:40px;}
-.about-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
-.about-inner p{font-size:14px;color:var(--muted);line-height:1.7;max-width:600px;}
-.about-inner a{flex-shrink:0;font-size:13px;font-weight:700;color:var(--accent);text-decoration:none;border:2px solid var(--accent);border-radius:6px;padding:10px 20px;transition:all .15s;white-space:nowrap;}
-.about-inner a:hover{background:var(--accent);color:white;}
+/* TOOL RIGHT — feature list */
+.tool-right{padding-left:48px;border-left:1.5px solid var(--rule);}
+.tool-right-label{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
+.feature-list{list-style:none;}
+.feature-item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--rule);font-size:13px;color:#2a2a2a;line-height:1.55;}
+.feature-item:last-child{border-bottom:none;}
+.feature-item::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;margin-top:6px;}
 
-footer{padding:28px 40px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
-footer p{font-size:12px;font-weight:500;color:var(--muted);}
+/* ── PLACEHOLDER TOOL ── */
+.tool-placeholder{padding:48px 0;border-bottom:1.5px solid var(--rule);}
+.placeholder-inner{border:2px dashed var(--rule);border-radius:10px;padding:36px 32px;display:flex;align-items:center;gap:28px;}
+.placeholder-num{font-family:var(--display-font);font-size:48px;color:var(--rule);line-height:1;flex-shrink:0;}
+.placeholder-text h3{font-family:var(--display-font);font-size:22px;font-weight:400;color:var(--rule);margin-bottom:6px;}
+.placeholder-text p{font-size:12px;font-weight:500;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--rule);}
 
-@media(max-width:680px){
-  nav{padding:14px 20px;}
-  .nl a{padding:7px 12px;font-size:12px;}
-  .bc,.ph,.tg-wrap,.divider{padding-left:20px;padding-right:20px;}
-  .about-strip{padding:32px 20px;}
-  footer{padding:20px 24px;flex-direction:column;text-align:center;}
+/* ── ABOUT STRIP ── */
+.about-strip{background:var(--ink);padding:48px 40px;}
+.about-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
+.about-inner h2{font-family:var(--display-font);font-size:clamp(22px,2.8vw,32px);font-weight:400;color:white;margin-bottom:10px;line-height:1.2;}
+.about-inner h2 em{font-style:italic;color:rgba(255,255,255,.45);}
+.about-inner p{font-size:14px;color:rgba(255,255,255,.6);line-height:1.75;max-width:560px;}
+.about-links{display:flex;flex-direction:column;gap:8px;flex-shrink:0;}
+.about-btn{display:inline-block;font-size:12px;font-weight:600;font-family:var(--body-font);text-decoration:none;border-radius:6px;padding:10px 20px;transition:all .15s;white-space:nowrap;text-align:center;}
+.about-btn.primary{background:white;color:var(--ink);}
+.about-btn.primary:hover{background:rgba(255,255,255,.88);}
+.about-btn.ghost{background:transparent;color:rgba(255,255,255,.7);border:1.5px solid rgba(255,255,255,.2);}
+.about-btn.ghost:hover{border-color:rgba(255,255,255,.5);color:white;}
+
+footer{padding:24px 40px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;background:white;}
+footer p{font-size:11px;font-weight:500;color:var(--muted);font-family:var(--mono);}
+
+@media(max-width:860px){
+  .tool-row{grid-template-columns:1fr;}
+  .tool-right{padding-left:0;border-left:none;border-top:1.5px solid var(--rule);padding-top:24px;margin-top:24px;}
+  .hero-strip{flex-direction:column;align-items:flex-start;gap:20px;}
+  .hero-stat-row{flex-direction:row;}
+  .about-inner{grid-template-columns:1fr;}
+  .about-links{flex-direction:row;}
+}
+@media(max-width:640px){
+  nav{padding:12px 20px;}
+  .nl a{padding:6px 10px;font-size:11px;}
+  .bc,.hero,.hero-strip,.tool-list,.about-strip{padding-left:20px;padding-right:20px;}
+  footer{padding:18px 20px;flex-direction:column;text-align:center;}
 }
 </style>
 </head>
@@ -90,51 +131,123 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
 <div class="bc">
   <div class="bc-inner">
-    <a href="../index.html">Rob Dull</a>
-    <span class="bc-sep">&#8250;</span>
-    <span>Tools and Interfaces</span>
+    <a href="../index.html">robdull</a>
+    <span class="bc-sep">/</span>
+    <span>tools</span>
   </div>
 </div>
 
-<div class="ph">
-  <div class="ey">Active Collection</div>
-  <h1>Tools and Interfaces</h1>
-  <p>AI-augmented tools that translate complex operational problems into clear, executive-ready outputs. Each one started as a real workflow problem observed in the field.</p>
+<div class="hero">
+  <div class="hero-tag">Active Collection</div>
+  <h1>Tools that do the<br><em>translation work</em> for you.</h1>
 </div>
 
-<div class="divider"></div>
+<div class="hero-strip">
+  <p class="hero-desc">Each tool here addresses a real moment of friction in product and delivery work — the moment when a PM needs to make a complex idea legible to an executive, a stakeholder, or a researcher. Built from field experience, not from the outside looking in.</p>
+  <div class="hero-stat-row">
+    <div class="hero-stat">
+      <div class="hero-stat-num">2</div>
+      <div class="hero-stat-label">Tools live</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">1</div>
+      <div class="hero-stat-label">In development</div>
+    </div>
+  </div>
+</div>
 
-<div class="tg-wrap">
-  <div class="tg">
+<div class="tool-list">
 
-    <a href="../business-case/business-case-index.html" class="card">
-      <div class="ca">&#8599;</div>
-      <div class="ctag">Business Justification</div>
-      <h3>Technical Business Case Generator</h3>
-      <p>Translates backend development and infrastructure upgrade proposals into executive-ready business justifications. Three analysis depths — Quick Pitch, Standard, and Full Analysis — adapt the form and output to your audience and timeline.</p>
-      <div class="cm">
-        <span class="chip">AI-generated</span>
-        <span class="chip">Adaptive UI</span>
-        <span class="chip">ROI analysis</span>
-        <span class="chip">Stakeholder-ready</span>
+  <!-- ── TOOL 01: BUSINESS CASE GENERATOR ── -->
+  <div class="tool-row">
+    <div class="tool-left">
+      <div class="tool-num">01</div>
+      <div class="tool-category">Business Justification</div>
+      <div class="tool-name">Technical Business<br><em>Case Generator</em></div>
+      <p class="tool-desc">Engineering and infrastructure teams constantly have to translate what they need and why it matters into language that earns executive approval. This tool does that translation — from project inputs to a structured, stakeholder-ready business case in three analysis depths.</p>
+      <div class="tool-chips">
+        <span class="chip">Quick Pitch</span>
+        <span class="chip">Standard</span>
+        <span class="chip">Full Analysis</span>
+        <span class="chip">ROI calculation</span>
+        <span class="chip">Salary-based productivity</span>
+        <span class="chip">Risks of inaction</span>
       </div>
-    </a>
-
-    <div class="ph-card"><p>Next tool<br>in development</p></div>
-    <div class="ph-card"><p>Coming<br>soon</p></div>
-
+      <a href="../business-case/business-case-index.html" class="tool-cta">Open tool <span class="tool-cta-arrow">&#8599;</span></a>
+    </div>
+    <div class="tool-right">
+      <div class="tool-right-label">What it produces</div>
+      <ul class="feature-list">
+        <li class="feature-item">Executive pitch — one to three paragraphs scaled to your selected depth and audience</li>
+        <li class="feature-item">Cost / benefit analysis with salary-based productivity ROI and payback period</li>
+        <li class="feature-item">End-user and employee impact section tied to the people you enter</li>
+        <li class="feature-item">Risks of inaction — financial, reputational, and talent retention</li>
+        <li class="feature-item">Technical complexity and delivery confidence assessment</li>
+        <li class="feature-item">How returns and risks evolve over time — month-by-month narrative</li>
+      </ul>
+    </div>
   </div>
+
+  <!-- ── TOOL 02: PERSONA GENERATOR ── -->
+  <div class="tool-row" style="animation-delay:.08s;">
+    <div class="tool-left">
+      <div class="tool-num">02</div>
+      <div class="tool-category">Enterprise User Research</div>
+      <div class="tool-name">JTBD + Enterprise<br><em>Persona Generator</em></div>
+      <p class="tool-desc">Most PMs can describe their user in a sentence. Getting from that sentence to a persona detailed enough to anchor a journey map — with a Jobs to Be Done statement, org context, tech comfort, key interactions, and relationship friction — is where research stalls. This tool closes that gap.</p>
+      <div class="tool-chips">
+        <span class="chip">Jobs to Be Done</span>
+        <span class="chip">Persona card</span>
+        <span class="chip">Key interactions</span>
+        <span class="chip">Relationship friction</span>
+        <span class="chip">Info preference</span>
+        <span class="chip">Copy to export</span>
+      </div>
+      <a href="persona-generator/persona-index.html" class="tool-cta">Open tool <span class="tool-cta-arrow">&#8599;</span></a>
+    </div>
+    <div class="tool-right">
+      <div class="tool-right-label">What it produces</div>
+      <ul class="feature-list">
+        <li class="feature-item">Jobs to Be Done statement — When / I want to / So I can — with org context metadata</li>
+        <li class="feature-item">Full persona card: name, title, department, tenure, reports-to, location</li>
+        <li class="feature-item">First-person quote, bio, wants and needs, frustrations</li>
+        <li class="feature-item">Technology comfort ratings across five relevant platforms</li>
+        <li class="feature-item">Information preference — how this person consumes data and why it matters for design</li>
+        <li class="feature-item">Key interactions table with color-coded friction, dependency, and reporting badges</li>
+        <li class="feature-item">Organizational impact of unmet job — three quantified consequences</li>
+        <li class="feature-item">Copy-to-clipboard export formatted for Miro, Figma, or product briefs</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── PLACEHOLDER ── -->
+  <div class="tool-placeholder">
+    <div class="placeholder-inner">
+      <div class="placeholder-num">03</div>
+      <div class="placeholder-text">
+        <h3>Next tool in development</h3>
+        <p>Coming soon &mdash; get in touch if you have a suggestion</p>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <div class="about-strip">
   <div class="about-inner">
-    <p>These tools are built on a central hypothesis: AI is most valuable when it is embedded directly into workflows as decisions are made. Each interface is designed to reduce friction at exactly the moment a product or technical team needs to communicate clearly to a non-technical audience.</p>
-    <a href="../index.html#about">About this work &#8599;</a>
+    <div>
+      <h2>Built from real problems,<br>not <em>hypothetical ones</em>.</h2>
+      <p>Every tool here started as a friction point I observed embedded inside delivery teams — a moment where a capable PM was spending hours on work that should take minutes. The hypothesis behind all of it: AI is most valuable when it is inside the workflow at the moment of decision, not bolted on afterward.</p>
+    </div>
+    <div class="about-links">
+      <a href="../index.html#about" class="about-btn primary">About this work &#8599;</a>
+      <a href="mailto:rob.dull@gmail.com" class="about-btn ghost">Suggest a tool &#8599;</a>
+    </div>
   </div>
 </div>
 
 <footer>
-  <p>Rob Dull &mdash; Product Operations &bull; San Francisco, CA</p>
+  <p>robdull / tools</p>
   <p><a href="mailto:rob.dull@gmail.com" style="color:var(--muted);text-decoration:none;">rob.dull@gmail.com</a></p>
 </footer>
 
