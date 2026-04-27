@@ -16,16 +16,16 @@ html{scroll-behavior:smooth;}
 body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;min-height:100vh;}
 
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
-.nn{font-size:15px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
+.nn{font-size:18px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
 .nl{display:flex;gap:10px;align-items:center;}
-.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--ink);border-radius:6px;transition:all .15s;letter-spacing:-.01em;}
-.nl a:hover{background:var(--ink);color:white;}
+.nl a{font-size:13px;font-weight:600;color:white;text-decoration:none;padding:8px 16px;border:2px solid var(--accent);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:var(--accent);}
+.nl a:hover{background:#0f2540;border-color:#0f2540;}
 .nl a.li-btn{background:var(--accent);color:white;border-color:var(--accent);}
 .nl a.li-btn:hover{background:#0f2540;border-color:#0f2540;}
 
 .hero{padding:140px 40px 100px;max-width:900px;margin:0 auto;text-align:center;}
 .he{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:20px;animation:fu .5s ease both;}
-.hero h1{font-size:clamp(42px,6vw,74px);font-weight:900;line-height:1.0;letter-spacing:-.03em;color:var(--ink);margin-bottom:28px;animation:fu .5s .08s ease both;}
+.hero h1{font-size:clamp(28px,4vw,52px);font-weight:900;line-height:1.1;letter-spacing:-.03em;color:var(--ink);margin-bottom:28px;animation:fu .5s .08s ease both;}
 .hero h1 em{font-style:normal;color:var(--accent);}
 .hb{max-width:580px;margin:0 auto 44px;color:var(--muted);font-size:17px;line-height:1.7;font-weight:400;animation:fu .5s .16s ease both;}
 .hc{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;animation:fu .5s .24s ease both;}
@@ -87,18 +87,16 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 <body>
 
 <nav>
-  <a href="/" class="nn">Rob Dull</a>
+  <a href="/" class="nn">Rob Dull &ndash; Product Management</a>
   <div class="nl">
     <a href="#tools">Tools</a>
     <a href="#about">About Me</a>
     <a href="mailto:rob.dull@gmail.com">Contact</a>
-    <a href="https://linkedin.com/in/robdull" target="_blank" class="li-btn">LinkedIn &#8599;</a>
   </div>
 </nav>
 
 <section class="hero">
-  <div class="he">Product Operations Portfolio</div>
-  <h1>Partnering with teams and leaders throughout organizations to improve<br><em>product management</em> and<br><em>delivery operations</em>.</h1>
+  <h1>I Partner with teams and leaders throughout organizations to improve <em>product management</em> and <em>delivery operations</em>.</h1>
   <p class="hb">I design and build operational tools and workflows that reduce waste, improve collaboration, and let product organizations move faster. This site contains ideas and working examples of how I approach that work, including AI-augmented content generation for presentations and product delivery assets. This is part portfolio, part exploration. If there is an opportunity for me to help you, or if you have feedback, let me know! </p>
   <div class="hc">
     <a href="#tools" class="bp">View Tools</a>
@@ -118,8 +116,8 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
 <section class="ts" id="tools">
   <div class="th">
-    <h2>What I'm working on, what I'm thinking, and what I can do for you</h2>
-    <div class="tc">Three areas of focus</div>
+    <h2>Three areas of focus</h2>
+    <div class="tc">Active collection</div>
   </div>
   <div class="tg">
     <a href="tools/tools-index.html" class="card">
