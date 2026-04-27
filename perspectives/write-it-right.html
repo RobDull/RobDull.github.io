@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Write It Right: Agile Story Writing That Actually Works | Rob Dull</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0a0a0a;--white:#ffffff;--off:#f7f7f7;--rule:#e8e8e8;
+  --accent:#1a3a5c;--accent2:#c8662a;--muted:#6b6b6b;
+  --font:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;min-height:100vh;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
+.nn{font-size:15px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
+.nl{display:flex;gap:10px;align-items:center;}
+.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--ink);border-radius:6px;transition:all .15s;letter-spacing:-.01em;}
+.nl a:hover{background:var(--ink);color:white;}
+.nl a.li-btn{background:var(--accent);color:white;border-color:var(--accent);}
+.nl a.li-btn:hover{background:#0f2540;border-color:#0f2540;}
+
+.bc{max-width:780px;margin:0 auto;padding:100px 40px 0;}
+.bc-inner{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--muted);}
+.bc-inner a{color:var(--muted);text-decoration:none;transition:color .15s;}
+.bc-inner a:hover{color:var(--ink);}
+.bc-sep{color:var(--rule);}
+
+.art-header{max-width:780px;margin:0 auto;padding:28px 40px 48px;}
+.art-tag{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:14px;}
+.art-header h1{font-size:clamp(28px,4vw,48px);font-weight:900;letter-spacing:-.03em;line-height:1.08;color:var(--ink);margin-bottom:20px;}
+.art-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.art-date{font-size:12px;font-weight:600;color:var(--muted);}
+.art-dot{width:3px;height:3px;border-radius:50%;background:var(--rule);}
+.art-source{font-size:12px;font-weight:600;color:var(--muted);}
+.art-source a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(26,58,92,.25);transition:border-color .15s;}
+.art-source a:hover{border-color:var(--accent);}
+.art-authors{font-size:12px;font-weight:600;color:var(--muted);}
+
+.art-body{max-width:780px;margin:0 auto;padding:0 40px 80px;}
+.art-body p{font-size:16px;line-height:1.85;color:#1a1a1a;margin-bottom:24px;}
+.art-body h2{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin:48px 0 16px;}
+.art-body h3{font-size:17px;font-weight:700;letter-spacing:-.01em;color:var(--ink);margin:28px 0 12px;}
+
+/* STAT CALLOUTS */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:36px 0;}
+.stat-box{background:var(--ink);border-radius:10px;padding:24px 20px;text-align:center;}
+.stat-num{font-size:32px;font-weight:900;letter-spacing:-.03em;color:white;line-height:1;margin-bottom:6px;}
+.stat-label{font-size:11px;font-weight:600;color:rgba(255,255,255,.6);line-height:1.4;}
+
+/* CALLOUT */
+.callout{background:var(--off);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:20px 24px;margin:32px 0;font-size:15px;line-height:1.8;color:#2a2a2a;}
+.callout strong{color:var(--ink);}
+
+/* PROCESS COMPARISON */
+.process-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0;}
+.process-col{border:2px solid var(--rule);border-radius:10px;overflow:hidden;}
+.process-col-head{padding:14px 18px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;}
+.process-col-head.old{background:#b0303018;color:#b03030;border-bottom:2px solid #b0303030;}
+.process-col-head.new{background:#2a7a5a18;color:#2a7a5a;border-bottom:2px solid #2a7a5a30;}
+.process-col ul{list-style:none;padding:16px 18px;}
+.process-col ul li{font-size:13px;color:var(--muted);padding:7px 0;border-bottom:1px solid var(--rule);display:flex;gap:10px;align-items:flex-start;line-height:1.5;}
+.process-col ul li:last-child{border-bottom:none;}
+.process-col ul li::before{font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px;}
+.process-col.old ul li::before{content:'✕';color:#b03030;}
+.process-col.new ul li::before{content:'✓';color:#2a7a5a;}
+
+/* STEPS */
+.steps{margin:28px 0;}
+.step{display:flex;gap:16px;margin-bottom:18px;}
+.step-num{width:32px;height:32px;border-radius:8px;background:var(--ink);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.step-body h4{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.step-body p{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:0;}
+
+/* MEETING TABLE */
+.meeting-table{width:100%;border-collapse:collapse;margin:28px 0;font-size:14px;}
+.meeting-table th{background:var(--ink);color:white;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:12px 16px;text-align:left;}
+.meeting-table td{padding:12px 16px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.6;color:#2a2a2a;}
+.meeting-table tr:last-child td{border-bottom:none;}
+.meeting-table tr:nth-child(even) td{background:var(--off);}
+
+/* BENEFITS LIST */
+.benefit-list{list-style:none;margin:20px 0 28px;}
+.benefit-list li{padding:14px 0;border-bottom:1px solid var(--rule);display:flex;gap:14px;align-items:flex-start;font-size:15px;line-height:1.7;color:#1a1a1a;}
+.benefit-list li:last-child{border-bottom:none;}
+.benefit-list li strong{color:var(--ink);}
+.b-icon{width:28px;height:28px;border-radius:6px;background:var(--accent2);color:white;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px;}
+
+/* AUTHORS */
+.authors-box{background:var(--off);border:2px solid var(--rule);border-radius:10px;padding:24px;margin:40px 0;}
+.authors-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.authors-box p{font-size:14px;color:#2a2a2a;line-height:1.7;margin-bottom:0;}
+
+.art-divider{max-width:780px;margin:0 auto;padding:0 40px;border-top:1px solid var(--rule);}
+.art-nav{max-width:780px;margin:0 auto;padding:40px 40px 80px;display:flex;justify-content:space-between;align-items:center;gap:16px;}
+.art-nav a{font-size:13px;font-weight:700;color:var(--muted);text-decoration:none;border:2px solid var(--rule);border-radius:6px;padding:10px 18px;transition:all .15s;}
+.art-nav a:hover{border-color:var(--ink);color:var(--ink);}
+
+footer{padding:28px 40px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+footer p{font-size:12px;font-weight:500;color:var(--muted);}
+
+@media(max-width:680px){
+  nav{padding:14px 20px;}
+  .nl a{padding:7px 12px;font-size:12px;}
+  .bc,.art-header,.art-body,.art-nav,.art-divider{padding-left:20px;padding-right:20px;}
+  .process-compare{grid-template-columns:1fr;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  footer{padding:20px 24px;flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nn">Rob Dull</a>
+  <div class="nl">
+    <a href="../index.html#tools">Work</a>
+    <a href="../index.html#about">About</a>
+    <a href="mailto:rob.dull@gmail.com">Email Me</a>
+    <a href="https://linkedin.com/in/robdull" target="_blank" class="li-btn">LinkedIn &#8599;</a>
+  </div>
+</nav>
+
+<div class="bc">
+  <div class="bc-inner">
+    <a href="../index.html">Rob Dull</a>
+    <span class="bc-sep">&#8250;</span>
+    <a href="perspectives-index.html">Perspectives</a>
+    <span class="bc-sep">&#8250;</span>
+    <span>Write It Right</span>
+  </div>
+</div>
+
+<div class="art-header">
+  <div class="art-tag">Agile Practices &bull; Whitepaper</div>
+  <h1>Write It Right: How One Team Cut PI Planning Time by 71% by Fixing Story Writing First</h1>
+  <div class="art-meta">
+    <span class="art-date">April 2025</span>
+    <span class="art-dot"></span>
+    <span class="art-source">Originally published on <a href="https://linkedin.com/in/robdull" target="_blank">LinkedIn &#8599;</a></span>
+    <span class="art-dot"></span>
+    <span class="art-authors">Co-authored with Tanya Jones and Karen Benbow</span>
+  </div>
+</div>
+
+<div class="art-body">
+
+  <p>Most Agile teams know their story writing process is broken. Stories arrive at refinement half-finished. Dependencies surface the week before PI Planning. The Product Owner spends more time chasing clarification than prioritizing work. Everyone is busy, but the throughput never seems to match the effort.</p>
+
+  <p>This whitepaper documents what happened when one team decided to fix this systematically — not with new tooling, not with a process overhaul, but by establishing a structured cadence for story writing that started the moment work was identified.</p>
+
+  <p>The results over nine months were concrete and measurable.</p>
+
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-num">71%</div>
+      <div class="stat-label">Reduction in PI Planning time<br>(28 hrs to 8 hrs)</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Elimination of missing dependencies<br>(~5 per PI to zero)</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">90%</div>
+      <div class="stat-label">Reduction in unplanned team-initiated work<br>(~15 stories to ~1.5 per PI)</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Stories complete before work starts<br>(vs. 85% incomplete previously)</div>
+    </div>
+  </div>
+
+  <h2>The Problem</h2>
+
+  <p>Before the transformation, story writing for this Kanban delivery team was fragmented and reactive. Stories were written the week before PI Planning or, more often, at the moment work needed to begin. Team members would create a story, notify the Product Owner that something needed to happen, and wait. The PO would prioritize it, often placing it in the backlog without enough context to act on it later.</p>
+
+  <div class="process-compare">
+    <div class="process-col old">
+      <div class="process-col-head old">Old Process: The Pain Points</div>
+      <ul>
+        <li>Stories written at the last minute or during PI Planning itself</li>
+        <li>Incomplete stories requiring multiple rounds of clarification by email and IM</li>
+        <li>One-hour bi-weekly refinement meeting where missing scope or dependencies were discovered too late</li>
+        <li>Separate one-hour replenishment meeting on alternating weeks generating last-minute questions and scope changes</li>
+        <li>Extended PI Planning sessions — up to 3.5 days and 28 hours — driven by incomplete readiness</li>
+        <li>Dependencies discovered after work had already started</li>
+        <li>85% of stories incomplete at the time work began</li>
+      </ul>
+    </div>
+    <div class="process-col new">
+      <div class="process-col-head new">New Process: What Changed</div>
+      <ul>
+        <li>Three 30-minute meetings per week replace two long recurring sessions</li>
+        <li>Each meeting has defined attendance, a clear objective, and predefined criteria</li>
+        <li>Process starts the moment work is identified, not when it is imminent</li>
+        <li>Discovery, refinement, and replenishment handled in separate focused sessions</li>
+        <li>Stories must meet all criteria before being marked Ready</li>
+        <li>Dependencies identified and coordinated in advance of PI Planning</li>
+        <li>100% of stories complete before work starts</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>The Methodology</h2>
+
+  <p>The transformation took place over nine months, following a structured sequence of steps that any team could adapt.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body"><h4>Assessment</h4><p>Reviewed the existing story writing process and mapped the specific points where inefficiencies and delays were occurring.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body"><h4>Analysis</h4><p>Determined where more structured Agile methodology could address the identified problems, and adapted the approach to fit the team's Kanban context — not a generic Scrum prescription.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body"><h4>Education</h4><p>Provided training to help team members understand the Agile principles behind the new process, including what "Agile story writing" means: consistent format, business value framing, and testable acceptance criteria that every team member can understand regardless of role.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body"><h4>Implementation</h4><p>Rolled out the new meeting cadence and story writing criteria, with the Agile Coach embedded to support the transition and handle resistance in real time.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body"><h4>Feedback and Iteration</h4><p>Continuously gathered feedback from team members and refined the process — criteria, meeting structure, and attendance expectations evolved based on what was and was not working.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-body"><h4>Measurement</h4><p>Tracked key metrics to evaluate impact at each stage: story completion rate at work start, dependency discovery timing, PI Planning duration, and volume of unplanned team-initiated work.</p></div>
+    </div>
+  </div>
+
+  <h2>The New Meeting Structure</h2>
+
+  <p>The core of the solution was replacing two long, infrequent meetings with three short, purpose-specific ones held every week. The shift from monthly or bi-weekly to weekly cadence is significant: it means problems surface when they are small, not when they are blocking.</p>
+
+  <table class="meeting-table">
+    <thead>
+      <tr><th>Meeting</th><th>Duration</th><th>Objective</th><th>Attendance</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Discovery</strong></td>
+        <td>30 min</td>
+        <td>Identify and capture new work as soon as it surfaces; begin initial scoping and dependency flagging</td>
+        <td>PO + relevant team members</td>
+      </tr>
+      <tr>
+        <td><strong>Refinement</strong></td>
+        <td>30 min</td>
+        <td>Review stories against predefined criteria; add missing business value, acceptance criteria, and dependency information until stories meet the Definition of Ready</td>
+        <td>Full team</td>
+      </tr>
+      <tr>
+        <td><strong>Replenishment</strong></td>
+        <td>30 min</td>
+        <td>Assign ready stories to team members and confirm priority against current in-flight work; validate no last-minute questions or scope gaps remain</td>
+        <td>Full team</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>A crucial design decision:</strong> the new process begins the moment work is identified. This is what allows dependencies to be discovered and coordinated in advance rather than at the point they become blockers. The old process started at imminent work. The new process starts at known work.
+  </div>
+
+  <h2>What Agile Story Writing Means in Practice</h2>
+
+  <p>A note on terminology, because this matters for adoption: "Agile story writing" in this context does not mean every team member sits together and writes stories from scratch in real time. For a Kanban team, that is neither practical nor necessary.</p>
+
+  <p>What it does mean is that every story, regardless of who drafts it, includes:</p>
+
+  <ul style="list-style:none;margin:0 0 24px;padding:0;">
+    <li style="padding:10px 0;border-bottom:1px solid var(--rule);display:flex;gap:12px;font-size:15px;color:#1a1a1a;"><span style="color:var(--accent2);font-weight:800;flex-shrink:0;">&#8250;</span>A concise summary that any team member, in any role, can understand without prior context</li>
+    <li style="padding:10px 0;border-bottom:1px solid var(--rule);display:flex;gap:12px;font-size:15px;color:#1a1a1a;"><span style="color:var(--accent2);font-weight:800;flex-shrink:0;">&#8250;</span>A clear statement of business value — why this work matters to the customer or the organization</li>
+    <li style="padding:10px 0;border-bottom:1px solid var(--rule);display:flex;gap:12px;font-size:15px;color:#1a1a1a;"><span style="color:var(--accent2);font-weight:800;flex-shrink:0;">&#8250;</span>Testable acceptance criteria — specific conditions that must be true for the story to be considered complete</li>
+    <li style="padding:10px 0;border-bottom:1px solid var(--rule);display:flex;gap:12px;font-size:15px;color:#1a1a1a;"><span style="color:var(--accent2);font-weight:800;flex-shrink:0;">&#8250;</span>All known dependencies identified and flagged for coordination</li>
+    <li style="padding:10px 0;display:flex;gap:12px;font-size:15px;color:#1a1a1a;"><span style="color:var(--accent2);font-weight:800;flex-shrink:0;">&#8250;</span>No open questions that would require ad hoc follow-up after work begins</li>
+  </ul>
+
+  <p>This format nurtures collective team ownership of the backlog. When anyone on the team can read a story and understand its value and its completion criteria, the whole team is invested in it — not just the person who wrote it or the PO who prioritized it.</p>
+
+  <h2>Challenges</h2>
+
+  <p>Two challenges emerged during the transition, both predictable and both manageable.</p>
+
+  <p><strong>Resistance to change.</strong> Some team members were skeptical of adding more meetings to an already-full calendar, even though the net meeting time would be lower. This was addressed by making the efficiency argument concrete early: the three short meetings replaced approximately two hours of poorly-structured meeting time per week, not added to it. Showing the math before the first session helped.</p>
+
+  <p><strong>Familiarity with Agile methodology.</strong> Writing stories with consistent business value framing and testable acceptance criteria is a learned skill. The team needed time and practice. The Agile Coach was present at early sessions to model the criteria, give real-time feedback on drafts, and normalize the revision cycle without making it feel like criticism.</p>
+
+  <h2>Benefits and Outcomes</h2>
+
+  <ul class="benefit-list">
+    <li><div class="b-icon">&#9201;</div><div><strong>Efficiency:</strong> Stories met predefined criteria before PI Planning, eliminating multiple clarification rounds and redundant follow-up meetings. Continuous evaluation of incoming work against scheduled work prevented escalations.</div></li>
+    <li><div class="b-icon">&#128172;</div><div><strong>Enhanced collaboration:</strong> Stories were discussed and refined collectively and in a timely manner. Misunderstandings and information gaps were caught while they were still easy to fix, not after work had started.</div></li>
+    <li><div class="b-icon">&#128203;</div><div><strong>Improved meeting structure:</strong> Three 30-minute focused sessions replaced two 60-minute unfocused ones. Easier to schedule, less fatiguing, and more productive per minute spent.</div></li>
+    <li><div class="b-icon">&#9989;</div><div><strong>Consistent story review:</strong> All team members reviewed stories using the same criteria. Familiarity with story contents was built before work started, eliminating the ad hoc questions that previously delayed execution.</div></li>
+    <li><div class="b-icon">&#128196;</div><div><strong>Clear process documentation:</strong> A documented standard for what information is required at each stage of story maturity. Stories were not marked Ready until all criteria were met &mdash; a hard gate that the team enforced collectively.</div></li>
+  </ul>
+
+  <div class="stats-row" style="margin-top:8px;">
+    <div class="stat-box"><div class="stat-num">&#8776;5 &#8594; 0</div><div class="stat-label">Missing dependencies per PI</div></div>
+    <div class="stat-box"><div class="stat-num">15 &#8594; 1.5</div><div class="stat-label">Unplanned stories per PI</div></div>
+    <div class="stat-box"><div class="stat-num">3.5 &#8594; 2.5</div><div class="stat-label">PI Planning duration (days)</div></div>
+    <div class="stat-box"><div class="stat-num">85% &#8594; 0%</div><div class="stat-label">Stories incomplete at work start</div></div>
+  </div>
+
+  <h2>Conclusion</h2>
+
+  <p>The lesson from this team's transformation is not that they found a magic process. It is that they fixed the upstream problem rather than managing the downstream symptoms. Incomplete stories, missed dependencies, and extended PI Planning are all outputs of a story writing process that starts too late and lacks consistent criteria. Fix when the process starts and what it requires, and the downstream problems largely resolve themselves.</p>
+
+  <p>The three-meeting cadence is not the only way to achieve this. What matters is the underlying principle: story writing is a continuous activity that begins when work is identified, not a periodic event that happens when work is imminent.</p>
+
+  <div class="callout">
+    <strong>For other Agile teams considering a similar change:</strong> start with the assessment. Map your current process and identify specifically where information gaps and delays are entering the system. The solution will follow from the diagnosis. Working with an Agile Coach through the transition &mdash; particularly during the first few refinement sessions &mdash; significantly accelerates adoption and reduces the friction of building new habits.
+  </div>
+
+  <div class="authors-box">
+    <div class="authors-label">About the Authors</div>
+    <p>This whitepaper was co-authored by <strong>Tanya Jones</strong>, <strong>Rob Dull</strong>, and <strong>Karen Benbow</strong>, drawing on direct experience with the transformation described. Rob Dull served as Agile Coach embedded with the team throughout the nine-month initiative at Delta Dental of California.</p>
+  </div>
+
+</div>
+
+<div class="art-divider"></div>
+
+<div class="art-nav">
+  <a href="perspectives-index.html">&#8592; All Perspectives</a>
+  <a href="mailto:rob.dull@gmail.com">Discuss this &#8599;</a>
+</div>
+
+<footer>
+  <p>Rob Dull &mdash; Product Operations &bull; San Francisco, CA</p>
+  <p><a href="mailto:rob.dull@gmail.com" style="color:var(--muted);text-decoration:none;">rob.dull@gmail.com</a></p>
+</footer>
+
+</body>
+</html>
