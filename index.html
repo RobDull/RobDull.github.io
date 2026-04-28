@@ -18,10 +18,8 @@ body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
 .nn{font-size:18px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
 .nl{display:flex;gap:10px;align-items:center;}
-.nl a{font-size:13px;font-weight:600;color:white;text-decoration:none;padding:8px 16px;border:2px solid var(--accent);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:var(--accent);}
-.nl a:hover{background:#0f2540;border-color:#0f2540;}
-.nl a.li-btn{background:var(--accent);color:white;border-color:var(--accent);}
-.nl a.li-btn:hover{background:#0f2540;border-color:#0f2540;}
+.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--ink);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:white;}
+.nl a:hover{background:var(--accent);color:white;border-color:var(--accent);}
 
 .hero{padding:140px 40px 100px;max-width:900px;margin:0 auto;text-align:center;}
 .he{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:20px;animation:fu .5s ease both;}
@@ -29,10 +27,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .hero h1 em{font-style:normal;color:var(--accent);}
 .hb{max-width:580px;margin:0 auto 44px;color:var(--muted);font-size:17px;line-height:1.7;font-weight:400;animation:fu .5s .16s ease both;}
 .hc{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;animation:fu .5s .24s ease both;}
-.bp{background:var(--ink);color:white;border:2px solid var(--ink);border-radius:6px;font-size:13px;font-weight:700;letter-spacing:-.01em;padding:12px 28px;text-decoration:none;transition:all .15s;display:inline-block;}
-.bp:hover{background:#2a2a2a;border-color:#2a2a2a;}
-.bg{background:transparent;color:var(--ink);border:2px solid var(--ink);border-radius:6px;font-size:13px;font-weight:700;letter-spacing:-.01em;padding:12px 28px;text-decoration:none;transition:all .15s;display:inline-block;}
-.bg:hover{background:var(--ink);color:white;}
+.bp{background:white;color:var(--ink);border:2px solid var(--ink);border-radius:6px;font-size:13px;font-weight:700;letter-spacing:-.01em;padding:12px 28px;text-decoration:none;transition:all .15s;display:inline-block;}
+.bp:hover{background:var(--accent);color:white;border-color:var(--accent);}
+.bg{background:white;color:var(--ink);border:2px solid var(--ink);border-radius:6px;font-size:13px;font-weight:700;letter-spacing:-.01em;padding:12px 28px;text-decoration:none;transition:all .15s;display:inline-block;}
+.bg:hover{background:var(--accent);color:white;border-color:var(--accent);}
 
 .sd{max-width:860px;margin:0 auto;padding:0 40px;border-top:1px solid var(--rule);}
 
@@ -89,9 +87,9 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 <nav>
   <a href="/" class="nn">Rob Dull &ndash; Product Management</a>
   <div class="nl">
-    <a href="#tools">Tools</a>
-    <a href="#about">About Me</a>
     <a href="mailto:rob.dull@gmail.com">Contact</a>
+    <a href="#about">About Me</a>
+    <a href="#tools">Work</a>
   </div>
 </nav>
 
@@ -99,19 +97,17 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <h1>Partnering with teams and leaders throughout organizations to improve <em>product management</em> and <em>delivery operations</em>.</h1>
   <p class="hb">I design methods to reduce waste, improve collaboration, and let product organizations move faster. This site showcases examples of my work, including AI-augmented generation of product management assets. This is part portfolio, part exploration. If this resonates with you, <a href="mailto:rob.dull@gmail.com">let me know!</a></p>
   <div class="hc">
-    <a href="#tools" class="bp">View Tools</a>
-    <a href="#about" class="bg">About This Work</a>
+    <a href="mailto:rob.dull@gmail.com" class="bp">Contact Me</a>
+    <a href="#tools" class="bg">View Tools</a>
   </div>
 </section>
 
-<div class="sd"></div>
 
 <section class="approach">
   <h2>AI as <em>operational infrastructure</em>,<br>not a workaround.</h2>
   <p>AI is most valuable when it is embedded into people's workflows as decisions are made, neither a premature shortcut nor a disruptive afterthought. Each of these tools demonstrates the use of AI to facilitate creation of key product management assets.</p>
 </section>
 
-<div class="sd"></div>
 
 <section class="ts" id="tools">
   <div class="th">
@@ -164,6 +160,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <p>I am currently exploring senior product operations, program management, and organizational effectiveness roles where this combination of operational depth and AI-enabled workflow design would be most useful.</p>
     <a href="https://linkedin.com/in/robdull" target="_blank" class="as-li-btn">Connect on LinkedIn &#8599;</a>
     <a href="about_me/resume.html" class="as-li-btn" style="background:transparent;color:white;border-color:rgba(255,255,255,0.4);margin-left:12px;">View Resume &#8599;</a>
+    <a href="mailto:rob.dull@gmail.com" class="as-li-btn" style="background:transparent;color:white;border-color:rgba(255,255,255,0.4);margin-left:12px;">Contact Me &#8599;</a>
   </div>
 </section>
 
