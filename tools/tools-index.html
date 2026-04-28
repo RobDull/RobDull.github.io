@@ -17,10 +17,12 @@ body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
-.nn{font-size:18px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
+.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--ink);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:white;}
+.nl a:hover{background:var(--accent);color:white;border-color:var(--accent);}
+.nn{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
 .nl{display:flex;gap:10px;align-items:center;}
-.nl a{font-size:13px;font-weight:600;color:white;text-decoration:none;padding:8px 16px;border:2px solid var(--accent);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:var(--accent);}
-.nl a:hover{background:#0f2540;border-color:#0f2540;}
+
+
 
 /* ── BREADCRUMB ── */
 .bc{max-width:1060px;margin:0 auto;padding:100px 40px 0;}
@@ -76,17 +78,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .placeholder-text p{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--rule);}
 
 /* ── ABOUT STRIP ── */
-.about-strip{background:var(--ink);padding:56px 40px;}
+.about-strip{background:var(--accent);padding:56px 40px;}
 .about-inner{max-width:1060px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
 .about-inner h2{font-size:clamp(22px,3vw,34px);font-weight:900;letter-spacing:-.03em;color:white;margin-bottom:10px;line-height:1.15;}
 .about-inner h2 em{font-style:normal;color:rgba(255,255,255,.35);}
 .about-inner p{font-size:14px;color:rgba(255,255,255,.6);line-height:1.8;max-width:560px;}
 .about-links{display:flex;flex-direction:column;gap:8px;flex-shrink:0;}
 .about-btn{display:inline-block;font-size:13px;font-weight:700;text-decoration:none;border-radius:6px;padding:11px 22px;transition:all .15s;white-space:nowrap;text-align:center;letter-spacing:-.01em;}
-.about-btn.primary{background:white;color:var(--ink);}
-.about-btn.primary:hover{background:rgba(255,255,255,.88);}
-.about-btn.ghost{background:transparent;color:rgba(255,255,255,.7);border:2px solid rgba(255,255,255,.2);}
-.about-btn.ghost:hover{border-color:rgba(255,255,255,.5);color:white;}
+.about-btn.primary{background:transparent;color:white;border:2px solid rgba(255,255,255,.6);}
+.about-btn.primary:hover{background:white;color:var(--ink);border-color:white;}
+.about-btn.ghost{background:transparent;color:white;border:2px solid rgba(255,255,255,.6);}
+.about-btn.ghost:hover{background:white;color:var(--ink);border-color:white;}
 
 footer{padding:28px 40px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
 footer p{font-size:12px;font-weight:500;color:var(--muted);}
@@ -109,11 +111,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 <body>
 
 <nav>
-  <a href="../index.html" class="nn">Rob Dull &ndash; Product Management</a>
+  <a href="../index.html" class="nn">Rob Dull</a>
   <div class="nl">
-    <a href="../index.html#tools">Work</a>
-    <a href="../index.html#about">About</a>
     <a href="mailto:rob.dull@gmail.com">Contact</a>
+    <a href="../index.html#about">About</a>
+    <a href="../index.html#tools">Work</a>
   </div>
 </nav>
 
@@ -235,8 +237,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <footer>
-  <p>Rob Dull &mdash; Product Management</p>
-  <p>San Francisco, CA</p>
+  <p>Rob Dull &bull; Product Management Practitioner and Product Operations Transformation Consultant</p>
 </footer>
 
 </body>
