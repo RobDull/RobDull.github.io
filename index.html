@@ -14,14 +14,16 @@
 }
 html{scroll-behavior:smooth;}
 body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;min-height:100vh;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
 
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
-.nn{font-size:18px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
+.nn{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
 .nl{display:flex;gap:10px;align-items:center;}
-.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--ink);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:white;}
+.nl a{font-size:13px;font-weight:600;color:white;text-decoration:none;padding:8px 16px;border:2px solid var(--accent);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:var(--accent);}
 .nl a:hover{background:var(--accent);color:white;border-color:var(--accent);}
 
-.hero{padding:140px 40px 100px;max-width:900px;margin:0 auto;text-align:center;}
+.hero{padding:140px 40px 60px;max-width:900px;margin:0 auto;text-align:center;}
 .he{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:20px;animation:fu .5s ease both;}
 .hero h1{font-size:clamp(28px,4vw,52px);font-weight:900;line-height:1.1;letter-spacing:-.03em;color:var(--ink);margin-bottom:28px;animation:fu .5s .08s ease both;}
 .hero h1 em{font-style:normal;color:var(--accent);}
@@ -34,12 +36,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 
 .sd{max-width:860px;margin:0 auto;padding:0 40px;border-top:1px solid var(--rule);}
 
-.approach{max-width:760px;margin:0 auto;padding:80px 40px;text-align:center;}
+.approach{max-width:760px;margin:0 auto;padding:48px 40px;text-align:center;}
 .approach h2{font-size:clamp(26px,3.5vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1.15;color:var(--ink);margin-bottom:20px;}
 .approach h2 em{font-style:normal;color:var(--accent);}
 .approach p{color:var(--muted);font-size:16px;line-height:1.8;margin-bottom:14px;}
 
-.ts{max-width:1000px;margin:0 auto;padding:80px 40px;text-align:center;}
+.ts{max-width:1000px;margin:0 auto;padding:48px 40px;text-align:center;}
 .th{margin-bottom:48px;}
 .th h2{font-size:clamp(28px,3.5vw,42px);font-weight:800;letter-spacing:-.03em;color:var(--ink);margin-bottom:6px;}
 .tc{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
@@ -57,14 +59,14 @@ a.card:hover .ca{color:var(--ink);transform:translate(2px,-2px);}
 .ph-card{background:transparent;border:2px dashed var(--rule);border-radius:10px;padding:28px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:180px;}
 .ph-card p{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--rule);}
 
-.as{background:var(--ink);padding:80px 40px;margin-top:80px;}
+.as{background:var(--accent);padding:64px 40px;margin-top:40px;}
 .as-inner{max-width:700px;margin:0 auto;text-align:center;}
 .as h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.03em;color:white;line-height:1.15;margin-bottom:20px;}
 .as h2 em{font-style:normal;color:rgba(255,255,255,.4);}
 .as p{color:rgba(255,255,255,.65);font-size:15px;line-height:1.8;margin-bottom:14px;}
 .as p strong{color:white;font-weight:700;}
-.as-li-btn{display:inline-flex;align-items:center;gap:8px;margin-top:28px;background:white;color:var(--ink);border:2px solid white;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:-.01em;padding:12px 28px;text-decoration:none;transition:all .15s;}
-.as-li-btn:hover{background:rgba(255,255,255,.85);}
+.as-li-btn{display:inline-flex;align-items:center;gap:8px;margin-top:28px;background:transparent;color:white;border:2px solid rgba(255,255,255,.6);border-radius:6px;font-size:13px;font-weight:700;letter-spacing:-.01em;padding:12px 28px;text-decoration:none;transition:all .15s;}
+.as-li-btn:hover{background:white;color:var(--ink);border-color:white;}
 
 footer{padding:28px 40px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
 footer p{font-size:12px;font-weight:500;color:var(--muted);}
@@ -74,10 +76,10 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 @media(max-width:680px){
   nav{padding:14px 20px;}
   .nl a{padding:7px 12px;font-size:12px;}
-  .hero{padding:120px 24px 80px;}
-  .approach,.ts{padding:60px 24px;}
+  .hero{padding:120px 24px 40px;}
+  .approach,.ts{padding:36px 24px;}
   .sd{padding:0 24px;}
-  .as{padding:60px 24px;}
+  .as{padding:48px 24px;}
   footer{padding:20px 24px;flex-direction:column;text-align:center;}
 }
 </style>
@@ -85,7 +87,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 <body>
 
 <nav>
-  <a href="/" class="nn">Rob Dull &ndash; Product Management</a>
+  <a href="/" class="nn">Rob Dull</a>
   <div class="nl">
     <a href="mailto:rob.dull@gmail.com">Contact</a>
     <a href="#about">About Me</a>
@@ -102,10 +104,12 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   </div>
 </section>
 
+
 <section class="approach">
   <h2>AI as <em>operational infrastructure</em>,<br>not a workaround.</h2>
-  <p>AI is most valuable when it is embedded into people's workflows as decisions are made, neither a premature shortcut nor a disruptive afterthought. Each tool on this site demonstrates the use of AI to facilitate creation of key product management assets.</p>
+  <p>AI is most valuable when it is embedded into people's workflows as decisions are made, neither a premature shortcut nor a disruptive afterthought. Each of these tools demonstrates the use of AI to facilitate creation of key product management assets.</p>
 </section>
+
 
 <section class="ts" id="tools">
   <div class="th">
@@ -152,19 +156,18 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
 <section class="as" id="about">
   <div class="as-inner">
-    <h2>Over 20 years in product management and product operations, with 12 years focused on coaching product managers and enabling organizational transformation.</h2>
-    <p>I have spent my career embedded inside delivery teams, working groups with operational leaders, and senior management groups during periods of rapid growth and organizational change, most recently at <strong>Salesforce</strong> and <strong>Delta Dental of California</strong>. My work is about organizational collaboration: how people communicate, learn, and make decisions.</p>
-    <p>The tools in this site represent a new dimension of that work: designing AI-augmented interfaces that bring the same operational discipline to individual decisions and workflows. Each tool facilitates an key milestone in discovery, decision, and presentation responsibilities that I have addressed with product managers and stakeholders.</p>
+    <h2>Over 20 years in product management and product operations, with the last 12 years focused on enabling organizational transformation.</h2>
+    <p>I have spent my career embedded inside delivery teams, working groups with operational leaders, and senior management groups during periods of rapid growth and organizational change, most recently at <strong>Salesforce</strong> and <strong>Delta Dental of California</strong>. My work has always been at the intersection of how teams plan, how they communicate, and the methods they use to make better decisions faster.</p>
+    <p>The tools in this site represent a new dimension of that work: designing AI-augmented interfaces that bring the same operational discipline to individual decisions and workflows. Each tool addresses discovery, decision, and presentation challenges that I have addressed with product managers and stakeholders.</p>
     <p>I am currently exploring senior product operations, program management, and organizational effectiveness roles where this combination of operational depth and AI-enabled workflow design would be most useful.</p>
     <a href="https://linkedin.com/in/robdull" target="_blank" class="as-li-btn">Connect on LinkedIn &#8599;</a>
-    <a href="about_me/resume.html" class="as-li-btn" style="background:transparent;color:white;border-color:rgba(255,255,255,0.4);margin-left:12px;">View Resume &#8599;</a>
-    <a href="mailto:rob.dull@gmail.com" class="as-li-btn" style="background:transparent;color:white;border-color:rgba(255,255,255,0.4);margin-left:12px;">Contact Me &#8599;</a>
+    <a href="about_me/resume.html" class="as-li-btn">View Resume &#8599;</a>
+    <a href="mailto:rob.dull@gmail.com" class="as-li-btn">Contact Me &#8599;</a>
   </div>
 </section>
 
 <footer>
-  <p>Rob Dull &mdash; Product Operations</p>
-  <p>San Francisco, CA</p>
+  <p>Rob Dull &bull; Product Management Practitioner and Product Operations Transformation Consultant</p>
 </footer>
 
 </body>
