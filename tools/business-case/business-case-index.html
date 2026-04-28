@@ -18,12 +18,11 @@ body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:
 
 /* NAV */
 nav{position:sticky;top:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
-.nn{font-size:15px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
+.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--ink);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:white;}
+.nl a:hover{background:var(--accent);color:white;border-color:var(--accent);}
+.nn{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
 .nl{display:flex;gap:10px;align-items:center;}
-.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--ink);border-radius:6px;transition:all .15s;}
-.nl a:hover{background:var(--ink);color:white;}
-.nl a.li-btn{background:var(--accent);color:white;border-color:var(--accent);}
-.nl a.li-btn:hover{background:#0f2540;border-color:#0f2540;}
+
 
 /* PAGE HERO */
 .ph{max-width:800px;margin:0 auto;padding:72px 40px 60px;text-align:center;}
@@ -166,9 +165,9 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 <nav>
   <a href="../../index.html" class="nn">Rob Dull</a>
   <div class="nl">
-    <a href="../../index.html#tools">Tools</a>
+    <a href="mailto:rob.dull@gmail.com">Contact</a>
     <a href="../../index.html#about">About</a>
-    <a href="https://linkedin.com/in/robdull" target="_blank" class="li-btn">LinkedIn &#8599;</a>
+    <a href="../../index.html#tools">Work</a>
   </div>
 </nav>
 
@@ -835,8 +834,7 @@ Year 3 and beyond: The infrastructure is designed to scale to ten times the curr
 </section>
 
 <footer>
-  <p>Rob Dull &mdash; Product Operations &bull; San Francisco, CA</p>
-  <a href="mailto:rob.dull@gmail.com?subject=Business Case Generator access request" class="req-link">Request team access</a>
+  <p>Rob Dull &bull; Product Management Practitioner and Product Operations Transformation Consultant</p>
 </footer>
 
 <script>
