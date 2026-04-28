@@ -11,12 +11,12 @@
 html{scroll-behavior:smooth;}
 body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;min-height:100vh;}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
-.nn{font-size:15px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
+.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--ink);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:white;}
+.nl a:hover{background:var(--accent);color:white;border-color:var(--accent);}
+.nn{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
 .nl{display:flex;gap:10px;align-items:center;}
-.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--ink);border-radius:6px;transition:all .15s;letter-spacing:-.01em;}
-.nl a:hover{background:var(--ink);color:white;}
-.nl a.li-btn{background:var(--accent);color:white;border-color:var(--accent);}
-.nl a.li-btn:hover{background:#0f2540;border-color:#0f2540;}
+
+
 .bc{max-width:1080px;margin:0 auto;padding:100px 40px 0;}
 .bc-inner{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--muted);}
 .bc-inner a{color:var(--muted);text-decoration:none;transition:color .15s;}
@@ -92,10 +92,9 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 <nav>
   <a href="../index.html" class="nn">Rob Dull</a>
   <div class="nl">
-    <a href="../index.html#tools">Work</a>
+    <a href="mailto:rob.dull@gmail.com">Contact</a>
     <a href="../index.html#about">About</a>
-    <a href="mailto:rob.dull@gmail.com">Email Me</a>
-    <a href="https://linkedin.com/in/robdull" target="_blank" class="li-btn">LinkedIn &#8599;</a>
+    <a href="../index.html#tools">Work</a>
   </div>
 </nav>
 
@@ -409,8 +408,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <footer>
-  <p>Rob Dull &mdash; Product Operations &bull; San Francisco, CA</p>
-  <p><a href="mailto:rob.dull@gmail.com" style="color:var(--muted);text-decoration:none;">rob.dull@gmail.com</a></p>
+  <p>Rob Dull &bull; Product Management Practitioner and Product Operations Transformation Consultant</p>
 </footer>
 
 </body>
