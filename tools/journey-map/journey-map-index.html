@@ -15,13 +15,25 @@
   --font:'Inter',sans-serif;
   --col-w:180px;--row-label-w:148px;--row-h-min:80px;
 }
-html,body{background:var(--off);color:var(--ink);font-family:var(--font);font-size:13px;line-height:1.5;height:100%;overflow-x:hidden;}
+html,body{background:var(--off);color:var(--ink);font-family:var(--font);font-size:13px;line-height:1.5;min-height:100%;overflow-x:hidden;}
 a{color:var(--accent);text-decoration:none;}
 
+/* ── INTRO SECTION ── */
+.bc{max-width:1200px;margin:0 auto;padding:88px 40px 0;}
+.bc-inner{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--muted);}
+.bc-inner a{color:var(--muted);text-decoration:none;}
+.bc-inner a:hover{color:var(--ink);}
+.bc-sep{opacity:.4;}
+.page-head{max-width:1200px;margin:0 auto;padding:20px 40px 0;}
+.page-tag{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px;}
+.page-head h1{font-family:var(--font);font-size:clamp(28px,3.5vw,48px);font-weight:900;line-height:1.05;letter-spacing:-.03em;color:var(--ink);margin-bottom:12px;}
+.page-head h1 em{font-style:normal;color:var(--accent);}
+.page-head p{font-size:15px;color:var(--muted);line-height:1.8;max-width:620px;margin-bottom:28px;}
+
 /* ── TOOLBAR ── */
-.toolbar{position:fixed;top:58px;left:0;right:0;z-index:200;background:var(--accent);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;box-shadow:0 2px 12px rgba(0,0,0,.2);}
-.brand{font-family:var(--font);font-size:18px;color:white;font-weight:800;letter-spacing:-.03em;}
-.brand span{color:rgba(255,255,255,.5);font-style:normal;font-weight:400;font-size:13px;margin-left:8px;}
+.toolbar{position:sticky;top:58px;z-index:200;background:var(--accent);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;box-shadow:0 2px 12px rgba(0,0,0,.2);}
+.brand{font-family:var(--font);font-size:15px;color:white;font-weight:800;letter-spacing:-.02em;}
+.brand span{color:rgba(255,255,255,.5);font-style:normal;font-weight:400;font-size:12px;margin-left:8px;}
 .tb-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
 .tb-btn{background:#7c5cbf;color:white;border:2px solid #7c5cbf;border-radius:6px;padding:7px 14px;font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;}
 .tb-btn:hover{background:#6a4aaa;border-color:#6a4aaa;color:white;}
@@ -30,7 +42,7 @@ a{color:var(--accent);text-decoration:none;}
 .tb-hint{font-size:11px;color:rgba(255,255,255,.5);font-style:italic;}
 
 /* ── MAP CONTAINER ── */
-.map-outer{overflow-x:auto;padding:0 0 40px;scroll-padding-top:200px;margin-top:106px;}
+.map-outer{overflow-x:auto;padding:0 0 40px;scroll-padding-top:100px;}
 .map-wrap{display:inline-flex;flex-direction:column;min-width:100%;}
 
 /* ── PHASE BANNERS ── */
@@ -155,6 +167,22 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;padding:16px 40px;display:fl
   </div>
 </nav>
 
+<!-- INTRO -->
+<div class="bc">
+  <div class="bc-inner">
+    <a href="../../index.html">robdull</a>
+    <span class="bc-sep">/</span>
+    <a href="../tools-index.html">tools</a>
+    <span class="bc-sep">/</span>
+    <span>journey-map</span>
+  </div>
+</div>
+<div class="page-head">
+  <div class="page-tag">Customer Experience</div>
+  <h1>Map the journey.<br>Find the <em>friction</em>.</h1>
+  <p>An editable, AI-ready customer journey map. Add or remove stages, drag sentiment points to reflect real experience scores, and export the full map to your AI tool of choice for analysis and recommendations.</p>
+</div>
+
 <!-- TOOLBAR -->
 <div class="toolbar">
   <div class="brand">FurBabyHealth <span>Customer Journey Map</span></div>
@@ -184,7 +212,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;padding:16px 40px;display:fl
   </div>
 
   <!-- ROWS -->
-  <div id="rows-container" style="padding-top:0;">
+  <div id="rows-container">
     <!-- Populated by JS -->
   </div>
 
@@ -343,7 +371,7 @@ const ROWS = [
   {id:'activities', label:'Customer Activities', cls:'row-activities', field:'activities', placeholder:'What is the customer doing at this stage?'},
   {id:'goals',      label:'Customer Goals',      cls:'row-goals',      field:'goals',      placeholder:'What does the customer want to achieve?'},
   {id:'touchpoints',label:'Touchpoints',         cls:'row-touchpoints',field:'touchpointText',placeholder:'Channels and interfaces the customer uses'},
-  {id:'experience', label:'Experience',          cls:'row-experience', field:null,         placeholder:null},
+  {id:'experience', label:'User Sentiment',          cls:'row-experience', field:null,         placeholder:null},
   {id:'bizgoal',    label:'Business Goal (OKR)',  cls:'row-bizgoal',    field:'bizGoal',    placeholder:'What does FurBabyHealth want to achieve at this stage?'},
   {id:'kpis',       label:'Outcome Metrics (KPIs)',cls:'row-kpis',      field:'kpis',       placeholder:'How do we measure success?'},
   {id:'orgact',     label:'Org. Activities',     cls:'row-orgact',     field:'orgActivities',placeholder:'What internal work is required?'},
@@ -447,7 +475,7 @@ function buildExperienceRow() {
   const label = document.createElement('div');
   label.className = 'row-label';
   label.style.cssText = 'position:absolute;top:0;left:0;height:100%;';
-  label.innerHTML = `<div class="row-label-name">Experience</div>
+  label.innerHTML = `<div class="row-label-name">User Sentiment</div>
     <button class="row-toggle" onclick="toggleRow('experience')">hide</button>`;
 
   // Main chart area
@@ -681,7 +709,7 @@ function copyForAI(){
     out+=`Customer Activities: ${s.activities}\n`;
     out+=`Customer Goals: ${s.goals}\n`;
     out+=`Touchpoints: ${s.touchpointText}\n`;
-    out+=`Experience Score: ${s.experience}/5 — ${s.expLabel}\n`;
+    out+=`User Sentiment Score: ${s.experience}/5 — ${s.expLabel}\n`;
     out+=`Business Goal: ${s.bizGoal}\n`;
     out+=`KPIs: ${s.kpis}\n`;
     out+=`Org Activities: ${s.orgActivities}\n`;
