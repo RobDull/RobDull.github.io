@@ -14,12 +14,11 @@
 }
 html{scroll-behavior:smooth;}
 body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;min-height:100vh;}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:15px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(248,248,251,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
 .nn{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
-.nl{display:flex;gap:8px;}
-.nl a{font-size:12px;font-weight:600;color:var(--ink);text-decoration:none;padding:7px 14px;border:1.5px solid var(--rule);border-radius:5px;transition:all .15s;background:white;}
-.nl a:hover{border-color:var(--ink);}
-.nl a.li-btn{background:var(--accent);color:white;border-color:var(--accent);}
+.nl{display:flex;gap:10px;align-items:center;}
+.nl a{font-size:13px;font-weight:600;color:white;text-decoration:none;padding:8px 16px;border:2px solid var(--accent);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:var(--accent);}
+.nl a:hover{background:#0f2540;border-color:#0f2540;color:white;text-decoration:none;}
 .bc{max-width:1120px;margin:0 auto;padding:88px 40px 0;}
 .bc-inner{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--muted);font-family:var(--font);}
 .bc-inner a{color:var(--muted);text-decoration:none;}
@@ -152,10 +151,9 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 <nav>
   <a href="../../index.html" class="nn">Rob Dull</a>
   <div class="nl">
+    <a href="mailto:rob.dull@gmail.com">Contact</a>
+    <a href="../../index.html#about">About Me</a>
     <a href="../../index.html#tools">Work</a>
-    <a href="../../index.html#about">About</a>
-    <a href="mailto:rob.dull@gmail.com">Email Me</a>
-    <a href="https://linkedin.com/in/robdull" target="_blank" class="li-btn">LinkedIn &#8599;</a>
   </div>
 </nav>
 
