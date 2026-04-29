@@ -4,44 +4,60 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FurBabyHealth — Customer Journey Map</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --teal:#2a6b6b;--teal-dk:#1d4f4f;--teal-lt:#e8f4f4;
-  --cream:#faf7f2;--cream-dk:#f0ebe1;--warm:#c8662a;
-  --ink:#1a1a1a;--muted:#6b6b6b;--rule:#d8d0c4;
-  --green:#2d7a4a;--red:#b03030;--amber:#b87a10;
-  --serif:'Playfair Display',serif;
-  --sans:'DM Sans',sans-serif;
-  --col-w:180px;--row-label-w:130px;--row-h-min:80px;
+  --ink:#0a0a0a;--white:#ffffff;--off:#f7f7f7;--rule:#e8e8e8;
+  --accent:#1a3a5c;--accent2:#c8662a;--muted:#6b6b6b;
+  --green:#4a7c6f;--red:#b03030;--amber:#b87a10;
+  --phase1:#1a3a5c;--phase2:#2a6b6b;--phase3:#c8662a;--phase4:#4a7c6f;--gold:#c8921a;--gold-lt:#fdf5e0;
+  --font:'Inter',sans-serif;
+  --col-w:180px;--row-label-w:148px;--row-h-min:80px;
 }
-html,body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:13px;line-height:1.5;height:100%;overflow-x:hidden;}
+html,body{background:var(--off);color:var(--ink);font-family:var(--font);font-size:13px;line-height:1.5;height:100%;overflow-x:hidden;}
+a{color:var(--accent);text-decoration:none;}
 
 /* ── TOOLBAR ── */
-.toolbar{position:sticky;top:0;z-index:200;background:var(--teal-dk);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;box-shadow:0 2px 12px rgba(0,0,0,.2);}
-.brand{font-family:var(--serif);font-size:18px;color:white;font-weight:700;letter-spacing:-.01em;}
-.brand span{color:#7dd4c8;font-style:italic;}
+.toolbar{position:sticky;top:0;z-index:200;background:var(--accent);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;box-shadow:0 2px 12px rgba(0,0,0,.2);}
+.brand{font-family:var(--font);font-size:18px;color:white;font-weight:800;letter-spacing:-.03em;}
+.brand span{color:rgba(255,255,255,.5);font-style:normal;font-weight:400;font-size:13px;margin-left:8px;}
 .tb-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
-.tb-btn{background:rgba(255,255,255,.12);color:white;border:1px solid rgba(255,255,255,.25);border-radius:5px;padding:6px 14px;font-family:var(--sans);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;white-space:nowrap;}
-.tb-btn:hover{background:rgba(255,255,255,.22);}
-.tb-btn.primary{background:var(--warm);border-color:var(--warm);}
-.tb-btn.primary:hover{background:#a8521f;}
+.tb-btn{background:white;color:var(--ink);border:2px solid white;border-radius:6px;padding:7px 14px;font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.tb-btn:hover{background:transparent;color:white;}
+.tb-btn.primary{background:var(--gold);border:2px solid var(--gold);color:white;}
+.tb-btn.primary:hover{background:#a8521f;border-color:#a8521f;color:white;}
 .tb-hint{font-size:11px;color:rgba(255,255,255,.5);font-style:italic;}
 
 /* ── MAP CONTAINER ── */
-.map-outer{overflow-x:auto;padding:24px 20px 40px;}
+.map-outer{overflow-x:auto;padding:0 0 40px;}
 .map-wrap{display:inline-flex;flex-direction:column;min-width:100%;}
 
 /* ── STAGE HEADER ROW ── */
 .stage-header-row{display:flex;position:sticky;top:52px;z-index:100;}
-.stage-header-spacer{width:var(--row-label-w);flex-shrink:0;background:var(--teal-dk);}
-.stage-col-header{width:var(--col-w);flex-shrink:0;background:var(--teal-dk);border-left:1px solid rgba(255,255,255,.15);padding:10px 12px;position:relative;}
-.stage-col-header .stage-name{font-family:var(--serif);font-size:13px;font-weight:700;color:white;letter-spacing:.02em;line-height:1.3;cursor:text;}
-.stage-col-header .stage-arrow{position:absolute;right:-10px;top:50%;transform:translateY(-50%);width:0;height:0;border-top:20px solid transparent;border-bottom:20px solid transparent;border-left:10px solid var(--teal-dk);z-index:1;}
+
+/* ── PHASE BANNERS ── */
+.phase-banner-row{display:flex;position:sticky;top:52px;z-index:101;}
+.phase-banner-spacer{width:var(--row-label-w);flex-shrink:0;background:var(--gold);}
+.phase-banner{flex-shrink:0;padding:5px 12px;display:flex;align-items:center;gap:6px;border-left:1px solid rgba(255,255,255,.15);}
+.phase-banner-label{font-family:var(--font);font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:white;}
+.phase-banner-count{font-size:9px;color:rgba(255,255,255,.45);font-weight:500;}
+
+/* ── STAGE HEADERS ── */
+.stage-header-row{display:flex;position:sticky;top:81px;z-index:100;}
+.stage-header-spacer{width:var(--row-label-w);flex-shrink:0;background:var(--gold);}
+.stage-header-spacer{width:var(--row-label-w);flex-shrink:0;background:var(--gold);}
+.stage-col-header{width:var(--col-w);flex-shrink:0;background:var(--ink);border-left:1px solid rgba(255,255,255,.12);padding:10px 12px;position:relative;}
+.stage-col-header .stage-name{font-family:var(--font);font-size:11px;font-weight:800;color:white;letter-spacing:.1em;text-transform:uppercase;line-height:1.3;cursor:text;}
+.stage-col-header .stage-arrow{position:absolute;right:-10px;top:50%;transform:translateY(-50%);width:0;height:0;border-top:20px solid transparent;border-bottom:20px solid transparent;border-left:10px solid var(--ink);z-index:1;}
 .stage-col-header:last-child .stage-arrow{display:none;}
 .stage-col-header .col-actions{display:flex;gap:4px;margin-top:6px;}
 .col-act-btn{background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.7);border-radius:3px;padding:2px 6px;font-size:10px;cursor:pointer;}
+/* Phase-tinted cell top border set dynamically via JS */
+.cell-phase-1{border-top:3px solid #1a3a5c !important;}
+.cell-phase-2{border-top:3px solid #2a6b6b !important;}
+.cell-phase-3{border-top:3px solid #c8662a !important;}
+.cell-phase-4{border-top:3px solid #4a7c6f !important;}
 .col-act-btn:hover{background:rgba(255,255,255,.25);color:white;}
 
 /* ── DATA ROWS ── */
@@ -49,28 +65,28 @@ html,body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-
 .map-row:last-child{border-bottom:none;}
 .map-row.hidden .row-cells{display:none;}
 
-.row-label{width:var(--row-label-w);flex-shrink:0;background:var(--teal-dk);color:white;padding:12px 10px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;border-top:1px solid rgba(255,255,255,.08);}
-.row-label-name{font-family:var(--serif);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;line-height:1.3;}
-.row-toggle{background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:10px;margin-top:4px;padding:0;text-align:left;}
-.row-toggle:hover{color:rgba(255,255,255,.8);}
+.row-label{width:var(--row-label-w);flex-shrink:0;background:var(--gold);color:white;padding:12px 12px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;border-top:1px solid rgba(255,255,255,.12);}
+.row-label-name{font-family:var(--font);font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;line-height:1.3;color:rgba(255,255,255,.95);}
+.row-toggle{background:none;border:none;color:rgba(255,255,255,.55);cursor:pointer;font-size:10px;margin-top:4px;padding:0;text-align:left;}
+.row-toggle:hover{color:white;}
 
 .row-cells{display:flex;flex:1;}
 .cell{width:var(--col-w);flex-shrink:0;min-height:var(--row-h-min);border-left:1px solid var(--rule);padding:10px 11px;background:var(--cream);position:relative;transition:background .15s;}
-.cell:hover{background:#f5f0e8;}
-.cell:focus-within{background:#fff;outline:2px solid var(--teal);outline-offset:-2px;z-index:5;}
+.cell:hover{background:#f0f4f8;}
+.cell:focus-within{background:#fff;outline:2px solid var(--accent);outline-offset:-2px;z-index:5;}
 .cell-content{font-size:12px;color:var(--ink);line-height:1.6;min-height:20px;outline:none;cursor:text;}
 .cell-content:empty::before{content:attr(data-placeholder);color:#bbb;font-style:italic;pointer-events:none;}
 
 /* Row-specific backgrounds */
-.row-activities .cell{background:#faf7f2;}
-.row-goals .cell{background:#f7f4ee;}
-.row-touchpoints .cell{background:#f4f8f8;}
-.row-experience .cell{background:#f9f9f4;padding-top:0;padding-bottom:0;}
-.row-bizgoal .cell{background:#f5f8f5;}
-.row-kpis .cell{background:#f2f2fa;}
-.row-orgact .cell{background:#fdf8f5;}
-.row-responsible .cell{background:#f7f5f0;}
-.row-tech .cell{background:#f4f7f7;}
+.row-activities .cell{background:var(--white);}
+.row-goals .cell{background:#fafafa;}
+.row-touchpoints .cell{background:#f2f6f8;}
+.row-experience .cell{background:var(--off);padding-top:0;padding-bottom:0;}
+.row-bizgoal .cell{background:#f4f7f4;}
+.row-kpis .cell{background:#f4f4fb;}
+.row-orgact .cell{background:#fdf7f4;}
+.row-responsible .cell{background:var(--off);}
+.row-tech .cell{background:#f3f7f7;}
 
 /* ── EXPERIENCE ROW ── */
 .exp-row-inner{display:flex;position:relative;}
@@ -80,19 +96,19 @@ html,body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-
 #exp-svg{width:100%;height:100%;overflow:visible;}
 .exp-label-row{display:flex;}
 .exp-label-cell{width:var(--col-w);flex-shrink:0;border-left:1px solid var(--rule);padding:4px 8px;font-size:10px;font-style:italic;color:var(--muted);min-height:28px;cursor:text;outline:none;}
-.exp-label-cell:focus{background:#fff;outline:2px solid var(--teal);outline-offset:-2px;}
+.exp-label-cell:focus{background:#fff;outline:2px solid var(--accent);outline-offset:-2px;}
 .exp-label-cell:empty::before{content:"Add sentiment label...";color:#ccc;pointer-events:none;}
 
 /* Sentiment point draggable */
 .exp-point{cursor:ns-resize;transition:r .15s;}
 .exp-point:hover{r:9;}
-.exp-line{fill:none;stroke:var(--teal);stroke-width:2.5;stroke-linejoin:round;}
-.exp-area{fill:var(--teal);fill-opacity:0.08;}
+.exp-line{fill:none;stroke:var(--gold);stroke-width:4;stroke-linejoin:round;stroke-linecap:round;}
+.exp-area{fill:none;fill-opacity:0;}
 
 /* ── CHIPS / TAGS ── */
 .chip-area{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;}
-.chip{display:inline-block;background:var(--teal-lt);color:var(--teal-dk);border-radius:3px;padding:2px 7px;font-size:10px;font-weight:600;cursor:default;}
-.chip.warm{background:#fdf0e8;color:var(--warm);}
+.chip{display:inline-block;background:#e8eef4;color:var(--accent);border-radius:3px;padding:2px 7px;font-size:10px;font-weight:600;cursor:default;}
+.chip.warm{background:#fdf0e8;color:var(--accent2);}
 
 /* ── TOUCHPOINT ICONS ── */
 .tp-icons{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;}
@@ -104,16 +120,16 @@ html,body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-
 .modal-overlay.open{opacity:1;pointer-events:all;}
 .modal{background:white;border-radius:12px;padding:28px;max-width:480px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.2);transform:translateY(10px);transition:transform .2s;}
 .modal-overlay.open .modal{transform:translateY(0);}
-.modal h3{font-family:var(--serif);font-size:20px;margin-bottom:16px;color:var(--teal-dk);}
+.modal h3{font-family:var(--font);font-size:18px;font-weight:800;letter-spacing:-.02em;margin-bottom:16px;color:var(--accent);}
 .modal textarea{width:100%;height:200px;border:1.5px solid var(--rule);border-radius:7px;padding:12px;font-family:'Courier New',monospace;font-size:11px;resize:vertical;outline:none;color:var(--ink);}
-.modal textarea:focus{border-color:var(--teal);}
+.modal textarea:focus{border-color:var(--accent);}
 .modal-actions{display:flex;gap:8px;margin-top:14px;justify-content:flex-end;}
 .modal-btn{padding:9px 20px;border-radius:6px;font-family:var(--sans);font-size:13px;font-weight:600;cursor:pointer;border:none;}
-.modal-btn.close{background:var(--cream-dk);color:var(--ink);}
-.modal-btn.go{background:var(--teal);color:white;}
+.modal-btn.close{background:var(--off);color:var(--ink);}
+.modal-btn.go{background:var(--gold);color:white;}
 
 /* ── FOOTER ── */
-.map-footer{padding:16px 20px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;background:var(--cream-dk);font-size:11px;color:var(--muted);}
+.map-footer{padding:16px 24px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;background:white;font-size:11px;color:var(--muted);font-weight:500;}
 
 @media(max-width:640px){:root{--col-w:140px;--row-label-w:100px;}}
 </style>
@@ -122,7 +138,7 @@ html,body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-
 
 <!-- TOOLBAR -->
 <div class="toolbar">
-  <div class="brand">FurBaby<span>Health</span> <span style="font-size:12px;color:rgba(255,255,255,.5);font-style:normal;font-family:var(--sans);font-weight:400;">Customer Journey Map</span></div>
+  <div class="brand">FurBabyHealth <span>Customer Journey Map</span></div>
   <div class="tb-actions">
     <span class="tb-hint">Click any cell to edit &nbsp;·&nbsp; Drag sentiment points &nbsp;·&nbsp; </span>
     <button class="tb-btn" onclick="addStage()">+ Add Stage</button>
@@ -135,6 +151,12 @@ html,body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-
 <!-- MAP -->
 <div class="map-outer">
 <div class="map-wrap" id="map-wrap">
+
+  <!-- PHASE BANNER ROW -->
+  <div class="phase-banner-row" id="phase-banners">
+    <div class="phase-banner-spacer"></div>
+    <!-- Populated by JS -->
+  </div>
 
   <!-- STAGE HEADERS -->
   <div class="stage-header-row" id="stage-headers">
@@ -171,6 +193,14 @@ html,body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-
 
 <script>
 // ── DATA ────────────────────────────────────────────────────────
+// ── PHASE GROUPS ────────────────────────────────────────────────
+const PHASES = [
+  {label:'Pre-Enrollment',             stageIds:['s1','s2','s3'],         color:'#1a3a5c'},
+  {label:'Account Management',         stageIds:['s4','s5'],              color:'#2a6b6b'},
+  {label:'Claims and Services',        stageIds:['s6','s7'],              color:'#c8662a'},
+  {label:'Recommendations and Renewals',stageIds:['s8'],                  color:'#4a7c6f'},
+];
+
 const STAGES = [
   {
     id:'s1', name:'AWARENESS',
@@ -291,8 +321,8 @@ const ROWS = [
   {id:'goals',      label:'Customer Goals',      cls:'row-goals',      field:'goals',      placeholder:'What does the customer want to achieve?'},
   {id:'touchpoints',label:'Touchpoints',         cls:'row-touchpoints',field:'touchpointText',placeholder:'Channels and interfaces the customer uses'},
   {id:'experience', label:'Experience',          cls:'row-experience', field:null,         placeholder:null},
-  {id:'bizgoal',    label:'Business Goal',       cls:'row-bizgoal',    field:'bizGoal',    placeholder:'What does FurBabyHealth want to achieve at this stage?'},
-  {id:'kpis',       label:'KPIs',                cls:'row-kpis',       field:'kpis',       placeholder:'How do we measure success?'},
+  {id:'bizgoal',    label:'Business Goal (OKR)',  cls:'row-bizgoal',    field:'bizGoal',    placeholder:'What does FurBabyHealth want to achieve at this stage?'},
+  {id:'kpis',       label:'Outcome Metrics (KPIs)',cls:'row-kpis',      field:'kpis',       placeholder:'How do we measure success?'},
   {id:'orgact',     label:'Org. Activities',     cls:'row-orgact',     field:'orgActivities',placeholder:'What internal work is required?'},
   {id:'responsible',label:'Responsible',         cls:'row-responsible',field:'responsible',placeholder:'Team or role accountable'},
   {id:'tech',       label:'Technology & Systems',cls:'row-tech',       field:'tech',       placeholder:'Systems, APIs, integrations involved'}
@@ -302,8 +332,25 @@ const TP_ICONS = {web:'🖥',mobile:'📱',email:'✉️',phone:'📞',vet:'🏥
 
 // ── BUILD ────────────────────────────────────────────────────────
 function build() {
+  buildPhaseBanners();
   buildHeaders();
   buildRows();
+}
+
+function buildPhaseBanners() {
+  const row = document.getElementById('phase-banners');
+  while(row.children.length > 1) row.removeChild(row.lastChild);
+  PHASES.forEach(phase => {
+    const stageCount = phase.stageIds.filter(id => STAGES.some(s=>s.id===id)).length;
+    if(stageCount === 0) return;
+    const div = document.createElement('div');
+    div.className = 'phase-banner';
+    div.style.background = phase.color;
+    div.style.width = (stageCount * 180) + 'px';
+    div.innerHTML = `<span class="phase-banner-label">${phase.label}</span>
+      <span class="phase-banner-count">${stageCount} stage${stageCount>1?'s':''}</span>`;
+    row.appendChild(div);
+  });
 }
 
 function buildHeaders() {
@@ -311,9 +358,12 @@ function buildHeaders() {
   // Clear existing stage headers (keep spacer)
   while(hdr.children.length > 1) hdr.removeChild(hdr.lastChild);
   STAGES.forEach((s,i) => {
+    const phase = PHASES.find(p=>p.stageIds.includes(s.id));
+    const phaseColor = phase ? phase.color : '#0a0a0a';
     const div = document.createElement('div');
     div.className = 'stage-col-header';
     div.dataset.sid = s.id;
+    div.style.background = phaseColor;
     div.innerHTML = `
       <div class="stage-name" contenteditable="true" spellcheck="false"
         onblur="updateStageName('${s.id}',this.textContent)">${s.name}</div>
@@ -322,7 +372,7 @@ function buildHeaders() {
         <button class="col-act-btn" onclick="moveStage('${s.id}',-1)" title="Move left">←</button>
         <button class="col-act-btn" onclick="moveStage('${s.id}',1)" title="Move right">→</button>
       </div>
-      <div class="stage-arrow"></div>`;
+      <div class="stage-arrow" style="border-left-color:${phaseColor}"></div>`;
     hdr.appendChild(div);
   });
 }
