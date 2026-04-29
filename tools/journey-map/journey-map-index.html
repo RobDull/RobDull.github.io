@@ -30,23 +30,23 @@ a{color:var(--accent);text-decoration:none;}
 .tb-hint{font-size:11px;color:rgba(255,255,255,.5);font-style:italic;}
 
 /* ── MAP CONTAINER ── */
-.map-outer{overflow-x:auto;padding:0 0 40px;}
+.map-outer{overflow-x:auto;padding:0 0 40px;scroll-padding-top:140px;}
 .map-wrap{display:inline-flex;flex-direction:column;min-width:100%;}
 
 /* ── STAGE HEADER ROW ── */
-.stage-header-row{display:flex;position:sticky;top:52px;z-index:100;}
+.stage-header-row{display:flex;position:sticky;top:80px;z-index:100;}
 
 /* ── PHASE BANNERS ── */
 .phase-banner-row{display:flex;position:sticky;top:52px;z-index:101;}
-.phase-banner-spacer{width:var(--row-label-w);flex-shrink:0;background:var(--gold);}
+.phase-banner-spacer{width:var(--row-label-w);flex-shrink:0;background:var(--accent);}
 .phase-banner{flex-shrink:0;padding:5px 12px;display:flex;align-items:center;gap:6px;border-left:1px solid rgba(255,255,255,.15);}
 .phase-banner-label{font-family:var(--font);font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:white;}
 .phase-banner-count{font-size:9px;color:rgba(255,255,255,.45);font-weight:500;}
 
 /* ── STAGE HEADERS ── */
 .stage-header-row{display:flex;position:sticky;top:81px;z-index:100;}
-.stage-header-spacer{width:var(--row-label-w);flex-shrink:0;background:var(--gold);}
-.stage-header-spacer{width:var(--row-label-w);flex-shrink:0;background:var(--gold);}
+.stage-header-spacer{width:var(--row-label-w);flex-shrink:0;background:var(--accent);}
+.stage-header-spacer{width:var(--row-label-w);flex-shrink:0;background:var(--accent);}
 .stage-col-header{width:var(--col-w);flex-shrink:0;background:var(--ink);border-left:1px solid rgba(255,255,255,.12);padding:10px 12px;position:relative;}
 .stage-col-header .stage-name{font-family:var(--font);font-size:11px;font-weight:800;color:white;letter-spacing:.1em;text-transform:uppercase;line-height:1.3;cursor:text;}
 .stage-col-header .stage-arrow{position:absolute;right:-10px;top:50%;transform:translateY(-50%);width:0;height:0;border-top:20px solid transparent;border-bottom:20px solid transparent;border-left:10px solid var(--ink);z-index:1;}
@@ -62,10 +62,11 @@ a{color:var(--accent);text-decoration:none;}
 
 /* ── DATA ROWS ── */
 .map-row{display:flex;border-bottom:1px dashed var(--rule);}
+.map-row:first-child{scroll-margin-top:140px;}
 .map-row:last-child{border-bottom:none;}
 .map-row.hidden .row-cells{display:none;}
 
-.row-label{width:var(--row-label-w);flex-shrink:0;background:var(--gold);color:white;padding:12px 12px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;border-top:1px solid rgba(255,255,255,.12);}
+.row-label{width:var(--row-label-w);flex-shrink:0;background:var(--sage);color:white;padding:12px 12px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;border-top:1px solid rgba(255,255,255,.12);}
 .row-label-name{font-family:var(--font);font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;line-height:1.3;color:rgba(255,255,255,.95);}
 .row-toggle{background:none;border:none;color:rgba(255,255,255,.55);cursor:pointer;font-size:10px;margin-top:4px;padding:0;text-align:left;}
 .row-toggle:hover{color:white;}
@@ -103,7 +104,7 @@ a{color:var(--accent);text-decoration:none;}
 .exp-point{cursor:ns-resize;transition:r .15s;}
 .exp-point:hover{r:9;}
 .exp-line{fill:none;stroke:var(--gold);stroke-width:4;stroke-linejoin:round;stroke-linecap:round;}
-.exp-area{fill:none;fill-opacity:0;}
+.exp-area{display:none;}
 
 /* ── CHIPS / TAGS ── */
 .chip-area{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;}
@@ -165,7 +166,7 @@ a{color:var(--accent);text-decoration:none;}
   </div>
 
   <!-- ROWS -->
-  <div id="rows-container">
+  <div id="rows-container" style="padding-top:0;">
     <!-- Populated by JS -->
   </div>
 
@@ -695,6 +696,19 @@ document.getElementById('export-modal').addEventListener('click',function(e){
 // ── INIT ─────────────────────────────────────────────────────────
 build();
 setTimeout(updateExpCurve, 50);
+setTimeout(()=>{
+  // Push rows container down so first row isn't hidden under sticky headers
+  const toolbar = document.querySelector('.toolbar');
+  const phaseBanner = document.querySelector('.phase-banner-row');
+  const stageHeader = document.querySelector('.stage-header-row');
+  const tb = toolbar ? toolbar.offsetHeight : 52;
+  const pb = phaseBanner ? phaseBanner.offsetHeight : 28;
+  const sh = stageHeader ? stageHeader.offsetHeight : 58;
+  document.getElementById('rows-container').style.paddingTop = (tb+pb+sh)+'px';
+  // Also fix sticky tops
+  if(phaseBanner) phaseBanner.style.top = tb+'px';
+  if(stageHeader) stageHeader.style.top = (tb+pb)+'px';
+}, 100);
 </script>
 </body>
 </html>
