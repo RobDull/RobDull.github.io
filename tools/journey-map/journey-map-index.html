@@ -137,6 +137,53 @@ a{color:var(--accent);text-decoration:none;}
 .modal-btn.close{background:var(--off);color:var(--ink);}
 .modal-btn.go{background:var(--gold);color:white;}
 
+/* ── RESEARCH PANEL ── */
+.research-panel{max-width:1200px;margin:0 auto;padding:0 40px 32px;}
+.research-card{background:white;border:1.5px solid var(--rule);border-radius:10px;overflow:hidden;}
+.research-card-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1.5px solid var(--rule);gap:12px;flex-wrap:wrap;}
+.research-card-title{display:flex;align-items:center;gap:10px;}
+.research-card-title-text{font-size:13px;font-weight:800;color:var(--ink);letter-spacing:-.01em;}
+.research-tag{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:var(--accent);color:white;border-radius:4px;padding:3px 8px;}
+.research-card-desc{font-size:12px;color:var(--muted);line-height:1.6;max-width:560px;}
+.research-card-body{padding:20px;}
+.research-textarea{width:100%;height:160px;border:1.5px solid var(--rule);border-radius:7px;padding:12px 14px;font-family:var(--font);font-size:12px;line-height:1.7;color:var(--ink);resize:vertical;outline:none;transition:border-color .15s;background:#fafafa;}
+.research-textarea:focus{border-color:var(--accent);background:white;}
+.research-textarea::placeholder{color:#bbb;font-style:italic;}
+.research-card-footer{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-top:1.5px solid var(--rule);background:var(--off);gap:12px;flex-wrap:wrap;}
+.persona-tip{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);}
+.persona-tip-icon{font-size:16px;line-height:1;}
+.persona-tip a{color:var(--accent2);font-weight:700;text-decoration:none;border-bottom:1px dotted var(--accent2);}
+.persona-tip a:hover{color:var(--accent);}
+.research-actions{display:flex;gap:8px;align-items:center;}
+.btn-populate{background:var(--accent);color:white;border:2px solid var(--accent);border-radius:6px;padding:9px 18px;font-family:var(--font);font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:7px;}
+.btn-populate:hover{background:#142d47;border-color:#142d47;}
+.btn-populate:disabled{opacity:.5;cursor:not-allowed;}
+.btn-populate .btn-spinner{width:12px;height:12px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;display:none;}
+.btn-populate.loading .btn-spinner{display:block;}
+.btn-populate.loading .btn-label{opacity:.7;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.btn-use-persona{background:white;color:var(--accent2);border:2px solid var(--accent2);border-radius:6px;padding:9px 16px;font-family:var(--font);font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.btn-use-persona:hover{background:var(--accent2);color:white;}
+
+/* ── AI POPULATE PREVIEW MODAL ── */
+.ai-modal{background:white;border-radius:12px;padding:0;max-width:700px;width:94%;box-shadow:0 24px 80px rgba(0,0,0,.25);transform:translateY(10px);transition:transform .2s;max-height:85vh;display:flex;flex-direction:column;overflow:hidden;}
+.modal-overlay.open .ai-modal{transform:translateY(0);}
+.ai-modal-head{padding:22px 24px 18px;border-bottom:1px solid var(--rule);flex-shrink:0;}
+.ai-modal-head h3{font-size:18px;font-weight:800;letter-spacing:-.02em;color:var(--accent);margin-bottom:4px;}
+.ai-modal-head p{font-size:12px;color:var(--muted);line-height:1.6;}
+.ai-modal-body{flex:1;overflow-y:auto;padding:20px 24px;}
+.ai-stage-block{margin-bottom:20px;border:1px solid var(--rule);border-radius:8px;overflow:hidden;}
+.ai-stage-block:last-child{margin-bottom:0;}
+.ai-stage-name{background:var(--accent);color:white;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;}
+.ai-field-row{display:flex;align-items:baseline;gap:10px;padding:9px 14px;border-bottom:1px solid var(--rule);}
+.ai-field-row:last-child{border-bottom:none;}
+.ai-field-row:nth-child(even){background:#fafafa;}
+.ai-field-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;min-width:130px;flex-shrink:0;}
+.ai-field-value{font-size:12px;color:var(--ink);line-height:1.6;}
+.ai-modal-foot{padding:16px 24px;border-top:1px solid var(--rule);display:flex;gap:10px;justify-content:flex-end;flex-shrink:0;background:var(--off);}
+.modal-btn.apply{background:var(--accent);color:white;}
+.modal-btn.apply:hover{background:#142d47;}
+
 /* ── FOOTER ── */
 .map-footer{padding:16px 24px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;background:var(--accent);font-size:11px;color:rgba(255,255,255,.7);font-weight:500;}
 
@@ -179,8 +226,37 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;padding:16px 40px;display:fl
 </div>
 <div class="page-head">
   <div class="page-tag">Customer Experience</div>
-  <h1>Map the <em>journey</em>.<br>Refine with assets like <em>personas</em>.<br>Find the <em>opportunities</em>.</h1>
-  <p>An editable, AI-ready customer journey map. Add or remove stages, drag sentiment points to reflect real experience scores, and export the full map to your AI tool of choice for analysis and recommendations.</p>
+  <h1>Map the <em>journey</em>.<br>Find the <em>opportunities</em>.</h1>
+  <p>This is an editable, AI-ready tool for collaboration throughout the product sales, delivery and support pipeline. Build the map dynamically, with uploaded assets and manual tweaks.<br><span style="display:block;margin-top:0.5lh;"></span>Add or remove stages, drag sentiment points to reflect real experience scores, and export the full map to your AI tool of choice for analysis and recommendations.</p>
+</div>
+
+<!-- RESEARCH CONTEXT PANEL -->
+<div class="research-panel">
+  <div class="research-card">
+    <div class="research-card-header">
+      <div class="research-card-title">
+        <span class="research-tag">AI Assist</span>
+        <span class="research-card-title-text">Populate with research context</span>
+      </div>
+      <p class="research-card-desc">Paste in a user persona, interview notes, survey findings, or competitive research. Claude will read your context and suggest realistic, specific content for every cell in the map — which you can review and apply or edit freely.</p>
+    </div>
+    <div class="research-card-body">
+      <textarea class="research-textarea" id="research-context" placeholder="Paste your research here — a persona profile, customer interview highlights, survey data, or any notes about who your customer is and what they experience. The more specific, the better the suggestions."></textarea>
+    </div>
+    <div class="research-card-footer">
+      <div class="persona-tip">
+        <span class="persona-tip-icon">💡</span>
+        <span>Try it with the sample PetHealth persona — <a href="../persona-generator/persona-index.html" target="_blank">open Marcus Chen in the Persona Generator</a>, copy his profile, and paste it above.</span>
+      </div>
+      <div class="research-actions">
+        <button class="btn-use-persona" onclick="loadMarcusChen()">Use sample persona</button>
+        <button class="btn-populate" id="btn-populate" onclick="populateWithAI()">
+          <div class="btn-spinner"></div>
+          <span class="btn-label">✦ Populate map with AI</span>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- TOOLBAR -->
@@ -220,6 +296,23 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;padding:16px 40px;display:fl
 </div>
 
 <!-- EXPERIENCE LABEL ROW (outside main grid, appended by JS) -->
+
+<!-- AI POPULATE PREVIEW MODAL -->
+<div class="modal-overlay" id="ai-modal">
+  <div class="ai-modal">
+    <div class="ai-modal-head">
+      <h3>Review AI suggestions</h3>
+      <p>These suggestions are based on your research context. Click <strong>Apply to map</strong> to populate all cells — you can edit any cell directly after applying.</p>
+    </div>
+    <div class="ai-modal-body" id="ai-modal-body">
+      <!-- populated by JS -->
+    </div>
+    <div class="ai-modal-foot">
+      <button class="modal-btn close" onclick="closeAIModal()">Discard</button>
+      <button class="modal-btn apply" onclick="applyAISuggestions()">Apply to map</button>
+    </div>
+  </div>
+</div>
 
 <!-- EXPORT MODAL -->
 <div class="modal-overlay" id="export-modal">
@@ -745,6 +838,159 @@ function closeModal(){
 
 document.getElementById('export-modal').addEventListener('click',function(e){
   if(e.target===this) closeModal();
+});
+
+// ── AI POPULATE ──────────────────────────────────────────────────
+const WORKER_URL = 'YOUR_WORKER_URL_HERE'; // replace with deployed Cloudflare Worker URL
+
+const MARCUS_CHEN = `PERSONA: Marcus Chen, PetHealth Insurance Member
+
+Demographics: 34-year-old software engineer in Austin, TX. Annual income ~$112k. Rents a 2BR apartment. Tech-comfortable — uses apps for banking, healthcare, groceries.
+
+Pet: Biscuit, a 3-year-old male golden retriever. Healthy but active and accident-prone.
+
+Backstory: Enrolled in PetHealth 18 months ago after a $2,400 out-of-pocket vet bill for Biscuit's torn ACL. Had never considered pet insurance before; the bill was the trigger. Found PetHealth via a Google search and enrolled the same week.
+
+Goals & motivations: Wants financial peace of mind around Biscuit's health. Doesn't want to face another surprise bill. Treats Biscuit like family — will spend what it takes, but wants to plan for it.
+
+Frustrations: Found the plan comparison process confusing — too many deductible and reimbursement combinations. Initial onboarding felt clunky; had to call support to connect his vet practice (Lakeline Animal Hospital, which uses Cornerstone PMS). Claim submission was stressful — submitted via mobile app during a panicked ER visit, unclear whether the upload went through.
+
+Current status: At renewal. His premium is increasing 12%. Considering switching but hasn't found a clearly better alternative. His one successful claim (Biscuit's follow-up ACL check) went smoothly — reimbursed in 4 days — and that positive experience is keeping him loyal.
+
+Preferred channels: Mobile app first. Checks the member portal monthly. Dislikes phone calls — prefers in-app chat or email.
+
+Quote: "I just want to know it's working. I shouldn't have to think about it until I need it."`;
+
+let aiSuggestions = null;
+
+function loadMarcusChen() {
+  document.getElementById('research-context').value = MARCUS_CHEN;
+  document.getElementById('research-context').focus();
+}
+
+async function populateWithAI() {
+  const context = document.getElementById('research-context').value.trim();
+  if (!context) {
+    alert('Please paste some research context first — a persona, interview notes, or any customer insights.');
+    return;
+  }
+
+  const btn = document.getElementById('btn-populate');
+  btn.classList.add('loading');
+  btn.disabled = true;
+
+  const stageList = STAGES.map(s => `- ${s.name} (stage id: ${s.id})`).join('\n');
+  const fieldList = ROWS.filter(r => r.field).map(r => `"${r.field}" (label: "${r.label}")`).join(', ');
+
+  const prompt = `You are a product management expert helping build a customer journey map for PetHealth, a pet insurance company. You have been given research context about the customer — read it carefully and use it to generate realistic, specific, and insightful content for the journey map.
+
+RESEARCH CONTEXT:
+${context}
+
+JOURNEY MAP STAGES (in order):
+${stageList}
+
+For each stage, generate content for these fields: ${fieldList}
+
+Also generate a sentiment score (1=very negative, 2=negative, 3=neutral, 4=positive, 5=very positive) and a short sentiment label (3-6 words, e.g. "Overwhelmed by options") reflecting how this customer would feel at that stage based on the research.
+
+Return ONLY valid JSON in this exact shape, no markdown, no explanation:
+{
+  "stages": [
+    {
+      "id": "<stage id>",
+      "activities": "...",
+      "goals": "...",
+      "touchpointText": "...",
+      "experience": <1-5>,
+      "expLabel": "...",
+      "bizGoal": "...",
+      "kpis": "...",
+      "orgActivities": "...",
+      "responsible": "...",
+      "tech": "..."
+    }
+  ]
+}`;
+
+  try {
+    const response = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    if (!response.ok) throw new Error(`Worker error: ${response.status}`);
+    const data = await response.json();
+
+    const text = data.content?.map(b => b.text || '').join('') || '';
+    const clean = text.replace(/```json|```/g, '').trim();
+    const parsed = JSON.parse(clean);
+
+    aiSuggestions = parsed.stages;
+    renderAIPreview(parsed.stages);
+    document.getElementById('ai-modal').classList.add('open');
+
+  } catch (err) {
+    console.error(err);
+    alert('Something went wrong generating suggestions. Make sure the WORKER_URL is set and the worker is deployed.\n\n' + err.message);
+  } finally {
+    btn.classList.remove('loading');
+    btn.disabled = false;
+  }
+}
+
+function renderAIPreview(stages) {
+  const body = document.getElementById('ai-modal-body');
+  const fieldLabels = {
+    activities: 'Customer Activities',
+    goals: 'Customer Goals',
+    touchpointText: 'Touchpoints',
+    expLabel: 'Sentiment Label',
+    bizGoal: 'Business Goal',
+    kpis: 'KPIs',
+    orgActivities: 'Org Activities',
+    responsible: 'Responsible',
+    tech: 'Technology & Systems'
+  };
+  body.innerHTML = stages.map(s => {
+    const stageName = STAGES.find(st => st.id === s.id)?.name || s.id;
+    const fields = Object.entries(fieldLabels).map(([key, label]) => {
+      const val = s[key] || '';
+      if (!val) return '';
+      const scoreRow = key === 'expLabel' ? `<div class="ai-field-row"><span class="ai-field-label">Sentiment Score</span><span class="ai-field-value">${s.experience}/5</span></div>` : '';
+      return `${scoreRow}<div class="ai-field-row"><span class="ai-field-label">${label}</span><span class="ai-field-value">${val}</span></div>`;
+    }).join('');
+    return `<div class="ai-stage-block"><div class="ai-stage-name">${stageName}</div>${fields}</div>`;
+  }).join('');
+}
+
+function applyAISuggestions() {
+  if (!aiSuggestions) return;
+  aiSuggestions.forEach(suggestion => {
+    const stage = STAGES.find(s => s.id === suggestion.id);
+    if (!stage) return;
+    const fields = ['activities','goals','touchpointText','bizGoal','kpis','orgActivities','responsible','tech','expLabel'];
+    fields.forEach(f => { if (suggestion[f]) stage[f] = suggestion[f]; });
+    if (suggestion.experience) stage.experience = suggestion.experience;
+  });
+  build();
+  updateExpCurve();
+  closeAIModal();
+  // Scroll to map
+  document.querySelector('.map-outer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function closeAIModal() {
+  document.getElementById('ai-modal').classList.remove('open');
+}
+
+document.getElementById('ai-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeAIModal();
 });
 
 // ── INIT ─────────────────────────────────────────────────────────
