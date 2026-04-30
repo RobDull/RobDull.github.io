@@ -32,8 +32,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .ph p{color:var(--muted);font-size:16px;line-height:1.75;max-width:600px;}
 .divider{max-width:1000px;margin:0 auto;padding:0 40px;border-top:1px solid var(--rule);}
 .art-list{max-width:1000px;margin:0 auto;padding:48px 40px 80px;}
-a.art-card{display:block;text-decoration:none;color:inherit;padding:28px 0;border-bottom:1px solid var(--rule);transition:all .15s;position:relative;}
+a.art-card{display:flex;gap:24px;align-items:flex-start;text-decoration:none;color:inherit;padding:28px 0;border-bottom:1px solid var(--rule);transition:all .15s;position:relative;}
 a.art-card:hover .art-card-title{color:var(--accent);}
+.art-thumb{flex-shrink:0;width:120px;height:90px;border-radius:8px;overflow:hidden;border:1.5px solid var(--rule);background:var(--off);}
+.art-thumb svg{width:100%;height:100%;}
+.art-card-content{flex:1;min-width:0;}
 .art-card-tag{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px;}
 .art-card-title{font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--ink);line-height:1.2;margin-bottom:10px;transition:color .15s;}
 .art-card-excerpt{font-size:14px;color:var(--muted);line-height:1.75;max-width:680px;margin-bottom:14px;}
@@ -56,6 +59,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   .bc,.ph,.art-list,.divider{padding-left:20px;padding-right:20px;}
   .about-strip{padding:32px 20px;}
   .art-card-arrow{display:none;}
+  .art-thumb{display:none;}
   footer{padding:20px 24px;flex-direction:column;text-align:center;}
 }
 </style>
@@ -82,7 +86,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 <div class="ph">
   <div class="ey">Writing</div>
   <h1>Perspectives and Advice</h1>
-  <p>Practical takes on product operations, program management, and organizational effectiveness — drawn from 12 years of embedded delivery work.</p>
+  <p>Practical takes on product operations, program management, and organizational effectiveness, drawn from 12 years of embedded delivery work.</p>
 </div>
 
 <div class="divider"></div>
@@ -90,16 +94,65 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 <div class="art-list">
 
   <a href="pm-roles-ai.html" class="art-card">
+    <div class="art-thumb">
+      <svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+        <rect width="120" height="90" fill="#f7f7f7"/>
+        <!-- Quadrant box -->
+        <rect x="14" y="10" width="92" height="70" fill="none" stroke="#e8e8e8" stroke-width="1.5" rx="1"/>
+        <!-- Center lines -->
+        <line x1="14" y1="45" x2="106" y2="45" stroke="#e8e8e8" stroke-width="0.75"/>
+        <line x1="60" y1="10" x2="60" y2="80" stroke="#e8e8e8" stroke-width="0.75"/>
+        <!-- CPO bubble -->
+        <ellipse cx="78" cy="24" rx="20" ry="11" fill="#1a3a5c" fill-opacity="0.15" stroke="#1a3a5c" stroke-width="1" stroke-opacity="0.4"/>
+        <text x="78" y="27" text-anchor="middle" font-family="Inter,sans-serif" font-size="6.5" font-weight="800" fill="#1a3a5c">CPO</text>
+        <!-- Product Director bubble -->
+        <ellipse cx="62" cy="33" rx="24" ry="11" fill="#c8662a" fill-opacity="0.13" stroke="#c8662a" stroke-width="1" stroke-opacity="0.4"/>
+        <text x="62" y="36" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" font-weight="800" fill="#c8662a">Product Director</text>
+        <!-- Sr PM bubble -->
+        <ellipse cx="65" cy="48" rx="22" ry="10" fill="#2a7a5a" fill-opacity="0.13" stroke="#2a7a5a" stroke-width="1" stroke-opacity="0.4"/>
+        <text x="65" y="51" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" font-weight="800" fill="#2a7a5a">Sr. PM</text>
+        <!-- Technical PM bubble -->
+        <ellipse cx="36" cy="48" rx="18" ry="9" fill="#5a30b0" fill-opacity="0.12" stroke="#5a30b0" stroke-width="1" stroke-opacity="0.4"/>
+        <text x="36" y="51" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" font-weight="800" fill="#5a30b0">Tech PM</text>
+        <!-- Product Owner bubble -->
+        <ellipse cx="56" cy="63" rx="22" ry="10" fill="#b5810a" fill-opacity="0.13" stroke="#b5810a" stroke-width="1" stroke-opacity="0.4"/>
+        <text x="56" y="66" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" font-weight="800" fill="#b5810a">Product Owner</text>
+      </svg>
+    </div>
+    <div class="art-card-content">
     <div class="art-card-arrow">&#8599;</div>
     <div class="art-card-tag">Product Operations</div>
     <div class="art-card-title">Visualizing Product Management Roles and AI-related Operations Gaps</div>
-    <div class="art-card-excerpt">The PM job family has always operated along a diagonal from upper-right strategy to lower-left implementation. AI is making two long-standing gaps — in technical strategy and customer feedback velocity — impossible to ignore.</div>
+    <div class="art-card-excerpt">The PM job family has always operated along a diagonal from upper-right strategy to lower-left implementation. AI is making two long-standing gaps impossible to ignore: technical strategy coverage and customer feedback velocity.</div>
     <div class="art-card-meta">
       <span class="art-card-date">November 2025</span>
+    </div>
     </div>
   </a>
 
   <a href="write-it-right.html" class="art-card">
+    <div class="art-thumb">
+      <svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+        <rect width="120" height="90" fill="#f7f7f7"/>
+        <!-- Four stat boxes in 2x2 grid -->
+        <rect x="8" y="8" width="48" height="34" rx="5" fill="#0a0a0a"/>
+        <text x="32" y="27" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="900" fill="white">71%</text>
+        <text x="32" y="36" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" fill="rgba(255,255,255,0.6)">PI Planning reduced</text>
+
+        <rect x="64" y="8" width="48" height="34" rx="5" fill="#0a0a0a"/>
+        <text x="88" y="27" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="900" fill="white">100%</text>
+        <text x="88" y="36" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" fill="rgba(255,255,255,0.6)">Dependencies met</text>
+
+        <rect x="8" y="48" width="48" height="34" rx="5" fill="#0a0a0a"/>
+        <text x="32" y="67" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="900" fill="white">90%</text>
+        <text x="32" y="76" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" fill="rgba(255,255,255,0.6)">Less unplanned work</text>
+
+        <rect x="64" y="48" width="48" height="34" rx="5" fill="#1a3a5c"/>
+        <text x="88" y="67" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="900" fill="white">100%</text>
+        <text x="88" y="76" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" fill="rgba(255,255,255,0.6)">Stories complete</text>
+      </svg>
+    </div>
+    <div class="art-card-content">
     <div class="art-card-arrow">&#8599;</div>
     <div class="art-card-tag">Agile Practices &bull; Whitepaper</div>
     <div class="art-card-title">Write It Right: How One Team Cut PI Planning Time by 71% by Fixing Story Writing First</div>
@@ -107,6 +160,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="art-card-meta">
       <span class="art-card-date">April 2025</span>
       <span style="font-size:12px;font-weight:600;color:var(--muted);">&bull; Co-authored with Tanya Jones and Karen Benbow</span>
+    </div>
     </div>
   </a>
 
@@ -116,7 +170,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
 <div class="about-strip">
   <div class="about-inner">
-    <p>The Tools and Interfaces section has working examples of how I approach operational problems — including an AI-augmented business case generator built for product and technical teams.</p>
+    <p>The Tools and Interfaces section has working examples of how I approach operational problems, including an AI-augmented business case generator built for product and technical teams.</p>
     <a href="../tools/tools-index.html">View tools &#8599;</a>
   </div>
 </div>
