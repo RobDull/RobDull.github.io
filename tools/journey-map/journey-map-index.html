@@ -42,7 +42,7 @@ a{color:var(--accent);text-decoration:none;}
 .tb-hint{font-size:11px;color:rgba(255,255,255,.5);font-style:italic;}
 
 /* ── MAP CONTAINER ── */
-.map-outer{overflow-x:auto;padding:0 0 40px;scroll-padding-top:100px;}
+.map-outer{overflow-x:auto;padding:0 0 40px;scroll-padding-top:100px;margin-top:12px;}
 .map-wrap{display:inline-flex;flex-direction:column;min-width:100%;}
 
 /* ── PHASE BANNERS ── */
@@ -111,7 +111,7 @@ a{color:var(--accent);text-decoration:none;}
 /* Sentiment point draggable */
 .exp-point{cursor:ns-resize;transition:r .15s;}
 .exp-point:hover{r:9;}
-.exp-line{fill:none;stroke:var(--gold);stroke-width:4;stroke-linejoin:round;stroke-linecap:round;}
+.exp-line{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round;}
 .exp-area{display:none;}
 
 /* ── CHIPS / TAGS ── */
@@ -507,14 +507,20 @@ function buildExperienceRow() {
     svg.appendChild(l);
   }
 
-  // Area fill
+  // Area fill (hidden — fill set to none for clean line-only chart)
   const area = document.createElementNS('http://www.w3.org/2000/svg','path');
   area.id='exp-area';area.className='exp-area';
+  area.setAttribute('fill','none');
   svg.appendChild(area);
 
   // Line
   const line = document.createElementNS('http://www.w3.org/2000/svg','path');
   line.id='exp-line';line.className='exp-line';
+  line.setAttribute('fill','none');
+  line.setAttribute('stroke','#1a3a5c');
+  line.setAttribute('stroke-width','2.5');
+  line.setAttribute('stroke-linejoin','round');
+  line.setAttribute('stroke-linecap','round');
   svg.appendChild(line);
 
   // Points (draggable)
@@ -589,8 +595,6 @@ function updateExpCurve(){
   const points = STAGES.map((s,i)=>({x:i*180+90, y:scoreToY(s.experience)}));
   let d='M '+points.map(p=>`${p.x} ${p.y}`).join(' L ');
   line.setAttribute('d',d);
-  let areaD=`M ${points[0].x} 120 L ${points.map(p=>`${p.x} ${p.y}`).join(' L ')} L ${points[points.length-1].x} 120 Z`;
-  area.setAttribute('d',areaD);
 
   // Update point positions and colors
   STAGES.forEach((s,i)=>{
@@ -747,10 +751,8 @@ document.getElementById('export-modal').addEventListener('click',function(e){
 build();
 setTimeout(updateExpCurve, 50);
 setTimeout(()=>{
-  // Pad rows-container by the exact height of the two sticky header rows
-  const pb = document.querySelector('.phase-banner-row').offsetHeight;
-  const sh = document.querySelector('.stage-header-row').offsetHeight;
-  document.getElementById('rows-container').style.paddingTop = (pb+sh)+'px';
+// No padding needed — sticky headers are in normal flow at rest
+  document.getElementById('rows-container').style.paddingTop = '0px';
 }, 100);
 </script>
 </body>
