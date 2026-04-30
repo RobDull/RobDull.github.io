@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FurBabyHealth — Customer Journey Map</title>
+<title>PetHealth — Customer Journey Map</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -185,7 +185,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;padding:16px 40px;display:fl
 
 <!-- TOOLBAR -->
 <div class="toolbar">
-  <div class="brand">FurBabyHealth <span>Customer Journey Map</span></div>
+  <div class="brand">PetHealth <span>Customer Journey Map</span></div>
   <div class="tb-actions">
     <span class="tb-hint">Click any cell to edit &nbsp;·&nbsp; Drag sentiment points &nbsp;·&nbsp; </span>
     <button class="tb-btn" onclick="addStage()">+ Add Stage</button>
@@ -234,7 +234,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;padding:16px 40px;display:fl
 </div>
 
 <div class="map-footer">
-  <span>FurBabyHealth &middot; Customer Journey Map &middot; Editable template</span>
+  <span>PetHealth &middot; Customer Journey Map &middot; Editable template</span>
   <span>Click any cell to edit &nbsp;&middot;&nbsp; Drag &bull; points to adjust sentiment curve</span>
 </div>
 
@@ -255,8 +255,8 @@ const PHASES = [
 const STAGES = [
   {
     id:'s1', name:'AWARENESS',
-    activities:'Pet owner hears about FurBabyHealth via vet recommendation, social media ad, or friend referral. Searches online for pet insurance.',
-    goals:'Understand that pet insurance exists and that FurBabyHealth covers their pet type and breed.',
+    activities:'Pet owner hears about PetHealth via vet recommendation, social media ad, or friend referral. Searches online for pet insurance.',
+    goals:'Understand that pet insurance exists and that PetHealth covers their pet type and breed.',
     touchpoints:['web','social','vet','word-of-mouth'],
     touchpointText:'Social media, Google search, vet clinic flyers, friend referral, pet store displays',
     experience:3,
@@ -297,10 +297,10 @@ const STAGES = [
   },
   {
     id:'s4', name:'ONBOARDING & VET SETUP',
-    activities:'Receives welcome kit. Sets up member profile. Connects vet practice to FurBabyHealth portal. Pet health history imported.',
-    goals:'Have FurBabyHealth fully connected to their vet so coverage is seamless from the first visit.',
+    activities:'Receives welcome kit. Sets up member profile. Connects vet practice to PetHealth portal. Pet health history imported.',
+    goals:'Have PetHealth fully connected to their vet so coverage is seamless from the first visit.',
     touchpoints:['email','mobile','web','vet'],
-    touchpointText:'Welcome email series, mobile app, web member portal, vet practice notification, FurBabyHealth provider portal',
+    touchpointText:'Welcome email series, mobile app, web member portal, vet practice notification, PetHealth provider portal',
     experience:4,
     expLabel:'Excited — feels set up',
     bizGoal:'Drive vet practice activation and health history import. Reduce future claim friction.',
@@ -312,7 +312,7 @@ const STAGES = [
   {
     id:'s5', name:'ONGOING CARE',
     activities:'Pet has routine vet visits. Member receives wellness reminders. Preventive care benefits used. Vet submits visit records automatically.',
-    goals:'Get value from the plan between claims. Trust that FurBabyHealth is working in the background.',
+    goals:'Get value from the plan between claims. Trust that PetHealth is working in the background.',
     touchpoints:['mobile','vet','email'],
     touchpointText:'Mobile app wellness tracker, push notifications, vet visit automatic record sync, email reminders',
     experience:5,
@@ -358,7 +358,7 @@ const STAGES = [
     touchpoints:['email','mobile','web','social'],
     touchpointText:'Renewal email, mobile app renewal flow, referral program, social sharing, review prompts (Google, Trustpilot)',
     experience:5,
-    expLabel:'Loyal — recommends FurBabyHealth',
+    expLabel:'Loyal — recommends PetHealth',
     bizGoal:'Maximize renewal rate and referral conversion. Turn claims winners into advocates.',
     kpis:'Renewal rate, plan upgrade rate, referral conversion rate, NPS, online review volume and rating',
     orgActivities:'Renewal campaign, plan upgrade prompts, referral program, review generation, loyalty benefits',
@@ -372,7 +372,7 @@ const ROWS = [
   {id:'goals',      label:'Customer Goals',      cls:'row-goals',      field:'goals',      placeholder:'What does the customer want to achieve?'},
   {id:'touchpoints',label:'Touchpoints',         cls:'row-touchpoints',field:'touchpointText',placeholder:'Channels and interfaces the customer uses'},
   {id:'experience', label:'User Sentiment',          cls:'row-experience', field:null,         placeholder:null},
-  {id:'bizgoal',    label:'Business Goal (OKR)',  cls:'row-bizgoal',    field:'bizGoal',    placeholder:'What does FurBabyHealth want to achieve at this stage?'},
+  {id:'bizgoal',    label:'Business Goal (OKR)',  cls:'row-bizgoal',    field:'bizGoal',    placeholder:'What does PetHealth want to achieve at this stage?'},
   {id:'kpis',       label:'Outcome Metrics (KPIs)',cls:'row-kpis',      field:'kpis',       placeholder:'How do we measure success?'},
   {id:'orgact',     label:'Org. Activities',     cls:'row-orgact',     field:'orgActivities',placeholder:'What internal work is required?'},
   {id:'responsible',label:'Responsible',         cls:'row-responsible',field:'responsible',placeholder:'Team or role accountable'},
@@ -697,7 +697,7 @@ function toggleRowPanel(){
 // ── EXPORT ───────────────────────────────────────────────────────
 function exportJSON(){
   const data={
-    title:'FurBabyHealth Customer Journey Map',
+    title:'PetHealth Customer Journey Map',
     exportDate:new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}),
     stages:STAGES.map(s=>({...s}))
   };
@@ -707,7 +707,7 @@ function exportJSON(){
 }
 
 function copyForAI(){
-  let out=`FURBABYHEALTH — CUSTOMER JOURNEY MAP\n${'='.repeat(60)}\nExport Date: ${new Date().toLocaleDateString()}\n\n`;
+  let out=`PETHEALTH — CUSTOMER JOURNEY MAP\n${'='.repeat(60)}\nExport Date: ${new Date().toLocaleDateString()}\n\n`;
   STAGES.forEach(s=>{
     out+=`STAGE: ${s.name}\n${'─'.repeat(40)}\n`;
     out+=`Customer Activities: ${s.activities}\n`;
@@ -722,7 +722,7 @@ function copyForAI(){
   });
   out+=`\nSUGGESTED AI ANALYSIS PROMPTS\n${'─'.repeat(40)}\n`;
   out+=`1. Identify the two stages with the highest friction and recommend specific product or process changes.\n`;
-  out+=`2. Where in this journey does the vet PMS integration create the most value for the customer? Where does it reduce friction most for FurBabyHealth?\n`;
+  out+=`2. Where in this journey does the vet PMS integration create the most value for the customer? Where does it reduce friction most for PetHealth?\n`;
   out+=`3. Map the stages where a mobile-first experience is most critical vs. where web or vet-facing tools matter more.\n`;
   out+=`4. Identify gaps between business goals and customer goals at each stage and recommend alignment strategies.\n`;
   out+=`5. Which stages have the lowest experience scores and what organizational changes would most improve them?\n`;
