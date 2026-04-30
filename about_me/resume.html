@@ -15,7 +15,7 @@
 @media print{
   body{font-size:11pt;}
   nav,.print-hide{display:none!important;}
-  .page{max-width:100%;padding:0;}
+
   a{color:inherit;text-decoration:none;}
   .section{page-break-inside:avoid;}
 }
@@ -31,16 +31,16 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
 .nav-links a.accent:hover{background:#0f2540;border-color:#0f2540;}
 
 /* PAGE WRAPPER */
-.page{max-width:860px;margin:32px auto;background:var(--white);border:1px solid var(--rule);border-radius:12px;overflow:hidden;}
+.page{background:var(--white);}
 
 /* HEADER */
-.resume-header{padding:40px 48px 36px;border-bottom:3px solid var(--ink);}
-.resume-header-nav{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px;}
+.resume-header{padding:40px 48px 36px;border-bottom:3px solid var(--ink);text-align:center;}
+.resume-header-nav{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px;justify-content:center;}
 .resume-header-nav a{font-size:11px;font-weight:600;color:var(--muted);text-decoration:none;border:1.5px solid var(--rule);border-radius:5px;padding:5px 14px;transition:all .15s;white-space:nowrap;background:var(--off);}
 .resume-header-nav a:hover{color:var(--accent);border-color:var(--accent);background:white;}
 .name{font-size:38px;font-weight:800;letter-spacing:-.04em;color:var(--ink);line-height:1;margin-bottom:6px;}
 .title{font-size:15px;font-weight:600;color:var(--accent);letter-spacing:-.01em;margin-bottom:16px;}
-.contact-row{display:flex;gap:20px;flex-wrap:wrap;}
+.contact-row{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;}
 .contact-row a,.contact-row span{font-size:12px;font-weight:500;color:var(--muted);text-decoration:none;}
 .contact-row a:hover{color:var(--accent);}
 .sep{color:var(--rule);}
@@ -50,6 +50,7 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
 .summary-block p{font-size:13.5px;line-height:1.75;color:var(--muted);max-width:720px;}
 
 /* SECTIONS */
+.resume-header,.summary-block,.section{max-width:900px;margin-left:auto;margin-right:auto;}
 .section{padding:28px 48px;border-bottom:1px solid var(--rule);}
 .section:last-child{border-bottom:none;}
 .section-title{font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
@@ -111,7 +112,7 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
 
 
 
-  .page{margin:0;border-radius:0;}
+
   .resume-header,.summary-block,.section{padding-left:24px;padding-right:24px;}
   .skills-grid{grid-template-columns:1fr 1fr;}
   .earlier-roles,.cert-groups,.edu-grid{grid-template-columns:1fr;}
