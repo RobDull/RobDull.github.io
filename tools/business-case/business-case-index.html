@@ -18,17 +18,23 @@ body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:
 
 /* NAV */
 nav{position:sticky;top:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
-.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--ink);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:white;}
+.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--rule);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:white;}
 .nl a:hover{background:var(--accent);color:white;border-color:var(--accent);}
 .nn{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
 .nl{display:flex;gap:10px;align-items:center;}
 
 
-/* PAGE HERO */
-.ph{max-width:800px;margin:0 auto;padding:72px 40px 60px;text-align:center;}
-.ey{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:16px;}
-.ph h1{font-size:clamp(32px,4.5vw,54px);font-weight:900;letter-spacing:-.03em;line-height:1.05;color:var(--ink);margin-bottom:18px;}
-.ph p{color:var(--muted);font-size:16px;line-height:1.75;max-width:580px;margin:0 auto;}
+/* BREADCRUMB + PAGE HEAD */
+.bc{max-width:1060px;margin:0 auto;padding:88px 40px 0;}
+.bc-inner{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--muted);}
+.bc-inner a{color:var(--muted);text-decoration:none;}
+.bc-inner a:hover{color:var(--ink);}
+.bc-sep{opacity:.4;}
+.page-head{max-width:1060px;margin:0 auto;padding:24px 40px 48px;border-bottom:1px solid var(--rule);}
+.page-tag{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;}
+.page-head h1{font-size:clamp(32px,4vw,52px);font-weight:900;letter-spacing:-.03em;line-height:1.05;color:var(--ink);margin-bottom:14px;}
+.page-head h1 em{font-style:normal;color:var(--accent);}
+.page-head p{color:var(--muted);font-size:15px;line-height:1.8;max-width:560px;}
 
 /* COMPLEXITY BAR */
 .cbar{background:var(--off);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:16px 40px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
@@ -171,12 +177,23 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   </div>
 </nav>
 
-<!-- PAGE HERO -->
-<section class="ph">
-  <div class="ey">AI-Augmented Tool</div>
-  <h1>Technical Business Case Generator</h1>
-  <p>Translates backend development and infrastructure proposals into executive-ready business justifications, written for non-technical stakeholders. The form adapts based on how much detail you need.</p>
-</section>
+<!-- BREADCRUMB -->
+<div class="bc">
+  <div class="bc-inner">
+    <a href="../../index.html">robdull</a>
+    <span class="bc-sep">/</span>
+    <a href="../tools-index.html">tools</a>
+    <span class="bc-sep">/</span>
+    <span>business-case-generator</span>
+  </div>
+</div>
+
+<!-- PAGE HEAD -->
+<div class="page-head">
+  <div class="page-tag">Business Justification</div>
+  <h1>From project inputs<br>to <em>executive-ready</em><br>business case.</h1>
+  <p>Translates backend development and infrastructure proposals into structured, stakeholder-ready business justifications written for non-technical audiences. Use the analysis depth selector to choose between a Quick Pitch, a Standard case, or a Full Analysis — the form expands to match the depth you select.</p>
+</div>
 
 <!-- COMPLEXITY SELECTOR -->
 <div class="cbar">
