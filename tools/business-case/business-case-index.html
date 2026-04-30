@@ -232,6 +232,14 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
           <label>What business problem does this solve?</label>
           <textarea id="problem" placeholder="What is breaking, slowing the business, creating risk, or limiting growth today? What happens if nothing changes?"></textarea>
         </div>
+        <div class="field fspan">
+          <label>Who owns this problem? (stakeholders who feel it most)</label>
+          <input type="text" id="problemOwners" placeholder="e.g. VP of Engineering frustrated by incident response time; CFO concerned about compliance exposure; Sales losing deals due to reliability">
+        </div>
+        <div class="field fspan">
+          <label>What is the current workaround or old way of handling this?</label>
+          <textarea id="workaround" placeholder="e.g. Engineers manually monitor four dashboards; on-call team pages the right squad by memory; monthly spreadsheet reconciliation by two analysts..."></textarea>
+        </div>
         <div class="field">
           <label>Estimated cost</label>
           <input type="text" id="cost" placeholder="e.g. $280,000">
@@ -294,8 +302,8 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="fsec-head">
       <div class="fsec-num">3</div>
       <div>
-        <div class="fsec-title">People Impacted</div>
-        <div class="fsec-sub">Employee roles whose time or productivity is part of the ROI calculation</div>
+        <div class="fsec-title">Internal People Impacted</div>
+        <div class="fsec-sub">Employees whose time, productivity, or daily work changes — used for salary-based ROI</div>
       </div>
       <div class="fsec-badge">Standard+</div>
     </div>
@@ -303,6 +311,12 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <p style="font-size:12px;color:var(--muted);margin-bottom:14px;font-weight:500;">Salary-based ROI is often the most compelling number for finance-oriented stakeholders. Add the roles most affected by this project.</p>
       <div class="person-rows" id="personRows"></div>
       <button class="add-btn" onclick="addPerson()">+ Add employee role</button>
+      <div class="fgrid" style="margin-top:20px;">
+        <div class="field fspan">
+          <label>What specifically is better for these employees vs. the old way?</label>
+          <textarea id="employeeImprovement" placeholder="e.g. On-call engineers stop spending 12 hrs/week on manual log checks; support agents no longer reconcile duplicate records by hand; analysts get reports in minutes instead of waiting overnight..."></textarea>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -311,20 +325,24 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="fsec-head">
       <div class="fsec-num" id="users-num">4</div>
       <div>
-        <div class="fsec-title">End-User Impact</div>
-        <div class="fsec-sub">How customers or internal users experience the change</div>
+        <div class="fsec-title">External and Customer Impact</div>
+        <div class="fsec-sub">How customers, end users, or external partners experience the change</div>
       </div>
       <div class="fsec-badge">Full Analysis</div>
     </div>
     <div class="fsec-body">
       <div class="fgrid">
         <div class="field">
-          <label>Who are the end users?</label>
-          <input type="text" id="endUsers" placeholder="e.g. 12,000 customers, finance team of 45">
+          <label>Who are the external users or customers affected?</label>
+          <input type="text" id="endUsers" placeholder="e.g. 12,000 policyholders; enterprise clients on SLA contracts; partner API consumers">
         </div>
         <div class="field fspan">
           <label>How does their experience change?</label>
-          <textarea id="userImpact" placeholder="e.g. Page load drops from 8s to 1.2s, zero downtime during business hours, self-service replaces manual requests..."></textarea>
+          <textarea id="userImpact" placeholder="e.g. Page load drops from 8s to 1.2s; no more downtime during business hours; self-service replaces manual requests that took 3 days..."></textarea>
+        </div>
+        <div class="field fspan">
+          <label>What is specifically better vs. the old way or current workaround?</label>
+          <textarea id="userImprovement" placeholder="e.g. Previously customers detected outages before we did and called support; now anomaly detection fires in under 3 minutes. Previously renewal required a phone call; now it completes in the portal in 4 clicks..."></textarea>
         </div>
       </div>
     </div>
@@ -972,6 +990,8 @@ PROJECT:
 Name: ${v('projectName')||'Not specified'}
 Description: ${v('description')||'Not provided'}
 Business Problem: ${v('problem')||'Not provided'}
+Problem Stakeholders (who owns this pain): ${v('problemOwners')||'Not specified'}
+Current Workaround or Old Way: ${v('workaround')||'Not provided'}
 Cost: ${v('cost')||'Not specified'}
 Timeline: ${v('timeline')||'Not specified'}
 Revenue Opportunity: ${v('revenue')||'Not specified'}
@@ -979,8 +999,10 @@ Cost Savings: ${v('savings')||'Not specified'}
 Productivity Gains: ${v('productivity')||'Not provided'}
 Pain Points: ${v('painPoints')||'Not provided'}
 ${currentMode!=='quick'&&peopleStr?'Impacted Employees:\n'+peopleStr:''}
-End Users: ${currentMode==='full'?v('endUsers')||'Not specified':''}
-User Impact: ${currentMode==='full'?v('userImpact')||'Not provided':''}
+${currentMode!=='quick'?'What specifically improves for those employees vs. the old way: '+( v('employeeImprovement')||'Not provided'):''}
+End Users / External Customers: ${currentMode==='full'?v('endUsers')||'Not specified':''}
+How External User Experience Changes: ${currentMode==='full'?v('userImpact')||'Not provided':''}
+What Is Specifically Better for External Users vs. Before: ${currentMode==='full'?v('userImprovement')||'Not provided':''}
 Technical Complexity: ${currentMode==='full'?v('complexity')||'Not specified':''}
 Technical Details: ${currentMode==='full'?v('techDetails')||'None':''}
 Risks of Inaction: ${currentMode==='full'?v('inactionRisks')||'Not provided':''}
