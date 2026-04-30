@@ -34,6 +34,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .he{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:20px;animation:fu .5s ease both;}
 .hero h1{font-size:clamp(28px,4vw,52px);font-weight:900;line-height:1.1;letter-spacing:-.03em;color:var(--ink);margin-bottom:28px;animation:fu .5s .08s ease both;}
 .hero h1 em{font-style:normal;color:var(--accent);}
+.hlinks{list-style:disc;margin:0 auto 0;max-width:580px;padding-left:22px;display:flex;flex-direction:column;gap:4px;animation:fu .5s .16s ease both;text-align:left;}
+.hlinks li{font-size:17px;font-weight:600;line-height:1.7;}
+.hlinks li::marker{color:var(--accent2);}
+.hlinks li a{color:var(--accent);text-decoration:none;border-bottom:1.5px solid rgba(26,58,92,.25);padding-bottom:1px;transition:all .15s;}
+.hlinks li a:hover{color:var(--accent2);border-bottom-color:var(--accent2);}
 .hb{max-width:580px;margin:0 auto 44px;color:var(--muted);font-size:17px;line-height:1.7;font-weight:400;animation:fu .5s .16s ease both;}
 .hc{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;animation:fu .5s .24s ease both;}
 .bp{background:white;color:var(--ink);border:2px solid var(--ink);border-radius:6px;font-size:13px;font-weight:700;letter-spacing:-.01em;padding:12px 28px;text-decoration:none;transition:all .15s;display:inline-block;}
@@ -104,7 +109,13 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
 <section class="hero">
   <h1>Product Operations Leader & Product Manager,<br>partnering with teams and leaders to<br><em>deliver products</em> and <br><em>transform operations</em></h1>
-  <p class="hb">I design methods to reduce waste, improve collaboration, and let product organizations move faster. This site showcases examples of my work, including AI-augmented product management tools, articles about delivery and management operations, and a menu of workshops and trainings. The site is part portfolio, part exploration, and entirely a conversation starter. If this resonates with you, <a href="mailto:rob.dull@gmail.com">let me know!</a></p>
+  <p class="hb" style="margin-bottom:10px;">I design methods to reduce waste, improve collaboration, and let product organizations move faster. This site showcases examples of my work, including:</p>
+  <ul class="hlinks">
+    <li><a href="tools/tools-index.html">AI-augmented product management tools</a></li>
+    <li><a href="perspectives/perspectives-index.html">Articles about delivery and management operations</a></li>
+    <li><a href="workshops/workshops-index.html">A menu of workshops and trainings</a></li>
+  </ul>
+  <p class="hb" style="margin-top:18px;">The site is part portfolio, part exploration, and entirely a conversation starter. If this resonates with you, <a href="mailto:rob.dull@gmail.com">let me know!</a></p>
   <div class="hc">
     <a href="mailto:rob.dull@gmail.com" class="bp">Contact Me</a>
     <a href="#tools" class="bg">Explore Work</a>
