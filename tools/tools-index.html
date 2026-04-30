@@ -9,7 +9,7 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
   --ink:#0a0a0a;--white:#ffffff;--off:#f7f7f7;--rule:#e8e8e8;
-  --accent:#1a3a5c;--accent2:#6b8f71;--sage:#6b8f71;--sage-lt:#eef4ef;--muted:#6b6b6b;
+  --accent:#1a3a5c;--accent2:#c8662a;--muted:#6b6b6b;
   --font:'Inter',sans-serif;
 }
 html{scroll-behavior:smooth;}
@@ -47,6 +47,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 
 /* ── TOOL LIST ── */
 .tool-list{max-width:1060px;margin:0 auto;padding:0 40px 80px;}
+.api-note{max-width:1060px;margin:0 auto;padding:14px 40px;font-size:12px;color:var(--muted);line-height:1.7;border-bottom:1px solid var(--rule);}
+.api-note strong{color:var(--ink);font-weight:600;}
+.api-note code{font-family:monospace;font-size:11px;background:var(--rule);padding:1px 5px;border-radius:3px;color:var(--ink);}
 
 /* TOOL ROW */
 .tool-row{display:grid;grid-template-columns:1fr 320px;gap:0;border-bottom:1px solid var(--rule);padding:52px 0;}
@@ -136,11 +139,18 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <p class="hero-desc">Each tool addresses a real moment of friction in product and delivery work — the moment when a PM needs to make a complex idea legible to an executive, a stakeholder, or a researcher. Built from field experience, not from the outside looking in.</p>
   <div class="hero-stat-row">
     <div class="hero-stat">
-      <div class="hero-stat-num">4</div>
+      <div class="hero-stat-num">2</div>
       <div class="hero-stat-label">Tools live</div>
     </div>
-
+    <div class="hero-stat">
+      <div class="hero-stat-num">1</div>
+      <div class="hero-stat-label">In development</div>
+    </div>
   </div>
+</div>
+
+<div class="api-note">
+  <strong>How the AI works:</strong> These tools call the Anthropic Claude API through a Cloudflare Worker that keeps the API key server-side. To run them yourself, deploy <code>worker.js</code> to Cloudflare Workers, add your API key as an encrypted secret, and replace the <code>WORKER_URL</code> constant near the top of each tool's HTML file with your Worker's URL. See <code>WORKER_README.md</code> for full instructions.
 </div>
 
 <div class="tool-list">
@@ -207,69 +217,16 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
   </div>
 
-  <!-- TOOL 03 -->
-  <div class="tool-row">
-    <div class="tool-left">
-      <div class="tool-num">03</div>
-      <div class="tool-category">Delivery Diagnostics</div>
-      <div class="tool-name">Product Operations<br><em>Health Radar</em></div>
-      <p class="tool-desc">Score your organization across nine delivery maturity dimensions — five product operations indicators and four DORA metrics — then copy a structured output to an AI tool for maturity analysis and a sequenced improvement plan. Includes a full scoring rubric and analytical framework.</p>
-      <div class="tool-chips">
-        <span class="chip">9-dimension radar</span>
-        <span class="chip">DORA metrics</span>
-        <span class="chip">Maturity matrix</span>
-        <span class="chip">AI-ready output</span>
-        <span class="chip">Scoring rubric</span>
-        <span class="chip">Sample data</span>
+  <!-- PLACEHOLDER -->
+  <div class="tool-placeholder">
+    <div class="placeholder-inner">
+      <div class="placeholder-num">03</div>
+      <div class="placeholder-text">
+        <h3>Next tool in development</h3>
+        <p>Coming soon &mdash; get in touch if you have a suggestion</p>
       </div>
-      <a href="prod-ops-radar/prod-ops-radar-index.html" class="tool-cta">Open tool &#8599;</a>
-    </div>
-    <div class="tool-right">
-      <div class="tool-right-label">What it produces</div>
-      <ul class="feature-list">
-        <li class="feature-item">Live radar chart updating as you score each dimension — ops metrics on top, DORA on bottom</li>
-        <li class="feature-item">Per-dimension 1–5 sliders with evidence fields designed for AI analysis</li>
-        <li class="feature-item">Overall maturity score with level label and per-dimension breakdown</li>
-        <li class="feature-item">Structured text export with scores, rubric text, evidence, and five suggested AI prompts</li>
-        <li class="feature-item">Full 9×5 maturity matrix — behavioral criteria at every level for every dimension</li>
-        <li class="feature-item">Analytical framework — how to score, interpret the shape, and use uploaded data with AI</li>
-        <li class="feature-item">Sample data showing a mid-maturity org making DORA progress with ops gaps</li>
-      </ul>
     </div>
   </div>
-
-  <!-- TOOL 04 -->
-  <div class="tool-row">
-    <div class="tool-left">
-      <div class="tool-num">04</div>
-      <div class="tool-category">Customer Experience</div>
-      <div class="tool-name">Customer Journey<br><em>Map Builder</em></div>
-      <p class="tool-desc">An editable, AI-ready journey map built around a real product context — FurBabyHealth pet insurance with vet PMS integrations. Edit every cell inline, drag the sentiment curve, add or remove journey stages, and export a structured output for AI analysis of friction points, channel gaps, and organizational alignment.</p>
-      <div class="tool-chips">
-        <span class="chip">Fully editable</span>
-        <span class="chip">Sentiment curve</span>
-        <span class="chip">8 journey stages</span>
-        <span class="chip">Vet PMS integration</span>
-        <span class="chip">AI-ready export</span>
-        <span class="chip">JSON export</span>
-      </div>
-      <a href="journey-map/journey-map-index.html" class="tool-cta">Open tool &#8599;</a>
-    </div>
-    <div class="tool-right">
-      <div class="tool-right-label">What it produces</div>
-      <ul class="feature-list">
-        <li class="feature-item">Eight pre-populated journey stages from Awareness through Renewal — all fully editable inline</li>
-        <li class="feature-item">Ten rows per stage: activities, goals, touchpoints, experience, business goal, KPIs, org activities, responsible, and technology</li>
-        <li class="feature-item">Draggable sentiment curve with 1–5 scale, emoji axis, color-coded points, and editable sentiment labels</li>
-        <li class="feature-item">Vet practice management system integrations called out at every relevant stage (Cornerstone, ezyVet, AVImark, IDEXX)</li>
-        <li class="feature-item">Add, remove, and reorder journey stages without losing data</li>
-        <li class="feature-item">Toggle between full map and customer-facing view by hiding internal rows</li>
-        <li class="feature-item">Structured text export with five suggested AI analysis prompts pre-written</li>
-        <li class="feature-item">JSON export of complete map data for use in other tools or storage</li>
-      </ul>
-    </div>
-  </div>
-
 
 </div>
 
