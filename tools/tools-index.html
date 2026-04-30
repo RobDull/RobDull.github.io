@@ -17,12 +17,10 @@ body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
-.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--ink);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:white;}
+.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--rule);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:white;}
 .nl a:hover{background:var(--accent);color:white;border-color:var(--accent);}
 .nn{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
 .nl{display:flex;gap:10px;align-items:center;}
-
-
 
 /* ── BREADCRUMB ── */
 .bc{max-width:1060px;margin:0 auto;padding:100px 40px 0;}
@@ -45,11 +43,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .hero-stat-num{font-size:40px;font-weight:900;letter-spacing:-.04em;color:var(--ink);line-height:1;}
 .hero-stat-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
 
-/* ── TOOL LIST ── */
-.tool-list{max-width:1060px;margin:0 auto;padding:0 40px 80px;}
+/* ── API NOTE ── */
 .api-note{max-width:1060px;margin:0 auto;padding:14px 40px;font-size:12px;color:var(--muted);line-height:1.7;border-bottom:1px solid var(--rule);}
 .api-note strong{color:var(--ink);font-weight:600;}
-.api-note code{font-family:monospace;font-size:11px;background:var(--rule);padding:1px 5px;border-radius:3px;color:var(--ink);}
+.api-note code{font-family:monospace;font-size:11px;background:var(--off);border:1px solid var(--rule);padding:1px 5px;border-radius:3px;color:var(--ink);}
+
+/* ── TOOL LIST ── */
+.tool-list{max-width:1060px;margin:0 auto;padding:0 40px 80px;}
 
 /* TOOL ROW */
 .tool-row{display:grid;grid-template-columns:1fr 320px;gap:0;border-bottom:1px solid var(--rule);padding:52px 0;}
@@ -57,13 +57,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 
 .tool-num{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--muted);margin-bottom:10px;}
 .tool-category{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px;}
-.tool-name{font-size:clamp(22px,3vw,34px);font-weight:900;letter-spacing:-.03em;color:var(--ink);line-height:1.1;margin-bottom:16px;}
+.tool-name{font-size:clamp(22px,3vw,34px);font-weight:900;letter-spacing:-.03em;color:var(--ink);line-height:1.1;margin-bottom:14px;}
 .tool-name em{font-style:normal;color:var(--accent);}
 .tool-desc{font-size:14px;color:var(--muted);line-height:1.8;max-width:500px;margin-bottom:20px;}
 .tool-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px;}
 .chip{font-size:10px;font-weight:600;letter-spacing:.04em;color:var(--ink);background:var(--off);border:1px solid var(--rule);border-radius:4px;padding:3px 9px;}
 .tool-cta{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:white;text-decoration:none;border-radius:6px;padding:11px 24px;font-size:13px;font-weight:700;transition:all .18s;letter-spacing:-.01em;}
 .tool-cta:hover{background:#2a2a2a;transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,.12);}
+
+/* STATUS BADGE */
+.tool-status{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;}
+.tool-status.live{color:#2a7a3a;}
+.tool-status.live::before{content:'';width:6px;height:6px;border-radius:50%;background:#2a7a3a;flex-shrink:0;}
+.tool-status.dev{color:var(--muted);}
+.tool-status.dev::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--rule);flex-shrink:0;}
 
 /* TOOL RIGHT */
 .tool-right{padding-left:48px;border-left:1px solid var(--rule);}
@@ -72,13 +79,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .feature-item{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--rule);font-size:13px;color:#2a2a2a;line-height:1.55;}
 .feature-item:last-child{border-bottom:none;}
 .feature-item::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent2);flex-shrink:0;margin-top:7px;}
-
-/* ── PLACEHOLDER ── */
-.tool-placeholder{padding:48px 0;border-bottom:1px solid var(--rule);}
-.placeholder-inner{border:2px dashed var(--rule);border-radius:10px;padding:36px 32px;display:flex;align-items:center;gap:28px;}
-.placeholder-num{font-size:52px;font-weight:900;letter-spacing:-.04em;color:var(--rule);line-height:1;flex-shrink:0;}
-.placeholder-text h3{font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--rule);margin-bottom:6px;}
-.placeholder-text p{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--rule);}
 
 /* ── ABOUT STRIP ── */
 .about-strip{background:var(--accent);padding:56px 40px;}
@@ -106,7 +106,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 @media(max-width:640px){
   nav{padding:14px 20px;}
   .nl a{padding:7px 12px;font-size:12px;}
-  .bc,.hero,.hero-strip,.tool-list,.about-strip{padding-left:20px;padding-right:20px;}
+  .bc,.hero,.hero-strip,.api-note,.tool-list,.about-strip{padding-left:20px;padding-right:20px;}
   footer{padding:20px 24px;flex-direction:column;text-align:center;}
 }
 </style>
@@ -139,7 +139,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <p class="hero-desc">Each tool addresses a real moment of friction in product and delivery work — the moment when a PM needs to make a complex idea legible to an executive, a stakeholder, or a researcher. Built from field experience, not from the outside looking in.</p>
   <div class="hero-stat-row">
     <div class="hero-stat">
-      <div class="hero-stat-num">2</div>
+      <div class="hero-stat-num">3</div>
       <div class="hero-stat-label">Tools live</div>
     </div>
     <div class="hero-stat">
@@ -161,6 +161,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="tool-num">01</div>
       <div class="tool-category">Business Justification</div>
       <div class="tool-name">Technical Business<br><em>Case Generator</em></div>
+      <div class="tool-status live">Live</div>
       <p class="tool-desc">Engineering and infrastructure teams constantly have to translate what they need and why it matters into language that earns executive approval. This tool does that translation — from project inputs to a structured, stakeholder-ready business case in three analysis depths.</p>
       <div class="tool-chips">
         <span class="chip">Quick Pitch</span>
@@ -191,6 +192,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="tool-num">02</div>
       <div class="tool-category">Enterprise User Research</div>
       <div class="tool-name">JTBD + Enterprise<br><em>Persona Generator</em></div>
+      <div class="tool-status live">Live</div>
       <p class="tool-desc">Most PMs can describe their user in a sentence. Getting from that sentence to a persona detailed enough to anchor a journey map — with a Jobs to Be Done statement, org context, tech comfort, key interactions, and relationship friction — is where research stalls. This tool closes that gap.</p>
       <div class="tool-chips">
         <span class="chip">Jobs to Be Done</span>
@@ -217,14 +219,62 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
   </div>
 
-  <!-- PLACEHOLDER -->
-  <div class="tool-placeholder">
-    <div class="placeholder-inner">
-      <div class="placeholder-num">03</div>
-      <div class="placeholder-text">
-        <h3>Next tool in development</h3>
-        <p>Coming soon &mdash; get in touch if you have a suggestion</p>
+  <!-- TOOL 03 -->
+  <div class="tool-row">
+    <div class="tool-left">
+      <div class="tool-num">03</div>
+      <div class="tool-category">Customer Experience</div>
+      <div class="tool-name">Customer<br><em>Journey Map Builder</em></div>
+      <div class="tool-status live">Live</div>
+      <p class="tool-desc">A journey map is only useful if it reflects what actually happens — not what teams assume. This tool provides an editable, stage-by-stage canvas for mapping customer actions, goals, touchpoints, emotions, and organizational responses, with a draggable sentiment curve and one-click AI export for analysis.</p>
+      <div class="tool-chips">
+        <span class="chip">Editable stages</span>
+        <span class="chip">User sentiment curve</span>
+        <span class="chip">Touchpoints</span>
+        <span class="chip">Pain points</span>
+        <span class="chip">Business goals</span>
+        <span class="chip">Export for AI</span>
       </div>
+      <a href="journey-map/journey-map-index.html" class="tool-cta">Open tool &#8599;</a>
+    </div>
+    <div class="tool-right">
+      <div class="tool-right-label">What it produces</div>
+      <ul class="feature-list">
+        <li class="feature-item">Stage-by-stage journey canvas with phase color-coding across up to eight stages</li>
+        <li class="feature-item">Draggable sentiment curve that captures emotional highs and lows across the journey</li>
+        <li class="feature-item">Row-level data for activities, goals, touchpoints, pain points, and business OKRs</li>
+        <li class="feature-item">Toggleable rows — show only the layers relevant to your current audience</li>
+        <li class="feature-item">Add and remove stages dynamically without losing other row data</li>
+        <li class="feature-item">One-click plain-text export structured for pasting directly into an AI prompt</li>
+        <li class="feature-item">JSON export for version control or integration into other tools</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TOOL 04 -->
+  <div class="tool-row">
+    <div class="tool-left">
+      <div class="tool-num">04</div>
+      <div class="tool-category">Organizational Health</div>
+      <div class="tool-name">Product Operations<br><em>Health Radar</em></div>
+      <div class="tool-status dev">In development</div>
+      <p class="tool-desc">Product operations health is rarely measured — it is felt. This tool makes it legible: a structured self-assessment across the core dimensions of delivery operations that surfaces where teams are strong, where they are struggling, and what to prioritize first.</p>
+      <div class="tool-chips">
+        <span class="chip">Delivery health</span>
+        <span class="chip">Radar visualization</span>
+        <span class="chip">Prioritized recommendations</span>
+        <span class="chip">Team assessment</span>
+      </div>
+    </div>
+    <div class="tool-right">
+      <div class="tool-right-label">What it will produce</div>
+      <ul class="feature-list">
+        <li class="feature-item">Radar chart across eight product operations dimensions — discovery, delivery, metrics, tooling, and more</li>
+        <li class="feature-item">Scored self-assessment with dimension-level commentary</li>
+        <li class="feature-item">AI-generated interpretation of the pattern — what the shape of the radar means organizationally</li>
+        <li class="feature-item">Prioritized recommendation set ranked by impact and effort</li>
+        <li class="feature-item">Export for leadership review or team retrospective facilitation</li>
+      </ul>
     </div>
   </div>
 
