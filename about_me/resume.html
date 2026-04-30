@@ -35,6 +35,9 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
 
 /* HEADER */
 .resume-header{padding:40px 48px 36px;border-bottom:3px solid var(--ink);}
+.resume-header-nav{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px;}
+.resume-header-nav a{font-size:11px;font-weight:600;color:var(--muted);text-decoration:none;border:1.5px solid var(--rule);border-radius:5px;padding:5px 14px;transition:all .15s;white-space:nowrap;background:var(--off);}
+.resume-header-nav a:hover{color:var(--accent);border-color:var(--accent);background:white;}
 .name{font-size:38px;font-weight:800;letter-spacing:-.04em;color:var(--ink);line-height:1;margin-bottom:6px;}
 .title{font-size:15px;font-weight:600;color:var(--accent);letter-spacing:-.01em;margin-bottom:16px;}
 .contact-row{display:flex;gap:20px;flex-wrap:wrap;}
@@ -103,9 +106,9 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
 .metric-label{font-size:10px;font-weight:600;color:var(--muted);line-height:1.4;}
 
 /* SECTION NAV */
-.sec-nav{background:var(--off);border-bottom:1px solid var(--rule);padding:0 32px;display:flex;gap:0;align-items:center;position:sticky;top:49px;z-index:9;overflow-x:auto;white-space:nowrap;}
-.sec-nav a{font-size:11px;font-weight:700;color:var(--muted);text-decoration:none;padding:10px 14px;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.01em;display:inline-block;}
-.sec-nav a:hover{color:var(--accent);border-bottom-color:var(--accent);}
+.sec-nav{display:none;}
+
+
 
 
   .page{margin:0;border-radius:0;}
@@ -128,17 +131,6 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
   </div>
 </nav>
 
-<div class="sec-nav print-hide">
-  <a href="#sec-summary">Summary</a>
-  <a href="#sec-skills">Skills</a>
-  <a href="#sec-tools">Tools</a>
-  <a href="#sec-experience">Experience</a>
-  <a href="#sec-earlier">Earlier Roles</a>
-  <a href="#sec-metrics">Metrics</a>
-  <a href="#sec-education">Education</a>
-  <a href="#sec-certs">Certifications</a>
-</div>
-
 <div class="page">
 
   <!-- HEADER -->
@@ -151,6 +143,16 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
       <a href="mailto:rob.dull@gmail.com">rob.dull@gmail.com</a>
       <span class="sep">|</span>
       <a href="https://linkedin.com/in/robdull" target="_blank">linkedin.com/in/robdull</a>
+    </div>
+    <div class="resume-header-nav print-hide">
+      <a href="#sec-summary">Summary</a>
+      <a href="#sec-skills">Skills</a>
+      <a href="#sec-tools">Tools</a>
+      <a href="#sec-experience">Experience</a>
+      <a href="#sec-earlier">Earlier Roles</a>
+      <a href="#sec-metrics">Metrics</a>
+      <a href="#sec-education">Education</a>
+      <a href="#sec-certs">Certifications</a>
     </div>
   </div>
 
