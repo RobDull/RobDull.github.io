@@ -35,9 +35,9 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
 
 /* HEADER */
 .resume-header{padding:40px 48px 36px;border-bottom:3px solid var(--ink);text-align:center;}
-.resume-header-nav{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px;justify-content:center;}
-.resume-header-nav a{font-size:11px;font-weight:600;color:var(--muted);text-decoration:none;border:1.5px solid var(--rule);border-radius:5px;padding:5px 14px;transition:all .15s;white-space:nowrap;background:var(--off);}
-.resume-header-nav a:hover{color:var(--accent);border-color:var(--accent);background:white;}
+.resume-header-nav{display:flex;flex-wrap:wrap;gap:4px 0;margin-top:20px;justify-content:center;list-style:none;}
+.resume-header-nav a{font-size:15px;font-weight:600;color:var(--accent);text-decoration:none;border-bottom:1.5px solid rgba(26,58,92,.25);padding-bottom:1px;transition:all .15s;white-space:nowrap;margin:0 10px;}
+.resume-header-nav a:hover{color:var(--accent2);border-bottom-color:var(--accent2);}
 .name{font-size:38px;font-weight:800;letter-spacing:-.04em;color:var(--ink);line-height:1;margin-bottom:6px;}
 .title{font-size:15px;font-weight:600;color:var(--accent);letter-spacing:-.01em;margin-bottom:16px;}
 .contact-row{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;}
@@ -128,7 +128,7 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
   <a href="../index.html" class="nav-name">Rob Dull</a>
   <div class="nav-links">
     <a href="https://linkedin.com/in/robdull" target="_blank" class="accent">LinkedIn &#8599;</a>
-    <a href="javascript:window.print()">Print / PDF</a>
+    <a href="javascript:window.print()" class="accent">Print / PDF</a>
   </div>
 </nav>
 
