@@ -297,7 +297,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
             <span class="dim-label">Long-term Objectives (bottom rows)</span>
             <div class="dim-stepper">
               <button class="dim-btn" onclick="adjustZone('LT',-1)">−</button>
-              <span class="dim-val" id="dim-LT">3</span>
+              <span class="dim-val" id="dim-LT">1</span>
               <button class="dim-btn" onclick="adjustZone('LT',1)">+</button>
             </div>
           </div>
@@ -749,7 +749,7 @@ async function buildWithAI(){
   const nA = Math.min(methods.length || 4, 5);
   const nK = Math.min(measures.length || 6, 10);
   const nW = Math.min(owners.length || 3, 5);
-  const nL = Math.min(obstacles.length || 3, 5);
+  const nL = Math.min(obstacles.length || 1, 10);
 
   const prompt = `You are an expert strategy consultant. The user has provided a Salesforce-style V2MOM. Your job is to populate a Hoshin Kanri X-matrix using this content.
 
@@ -1185,11 +1185,12 @@ function renderMatrix(d){
   }
   h+=`</tr>`;
 
-  // LT rows — Co-owners label in the OWN cols of the first row, aligned with Vision
+  // LT rows — row 0 = Vision (merged across all OBJ dot cols + center), rows 1+ = editable LT objectives
   for(let r=0;r<nL;r++){
     h+=`<tr>`;
     for(let c=0;c<nO;c++) h+=dot((LO[r]||[])[c]||'_','#fff','LO',r,c);
     if(r===0){
+      // Vision row: spans full height of all LT rows in the center column
       const ltH = nL * RH;
       h+=`<td rowspan="${nL}" style="width:${LC}px;height:${ltH}px;background:#1a3a5c;padding:10px 16px;font-size:12px;line-height:1.6;vertical-align:middle;text-align:left;color:rgba(255,255,255,0.75);font-style:italic;">${esc(vision||'')}</td>`;
     }
