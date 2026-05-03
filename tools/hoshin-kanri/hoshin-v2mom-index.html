@@ -509,6 +509,9 @@ function renderMethod(m, vi, mi){
       <input class="method-input" placeholder="Method / activity…" value="${esc2(m.method)}"
         oninput="window._cascade[${vi}].methods[${mi}].method=this.value"
         style="border-color:${col.strong}33;" />
+      <input class="method-input" placeholder="Obstacle (optional)…" value="${esc2(m.obstacle||'')}"
+        oninput="window._cascade[${vi}].methods[${mi}].obstacle=this.value"
+        style="border-color:#c8662a33;font-size:10px;color:#c8662a;" />
       <div class="method-measures" id="measures-${vi}-${mi}">${measuresHTML}</div>
       <button class="mini-btn" onclick="addMeasure(${vi},${mi})" style="font-size:10px;color:${col.strong};">+ measure</button>
     </div>
@@ -636,40 +639,40 @@ const EXAMPLES = {
     vision:'A seamless, trustworthy member experience across every stage of the PetHealth journey — from enrollment to renewal.',
     owners:['Product Owner','UX Team','CRM and Marketing','Data Engineering'],
     cascade:[
-      { value:'Member empathy first', methods:[{method:'Redesign mobile claim submission flow', measures:['Claim submission completion rate: 92%','Mobile claim abandonment rate under 8%','Time to complete claim under 3 minutes']}] },
-      { value:'Clarity over complexity', methods:[{method:'Build proactive renewal outreach (90 days out)', measures:['Renewal awareness rate before premium notice: 80%+','Outreach open rate: 40%+','Members who review plan before renewal: 60%+']}] },
-      { value:'Fast and transparent claims', methods:[{method:'Launch in-app vet directory with real-time availability', measures:['Vet directory coverage: 90% of member zip codes','In-app vet search usage: 50%+ of members','Directory-to-appointment conversion: 30%+']}] },
-      { value:'Proactive communication', methods:[{method:'Create member sentiment dashboard', measures:['Member NPS: 34 to 50 by Q4','App store rating: 3.6 to 4.4','Support contact rate per claim down 20%']}] },
+      { value:'Member empathy first', methods:[{method:'Redesign mobile claim submission flow', obstacle:'Claim UX causes drop-off and abandonment on mobile', measures:['Claim submission completion rate: 92%','Mobile claim abandonment rate under 8%','Time to complete claim under 3 minutes']}] },
+      { value:'Clarity over complexity', methods:[{method:'Build proactive renewal outreach (90 days out)', obstacle:'Renewal awareness is low until the premium notice arrives', measures:['Renewal awareness rate before premium notice: 80%+','Outreach open rate: 40%+','Members who review plan before renewal: 60%+']}] },
+      { value:'Fast and transparent claims', methods:[{method:'Launch in-app vet directory with real-time availability', obstacle:'Vet directory data is fragmented across legacy systems', measures:['Vet directory coverage: 90% of member zip codes','In-app vet search usage: 50%+ of members','Directory-to-appointment conversion: 30%+']}] },
+      { value:'Proactive communication', methods:[{method:'Create member sentiment dashboard', obstacle:'No single view of member sentiment exists across touchpoints', measures:['Member NPS: 34 to 50 by Q4','App store rating: 3.6 to 4.4','Support contact rate per claim down 20%']}] },
     ]
   },
   ops:{
     vision:'Build a Product Operations function that gives every product team clear, consistent visibility into delivery health and performance.',
     owners:['Product Ops Manager','Analytics Team','Delivery Leads','PM Community'],
     cascade:[
-      { value:'Enabling teams, not controlling them', methods:[{method:'Roll out product health scorecard across all squads', measures:['100% of squads on shared scorecard by Q3','Scorecard adoption without mandate: 80%+','Squad leads report scorecard saves time: 70%+']}] },
-      { value:'Standardization where it scales', methods:[{method:'Establish shared metrics taxonomy and data dictionary', measures:['Metrics taxonomy adopted by 100% of squads','Data dictionary coverage: 90%+ of tracked metrics','Time to answer metric definition question: under 5 minutes']}] },
-      { value:'Evidence over intuition', methods:[{method:'Create PM enablement library (templates, playbooks, tools)', measures:['3 published playbooks adopted by 80%+ of PMs','PM time on reporting reduced by 40%','Portfolio risk report delivered in under 2 hours']}] },
-      { value:'Continuous improvement', methods:[{method:'Build cross-team dependency intake and tracking process', measures:['Cross-team dependency resolution time down 30%','Unplanned dependency escalations down 50%','Leadership satisfaction with operational visibility: 8/10']}] },
+      { value:'Enabling teams, not controlling them', methods:[{method:'Roll out product health scorecard across all squads', obstacle:'Each squad tracks different metrics with no shared standard', measures:['100% of squads on shared scorecard by Q3','Scorecard adoption without mandate: 80%+','Squad leads report scorecard saves time: 70%+']}] },
+      { value:'Standardization where it scales', methods:[{method:'Establish shared metrics taxonomy and data dictionary', obstacle:'No agreed definition of core metrics across portfolio', measures:['Metrics taxonomy adopted by 100% of squads','Data dictionary coverage: 90%+ of tracked metrics','Time to answer metric definition question: under 5 minutes']}] },
+      { value:'Evidence over intuition', methods:[{method:'Create PM enablement library (templates, playbooks, tools)', obstacle:'PM time consumed by ad hoc reporting and one-off requests', measures:['3 published playbooks adopted by 80%+ of PMs','PM time on reporting reduced by 40%','Portfolio risk report delivered in under 2 hours']}] },
+      { value:'Continuous improvement', methods:[{method:'Build cross-team dependency intake and tracking process', obstacle:'No cross-portfolio risk or dependency visibility', measures:['Cross-team dependency resolution time down 30%','Unplanned dependency escalations down 50%','Leadership satisfaction with operational visibility: 8/10']}] },
     ]
   },
   dir:{
     vision:'Grow a product portfolio and team that consistently delivers outcomes customers love — at scale, with less friction.',
     owners:['Product Director','Squad Leads','HR Business Partner','Stakeholders'],
     cascade:[
-      { value:'Outcomes over output', methods:[{method:'Define 3-horizon product strategy each planning cycle', measures:['80% of shipped features tied to validated customer outcomes','Strategy comprehension score among PMs: 8/10','Roadmap changes driven by evidence vs. request: 70%+']}] },
-      { value:'Customer evidence drives the roadmap', methods:[{method:'Launch structured discovery sprints for major initiatives', measures:['Discovery sprint run before each major initiative: 100%','Customer interviews per quarter: 20+','Features validated before build: 80%+']}] },
-      { value:'Clear strategy, empowered execution', methods:[{method:'Establish quarterly OKR reviews with squad leads', measures:['OKR review completion rate: 100%','Squad confidence in quarterly goals: 8/10','Roadmap change lead time: 6 weeks to 2 weeks']}] },
-      { value:'Honest about trade-offs', methods:[{method:'Build PM succession pipeline and development plans', measures:['All PMs have active development plans with quarterly check-ins','2 APMs promotion-ready within 12 months','PM retention rate: 90%+']}] },
+      { value:'Outcomes over output', methods:[{method:'Define 3-horizon product strategy each planning cycle', obstacle:'Sales pressure creating reactive feature work', measures:['80% of shipped features tied to validated customer outcomes','Strategy comprehension score among PMs: 8/10','Roadmap changes driven by evidence vs. request: 70%+']}] },
+      { value:'Customer evidence drives the roadmap', methods:[{method:'Launch structured discovery sprints for major initiatives', obstacle:'Inconsistent discovery rigor across squads', measures:['Discovery sprint run before each major initiative: 100%','Customer interviews per quarter: 20+','Features validated before build: 80%+']}] },
+      { value:'Clear strategy, empowered execution', methods:[{method:'Establish quarterly OKR reviews with squad leads', obstacle:'Roadmap change lead time too long — slows squad responsiveness', measures:['OKR review completion rate: 100%','Squad confidence in quarterly goals: 8/10','Roadmap change lead time: 6 weeks to 2 weeks']}] },
+      { value:'Honest about trade-offs', methods:[{method:'Build PM succession pipeline and development plans', obstacle:'Senior PM bench is thin — limited internal promotion pipeline', measures:['All PMs have active development plans with quarterly check-ins','2 APMs promotion-ready within 12 months','PM retention rate: 90%+']}] },
     ]
   },
   em:{
     vision:'Build an engineering org that ships with confidence — automated, well-reviewed, and continuously improving.',
     owners:['Engineering Manager','DevOps Team','Senior Engineers','Platform Team'],
     cascade:[
-      { value:'Automate before you scale', methods:[{method:'Implement CI/CD pipeline with automated test gates', measures:['Deployment frequency: weekly or better per team','Automated test coverage above 80%','Manual deploy steps eliminated: 100%']}] },
-      { value:'Code quality through peer review', methods:[{method:'Roll out new PR review guidelines and templates', measures:['PR review turnaround under 24 hours','PR template adoption: 90%+','Code review coverage: 100% of PRs']}] },
-      { value:'Incidents as learning opportunities', methods:[{method:'Establish blameless postmortem process', measures:['Blameless postmortem completed within 48hrs of P1: 100%','Action items from postmortems resolved within sprint: 80%','MTTR under 1 hour for P1 incidents']}] },
-      { value:'Fast feedback loops', methods:[{method:'Deploy automated linting, security scanning, and dependency checks', measures:['Change failure rate under 5%','Security scan coverage: 100% of repos','Dependency vulnerability response time under 24 hours']}] },
+      { value:'Automate before you scale', methods:[{method:'Implement CI/CD pipeline with automated test gates', obstacle:'Legacy manual deploy process causing bottlenecks and risk', measures:['Deployment frequency: weekly or better per team','Automated test coverage above 80%','Manual deploy steps eliminated: 100%']}] },
+      { value:'Code quality through peer review', methods:[{method:'Roll out new PR review guidelines and templates', obstacle:'Inconsistent PR review standards across teams', measures:['PR review turnaround under 24 hours','PR template adoption: 90%+','Code review coverage: 100% of PRs']}] },
+      { value:'Incidents as learning opportunities', methods:[{method:'Establish blameless postmortem process', obstacle:'Blame culture prevents honest incident retrospectives', measures:['Blameless postmortem completed within 48hrs of P1: 100%','Action items from postmortems resolved within sprint: 80%','MTTR under 1 hour for P1 incidents']}] },
+      { value:'Fast feedback loops', methods:[{method:'Deploy automated linting, security scanning, and dependency checks', obstacle:'On-call burden too high — burning out senior engineers', measures:['Change failure rate under 5%','Security scan coverage: 100% of repos','Dependency vulnerability response time under 24 hours']}] },
     ]
   }
 };
@@ -1103,29 +1106,6 @@ function renderMatrix(d){
 
   let h=`<colgroup>${cgCols}</colgroup>`;
 
-  // ── VISION ALIGNMENT ROW ─────────────────────────────────────────
-  // One row above activities: dots under each OBJ column showing alignment with Vision
-  // OBJ col ring# = nO-c (rightmost=1). VO[c] dot for that col.
-  // Right side (KPI/OWN cols): blank. Center: Vision label.
-  {
-    const voRow_bg = '#f0eef8'; // very light lavender tint
-    h += `<tr>`;
-    // OBJ dot cells — VO correlation
-    for(let c=0;c<nO;c++){
-      const v = (VO[c]||'_');
-      const s = v==='F'?`<span style="width:12px;height:12px;border-radius:50%;background:#111;display:inline-block;"></span>`
-               :v==='O'?`<span style="width:12px;height:12px;border-radius:50%;border:2.5px solid #111;display:inline-block;"></span>`:'';
-      h += `<td style="width:${D}px;height:${RH}px;background:${voRow_bg};text-align:center;vertical-align:middle;border:1px solid #bbb;">${s}</td>`;
-    }
-    // Center cell: "Vision" label
-    h += `<td style="width:${LC}px;height:${RH}px;background:${voRow_bg};padding:4px 10px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7c5cbf;vertical-align:middle;border:1px solid #bbb;">Vision alignment</td>`;
-    // KPI cols: blank tint
-    for(let c=0;c<nK;c++) h += `<td style="width:${D}px;height:${RH}px;background:${voRow_bg};border:1px solid #bbb;"></td>`;
-    // OWN cols: blank tint
-    for(let c=0;c<nW;c++) h += `<td style="width:${D}px;height:${RH}px;background:${voRow_bg};border:1px solid #bbb;"></td>`;
-    h += `</tr>`;
-  }
-
   // Activity rows — OWN vtCells rowspan nA+1 (activity rows + center row), emitted in row 0 only
   for(let r=0;r<nA;r++){
     h+=`<tr>`;
@@ -1206,8 +1186,26 @@ function renderMatrix(d){
 
   // Vision and obstacles context cards — inside scroll so right edge aligns with table
   const tableW = nO*D + LC + nK*D + nW*D;
-  const visionHTML = vision ? `<div class="vc-card vision" style="flex:1;"><div class="vc-label">Vision</div><div class="vc-text">${esc(vision)}</div></div>` : '';
-  const ctxHTML = visionHTML ? `<div class="v2mom-context">${visionHTML}</div>` : '';
+  // Obstacles from cascade — colored by value group
+  const obstacles = [];
+  if(window._cascade){
+    window._cascade.forEach((vg,vi)=>{
+      vg.methods.forEach(m=>{
+        if(m.obstacle && m.obstacle.trim()){
+          obstacles.push({text:m.obstacle.trim(), vi});
+        }
+      });
+    });
+  }
+  const obstaclesHTML = obstacles.length ? `<div style="display:flex;width:${tableW}px;gap:0;border-bottom:1.5px solid var(--rule);flex-wrap:wrap;">` +
+    obstacles.map(o=>{
+      const col = VALUE_COLORS[o.vi % VALUE_COLORS.length];
+      return `<div style="flex:1;min-width:160px;padding:10px 14px;background:${col.light};border-right:1px solid var(--rule);">
+        <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${col.strong};margin-bottom:4px;">Obstacle</div>
+        <div style="font-size:11px;color:var(--ink);line-height:1.5;">${esc(o.text)}</div>
+      </div>`;
+    }).join('') + `</div>` : '';
+  const ctxHTML = obstaclesHTML;
 
   const legendHTML = `<div class="matrix-legend">
     <span class="ml-label">Correlation key</span>
