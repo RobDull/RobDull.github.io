@@ -247,7 +247,18 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 <div class="page-head">
   <div class="page-tag">Strategy and Execution</div>
   <h1>Hoshin Kanri with<br><em>V2MOM alignment</em>.</h1>
-  <p>Enter your V2MOM fields and Claude will populate and align a Hoshin Kanri X-matrix — connecting your values, methods, and measures to annual objectives, activities, key metrics, and owners. Edit any cell directly, then ask Claude to clean up and realign.<br><span style="display:block;margin-top:2px;">Vision and Obstacles appear as context cards beside the matrix.</span></p>
+  <p>I learned about hoshin kanri when I was coaching at Salesforce, where every employee has a V2MOM. I liked that Hoshin Kanri was explicit about the breakdown of long-term goals (Vision, in the V2MOM) all the way down to metrics and collaborators. The matrix is visually busy, but that's because it's a comprehensive view.</p>
+  <p style="margin-top:14px;">This tool allows a more robust visualization of the information from the V2MOM, showing greater clarity between objectives, activities and measures. Co-owners, with shared V2MOM responsibilities are also clearly visible. Obstacles are at the top of the matrix, elevating them in reviews when they would otherwise be buried and potentially ignored. Other companies have adopted Salesforce's V2MOM, and have promoted it to guests at Salesforce's executive briefing center.</p>
+  <p style="margin-top:14px;">I hope that this tool facilitates more frequent progress reviews, at least monthly, and helps users to operationalize their Vision and Values throughout the year. Here are the 7 Hoshin Kanri steps that would benefit a V2MOM process. For the sake of this tool, the first two steps have been combined, so the V2MOM "Vision" is the "Long Term Objective" in the hoshin kanri matrix. You can manually add lines to the long-term objectives if you choose to create a hoshin kanri with multiple long-term goals.</p>
+  <ol style="margin-top:14px;padding-left:20px;font-size:14px;line-height:1.8;color:var(--ink);">
+    <li><strong>Establish Organizational Vision:</strong> Define the core vision, mission, and long-term direction.</li>
+    <li><strong>Develop Long-Term Objectives:</strong> Set 3–5 year "stretch" goals that represent significant improvements.</li>
+    <li><strong>Develop Annual Objectives:</strong> Break down breakthrough objectives into actionable, measurable goals for the current year.</li>
+    <li><strong>Deploy Objectives (Catchball):</strong> Cascade goals through all levels of the organization, using a "catchball" process to negotiate and ensure alignment between senior management and operational teams.</li>
+    <li><strong>Implement the Plan:</strong> Execute the tactical plans and projects designed to achieve the annual objectives.</li>
+    <li><strong>Track Performance (Monthly Review):</strong> Monitor key performance indicators (KPIs) through regular monthly or quarterly reviews.</li>
+    <li><strong>Reflect and Adjust (Annual Review):</strong> Evaluate the year's performance to assess successes, failures, and lessons learned to inform the next planning cycle.</li>
+  </ol>
 </div>
 
 <div class="tool-wrap">
@@ -556,19 +567,21 @@ function removeMeasure(vi,mi,si){
 
 // Read cascade into flat arrays for matrix building
 function getCascadeData(){
-  const values=[], methods=[], measures=[], colorMap=[], kpiColorMap=[];
+  const values=[], methods=[], measures=[], colorMap=[], kpiColorMap=[], methodMap=[];
+  let methodIdx = 0;
   window._cascade.forEach((vg,vi)=>{
     values.push(vg.value||'');
     vg.methods.forEach((m,mi)=>{
       methods.push(m.method||'');
       colorMap.push(vi);
-      // Each measure of this method belongs to value group vi
-      (m.measures||[]).forEach(ms=>{ if(ms) kpiColorMap.push(vi); });
+      // Each measure of this method belongs to method index methodIdx and value group vi
+      (m.measures||[]).forEach(ms=>{ if(ms){ kpiColorMap.push(vi); methodMap.push(methodIdx); } });
+      methodIdx++;
     });
     const allMeasures = vg.methods.flatMap(m=>m.measures||['']).filter(Boolean);
     allMeasures.forEach(ms=>{ if(ms) measures.push(ms); });
   });
-  return { values, methods, measures, colorMap, kpiColorMap };
+  return { values, methods, measures, colorMap, kpiColorMap, methodMap };
 }
 
 // Read flat arrays back into cascade (for loadExample)
@@ -732,7 +745,7 @@ function setLoading(btnId, spinnerId, labelId, loading){
 // ── BUILD WITH AI ───────────────────────────────────────────────────
 async function buildWithAI(){
   const vision=val('f-vision');
-  const { values, methods, measures, colorMap, kpiColorMap } = getCascadeData();
+  const { values, methods, measures, colorMap, kpiColorMap, methodMap } = getCascadeData();
   const owners = getLineItems('owners');
   const obstacles = [];
 
@@ -801,13 +814,13 @@ Adjust array lengths to match: OBJ=${nO}, ACT=${nA}, KPI=${nK}, OWN=${nW}, LT=${
     const text = data.content?.map(b=>b.text||'').join('') || '';
     const clean = text.replace(/```json|```/g,'').trim();
     const parsed = JSON.parse(clean);
-    window._matrixData = {vision, colorMap:colorMap||[], kpiColorMap:kpiColorMap||[], ...parsed};
+    window._matrixData = {vision, colorMap:colorMap||[], kpiColorMap:kpiColorMap||[], methodMap:methodMap||[], ...parsed};
     renderMatrix(window._matrixData);
     document.getElementById('btn-cleanup').style.display = 'flex';
   } catch(err){
     console.error(err);
     // Fallback: render with user input directly, no AI alignment
-    window._matrixData = buildFallback(vision, values, methods, measures, owners, colorMap, kpiColorMap, nO, nA, nK, nW, nL);
+    window._matrixData = buildFallback(vision, values, methods, measures, owners, colorMap, kpiColorMap, methodMap, nO, nA, nK, nW, nL);
     renderMatrix(window._matrixData);
     document.getElementById('btn-cleanup').style.display = 'flex';
   } finally {
@@ -815,7 +828,7 @@ Adjust array lengths to match: OBJ=${nO}, ACT=${nA}, KPI=${nK}, OWN=${nW}, LT=${
   }
 }
 
-function buildFallback(vision, values, methods, measures, owners, colorMap, kpiColorMap, nO, nA, nK, nW, nL){
+function buildFallback(vision, values, methods, measures, owners, colorMap, kpiColorMap, methodMap, nO, nA, nK, nW, nL){
   const pad = (arr, n, prefix) => { const r=[...arr]; while(r.length<n) r.push(`${prefix} ${r.length+1}`); return r.slice(0,n); };
   const blankRow = (n) => Array(n).fill('_');
 
@@ -834,20 +847,27 @@ function buildFallback(vision, values, methods, measures, owners, colorMap, kpiC
     if(Math.abs(ag - c) === 1) return 'O';
     return '_';
   }));
-  const akMatrixFromColorMap = (nA, nK, colorMap, kpiColorMap) => {
+  const akMatrixFromColorMap = (nA, nK, colorMap, kpiColorMap, methodMap) => {
     if(!colorMap.length || !kpiColorMap.length) {
       return Array(nA).fill(null).map((_,r)=>Array(nK).fill(null).map((_,c)=>{
-        const rn = r+1, cn = c+1;  // top row = ring 1, leftmost KPI = ring 1
+        const rn = r+1, cn = c+1;
         if(rn===cn) return 'F';
         if(Math.abs(rn-cn)===1) return 'O';
         return '_';
       }));
     }
     return Array(nA).fill(null).map((_,r)=>Array(nK).fill(null).map((_,c)=>{
-      const actGroup = colorMap[r] !== undefined ? colorMap[r] : r;
-      const kpiGroup = kpiColorMap[c] !== undefined ? kpiColorMap[c] : c;
-      if(actGroup === kpiGroup) return 'F';
-      if(Math.abs(actGroup - kpiGroup) === 1) return 'O';
+      const actMethod = r;                   // activity index r = method index r
+      const kpiMethod = methodMap[c];        // which method this KPI belongs to
+      const actGroup  = colorMap[r];         // value group of this activity
+      const kpiGroup  = kpiColorMap[c];      // value group of this KPI
+      // F: KPI belongs to this exact activity's method
+      if(kpiMethod !== undefined && kpiMethod === actMethod) return 'F';
+      // O: same value group (sibling method) or adjacent value group
+      if(kpiGroup !== undefined && actGroup !== undefined){
+        if(kpiGroup === actGroup) return 'O';
+        if(Math.abs(kpiGroup - actGroup) === 1) return 'O';
+      }
       return '_';
     }));
   };
@@ -873,8 +893,9 @@ function buildFallback(vision, values, methods, measures, owners, colorMap, kpiC
     LT:  Array(nL).fill(''),
     colorMap: colorMap||[],
     kpiColorMap: kpiColorMap||[],
+    methodMap: methodMap||[],
     AO:  aoMatrix(nA,nO,colorMap),
-    AK:  akMatrixFromColorMap(nA,nK,colorMap,kpiColorMap),
+    AK:  akMatrixFromColorMap(nA,nK,colorMap,kpiColorMap,methodMap),
     AWN: awnMatrix(nA,nW),
     LO:  loMatrix(nL,nO),
     VO:  Array(nO).fill('F'), // all objectives directly serve vision by default
@@ -1067,7 +1088,7 @@ function readMatrixFromDOM(){
 
 // ── RENDER MATRIX ───────────────────────────────────────────────────
 function renderMatrix(d){
-  const {vision, OBJ, ACT, KPI, OWN, LT, AO, AK, AWN, LO, LK, LWN, colorMap=[], kpiColorMap=[], VO=[]} = d;
+  const {vision, OBJ, ACT, KPI, OWN, LT, AO, AK, AWN, LO, LK, LWN, colorMap=[], kpiColorMap=[], methodMap=[], VO=[]} = d;
   const nO=OBJ.length, nA=ACT.length, nK=KPI.length, nW=OWN.length, nL=LT.length;
 
   // Dims from template
@@ -1079,10 +1100,11 @@ function renderMatrix(d){
   // primary correlated activity ring# matches their column ring# (ascending left→right).
   {
     // Build sort key for each KPI col: ring# of first F-correlated activity, else O, else nA+1
-    // Sort KPIs by value group (kpiColorMap) so value 1's KPIs are leftmost
+    // Sort KPIs: primary by method index (keeps each method's KPIs together), secondary by value group
     const kpiOrder = KPI.map((_, c) => {
-      const vg = kpiColorMap[c] !== undefined ? kpiColorMap[c] : 999;
-      return vg;
+      const method = methodMap[c] !== undefined ? methodMap[c] : 999;
+      const vg     = kpiColorMap[c] !== undefined ? kpiColorMap[c] : 999;
+      return method * 1000 + vg;
     });
     const kpiIdx = KPI.map((_,i)=>i).sort((a,b)=>kpiOrder[a]-kpiOrder[b]);
     // Reorder KPI, AK columns, LK columns
@@ -1093,6 +1115,9 @@ function renderMatrix(d){
     // Reorder kpiColorMap in sync
     const reorderedKpiColorMap = reorder(kpiColorMap, kpiIdx);
     kpiColorMap.splice(0, kpiColorMap.length, ...reorderedKpiColorMap);
+    // Reorder methodMap in sync
+    const reorderedMethodMap = reorder(methodMap, kpiIdx);
+    methodMap.splice(0, methodMap.length, ...reorderedMethodMap);
   }
 
   const COLS=[...Array(nO).fill(D), LC, ...Array(nK).fill(D), ...Array(nW).fill(D)]; // OWN shares same cols as AWN
