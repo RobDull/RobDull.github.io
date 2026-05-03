@@ -799,21 +799,18 @@ function buildFallback(vision, values, methods, measures, owners, colorMap, kpiC
   // OWN col c → ring# = c + 1   (leftmost col = ring 1)
   // LT  row r → ring# = r + 1   (top row = ring 1)
 
-  // F where ring numbers match exactly, O where they differ by 1
+  // Ring numbering for activities: top row = ring 1 (Activity 1), bottom row = ring nA
+  // OBJ: rightmost col = ring 1
   const aoMatrix = (nA, nO) => Array(nA).fill(null).map((_,r)=>Array(nO).fill(null).map((_,c)=>{
-    const rn = nA-r, cn = nO-c;
+    const rn = r+1,    cn = nO-c;  // top row = ring 1, rightmost OBJ = ring 1
     if(rn===cn) return 'F';
     if(Math.abs(rn-cn)===1) return 'O';
     return '_';
   }));
-  // AK matrix: use kpiColorMap and colorMap to correlate KPIs to their owning activity
-  // F when activity's value group matches KPI's value group exactly
-  // O when they are adjacent value groups
   const akMatrixFromColorMap = (nA, nK, colorMap, kpiColorMap) => {
     if(!colorMap.length || !kpiColorMap.length) {
-      // Fall back to ring-number logic if no colorMap
       return Array(nA).fill(null).map((_,r)=>Array(nK).fill(null).map((_,c)=>{
-        const rn = nA-r, cn = c+1;
+        const rn = r+1, cn = c+1;  // top row = ring 1, leftmost KPI = ring 1
         if(rn===cn) return 'F';
         if(Math.abs(rn-cn)===1) return 'O';
         return '_';
@@ -828,7 +825,7 @@ function buildFallback(vision, values, methods, measures, owners, colorMap, kpiC
     }));
   };
   const awnMatrix = (nA, nW) => Array(nA).fill(null).map((_,r)=>Array(nW).fill(null).map((_,c)=>{
-    const rn = nA-r, cn = c+1;
+    const rn = r+1, cn = c+1;  // top row = ring 1, leftmost owner = ring 1
     if(rn===cn) return 'F';
     if(Math.abs(rn-cn)===1) return 'O';
     return '_';
@@ -1056,11 +1053,11 @@ function renderMatrix(d){
   {
     // Build sort key for each KPI col: ring# of first F-correlated activity, else O, else nA+1
     const kpiOrder = KPI.map((_, c) => {
-      for(let r=nA-1;r>=0;r--){  // scan from inner ring outward
-        if((AK[r]||[])[c]==='F') return (nA - r);
+      for(let r=0;r<nA;r++){  // scan from top (ring 1) outward
+        if((AK[r]||[])[c]==='F') return (r + 1);
       }
-      for(let r=nA-1;r>=0;r--){
-        if((AK[r]||[])[c]==='O') return (nA - r) + 0.5;
+      for(let r=0;r<nA;r++){
+        if((AK[r]||[])[c]==='O') return (r + 1) + 0.5;
       }
       return nA + 1;
     });
@@ -1106,7 +1103,8 @@ function renderMatrix(d){
 
   let h=`<colgroup>${cgCols}</colgroup>`;
 
-  // Activity rows — OWN vtCells rowspan nA+1 (activity rows + center row), emitted in row 0 only
+  // Activity rows — Activity 1 at top (index 0), no reversal needed
+  // OWN vtCells rowspan nA+1 (activity rows + center row), emitted in row 0 only
   for(let r=0;r<nA;r++){
     h+=`<tr>`;
     for(let c=0;c<nO;c++){ const sc=colorMap[r]!==undefined?`shade-v${(colorMap[r]%5)+1}`:''; h+=dot((AO[r]||[])[c]||'_','#fff','AO',r,c,sc); }
@@ -1114,7 +1112,14 @@ function renderMatrix(d){
     h+=`<td data-field="act-${r}" contenteditable="true" class="cell-editable" style="width:${LC}px;height:${RH}px;background:${actColor};padding:4px 10px;font-size:11px;line-height:1.4;vertical-align:middle;white-space:nowrap;text-align:left;color:white;font-weight:600;" data-placeholder="Activity ${r+1}">${esc(ACT[r]||'')}</td>`;
     for(let c=0;c<nK;c++){ const sc=colorMap[r]!==undefined?`shade-v${(colorMap[r]%5)+1}`:''; h+=dot((AK[r]||[])[c]||'_','#fff','AK',r,c,sc); }
     for(let c=0;c<nW;c++){ const sc=colorMap[r]!==undefined?`shade-v${(colorMap[r]%5)+1}`:''; h+=dot((AWN[r]||[])[c]||'_','#fff','AWN',r,c,sc); }
-    // OWN vtCells rendered in center row, same cols as AWN dots
+    if(r===0){
+      const ownH = nA*RH + CH;
+      for(let c=0;c<nW;c++){
+        h+=`<td style="width:${D}px;height:${ownH}px;background:#b8d4a8;vertical-align:top;text-align:center;border:1px solid #bbb;" rowspan="${nA+1}">
+          <div data-field="own-${c}" contenteditable="true" class="cell-editable" style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;font-weight:600;color:#2a4a1a;white-space:nowrap;display:flex;align-items:center;justify-content:flex-start;width:${D}px;height:${ownH}px;padding-top:8px;">${esc(OWN[c]||'')}</div>
+        </td>`;
+      }
+    }
     h+=`</tr>`;
   }
 
@@ -1141,14 +1146,14 @@ function renderMatrix(d){
   for(let c=0;c<nK;c++){
     // Primary: use kpiColorMap — derived directly from cascade (measure → method → value group)
     let kpiColorIdx = kpiColorMap[c] !== undefined ? kpiColorMap[c] : -1;
-    // Secondary: activity correlation dot (F then O)
+    // Secondary: activity correlation dot (F then O) — scan from top (ring 1) outward
     if(kpiColorIdx===-1){
-      for(let r=nA-1;r>=0;r--){
+      for(let r=0;r<nA;r++){
         if((AK[r]||[])[c]==='F' && colorMap[r]!==undefined){ kpiColorIdx=colorMap[r]; break; }
       }
     }
     if(kpiColorIdx===-1){
-      for(let r=nA-1;r>=0;r--){
+      for(let r=0;r<nA;r++){
         if((AK[r]||[])[c]==='O' && colorMap[r]!==undefined){ kpiColorIdx=colorMap[r]; break; }
       }
     }
@@ -1160,12 +1165,7 @@ function renderMatrix(d){
     const kpiCol = VALUE_COLORS[kpiColorIdx % VALUE_COLORS.length];
     h+=vtCell(KPI[c]||'',kpiCol.strong,'rgba(255,255,255,0.92)',`kpi-${c}`);
   }
-  for(let c=0;c<nW;c++){
-    const ownH = nA*RH + CH;
-    h+=`<td style="width:${D}px;height:${CH}px;background:#b8d4a8;vertical-align:top;text-align:center;border:1px solid #bbb;">
-      <div data-field="own-${c}" contenteditable="true" class="cell-editable" style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;font-weight:600;color:#2a4a1a;white-space:nowrap;display:flex;align-items:center;justify-content:flex-start;width:${D}px;height:${CH}px;padding-top:8px;">${esc(OWN[c]||'')}</div>
-    </td>`;
-  }
+  // OWN cols already rowspanned from first activity row — skip here
   h+=`</tr>`;
 
   // LT rows — Co-owners label in the OWN cols of the first row, aligned with Vision
