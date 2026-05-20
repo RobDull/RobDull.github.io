@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y1JYXTE5J"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-0Y1JYXTE5J');
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Technical Business Case Generator | Rob Dull</title>
@@ -17,7 +9,7 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
   --ink:#0a0a0a;--white:#ffffff;--off:#f7f7f7;--off2:#f0f0f0;--rule:#e8e8e8;
-  --accent:#1a3a5c;--accent2:#6b8f71;--sage:#6b8f71;--sage-lt:#eef4ef;--muted:#6b6b6b;--light-muted:#9a9a9a;
+  --accent:#1a3a5c;--accent2:#c8662a;--muted:#6b6b6b;--light-muted:#9a9a9a;
   --green:#2a7a5a;--gold:#b5810a;--red:#b03030;--purple:#5a30b0;--orange:#c8662a;
   --font:'Inter',sans-serif;
 }
@@ -26,23 +18,17 @@ body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:
 
 /* NAV */
 nav{position:sticky;top:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
-.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--rule);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:white;}
+.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--ink);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:white;}
 .nl a:hover{background:var(--accent);color:white;border-color:var(--accent);}
 .nn{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
 .nl{display:flex;gap:10px;align-items:center;}
 
 
-/* BREADCRUMB + PAGE HEAD */
-.bc{max-width:1060px;margin:0 auto;padding:88px 40px 0;}
-.bc-inner{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--muted);}
-.bc-inner a{color:var(--muted);text-decoration:none;}
-.bc-inner a:hover{color:var(--ink);}
-.bc-sep{opacity:.4;}
-.page-head{max-width:1060px;margin:0 auto;padding:24px 40px 48px;border-bottom:1px solid var(--rule);}
-.page-tag{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;}
-.page-head h1{font-size:clamp(32px,4vw,52px);font-weight:900;letter-spacing:-.03em;line-height:1.05;color:var(--ink);margin-bottom:14px;}
-.page-head h1 em{font-style:normal;color:var(--accent);}
-.page-head p{color:var(--muted);font-size:15px;line-height:1.8;max-width:560px;}
+/* PAGE HERO */
+.ph{max-width:800px;margin:0 auto;padding:72px 40px 60px;text-align:center;}
+.ey{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:16px;}
+.ph h1{font-size:clamp(32px,4.5vw,54px);font-weight:900;letter-spacing:-.03em;line-height:1.05;color:var(--ink);margin-bottom:18px;}
+.ph p{color:var(--muted);font-size:16px;line-height:1.75;max-width:580px;margin:0 auto;}
 
 /* COMPLEXITY BAR */
 .cbar{background:var(--off);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:16px 40px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
@@ -172,6 +158,31 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   .dd-area{padding:60px 20px;}
   footer{padding:20px;flex-direction:column;text-align:center;}
 }
+
+/* ── API KEY MODAL ── */
+.apikey-overlay{position:fixed;inset:0;background:rgba(10,10,10,.55);backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s;}
+.apikey-overlay.visible{opacity:1;pointer-events:all;}
+.apikey-modal{background:white;border-radius:14px;padding:36px;max-width:480px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,.18);transform:translateY(8px);transition:transform .2s;}
+.apikey-overlay.visible .apikey-modal{transform:translateY(0);}
+.akm-eyebrow{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;}
+.akm-title{font-size:22px;font-weight:900;letter-spacing:-.02em;color:var(--ink);margin-bottom:10px;}
+.akm-body{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:22px;}
+.akm-body a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(26,58,92,.2);}
+.akm-body a:hover{border-color:var(--accent);}
+.akm-input-row{display:flex;gap:8px;margin-bottom:10px;}
+.akm-input{flex:1;border:2px solid var(--rule);border-radius:8px;padding:11px 14px;font-family:var(--font);font-size:14px;color:var(--ink);outline:none;transition:border-color .15s;font-family:monospace;}
+.akm-input:focus{border-color:var(--accent);}
+.akm-input.error{border-color:#b03030;}
+.akm-submit{padding:11px 22px;background:var(--ink);color:white;border:none;border-radius:8px;font-family:var(--font);font-size:13px;font-weight:700;cursor:pointer;transition:background .15s;white-space:nowrap;}
+.akm-submit:hover{background:var(--accent);}
+.akm-error{font-size:12px;color:#b03030;font-weight:600;min-height:16px;margin-bottom:4px;}
+.akm-note{font-size:12px;color:var(--muted);line-height:1.6;}
+.akm-note strong{color:var(--ink);}
+/* Key status pill */
+.key-status{display:none;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--muted);padding:7px 14px;border:1.5px solid var(--rule);border-radius:20px;cursor:pointer;transition:all .15s;background:white;}
+.key-status:hover{border-color:#b03030;color:#b03030;}
+.key-status.visible{display:flex;}
+.key-status-dot{width:7px;height:7px;border-radius:50%;background:#2a6b6b;}
 </style>
 </head>
 <body>
@@ -182,26 +193,37 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <a href="mailto:rob.dull@gmail.com">Contact</a>
     <a href="../../index.html#about">About</a>
     <a href="../../index.html#tools">Work</a>
+    <button class="key-status" id="keyStatusPill" onclick="clearApiKey()" title="Click to clear API key">
+      <span class="key-status-dot"></span>
+      <span>API key set &mdash; click to clear</span>
+    </button>
   </div>
 </nav>
 
-<!-- BREADCRUMB -->
-<div class="bc">
-  <div class="bc-inner">
-    <a href="../../index.html">robdull</a>
-    <span class="bc-sep">/</span>
-    <a href="../tools-index.html">tools</a>
-    <span class="bc-sep">/</span>
-    <span>business-case-generator</span>
+<!-- API KEY MODAL -->
+<div class="apikey-overlay" id="apikeyOverlay">
+  <div class="apikey-modal">
+    <div class="akm-eyebrow">Live Demo</div>
+    <div class="akm-title">Try this tool with your own API key</div>
+    <div class="akm-body">
+      This is a live demo — enter your Anthropic API key to run the generator for real. Your key is used only for this session and never stored or shared.<br><br>
+      Don't have a key? Get one free at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> — takes two minutes, costs a few cents per use.
+    </div>
+    <div class="akm-error" id="akmError"></div>
+    <div class="akm-input-row">
+      <input class="akm-input" id="akmInput" type="password" placeholder="sk-ant-..." autocomplete="off" onkeydown="if(event.key==='Enter')submitApiKey()">
+      <button class="akm-submit" onclick="submitApiKey()">Run the demo</button>
+    </div>
+    <div class="akm-note"><strong>Privacy:</strong> Your key lives in sessionStorage — cleared when you close this tab. It is never logged, stored, or shared.</div>
   </div>
 </div>
 
-<!-- PAGE HEAD -->
-<div class="page-head">
-  <div class="page-tag">Business Justification</div>
-  <h1>From project inputs<br>to <em>executive-ready</em><br>business case.</h1>
-  <p>It can be difficult to communicate the benefits of technical work to non-technical stakeholders, but you want a good enough pitch to give context in planning and review sessions. This tool translates backend development and infrastructure proposals into structured, stakeholder-ready business justifications written for non-technical audiences. Use the analysis depth selector to choose between a Quick Pitch, a Standard case, or a Full Analysis. The form expands to match the depth you select.</p>
-</div>
+<!-- PAGE HERO -->
+<section class="ph">
+  <div class="ey">AI-Augmented Tool</div>
+  <h1>Technical Business Case Generator</h1>
+  <p>Translates backend development and infrastructure proposals into executive-ready business justifications, written for non-technical stakeholders. The form adapts based on how much detail you need.</p>
+</section>
 
 <!-- COMPLEXITY SELECTOR -->
 <div class="cbar">
@@ -239,14 +261,6 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
         <div class="field fspan">
           <label>What business problem does this solve?</label>
           <textarea id="problem" placeholder="What is breaking, slowing the business, creating risk, or limiting growth today? What happens if nothing changes?"></textarea>
-        </div>
-        <div class="field fspan">
-          <label>Who owns this problem? (stakeholders who feel it most)</label>
-          <input type="text" id="problemOwners" placeholder="e.g. VP of Engineering frustrated by incident response time; CFO concerned about compliance exposure; Sales losing deals due to reliability">
-        </div>
-        <div class="field fspan">
-          <label>What is the current workaround or old way of handling this?</label>
-          <textarea id="workaround" placeholder="e.g. Engineers manually monitor four dashboards; on-call team pages the right squad by memory; monthly spreadsheet reconciliation by two analysts..."></textarea>
         </div>
         <div class="field">
           <label>Estimated cost</label>
@@ -310,8 +324,8 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="fsec-head">
       <div class="fsec-num">3</div>
       <div>
-        <div class="fsec-title">Internal People Impacted</div>
-        <div class="fsec-sub">Employees whose time, productivity, or daily work changes — used for salary-based ROI</div>
+        <div class="fsec-title">People Impacted</div>
+        <div class="fsec-sub">Employee roles whose time or productivity is part of the ROI calculation</div>
       </div>
       <div class="fsec-badge">Standard+</div>
     </div>
@@ -319,12 +333,6 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <p style="font-size:12px;color:var(--muted);margin-bottom:14px;font-weight:500;">Salary-based ROI is often the most compelling number for finance-oriented stakeholders. Add the roles most affected by this project.</p>
       <div class="person-rows" id="personRows"></div>
       <button class="add-btn" onclick="addPerson()">+ Add employee role</button>
-      <div class="fgrid" style="margin-top:20px;">
-        <div class="field fspan">
-          <label>What specifically is better for these employees vs. the old way?</label>
-          <textarea id="employeeImprovement" placeholder="e.g. On-call engineers stop spending 12 hrs/week on manual log checks; support agents no longer reconcile duplicate records by hand; analysts get reports in minutes instead of waiting overnight..."></textarea>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -333,24 +341,20 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="fsec-head">
       <div class="fsec-num" id="users-num">4</div>
       <div>
-        <div class="fsec-title">External and Customer Impact</div>
-        <div class="fsec-sub">How customers, end users, or external partners experience the change</div>
+        <div class="fsec-title">End-User Impact</div>
+        <div class="fsec-sub">How customers or internal users experience the change</div>
       </div>
       <div class="fsec-badge">Full Analysis</div>
     </div>
     <div class="fsec-body">
       <div class="fgrid">
         <div class="field">
-          <label>Who are the external users or customers affected?</label>
-          <input type="text" id="endUsers" placeholder="e.g. 12,000 policyholders; enterprise clients on SLA contracts; partner API consumers">
+          <label>Who are the end users?</label>
+          <input type="text" id="endUsers" placeholder="e.g. 12,000 customers, finance team of 45">
         </div>
         <div class="field fspan">
           <label>How does their experience change?</label>
-          <textarea id="userImpact" placeholder="e.g. Page load drops from 8s to 1.2s; no more downtime during business hours; self-service replaces manual requests that took 3 days..."></textarea>
-        </div>
-        <div class="field fspan">
-          <label>What is specifically better vs. the old way or current workaround?</label>
-          <textarea id="userImprovement" placeholder="e.g. Previously customers detected outages before we did and called support; now anomaly detection fires in under 3 minutes. Previously renewal required a phone call; now it completes in the portal in 4 clicks..."></textarea>
+          <textarea id="userImpact" placeholder="e.g. Page load drops from 8s to 1.2s, zero downtime during business hours, self-service replaces manual requests..."></textarea>
         </div>
       </div>
     </div>
@@ -497,7 +501,7 @@ For compliance and audit stakeholders, three regulated pipelines currently flagg
 The incident trajectory will not improve without structural change. Five incidents in 90 days at $48,000 average is a $960,000 annualized run rate. As infrastructure grows, fragmented monitoring systems degrade further. Inaction is a decision to absorb escalating incident costs on a growing infrastructure base.
 
 On-call burnout has been cited in two recent exit interviews. Replacing an experienced SRE costs upward of $250,000. Two enterprise accounts have also noted slow incident awareness in quarterly business reviews.</div></div>
-      <div class="out-section"><div class="out-head" style="background:#6b8f7118;border-left:4px solid #6b8f71;"><div class="dot" style="background:#6b8f71;"></div><div class="sec-name" style="color:#6b8f71;">How Returns and Risks Evolve Over Time</div></div><div class="out-body">Month 1 closes the compliance gaps. The three regulated pipelines are instrumented first. The SRE team begins validating anomaly detection against known incident patterns.
+      <div class="out-section"><div class="out-head" style="background:#c8662a18;border-left:4px solid #c8662a;"><div class="dot" style="background:#c8662a;"></div><div class="sec-name" style="color:#c8662a;">How Returns and Risks Evolve Over Time</div></div><div class="out-body">Month 1 closes the compliance gaps. The three regulated pipelines are instrumented first. The SRE team begins validating anomaly detection against known incident patterns.
 
 Months 2 and 3 expand coverage across the remaining seven pipelines. Unified dashboards are operational for all 10 pipeline teams. Alert volumes from legacy tools begin declining. Automated runbooks handle their first real incidents without human triage.
 
@@ -545,7 +549,7 @@ The implementation approach manages this through a phased pipeline rollout. The 
 PagerDuty integration is configured pipeline by pipeline rather than as a cutover, ensuring on-call routing is validated for each team's alerting profile before the legacy routing is retired. No pipeline is ever in a state of degraded monitoring coverage during the transition.
 
 The four-month timeline includes a two-week buffer at the end of Month 3 for configuration refinement before final legacy decommission. The implementation team has prior Datadog deployments in two of the three infrastructure environments involved.</div></div>
-      <div class="out-section"><div class="out-head" style="background:#6b8f7118;border-left:4px solid #6b8f71;"><div class="dot" style="background:#6b8f71;"></div><div class="sec-name" style="color:#6b8f71;">How Returns and Risks Evolve Over Time</div></div><div class="out-body">Month 1 is the highest-impact phase relative to effort. The three regulated pipelines are instrumented first. Compliance gaps close. The audit exposure open since the last review is resolved before it can escalate. The SRE team gets its first experience with unified Datadog dashboards and begins validating anomaly detection against known incident patterns.
+      <div class="out-section"><div class="out-head" style="background:#c8662a18;border-left:4px solid #c8662a;"><div class="dot" style="background:#c8662a;"></div><div class="sec-name" style="color:#c8662a;">How Returns and Risks Evolve Over Time</div></div><div class="out-body">Month 1 is the highest-impact phase relative to effort. The three regulated pipelines are instrumented first. Compliance gaps close. The audit exposure open since the last review is resolved before it can escalate. The SRE team gets its first experience with unified Datadog dashboards and begins validating anomaly detection against known incident patterns.
 
 Months 2 and 3 expand coverage across the remaining seven pipelines. Unified dashboards are operational for all 10 pipeline teams. Alert volumes from legacy tools begin declining as Datadog routing takes over. Automated runbooks handle their first real incidents without human triage.
 
@@ -636,7 +640,7 @@ For Release Managers specifically, the role shifts from coordination and executi
 The enterprise customer risk is time-sensitive. Two accounts representing $380,000 in combined ARR have formally escalated. Escalations of this type have a resolution window. Customers who escalate and see no improvement within one or two quarters make contract decisions accordingly.
 
 Engineering talent retention is a slower-moving but equally real risk. Deployment frustration has appeared in exit interviews. The cost of replacing an experienced software engineer typically exceeds $200,000.</div></div>
-      <div class="out-section"><div class="out-head" style="background:#6b8f7118;border-left:4px solid #6b8f71;"><div class="dot" style="background:#6b8f71;"></div><div class="sec-name" style="color:#6b8f71;">How Returns and Risks Evolve Over Time</div></div><div class="out-body">Months 1 and 2 are the setup phase. The first four to five low-criticality services are containerized and running through automated pipelines. The team builds familiarity and refines the approach. Engineering confidence builds with each successful automated deployment.
+      <div class="out-section"><div class="out-head" style="background:#c8662a18;border-left:4px solid #c8662a;"><div class="dot" style="background:#c8662a;"></div><div class="sec-name" style="color:#c8662a;">How Returns and Risks Evolve Over Time</div></div><div class="out-body">Months 1 and 2 are the setup phase. The first four to five low-criticality services are containerized and running through automated pipelines. The team builds familiarity and refines the approach. Engineering confidence builds with each successful automated deployment.
 
 Month 3 marks a visible inflection. The majority of services have migrated. The production incident rate begins declining. The two enterprise customers begin to see faster resolution times.
 
@@ -680,7 +684,7 @@ The primary complexity comes from scope rather than technology uncertainty. Twel
 Our sequencing approach manages risk by starting with low-stakes services in Months 1 and 2. We build team familiarity and refine our approach before migrating high-criticality services. By the time we reach the most sensitive parts of the system, the team has run dozens of deployments through the new pipeline and the process is routine.
 
 The five-month timeline includes a one-month buffer. The team executing this has direct experience with the existing Jenkins infrastructure and has containerized services in prior projects.</div></div>
-      <div class="out-section"><div class="out-head" style="background:#6b8f7118;border-left:4px solid #6b8f71;"><div class="dot" style="background:#6b8f71;"></div><div class="sec-name" style="color:#6b8f71;">How Returns and Risks Evolve Over Time</div></div><div class="out-body">Months 1 and 2 are the setup phase. The new GitHub Actions infrastructure is configured. The first four to five low-criticality services are containerized and running through automated pipelines. The team builds familiarity and refines the approach. No broad productivity gains yet, but engineering confidence in the new system builds with each successful automated deployment.
+      <div class="out-section"><div class="out-head" style="background:#c8662a18;border-left:4px solid #c8662a;"><div class="dot" style="background:#c8662a;"></div><div class="sec-name" style="color:#c8662a;">How Returns and Risks Evolve Over Time</div></div><div class="out-body">Months 1 and 2 are the setup phase. The new GitHub Actions infrastructure is configured. The first four to five low-criticality services are containerized and running through automated pipelines. The team builds familiarity and refines the approach. No broad productivity gains yet, but engineering confidence in the new system builds with each successful automated deployment.
 
 Month 3 marks a visible inflection. The majority of services have migrated. The production incident rate begins declining. The two enterprise customers begin to see faster resolution times as their most frequently touched services go through the new pipeline.
 
@@ -777,7 +781,7 @@ For ML Engineers and Backend Engineers, the elimination of daily batch job monit
 The churn signal is already measurable. Customer complaints about stale AI recommendations increased 60% over the past twelve months. Power-user churn attributable to this issue costs $620,000 per year today, and that figure grows as the gap between user expectations and our AI capabilities widens.
 
 The talent risk is real. Data scientists who spend 35% of their time on infrastructure workarounds are not doing the work they were hired to do. The cost of replacing a single data scientist, including recruiting and ramp time, typically exceeds $200,000.</div></div>
-      <div class="out-section"><div class="out-head" style="background:#6b8f7118;border-left:4px solid #6b8f71;"><div class="dot" style="background:#6b8f71;"></div><div class="sec-name" style="color:#6b8f71;">How Returns and Risks Evolve Over Time</div></div><div class="out-body">Months 1 through 3 represent the investment phase. The new streaming infrastructure is being built while the existing batch system continues operating. No revenue benefits have been realized yet, though the data science team begins recovering some capacity as the first streaming pipelines reduce their workaround burden.
+      <div class="out-section"><div class="out-head" style="background:#c8662a18;border-left:4px solid #c8662a;"><div class="dot" style="background:#c8662a;"></div><div class="sec-name" style="color:#c8662a;">How Returns and Risks Evolve Over Time</div></div><div class="out-body">Months 1 through 3 represent the investment phase. The new streaming infrastructure is being built while the existing batch system continues operating. No revenue benefits have been realized yet, though the data science team begins recovering some capacity as the first streaming pipelines reduce their workaround burden.
 
 Month 4 marks the first inflection point. The initial AI features launch on the new pipeline. Revenue generation begins. The product backlog starts clearing.
 
@@ -828,7 +832,7 @@ The core technical change is migrating from Apache Spark batch processing to Apa
 Our mitigation approach is a three-month parallel run period in which both systems operate simultaneously. During this window, teams validate streaming outputs against batch outputs and build confidence before any consumer is cut over. No downstream system is migrated until it has been fully validated on the new pipeline.
 
 The team executing this project has direct experience with the existing batch architecture and has completed two prior infrastructure migrations of comparable scope. The eight-month timeline is conservative, with two months of buffer built in.</div></div>
-      <div class="out-section"><div class="out-head" style="background:#6b8f7118;border-left:4px solid #6b8f71;"><div class="dot" style="background:#6b8f71;"></div><div class="sec-name" style="color:#6b8f71;">How Returns and Risks Evolve Over Time</div></div><div class="out-body">Months 1 through 3 represent the investment phase. The new streaming infrastructure is being built while the existing batch system continues operating. Costs are at their highest point. No revenue benefits have been realized yet, though the data science team begins recovering some capacity as the first streaming pipelines reduce their workaround burden.
+      <div class="out-section"><div class="out-head" style="background:#c8662a18;border-left:4px solid #c8662a;"><div class="dot" style="background:#c8662a;"></div><div class="sec-name" style="color:#c8662a;">How Returns and Risks Evolve Over Time</div></div><div class="out-body">Months 1 through 3 represent the investment phase. The new streaming infrastructure is being built while the existing batch system continues operating. Costs are at their highest point. No revenue benefits have been realized yet, though the data science team begins recovering some capacity as the first streaming pipelines reduce their workaround burden.
 
 Month 4 marks the first inflection point. The initial AI features launch on the new pipeline. Revenue generation begins. The product backlog starts clearing. User-facing AI experiences improve for the segments served by the first features to go live.
 
@@ -998,8 +1002,6 @@ PROJECT:
 Name: ${v('projectName')||'Not specified'}
 Description: ${v('description')||'Not provided'}
 Business Problem: ${v('problem')||'Not provided'}
-Problem Stakeholders (who owns this pain): ${v('problemOwners')||'Not specified'}
-Current Workaround or Old Way: ${v('workaround')||'Not provided'}
 Cost: ${v('cost')||'Not specified'}
 Timeline: ${v('timeline')||'Not specified'}
 Revenue Opportunity: ${v('revenue')||'Not specified'}
@@ -1007,20 +1009,33 @@ Cost Savings: ${v('savings')||'Not specified'}
 Productivity Gains: ${v('productivity')||'Not provided'}
 Pain Points: ${v('painPoints')||'Not provided'}
 ${currentMode!=='quick'&&peopleStr?'Impacted Employees:\n'+peopleStr:''}
-${currentMode!=='quick'?'What specifically improves for those employees vs. the old way: '+( v('employeeImprovement')||'Not provided'):''}
-End Users / External Customers: ${currentMode==='full'?v('endUsers')||'Not specified':''}
-How External User Experience Changes: ${currentMode==='full'?v('userImpact')||'Not provided':''}
-What Is Specifically Better for External Users vs. Before: ${currentMode==='full'?v('userImprovement')||'Not provided':''}
+End Users: ${currentMode==='full'?v('endUsers')||'Not specified':''}
+User Impact: ${currentMode==='full'?v('userImpact')||'Not provided':''}
 Technical Complexity: ${currentMode==='full'?v('complexity')||'Not specified':''}
 Technical Details: ${currentMode==='full'?v('techDetails')||'None':''}
 Risks of Inaction: ${currentMode==='full'?v('inactionRisks')||'Not provided':''}
 Return/Risk Evolution: ${currentMode==='full'?v('timelineChanges')||'Not provided':''}
 Audience: ${v('audience')||'Non-technical business stakeholders'}`;
 
+  // Require API key
+  const apiKey = sessionStorage.getItem('anthropic_api_key');
+  if (!apiKey) {
+    btn.disabled = false;
+    btn.textContent = 'Generate Business Case';
+    area.classList.add('hidden');
+    showApiKeyModal(() => generate());
+    return;
+  }
+
   try {
-    const res = await fetch('WORKER_URL_HERE', {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{
+        'Content-Type':'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})
     });
     const data = await res.json();
@@ -1100,6 +1115,44 @@ function copyExDepth(exNum, depth) {
     const btn=el.querySelector('.cp-btn');
     if(btn){btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy document',2000);}
   });
+}
+
+
+// ── API KEY MODAL ──
+let _apikeyCallback = null;
+
+function showApiKeyModal(callback) {
+  _apikeyCallback = callback || null;
+  document.getElementById('akmInput').value = '';
+  document.getElementById('akmError').textContent = '';
+  document.getElementById('akmInput').classList.remove('error');
+  document.getElementById('apikeyOverlay').classList.add('visible');
+  setTimeout(() => document.getElementById('akmInput').focus(), 120);
+}
+
+function submitApiKey() {
+  const val = document.getElementById('akmInput').value.trim();
+  const errEl = document.getElementById('akmError');
+  if (!val.startsWith('sk-ant-')) {
+    errEl.textContent = 'Key should start with sk-ant- — check and try again.';
+    document.getElementById('akmInput').classList.add('error');
+    return;
+  }
+  errEl.textContent = '';
+  sessionStorage.setItem('anthropic_api_key', val);
+  document.getElementById('apikeyOverlay').classList.remove('visible');
+  document.getElementById('keyStatusPill').classList.add('visible');
+  if (_apikeyCallback) { _apikeyCallback(); _apikeyCallback = null; }
+}
+
+function clearApiKey() {
+  sessionStorage.removeItem('anthropic_api_key');
+  document.getElementById('keyStatusPill').classList.remove('visible');
+}
+
+// Show pill if key already in session
+if (sessionStorage.getItem('anthropic_api_key')) {
+  document.getElementById('keyStatusPill').classList.add('visible');
 }
 
 // Init
