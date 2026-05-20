@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Is it Safe to Use AI? A Submarine Commander vs. YOLO Mode | Rob Dull</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y1JYXTE5J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0Y1JYXTE5J');
+</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0a0a0a;--white:#ffffff;--off:#f7f7f7;--rule:#e8e8e8;
+  --accent:#1a3a5c;--accent2:#c8662a;--muted:#6b6b6b;
+  --font:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;min-height:100vh;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
+.nn{font-size:15px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
+.nl{display:flex;gap:10px;align-items:center;}
+.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--ink);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:white;}
+.nl a:hover{background:var(--accent);color:white;border-color:var(--accent);}
+.nl a.li-btn{background:var(--accent);color:white;border-color:var(--accent);}
+.nl a.li-btn:hover{background:#0f2540;border-color:#0f2540;}
+
+/* BREADCRUMB */
+.bc{max-width:780px;margin:0 auto;padding:100px 40px 0;}
+.bc-inner{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--muted);}
+.bc-inner a{color:var(--muted);text-decoration:none;transition:color .15s;}
+.bc-inner a:hover{color:var(--ink);}
+.bc-sep{color:var(--rule);}
+
+/* ARTICLE HEADER */
+.art-header{max-width:780px;margin:0 auto;padding:28px 40px 48px;}
+.art-tag{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:14px;}
+.art-header h1{font-size:clamp(28px,4vw,48px);font-weight:900;letter-spacing:-.03em;line-height:1.08;color:var(--ink);margin-bottom:20px;}
+.art-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.art-date{font-size:12px;font-weight:600;color:var(--muted);}
+.art-source{font-size:12px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px;}
+.art-source a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(26,58,92,.25);transition:border-color .15s;}
+.art-source a:hover{border-color:var(--accent);}
+.art-dot{width:3px;height:3px;border-radius:50%;background:var(--rule);}
+
+/* ARTICLE BODY */
+.art-body{max-width:780px;margin:0 auto;padding:0 40px 80px;}
+.art-body p{font-size:16px;line-height:1.85;color:#1a1a1a;margin-bottom:24px;}
+.art-body h2{font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin:44px 0 16px;}
+
+/* TABLES */
+.art-body table{width:100%;border-collapse:collapse;margin:28px 0;font-size:14px;}
+.art-body th{background:var(--ink);color:white;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:12px 16px;text-align:left;}
+.art-body td{padding:11px 16px;border-bottom:1px solid var(--rule);color:#2a2a2a;line-height:1.6;vertical-align:top;}
+.art-body tr:last-child td{border-bottom:none;}
+.art-body tr:nth-child(even) td{background:var(--off);}
+
+/* CERT TABLE — category-grouped with accent column */
+.cert-table{width:100%;border-collapse:collapse;margin:28px 0;font-size:14px;}
+.cert-table th{background:var(--ink);color:white;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:12px 16px;text-align:left;}
+.cert-table td{padding:12px 16px;border-bottom:1px solid var(--rule);color:#2a2a2a;line-height:1.65;vertical-align:top;}
+.cert-table tr:last-child td{border-bottom:none;}
+.cert-table .cat-cell{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;}
+.cert-table .cat-mastery{color:#1a3a5c;}
+.cert-table .cat-control{color:#c8662a;}
+.cert-table .cat-clarity{color:#2a6b6b;}
+.cert-table tr.cat-mastery-row td{background:rgba(26,58,92,.04);}
+.cert-table tr.cat-control-row td{background:rgba(200,102,42,.04);}
+.cert-table tr.cat-clarity-row td{background:rgba(42,107,107,.04);}
+
+/* CALLOUT */
+.callout{background:var(--off);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:20px 24px;margin:32px 0;font-size:15px;line-height:1.8;color:#2a2a2a;}
+.callout strong{color:var(--ink);}
+
+/* CALLOUT ORANGE variant */
+.callout-orange{background:rgba(200,102,42,.06);border-left:4px solid var(--accent2);border-radius:0 8px 8px 0;padding:20px 24px;margin:32px 0;font-size:15px;line-height:1.8;color:#2a2a2a;}
+
+/* BULLET LIST */
+.art-body ul.art-list{list-style:none;margin:0 0 28px;padding:0;}
+.art-body ul.art-list li{position:relative;padding:10px 0 10px 22px;border-bottom:1px solid var(--rule);font-size:15px;line-height:1.7;color:#2a2a2a;}
+.art-body ul.art-list li:last-child{border-bottom:none;}
+.art-body ul.art-list li::before{content:'';position:absolute;left:0;top:20px;width:7px;height:7px;border-radius:50%;background:var(--accent2);}
+
+/* FOOTNOTES */
+.footnotes{margin-top:56px;padding-top:28px;border-top:1px solid var(--rule);}
+.footnotes p{font-size:13px;line-height:1.75;color:var(--muted);margin-bottom:10px;}
+.footnotes a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(26,58,92,.2);word-break:break-all;}
+.footnotes a:hover{border-color:var(--accent);}
+.fn-label{font-weight:700;color:var(--ink);margin-right:4px;}
+
+/* DIVIDER */
+.art-divider{max-width:780px;margin:0 auto;padding:0 40px;border-top:1px solid var(--rule);}
+
+/* NEXT/BACK NAV */
+.art-nav{max-width:780px;margin:0 auto;padding:40px 40px 80px;display:flex;justify-content:space-between;align-items:center;gap:16px;}
+.art-nav a{font-size:13px;font-weight:700;color:var(--muted);text-decoration:none;border:2px solid var(--rule);border-radius:6px;padding:10px 18px;transition:all .15s;}
+.art-nav a:hover{border-color:var(--ink);color:var(--ink);}
+
+footer{padding:28px 40px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+footer p{font-size:12px;font-weight:500;color:var(--muted);}
+
+@media(max-width:680px){
+  nav{padding:14px 20px;}
+  .nl a{padding:7px 12px;font-size:12px;}
+  .bc,.art-header,.art-body,.art-nav,.art-divider{padding-left:20px;padding-right:20px;}
+  footer{padding:20px 24px;flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nn">Rob Dull</a>
+  <div class="nl">
+    <a href="../index.html#tools">Work</a>
+    <a href="../index.html#about">About</a>
+    <a href="mailto:rob.dull@gmail.com">Contact</a>
+    <a href="https://linkedin.com/in/robdull" target="_blank" class="li-btn">LinkedIn &#8599;</a>
+  </div>
+</nav>
+
+<div class="bc">
+  <div class="bc-inner">
+    <a href="../index.html">Rob Dull</a>
+    <span class="bc-sep">&#8250;</span>
+    <a href="perspectives-index.html">Perspectives</a>
+    <span class="bc-sep">&#8250;</span>
+    <span>Is it Safe to Use AI?</span>
+  </div>
+</div>
+
+<div class="art-header">
+  <div class="art-tag">AI &bull; Leadership &bull; Product Operations</div>
+  <h1>Is it Safe to Use AI?<br><em style="font-style:normal;color:var(--accent);">A Submarine Commander vs. YOLO Mode and Loss of Skill</em></h1>
+  <div class="art-meta">
+    <span class="art-date">May 2026</span>
+    <span class="art-dot"></span>
+    <span class="art-source">Originally published on <a href="https://linkedin.com/in/robdull" target="_blank">LinkedIn &#8599;</a></span>
+  </div>
+</div>
+
+<div class="art-body">
+
+  <p>A growing percentage of work is being delegated to coding tools and agents, throughout product development and deployment pipelines. It seems more and more time-consuming to verify technical understanding, controls and guardrails, and the business intent behind development goals. These three areas are crucial, and it is more important than ever to check human understanding regularly, throughout your product operations and deployment pipelines.</p>
+
+  <p>People are using YOLO mode in tools like Cursor&sup2; — "You Only Live/Look Once" — an unhinged level of enthusiasm for relinquishing control. Meanwhile, agents are going too far and deleting databases.&sup3; Even regular ChatGPT has way too much of a go-getter "let me just take care of that for you" attitude. Adding to these concerns, there are a growing number of studies and articles detailing the loss of human expertise in areas where AI does most of the work.&#8308;</p>
+
+  <div class="callout">
+    <strong>Applying David Marquet's Leader-Leader model to the age of agentic AI:</strong> When Captain Marquet was approving a key decision, he needed to know "Is it safe?" If he could get a "yes" answer, with credible and sufficient confidence, that was all he really needed to hear. That same question is the most important safeguard in AI-native work.
+  </div>
+
+  <p>David Marquet transformed his submarine crew from the worst-performing in the US Navy into the highest-performing, without changing crew members.&sup1; He recognized that people need to be empowered to make consequential decisions with minimal oversight — but empowerment only works when the people making decisions have genuine mastery of the domain.</p>
+
+  <h2>Regarding AI-native workflows and the use of agents: "Is it safe?"</h2>
+
+  <p>We want frequent reassurance, with credible and sufficient confidence from an actual person. How can we build in trustworthy human oversight as more development responsibilities are delegated to AI — and de-skilling is a common risk?</p>
+
+  <h2>Do you have enough expertise to judge safety? Are you losing it?</h2>
+
+  <p>Marquet's Leader-Leader model has given me some useful angles on human oversight in AI-native software production. To be confident in a "yes, it's safe" answer, Marquet would certify people by asking key questions to confirm ownership of context. His certification questions focused on three pillars:</p>
+
+  <table>
+    <thead>
+      <tr><th>Pillar</th><th>What it verifies</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Mastery</strong></td><td>Technical competence — do they understand what is being built and why this approach was chosen?</td></tr>
+      <tr><td><strong>Control</strong></td><td>Governance capabilities and system constraints — do they understand the guardrails and failure modes?</td></tr>
+      <tr><td><strong>Clarity</strong></td><td>Clarity of intent — does the output serve the goal, not just the prompt?</td></tr>
+    </tbody>
+  </table>
+
+  <p>He wanted skilled leaders under his command, not followers who needed explicit rulesets to dictate each course of action. That distinction matters enormously when AI is executing consequential actions on behalf of a team.</p>
+
+  <p>On a related note, the loss of human expertise in AI-native environments has been flagged as a serious danger. A January 2026 Randomized Controlled Trial conducted by Anthropic revealed that while AI assistance dramatically speeds up software development, it can lead to a 17% decline in developer mastery and significantly weaken debugging skills.&#8309;</p>
+
+  <div class="callout-orange">
+    Anthropic's own recommendation: deploy AI tools with intentional design choices that support engineers' learning, noting that productivity benefits may come at the cost of the debugging and validation skills needed to oversee AI-generated code.
+  </div>
+
+  <p>A culture of continuous learning has been championed at every tech company I've encountered, frequently by me. Sadly, there is a vast chasm between principled discussion and meaningful implementation. A learning platform isn't a set of embedded practices, and the licenses won't get used by the majority of people who have access. We need to verify learning and understanding, with checkpoints built into our daily workflows. The need is becoming more obvious and urgent.</p>
+
+  <h2>A Certification Checklist for Safety and Learning</h2>
+
+  <p>Here is an approach to ensure that a human has engaged responsibly with what an agent is producing. I recommend that managers or leads use two or three randomly selected questions from this list during any AI-assisted code review, deployment, or consequential workflow decision. Real live human people credibly answer the question, "Is it safe?" — with credible mastery, control, and clarity. Are they learning through the use of sophisticated tools, or letting the tools get out of control?</p>
+
+  <table class="cert-table">
+    <thead>
+      <tr><th style="width:110px;">Category</th><th>Question to ask</th></tr>
+    </thead>
+    <tbody>
+      <tr class="cat-mastery-row">
+        <td class="cat-cell cat-mastery">Mastery</td>
+        <td>Can you explain why the agent chose this approach over the obvious alternative?</td>
+      </tr>
+      <tr class="cat-mastery-row">
+        <td class="cat-cell cat-mastery">Mastery</td>
+        <td>Which parts of this output did you manually verify against your own understanding?</td>
+      </tr>
+      <tr class="cat-mastery-row">
+        <td class="cat-cell cat-mastery">Mastery</td>
+        <td>What assumptions did the agent make, and are those assumptions true in your context?</td>
+      </tr>
+      <tr class="cat-control-row">
+        <td class="cat-cell cat-control">Control</td>
+        <td>How does this handle null inputs, timeouts, or unexpected states? Did the agent account for these?</td>
+      </tr>
+      <tr class="cat-control-row">
+        <td class="cat-cell cat-control">Control</td>
+        <td>What is the rollback procedure if this goes wrong, and has the agent accounted for it?</td>
+      </tr>
+      <tr class="cat-control-row">
+        <td class="cat-cell cat-control">Control</td>
+        <td>Which actions in this workflow are irreversible? Are they gated behind explicit human confirmation?</td>
+      </tr>
+      <tr class="cat-clarity-row">
+        <td class="cat-cell cat-clarity">Clarity</td>
+        <td>How does this output serve the goal we stated, not just the prompt we wrote?</td>
+      </tr>
+      <tr class="cat-clarity-row">
+        <td class="cat-cell cat-clarity">Clarity</td>
+        <td>If the AI tool disappears now, could a human debug and maintain this work in six months?</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><em>Fair warning:</em> This will save people from de-skilling, long-term redundancy, and technical liabilities — but it will also feel strange to be quizzed this way until you've gone through it several times. There's a good justification for that strangeness. Studies have shown that taking tests, or just being informed about upcoming tests, improves learning and recall. This is the "forward testing effect."&#8310;</p>
+
+  <h2>The Bottom Line</h2>
+
+  <p>The most important safeguard is a team that understands the domain well enough to spot when the agent has gone wrong. Marquet called this mastery. It's still the prerequisite for safe delegation. Confirm human mastery by certifying people respectfully and as a matter of course, at each gate.</p>
+
+  <ul class="art-list">
+    <li>When AI is doing a significant amount of heavy lifting, check for people's continuous learning and reliable grasp of context.</li>
+    <li>Design all agentic workflows with explicit gates where the agent surfaces its intended next action, then waits for human confirmation before executing anything with real-world consequences.</li>
+    <li>Cognitive engagement with AI solutions, reinforced in collaboration with other people, will lead to greater skills mastery rather than a reduction.</li>
+  </ul>
+
+  <div class="footnotes">
+    <p><span class="fn-label">1</span> David Marquet, <em>Turn the Ship Around!: A True Story of Turning Followers into Leaders.</em> <a href="https://davidmarquet.com/turn-the-ship-around-book/" target="_blank">davidmarquet.com/turn-the-ship-around-book</a></p>
+    <p><span class="fn-label">2</span> Cursor Community Forum, "How to enable actual YOLO/AutoRun mode?" March 2025. <a href="https://forum.cursor.com/t/how-to-enable-actual-yolo-auto-run-mode/67491" target="_blank">forum.cursor.com</a></p>
+    <p><span class="fn-label">3</span> <em>The Guardian</em>, "Claude AI deletes firm database," April 29, 2026. <a href="https://www.theguardian.com/technology/2026/apr/29/claude-ai-deletes-firm-database" target="_blank">theguardian.com</a></p>
+    <p><span class="fn-label">4</span> Futurism, "Software Engineers Say They're Losing the Ability to Code Now That AI Does It for Them," Krystle Vermes, May 13, 2026. <a href="https://futurism.com/artificial-intelligence/engineers-losing-coding-ability-ai" target="_blank">futurism.com</a></p>
+    <p><span class="fn-label">5</span> InfoQ, "Anthropic Study: AI Coding Assistance Reduces Developer Skill Mastery," February 2026. <a href="https://www.infoq.com/news/2026/02/ai-coding-skill-formation/" target="_blank">infoq.com</a></p>
+    <p><span class="fn-label">6</span> Karl Heinz T. B&auml;uml and Oliver Kliegl, "The Critical Role of Retrieval Processes in Release from Proactive Interference," <em>Journal of Memory and Language</em> (2013). <a href="https://baeuml.app.uni-regensburg.de/paper/papers/KB_JML.pdf" target="_blank">baeuml.app.uni-regensburg.de</a></p>
+  </div>
+
+</div>
+
+<div class="art-divider"></div>
+
+<div class="art-nav">
+  <a href="perspectives-index.html">&#8592; All Perspectives</a>
+  <a href="mailto:rob.dull@gmail.com">Discuss this &#8599;</a>
+</div>
+
+<footer>
+  <p>Rob Dull &mdash; Product Operations &bull; San Francisco, CA</p>
+  <p><a href="mailto:rob.dull@gmail.com" style="color:var(--muted);text-decoration:none;">rob.dull@gmail.com</a></p>
+</footer>
+
+</body>
+</html>
