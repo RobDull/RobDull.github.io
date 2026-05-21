@@ -147,7 +147,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <div class="hero-strip">
-  <p class="hero-desc">These tools represent use cases for AI in Product Management workflows. I've been experimenting with different tools and how I use them, including clean specs for HTML interfaces and logical workflows, and securing API keys so I can share these with you. See notes below.</p>
+  <p class="hero-desc">These tools represent use cases for AI in Product Management workflows. I've been experimenting with different tools and how I use them, including clean specs for HTML interfaces and logical workflows, and securing API keys so I can share these with you. A couple of these tools let you enter your own API key. For a non-demo version, I would currently recommend a Cloudflare Worker as a server-side proxy so the API key is essentially embedded, but not shown in the code.</p>
   <div class="hero-stat-row">
     <div class="hero-stat">
       <div class="hero-stat-num">5</div>
@@ -161,7 +161,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <div class="api-note">
-  <strong>How the AI works:</strong> The AI-powered tools here use the Anthropic Claude API in two different ways. Some tools — like the Business Case Generator and Feature Intake Pipeline — call the API directly from your browser using an API key you provide at runtime; your key is held in session memory only and never stored. Other tools use a Cloudflare Worker as a secure server-side proxy that keeps an API key out of the browser entirely. Client-side tools like the Journey Map Builder, Persona Generator, and Hoshin Kanri matrix require no API key at all — they run fully in your browser.
+  <strong>How the AI works:</strong> Two tools — the Business Case Generator and the Feature Intake Pipeline — call the Anthropic Claude API directly from your browser. When you click Run for the first time, you'll be prompted to enter your own API key; it is held in session memory only and cleared when you close the tab. The other four tools run entirely in your browser with no API calls and no key required.
 </div>
 
 <div class="tool-list">
