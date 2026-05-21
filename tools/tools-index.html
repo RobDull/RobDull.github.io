@@ -11,7 +11,7 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tools and Interfaces | Rob Dull</title>
+<title>Experimental Tools for Product Management | Rob Dull</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -137,20 +137,20 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <div class="bc-inner">
     <a href="../index.html">Rob Dull</a>
     <span class="bc-sep">&#8250;</span>
-    <span>Tools and Interfaces</span>
+    <span>Experimental Tools for Product Management</span>
   </div>
 </div>
 
 <div class="hero">
   <div class="hero-tag">Active Collection</div>
-  <h1>Tools that do the<br><em>translation work</em> for you.</h1>
+  <h1>Experimental Tools for<br><em>Product Management</em></h1>
 </div>
 
 <div class="hero-strip">
-  <p class="hero-desc">Each tool addresses a real moment of friction in product and delivery work — the moment when a PM needs to make a complex idea legible to an executive, a stakeholder, or a researcher. Built from field experience, not from the outside looking in.</p>
+  <p class="hero-desc">These tools represent use cases for AI in Product Management workflows. I've been experimenting with different tools and how I use them, including clean specs for HTML interfaces and logical workflows, and securing API keys so I can share these with you. See notes below.</p>
   <div class="hero-stat-row">
     <div class="hero-stat">
-      <div class="hero-stat-num">3</div>
+      <div class="hero-stat-num">5</div>
       <div class="hero-stat-label">Tools live</div>
     </div>
     <div class="hero-stat">
@@ -161,12 +161,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <div class="api-note">
-  <strong>How the AI works:</strong> These tools call the Anthropic Claude API through a Cloudflare Worker that keeps the API key server-side. To run them yourself, deploy <code>worker.js</code> to Cloudflare Workers, add your API key as an encrypted secret, and replace the <code>WORKER_URL</code> constant near the top of each tool's HTML file with your Worker's URL. See <code>WORKER_README.md</code> for full instructions.
+  <strong>How the AI works:</strong> The AI-powered tools here use the Anthropic Claude API in two different ways. Some tools — like the Business Case Generator and Feature Intake Pipeline — call the API directly from your browser using an API key you provide at runtime; your key is held in session memory only and never stored. Other tools use a Cloudflare Worker as a secure server-side proxy that keeps an API key out of the browser entirely. Client-side tools like the Journey Map Builder, Persona Generator, and Hoshin Kanri matrix require no API key at all — they run fully in your browser.
 </div>
 
 <div class="tool-list">
-
-  <!-- TOOL 01 -->
+<!-- TOOL 01 -->
   <div class="tool-row">
     <div class="tool-left">
       <div class="tool-category">Business Justification</div>
@@ -240,6 +239,85 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <!-- TOOL 02 -->
   <div class="tool-row">
     <div class="tool-left">
+      <div class="tool-category">Agentic Workflow Demo</div>
+      <div class="tool-name">Feature Intake<br><em>Pipeline</em></div>
+      <div class="tool-status live">Live</div>
+      <p class="tool-desc">A live demonstration of agentic tool chaining — four sequential AI calls where each step's structured output becomes the next step's input. Takes a raw feature idea from any format through intake triage, JTBD framing, assumption mapping, and a RICE-based prioritization brief. An explanation panel at each step shows the design decision behind the chain.</p>
+      <div class="tool-chips">
+        <span class="chip">Agentic chaining</span>
+        <span class="chip">JTBD framing</span>
+        <span class="chip">Assumption mapping</span>
+        <span class="chip">RICE scoring</span>
+        <span class="chip">Human checkpoints</span>
+      </div>
+      <a href="feature-intake/feature-intake-index.html" class="tool-cta">Open tool &#8599;</a>
+    </div>
+    <div class="tool-right">
+      <div class="tool-thumb">
+        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="160" fill="#f7f7f7"/>
+          <!-- Step pipeline bar -->
+          <rect x="0" y="0" width="300" height="22" fill="#0a0a0a"/>
+          <rect x="8"   y="5" width="62" height="12" rx="3" fill="#1a3a5c"/>
+          <rect x="78"  y="5" width="62" height="12" rx="3" fill="#7c5cbf"/>
+          <rect x="148" y="5" width="62" height="12" rx="3" fill="#2a6b6b"/>
+          <rect x="218" y="5" width="74" height="12" rx="3" fill="#c8662a"/>
+          <text x="39"  y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">01 TRIAGE</text>
+          <text x="109" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">02 JTBD</text>
+          <text x="179" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">03 ASSUMPTIONS</text>
+          <text x="255" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">04 BRIEF</text>
+          <!-- Step 1 card -->
+          <rect x="8" y="28" width="130" height="58" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
+          <text x="16" y="40" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#1a3a5c" letter-spacing="0.5">CORE PROBLEM</text>
+          <rect x="16" y="44" width="100" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="16" y="52" width="114" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="16" y="60" width="80" height="4" rx="2" fill="#e8e8e8"/>
+          <text x="16" y="74" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#1a3a5c" letter-spacing="0.5">SIGNAL</text>
+          <rect x="16" y="77" width="40" height="5" rx="2" fill="#2a6b6b" fill-opacity="0.3"/>
+          <text x="18" y="82" font-family="Inter,sans-serif" font-size="5" font-weight="700" fill="#2a6b6b">STRONG</text>
+          <!-- Step 2 card -->
+          <rect x="8" y="92" width="130" height="62" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
+          <text x="16" y="103" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#7c5cbf" letter-spacing="0.5">JOB STATEMENT</text>
+          <rect x="16" y="107" width="114" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="16" y="115" width="90" height="4" rx="2" fill="#e8e8e8"/>
+          <text x="16" y="128" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#7c5cbf" letter-spacing="0.5">UNDERSERVED</text>
+          <rect x="16" y="131" width="55" height="5" rx="2" fill="#7c5cbf" fill-opacity="0.15"/>
+          <text x="18" y="136" font-family="Inter,sans-serif" font-size="5" font-weight="700" fill="#7c5cbf">EMOTIONAL</text>
+          <!-- Step 3+4 right column -->
+          <rect x="148" y="28" width="144" height="58" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
+          <text x="156" y="40" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#2a6b6b" letter-spacing="0.5">ASSUMPTIONS</text>
+          <rect x="156" y="44" width="120" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="248" y="43" width="22" height="6" rx="2" fill="#b03030" fill-opacity="0.15"/>
+          <text x="249" y="48" font-family="Inter,sans-serif" font-size="5" font-weight="700" fill="#b03030">HIGH</text>
+          <rect x="156" y="53" width="120" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="248" y="52" width="22" height="6" rx="2" fill="#c8662a" fill-opacity="0.15"/>
+          <text x="249" y="57" font-family="Inter,sans-serif" font-size="5" font-weight="700" fill="#c8662a">MED</text>
+          <rect x="156" y="63" width="120" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="248" y="62" width="22" height="6" rx="2" fill="#2a6b6b" fill-opacity="0.15"/>
+          <text x="249" y="67" font-family="Inter,sans-serif" font-size="5" font-weight="700" fill="#2a6b6b">LOW</text>
+          <!-- RICE brief -->
+          <rect x="148" y="92" width="144" height="62" rx="4" fill="#0a0a0a"/>
+          <text x="156" y="104" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="rgba(255,255,255,0.45)" letter-spacing="0.5">RECOMMENDED ACTION</text>
+          <text x="156" y="118" font-family="Inter,sans-serif" font-size="11" font-weight="900" fill="#c8662a">SPIKE</text>
+          <rect x="156" y="122" width="128" height="4" rx="2" fill="rgba(255,255,255,0.12)"/>
+          <rect x="156" y="130" width="110" height="4" rx="2" fill="rgba(255,255,255,0.12)"/>
+          <text x="156" y="146" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="rgba(255,255,255,0.35)" letter-spacing="0.5">RICE SCORE: 42</text>
+        </svg>
+      </div>
+      <div class="tool-right-label">What it produces</div>
+      <ul class="feature-list">
+        <li class="feature-item">Structured problem statement — core problem, who is affected, what they cannot do today</li>
+        <li class="feature-item">Three-layer JTBD analysis — functional, emotional, and social job dimensions</li>
+        <li class="feature-item">Assumption map ranked by uncertainty &times; impact, each with a fastest-test method</li>
+        <li class="feature-item">RICE scoring rationale with recommended next action: spike, prototype, backlog, or reject</li>
+        <li class="feature-item">Explanation panel at each step showing the design decision behind the chain</li>
+      </ul>
+    </div>
+  </div>
+
+<!-- TOOL 03 -->
+  <div class="tool-row">
+    <div class="tool-left">
       <div class="tool-category">Enterprise User Research</div>
       <div class="tool-name">JTBD + Enterprise<br><em>Persona Generator</em></div>
       <div class="tool-status live">Live</div>
@@ -307,7 +385,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
   </div>
 
-  <!-- TOOL 03 -->
+  <!-- TOOL 04 -->
   <div class="tool-row">
     <div class="tool-left">
       <div class="tool-category">Customer Experience</div>
@@ -517,7 +595,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
   </div>
 
-  <!-- TOOL 04 -->
+  <!-- TOOL 06 -->
   <div class="tool-row">
     <div class="tool-left">
       <div class="tool-category">Organizational Health</div>
@@ -599,86 +677,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   </div>
 
 
-  <!-- TOOL 06 — Feature Intake Pipeline -->
-  <div class="tool-row">
-    <div class="tool-left">
-      <div class="tool-category">Agentic Workflow Demo</div>
-      <div class="tool-name">Feature Intake<br><em>Pipeline</em></div>
-      <div class="tool-status live">Live</div>
-      <p class="tool-desc">A live demonstration of agentic tool chaining — four sequential AI calls where each step's structured output becomes the next step's input. Takes a raw feature idea from any format through intake triage, JTBD framing, assumption mapping, and a RICE-based prioritization brief. An explanation panel at each step shows the design decision behind the chain.</p>
-      <div class="tool-chips">
-        <span class="chip">Agentic chaining</span>
-        <span class="chip">JTBD framing</span>
-        <span class="chip">Assumption mapping</span>
-        <span class="chip">RICE scoring</span>
-        <span class="chip">Human checkpoints</span>
-      </div>
-      <a href="feature-intake/feature-intake-index.html" class="tool-cta">Open tool &#8599;</a>
-    </div>
-    <div class="tool-right">
-      <div class="tool-thumb">
-        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg">
-          <rect width="300" height="160" fill="#f7f7f7"/>
-          <!-- Step pipeline bar -->
-          <rect x="0" y="0" width="300" height="22" fill="#0a0a0a"/>
-          <rect x="8"   y="5" width="62" height="12" rx="3" fill="#1a3a5c"/>
-          <rect x="78"  y="5" width="62" height="12" rx="3" fill="#7c5cbf"/>
-          <rect x="148" y="5" width="62" height="12" rx="3" fill="#2a6b6b"/>
-          <rect x="218" y="5" width="74" height="12" rx="3" fill="#c8662a"/>
-          <text x="39"  y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">01 TRIAGE</text>
-          <text x="109" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">02 JTBD</text>
-          <text x="179" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">03 ASSUMPTIONS</text>
-          <text x="255" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">04 BRIEF</text>
-          <!-- Step 1 card -->
-          <rect x="8" y="28" width="130" height="58" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="16" y="40" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#1a3a5c" letter-spacing="0.5">CORE PROBLEM</text>
-          <rect x="16" y="44" width="100" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="16" y="52" width="114" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="16" y="60" width="80" height="4" rx="2" fill="#e8e8e8"/>
-          <text x="16" y="74" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#1a3a5c" letter-spacing="0.5">SIGNAL</text>
-          <rect x="16" y="77" width="40" height="5" rx="2" fill="#2a6b6b" fill-opacity="0.3"/>
-          <text x="18" y="82" font-family="Inter,sans-serif" font-size="5" font-weight="700" fill="#2a6b6b">STRONG</text>
-          <!-- Step 2 card -->
-          <rect x="8" y="92" width="130" height="62" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="16" y="103" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#7c5cbf" letter-spacing="0.5">JOB STATEMENT</text>
-          <rect x="16" y="107" width="114" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="16" y="115" width="90" height="4" rx="2" fill="#e8e8e8"/>
-          <text x="16" y="128" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#7c5cbf" letter-spacing="0.5">UNDERSERVED</text>
-          <rect x="16" y="131" width="55" height="5" rx="2" fill="#7c5cbf" fill-opacity="0.15"/>
-          <text x="18" y="136" font-family="Inter,sans-serif" font-size="5" font-weight="700" fill="#7c5cbf">EMOTIONAL</text>
-          <!-- Step 3+4 right column -->
-          <rect x="148" y="28" width="144" height="58" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="156" y="40" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#2a6b6b" letter-spacing="0.5">ASSUMPTIONS</text>
-          <rect x="156" y="44" width="120" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="248" y="43" width="22" height="6" rx="2" fill="#b03030" fill-opacity="0.15"/>
-          <text x="249" y="48" font-family="Inter,sans-serif" font-size="5" font-weight="700" fill="#b03030">HIGH</text>
-          <rect x="156" y="53" width="120" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="248" y="52" width="22" height="6" rx="2" fill="#c8662a" fill-opacity="0.15"/>
-          <text x="249" y="57" font-family="Inter,sans-serif" font-size="5" font-weight="700" fill="#c8662a">MED</text>
-          <rect x="156" y="63" width="120" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="248" y="62" width="22" height="6" rx="2" fill="#2a6b6b" fill-opacity="0.15"/>
-          <text x="249" y="67" font-family="Inter,sans-serif" font-size="5" font-weight="700" fill="#2a6b6b">LOW</text>
-          <!-- RICE brief -->
-          <rect x="148" y="92" width="144" height="62" rx="4" fill="#0a0a0a"/>
-          <text x="156" y="104" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="rgba(255,255,255,0.45)" letter-spacing="0.5">RECOMMENDED ACTION</text>
-          <text x="156" y="118" font-family="Inter,sans-serif" font-size="11" font-weight="900" fill="#c8662a">SPIKE</text>
-          <rect x="156" y="122" width="128" height="4" rx="2" fill="rgba(255,255,255,0.12)"/>
-          <rect x="156" y="130" width="110" height="4" rx="2" fill="rgba(255,255,255,0.12)"/>
-          <text x="156" y="146" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="rgba(255,255,255,0.35)" letter-spacing="0.5">RICE SCORE: 42</text>
-        </svg>
-      </div>
-      <div class="tool-right-label">What it produces</div>
-      <ul class="feature-list">
-        <li class="feature-item">Structured problem statement — core problem, who is affected, what they cannot do today</li>
-        <li class="feature-item">Three-layer JTBD analysis — functional, emotional, and social job dimensions</li>
-        <li class="feature-item">Assumption map ranked by uncertainty &times; impact, each with a fastest-test method</li>
-        <li class="feature-item">RICE scoring rationale with recommended next action: spike, prototype, backlog, or reject</li>
-        <li class="feature-item">Explanation panel at each step showing the design decision behind the chain</li>
-      </ul>
-    </div>
   </div>
-
-</div>
 
 <div class="about-strip">
   <div class="about-inner">
