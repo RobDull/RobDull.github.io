@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How the Feature Intake Pipeline Works | Rob Dull</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y1JYXTE5J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0Y1JYXTE5J');
+</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0a0a0a;--white:#ffffff;--off:#f7f7f7;--rule:#e8e8e8;
+  --accent:#1a3a5c;--accent2:#c8662a;--muted:#6b6b6b;
+  --font:'Inter',sans-serif;
+  --s1:#1a3a5c;--s2:#7c5cbf;--s3:#2a6b6b;--s4:#c8662a;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;min-height:100vh;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
+.nn{font-size:15px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
+.nl{display:flex;gap:10px;align-items:center;}
+.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 16px;border:2px solid var(--ink);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:white;}
+.nl a:hover{background:var(--accent);color:white;border-color:var(--accent);}
+.nl a.li-btn{background:var(--accent);color:white;border-color:var(--accent);}
+.nl a.li-btn:hover{background:#0f2540;border-color:#0f2540;}
+
+.bc{max-width:780px;margin:0 auto;padding:100px 40px 0;}
+.bc-inner{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--muted);}
+.bc-inner a{color:var(--muted);text-decoration:none;transition:color .15s;}
+.bc-inner a:hover{color:var(--ink);}
+.bc-sep{color:var(--rule);}
+
+.art-header{max-width:780px;margin:0 auto;padding:28px 40px 48px;}
+.art-tag{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:14px;}
+.art-header h1{font-size:clamp(28px,4vw,46px);font-weight:900;letter-spacing:-.03em;line-height:1.08;color:var(--ink);margin-bottom:20px;}
+.art-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.art-date{font-size:12px;font-weight:600;color:var(--muted);}
+.art-dot{width:3px;height:3px;border-radius:50%;background:var(--rule);}
+
+.art-body{max-width:780px;margin:0 auto;padding:0 40px 80px;}
+.art-body p{font-size:16px;line-height:1.85;color:#1a1a1a;margin-bottom:24px;}
+.art-body h2{font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin:48px 0 16px;}
+
+/* CALLOUT */
+.callout{background:var(--off);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:20px 24px;margin:32px 0;font-size:15px;line-height:1.8;color:#2a2a2a;}
+.callout strong{color:var(--ink);}
+.callout-orange{background:rgba(200,102,42,.06);border-left:4px solid var(--accent2);border-radius:0 8px 8px 0;padding:20px 24px;margin:32px 0;font-size:15px;line-height:1.8;color:#2a2a2a;}
+
+/* DIAGRAM BLOCKS */
+.diagram-wrap{margin:36px 0;border:2px solid var(--rule);border-radius:12px;overflow:hidden;}
+.diagram-label{background:var(--off);border-bottom:1px solid var(--rule);padding:10px 18px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.diagram-body{padding:28px 24px;display:flex;justify-content:center;}
+
+/* INFRA FLOW */
+.infra-flow{display:flex;flex-direction:column;gap:0;width:100%;max-width:640px;}
+.if-row{display:flex;align-items:center;gap:12px;}
+.if-box{flex:1;border-radius:8px;padding:14px 18px;}
+.if-box-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;}
+.if-box-name{font-size:14px;font-weight:800;letter-spacing:-.01em;}
+.if-box-sub{font-size:12px;margin-top:3px;line-height:1.5;}
+.if-arrow{display:flex;flex-direction:column;align-items:center;padding:6px 0;}
+.if-arrow-line{width:2px;height:20px;background:var(--rule);}
+.if-arrow-head{font-size:14px;color:var(--muted);margin-top:-2px;}
+.if-arrow-label{font-size:11px;font-weight:600;color:var(--muted);margin-top:4px;white-space:nowrap;}
+
+/* STEP CHAIN */
+.step-chain{display:flex;flex-direction:column;gap:0;width:100%;max-width:620px;}
+.sc-step{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--rule);}
+.sc-step:last-child{border-bottom:none;}
+.sc-num{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:white;flex-shrink:0;margin-top:2px;}
+.sc-content{}
+.sc-title{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:3px;}
+.sc-in{font-size:12px;color:var(--muted);margin-bottom:2px;}
+.sc-in span{font-weight:600;color:var(--ink);}
+.sc-out{font-size:12px;color:var(--muted);}
+.sc-out span{font-weight:600;color:var(--ink);}
+.sc-arrow{padding:6px 0 6px 22px;font-size:13px;color:var(--rule);}
+
+/* AGENT vs CHAIN comparison */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0;}
+.cg-card{border:2px solid var(--rule);border-radius:10px;padding:18px 20px;}
+.cg-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;}
+.cg-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:8px;}
+.cg-text{font-size:13px;color:#3a3a3a;line-height:1.7;}
+.cg-card.highlight{border-color:var(--accent);background:rgba(26,58,92,.03);}
+.cg-card.highlight .cg-label{color:var(--accent);}
+
+/* DIVIDER / NAV */
+.art-divider{max-width:780px;margin:0 auto;padding:0 40px;border-top:1px solid var(--rule);}
+.art-nav{max-width:780px;margin:0 auto;padding:40px 40px 80px;display:flex;justify-content:space-between;align-items:center;gap:16px;}
+.art-nav a{font-size:13px;font-weight:700;color:var(--muted);text-decoration:none;border:2px solid var(--rule);border-radius:6px;padding:10px 18px;transition:all .15s;}
+.art-nav a:hover{border-color:var(--ink);color:var(--ink);}
+
+footer{padding:28px 40px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+footer p{font-size:12px;font-weight:500;color:var(--muted);}
+
+@media(max-width:680px){
+  nav{padding:14px 20px;}
+  .nl a{padding:7px 12px;font-size:12px;}
+  .bc,.art-header,.art-body,.art-nav,.art-divider{padding-left:20px;padding-right:20px;}
+  .compare-grid{grid-template-columns:1fr;}
+  .if-arrow-label{display:none;}
+  footer{padding:20px 24px;flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nn">Rob Dull</a>
+  <div class="nl">
+    <a href="../tools-index.html">Tools</a>
+    <a href="../../index.html#about">About</a>
+    <a href="mailto:rob.dull@gmail.com">Contact</a>
+    <a href="https://linkedin.com/in/robdull" target="_blank" class="li-btn">LinkedIn &#8599;</a>
+  </div>
+</nav>
+
+<div class="bc">
+  <div class="bc-inner">
+    <a href="../../index.html">Rob Dull</a>
+    <span class="bc-sep">&#8250;</span>
+    <a href="../tools-index.html">Tools</a>
+    <span class="bc-sep">&#8250;</span>
+    <a href="feature-intake-index.html">Feature Intake Pipeline</a>
+    <span class="bc-sep">&#8250;</span>
+    <span>How it works</span>
+  </div>
+</div>
+
+<div class="art-header">
+  <div class="art-tag">Technical Explainer &bull; Agentic Workflow</div>
+  <h1>How the Feature Intake Pipeline Works</h1>
+  <div class="art-meta">
+    <span class="art-date">Plain language — no prior technical knowledge assumed</span>
+  </div>
+</div>
+
+<div class="art-body">
+
+  <p>The Feature Intake Pipeline is a live demonstration of a concept called <strong>agentic chaining</strong> — a way of using AI where instead of asking one question and getting one answer, you run a sequence of AI calls where each step's output becomes the next step's input. This page explains what the tool is doing, how the pieces fit together technically, and what "agents" actually means in this context.</p>
+
+  <h2>What the tool does, in plain terms</h2>
+
+  <p>You type in a rough feature idea — anything from a customer quote to a Slack message to a half-formed thought. The tool runs it through four separate AI calls, in sequence, each one building on what came before.</p>
+
+  <div class="diagram-wrap">
+    <div class="diagram-label">The four-step chain</div>
+    <div class="diagram-body">
+      <div class="step-chain">
+        <div class="sc-step">
+          <div class="sc-num" style="background:var(--s1);">1</div>
+          <div class="sc-content">
+            <div class="sc-title">Intake Triage</div>
+            <div class="sc-in">Takes in: <span>your raw text, in any format</span></div>
+            <div class="sc-out">Produces: <span>a structured problem statement — the core problem, who is affected, what they can't do today</span></div>
+          </div>
+        </div>
+        <div class="sc-arrow">&#8595;</div>
+        <div class="sc-step">
+          <div class="sc-num" style="background:var(--s2);">2</div>
+          <div class="sc-content">
+            <div class="sc-title">JTBD Framing</div>
+            <div class="sc-in">Takes in: <span>Step 1's structured output</span></div>
+            <div class="sc-out">Produces: <span>a Jobs-to-be-Done analysis — the functional, emotional, and social dimensions of what the user is actually trying to accomplish</span></div>
+          </div>
+        </div>
+        <div class="sc-arrow">&#8595;</div>
+        <div class="sc-step">
+          <div class="sc-num" style="background:var(--s3);">3</div>
+          <div class="sc-content">
+            <div class="sc-title">Assumption Mapping</div>
+            <div class="sc-in">Takes in: <span>Steps 1 and 2's outputs combined</span></div>
+            <div class="sc-out">Produces: <span>the key assumptions that must be true for this feature to matter, ranked by how uncertain and how consequential each one is</span></div>
+          </div>
+        </div>
+        <div class="sc-arrow">&#8595;</div>
+        <div class="sc-step">
+          <div class="sc-num" style="background:var(--s4);">4</div>
+          <div class="sc-content">
+            <div class="sc-title">Prioritization Brief</div>
+            <div class="sc-in">Takes in: <span>all three prior outputs together</span></div>
+            <div class="sc-out">Produces: <span>a RICE scoring rationale and a recommended next action — spike, prototype, backlog, or reject</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p>After each step, you review the output before the next one runs. That review checkpoint is intentional — it's what makes the chain reliable. If Step 2 produces a JTBD statement that doesn't match your context, you catch it before it shapes the assumption map and the final recommendation.</p>
+
+  <h2>The three pieces of infrastructure and what each one does</h2>
+
+  <p>Three separate services are involved in running this tool. They each have a distinct job, and none of them can substitute for the others.</p>
+
+  <div class="diagram-wrap">
+    <div class="diagram-label">Infrastructure — what each service does</div>
+    <div class="diagram-body">
+      <div class="infra-flow">
+
+        <div class="if-row">
+          <div class="if-box" style="background:var(--off);border:2px solid var(--rule);">
+            <div class="if-box-label" style="color:var(--muted);">Your browser</div>
+            <div class="if-box-name">GitHub Pages</div>
+            <div class="if-box-sub" style="color:var(--muted);">Hosts the HTML, CSS, and JavaScript files that make up the tool's interface. Serves them to anyone who visits the URL. Does not run any code on a server — everything it delivers runs inside your browser.</div>
+          </div>
+        </div>
+
+        <div class="if-arrow">
+          <div class="if-arrow-line"></div>
+          <div class="if-arrow-head">&#8595;</div>
+          <div class="if-arrow-label">Your browser sends the prompt directly</div>
+        </div>
+
+        <div class="if-row">
+          <div class="if-box" style="background:rgba(200,102,42,.06);border:2px solid rgba(200,102,42,.2);">
+            <div class="if-box-label" style="color:var(--accent2);">Optional secure proxy</div>
+            <div class="if-box-name" style="color:var(--ink);">Cloudflare Worker</div>
+            <div class="if-box-sub" style="color:#3a3a3a;">A small piece of server-side code that can sit between the browser and the AI. Its job is to hold the API key securely so it never appears in the browser. In this tool's current configuration, the Worker is bypassed — the browser calls the AI directly using the key you paste into the modal.</div>
+          </div>
+        </div>
+
+        <div class="if-arrow">
+          <div class="if-arrow-line"></div>
+          <div class="if-arrow-head">&#8595;</div>
+          <div class="if-arrow-label">Prompt sent to the AI with your API key</div>
+        </div>
+
+        <div class="if-row">
+          <div class="if-box" style="background:#1a3a5c;border:2px solid #1a3a5c;">
+            <div class="if-box-label" style="color:rgba(255,255,255,.5);">The AI</div>
+            <div class="if-box-name" style="color:white;">Anthropic API</div>
+            <div class="if-box-sub" style="color:rgba(255,255,255,.65);">The service that actually runs the Claude language model. It receives a prompt, generates a response, and returns it. It has no memory between calls — every step in the chain sends the full context it needs as part of the prompt.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <p><strong>GitHub Pages</strong> is the filing cabinet — it stores and serves the files. It has no intelligence and runs no logic of its own. When you visit the tool, GitHub sends your browser the HTML file, and from that point on everything runs locally in your tab.</p>
+
+  <p><strong>The Anthropic API</strong> is where the actual AI work happens. Each time you click Run, your browser sends a prompt to Anthropic's servers, which run the Claude model and send back a structured response. The API charges per use — a fraction of a cent per call — which is why you need your own key to run the tool.</p>
+
+  <p><strong>Cloudflare</strong> is a secure middleman. In a production deployment — one where you didn't want users to supply their own key — the Cloudflare Worker would hold the API key on the server and forward requests on behalf of the browser, so the key is never visible. In this tool, you supply your own key directly, so the Worker is not in the path.</p>
+
+  <div class="callout">
+    <strong>Why your key is safe:</strong> When you paste your Anthropic key into the modal, it goes into your browser's session memory — a temporary holding area that is cleared the moment you close the tab. It is sent directly to api.anthropic.com with each request and nowhere else. It is never stored in a file, never sent to this site's server (GitHub Pages has no server to send it to), and never logged.
+  </div>
+
+  <h2>What "agents" means here — and what it doesn't</h2>
+
+  <p>The word "agent" is used loosely in AI discussions, so it's worth being precise about what this tool is and isn't doing.</p>
+
+  <div class="compare-grid">
+    <div class="cg-card">
+      <div class="cg-label" style="color:var(--muted);">What an agent usually implies</div>
+      <div class="cg-title">Autonomous action</div>
+      <div class="cg-text">An AI that can decide what to do next, take actions in the world (browse the web, run code, send messages), observe the results, and keep going without human input at each step. The AI is in the loop and driving.</div>
+    </div>
+    <div class="cg-card highlight">
+      <div class="cg-label">What this tool uses</div>
+      <div class="cg-title">Chained calls with human checkpoints</div>
+      <div class="cg-text">Four sequential AI calls where each one receives the prior output as structured input. A human reviews the result at each step before the next one runs. The AI generates — the human decides whether to proceed.</div>
+    </div>
+  </div>
+
+  <p>This tool is better described as a <strong>chained workflow</strong> than a true agent. The distinction matters: a fully autonomous agent could run all four steps, decide the output was good enough, and hand you a brief — all without you reviewing anything in between. That would be faster. It would also be less reliable, because errors in early steps would compound silently into the final output.</p>
+
+  <p>The design choice here is to keep a human in the loop at every transition. This reflects a core principle from Product Operations: AI is most valuable when it is inside the workflow at the moment of decision, not running autonomously beside it. The human checkpoint is the reliability mechanism.</p>
+
+  <div class="callout-orange">
+    <strong>The chain design in practice:</strong> Step 4 produces a better prioritization brief because it has access to Step 1's structured problem, Step 2's JTBD layers, and Step 3's assumption risk map — all as structured inputs. A single prompt asking "prioritize this idea" would produce a generic answer. The chain produces a contextualized one.
+  </div>
+
+  <h2>Why structure each step's output as JSON</h2>
+
+  <p>Each step in the chain instructs the AI to respond in a specific structured format — a JSON object with named fields rather than free-form prose. This is deliberate and important.</p>
+
+  <p>If Step 1 returned a paragraph of text, Step 2 would have to interpret that paragraph before it could use it. Interpretations drift — especially across multiple calls. By enforcing a consistent schema at each step, the chain passes clean, unambiguous data forward. The final RICE brief is built from precise fields extracted at Steps 1, 2, and 3, not from the AI's interpretation of its own prior prose.</p>
+
+  <p>This is the same principle that makes software integrations reliable: agree on the data format up front, and every downstream system can trust what it receives.</p>
+
+  <h2>The relationship between the tool and the infrastructure</h2>
+
+  <p>Putting it all together: you visit a URL hosted on GitHub Pages. Your browser downloads the tool's code. You type a feature idea and click Run. The tool constructs a prompt, attaches your API key, and sends it directly to Anthropic. Anthropic runs the Claude model and sends back a JSON response. The tool extracts the relevant fields, displays them, and waits for you to click the next step. This repeats four times. Nothing is stored anywhere. When you close the tab, the session ends.</p>
+
+  <p>The sophistication is not in the infrastructure — it is in the prompt design at each step, the schema enforced on each output, and the decision to surface a human checkpoint at every transition rather than letting the chain run unattended.</p>
+
+</div>
+
+<div class="art-divider"></div>
+
+<div class="art-nav">
+  <a href="feature-intake-index.html">&#8592; Back to the tool</a>
+  <a href="../tools-index.html">All tools &#8599;</a>
+</div>
+
+<footer>
+  <p>Rob Dull &mdash; Product Operations &bull; San Francisco, CA</p>
+  <p><a href="mailto:rob.dull@gmail.com" style="color:var(--muted);text-decoration:none;">rob.dull@gmail.com</a></p>
+</footer>
+
+</body>
+</html>
