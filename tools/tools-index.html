@@ -90,6 +90,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .feature-item:last-child{border-bottom:none;}
 .feature-item::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent2);flex-shrink:0;margin-top:7px;}
 
+/* ── READING STRIP ── */
+.reading-strip{background:var(--off);border-top:2px solid var(--accent2);border-bottom:1px solid var(--rule);padding:32px 40px;}
+.reading-inner{max-width:1060px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;}
+.reading-left{flex:1;min-width:260px;}
+.reading-eyebrow{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px;}
+.reading-title{font-size:17px;font-weight:800;letter-spacing:-.02em;color:var(--ink);line-height:1.3;margin-bottom:8px;}
+.reading-title em{font-style:normal;color:var(--accent);}
+.reading-desc{font-size:13px;color:var(--muted);line-height:1.7;max-width:580px;}
+.reading-btn{flex-shrink:0;display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:white;text-decoration:none;border-radius:6px;padding:11px 22px;font-size:13px;font-weight:700;transition:all .15s;white-space:nowrap;letter-spacing:-.01em;}
+.reading-btn:hover{background:#0f2640;}
+@media(max-width:640px){.reading-strip{padding:24px 20px;}.reading-btn{width:100%;justify-content:center;}}
+
 /* ── ABOUT STRIP ── */
 .about-strip{background:var(--accent);padding:56px 40px;}
 .about-inner{max-width:1060px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
@@ -678,6 +690,17 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
 
   </div>
+
+<div class="reading-strip">
+  <div class="reading-inner">
+    <div class="reading-left">
+      <div class="reading-eyebrow">Background reading</div>
+      <div class="reading-title">What makes a product operations workflow <em>genuinely AI-native</em>?</div>
+      <div class="reading-desc">These tools were built to connect — not just to stand alone. This piece explains the workflow architecture behind the tools, how MCP engineering is becoming a core PM skill, and how the Mastery / Control / Clarity framework applies at every human-in-the-loop gate.</div>
+    </div>
+    <a href="ai-native-prodops.html" class="reading-btn">Read the article &#8599;</a>
+  </div>
+</div>
 
 <div class="about-strip">
   <div class="about-inner">
