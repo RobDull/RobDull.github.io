@@ -133,9 +133,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .evolution-table td:nth-child(2){width:26%;color:var(--muted);font-size:12px;}
 .evolution-table td:nth-child(3){width:26%;color:var(--muted);font-size:12px;}
 .evolution-table td:last-child{width:26%;font-size:12px;}
-.evolution-table .gen-1 td:first-child{color:var(--muted);}
-.evolution-table .gen-2 td:first-child{color:#c8921a;}
-.evolution-table .gen-3 td:first-child{color:var(--accent);}
+/* section shading — alternating very light backgrounds per group */
+.evolution-table .grp-a td{background:#ffffff;}
+.evolution-table .grp-b td{background:#f9f9f8;}
+.evolution-table .grp-c td{background:#ffffff;}
+.evolution-table .grp-d td{background:#f9f9f8;}
+.evolution-table .grp-e td{background:#ffffff;}
+/* top border on first row of each group to visually separate sections */
+.evolution-table .grp-start td{border-top:2px solid var(--rule);}
+.evolution-table .grp-start:first-child td{border-top:none;}
 .evo-tool{font-size:11px;font-weight:700;color:var(--accent2);background:rgba(200,102,42,.07);border:1px solid rgba(200,102,42,.2);border-radius:4px;padding:2px 7px;display:inline-block;margin:2px 2px 2px 0;white-space:nowrap;text-decoration:none;}
 a.evo-tool:hover{background:rgba(200,102,42,.14);border-color:rgba(200,102,42,.4);}
 
@@ -481,34 +487,23 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       </tr>
     </thead>
     <tbody>
-      <tr class="gen-1">
+
+      <!-- GROUP A: Work output -->
+      <tr class="grp-a grp-start">
         <td>PM primary output</td>
         <td>PRD, business case memo, requirements brief</td>
         <td>AI-assisted PRD, faster brief</td>
         <td>Structured JSON handoffs, approved gate records, strategy cascade</td>
       </tr>
-      <tr class="gen-2">
+
+      <!-- GROUP B: Discovery & research -->
+      <tr class="grp-b grp-start">
         <td>Research cadence</td>
         <td>Quarterly discovery sprints</td>
         <td>Quarterly sprints, faster synthesis</td>
         <td>Continuous signal loop, weekly delta brief from agent</td>
       </tr>
-      <tr class="gen-3">
-        <td>Prioritization method</td>
-        <td>Manual RICE in spreadsheet</td>
-        <td>AI-assisted scoring, still spreadsheet-native</td>
-        <td>Auto-scoped RICE from live backlog and velocity data via MCP</td>
-      </tr>
-      <tr class="gen-1">
-        <td>Business case</td>
-        <td>Manual financial modelling, slide deck</td>
-        <td>AI-drafted narrative, PM fills numbers</td>
-        <td>
-          AI draft enriched with live benchmarks via MCP, HITL approval gated
-          <br><a href="../business-case/business-case-index.html" class="evo-tool">Business case gen. &#8599;</a>
-        </td>
-      </tr>
-      <tr class="gen-2">
+      <tr class="grp-b">
         <td>User research</td>
         <td>Interview notes in Notion, manual persona card</td>
         <td>AI-summarized transcripts, faster persona draft</td>
@@ -517,7 +512,24 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
           <br><a href="../persona-generator/persona-index.html" class="evo-tool">Persona generator &#8599;</a> <a href="../journey-map/journey-map-index.html" class="evo-tool">Journey map builder &#8599;</a>
         </td>
       </tr>
-      <tr class="gen-3">
+
+      <!-- GROUP C: Intake & prioritisation -->
+      <tr class="grp-c grp-start">
+        <td>Prioritization method</td>
+        <td>Manual RICE in spreadsheet</td>
+        <td>AI-assisted scoring, still spreadsheet-native</td>
+        <td>Auto-scoped RICE from live backlog and velocity data via MCP</td>
+      </tr>
+      <tr class="grp-c">
+        <td>Business case</td>
+        <td>Manual financial modelling, slide deck</td>
+        <td>AI-drafted narrative, PM fills numbers</td>
+        <td>
+          AI draft enriched with live benchmarks via MCP, HITL approval gated
+          <br><a href="../business-case/business-case-index.html" class="evo-tool">Business case gen. &#8599;</a>
+        </td>
+      </tr>
+      <tr class="grp-c">
         <td>Feature intake</td>
         <td>Submission form → PM review → backlog item</td>
         <td>AI-suggested tags and priorities on submission</td>
@@ -526,7 +538,9 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
           <br><a href="../feature-intake/feature-intake-index.html" class="evo-tool">Feature intake pipeline &#8599;</a>
         </td>
       </tr>
-      <tr class="gen-1">
+
+      <!-- GROUP D: Strategy & health -->
+      <tr class="grp-d grp-start">
         <td>Strategy alignment</td>
         <td>Annual planning deck, quarterly OKR review</td>
         <td>AI-drafted OKR summaries and gap notes</td>
@@ -535,7 +549,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
           <br><a href="../hoshin-kanri/hoshin-v2mom-index.html" class="evo-tool">Hoshin Kanri + V2MOM &#8599;</a>
         </td>
       </tr>
-      <tr class="gen-2">
+      <tr class="grp-d">
         <td>Ops health</td>
         <td>Retrospective survey, ad hoc health checks</td>
         <td>AI-themed retro summaries</td>
@@ -544,18 +558,21 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
           <br><a href="../prod-ops-radar/prod-ops-radar-index.html" class="evo-tool">Product ops radar &#8599;</a>
         </td>
       </tr>
-      <tr class="gen-3">
+
+      <!-- GROUP E: The PM role -->
+      <tr class="grp-e grp-start">
         <td>Human role</td>
         <td>Synthesizer, writer, coordinator</td>
         <td>Editor, prompter, reviewer</td>
         <td>Orchestrator, framer, gate-keeper at the moments that matter</td>
       </tr>
-      <tr class="gen-1">
+      <tr class="grp-e">
         <td>Primary bottleneck</td>
         <td>PM writing and synthesis capacity</td>
         <td>Prompt quality and tool selection</td>
         <td>Judgment quality at HITL gates, data readiness of MCP layer</td>
       </tr>
+
     </tbody>
   </table>
 
