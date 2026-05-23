@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Augmented PM Tools Within AI-Native Product Operations; Structural Elements Including MCP | Rob Dull</title>
+<title>AI-Augmented PM Tools Within AI-Native Product Operations; Structural Elements Including MCP | Rob Dull</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -51,18 +51,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 
 /* ARTICLE BODY */
 .art-body{max-width:780px;margin:0 auto;padding:40px 40px 80px;}
-.art-body h2{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin:56px 0 16px;line-height:1.2;}
-.art-body h2 em{font-style:normal;color:var(--accent);}
-.art-body h2:first-child{margin-top:0;}
+
+/* section-head replaces hr + h2 */
+.section-head{display:flex;align-items:flex-start;gap:14px;margin:64px 0 20px;padding-top:24px;border-top:3px solid var(--ink);}
+.section-head:first-child{margin-top:0;border-top:none;padding-top:0;}
+.section-icon{width:36px;height:36px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.section-icon svg{width:18px;height:18px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.section-head-text{}
+.section-head h2{font-size:22px;font-weight:900;letter-spacing:-.025em;color:var(--ink);line-height:1.15;margin:0 0 4px;}
+.section-head h2 em{font-style:normal;color:var(--accent);}
+.section-head p{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin:0;}
+
 .art-body h3{font-size:16px;font-weight:800;letter-spacing:-.01em;color:var(--ink);margin:32px 0 10px;line-height:1.3;}
 .art-body p{font-size:15px;color:#2a2a2a;line-height:1.8;margin-bottom:18px;}
 .art-body p:last-child{margin-bottom:0;}
 .art-body strong{font-weight:700;color:var(--ink);}
 
+/* legacy rule divider — keep for any remaining uses */
+.rule{border:none;border-top:1px solid var(--rule);margin:48px 0;}
+
 /* lead */
 .lead{font-size:17px;line-height:1.75;color:var(--ink);margin-bottom:28px;font-weight:500;}
 
-/* callouts */
 .callout{background:var(--off);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:16px 20px;margin:28px 0;font-size:14px;line-height:1.75;color:#2a2a2a;}
 .callout strong{color:var(--ink);}
 .callout-orange{background:rgba(200,102,42,.05);border-left:4px solid var(--accent2);border-radius:0 8px 8px 0;padding:16px 20px;margin:28px 0;font-size:14px;line-height:1.75;color:#2a2a2a;}
@@ -209,8 +219,8 @@ a.evo-tool:hover{background:rgba(200,102,42,.14);border-color:rgba(200,102,42,.4
 .tools-cta-strip{background:var(--accent);padding:48px 40px;}
 .tools-cta-inner{max-width:780px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;}
 .tools-cta-inner h2{font-size:clamp(18px,2.5vw,26px);font-weight:900;letter-spacing:-.02em;color:white;line-height:1.2;max-width:460px;}
-.tools-cta-inner h2 em{font-style:normal;color:rgba(255,255,255,.45);}
-.tools-cta-inner p{font-size:13px;color:rgba(255,255,255,.6);max-width:440px;margin-top:8px;line-height:1.7;}
+.tools-cta-inner h2 em{font-style:normal;color:var(--accent2);}
+.tools-cta-inner p{font-size:13px;color:rgba(255,255,255,.88);max-width:440px;margin-top:8px;line-height:1.7;}
 .cta-links{display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap;}
 .cta-btn{font-size:13px;font-weight:700;padding:10px 20px;border-radius:6px;text-decoration:none;transition:all .15s;white-space:nowrap;border:2px solid rgba(255,255,255,.5);color:white;background:transparent;}
 .cta-btn:hover{background:white;color:var(--ink);border-color:white;}
@@ -255,7 +265,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
 <div class="art-head">
   <div class="eyebrow">Background Reading · Product Operations · AI</div>
-  <h1>AI augmented PM tools within <em>AI-native product operations</em></h1>
+  <h1>AI-Augmented PM tools within <em>AI-native product operations</em></h1>
   <p style="font-size:15px;color:var(--muted);margin-top:10px;max-width:640px;line-height:1.6;">Structural elements including MCP — how the tools connect, how agents orchestrate, and what product managers need to know to govern it all.</p>
   <div class="art-meta">
     <span class="art-meta-item"><strong>Published</strong> May 2026</span>
@@ -289,9 +299,13 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
   <p class="lead">The tools on this site were built on a specific hypothesis: AI is most valuable when it is inside the workflow at the moment of decision, not bolted on afterward. The research from 2025–2026 now provides the evidence base for what that actually looks like — and a new picture of what product managers need to know how to do.</p>
 
-  <hr class="rule" id="gap">
-
-  <h2>The gap between <em>using AI</em> and being AI-native</h2>
+  <div class="section-head" id="gap">
+    <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+    <div class="section-head-text">
+      <p>Context</p>
+      <h2>The gap between <em>using AI</em> and being AI-native</h2>
+    </div>
+  </div>
 
   <p>The divide in 2026 is not between organizations that use AI and those that don't. The divide is between organizations using AI for isolated productivity tasks and those who have redesigned how work moves across the whole system.</p>
 
@@ -306,9 +320,13 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <strong>The test for AI-nativeness is not which tools you use.</strong> It's whether your decision architecture has been redesigned around AI's actual strengths — synthesis, pattern recognition, structured output at speed — and whether humans are reserved for the judgment calls AI structurally cannot make.
   </div>
 
-  <hr class="rule" id="elements">
-
-  <h2>Eight structural <em>elements</em></h2>
+  <div class="section-head" id="elements">
+    <div class="section-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+    <div class="section-head-text">
+      <p>Research findings</p>
+      <h2>Eight structural <em>elements</em></h2>
+    </div>
+  </div>
 
   <p>The research from McKinsey, Gartner, Deloitte, Stanford's AI Index, and recent academic work on agentic AI in product management converges on eight elements that separate genuinely AI-native product operations from productivity-augmented versions of the old workflow.</p>
 
@@ -380,9 +398,13 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
   </ul>
 
-  <hr class="rule" id="workflow">
-
-  <h2>The four-phase <em>AI-native PM workflow</em></h2>
+  <div class="section-head" id="workflow">
+    <div class="section-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div>
+    <div class="section-head-text">
+      <p>Applied framework</p>
+      <h2>The four-phase <em>AI-native PM workflow</em></h2>
+    </div>
+  </div>
 
   <p>Beyond the structural elements, an AI-native product operations workflow has a concrete shape. Drawing from the Institute of Product Leadership's AI Native Product Loop and Product School's decision-point framework, the workflow runs in four continuous phases — each one relying on MCP connections to the systems of record that make it ground in reality rather than generate in a vacuum.</p>
 
@@ -458,9 +480,13 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <strong>The PM's job in this workflow is not to execute the phases — it is to govern the transitions between them.</strong> Each phase produces structured output that the next phase depends on. The HITL gates sit at those transitions: ratifying the opportunity map before intake begins, validating the JTBD frame before assumption mapping runs, approving the feature brief before spec work proceeds, and reviewing canary metrics before full rollout is authorized. Execution is agentic; judgment is human.
   </div>
 
-  <hr class="rule" id="evolution">
-
-  <h2>How the PM role has evolved — <em>and where the tools fit</em></h2>
+  <div class="section-head" id="evolution">
+    <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    <div class="section-head-text">
+      <p>PM role evolution</p>
+      <h2>How the PM role has evolved — <em>and where the tools fit</em></h2>
+    </div>
+  </div>
 
   <p>The shift to AI-native product operations is not a single transition — it has happened in three distinct generations, each with its own dominant workflow pattern, primary bottleneck, and relationship between PM effort and product decision quality. The tools on this site were designed to serve the third generation.</p>
 
@@ -578,9 +604,13 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
   <p>The table above makes a specific claim: each tool on this site corresponds to a concrete Gen 3 capability that has no adequate equivalent in either Gen 1 or Gen 2 workflows. They are not writing accelerators. They are workflow nodes — and the value of each one compounds when it is connected to the others.</p>
 
-  <hr class="rule" id="marquet">
-
-  <h2>Mastery, control, and clarity — <em>certifying humans at every gate</em></h2>
+  <div class="section-head" id="marquet">
+    <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/></svg></div>
+    <div class="section-head-text">
+      <p>Human oversight</p>
+      <h2>Mastery, control, and clarity — <em>certifying humans at every gate</em></h2>
+    </div>
+  </div>
 
   <p>Faster synthesis and autonomous agentic execution introduce a risk that sits underneath all the other ones: the PM who approves a HITL gate without genuinely understanding what the agent produced has not added a governance layer. They have added a rubber stamp with a human face.</p>
 
@@ -630,6 +660,14 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <p>Cognitive engagement with AI solutions, reinforced through active review and collaboration with other people, leads to greater skills mastery rather than a reduction. The PM who reads the assumption map critically, challenges the JTBD frame before approving it, and annotates the business case rather than just signing off is building the judgment capability that makes the whole system safer as it becomes more autonomous. The PM who approves without reading is not.</p>
 
 
+
+  <div class="section-head" id="mcp">
+    <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+    <div class="section-head-text">
+      <p>Core PM competency</p>
+      <h2>MCP engineering as a <em>core PM competency</em></h2>
+    </div>
+  </div>
 
   <p>Model Context Protocol is often framed as an infrastructure concern — something engineering teams configure while product managers define requirements. That framing is wrong, and organizations that accept it will consistently underutilize their AI tooling.</p>
 
@@ -769,9 +807,13 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <strong>The PM who can specify these connections, govern their scope, and design the HITL gates around them is not a technical PM in the old sense.</strong> They are an architect of intelligent workflows. That is the job description that is emerging in 2026 — and it is distinct from both the traditional PM role and the data engineering role. It lives in the space between them.
   </div>
 
-  <hr class="rule" id="bottleneck">
-
-  <h2>The bottleneck <em>no one talks about</em></h2>
+  <div class="section-head" id="bottleneck">
+    <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M12 2v6M12 22v-6M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M22 12h-6M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/></svg></div>
+    <div class="section-head-text">
+      <p>Systemic risk</p>
+      <h2>The bottleneck <em>no one talks about</em></h2>
+    </div>
+  </div>
 
   <p>The Deloitte 2025 AI survey surfaced the data point that explains why most AI initiatives stall: <strong>nearly half of organizations cited searchability of data (48%) and reusability of data (47%) as the primary challenges to their AI automation strategy.</strong></p>
 
@@ -786,9 +828,13 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="stat-text"><strong>of enterprise applications will embed AI agents by end of 2026</strong>, up from less than 5% in 2025. Gartner projects that by 2030, AI-native development platforms will result in 80% of organizations evolving large software engineering teams into smaller, more nimble, AI-augmented units.</div>
   </div>
 
-  <hr class="rule" id="throughline">
-
-  <h2>The <em>through-line</em></h2>
+  <div class="section-head" id="throughline">
+    <div class="section-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+    <div class="section-head-text">
+      <p>Summary</p>
+      <h2>The <em>through-line</em></h2>
+    </div>
+  </div>
 
   <p>All of this research points to the same structural truth: AI-native product operations is not a set of tools — it is a decision architecture. The tools do the synthesis; humans own the judgment. Agents handle the signal-to-brief pipeline; PMs own the framing. MCP integrations handle the data access; governance frameworks own the scope.</p>
 
