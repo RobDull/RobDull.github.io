@@ -83,6 +83,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .element-num{font-size:11px;font-weight:800;color:var(--accent2);letter-spacing:.06em;width:24px;flex-shrink:0;padding-top:2px;}
 .element-title{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:4px;letter-spacing:-.01em;}
 .element-desc{font-size:13px;color:var(--muted);line-height:1.7;}
+/* stacked variant for items with longer labels (MCP, AGENTS.md, Goose) */
+.element-item--labeled{flex-direction:column;gap:6px;}
+.element-item--labeled .element-num{width:auto;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:white;background:var(--accent2);border-radius:4px;padding:2px 8px;display:inline-block;align-self:flex-start;}
 
 /* phase grid — the four workflow phases */
 .phase-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;}
@@ -626,21 +629,21 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <p>The three projects under AAIF governance each address a different layer of the agentic stack — and all three are relevant to a product operations context:</p>
 
   <ul class="element-list">
-    <li class="element-item">
+    <li class="element-item element-item--labeled">
       <span class="element-num">MCP</span>
       <div class="element-body">
         <div class="element-title">Model Context Protocol — the connection layer</div>
         <div class="element-desc">The universal standard for connecting AI models to tools, data, and external applications. In a product ops context, this is what allows the Persona Generator to ingest Dovetail transcripts, the Feature Intake Pipeline to read from and write back to Jira, and the Business Case Generator to pull live financial benchmarks — without bespoke integrations for each connection. MCP became the industry standard within months of its open-source release in November 2024, and is now used across enterprises deploying on AWS, Google Cloud, and Azure.</div>
       </div>
     </li>
-    <li class="element-item">
+    <li class="element-item element-item--labeled">
       <span class="element-num">AGENTS.md</span>
       <div class="element-body">
         <div class="element-title">AGENTS.md — the behavioral context layer</div>
         <div class="element-desc">A simple universal standard that gives AI coding agents a consistent source of project-specific guidance — the conventions, constraints, and context an agent needs to operate reliably across different repositories and toolchains. For a PM, AGENTS.md is the answer to the question: "when the intake chain agent touches our Jira backlog, how does it know our team's naming conventions, sprint cadence, and ticket structure?" Without AGENTS.md, that context must be re-established in every prompt. With it, it is declared once and inherited by every agent that operates on the repository.</div>
       </div>
     </li>
-    <li class="element-item">
+    <li class="element-item element-item--labeled">
       <span class="element-num">Goose</span>
       <div class="element-body">
         <div class="element-title">Goose — the local agent execution layer</div>
