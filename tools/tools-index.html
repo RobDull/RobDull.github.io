@@ -56,6 +56,38 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .api-note strong{color:var(--ink);font-weight:600;}
 .api-note code{font-family:monospace;font-size:11px;background:var(--off);border:1px solid var(--rule);padding:1px 5px;border-radius:3px;color:var(--ink);}
 
+/* ── WORKFLOW CONTINUUM STRIP ── */
+.continuum-strip{max-width:1060px;margin:0 auto;padding:36px 40px 40px;border-bottom:2px solid var(--rule);}
+.continuum-label{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
+.continuum-diagram{display:grid;grid-template-columns:repeat(6,1fr);gap:0;border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:20px;}
+.continuum-node{padding:12px 14px;border-right:1px solid var(--rule);background:white;position:relative;}
+.continuum-node:last-child{border-right:none;}
+.continuum-node-num{font-size:9px;font-weight:800;color:var(--accent2);letter-spacing:.08em;margin-bottom:4px;}
+.continuum-node-name{font-size:11px;font-weight:800;color:var(--ink);line-height:1.3;margin-bottom:3px;}
+.continuum-node-tool{font-size:9px;font-weight:700;color:var(--accent);background:rgba(26,58,92,.06);border:1px solid rgba(26,58,92,.15);border-radius:3px;padding:2px 6px;display:inline-block;margin-top:4px;text-decoration:none;white-space:nowrap;}
+.continuum-node-tool:hover{background:rgba(26,58,92,.12);}
+.continuum-node-mode{font-size:8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:3px;display:inline-block;margin-top:4px;}
+.mode-aug{background:rgba(200,146,26,.1);color:#7a5700;}
+.mode-native{background:rgba(26,58,92,.08);color:var(--accent);}
+.mode-both{background:rgba(200,102,42,.08);color:#7a2a00;}
+.continuum-arrow{display:flex;align-items:center;justify-content:center;padding:10px 0;gap:6px;font-size:11px;color:var(--muted);}
+.continuum-arrow-line{flex:1;height:2px;border-radius:1px;background:linear-gradient(to right,rgba(200,146,26,.3),rgba(26,58,92,.5));}
+.continuum-arrow-label{font-size:10px;font-weight:700;color:var(--muted);text-align:center;letter-spacing:.04em;}
+.continuum-modes{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+.continuum-mode-key{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);}
+.continuum-mode-pip{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
+
+/* ── TOOL WORKFLOW BADGE ── */
+.tool-workflow{margin-top:12px;margin-bottom:6px;padding:10px 14px;background:var(--off);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;}
+.tool-workflow-label{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.tool-workflow-text{font-size:12px;color:#2a2a2a;line-height:1.6;}
+.tool-workflow-text strong{color:var(--ink);font-weight:700;}
+.tool-workflow-mode{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:3px;display:inline-block;margin-top:5px;}
+@media(max-width:720px){
+  .continuum-diagram{grid-template-columns:1fr 1fr 1fr;}
+  .continuum-strip{padding:24px 20px;}
+}
+
 /* ── TOOL LIST ── */
 .tool-list{max-width:1060px;margin:0 auto;padding:0 40px 80px;}
 
@@ -176,6 +208,68 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <strong>How the AI works:</strong> Two tools — the Business Case Generator and the Feature Intake Pipeline — call the Anthropic Claude API directly from your browser. When you click Run for the first time, you'll be prompted to enter your own API key; it is held in session memory only and cleared when you close the tab. The other four tools run entirely in your browser with no API calls and no key required.
 </div>
 
+<div class="continuum-strip">
+  <div class="continuum-label">How the tools connect — AI-augmented to AI-native</div>
+  <div class="continuum-diagram">
+
+    <div class="continuum-node">
+      <div class="continuum-node-num">01 — DISCOVER</div>
+      <div class="continuum-node-name">Research &amp; persona</div>
+      <div class="continuum-node-mode mode-aug">AI-augmented</div><br>
+      <a href="persona-generator/persona-index.html" class="continuum-node-tool">Persona generator ↗</a><br>
+      <a href="journey-map/journey-map-index.html" class="continuum-node-tool">Journey map ↗</a>
+    </div>
+
+    <div class="continuum-node">
+      <div class="continuum-node-num">02 — ALIGN</div>
+      <div class="continuum-node-name">Strategy cascade</div>
+      <div class="continuum-node-mode mode-aug">AI-augmented</div><br>
+      <a href="hoshin-kanri/hoshin-v2mom-index.html" class="continuum-node-tool">Hoshin + V2MOM ↗</a>
+    </div>
+
+    <div class="continuum-node">
+      <div class="continuum-node-num">03 — JUSTIFY</div>
+      <div class="continuum-node-name">Business case</div>
+      <div class="continuum-node-mode mode-both">Augmented → native</div><br>
+      <a href="business-case/business-case-index.html" class="continuum-node-tool">Business case gen. ↗</a>
+    </div>
+
+    <div class="continuum-node">
+      <div class="continuum-node-num">04 — INTAKE</div>
+      <div class="continuum-node-name">Feature pipeline</div>
+      <div class="continuum-node-mode mode-native">AI-native</div><br>
+      <a href="feature-intake/feature-intake-index.html" class="continuum-node-tool">Feature intake ↗</a>
+    </div>
+
+    <div class="continuum-node">
+      <div class="continuum-node-num">05 — MEASURE</div>
+      <div class="continuum-node-name">Ops health</div>
+      <div class="continuum-node-mode mode-both">Augmented → native</div><br>
+      <a href="prod-ops-radar/prod-ops-radar-index.html" class="continuum-node-tool">Ops radar ↗</a>
+    </div>
+
+    <div class="continuum-node" style="background:rgba(26,58,92,.03);">
+      <div class="continuum-node-num">CONNECTED</div>
+      <div class="continuum-node-name">Agents + MCP threading the workflow</div>
+      <div class="continuum-node-mode mode-native">AI-native</div><br>
+      <a href="AI-native-prodops/AI-prodops-overview.html" class="continuum-node-tool">See the architecture ↗</a>
+    </div>
+
+  </div>
+
+  <div class="continuum-arrow">
+    <div class="continuum-arrow-line"></div>
+    <div class="continuum-arrow-label">Each tool works standalone (AI-augmented) &nbsp;·&nbsp; Connected by agents and MCP, the whole is AI-native</div>
+    <div class="continuum-arrow-line"></div>
+  </div>
+
+  <div class="continuum-modes">
+    <div class="continuum-mode-key"><div class="continuum-mode-pip" style="background:rgba(200,146,26,.4);"></div>AI-augmented — tool accelerates a workflow step. Works standalone.</div>
+    <div class="continuum-mode-key"><div class="continuum-mode-pip" style="background:rgba(200,102,42,.4);"></div>Augmented → native — standalone or connected, depending on setup.</div>
+    <div class="continuum-mode-key"><div class="continuum-mode-pip" style="background:rgba(26,58,92,.4);"></div>AI-native — designed for connection. Full value when agents and MCP are in place.</div>
+  </div>
+</div>
+
 <div class="tool-list">
 <!-- TOOL 01 -->
   <div class="tool-row">
@@ -184,6 +278,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="tool-name">Technical Business<br><em>Case Generator</em></div>
       <div class="tool-status live">Live</div>
       <p class="tool-desc">Engineering and infrastructure teams constantly have to translate what they need and why it matters into language that earns executive approval. This tool does that translation — from project inputs to a structured, stakeholder-ready business case in three analysis depths.</p>
+      <div class="tool-workflow">
+        <div class="tool-workflow-label">Where it fits in the workflow</div>
+        <div class="tool-workflow-text"><strong>Step 03 — Justify.</strong> Sits at the business case approval HITL gate between the opportunity map and the feature intake pipeline. Used standalone: AI-augmented — the PM drafts and edits. Connected to the signal aggregator MCP and strategy context MCP: the agent enriches financial claims with live benchmarks before the PM reviews.</div>
+        <span class="tool-workflow-mode mode-both">AI-augmented → AI-native</span>
+      </div>
       <div class="tool-chips">
         <span class="chip">Quick Pitch</span>
         <span class="chip">Standard</span>
@@ -255,6 +354,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="tool-name">Feature Intake<br><em>Pipeline</em></div>
       <div class="tool-status live">Live</div>
       <p class="tool-desc">A live demonstration of agentic tool chaining — four sequential AI calls where each step's structured output becomes the next step's input. Takes a raw feature idea from any format through intake triage, JTBD framing, assumption mapping, and a RICE-based prioritization brief. An explanation panel at each step shows the design decision behind the chain.</p>
+      <div class="tool-workflow">
+        <div class="tool-workflow-label">Where it fits in the workflow</div>
+        <div class="tool-workflow-text"><strong>Step 04 — Intake.</strong> The most AI-native tool in the set — it is itself an agentic chain, not just an AI-assisted form. Output feeds directly into backlog grooming and the three parallel review gates (architecture, security, business) before any engineering commitment. When connected to the Intake source MCP, approved briefs write back to Jira automatically.</div>
+        <span class="tool-workflow-mode mode-native">AI-native</span>
+      </div>
       <div class="tool-chips">
         <span class="chip">Agentic chaining</span>
         <span class="chip">JTBD framing</span>
@@ -334,6 +438,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="tool-name">JTBD + Enterprise<br><em>Persona Generator</em></div>
       <div class="tool-status live">Live</div>
       <p class="tool-desc">Most PMs can describe their user in a sentence. Getting from that sentence to a persona detailed enough to anchor a journey map — with a Jobs to Be Done statement, org context, tech comfort, key interactions, and relationship friction — is where research stalls. This tool closes that gap.</p>
+      <div class="tool-workflow">
+        <div class="tool-workflow-label">Where it fits in the workflow</div>
+        <div class="tool-workflow-text"><strong>Step 01 — Discover.</strong> The upstream anchor of the entire network. Every downstream tool produces better output when it has a grounded persona to work from. Used standalone: AI-augmented synthesis from interview notes. In a connected workflow, the Research ingest MCP pre-populates the tool with structured themes from Dovetail or Notion interview repositories.</div>
+        <span class="tool-workflow-mode mode-aug">AI-augmented</span>
+      </div>
       <div class="tool-chips">
         <span class="chip">Jobs to Be Done</span>
         <span class="chip">Persona card</span>
@@ -404,6 +513,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="tool-name">Customer<br><em>Journey Map Builder</em></div>
       <div class="tool-status live">Live</div>
       <p class="tool-desc">A journey map is only useful if it reflects what actually happens — not what teams assume. This tool provides an editable, stage-by-stage canvas for mapping customer actions, goals, touchpoints, emotions, and organizational responses, with a draggable sentiment curve and one-click AI export for analysis.</p>
+      <div class="tool-workflow">
+        <div class="tool-workflow-label">Where it fits in the workflow</div>
+        <div class="tool-workflow-text"><strong>Step 01 — Discover.</strong> Produces the pain cluster map that feeds the opportunity merge agent. The JSON export is structured for direct consumption by downstream tools or an AI agent. Used after the persona generator, a journey map grounded in a JTBD persona is significantly more predictive than one built from assumptions. The signal aggregator MCP can enrich journey stages with live support ticket themes.</div>
+        <span class="tool-workflow-mode mode-aug">AI-augmented</span>
+      </div>
       <div class="tool-chips">
         <span class="chip">Editable stages</span>
         <span class="chip">User sentiment curve</span>
@@ -497,6 +611,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="tool-name">Hoshin Kanri<br><em>+ V2MOM Alignment</em></div>
       <div class="tool-status live">Live</div>
       <p class="tool-desc">Enter your V2MOM — vision, values, methods, and measures — and this tool cascades it directly into a Hoshin Kanri X-matrix. Values become annual objectives. Methods map exactly to activities. Measures drive key metrics. The matrix is color-coded by value group, correlation dots are interactive, and Claude can align and refine the whole thing on demand.</p>
+      <div class="tool-workflow">
+        <div class="tool-workflow-label">Where it fits in the workflow</div>
+        <div class="tool-workflow-text"><strong>Step 02 — Align.</strong> Provides the strategic alignment context that every other tool depends on — what the organization is trying to accomplish and why. Used standalone: the clearest way to cascade a V2MOM into an actionable X-matrix. In a connected workflow, the Strategy context MCP pre-populates the tool from your Confluence or Notion planning wiki, and the strategy cascade agent flags OKR alignment gaps after each run.</div>
+        <span class="tool-workflow-mode mode-aug">AI-augmented</span>
+      </div>
       <div class="tool-chips">
         <span class="chip">V2MOM cascade</span>
         <span class="chip">X-matrix visualization</span>
@@ -614,6 +733,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="tool-name">Product Operations<br><em>Health Radar</em></div>
       <div class="tool-status dev">In development</div>
       <p class="tool-desc">Product operations health is rarely measured — it is felt. This tool makes it legible: a structured self-assessment across the core dimensions of delivery operations that surfaces where teams are strong, where they are struggling, and what to prioritize first.</p>
+      <div class="tool-workflow">
+        <div class="tool-workflow-label">Where it fits in the workflow</div>
+        <div class="tool-workflow-text"><strong>Step 05 — Measure.</strong> The feedback layer that closes the loop — after delivery, it surfaces whether the ops system is healthy enough to sustain the next cycle. Used standalone: AI-augmented self-assessment with prioritized recommendations. In a connected workflow, the Metrics MCP auto-populates the delivery and tooling dimensions from live DORA metrics and sprint data, so the PM fills in only the qualitative dimensions.</div>
+        <span class="tool-workflow-mode mode-both">AI-augmented → AI-native</span>
+      </div>
       <div class="tool-chips">
         <span class="chip">Delivery health</span>
         <span class="chip">Radar visualization</span>
