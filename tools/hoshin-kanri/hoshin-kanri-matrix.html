@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hoshin Kanri Planning Matrix</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#fff;font-family:'Inter',sans-serif;padding:32px 16px 48px;}
+h1{text-align:center;font-size:26px;font-weight:700;margin-bottom:24px;color:#111;}
+.wrap{overflow-x:auto;}
+table{border-collapse:collapse;table-layout:fixed;}
+td{border:1px solid #bbb;padding:0;overflow:hidden;text-align:left;}
+.foot{margin-top:14px;display:flex;align-items:center;gap:10px;font-size:11px;color:#666;}
+.flogo{width:26px;height:26px;border-radius:50%;background:conic-gradient(#3a7a3a 180deg,#c8a020 180deg);flex-shrink:0;}
+</style>
+<meta name="robots" content="noindex">
+</head>
+<body>
+<h1>Hoshin Kanri Planning Matrix</h1>
+<div class="wrap"><table id="hk"></table></div>
+
+<script>
+const ACT=[
+  'Activity 1: <strong>Modify customer support policies</strong>',
+  'Activity 2: <strong>Implement video tutorials</strong>',
+  'Activity 3: <strong>Implement innovation pipeline</strong>',
+  'Activity 4: <strong>Plan the development of new product features</strong>',
+  'Activity 5: <strong>Conduct constraints analysis</strong>',
+];
+const OBJ=[
+  'Annual objective 1: Focus on the needs of high-paying clients',
+  'Annual objective 2: Achieve excellence in product training',
+  'Annual objective 3: Test and implement innovative ideas',
+  'Annual objective 4: Optimize business processes',
+  'Annual objective 5:',
+];
+const KPI=[
+  'KPI 01: Time to respond for high-paying clients',
+  'KPI 02: Churn rate for high-profile clients, %',
+  'KPI 03: % of functions with up-to-date video tutorials',
+  'KPI 04: Innovation pipeline performance according to the scorecard',
+  'KPI 05: Time to market for new features, days',
+  'KPI 06: Marketing budget for the new features, $',
+  'KPI 07: Feature/market fit for the new features, %',
+  'KPI 08: Improvement ideas suggested quarterly',
+  'KPI 09: Processes with optimization plan, %',
+  'KPI 10:',
+];
+const OWN=[
+  'Owner 1: Development team',
+  'Owner 2: Customer service team',
+  'Owner 3: Management team',
+  'Owner 4:',
+  'Owner 5:',
+];
+const LT=[
+  'Long-term objective 1: <strong>Build high-quality product</strong>',
+  'Long-term objective 2: <strong>Keep team motivated</strong>',
+  'Long-term objective 3: <strong>Achieve sustainable growth</strong>',
+  'Long-term objective 4:',
+  'Long-term objective 5:',
+];
+const AO=[['F','O','_','O','_'],['O','F','_','O','_'],['_','_','F','_','_'],['F','_','_','F','_'],['_','O','F','_','_']];
+const AK=[['F','F','_','_','_','_','_','_','_','_'],['_','_','F','_','_','_','_','_','_','_'],['_','_','_','F','_','_','_','_','_','_'],['_','O','_','_','F','_','_','_','_','_'],['_','_','_','_','_','_','_','_','_','_']];
+const AWN=[['_','F','O','_','_'],['_','O','F','_','_'],['_','_','_','F','_'],['F','_','_','_','O'],['_','_','_','_','_']];
+const LO=[['F','O','_','_','_'],['_','F','_','O','_'],['F','O','O','_','_'],['_','_','_','_','_'],['_','_','_','_','_']];
+const LK=[['_','_','_','_','_','_','_','_','_','_'],['_','_','_','_','_','_','_','_','_','_'],['_','_','_','_','_','_','_','_','_','_'],['_','_','_','_','_','_','_','_','_','_'],['_','_','_','_','_','_','_','_','_','_']];
+const LWN=[['_','_','_','_','_'],['_','_','_','_','_'],['_','_','_','_','_'],['_','_','_','_','_'],['_','_','_','_','_']];
+
+const nA=ACT.length, nO=OBJ.length, nK=KPI.length, nW=OWN.length, nL=LT.length;
+
+// One column per obj/kpi/own — dots AND vertical text share the same column
+const D  = 26;   // shared dot/vert-text column width
+const LC = 420;  // center label/X column width — wide enough for longest label on one line
+const RH = 26;   // activity & LT row height
+const CH = 320;  // center row height — tall enough for longest vertical label
+
+// Column order: [obj×nO] | [CENTER] | [kpi×nK] | [own×nW]
+const COLS = [...Array(nO).fill(D), LC, ...Array(nK).fill(D), ...Array(nW).fill(D)];
+
+const table = document.getElementById('hk');
+const cg = document.createElement('colgroup');
+COLS.forEach(w => { const c = document.createElement('col'); c.style.width = w+'px'; cg.appendChild(c); });
+table.appendChild(cg);
+
+function dot(v, bg) {
+  const s = v==='F'
+    ? `<span style="width:12px;height:12px;border-radius:50%;background:#111;display:inline-block;"></span>`
+    : v==='O'
+    ? `<span style="width:12px;height:12px;border-radius:50%;border:2.5px solid #111;display:inline-block;"></span>`
+    : '';
+  return `<td style="width:${D}px;height:${RH}px;background:${bg};text-align:center;vertical-align:middle;">${s}</td>`;
+}
+
+let h = '';
+
+// ── ACTIVITY ROWS ─────────────────────────────────────────────────
+for (let r = 0; r < nA; r++) {
+  h += `<tr>`;
+  // obj cols: WHITE background (top-left corner)
+  for (let c = 0; c < nO; c++) h += dot(AO[r][c], '#fff');
+  // center col: AMBER activity label
+  h += `<td style="width:${LC}px;height:${RH}px;background:#f5c342;padding:4px 10px;font-size:11px;line-height:1.4;vertical-align:middle;white-space:nowrap;text-align:left;">${ACT[r]}</td>`;
+  // kpi cols: WHITE background (top-right corner)
+  for (let c = 0; c < nK; c++) h += dot(AK[r][c], '#fff');
+  // own cols: WHITE background
+  for (let c = 0; c < nW; c++) h += dot(AWN[r][c], '#fff');
+  h += `</tr>`;
+}
+
+// ── CENTER ROW ────────────────────────────────────────────────────
+h += `<tr>`;
+// obj cols: AMBER vertical text (matches activity label zone)
+for (let c = 0; c < nO; c++) {
+  h += `<td style="width:${D}px;height:${CH}px;background:#f5c342;vertical-align:middle;text-align:center;">
+    <div style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;font-weight:600;color:#5a3a00;white-space:nowrap;display:flex;align-items:center;justify-content:flex-start;width:${D}px;height:${CH}px;padding-top:8px;">${OBJ[c]}</div>
+  </td>`;
+}
+// center col: X diamond (white)
+h += `<td style="width:${LC}px;height:${CH}px;padding:0;position:relative;vertical-align:top;">
+  <div style="position:relative;width:${LC}px;height:${CH}px;">
+    <svg style="position:absolute;top:0;left:0;" width="${LC}" height="${CH}" viewBox="0 0 ${LC} ${CH}">
+      <rect width="${LC}" height="${CH}" fill="white"/>
+      <line x1="0" y1="0" x2="${LC}" y2="${CH}" stroke="#aaa" stroke-width="1.2"/>
+      <line x1="${LC}" y1="0" x2="0" y2="${CH}" stroke="#aaa" stroke-width="1.2"/>
+    </svg>
+    <div style="position:absolute;top:${CH*0.18}px;left:0;right:0;text-align:center;font-size:13px;font-weight:600;color:#333;line-height:1.35;">Priorities and<br>Activities</div>
+    <div style="position:absolute;top:50%;left:${LC*0.25 - 40}px;transform:translateY(-50%);font-size:12px;font-weight:600;color:#333;line-height:1.35;text-align:center;">Annual<br>Objectives</div>
+    <div style="position:absolute;top:50%;right:${LC*0.25 - 40}px;transform:translateY(-50%);font-size:12px;font-weight:600;color:#333;line-height:1.35;text-align:center;">Key<br>Metrics</div>
+    <div style="position:absolute;bottom:auto;top:${CH*0.82 - 18}px;left:0;right:0;text-align:center;font-size:13px;font-weight:600;color:#333;line-height:1.35;">Long-term<br>Objectives</div>
+  </div>
+</td>`;
+// kpi cols: GREEN vertical text
+for (let c = 0; c < nK; c++) {
+  h += `<td style="width:${D}px;height:${CH}px;background:#8fba6a;vertical-align:top;text-align:center;">
+    <div style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;font-weight:600;color:#1a3a10;white-space:nowrap;display:flex;align-items:center;justify-content:flex-start;width:${D}px;height:${CH}px;padding-top:8px;">${KPI[c]}</div>
+  </td>`;
+}
+// own cols: SAGE/OLIVE vertical text (distinct from KPI green)
+for (let c = 0; c < nW; c++) {
+  h += `<td style="width:${D}px;height:${CH}px;background:#b8d4a8;vertical-align:top;text-align:center;">
+    <div style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;font-weight:600;color:#2a4a1a;white-space:nowrap;display:flex;align-items:center;justify-content:flex-start;width:${D}px;height:${CH}px;padding-top:8px;">${OWN[c]}</div>
+  </td>`;
+}
+h += `</tr>`;
+
+// ── LONG-TERM ROWS ────────────────────────────────────────────────
+for (let r = 0; r < nL; r++) {
+  h += `<tr>`;
+  for (let c = 0; c < nO; c++) h += dot(LO[r][c], '#fff');
+  h += `<td style="width:${LC}px;height:${RH}px;background:#f5c342;padding:4px 10px;font-size:11px;line-height:1.4;vertical-align:middle;white-space:nowrap;text-align:left;">${LT[r]}</td>`;
+  for (let c = 0; c < nK; c++) h += dot(LK[r][c], '#fff');
+  for (let c = 0; c < nW; c++) h += dot(LWN[r][c], '#fff');
+  h += `</tr>`;
+}
+
+table.insertAdjacentHTML('beforeend', h);
+</script>
+
+<div style="margin-top:16px;display:flex;align-items:center;gap:28px;font-family:'Inter',sans-serif;font-size:12px;color:#333;">
+  <span style="font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.06em;font-size:10px;">Correlation key</span>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <span style="width:14px;height:14px;border-radius:50%;background:#111;display:inline-block;flex-shrink:0;"></span>
+    <span><strong>Direct / primary</strong> — a strong, direct relationship between the two items</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <span style="width:14px;height:14px;border-radius:50%;border:2.5px solid #111;display:inline-block;flex-shrink:0;"></span>
+    <span><strong>Complementary</strong> — a supporting or indirect relationship between the two items</span>
+  </div>
+</div>
+</body>
+</html>
