@@ -56,7 +56,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 40px;display:fl
 .workflow-steps{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .wf-step{display:flex;flex-direction:column;gap:2px;padding:7px 12px;border-radius:6px;background:white;border:1.5px solid var(--rule);text-decoration:none;transition:border-color .15s;min-width:88px;}
 .wf-step:hover{border-color:var(--accent);}
-.wf-native{border-color:rgba(26,58,92,.3);background:rgba(26,58,92,.04);}
+.wf-native{border-color:rgba(26,58,92,.3);}
 .wf-num{font-size:9px;font-weight:800;color:var(--accent2);letter-spacing:.08em;}
 .wf-name{font-size:12px;font-weight:800;color:var(--ink);}
 .wf-tools{font-size:10px;color:var(--muted);}
@@ -324,7 +324,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
   <!-- ═══ COLUMN HEADERS ═══ -->
   <text x="45"   y="11.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="700" letter-spacing=".13em" fill="#2a6b6b">DATA SOURCES</text>
   <text x="137"  y="11.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="700" letter-spacing=".13em" fill="#c8921a">MCP LAYER</text>
-  <text x="257"  y="11.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="700" letter-spacing=".13em" fill="#1a3a5c">TOOLS</text>
+  <text x="257"  y="11.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="700" letter-spacing=".13em" fill="#1a3a5c">Tools &amp; HITL</text>
   <text x="364"  y="11.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="700" letter-spacing=".13em" fill="#c8662a">AGENTS &amp; HITL</text>
   <text x="458"  y="11.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="700" letter-spacing=".13em" fill="#1a5c3a">OUTPUTS</text>
 
@@ -614,13 +614,13 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
   <!-- ═══ TOOL NODES ═══ -->
   <!-- x=470 center, w=204, h=60 -->
 
-  <g class="n" data-type="tool" onclick="showDetail('tool-persona')">
+  <g class="n" data-type="tool hitl" onclick="showDetail('tool-persona')">
     <rect x="223" y="20.9" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
     <text x="226"  y="25.4" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">01 · DISCOVER</text>
     <text x="257"  y="30.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Persona generator</text>
   <text x="257"  y="36.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">JTBD + segment synthesis</text>
     <rect x="223" y="38.9" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
-    <text x="257"  y="42.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API</text>
+    <text x="257"  y="42.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API · ✋ HITL</text>
   </g>
 
   <g class="n" data-type="tool" onclick="showDetail('tool-journey')">
@@ -632,31 +632,31 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <text x="257"  y="81.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLIENT-SIDE</text>
   </g>
 
-  <g class="n" data-type="tool" onclick="showDetail('tool-bizcase')">
+  <g class="n" data-type="tool hitl" onclick="showDetail('tool-bizcase')">
     <rect x="223" y="100" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
     <text x="226"  y="104.5" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">03 · JUSTIFY</text>
     <text x="257"  y="110" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Business case gen.</text>
   <text x="257"  y="115.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">ROI · risk · inaction cost</text>
     <rect x="223" y="118" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
-    <text x="257"  y="121.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API</text>
+    <text x="257"  y="121.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API · ✋ HITL</text>
   </g>
 
-  <g class="n" data-type="tool" onclick="showDetail('tool-intake')">
+  <g class="n" data-type="tool hitl" onclick="showDetail('tool-intake')">
     <rect x="223" y="139.5" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
     <text x="226"  y="144" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">04 · INTAKE · AI-NATIVE</text>
     <text x="257"  y="149.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Feature intake pipeline</text>
   <text x="257"  y="155" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Triage · JTBD · assumptions · RICE</text>
     <rect x="223" y="157.5" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
-    <text x="257"  y="160.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · AGENTIC · CLAUDE API</text>
+    <text x="257"  y="160.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · AGENTIC · ✋ HITL</text>
   </g>
 
-  <g class="n" data-type="tool" onclick="showDetail('tool-hoshin')">
+  <g class="n" data-type="tool hitl" onclick="showDetail('tool-hoshin')">
     <rect x="223" y="179" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
     <text x="226"  y="183.5" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">02 · ALIGN</text>
     <text x="257"  y="189" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Hoshin Kanri + V2MOM</text>
   <text x="257"  y="194.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Strategy · values · measures</text>
     <rect x="223" y="197" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
-    <text x="257"  y="200.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLIENT-SIDE</text>
+    <text x="257"  y="200.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLIENT-SIDE · ✋ HITL</text>
   </g>
 
   <g class="n" data-type="tool" onclick="showDetail('tool-radar')">
@@ -672,22 +672,22 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
   <!-- Section label -->
   <text x="221"  y="572" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" letter-spacing=".13em" fill="#1a3a5c" opacity=".5">COMPANION TOOLS</text>
 
-  <g class="n" data-type="tool" onclick="showDetail('tool-backlog')">
+  <g class="n" data-type="tool hitl" onclick="showDetail('tool-backlog')">
     <rect x="223" y="258" width="68" height="24" rx="3" fill="#edf0f7" stroke="#1a3a5c" stroke-width="1" stroke-dasharray="5 3"/>
     <text x="224"  y="262.5" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">04 · INTAKE → BACKLOG</text>
     <text x="256"  y="268" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Backlog generator</text>
   <text x="256"  y="273.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Brief → epics + user stories</text>
     <rect x="223" y="276" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".08"/>
-    <text x="256"  y="279.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API · RECOMMENDED</text>
+    <text x="256"  y="279.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API · ✋ HITL</text>
   </g>
 
-  <g class="n" data-type="tool" onclick="showDetail('tool-stories')">
+  <g class="n" data-type="tool hitl" onclick="showDetail('tool-stories')">
     <rect x="223" y="297.6" width="68" height="24" rx="3" fill="#edf0f7" stroke="#1a3a5c" stroke-width="1" stroke-dasharray="5 3"/>
     <text x="224"  y="302.1" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">04 · INTAKE → SPEC</text>
     <text x="256"  y="307.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Story writer + AC gen.</text>
     <text x="256"  y="313.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Acceptance criteria · edge cases</text>
     <rect x="223" y="315.6" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".08"/>
-    <text x="256"  y="319" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API · RECOMMENDED</text>
+    <text x="256"  y="319" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API · ✋ HITL</text>
   </g>
 
   <g class="n" data-type="tool" onclick="showDetail('tool-jira-sync')">
@@ -699,13 +699,13 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <text x="256"  y="358.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#7a5700" letter-spacing=".07em">MCP WRITE · HITL-GATED</text>
   </g>
 
-  <g class="n" data-type="tool" onclick="showDetail('tool-sprint')">
+  <g class="n" data-type="tool hitl" onclick="showDetail('tool-sprint')">
     <rect x="223" y="376.6" width="68" height="24" rx="3" fill="#edf0f7" stroke="#1a3a5c" stroke-width="1" stroke-dasharray="5 3"/>
     <text x="224"  y="381.1" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">04 → 05 · PLANNING</text>
     <text x="256"  y="386.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Sprint planning assist.</text>
   <text x="256"  y="392.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Velocity + backlog → sprint draft</text>
     <rect x="223" y="394.6" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".08"/>
-    <text x="256"  y="398" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API · RECOMMENDED</text>
+    <text x="256"  y="398" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API · ✋ HITL</text>
   </g>
 
   <!-- ═══ AGENT + HITL NODES ═══ -->
@@ -1231,7 +1231,7 @@ document.querySelectorAll('.leg-btn').forEach(btn=>{
     else{active.add(t);btn.classList.add('active');}
     // SVG nodes
     document.querySelectorAll('g[data-type]').forEach(g=>{
-      g.style.opacity = active.has(g.dataset.type) ? '1' : '0.1';
+      g.style.opacity = (g.dataset.type||'').split(' ').some(t=>active.has(t)) ? '1' : '0.1';
     });
     // Governance bar
     const gBar = document.querySelector('.gov-bar-inner');
