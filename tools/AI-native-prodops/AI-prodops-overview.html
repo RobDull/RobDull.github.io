@@ -467,7 +467,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="phase-card-right">
         <div class="phase-body">
           <ul>
-            <li><strong>Self-writing PRDs:</strong> PMs prompt the intake pipeline with a feature idea; the agentic chain generates user stories, edge cases, and technical constraints as a draft the PM refines.</li>
+            <li><strong>Self-writing PRDs:</strong> PMs prompt the intake pipeline with a feature idea; the agentic chain generates user stories, edge cases, and technical constraints as a draft the PM refines. In production implementations this is not a single prompt — it is a staged chain where requirements are extracted and classified first, conflicts detected second, and the PRD synthesized third, so each layer's structured output grounds the next rather than accumulating assumptions silently.</li>
             <li><strong>Synthetic test generation:</strong> AI writes automated QA test scripts and acceptance criteria simultaneously with the feature spec — cutting the handoff delay to zero.</li>
             <li><strong>Bilingual code mapping:</strong> the system automatically converts PRD requirements into tracked Jira tickets and GitHub issues, maintaining traceability from idea to implementation.</li>
             <li><strong>Assumption surfacing:</strong> critical assumptions about user behavior, technical feasibility, and market size are made explicit and ranked by risk before any code is written.</li>
@@ -498,7 +498,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   </div>
 
   <div class="callout">
-    <strong>The PM's job in this workflow is not to execute the phases — it is to govern the transitions between them.</strong> Each phase produces structured output that the next phase depends on. The HITL gates sit at those transitions: ratifying the opportunity map before intake begins, validating the JTBD frame before assumption mapping runs, approving the feature brief before spec work proceeds, and reviewing canary metrics before full rollout is authorized. Execution is agentic; judgment is human.
+    <strong>The PM's job in this workflow is not to execute the phases — it is to govern the transitions between them.</strong> Each phase produces structured output that the next phase depends on. The HITL gates sit at those transitions: ratifying the opportunity map before intake begins, validating the JTBD frame before assumption mapping runs, approving the feature brief before spec work proceeds, and reviewing canary metrics before full rollout is authorized. The transition into execution typically requires parallel sign-off across three independent dimensions — technical feasibility (engineering or architecture lead), security and compliance, and business or financial review — all of which must clear before any code is written. Execution is agentic; judgment is human.
   </div>
 
   <div class="section-head" id="evolution">
@@ -696,7 +696,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
   <h3>Why MCP is now safe infrastructure to build on</h3>
 
-  <p>One legitimate concern about building production workflows on MCP was single-vendor dependency — a protocol controlled by one company is a strategic risk. That concern was addressed in December 2025 when the Linux Foundation launched the Agentic AI Foundation (AAIF), bringing MCP under neutral, open governance alongside two complementary standards: AGENTS.md from OpenAI and a designated local agent runtime layer (initially anchored by Goose from Block, now a broader category with multiple compliant implementations).</p>
+  <p>One legitimate concern about building production workflows on MCP was single-vendor dependency — a protocol controlled by one company is a strategic risk. That concern was addressed in December 2025 when the Linux Foundation launched the Agentic AI Foundation (AAIF), bringing MCP under neutral, open governance alongside two complementary standards: AGENTS.md from OpenAI and Goose from Block.</p>
 
   <div class="callout">
     <strong>The AAIF's founding membership includes AWS, Anthropic, Block, Bloomberg, Cloudflare, Google, Microsoft, and OpenAI — every major cloud provider and AI lab.</strong> For enterprises evaluating whether to build production product operations workflows on MCP, this resolves the core adoption risk. Enterprises don't bet on protocols controlled by single vendors; they bet on open standards with transparent governance. The AAIF provides exactly that foundation.
@@ -720,10 +720,10 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       </div>
     </li>
     <li class="element-item element-item--labeled">
-      <span class="element-num">Local Agent Runtime</span>
+      <span class="element-num">Goose</span>
       <div class="element-body">
-        <div class="element-title">Local agent execution — the on-premise orchestration layer</div>
-        <div class="element-desc">The third layer in the AAIF stack is the local agent runtime: frameworks that execute multi-step agentic workflows on local hardware rather than routing all traffic through cloud APIs. This category exists to solve a real enterprise constraint — customer interview recordings, internal financial models, and personnel data frequently cannot leave the network, yet still need to be readable by agents operating on MCP standards. Local runtimes bridge that gap. The leading options in this category cover a spectrum: <strong>Goose</strong> (Block, open-source) provides a terminal-based MCP-native framework oriented toward product and engineering workflows; <strong>OpenHands</strong> (formerly OpenDevin) offers an open-source browser-based GUI with live file tree, terminal, planner, and web access; <strong>Cline / Roo Code</strong> embed agentic looping directly inside VS Code with checkpoint rollback; <strong>Aider</strong> focuses on fast multi-file git-aware editing from the terminal. Cloud-hosted alternatives — Devin, Bolt.new, Cursor, Windsurf — trade local data control for zero environmental setup and background execution. For product operations teams evaluating this layer, the architectural decision is less about which tool and more about the tradeoff: local runtimes give you data sovereignty and auditability; cloud agents give you scale and parallelism. Both categories are AAIF-compatible and MCP-compliant.</div>
+        <div class="element-title">Goose — the local agent execution layer</div>
+        <div class="element-desc">An open-source, local-first AI agent framework from Block that combines language models, extensible tools, and MCP-based integration to provide a structured, reliable, trusted environment for executing agentic workflows. For product operations teams that cannot route all agent traffic through cloud APIs for data sensitivity reasons — customer interview recordings, internal financial data, personnel information — Goose provides a local execution environment that still follows MCP standards. The local-first architecture is directly relevant to the audit and governance layer: agent runs that never leave the local environment are easier to audit and scope.</div>
       </div>
     </li>
   </ul>
@@ -899,7 +899,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <p class="footnote">Nika, M., <em>Building AI-Powered Products</em>. AI product specification and multi-agent workflow design patterns.</p>
     <p class="footnote">Dull, R., "Is it Safe to Use AI? A Submarine Commander vs. YOLO Mode and Loss of Skill," <a href="../../perspectives/marquet-ai-cert.html">robdull.com/perspectives</a>, May 2026. Marquet Leader-Leader model applied to AI-native workflows; three-pillar certification framework (Mastery, Control, Clarity).</p>
     <p class="footnote">Anthropic, Randomized Controlled Trial on AI-assisted software development, January 2026. 17% decline in developer mastery among heavy AI tool users; productivity and skill trade-off finding.</p>
-    <p class="footnote">Linux Foundation / Agentic AI Foundation (AAIF), founding announcement, December 2025. <a href="https://aaif.io" target="_blank">aaif.io</a>. MCP, AGENTS.md, and the local agent runtime layer (initially Goose from Block) brought under neutral open governance; 49 founding member organizations including AWS, Anthropic, Block, Bloomberg, Cloudflare, Google, Microsoft, OpenAI. Source for: MCP governance neutrality argument; AGENTS.md behavioral context standard; local-first agent execution category; interoperability as compounding infrastructure investment. Local agent runtime landscape also informed by analysis of Goose, OpenHands, Cline/Roo Code, Aider, Devin, Bolt.new, Cursor, and Windsurf.</p>
+    <p class="footnote">Linux Foundation / Agentic AI Foundation (AAIF), founding announcement, December 2025. <a href="https://aaif.io" target="_blank">aaif.io</a>. MCP, AGENTS.md, and Goose brought under neutral open governance; 49 founding member organizations including AWS, Anthropic, Block, Bloomberg, Cloudflare, Google, Microsoft, OpenAI. Source for: MCP governance neutrality argument; AGENTS.md behavioral context standard; Goose local-first agent execution; interoperability as compounding infrastructure investment.</p>
     <p class="footnote">Jones, A., "Building the Foundation for Agentic AI," AAIF Blog, April 2026. <a href="https://aaif.io/blog/building-the-foundation-for-agentic-ai/" target="_blank">aaif.io/blog</a>. Reconfiguration tax framing; practical interoperability as the standard's core value proposition.</p>
   </div>
 
