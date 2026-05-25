@@ -297,7 +297,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
 <div class="art-body">
 
-  <p class="lead">The tools on this site were built on a specific hypothesis: AI is most valuable when it is inside the workflow at the moment of decision, not bolted on afterward. The research from 2025–2026 now provides the evidence base for what that actually looks like — and a new picture of what product managers need to know how to do.</p>
+  <p class="lead">Research from 2025–2026 describes a specific architecture for AI in product operations — one where data sources connect to tools via MCP, agents synthesize signal continuously, and human review is built into the workflow at defined transition points. This piece covers that architecture and what product managers need to understand to govern it.</p>
 
   <div class="section-head" id="gap">
     <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
@@ -314,11 +314,9 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="stat-text"><strong>of organizations regularly use AI in at least one business function</strong> — yet only about one-third have started scaling it across the enterprise. McKinsey State of AI, 2025.</div>
   </div>
 
-  <p>The more damning data point comes from engineering teams. Teams on high-AI-adoption workflows complete 21% more tasks and merge 98% more pull requests — but PR review time increases 91%. Without process redesign, the bottleneck just moves downstream. Leaders who invest in AI tooling without investing in the workflow redesign around it are paying for speed they can't capture.</p>
+  <p>In engineering teams on high-AI-adoption workflows, PR completion and merge rates increase significantly — but PR review time also increases 91%. The bottleneck moves downstream rather than disappearing. Tooling adoption without workflow redesign shifts where the constraint is, not whether one exists.</p>
 
-  <div class="callout-orange">
-    <strong>The test for AI-nativeness is not which tools you use.</strong> It's whether your decision architecture has been redesigned around AI's actual strengths — synthesis, pattern recognition, structured output at speed — and whether humans are reserved for the judgment calls AI structurally cannot make.
-  </div>
+
 
   <div class="section-head" id="elements">
     <div class="section-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
@@ -328,7 +326,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
   </div>
 
-  <p>The research from McKinsey, Gartner, Deloitte, Stanford's AI Index, and recent academic work on agentic AI in product management converges on eight elements that separate genuinely AI-native product operations from productivity-augmented versions of the old workflow.</p>
+  <p>Several research threads — McKinsey, Gartner, Deloitte, and academic work on agentic PM — identify consistent structural patterns in organizations that have moved beyond isolated AI productivity use. Eight of those patterns are directly relevant to product operations workflow design.</p>
 
   <ul class="element-list">
 
@@ -336,7 +334,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <span class="element-num">01</span>
       <div class="element-body">
         <div class="element-title">The PM role shifts from executor to orchestrator</div>
-        <div class="element-desc">Product managers currently spend roughly 30% of their time on data gathering and synthesis, 20% on stakeholder communication, and only 15% on strategic thinking. AI-native product ops inverts those proportions. The PM becomes a system orchestrator — directing, framing, and ratifying work that AI agents execute. Product organizations increasingly resemble intelligence systems rather than coordination hubs: teams become smaller but more leveraged as AI handles synthesis and coordination overhead.</div>
+        <div class="element-desc">Product managers currently spend roughly 30% of their time on data gathering and synthesis, 20% on stakeholder communication, and only 15% on strategic thinking. In AI-native product ops, the PM role shifts toward framing and ratifying work that agents execute — directing the workflow rather than producing the artifacts. Teams become smaller but more leveraged as agents handle synthesis tasks the PM previously did manually.</div>
       </div>
     </li>
 
@@ -352,7 +350,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <span class="element-num">03</span>
       <div class="element-body">
         <div class="element-title">Signal-to-decision is a continuous loop, not a quarterly report</div>
-        <div class="element-desc">The winning product organizations from 2026 to 2030 will be those who convert customer signal into validated strategic leverage before execution begins. The advanced end of this is fully autonomous: an agent detects an activation rate drop, forms a hypothesis, designs an in-app experiment, deploys it to a limited cohort, and reports back — without the PM initiating the workflow. The bottleneck is not technical capability but organizational trust in the governance framework that defines what agents can do autonomously versus what requires human approval.</div>
+        <div class="element-desc">Signal processing that previously happened in quarterly discovery sprints — clustering support tickets, reviewing Gong call themes, identifying activation gaps — can run continuously via agent. The bottleneck shifts from analyst bandwidth to governance design: what can an agent act on independently, and what requires explicit PM approval before proceeding.</div>
       </div>
     </li>
 
@@ -360,7 +358,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <span class="element-num">04</span>
       <div class="element-body">
         <div class="element-title">Agentic chains replace single-step prompts</div>
-        <div class="element-desc">The era of chatting with AI for product work is over. Agentic workflows involve agents that don't just generate text — they autonomously execute complex chains of tasks. A PM sets a goal ("analyze these 50 support tickets and update the backlog with high-priority bugs") and the agent executes, verifies output, and integrates into Jira or Linear. The market has converged on three orchestration patterns: workflow engines for predictable task flows, LLM orchestrators for complex prompt logic, and agentic orchestration for dynamic multi-domain problems. Most product ops workflows will use all three.</div>
+        <div class="element-desc">Agentic workflows involve multiple model calls chained together, where the output of one step becomes the input to the next. A PM sets a goal ("analyze these 50 support tickets and update the backlog with high-priority bugs") and the agent executes, verifies output, and writes to Jira. The feature intake pipeline on this site is a four-step example: triage → JTBD framing → assumption mapping → RICE scoring, with a human review gate after step 2.</div>
       </div>
     </li>
 
@@ -376,7 +374,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <span class="element-num">06</span>
       <div class="element-body">
         <div class="element-title">Governance is a prerequisite, not a compliance layer</div>
-        <div class="element-desc">As agentic systems begin to make decisions and take action, governance is no longer secondary — it is becoming a prerequisite for deployment. The shift in 2026 is from viewing governance as overhead to recognizing it as an enabler: mature governance frameworks increase organizational confidence to deploy agents in higher-value scenarios, creating a virtuous cycle. Trustworthy outcomes require engineering controls — distinct agent identities with least-privileged access, policy-as-code enforcement, full observability, and HITL at key decision points.</div>
+        <div class="element-desc">Governance requirements for agentic systems include: distinct agent identities with least-privileged access, policy-as-code enforcement, full observability, and human review at key decision points. Organizations that establish these controls early find they can deploy agents in higher-value scenarios with greater confidence — the governance layer is what makes expanded autonomy defensible.</div>
       </div>
     </li>
 
@@ -406,7 +404,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
   </div>
 
-  <p>Beyond the structural elements, an AI-native product operations workflow has a concrete shape. Drawing from the Institute of Product Leadership's AI Native Product Loop and Product School's decision-point framework, the workflow runs in four continuous phases — each one relying on MCP connections to the systems of record that make it ground in reality rather than generate in a vacuum.</p>
+  <p>The four-phase workflow below maps the structural elements above onto a concrete sequence. Each phase depends on MCP connections to systems of record; without those connections, the tools produce output that isn't grounded in live organizational data.</p>
 
   <div class="phase-grid">
 
@@ -418,8 +416,8 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="phase-body">
         <ul>
           <li><strong>Autonomous synthesis:</strong> agents continuously ingest raw data from Gong, Zendesk, Intercom, and App Store reviews — no manual querying required.</li>
-          <li><strong>Dynamic cluster mapping:</strong> the system automatically groups user pain points into real-time trend graphs, surfacing what's rising and what's resolving.</li>
-          <li><strong>Automated persona simulation:</strong> PMs test early concepts against AI agents trained on historical user behavior data before any design work begins.</li>
+          <li><strong>Continuous clustering:</strong> agents group incoming tickets and feedback into themes and track week-over-week movement — what's rising, resolving, or newly appearing.</li>
+
           <li><strong>Intent gap analysis:</strong> AI highlights areas where users search documentation but find no corresponding feature — unmet demand that wasn't on the roadmap.</li>
         </ul>
       </div>
@@ -450,7 +448,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="phase-body">
         <ul>
           <li><strong>Self-writing PRDs:</strong> PMs prompt the intake pipeline with a feature idea; the agentic chain generates user stories, edge cases, and technical constraints as a draft the PM refines.</li>
-          <li><strong>Synthetic test generation:</strong> AI writes automated QA test scripts and acceptance criteria simultaneously with the feature spec — cutting the handoff delay to zero.</li>
+          <li><strong>Acceptance criteria generation:</strong> AI drafts acceptance criteria and edge cases alongside the feature spec, which the PM then reviews before the HITL gate.</li>
           <li><strong>Bilingual code mapping:</strong> the system automatically converts PRD requirements into tracked Jira tickets and GitHub issues, maintaining traceability from idea to implementation.</li>
           <li><strong>Assumption surfacing:</strong> critical assumptions about user behavior, technical feasibility, and market size are made explicit and ranked by risk before any code is written.</li>
         </ul>
@@ -466,7 +464,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="phase-body">
         <ul>
           <li><strong>Automated release notes:</strong> AI reads final code commits and drafts personalized release notes for marketing, sales, and customers — scoped to each audience's language.</li>
-          <li><strong>Predictive canary testing:</strong> the deployment system monitors telemetry during rollouts and automatically rolls back if anomalies appear — without waiting for the PM to notice.</li>
+          <li><strong>Canary monitoring:</strong> the deployment system tracks telemetry during rollouts against thresholds defined at spec time; automated rollback is possible when anomaly criteria are clearly defined.</li>
           <li><strong>Real-time feature tracking:</strong> AI builds custom analytics dashboards the moment a feature goes live, tracking conversion and adoption against the metrics defined at spec time.</li>
           <li><strong>Feedback loop closure:</strong> the system automatically notifies the users who originally requested the feature once it is deployed — closing the signal-to-delivery loop explicitly.</li>
         </ul>
@@ -499,9 +497,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <h3>Generation 3 — AI-native (2024–present)</h3>
   <p>The workflow architecture itself changes. Data sources connect to tools via MCP. Agents synthesize signal continuously rather than at research sprint intervals. Tools produce structured output that other tools and agents can consume — not just PDFs that get emailed around. The PM's job shifts from producing documents to governing the transitions between agentic steps. The bottleneck moves from synthesis capacity to judgment quality.</p>
 
-  <div class="callout">
-    <strong>The tools on this site are designed for the third generation — not as faster document writers, but as nodes in a connected workflow.</strong> Each one produces structured output that is designed to be consumed by the next tool in the chain: the persona grounds the journey map, the journey map feeds the opportunity merge, the business case gates the intake pipeline, the intake brief unlocks engineering. The tools only realize their full value when they are connected.
-  </div>
+
 
   <table class="evolution-table">
     <thead>
@@ -602,7 +598,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </tbody>
   </table>
 
-  <p>The table above makes a specific claim: each tool on this site corresponds to a concrete Gen 3 capability that has no adequate equivalent in either Gen 1 or Gen 2 workflows. They are not writing accelerators. They are workflow nodes — and the value of each one compounds when it is connected to the others.</p>
+  <p>The table above is designed to help identify where an existing workflow sits. Most organizations in 2026 have Gen 1 or Gen 2 patterns in some workflow dimensions while running Gen 3 in others. The shift rarely happens all at once.</p>
 
   <div class="section-head" id="marquet">
     <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/></svg></div>
@@ -655,9 +651,9 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
   </div>
 
-  <p>The Marquet framework also surfaces a design principle for the tools themselves: every tool that produces output a PM will approve should make its reasoning visible, not just its conclusions. The business case generator's confidence scoring on financial claims, the feature intake pipeline's explicit assumption mapping, the opportunity map's signal source citations — these are not just usability features. They are the mechanism by which a PM can exercise mastery rather than trust-by-default.</p>
+  <p>One practical implication of the Marquet framework for tool design: tools that produce output a PM will approve should show their reasoning, not just their conclusions. Confidence scoring on financial claims, explicit assumption mapping in the intake pipeline, and signal source citations in opportunity maps give the PM at the HITL gate something to verify — not just a result to sign off on.</p>
 
-  <p>Cognitive engagement with AI solutions, reinforced through active review and collaboration with other people, leads to greater skills mastery rather than a reduction. The PM who reads the assumption map critically, challenges the JTBD frame before approving it, and annotates the business case rather than just signing off is building the judgment capability that makes the whole system safer as it becomes more autonomous. The PM who approves without reading is not.</p>
+
 
 
 
@@ -671,14 +667,14 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
   <p>Model Context Protocol is often framed as an infrastructure concern — something engineering teams configure while product managers define requirements. That framing is wrong, and organizations that accept it will consistently underutilize their AI tooling.</p>
 
-  <p>MCP is fundamentally a product design decision. What data sources an agent can access, in what scope, at what moment in the workflow — these choices determine what the agent can know, what it can produce, and what it might hallucinate when the right context isn't there. A PM who can specify MCP connections is not doing engineering's job. They are doing their own job better.</p>
+  <p>MCP is a product design decision as much as an engineering one. What data sources an agent can access, in what scope, at what point in the workflow — these choices determine what the agent can produce and where it will generate unreliable output when context is missing.</p>
 
   <h3>Why MCP is now safe infrastructure to build on</h3>
 
-  <p>One legitimate concern about building production workflows on MCP was single-vendor dependency — a protocol controlled by one company is a strategic risk. That concern was addressed in December 2025 when the Linux Foundation launched the Agentic AI Foundation (AAIF), bringing MCP under neutral, open governance alongside two complementary standards: AGENTS.md from OpenAI and Goose from Block.</p>
+  <p>One concern about building on MCP was single-vendor dependency. In December 2025, the Linux Foundation launched the Agentic AI Foundation (AAIF), bringing MCP under neutral open governance alongside AGENTS.md (OpenAI) and Goose (Block).</p>
 
   <div class="callout">
-    <strong>The AAIF's founding membership includes AWS, Anthropic, Block, Bloomberg, Cloudflare, Google, Microsoft, and OpenAI — every major cloud provider and AI lab.</strong> For enterprises evaluating whether to build production product operations workflows on MCP, this resolves the core adoption risk. Enterprises don't bet on protocols controlled by single vendors; they bet on open standards with transparent governance. The AAIF provides exactly that foundation.
+    <strong>The AAIF's founding membership includes AWS, Anthropic, Block, Bloomberg, Cloudflare, Google, Microsoft, and OpenAI.</strong> For organizations evaluating MCP as production infrastructure, the neutral governance structure and multi-vendor support addresses the single-vendor dependency concern that was a legitimate adoption risk before December 2025.
   </div>
 
   <p>The three projects under AAIF governance each address a different layer of the agentic stack — and all three are relevant to a product operations context:</p>
@@ -707,13 +703,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </li>
   </ul>
 
-  <p>The deeper significance of the AAIF for PM workflow design is what it solves at the infrastructure level. The single biggest friction point developers report is reconfiguring MCP servers, skills, memory, and context repeatedly for each new agent or integration. The AAIF's interoperability goal — agents that work across tools and environments without constant rewiring — means that MCP infrastructure investment compounds rather than depreciates. Each new agent or tool a product operations team adds leverages the same connection layer, the same behavioral context declarations, and the same governance framework built once.</p>
+  <p>The interoperability goal of the AAIF — agents that work across tools and environments without constant reconfiguration — means MCP infrastructure investment carries forward. Each new agent or tool leverages the same connection layer, behavioral context declarations, and governance framework established initially, rather than requiring separate configuration each time.</p>
 
-  <div class="callout-gold">
-    <strong>The practical implication for a PM building out a product operations toolstack:</strong> the five MCP servers described below are not sunk costs that lock you into a particular vendor's ecosystem. They are open-standard connections that any AAIF-compliant agent or tool — today or in two years — will be able to use. That changes the investment calculus significantly.
-  </div>
 
-  <p>In 2012, the PM who understood what an API call could and couldn't do — who could read a spec and reason about latency, data freshness, and error states — was structurally more capable than the one who couldn't. MCP literacy is the 2026 equivalent. It is not coding. It is understanding the connection layer well enough to make informed product decisions about what to connect, in what order, with what scope, and under what governance constraints.</p>
+
+  <p>MCP literacy for a PM means being able to answer questions about connection scope, data freshness requirements, fallback behavior, access controls, and audit requirements — not configuring the servers, but specifying what they need to do.</p>
 
   <h3>What MCP engineering means in a PM context</h3>
 
@@ -766,7 +760,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="competency-icon">1</div>
       <div>
         <div class="competency-title">Signal aggregator MCP — Zendesk, Gong, Intercom</div>
-        <div class="competency-desc">The single highest-leverage connection. Support tickets and sales call transcripts contain the most honest customer signal in the organization — and they're almost entirely unused in product decisions because they're not searchable at the moment of decision. A signal aggregator MCP that continuously clusters and surfaces themes eliminates the most common reason product decisions are made on gut: the data existed, it just wasn't accessible.</div>
+        <div class="competency-desc">Support tickets and sales call transcripts contain the most useful customer signal in most organizations and are rarely consulted at the moment of product decisions because they're not searchable. A signal aggregator MCP that clusters and surfaces themes from these sources makes the data available at the point where it's relevant.</div>
       </div>
     </li>
 
@@ -774,7 +768,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="competency-icon">2</div>
       <div>
         <div class="competency-title">Intake source MCP — Jira or Linear, with write-back</div>
-        <div class="competency-desc">Read access enables duplicate detection and prior art lookup before the intake pipeline runs. Write-back access — scoped post-HITL-approval — enables the story drafter agent to populate the backlog directly from the approved feature brief. This is the connection that eliminates the manual copy-paste from product brief to Jira ticket, which is consistently cited as one of the highest-friction handoffs in product development.</div>
+        <div class="competency-desc">Read access enables duplicate detection and prior art lookup before intake runs. Write-back access — scoped post-HITL-approval — enables the story drafter to populate the backlog from the approved brief, eliminating the manual handoff from feature brief to Jira ticket.</div>
       </div>
     </li>
 
@@ -782,7 +776,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="competency-icon">3</div>
       <div>
         <div class="competency-title">Strategy context MCP — Confluence, Notion, or planning wiki</div>
-        <div class="competency-desc">Without this connection, every AI tool run requires the PM to manually paste in the current quarter's OKRs, strategic priorities, and operating context. With it, the Hoshin Kanri tool, business case generator, and feature intake pipeline all receive live strategic context at run time. This is the connection that makes the tools feel like they know your organization rather than generating for a generic enterprise.</div>
+        <div class="competency-desc">Without this connection, every tool run requires manually pasting the current quarter's OKRs and operating context. With it, the Hoshin Kanri tool, business case generator, and feature intake pipeline all receive live strategic context at run time — so the output reflects the current plan, not a generic template.</div>
       </div>
     </li>
 
@@ -790,7 +784,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="competency-icon">4</div>
       <div>
         <div class="competency-title">Metrics MCP — DataDog, Mixpanel, or GA4</div>
-        <div class="competency-desc">Closes the deployment feedback loop. Without a metrics MCP, the product ops radar requires manual data entry, canary monitoring requires the PM to check a dashboard, and post-release adoption tracking requires a separate analytical run. With it, the radar auto-populates, canary thresholds trigger automatically, and adoption dashboards instantiate the moment a feature goes live. This is the connection that makes phase four of the workflow genuinely continuous rather than episodic.</div>
+        <div class="competency-desc">Without a metrics MCP, the product ops radar requires manual data entry, canary monitoring requires the PM to check dashboards, and post-release tracking requires a separate run. With it, the radar auto-populates from live data, thresholds trigger on defined criteria, and adoption dashboards are available immediately after deploy.</div>
       </div>
     </li>
 
@@ -798,15 +792,13 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="competency-icon">5</div>
       <div>
         <div class="competency-title">Audit log MCP — append-only, all agent runs</div>
-        <div class="competency-desc">The connection that makes everything else trustworthy. Every agent run — which tool was called, which model version was used, what data was accessed, what was produced, and who approved it — written to an append-only log. This is the governance prerequisite that allows organizations to expand agent autonomy with confidence rather than anxiety. Without it, you cannot review agent decisions, you cannot comply with emerging AI audit requirements, and you cannot answer the question "why did the agent recommend this?" after the fact.</div>
+        <div class="competency-desc">Every agent run — tool called, model version, data accessed, output, approver — written to an append-only log. Without this, agent decisions can't be reviewed after the fact, emerging AI audit requirements can't be met, and expanding agent scope becomes difficult to justify. It's the connection that makes the others auditable.</div>
       </div>
     </li>
 
   </ul>
 
-  <div class="callout-orange">
-    <strong>The PM who can specify these connections, govern their scope, and design the HITL gates around them is not a technical PM in the old sense.</strong> They are an architect of intelligent workflows. That is the job description that is emerging in 2026 — and it is distinct from both the traditional PM role and the data engineering role. It lives in the space between them.
-  </div>
+
 
   <div class="section-head" id="bottleneck">
     <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M12 2v6M12 22v-6M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M22 12h-6M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/></svg></div>
@@ -822,7 +814,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <strong>The fundamental issue is that most organizational data isn't positioned to be consumed by agents that need to understand business context and make decisions.</strong> The solution involves contextualizing enterprise data through content and index stores built on knowledge graphs, making information discoverable without requiring extensive ETL processes. This is precisely what the five MCP connections above are designed to solve. Deloitte Insights, 2026.
   </div>
 
-  <p>This is the layer below the tools layer. Before agents can synthesize customer signals, before the business case generator can cross-reference claims against live financial benchmarks, before the product ops radar can auto-populate from delivery metrics — the data has to be findable, structured, and MCP-accessible. Most organizations are not there yet. The teams that are will compound their advantage as agentic capabilities continue to accelerate.</p>
+  <p>The data readiness problem is the layer below the tools layer. Before agents can synthesize signals, before tools can pull live benchmarks, before radars can auto-populate — the data has to be findable and MCP-accessible. Most product organizations have some data in that state and much of it not.</p>
 
   <div class="stat-pull">
     <div class="stat-num">40%</div>
@@ -837,12 +829,12 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
   </div>
 
-  <p>All of this research points to the same structural truth: AI-native product operations is not a set of tools — it is a decision architecture. The tools do the synthesis; humans own the judgment. Agents handle the signal-to-brief pipeline; PMs own the framing. MCP integrations handle the data access; governance frameworks own the scope.</p>
+  <p>The pattern across all of this research: the tools handle synthesis; humans make the judgment calls at defined gates. Agents process the signal-to-brief pipeline; PMs frame the problem and ratify the output. MCP integrations handle data access; governance design determines scope and accountability.</p>
 
-  <p>The PM role is not disappearing into AI. It is becoming more consequential — because the leverage of getting the architecture right, or wrong, is larger than it has ever been. The PM who understands how to specify context, design HITL gates, govern MCP scope, and evaluate agent output quality is not being automated. They are operating at a level of abstraction that the tools underneath them cannot reach.</p>
+
 
   <div class="callout-orange">
-    <strong>The practical implication for anyone building or evaluating product ops tooling:</strong> ask not whether the tool uses AI, but whether the workflow it sits inside has been redesigned around the tool's actual output — and whether the MCP connections that ground that output in real organizational context have been specified and governed. A business case generator producing a draft nobody reads hasn't changed anything. One that sits at the moment of funding decision, connected to the opportunity map that preceded it and the intake pipeline that follows, grounded in live financial benchmarks via MCP, is a different thing entirely.
+    <strong>The diagnostic question for any AI tool in a product ops workflow:</strong> is the tool connected to the context that makes its output verifiable — and does its output become the input to what comes next? A business case generator producing a draft nobody acts on is a writing tool. One gated at a funding decision, connected to live benchmarks via MCP, and feeding the intake pipeline that follows is a workflow node. The difference is in the connections and the governance, not the model.
   </div>
 
   <div class="chip-row">
