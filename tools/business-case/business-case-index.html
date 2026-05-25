@@ -158,32 +158,14 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   .dd-area{padding:60px 20px;}
   footer{padding:20px;flex-direction:column;text-align:center;}
 }
-
-/* ── API KEY MODAL ── */
-.apikey-overlay{position:fixed;inset:0;background:rgba(10,10,10,.55);backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s;}
-.apikey-overlay.visible{opacity:1;pointer-events:all;}
-.apikey-modal{background:white;border-radius:14px;padding:36px;max-width:480px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,.18);transform:translateY(8px);transition:transform .2s;}
-.apikey-overlay.visible .apikey-modal{transform:translateY(0);}
-.akm-eyebrow{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;}
-.akm-title{font-size:22px;font-weight:900;letter-spacing:-.02em;color:var(--ink);margin-bottom:10px;}
-.akm-body{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:22px;}
-.akm-body a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(26,58,92,.2);}
-.akm-body a:hover{border-color:var(--accent);}
-.akm-input-row{display:flex;gap:8px;margin-bottom:10px;}
-.akm-input{flex:1;border:2px solid var(--rule);border-radius:8px;padding:11px 14px;font-family:var(--font);font-size:14px;color:var(--ink);outline:none;transition:border-color .15s;font-family:monospace;}
-.akm-input:focus{border-color:var(--accent);}
-.akm-input.error{border-color:#b03030;}
-.akm-submit{padding:11px 22px;background:var(--ink);color:white;border:none;border-radius:8px;font-family:var(--font);font-size:13px;font-weight:700;cursor:pointer;transition:background .15s;white-space:nowrap;}
-.akm-submit:hover{background:var(--accent);}
-.akm-error{font-size:12px;color:#b03030;font-weight:600;min-height:16px;margin-bottom:4px;}
-.akm-note{font-size:12px;color:var(--muted);line-height:1.6;}
-.akm-note strong{color:var(--ink);}
-/* Key status pill */
-.key-status{display:none;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--muted);padding:7px 14px;border:1.5px solid var(--rule);border-radius:20px;cursor:pointer;transition:all .15s;background:white;}
-.key-status:hover{border-color:#b03030;color:#b03030;}
-.key-status.visible{display:flex;}
-.key-status-dot{width:7px;height:7px;border-radius:50%;background:#2a6b6b;}
 </style>
+<meta name="description" content="Generate structured technical business cases with AI — executive pitch, financial model, risk analysis, and recommendation in one structured output.">
+<link rel="canonical" href="https://robdull.com/tools/business-case/business-case-index.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://robdull.com/tools/business-case/business-case-index.html">
+<meta property="og:title" content="AI Technical Business Case Generator | Rob Dull">
+<meta property="og:description" content="Generate structured technical business cases with AI — executive pitch, financial model, risk analysis, and recommendation in one structured output.">
+<meta property="og:site_name" content="Rob Dull">
 </head>
 <body>
 
@@ -193,30 +175,8 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <a href="mailto:rob.dull@gmail.com">Contact</a>
     <a href="../../index.html#about">About</a>
     <a href="../../index.html#tools">Work</a>
-    <button class="key-status" id="keyStatusPill" onclick="clearApiKey()" title="Click to clear API key">
-      <span class="key-status-dot"></span>
-      <span>API key set &mdash; click to clear</span>
-    </button>
   </div>
 </nav>
-
-<!-- API KEY MODAL -->
-<div class="apikey-overlay" id="apikeyOverlay">
-  <div class="apikey-modal">
-    <div class="akm-eyebrow">Live Demo</div>
-    <div class="akm-title">Try this tool with your own API key</div>
-    <div class="akm-body">
-      This is a live demo — enter your Anthropic API key to run the generator for real. Your key is used only for this session and never stored or shared.<br><br>
-      Don't have a key? Get one free at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> — takes two minutes, costs a few cents per use.
-    </div>
-    <div class="akm-error" id="akmError"></div>
-    <div class="akm-input-row">
-      <input class="akm-input" id="akmInput" type="password" placeholder="sk-ant-..." autocomplete="off" onkeydown="if(event.key==='Enter')submitApiKey()">
-      <button class="akm-submit" onclick="submitApiKey()">Run the demo</button>
-    </div>
-    <div class="akm-note"><strong>Privacy:</strong> Your key lives in sessionStorage — cleared when you close this tab. It is never logged, stored, or shared.</div>
-  </div>
-</div>
 
 <!-- PAGE HERO -->
 <section class="ph">
@@ -1017,26 +977,11 @@ Risks of Inaction: ${currentMode==='full'?v('inactionRisks')||'Not provided':''}
 Return/Risk Evolution: ${currentMode==='full'?v('timelineChanges')||'Not provided':''}
 Audience: ${v('audience')||'Non-technical business stakeholders'}`;
 
-  // Require API key
-  const apiKey = sessionStorage.getItem('anthropic_api_key');
-  if (!apiKey) {
-    btn.disabled = false;
-    btn.textContent = 'Generate Business Case';
-    area.classList.add('hidden');
-    showApiKeyModal(() => generate());
-    return;
-  }
-
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch('WORKER_URL_HERE', {
       method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version':'2023-06-01',
-        'anthropic-dangerous-direct-browser-access':'true'
-      },
-      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,messages:[{role:'user',content:prompt}]})
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error?.message||'API error');
@@ -1115,44 +1060,6 @@ function copyExDepth(exNum, depth) {
     const btn=el.querySelector('.cp-btn');
     if(btn){btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy document',2000);}
   });
-}
-
-
-// ── API KEY MODAL ──
-let _apikeyCallback = null;
-
-function showApiKeyModal(callback) {
-  _apikeyCallback = callback || null;
-  document.getElementById('akmInput').value = '';
-  document.getElementById('akmError').textContent = '';
-  document.getElementById('akmInput').classList.remove('error');
-  document.getElementById('apikeyOverlay').classList.add('visible');
-  setTimeout(() => document.getElementById('akmInput').focus(), 120);
-}
-
-function submitApiKey() {
-  const val = document.getElementById('akmInput').value.trim();
-  const errEl = document.getElementById('akmError');
-  if (!val.startsWith('sk-ant-')) {
-    errEl.textContent = 'Key should start with sk-ant- — check and try again.';
-    document.getElementById('akmInput').classList.add('error');
-    return;
-  }
-  errEl.textContent = '';
-  sessionStorage.setItem('anthropic_api_key', val);
-  document.getElementById('apikeyOverlay').classList.remove('visible');
-  document.getElementById('keyStatusPill').classList.add('visible');
-  if (_apikeyCallback) { _apikeyCallback(); _apikeyCallback = null; }
-}
-
-function clearApiKey() {
-  sessionStorage.removeItem('anthropic_api_key');
-  document.getElementById('keyStatusPill').classList.remove('visible');
-}
-
-// Show pill if key already in session
-if (sessionStorage.getItem('anthropic_api_key')) {
-  document.getElementById('keyStatusPill').classList.add('visible');
 }
 
 // Init
