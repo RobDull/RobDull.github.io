@@ -44,7 +44,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .hero h1 em{font-style:normal;color:var(--accent);}
 
 /* ── HERO STRIP ── */
-.hero-strip{max-width:1060px;margin:0 auto;padding:24px 40px 52px;display:flex;align-items:flex-end;justify-content:space-between;gap:40px;border-bottom:2px solid var(--rule);}
+.hero-strip{max-width:1060px;margin:0 auto;padding:24px 40px 24px;display:flex;align-items:center;justify-content:space-between;gap:40px;border-bottom:2px solid var(--rule);}
 .hero-desc{font-size:16px;color:var(--muted);line-height:1.8;max-width:520px;}
 .hero-stat-row{display:flex;gap:32px;flex-shrink:0;}
 .hero-stat{text-align:right;}
@@ -192,7 +192,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <div class="hero-strip">
-  <p class="hero-desc">I've been experimenting with coding tools and rapid design, including clean specs for HTML interfaces and logical workflows, and securing API keys so I can share these with you.</p>
+  <p class="hero-desc">This is a growing set of tools that combines 15 years of Product Management practices with AI-integrated workflows. Since context is key, here is a diagram that includes these tools in a broader context, and an overview of the current state of Product Operations.</p>
+  <div style="display:flex;flex-direction:column;gap:10px;flex-shrink:0;">
+    <a href="AI-native-prodops/prodops-network.html" class="hero-btn" style="margin-top:0;padding-top:7px;padding-bottom:7px;">Network Diagram &#8599;</a>
+    <a href="AI-native-prodops/AI-prodops-overview.html" class="hero-btn" style="margin-top:0;padding-top:7px;padding-bottom:7px;">Explore AI ProdOps &#8599;</a>
+  </div>
 </div>
 
 <div class="api-note">
@@ -262,10 +266,6 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <div class="tool-list">
-<div style="padding:40px 0 0;display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:32px;margin-bottom:0;">
-  <span style="font-size:13px;color:var(--muted);line-height:1.5;">Here is a more comprehensive model of how these tools fit into AI-native Product Operations</span>
-  <a href="AI-native-prodops/prodops-network.html" class="hero-btn" style="margin-top:0;flex-shrink:0;">Network diagram &#8599;</a>
-</div>
 <div style="padding:40px 0 0;">
   <ul style="list-style:none;padding-left:0;display:flex;flex-direction:column;gap:4px;">
     <li><a href="#tool-01" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> JTBD + Enterprise Persona Generator</a></li>
