@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /SESSION_NOTES.html
+Disallow: /worker-vs-direct.html
+Disallow: /hoshin-kanri-matrix.html
+Disallow: /tools/AI-native-prodops/enterprise-agentic-reference.html
+
+Sitemap: https://robdull.com/sitemap.xml

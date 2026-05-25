@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://robdull.com/</loc><priority>1.0</priority></url>
+  <url><loc>https://robdull.com/tools/tools-index.html</loc><priority>0.9</priority></url>
+  <url><loc>https://robdull.com/tools/AI-native-prodops/AI-prodops-overview.html</loc><priority>0.9</priority></url>
+  <url><loc>https://robdull.com/tools/AI-native-prodops/prodops-network.html</loc><priority>0.8</priority></url>
+  <url><loc>https://robdull.com/tools/business-case/business-case-index.html</loc><priority>0.8</priority></url>
+  <url><loc>https://robdull.com/tools/feature-intake/feature-intake-index.html</loc><priority>0.8</priority></url>
+  <url><loc>https://robdull.com/tools/persona-generator/persona-index.html</loc><priority>0.8</priority></url>
+  <url><loc>https://robdull.com/tools/journey-map/journey-map-index.html</loc><priority>0.8</priority></url>
+  <url><loc>https://robdull.com/tools/hoshin-kanri/hoshin-v2mom-index.html</loc><priority>0.8</priority></url>
+  <url><loc>https://robdull.com/tools/prod-ops-radar/prod-ops-radar-index.html</loc><priority>0.8</priority></url>
+  <url><loc>https://robdull.com/perspectives/perspectives-index.html</loc><priority>0.8</priority></url>
+  <url><loc>https://robdull.com/perspectives/marquet-ai-cert.html</loc><priority>0.8</priority></url>
+  <url><loc>https://robdull.com/perspectives/pm-roles-ai.html</loc><priority>0.7</priority></url>
+  <url><loc>https://robdull.com/perspectives/write-it-right.html</loc><priority>0.7</priority></url>
+  <url><loc>https://robdull.com/workshops/workshops-index.html</loc><priority>0.7</priority></url>
+  <url><loc>https://robdull.com/about_me/resume.html</loc><priority>0.7</priority></url>
+</urlset>
