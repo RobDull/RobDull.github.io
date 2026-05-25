@@ -102,7 +102,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .tool-desc{font-size:14px;color:var(--muted);line-height:1.8;max-width:500px;margin-bottom:20px;}
 .tool-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px;}
 .chip{font-size:10px;font-weight:600;letter-spacing:.04em;color:var(--ink);background:var(--off);border:1px solid var(--rule);border-radius:4px;padding:3px 9px;}
-.tool-cta{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:white;text-decoration:none;border-radius:6px;padding:11px 24px;font-size:13px;font-weight:700;transition:all .18s;letter-spacing:-.01em;}
+.hero-btn{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:13px;font-weight:700;color:var(--accent);text-decoration:none;padding:9px 18px;border:2px solid var(--accent);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:transparent;}
+.hero-btn:hover{background:var(--accent);color:white;}
 .tool-cta:hover{background:#2a2a2a;transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,.12);}
 
 /* STATUS BADGE */
@@ -191,7 +192,8 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <div class="hero-strip">
-  <p class="hero-desc">These tools represent use cases for AI in Product Management workflows. I've been experimenting with coding tools and rapid design, including clean specs for HTML interfaces and logical workflows, and securing API keys so I can share these with you. A couple of these tools let you enter your own API key. For a non-demo version, I would currently recommend a Cloudflare Worker as a server-side proxy so the API key is essentially embedded, but not shown in the code.</p>
+  <p class="hero-desc">These tools represent use cases for AI in Product Management workflows. I've been experimenting with coding tools and rapid design, including clean specs for HTML interfaces and logical workflows, and securing API keys so I can share these with you.</p>
+  <a href="AI-native-prodops/prodops-network.html" class="hero-btn">Network diagram &#8599;</a>
   <div class="hero-stat-row">
     <div class="hero-stat">
       <div class="hero-stat-num">5</div>
