@@ -13,9 +13,11 @@
   --off:#f7f7f7;
   --rule:#e8e8e8;
   --accent:#1a3a5c;
-  --accent-dark:#0f2640;
   --accent2:#c8662a;
   --muted:#6b6b6b;
+  --teal:#2a6b6b;
+  --purple:#7c5cbf;
+  --gold:#c8921a;
   --font:'Inter',sans-serif;
   --c-data:#2a6b6b;
   --c-tool:#1a3a5c;
@@ -26,7 +28,7 @@
   --c-gov:#b0303a;
 }
 html{scroll-behavior:smooth;}
-body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;min-height:158vh;}
+body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;min-height:100vh;}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
@@ -56,14 +58,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 40px;display:fl
 .workflow-steps{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .wf-step{display:flex;flex-direction:column;gap:2px;padding:7px 12px;border-radius:6px;background:white;border:1.5px solid var(--rule);text-decoration:none;transition:border-color .15s;min-width:88px;}
 .wf-step:hover{border-color:var(--accent);}
-.wf-native{border-color:rgba(26,58,92,.3);}
+.wf-native{border-color:rgba(26,58,92,.3);background:rgba(26,58,92,.04);}
 .wf-num{font-size:9px;font-weight:800;color:var(--accent2);letter-spacing:.08em;}
 .wf-name{font-size:12px;font-weight:800;color:var(--ink);}
 .wf-tools{font-size:10px;color:var(--muted);}
 .wf-arrow{font-size:13px;color:var(--rule);flex-shrink:0;}
 .wf-arrow-agents{font-size:10px;font-weight:700;color:var(--accent2);background:rgba(200,102,42,.07);border:1px solid rgba(200,102,42,.2);border-radius:4px;padding:4px 8px;flex-shrink:0;}
 .wf-cta{font-size:11px;font-weight:700;color:white;background:var(--accent);border-radius:6px;padding:6px 12px;text-decoration:none;white-space:nowrap;margin-left:auto;flex-shrink:0;transition:background .15s;}
-.wf-cta:hover{background:var(--accent-dark);}
+.wf-cta:hover{background:#0f2640;}
 @media(max-width:800px){.workflow-strip{padding:0 20px;}.wf-cta{margin-left:0;width:100%;text-align:center;}}
 
 /* LEGEND / FILTER BAR */
@@ -125,7 +127,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 40px;display:fl
 
 /* DIAGRAM SCROLL */
 .diagram-scroll{width:100%;padding:0 16px;box-sizing:border-box;}
-svg.network{display:block;max-width:100%;width:auto;height:158vh;margin:0 auto;}
+svg.network{display:block;max-width:100%;width:auto;height:255vh;margin:0 auto;}
 
 /* node hover */
 .n:hover > rect, .n:hover > polygon{filter:brightness(0.93);}
@@ -188,12 +190,16 @@ svg.network{display:block;max-width:100%;width:auto;height:158vh;margin:0 auto;}
 .about-links{display:flex;gap:10px;flex-shrink:0;margin-top:4px;}
 .about-btn{font-size:13px;font-weight:700;padding:10px 20px;border-radius:6px;text-decoration:none;transition:all .15s;}
 .about-btn.primary{background:var(--accent);color:white;}
-.about-btn.primary:hover{background:var(--accent-dark);}
+.about-btn.primary:hover{background:#0f2640;}
 .about-btn.ghost{background:white;color:var(--ink);border:2px solid var(--rule);}
 .about-btn.ghost:hover{border-color:var(--ink);}
 
 footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);border-top:1px solid var(--rule);}
 
+/* Feedback loop toggle active */
+#fbToggle.active{background:#1a5c3a;color:#fff !important;}
+#fbToggle.active .leg-dot{background:rgba(255,255,255,0.6);}
+#fbToggle:not(.active){background:white;}
 
 @media(max-width:800px){
   nav{padding:12px 20px;}
@@ -201,6 +207,13 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
   .obs-wrap,.gov-bar{padding:0 20px;}
 }
 </style>
+<meta name="description" content="Interactive network diagram mapping an AI-native product operations system — agents, MCPs, data sources, HITL gates, and outputs across the full PM workflow.">
+<link rel="canonical" href="https://robdull.com/tools/AI-native-prodops/prodops-network.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://robdull.com/tools/AI-native-prodops/prodops-network.html">
+<meta property="og:title" content="AI-Native ProdOps Network Diagram | Rob Dull">
+<meta property="og:description" content="Interactive network diagram mapping an AI-native product operations system — agents, MCPs, data sources, HITL gates, and outputs across the full PM workflow.">
+<meta property="og:site_name" content="Rob Dull">
 </head>
 <body>
 
@@ -282,7 +295,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <button class="leg-btn active" data-type="output"><span class="leg-dot"></span>Outputs</button>
 
     <span class="legend-hint">Click node to expand · Filter by type above</span>
-
+    <button class="leg-btn fb-toggle active" id="fbToggle" style="border-color:#1a5c3a;color:#1a5c3a;margin-left:auto;"><span class="leg-dot" style="background:#1a5c3a;"></span>↻ Feedback loops</button>
   </div>
 </div>
 
@@ -291,650 +304,650 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
 
   <!-- SVG DIAGRAM -->
   <div class="diagram-scroll">
-  <svg class="network" id="network" viewBox="0 6 498 419" width="100%"
+  <svg class="network" id="network" viewBox="0 0 498 1009" width="100%"
        role="img" aria-label="Product operations tool network — five columns from data sources to outputs">
   <defs>
     <!-- Arrow markers — one per color, thick -->
-    <marker id="a-def" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+    <marker id="a-def" viewBox="0 0 10 1009" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
       <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="#b4b2a9" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
     </marker>
-    <marker id="a-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+    <marker id="a-teal" viewBox="0 0 10 1009" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
       <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="#2a6b6b" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
     </marker>
-    <marker id="a-navy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+    <marker id="a-navy" viewBox="0 0 10 1009" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
       <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="#1a3a5c" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
     </marker>
-    <marker id="a-gold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+    <marker id="a-gold" viewBox="0 0 10 1009" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
       <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="#c8921a" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
     </marker>
-    <marker id="a-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+    <marker id="a-orange" viewBox="0 0 10 1009" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
       <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="#c8662a" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
     </marker>
-    <marker id="a-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+    <marker id="a-purple" viewBox="0 0 10 1009" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
       <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="#7c5cbf" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
     </marker>
-    <marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+    <marker id="a-green" viewBox="0 0 10 1009" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
       <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="#1a5c3a" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
     </marker>
-    <marker id="a-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+    <marker id="a-red" viewBox="0 0 10 1009" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
       <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="#b0303a" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
     </marker>
   </defs>
 
   <!-- ═══ COLUMN HEADERS ═══ -->
   <text x="45"   y="11.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="700" letter-spacing=".13em" fill="#2a6b6b">DATA SOURCES</text>
-  <text x="137"  y="11.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="700" letter-spacing=".13em" fill="#c8921a">MCP LAYER</text>
-  <text x="257"  y="11.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="700" letter-spacing=".13em" fill="#1a3a5c">Tools &amp; HITL</text>
-  <text x="364"  y="11.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="700" letter-spacing=".13em" fill="#c8662a">AGENTS &amp; HITL</text>
+  <text x="136"  y="11.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="700" letter-spacing=".13em" fill="#c8921a">MCP LAYER</text>
+  <text x="247"  y="11.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="700" letter-spacing=".13em" fill="#1a3a5c">TOOLS</text>
+  <text x="362"  y="11.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="700" letter-spacing=".13em" fill="#c8662a">AGENTS &amp; HITL</text>
   <text x="458"  y="11.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="700" letter-spacing=".13em" fill="#1a5c3a">OUTPUTS</text>
 
   <!-- Column zone fills -->
-  <rect x="17"  y="13.0" width="56" height="402" rx="4" fill="#f7f7f7" fill-opacity="1" stroke="#d4d4d4" stroke-width=".4"/>
-  <rect x="106" y="13.0" width="80" height="402" rx="4" fill="#f7f7f7" fill-opacity="1" stroke="#d4d4d4" stroke-width=".4"/>
-  <rect x="219" y="13.0" width="76" height="402" rx="4" fill="#f7f7f7" fill-opacity="1" stroke="#d4d4d4" stroke-width=".4"/>
-  <rect x="328" y="13.0" width="72" height="402" rx="4" fill="#f7f7f7" fill-opacity="1" stroke="#d4d4d4" stroke-width=".4"/>
-  <rect x="433" y="13.0" width="64" height="402" rx="4" fill="#f7f7f7" fill-opacity="1" stroke="#d4d4d4" stroke-width=".4"/>
+  <rect x="17"  y="16" width="56" height="803" rx="4" fill="#2a6b6b" fill-opacity=".03" stroke="#2a6b6b" stroke-width=".3" stroke-opacity=".18"/>
+  <rect x="105" y="16" width="80" height="825" rx="4" fill="#c8921a" fill-opacity=".03" stroke="#c8921a" stroke-width=".3" stroke-opacity=".18"/>
+  <rect x="209" y="16" width="76" height="771" rx="4" fill="#1a3a5c" fill-opacity=".03" stroke="#1a3a5c" stroke-width=".3" stroke-opacity=".18"/>
+  <rect x="326" y="16" width="72" height="983" rx="4" fill="#c8662a" fill-opacity=".03" stroke="#c8662a" stroke-width=".3" stroke-opacity=".18"/>
+  <rect x="433" y="16" width="64" height="1011" rx="4" fill="#1a5c3a" fill-opacity=".03" stroke="#1a5c3a" stroke-width=".3" stroke-opacity=".18"/>
 
   <!-- ═══ EDGES (drawn first so nodes sit on top) ═══ -->
 
   <!-- data → MCP: thick, solid teal -->
-  <line x1="69" y1="22"  x2="110" y2="38.7" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
-  <line x1="69" y1="44.6" x2="110" y2="38.7" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
-  <line x1="69" y1="67.1" x2="110" y2="38.7" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
-  <line x1="69" y1="89.7" x2="110" y2="38.7" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
-  <line x1="69" y1="112.2" x2="110" y2="76.9" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
-  <line x1="69" y1="134.8" x2="110" y2="76.9" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
-  <line x1="69" y1="157.4" x2="110" y2="115.2" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
-  <line x1="69" y1="179.9" x2="110" y2="153.4" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
-  <line x1="69" y1="202.5" x2="110" y2="153.4" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
-  <line x1="69" y1="225" x2="110" y2="153.4" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
-  <line x1="69" y1="247.6" x2="110" y2="191.6" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
-  <line x1="69" y1="270.2" x2="110" y2="191.6" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="39.3"  x2="109" y2="105.0" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="83.3" x2="109" y2="105.0" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="127.3" x2="109" y2="105.0" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="171.3" x2="109" y2="105.0" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="215.3" x2="109" y2="183.7" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="259.3" x2="109" y2="183.7" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="303.3" x2="109" y2="230.3" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="347.3" x2="109" y2="287.7" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="391.3" x2="109" y2="287.7" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="435.3" x2="109" y2="287.7" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="479.3" x2="109" y2="375.7" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="523.3" x2="109" y2="375.7" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
 
   <!-- MCP → tools: thick gold -->
-  <line x1="182" y1="38.7" x2="223" y2="32.9" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
-  <line x1="182" y1="38.7" x2="223" y2="72.4" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
-  <line x1="182" y1="38.7" x2="223" y2="32.9" stroke="#c8921a" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".5"/>
-  <line x1="182" y1="76.9" x2="223" y2="112" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
-  <line x1="182" y1="76.9" x2="223" y2="151.5" stroke="#c8921a" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".5"/>
-  <line x1="182" y1="115.2" x2="223" y2="151.5" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
-  <line x1="182" y1="153.4" x2="223" y2="191" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
-  <line x1="182" y1="191.6" x2="223" y2="230.5" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
+  <line x1="181" y1="105.0" x2="213" y2="81.3" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
+  <line x1="181" y1="105.0" x2="213" y2="170.7" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
+  <line x1="181" y1="105.0" x2="213" y2="81.3" stroke="#c8921a" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".5"/>
+  <line x1="181" y1="183.7" x2="213" y2="257.3" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
+  <line x1="181" y1="183.7" x2="213" y2="317.3" stroke="#c8921a" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".5"/>
+  <line x1="181" y1="230.3" x2="213" y2="317.3" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
+  <line x1="181" y1="287.7" x2="213" y2="437.3" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
+  <line x1="181" y1="375.7" x2="213" y2="525.3" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
 
   <!-- Tools → agents/HITL: thick navy -->
-  <line x1="293" y1="32.9" x2="331" y2="32.1" stroke="#1a3a5c" stroke-width="1.0" marker-end="url(#a-navy)"/>
-  <line x1="293" y1="72.4" x2="331" y2="32.1" stroke="#1a3a5c" stroke-width="1.0" marker-end="url(#a-navy)"/>
-  <line x1="293" y1="32.9" x2="331" y2="64.6" stroke="#1a3a5c" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-navy)" opacity=".6"/>
-  <line x1="293" y1="72.4" x2="331" y2="64.6" stroke="#1a3a5c" stroke-width="1.0" marker-end="url(#a-navy)"/>
-  <line x1="293" y1="112" x2="331" y2="97.1" stroke="#1a3a5c" stroke-width="1.0" marker-end="url(#a-navy)"/>
-  <line x1="293" y1="112" x2="331" y2="129.6" stroke="#1a3a5c" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-navy)" opacity=".6"/>
-  <line x1="293" y1="151.5" x2="331" y2="162" stroke="#1a3a5c" stroke-width="1.0" marker-end="url(#a-navy)"/>
-  <line x1="293" y1="151.5" x2="331" y2="194.5" stroke="#1a3a5c" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-navy)" opacity=".6"/>
-  <line x1="293" y1="191" x2="331" y2="129.6" stroke="#1a3a5c" stroke-width="1.0" marker-end="url(#a-navy)"/>
-  <line x1="293" y1="230.5" x2="331" y2="129.6" stroke="#1a3a5c" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-navy)" opacity=".6"/>
+  <line x1="283" y1="81.3" x2="329" y2="81.0" stroke="#1a3a5c" stroke-width="1.0" marker-end="url(#a-navy)"/>
+  <line x1="283" y1="170.7" x2="329" y2="81.0" stroke="#1a3a5c" stroke-width="1.0" marker-end="url(#a-navy)"/>
+  <line x1="283" y1="81.3" x2="329" y2="178.3" stroke="#1a3a5c" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-navy)" opacity=".6"/>
+  <line x1="283" y1="170.7" x2="329" y2="178.3" stroke="#1a3a5c" stroke-width="1.0" marker-end="url(#a-navy)"/>
+  <line x1="283" y1="257.3" x2="329" y2="270.3" stroke="#1a3a5c" stroke-width="1.0" marker-end="url(#a-navy)"/>
+  <line x1="283" y1="257.3" x2="329" y2="359.7" stroke="#1a3a5c" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-navy)" opacity=".6"/>
+  <line x1="283" y1="317.3" x2="329" y2="449.0" stroke="#1a3a5c" stroke-width="1.0" marker-end="url(#a-navy)"/>
+  <line x1="283" y1="317.3" x2="329" y2="538.3" stroke="#1a3a5c" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-navy)" opacity=".6"/>
+  <line x1="283" y1="437.3" x2="329" y2="359.7" stroke="#1a3a5c" stroke-width="1.0" marker-end="url(#a-navy)"/>
+  <line x1="283" y1="525.3" x2="329" y2="359.7" stroke="#1a3a5c" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-navy)" opacity=".6"/>
 
   <!-- Agents/HITL → outputs: thick orange/purple -->
-  <line x1="398" y1="32.1" x2="436" y2="34.4" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
-  <line x1="398" y1="64.6" x2="436" y2="34.4" stroke="#7c5cbf" stroke-width="1.0" marker-end="url(#a-purple)"/>
-  <line x1="398" y1="97.1" x2="436" y2="62.8" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
-  <line x1="398" y1="129.6" x2="436" y2="62.8" stroke="#7c5cbf" stroke-width="1.0" marker-end="url(#a-purple)"/>
-  <line x1="398" y1="162" x2="436" y2="91.2" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
-  <line x1="398" y1="194.5" x2="436" y2="91.2" stroke="#7c5cbf" stroke-width="1.0" marker-end="url(#a-purple)"/>
-  <line x1="398" y1="129.6" x2="436" y2="119.6" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
-  <line x1="398" y1="162" x2="436" y2="148" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
-  <line x1="398" y1="162" x2="436" y2="176.4" stroke="#c8662a" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-orange)" opacity=".5"/>
+  <line x1="396" y1="81.0" x2="436" y2="99.7" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <line x1="396" y1="178.3" x2="436" y2="99.7" stroke="#7c5cbf" stroke-width="1.0" marker-end="url(#a-purple)"/>
+  <line x1="396" y1="270.3" x2="436" y2="210.3" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <line x1="396" y1="359.7" x2="436" y2="210.3" stroke="#7c5cbf" stroke-width="1.0" marker-end="url(#a-purple)"/>
+  <line x1="396" y1="449.0" x2="436" y2="302.3" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <line x1="396" y1="538.3" x2="436" y2="302.3" stroke="#7c5cbf" stroke-width="1.0" marker-end="url(#a-purple)"/>
+  <line x1="396" y1="359.7" x2="436" y2="402.3" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <line x1="396" y1="449.0" x2="436" y2="493.0" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <line x1="396" y1="449.0" x2="436" y2="582.3" stroke="#c8662a" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-orange)" opacity=".5"/>
 
   <!-- Feedback loop arc -->
   <g id="feedback-loops" class="feedback-group">
   <!-- Backlog tool edges: intake pipeline → companion tools (feedback: right-to-left) -->
-  <line x1="291" y1="151.5" x2="223" y2="270" stroke="#1a3a5c" stroke-width="0.6" stroke-dasharray="5 4" marker-end="url(#a-navy)" opacity=".5" class="fb-arrow"/>
-  <line x1="291" y1="151.5" x2="223" y2="309.6" stroke="#1a3a5c" stroke-width="0.6" stroke-dasharray="5 4" marker-end="url(#a-navy)" opacity=".5" class="fb-arrow"/>
+  <line x1="281" y1="317.3" x2="213" y2="589.3" stroke="#1a3a5c" stroke-width="0.6" stroke-dasharray="5 4" marker-end="url(#a-navy)" opacity=".5" class="fb-arrow"/>
+  <line x1="281" y1="317.3" x2="213" y2="642.7" stroke="#1a3a5c" stroke-width="0.6" stroke-dasharray="5 4" marker-end="url(#a-navy)" opacity=".5" class="fb-arrow"/>
   </g><!-- /feedback-loops early -->
 
   <!-- Intake MCP → Jira write-back tool -->
-  <line x1="182" y1="115.2" x2="223" y2="349.1" stroke="#c8921a" stroke-width="0.8" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".6"/>
+  <line x1="181" y1="230.3" x2="213" y2="696.0" stroke="#c8921a" stroke-width="0.8" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".6"/>
   <!-- Metrics MCP → sprint planning tool -->
-  <line x1="182" y1="191.6" x2="223" y2="388.6" stroke="#c8921a" stroke-width="0.6" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".5"/>
+  <line x1="181" y1="375.7" x2="213" y2="749.3" stroke="#c8921a" stroke-width="0.6" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".5"/>
 
   <!-- new data → new MCP edges -->
-  <line x1="69" y1="292.7" x2="110" y2="268.1" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
-  <line x1="69" y1="315.3" x2="110" y2="306.4" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
-  <line x1="69" y1="337.8" x2="110" y2="306.4" stroke="#2a6b6b" stroke-width="0.9" stroke-dasharray="5 4" marker-end="url(#a-teal)" opacity=".4"/>
-  <line x1="69" y1="383" x2="110" y2="344.6" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
-  <line x1="69" y1="405.5" x2="110" y2="382.8" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="567.3" x2="109" y2="583.7" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="611.3" x2="109" y2="662.3" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="655.3" x2="109" y2="662.3" stroke="#2a6b6b" stroke-width="0.9" stroke-dasharray="5 4" marker-end="url(#a-teal)" opacity=".4"/>
+  <line x1="69" y1="743.3" x2="109" y2="741.0" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="787.3" x2="109" y2="806.3" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
 
   <!-- new MCP → new agents edges -->
-  <line x1="182" y1="268.1" x2="332" y2="259.5" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
-  <line x1="182" y1="306.4" x2="332" y2="292" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
-  <line x1="182" y1="344.6" x2="332" y2="324.4" stroke="#c8921a" stroke-width="1.0" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".6"/>
-  <line x1="182" y1="382.8" x2="332" y2="356.9" stroke="#c8921a" stroke-width="1.0" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".6"/>
+  <line x1="181" y1="583.7" x2="330" y2="646.3" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
+  <line x1="181" y1="662.3" x2="330" y2="733.0" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
+  <line x1="181" y1="741.0" x2="330" y2="819.7" stroke="#c8921a" stroke-width="1.0" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".6"/>
+  <line x1="181" y1="806.3" x2="330" y2="906.3" stroke="#c8921a" stroke-width="1.0" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".6"/>
 
   <!-- new agents → new outputs edges -->
-  <line x1="397" y1="259.5" x2="437" y2="204.8" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
-  <line x1="397" y1="292" x2="437" y2="233.2" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
-  <line x1="397" y1="324.4" x2="437" y2="290" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
-  <line x1="397" y1="356.9" x2="437" y2="318.4" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
-  <line x1="397" y1="292" x2="437" y2="233.2" stroke="#b0303a" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-red)" opacity=".6"/>
+  <line x1="395" y1="646.3" x2="437" y2="649.0" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <line x1="395" y1="733.0" x2="437" y2="749.0" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <line x1="395" y1="819.7" x2="437" y2="822.3" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <line x1="395" y1="906.3" x2="437" y2="909.0" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <line x1="395" y1="733.0" x2="437" y2="749.0" stroke="#b0303a" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-red)" opacity=".6"/>
 
   <!-- ═══ DATA SOURCE NODES ═══ -->
   <!-- each: rect fill teal-tint, stroke teal, rx=7, h=46, w=134 centered on x=90 -->
 
   <g class="n" data-type="data" onclick="showDetail('interviews')">
-    <rect x="21" y="16" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
-    <text x="45"  y="20.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Customer interviews</text>
-    <text x="45"  y="26" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Qual research · JTBD</text>
+    <rect x="21" y="33.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="37.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Customer interviews</text>
+    <text x="45"  y="43.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Qual research · JTBD</text>
   </g>
 
   <g class="n" data-type="data" onclick="showDetail('analytics')">
-    <rect x="21" y="38.6" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
-    <text x="45"  y="43.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Usage analytics</text>
-    <text x="45"  y="48.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Telemetry · funnels</text>
+    <rect x="21" y="77.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="81.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Usage analytics</text>
+    <text x="45"  y="87.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Telemetry · funnels</text>
   </g>
 
   <g class="n" data-type="data" onclick="showDetail('support')">
-    <rect x="21" y="61.1" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
-    <text x="45"  y="65.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Support tickets</text>
-    <text x="45"  y="71.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Zendesk · Intercom</text>
+    <rect x="21" y="121.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="125.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Support tickets</text>
+    <text x="45"  y="131.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Zendesk · Intercom</text>
   </g>
 
   <g class="n" data-type="data" onclick="showDetail('sales')">
-    <rect x="21" y="83.7" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
-    <text x="45"  y="88.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Sales transcripts</text>
-    <text x="45"  y="93.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Gong · call notes</text>
+    <rect x="21" y="165.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="169.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Sales transcripts</text>
+    <text x="45"  y="175.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Gong · call notes</text>
   </g>
 
   <g class="n" data-type="data" onclick="showDetail('market')">
-    <rect x="21" y="106.2" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
-    <text x="45"  y="110.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Market research</text>
-    <text x="45"  y="116.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Competitive · trends</text>
+    <rect x="21" y="209.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="213.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Market research</text>
+    <text x="45"  y="219.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Competitive · trends</text>
   </g>
 
   <g class="n" data-type="data" onclick="showDetail('stakeholder')">
-    <rect x="21" y="128.8" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
-    <text x="45"  y="133.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Stakeholder input</text>
-    <text x="45"  y="138.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Priorities · constraints</text>
+    <rect x="21" y="253.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="257.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Stakeholder input</text>
+    <text x="45"  y="263.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Priorities · constraints</text>
   </g>
 
   <g class="n" data-type="data" onclick="showDetail('backlog')">
-    <rect x="21" y="151.4" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
-    <text x="45"  y="155.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Product backlog</text>
-    <text x="45"  y="161.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Existing requests</text>
+    <rect x="21" y="297.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="301.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Product backlog</text>
+    <text x="45"  y="307.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Existing requests</text>
   </g>
 
   <g class="n" data-type="data" onclick="showDetail('orgstrategy')">
-    <rect x="21" y="173.9" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
-    <text x="45"  y="178.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Org strategy / OKRs</text>
-    <text x="45"  y="183.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Vision · annual goals</text>
+    <rect x="21" y="341.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="345.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Org strategy / OKRs</text>
+    <text x="45"  y="351.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Vision · annual goals</text>
   </g>
 
   <g class="n" data-type="data" onclick="showDetail('financial')">
-    <rect x="21" y="196.5" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
-    <text x="45"  y="201" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Financial targets</text>
-    <text x="45"  y="206.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">ROI · budget</text>
+    <rect x="21" y="385.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="389.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Financial targets</text>
+    <text x="45"  y="395.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">ROI · budget</text>
   </g>
 
   <g class="n" data-type="data" onclick="showDetail('deliverymetrics')">
-    <rect x="21" y="219" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
-    <text x="45"  y="223.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Delivery metrics</text>
-    <text x="45"  y="229" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Velocity · DORA</text>
+    <rect x="21" y="429.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="433.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Delivery metrics</text>
+    <text x="45"  y="439.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Velocity · DORA</text>
   </g>
 
   <g class="n" data-type="data" onclick="showDetail('retros')">
-    <rect x="21" y="241.6" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
-    <text x="45"  y="246.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Team retros</text>
-    <text x="45"  y="251.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Process health</text>
+    <rect x="21" y="473.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="477.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Team retros</text>
+    <text x="45"  y="483.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Process health</text>
   </g>
 
   <g class="n" data-type="data" onclick="showDetail('nps')">
-    <rect x="21" y="264.2" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
-    <text x="45"  y="268.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">NPS / CSAT</text>
-    <text x="45"  y="274.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Satisfaction signals</text>
+    <rect x="21" y="517.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="521.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">NPS / CSAT</text>
+    <text x="45"  y="527.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Satisfaction signals</text>
   </g>
 
   <g class="n" data-type="data" onclick="showDetail('winloss')">
-    <rect x="21" y="286.7" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
-    <text x="45"  y="291.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Win / loss data</text>
-    <text x="45"  y="296.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">CRM · deal outcomes</text>
+    <rect x="21" y="561.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="565.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Win / loss data</text>
+    <text x="45"  y="571.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">CRM · deal outcomes</text>
   </g>
 
   <g class="n" data-type="data" onclick="showDetail('competitive')">
-    <rect x="21" y="309.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
-    <text x="45"  y="313.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Competitive signals</text>
-    <text x="45"  y="319.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Crayon · G2 · job posts</text>
+    <rect x="21" y="605.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="609.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Competitive signals</text>
+    <text x="45"  y="615.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Crayon · G2 · job posts</text>
   </g>
 
   <g class="n" data-type="data" onclick="showDetail('regulatory')">
-    <rect x="21" y="331.8" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
-    <text x="45"  y="336.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Regulatory signals</text>
-    <text x="45"  y="341.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Compliance · policy updates</text>
+    <rect x="21" y="649.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="653.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Regulatory signals</text>
+    <text x="45"  y="659.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Compliance · policy updates</text>
   </g>
 
   <g class="n" data-type="data" onclick="showDetail('teamsurvey')">
-    <rect x="21" y="354.4" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
-    <text x="45"  y="358.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Team health surveys</text>
-    <text x="45"  y="364.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Engagement · capacity</text>
+    <rect x="21" y="693.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="697.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Team health surveys</text>
+    <text x="45"  y="703.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Engagement · capacity</text>
   </g>
 
   <g class="n" data-type="data" onclick="showDetail('comms')">
-    <rect x="21" y="377" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
-    <text x="45"  y="381.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Internal comms</text>
-    <text x="45"  y="387" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Slack · Teams channels</text>
+    <rect x="21" y="737.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="741.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Internal comms</text>
+    <text x="45"  y="747.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Slack · Teams channels</text>
   </g>
 
   <g class="n" data-type="data" onclick="showDetail('itsm')">
-    <rect x="21" y="399.5" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
-    <text x="45"  y="404" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">ITSM / incidents</text>
-    <text x="45"  y="409.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">ServiceNow · PagerDuty</text>
+    <rect x="21" y="781.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="785.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">ITSM / incidents</text>
+    <text x="45"  y="791.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">ServiceNow · PagerDuty</text>
   </g>
 
   <!-- ═══ MCP NODES ═══ -->
   <!-- x=262 center, w=164 -->
 
   <g class="n" data-type="mcp" onclick="showDetail('mcp-research')">
-    <rect x="110" y="29.7" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
-    <text x="146"  y="34.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Research ingest MCP</text>
- <text x="146"  y="39.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">a">Interviews · surveys → structured</text>
-    <rect x="110" y="41.7" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
-    <text x="146"  y="45.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
+    <rect x="109" y="96" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
+    <text x="145"  y="100.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Research ingest MCP</text>
+ <text x="145"  y="106.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">a">Interviews · surveys → structured</text>
+    <rect x="109" y="108.0" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <text x="145"  y="111.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
   </g>
 
   <g class="n" data-type="mcp" onclick="showDetail('mcp-signal')">
-    <rect x="110" y="67.9" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
-    <text x="146"  y="72.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Signal aggregator MCP</text>
-    <text x="146"  y="77.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Zendesk · Gong · analytics</text>
-    <rect x="110" y="79.9" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
-    <text x="146"  y="83.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
+    <rect x="109" y="174.7" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
+    <text x="145"  y="179.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Signal aggregator MCP</text>
+    <text x="145"  y="184.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Zendesk · Gong · analytics</text>
+    <rect x="109" y="186.7" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <text x="145"  y="190.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
   </g>
 
   <g class="n" data-type="mcp" onclick="showDetail('mcp-intake')">
-    <rect x="110" y="106.2" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
-    <text x="146"  y="110.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Intake source MCP</text>
-    <text x="146"  y="116.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Jira · Linear · backlog sync</text>
-    <rect x="110" y="118.2" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
-    <text x="146"  y="121.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
+    <rect x="109" y="221.3" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
+    <text x="145"  y="225.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Intake source MCP</text>
+    <text x="145"  y="231.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Jira · Linear · backlog sync</text>
+    <rect x="109" y="233.3" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <text x="145"  y="236.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
   </g>
 
   <g class="n" data-type="mcp" onclick="showDetail('mcp-strategy')">
-    <rect x="110" y="144.4" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
-    <text x="146"  y="148.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Strategy context MCP</text>
-    <text x="146"  y="154.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">OKRs · planning docs · wiki</text>
-    <rect x="110" y="156.4" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
-    <text x="146"  y="159.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
+    <rect x="109" y="278.7" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
+    <text x="145"  y="283.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Strategy context MCP</text>
+    <text x="145"  y="288.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">OKRs · planning docs · wiki</text>
+    <rect x="109" y="290.7" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <text x="145"  y="294.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
   </g>
 
   <g class="n" data-type="mcp" onclick="showDetail('mcp-metrics')">
-    <rect x="110" y="182.6" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
-    <text x="146"  y="187.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Metrics MCP</text>
-    <text x="146"  y="192.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">DataDog · Mixpanel · GA4</text>
-    <rect x="110" y="194.6" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
-    <text x="146"  y="198" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
+    <rect x="109" y="366.7" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
+    <text x="145"  y="371.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Metrics MCP</text>
+    <text x="145"  y="376.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">DataDog · Mixpanel · GA4</text>
+    <rect x="109" y="378.7" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <text x="145"  y="382.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
   </g>
 
   <!-- Audit / governance MCP -->
   <g class="n" data-type="governance" onclick="showDetail('mcp-audit')">
-    <rect x="110" y="220.9" width="72" height="18" rx="3" fill="#fceaeb" stroke="#b0303a" stroke-width="1"/>
-    <text x="146"  y="225.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#7a1a22">Audit log MCP</text>
-    <text x="146"  y="230.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#b0303a">All agent decisions logged</text>
-    <rect x="110" y="232.9" width="72" height="6" rx="0 0 3 3" fill="#b0303a" fill-opacity=".12"/>
-    <text x="146"  y="236.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#7a1a22" letter-spacing=".07em">GOVERNANCE · MCP</text>
+    <rect x="109" y="506.7" width="72" height="18" rx="3" fill="#fceaeb" stroke="#b0303a" stroke-width="1"/>
+    <text x="145"  y="511.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#7a1a22">Audit log MCP</text>
+    <text x="145"  y="516.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#b0303a">All agent decisions logged</text>
+    <rect x="109" y="518.7" width="72" height="6" rx="0 0 3 3" fill="#b0303a" fill-opacity=".12"/>
+    <text x="145"  y="522.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#7a1a22" letter-spacing=".07em">GOVERNANCE · MCP</text>
   </g>
 
   <g class="n" data-type="mcp" onclick="showDetail('mcp-crm')">
-    <rect x="110" y="259.1" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
-    <text x="146"  y="263.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">CRM / sales MCP</text>
-    <text x="146"  y="269.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Salesforce · HubSpot · deals</text>
-    <rect x="110" y="271.1" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
-    <text x="146"  y="274.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
+    <rect x="109" y="574.7" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
+    <text x="145"  y="579.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">CRM / sales MCP</text>
+    <text x="145"  y="584.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Salesforce · HubSpot · deals</text>
+    <rect x="109" y="586.7" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <text x="145"  y="590.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
   </g>
 
   <g class="n" data-type="mcp" onclick="showDetail('mcp-competitive')">
-    <rect x="110" y="297.4" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
-    <text x="146"  y="301.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Competitive intel MCP</text>
-    <text x="146"  y="307.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Crayon · Klue · web scrape</text>
-    <rect x="110" y="309.4" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
-    <text x="146"  y="312.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
+    <rect x="109" y="653.3" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
+    <text x="145"  y="657.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Competitive intel MCP</text>
+    <text x="145"  y="663.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Crayon · Klue · web scrape</text>
+    <rect x="109" y="665.3" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <text x="145"  y="668.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
   </g>
 
   <g class="n" data-type="mcp" onclick="showDetail('mcp-comms')">
-    <rect x="110" y="335.6" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
-    <text x="146"  y="340.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Comms MCP</text>
-  <text x="146"  y="345.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Slack · Teams · signal mining</text>
-    <rect x="110" y="347.6" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
-    <text x="146"  y="351" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
+    <rect x="109" y="732" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
+    <text x="145"  y="736.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Comms MCP</text>
+  <text x="145"  y="742.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Slack · Teams · signal mining</text>
+    <rect x="109" y="744.0" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <text x="145"  y="747.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
   </g>
 
   <g class="n" data-type="mcp" onclick="showDetail('mcp-itsm')">
-    <rect x="110" y="373.8" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
-    <text x="146"  y="378.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">ITSM MCP</text>
-    <text x="146"  y="383.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">ServiceNow · PagerDuty</text>
-    <rect x="110" y="385.8" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
-    <text x="146"  y="389.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
+    <rect x="109" y="797.3" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
+    <text x="145"  y="801.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">ITSM MCP</text>
+    <text x="145"  y="807.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">ServiceNow · PagerDuty</text>
+    <rect x="109" y="809.3" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <text x="145"  y="812.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
   </g>
 
   <!-- ═══ TOOL NODES ═══ -->
   <!-- x=470 center, w=204, h=60 -->
 
-  <g class="n" data-type="tool hitl" onclick="showDetail('tool-persona')">
-    <rect x="223" y="20.9" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
-    <text x="226"  y="25.4" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">01 · DISCOVER</text>
-    <text x="257"  y="30.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Persona generator</text>
-  <text x="257"  y="36.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">JTBD + segment synthesis</text>
-    <rect x="223" y="38.9" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
-    <text x="257"  y="42.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API · ✋ HITL</text>
+  <g class="n" data-type="tool" onclick="showDetail('tool-persona')">
+    <rect x="213" y="69.3" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
+    <text x="216"  y="73.8" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">01 · DISCOVER</text>
+    <text x="247"  y="79.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Persona generator</text>
+  <text x="247"  y="84.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">JTBD + segment synthesis</text>
+    <rect x="213" y="87.3" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <text x="247"  y="90.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API</text>
   </g>
 
   <g class="n" data-type="tool" onclick="showDetail('tool-journey')">
-    <rect x="223" y="60.4" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
-    <text x="226"  y="64.9" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">01 · DISCOVER</text>
-    <text x="257"  y="70.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Journey map builder</text>
-    <text x="257"  y="75.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Touchpoints · pain · moments</text>
-    <rect x="223" y="78.4" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
-    <text x="257"  y="81.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLIENT-SIDE</text>
+    <rect x="213" y="158.7" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
+    <text x="216"  y="163.2" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">01 · DISCOVER</text>
+    <text x="247"  y="168.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Journey map builder</text>
+    <text x="247"  y="174.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Touchpoints · pain · moments</text>
+    <rect x="213" y="176.7" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <text x="247"  y="180.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLIENT-SIDE</text>
   </g>
 
-  <g class="n" data-type="tool hitl" onclick="showDetail('tool-bizcase')">
-    <rect x="223" y="100" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
-    <text x="226"  y="104.5" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">03 · JUSTIFY</text>
-    <text x="257"  y="110" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Business case gen.</text>
-  <text x="257"  y="115.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">ROI · risk · inaction cost</text>
-    <rect x="223" y="118" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
-    <text x="257"  y="121.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API · ✋ HITL</text>
+  <g class="n" data-type="tool" onclick="showDetail('tool-bizcase')">
+    <rect x="213" y="245.3" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
+    <text x="216"  y="249.8" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">03 · JUSTIFY</text>
+    <text x="247"  y="255.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Business case gen.</text>
+  <text x="247"  y="260.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">ROI · risk · inaction cost</text>
+    <rect x="213" y="263.3" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <text x="247"  y="266.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API</text>
   </g>
 
-  <g class="n" data-type="tool hitl" onclick="showDetail('tool-intake')">
-    <rect x="223" y="139.5" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
-    <text x="226"  y="144" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">04 · INTAKE · AI-NATIVE</text>
-    <text x="257"  y="149.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Feature intake pipeline</text>
-  <text x="257"  y="155" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Triage · JTBD · assumptions · RICE</text>
-    <rect x="223" y="157.5" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
-    <text x="257"  y="160.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · AGENTIC · ✋ HITL</text>
+  <g class="n" data-type="tool" onclick="showDetail('tool-intake')">
+    <rect x="213" y="305.3" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
+    <text x="216"  y="309.8" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">04 · INTAKE · AI-NATIVE</text>
+    <text x="247"  y="315.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Feature intake pipeline</text>
+  <text x="247"  y="320.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Triage · JTBD · assumptions · RICE</text>
+    <rect x="213" y="323.3" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <text x="247"  y="326.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · AGENTIC · CLAUDE API</text>
   </g>
 
-  <g class="n" data-type="tool hitl" onclick="showDetail('tool-hoshin')">
-    <rect x="223" y="179" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
-    <text x="226"  y="183.5" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">02 · ALIGN</text>
-    <text x="257"  y="189" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Hoshin Kanri + V2MOM</text>
-  <text x="257"  y="194.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Strategy · values · measures</text>
-    <rect x="223" y="197" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
-    <text x="257"  y="200.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLIENT-SIDE · ✋ HITL</text>
+  <g class="n" data-type="tool" onclick="showDetail('tool-hoshin')">
+    <rect x="213" y="425.3" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
+    <text x="216"  y="429.8" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">02 · ALIGN</text>
+    <text x="247"  y="435.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Hoshin Kanri + V2MOM</text>
+  <text x="247"  y="440.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Strategy · values · measures</text>
+    <rect x="213" y="443.3" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <text x="247"  y="446.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLIENT-SIDE</text>
   </g>
 
   <g class="n" data-type="tool" onclick="showDetail('tool-radar')">
-    <rect x="223" y="218.5" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
-    <text x="226"  y="223" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">05 · MEASURE</text>
-    <text x="257"  y="228.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Product ops radar</text>
-  <text x="257"  y="234" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Health · gaps · dim. scoring</text>
-    <rect x="223" y="236.5" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
-    <text x="257"  y="239.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLIENT-SIDE</text>
+    <rect x="213" y="513.3" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
+    <text x="216"  y="517.8" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">05 · MEASURE</text>
+    <text x="247"  y="523.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Product ops radar</text>
+  <text x="247"  y="528.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Health · gaps · dim. scoring</text>
+    <rect x="213" y="531.3" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <text x="247"  y="534.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLIENT-SIDE</text>
   </g>
 
   <!-- ═══ BACKLOG + STORY TOOLS (companion tools) ═══ -->
   <!-- Section label -->
-  <text x="221"  y="572" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" letter-spacing=".13em" fill="#1a3a5c" opacity=".5">COMPANION TOOLS</text>
+  <text x="211"  y="572" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" letter-spacing=".13em" fill="#1a3a5c" opacity=".5">COMPANION TOOLS</text>
 
-  <g class="n" data-type="tool hitl" onclick="showDetail('tool-backlog')">
-    <rect x="223" y="258" width="68" height="24" rx="3" fill="#edf0f7" stroke="#1a3a5c" stroke-width="1" stroke-dasharray="5 3"/>
-    <text x="224"  y="262.5" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">04 · INTAKE → BACKLOG</text>
-    <text x="256"  y="268" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Backlog generator</text>
-  <text x="256"  y="273.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Brief → epics + user stories</text>
-    <rect x="223" y="276" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".08"/>
-    <text x="256"  y="279.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API · ✋ HITL</text>
+  <g class="n" data-type="tool" onclick="showDetail('tool-backlog')">
+    <rect x="213" y="577.3" width="68" height="24" rx="3" fill="#edf0f7" stroke="#1a3a5c" stroke-width="1" stroke-dasharray="5 3"/>
+    <text x="214"  y="581.8" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">04 · INTAKE → BACKLOG</text>
+    <text x="246"  y="587.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Backlog generator</text>
+  <text x="246"  y="592.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Brief → epics + user stories</text>
+    <rect x="213" y="595.3" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".08"/>
+    <text x="246"  y="598.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API · RECOMMENDED</text>
   </g>
 
-  <g class="n" data-type="tool hitl" onclick="showDetail('tool-stories')">
-    <rect x="223" y="297.6" width="68" height="24" rx="3" fill="#edf0f7" stroke="#1a3a5c" stroke-width="1" stroke-dasharray="5 3"/>
-    <text x="224"  y="302.1" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">04 · INTAKE → SPEC</text>
-    <text x="256"  y="307.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Story writer + AC gen.</text>
-    <text x="256"  y="313.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Acceptance criteria · edge cases</text>
-    <rect x="223" y="315.6" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".08"/>
-    <text x="256"  y="319" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API · ✋ HITL</text>
+  <g class="n" data-type="tool" onclick="showDetail('tool-stories')">
+    <rect x="213" y="630.7" width="68" height="24" rx="3" fill="#edf0f7" stroke="#1a3a5c" stroke-width="1" stroke-dasharray="5 3"/>
+    <text x="214"  y="635.2" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">04 · INTAKE → SPEC</text>
+    <text x="246"  y="640.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Story writer + AC gen.</text>
+    <text x="246"  y="646.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Acceptance criteria · edge cases</text>
+    <rect x="213" y="648.7" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".08"/>
+    <text x="246"  y="652.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API · RECOMMENDED</text>
   </g>
 
   <g class="n" data-type="tool" onclick="showDetail('tool-jira-sync')">
-    <rect x="223" y="337.1" width="68" height="24" rx="3" fill="#edf0f7" stroke="#c8921a" stroke-width="1" stroke-dasharray="5 3"/>
-    <text x="224"  y="341.6" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">04 · INTAKE → JIRA</text>
-  <text x="256"  y="347.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Jira write-back</text>
-  <text x="256"  y="352.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#7a5700">Intake MCP → Jira API · approved only</text>
-    <rect x="223" y="355.1" width="68" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".1"/>
-    <text x="256"  y="358.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#7a5700" letter-spacing=".07em">MCP WRITE · HITL-GATED</text>
+    <rect x="213" y="684" width="68" height="24" rx="3" fill="#edf0f7" stroke="#c8921a" stroke-width="1" stroke-dasharray="5 3"/>
+    <text x="214"  y="688.5" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">04 · INTAKE → JIRA</text>
+  <text x="246"  y="694.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Jira write-back</text>
+  <text x="246"  y="699.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#7a5700">Intake MCP → Jira API · approved only</text>
+    <rect x="213" y="702.0" width="68" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".1"/>
+    <text x="246"  y="705.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#7a5700" letter-spacing=".07em">MCP WRITE · HITL-GATED</text>
   </g>
 
-  <g class="n" data-type="tool hitl" onclick="showDetail('tool-sprint')">
-    <rect x="223" y="376.6" width="68" height="24" rx="3" fill="#edf0f7" stroke="#1a3a5c" stroke-width="1" stroke-dasharray="5 3"/>
-    <text x="224"  y="381.1" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">04 → 05 · PLANNING</text>
-    <text x="256"  y="386.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Sprint planning assist.</text>
-  <text x="256"  y="392.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Velocity + backlog → sprint draft</text>
-    <rect x="223" y="394.6" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".08"/>
-    <text x="256"  y="398" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API · ✋ HITL</text>
+  <g class="n" data-type="tool" onclick="showDetail('tool-sprint')">
+    <rect x="213" y="737.3" width="68" height="24" rx="3" fill="#edf0f7" stroke="#1a3a5c" stroke-width="1" stroke-dasharray="5 3"/>
+    <text x="214"  y="741.8" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">04 → 05 · PLANNING</text>
+    <text x="246"  y="747.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Sprint planning assist.</text>
+  <text x="246"  y="752.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Velocity + backlog → sprint draft</text>
+    <rect x="213" y="755.3" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".08"/>
+    <text x="246"  y="758.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API · RECOMMENDED</text>
   </g>
 
   <!-- ═══ AGENT + HITL NODES ═══ -->
   <!-- x=690 center, w=192 -->
 
   <g class="n" data-type="agent" onclick="showDetail('agent-signal')">
-    <rect x="332" y="23.1" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
-    <text x="364"  y="27.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Signal synthesis</text>
-  <text x="364"  y="33.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Clusters themes · weekly delta</text>
-    <rect x="332" y="35.1" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
-    <text x="364"  y="38.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · SCHEDULED</text>
+    <rect x="330" y="72" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
+    <text x="362"  y="76.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Signal synthesis</text>
+  <text x="362"  y="82.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Clusters themes · weekly delta</text>
+    <rect x="330" y="84.0" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <text x="362"  y="87.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · SCHEDULED</text>
   </g>
 
   <g class="n" data-type="hitl" onclick="showDetail('hitl-strategic')">
-    <rect x="332" y="55.6" width="64" height="18" rx="3" fill="#eeeafb" stroke="#7c5cbf" stroke-width="1"/>
-    <text x="364"  y="60.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#2e1060">✋ Strategic review</text>
-    <text x="364"  y="65.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#7c5cbf">PM ratifies opportunity map</text>
-    <rect x="332" y="67.6" width="64" height="6" rx="0 0 3 3" fill="#7c5cbf" fill-opacity=".12"/>
-    <text x="364"  y="71" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#2e1060" letter-spacing=".07em">HUMAN IN THE LOOP</text>
+    <rect x="330" y="169.3" width="64" height="18" rx="3" fill="#eeeafb" stroke="#7c5cbf" stroke-width="1"/>
+    <text x="362"  y="173.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#2e1060">✋ Strategic review</text>
+    <text x="362"  y="179.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#7c5cbf">PM ratifies opportunity map</text>
+    <rect x="330" y="181.3" width="64" height="6" rx="0 0 3 3" fill="#7c5cbf" fill-opacity=".12"/>
+    <text x="362"  y="184.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#2e1060" letter-spacing=".07em">HUMAN IN THE LOOP</text>
   </g>
 
   <g class="n" data-type="agent" onclick="showDetail('agent-merge')">
-    <rect x="332" y="88.1" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
-    <text x="364"  y="92.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Case enrichment</text>
-    <text x="364"  y="98.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Merges signal + financials</text>
-    <rect x="332" y="100.1" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
-    <text x="364"  y="103.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT</text>
+    <rect x="330" y="261.3" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
+    <text x="362"  y="265.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Case enrichment</text>
+    <text x="362"  y="271.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Merges signal + financials</text>
+    <rect x="330" y="273.3" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <text x="362"  y="276.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT</text>
   </g>
 
   <g class="n" data-type="hitl" onclick="showDetail('hitl-case')">
-    <rect x="332" y="120.6" width="64" height="18" rx="3" fill="#eeeafb" stroke="#7c5cbf" stroke-width="1"/>
-    <text x="364"  y="125.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#2e1060">✋ Case approval</text>
-    <text x="364"  y="130.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#7c5cbf">Sponsor sign-off required</text>
-    <rect x="332" y="132.6" width="64" height="6" rx="0 0 3 3" fill="#7c5cbf" fill-opacity=".12"/>
-    <text x="364"  y="136" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#2e1060" letter-spacing=".07em">HUMAN IN THE LOOP</text>
+    <rect x="330" y="350.7" width="64" height="18" rx="3" fill="#eeeafb" stroke="#7c5cbf" stroke-width="1"/>
+    <text x="362"  y="355.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#2e1060">✋ Case approval</text>
+    <text x="362"  y="360.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#7c5cbf">Sponsor sign-off required</text>
+    <rect x="330" y="362.7" width="64" height="6" rx="0 0 3 3" fill="#7c5cbf" fill-opacity=".12"/>
+    <text x="362"  y="366.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#2e1060" letter-spacing=".07em">HUMAN IN THE LOOP</text>
   </g>
 
   <g class="n" data-type="agent" onclick="showDetail('agent-intake')">
-    <rect x="332" y="153" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
-    <text x="364"  y="157.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Intake chain</text>
-  <text x="364"  y="163" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">4-step agentic pipeline</text>
-    <rect x="332" y="165" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
-    <text x="364"  y="168.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · SEQUENTIAL</text>
+    <rect x="330" y="440" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
+    <text x="362"  y="444.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Intake chain</text>
+  <text x="362"  y="450.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">4-step agentic pipeline</text>
+    <rect x="330" y="452.0" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <text x="362"  y="455.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · SEQUENTIAL</text>
   </g>
 
   <g class="n" data-type="hitl" onclick="showDetail('hitl-intake')">
-    <rect x="332" y="185.5" width="64" height="18" rx="3" fill="#eeeafb" stroke="#7c5cbf" stroke-width="1"/>
-    <text x="364"  y="190" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#2e1060">✋ Intake review</text>
-    <text x="364"  y="195.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#7c5cbf">PM + stakeholders sign off</text>
-    <rect x="332" y="197.5" width="64" height="6" rx="0 0 3 3" fill="#7c5cbf" fill-opacity=".12"/>
-    <text x="364"  y="200.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#2e1060" letter-spacing=".07em">HUMAN IN THE LOOP</text>
+    <rect x="330" y="529.3" width="64" height="18" rx="3" fill="#eeeafb" stroke="#7c5cbf" stroke-width="1"/>
+    <text x="362"  y="533.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#2e1060">✋ Intake review</text>
+    <text x="362"  y="539.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#7c5cbf">PM + stakeholders sign off</text>
+    <rect x="330" y="541.3" width="64" height="6" rx="0 0 3 3" fill="#7c5cbf" fill-opacity=".12"/>
+    <text x="362"  y="544.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#2e1060" letter-spacing=".07em">HUMAN IN THE LOOP</text>
   </g>
 
   <!-- Policy enforcement node (governance) — sits between agent layer and outputs -->
   <g class="n" data-type="governance" onclick="showDetail('gov-policy')">
-    <rect x="332" y="218" width="64" height="18" rx="3" fill="#fceaeb" stroke="#b0303a" stroke-width="1"/>
-    <text x="364"  y="222.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#7a1a22">Policy enforcement</text>
-  <text x="364"  y="228" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#b0303a">Access · credentials · scope</text>
-    <rect x="332" y="230" width="64" height="6" rx="0 0 3 3" fill="#b0303a" fill-opacity=".12"/>
-    <text x="364"  y="233.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#7a1a22" letter-spacing=".07em">GOVERNANCE</text>
+    <rect x="330" y="576" width="64" height="18" rx="3" fill="#fceaeb" stroke="#b0303a" stroke-width="1"/>
+    <text x="362"  y="580.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#7a1a22">Policy enforcement</text>
+  <text x="362"  y="586.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#b0303a">Access · credentials · scope</text>
+    <rect x="330" y="588.0" width="64" height="6" rx="0 0 3 3" fill="#b0303a" fill-opacity=".12"/>
+    <text x="362"  y="591.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#7a1a22" letter-spacing=".07em">GOVERNANCE</text>
   </g>
   <!-- policy feeds outputs -->
-  <line x1="397" y1="227" x2="436" y2="176.4" stroke="#b0303a" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#a-red)" opacity=".6"/>
+  <line x1="395" y1="585.0" x2="436" y2="582.3" stroke="#b0303a" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#a-red)" opacity=".6"/>
 
   <!-- ═══ OUTPUT NODES ═══ -->
 
   <g class="n" data-type="output" onclick="showDetail('out-opmap')">
-    <rect x="437" y="25.4" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
-    <text x="465"  y="29.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Opportunity map</text>
-    <text x="465"  y="35.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Ranked pain clusters</text>
-    <rect x="437" y="37.4" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
-    <text x="465"  y="40.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+    <rect x="437" y="90.7" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="95.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Opportunity map</text>
+    <text x="465"  y="100.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Ranked pain clusters</text>
+    <rect x="437" y="102.7" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="106.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
   <g class="n" data-type="output" onclick="showDetail('out-bizcase')">
-    <rect x="437" y="53.8" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
-    <text x="465"  y="58.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Approved biz case</text>
-    <text x="465"  y="63.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Funded · signed</text>
-    <rect x="437" y="65.8" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
-    <text x="465"  y="69.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+    <rect x="437" y="201.3" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="205.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Approved biz case</text>
+    <text x="465"  y="211.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Funded · signed</text>
+    <rect x="437" y="213.3" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="216.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
   <g class="n" data-type="output" onclick="showDetail('out-brief')">
-    <rect x="437" y="82.2" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
-    <text x="465"  y="86.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Feature brief</text>
-    <text x="465"  y="92.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">RICE · assumptions</text>
-    <rect x="437" y="94.2" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
-    <text x="465"  y="97.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+    <rect x="437" y="293.3" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="297.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Feature brief</text>
+    <text x="465"  y="303.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">RICE · assumptions</text>
+    <rect x="437" y="305.3" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="308.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
   <g class="n" data-type="hitl" onclick="showDetail('out-gates')">
-    <rect x="437" y="110.6" width="56" height="18" rx="3" fill="#eeeafb" stroke="#7c5cbf" stroke-width="1"/>
-    <text x="465"  y="115.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#2e1060">✋ Review gates</text>
-    <text x="465"  y="120.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#7c5cbf">Arch · sec · business</text>
-    <rect x="437" y="122.6" width="56" height="6" rx="0 0 3 3" fill="#7c5cbf" fill-opacity=".12"/>
-    <text x="465"  y="126" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#2e1060" letter-spacing=".07em">3× HITL PARALLEL</text>
+    <rect x="437" y="393.3" width="56" height="18" rx="3" fill="#eeeafb" stroke="#7c5cbf" stroke-width="1"/>
+    <text x="458"  y="397.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#2e1060">✋ Review gates</text>
+    <text x="458"  y="403.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#7c5cbf">Arch · sec · business</text>
+    <rect x="437" y="405.3" width="56" height="6" rx="0 0 3 3" fill="#7c5cbf" fill-opacity=".12"/>
+    <text x="458"  y="408.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#2e1060" letter-spacing=".07em">3× HITL PARALLEL</text>
   </g>
 
   <g class="n" data-type="output" onclick="showDetail('out-hoshin')">
-    <rect x="437" y="139" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
-    <text x="465"  y="143.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Strategy cascade</text>
-  <text x="465"  y="149" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Hoshin · V2MOM</text>
-    <rect x="437" y="151" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
-    <text x="465"  y="154.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+    <rect x="437" y="484" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="488.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Strategy cascade</text>
+  <text x="465"  y="494.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Hoshin · V2MOM</text>
+    <rect x="437" y="496.0" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="499.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
   <g class="n" data-type="output" onclick="showDetail('out-radar')">
-    <rect x="437" y="167.4" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
-    <text x="465"  y="171.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Ops health report</text>
-    <text x="465"  y="177.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Radar · gaps · recs</text>
-    <rect x="437" y="179.4" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
-    <text x="465"  y="182.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+    <rect x="437" y="573.3" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="577.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Ops health report</text>
+    <text x="465"  y="583.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Radar · gaps · recs</text>
+    <rect x="437" y="585.3" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="588.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
   <g class="n" data-type="agent" onclick="showDetail('agent-winloss')">
-    <rect x="332" y="250.5" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
-    <text x="364"  y="255" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Win/loss synthesis</text>
-    <text x="364"  y="260.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Patterns · theme clustering</text>
-    <rect x="332" y="262.5" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
-    <text x="364"  y="265.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · TRIGGERED</text>
+    <rect x="330" y="637.3" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
+    <text x="362"  y="641.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Win/loss synthesis</text>
+    <text x="362"  y="647.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Patterns · theme clustering</text>
+    <rect x="330" y="649.3" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <text x="362"  y="652.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · TRIGGERED</text>
   </g>
 
   <g class="n" data-type="agent" onclick="showDetail('agent-competitive')">
-    <rect x="332" y="283" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
-    <text x="364"  y="287.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Competitive monitor</text>
-  <text x="364"  y="293" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Weekly delta · gap alerts</text>
-    <rect x="332" y="295" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
-    <text x="364"  y="298.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · SCHEDULED</text>
+    <rect x="330" y="724" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
+    <text x="362"  y="728.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Competitive monitor</text>
+  <text x="362"  y="734.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Weekly delta · gap alerts</text>
+    <rect x="330" y="736.0" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <text x="362"  y="739.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · SCHEDULED</text>
   </g>
 
   <g class="n" data-type="agent" onclick="showDetail('agent-retro')">
-    <rect x="332" y="315.4" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
-    <text x="364"  y="319.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Retro summarizer</text>
-    <text x="364"  y="325.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Sprint health · action items</text>
-    <rect x="332" y="327.4" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
-    <text x="364"  y="330.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · ON-DEMAND</text>
+    <rect x="330" y="810.7" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
+    <text x="362"  y="815.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Retro summarizer</text>
+    <text x="362"  y="820.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Sprint health · action items</text>
+    <rect x="330" y="822.7" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <text x="362"  y="826.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · ON-DEMAND</text>
   </g>
 
   <g class="n" data-type="agent" onclick="showDetail('agent-release')">
-    <rect x="332" y="347.9" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
-    <text x="364"  y="352.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Release notes drafter</text>
-    <text x="364"  y="357.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Commits → audience-scoped notes</text>
-    <rect x="332" y="359.9" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
-    <text x="364"  y="363.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · TRIGGERED ON DEPLOY</text>
+    <rect x="330" y="897.3" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
+    <text x="362"  y="901.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Release notes drafter</text>
+    <text x="362"  y="907.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Commits → audience-scoped notes</text>
+    <rect x="330" y="909.3" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <text x="362"  y="912.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · TRIGGERED ON DEPLOY</text>
   </g>
 
   <g class="n" data-type="agent" onclick="showDetail('agent-roi')">
-    <rect x="332" y="380.4" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
-    <text x="364"  y="384.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ ROI validation agent</text>
-    <text x="364"  y="390.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">30 / 60 / 90-day telemetry checks</text>
-    <rect x="332" y="392.4" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
-    <text x="364"  y="395.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · SCHEDULED POST-DEPLOY</text>
+    <rect x="330" y="954.7" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
+    <text x="362"  y="959.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ ROI validation agent</text>
+    <text x="362"  y="964.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">30 / 60 / 90-day telemetry checks</text>
+    <rect x="330" y="966.7" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <text x="362"  y="970.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · SCHEDULED POST-DEPLOY</text>
   </g>
 
   <!-- ROI agent → telemetry output -->
-  <line x1="397" y1="389.4" x2="437" y2="346.8" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <line x1="395" y1="963.7" x2="437" y2="979.0" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
   <!-- Metrics MCP → ROI validation agent -->
-  <line x1="182" y1="191.6" x2="332" y2="389.4" stroke="#c8921a" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".5"/>
+  <line x1="181" y1="375.7" x2="330" y2="963.7" stroke="#c8921a" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".5"/>
 
   <!-- ═══ NEW OUTPUT NODES ═══ -->
 
   <g class="n" data-type="output" onclick="showDetail('out-winloss')">
-    <rect x="437" y="195.8" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
-    <text x="465"  y="200.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Win/loss report</text>
-  <text x="465"  y="205.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Patterns · deal themes</text>
-    <rect x="437" y="207.8" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
-    <text x="465"  y="211.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+    <rect x="437" y="640" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="644.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Win/loss report</text>
+  <text x="465"  y="650.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Patterns · deal themes</text>
+    <rect x="437" y="652.0" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="655.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
   <g class="n" data-type="output" onclick="showDetail('out-competitive')">
-    <rect x="437" y="224.2" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
-    <text x="465"  y="228.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Competitive brief</text>
-    <text x="465"  y="234.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Gaps · positioning delta</text>
-    <rect x="437" y="236.2" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
-    <text x="465"  y="239.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+    <rect x="437" y="726.7" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="731.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Competitive brief</text>
+    <text x="465"  y="736.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Gaps · positioning delta</text>
+    <rect x="437" y="738.7" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="742.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
   <g class="n" data-type="output" onclick="showDetail('out-retro')">
-    <rect x="437" y="281" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
-    <text x="465"  y="285.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Retro summary</text>
-    <text x="465"  y="291" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Health · action items</text>
-    <rect x="437" y="293" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
-    <text x="465"  y="296.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+    <rect x="437" y="813.3" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="817.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Retro summary</text>
+    <text x="465"  y="823.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Health · action items</text>
+    <rect x="437" y="825.3" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="828.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
   <g class="n" data-type="output" onclick="showDetail('out-release')">
-    <rect x="437" y="309.4" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
-    <text x="465"  y="313.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Release notes</text>
-  <text x="465"  y="319.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">PM · sales · customer scoped</text>
-    <rect x="437" y="285.4" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
-    <text x="465"  y="324.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+    <rect x="437" y="900" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="904.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Release notes</text>
+  <text x="465"  y="910.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">PM · sales · customer scoped</text>
+    <rect x="437" y="912.0" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="915.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
   <g class="n" data-type="output" onclick="showDetail('out-regulatory')">
-    <rect x="437" y="252.6" width="56" height="18" rx="3" fill="#fceaeb" stroke="#b0303a" stroke-width="1"/>
-    <text x="465"  y="257.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#7a1a22">Regulatory impact</text>
-  <text x="465"  y="262.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#b0303a">Compliance · risk flags</text>
-    <rect x="437" y="264.6" width="56" height="6" rx="0 0 3 3" fill="#b0303a" fill-opacity=".1"/>
-    <text x="465"  y="268" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#7a1a22" letter-spacing=".07em">OUTPUT · GOVERNANCE</text>
+    <rect x="437" y="740" width="56" height="18" rx="3" fill="#fceaeb" stroke="#b0303a" stroke-width="1"/>
+    <text x="465"  y="744.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#7a1a22">Regulatory impact</text>
+  <text x="465"  y="750.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#b0303a">Compliance · risk flags</text>
+    <rect x="437" y="752.0" width="56" height="6" rx="0 0 3 3" fill="#b0303a" fill-opacity=".1"/>
+    <text x="465"  y="755.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#7a1a22" letter-spacing=".07em">OUTPUT · GOVERNANCE</text>
   </g>
 
   <g class="n" data-type="output" onclick="showDetail('out-stakeholder')">
-    <rect x="437" y="337.8" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
-    <text x="465"  y="342.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Stakeholder comms</text>
-  <text x="465"  y="347.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Roadmap · update briefs</text>
-    <rect x="437" y="349.8" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
-    <text x="465"  y="353.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+    <rect x="437" y="970" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="974.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Stakeholder comms</text>
+  <text x="465"  y="980.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Roadmap · update briefs</text>
+    <rect x="437" y="982.0" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="985.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
   <!-- ═══ ROI TELEMETRY VALIDATION (post-release) ═══ -->
   <!-- Separator label -->
-  <text x="437"  y="361.5" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" letter-spacing=".13em" fill="#1a5c3a" opacity=".6">POST-RELEASE VALIDATION</text>
+  <text x="437"  y="965.3" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" letter-spacing=".13em" fill="#1a5c3a" opacity=".6">POST-RELEASE VALIDATION</text>
 
   <!-- Main callout box — spans taller, distinct amber/teal style -->
   <g class="n" data-type="output" onclick="showDetail('out-roi-telemetry')">
-    <rect x="437" y="366.2" width="56" height="30" rx="3" fill="#f2fbf6" stroke="#1a5c3a" stroke-width="1"/>
-    <text x="465"  y="370.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".06em">ROI HYPOTHESIS TEST</text>
-    <text x="465"  y="376.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="800" fill="#0a3320">Telemetry monitor</text>
-    <text x="465"  y="381.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.5" fill="#1a5c3a">Verify / deny post-release</text>
-  <text x="465"  y="387.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" fill="#1a5c3a">ROI claims from biz case</text>
-    <rect x="437" y="390.4" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".12"/>
-    <text x="465"  y="393.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT · CONTINUOUS</text>
+    <rect x="437" y="970.7" width="56" height="30" rx="3" fill="#f2fbf6" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="459"  y="975.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".06em">ROI HYPOTHESIS TEST</text>
+    <text x="459"  y="980.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="800" fill="#0a3320">Telemetry monitor</text>
+    <text x="459"  y="986.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.5" fill="#1a5c3a">Verify / deny post-release</text>
+  <text x="459"  y="991.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" fill="#1a5c3a">ROI claims from biz case</text>
+    <rect x="437" y="994.7" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".12"/>
+    <text x="459"  y="998.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT · CONTINUOUS</text>
   </g>
 
   <!-- Telemetry sources legend inside callout — small chips below -->
 
   <g id="feedback-loops-2" class="feedback-group">
   <!-- Edge: Metrics MCP → ROI telemetry (dashed, teal) — feedback -->
-  <line x1="182" y1="191.6" x2="437" y2="346.8" stroke="#2a6b6b" stroke-width="0.6" stroke-dasharray="5 4" marker-end="url(#a-teal)" opacity=".4"/>
+  <line x1="181" y1="375.7" x2="437" y2="979.0" stroke="#2a6b6b" stroke-width="0.6" stroke-dasharray="5 4" marker-end="url(#a-teal)" opacity=".4"/>
   <!-- Edge: biz case output → ROI telemetry (validates original hypothesis) — feedback -->
   <!-- Label on the validation arrow -->
 
@@ -1231,23 +1244,46 @@ document.querySelectorAll('.leg-btn').forEach(btn=>{
     else{active.add(t);btn.classList.add('active');}
     // SVG nodes
     document.querySelectorAll('g[data-type]').forEach(g=>{
-      g.style.opacity = (g.dataset.type||'').split(' ').some(t=>active.has(t)) ? '1' : '0.1';
+      g.style.opacity = active.has(g.dataset.type) ? '1' : '0.1';
     });
     // Governance bar
     const gBar = document.querySelector('.gov-bar-inner');
     if(gBar) gBar.style.opacity = active.has('governance') ? '1' : '0.1';
   });
 });
+// Feedback loop toggle
+const fbBtn = document.getElementById('fbToggle');
+const fbGroups = [document.getElementById('feedback-loops'), document.getElementById('feedback-loops-2')];
+let fbVisible = true;
+fbBtn.addEventListener('click', () => {
+  fbVisible = !fbVisible;
+  fbGroups.forEach(g => { if(g) g.style.display = fbVisible ? '' : 'none'; });
+  if (fbVisible) { fbBtn.classList.add('active'); }
+  else { fbBtn.classList.remove('active'); }
+});
+// Dynamic viewBox — keep col widths fixed, stretch gaps to fill page width
+// Col 5 (Outputs) right edge is at x=932 in SVG coords; we want it ~20px from right edge
 const svgEl = document.getElementById('network');
 const COL5_RIGHT = 493; // right edge of outputs column in SVG coords
-const BUFFER = 20;      // gap between outputs right edge and SVG right edge
+const BUFFER = 20;      // px gap between outputs right edge and SVG right edge
+
+function updateViewBox() {
+  const W = svgEl.getBoundingClientRect().width;
+  if (!W) return;
+  // viewBoxW such that COL5_RIGHT maps to (W - BUFFER) rendered pixels
+  // COL5_RIGHT / viewBoxW * W = W - BUFFER
+  // viewBoxW = COL5_RIGHT * W / (W - BUFFER)
+  const vbW = Math.round(COL5_RIGHT * W / (W - BUFFER));
+  svgEl.setAttribute('viewBox', `0 0 ${vbW} 1670`);
+}
+
+const ro = new ResizeObserver(updateViewBox);
 function updateViewBox() {
   const W = svgEl.parentElement.getBoundingClientRect().width - 32; // subtract padding
   if (!W) return;
   const vbW = Math.round(COL5_RIGHT * W / (W - BUFFER));
-  svgEl.setAttribute('viewBox', `0 6 ${vbW} 419`);
+  svgEl.setAttribute('viewBox', `0 0 ${vbW} 1009`);
 }
-const ro = new ResizeObserver(updateViewBox);
 ro.observe(svgEl.parentElement);
 updateViewBox(); // initial call
 
