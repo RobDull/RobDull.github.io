@@ -2,22 +2,48 @@
 
 ## Site overview
 
-A portfolio site for Rob Dull, Product Management Practitioner and Product Operations Transformation Consultant. The site has a home page, a tools index, and individual tool pages. Tools use the Anthropic Claude API via a Cloudflare Worker proxy.
+A portfolio site for Rob Dull, Product Management Practitioner and Product Operations Transformation Consultant. The site serves two audiences: practitioners who use the tools, and hiring managers evaluating PM and Product Operations capability. Tools use the Anthropic Claude API either via direct browser call (with visitor-supplied API key modal) or a Cloudflare Worker proxy.
+
+---
 
 ## File structure
 
 ```
-index.html                          ← homepage
+index.html                                    ← homepage
 tools/
-  tools-index.html                  ← tools listing page
+  tools-index.html                            ← tools hub (6 tools)
   business-case/
-    business-case-index.html        ← Business Case Generator tool
+    business-case-index.html                  ← Business Case Generator (AI, direct API + key modal)
   persona-generator/
-    persona-index.html              ← Persona Generator tool
+    persona-index.html                        ← JTBD + Persona Generator (client-side)
   journey-map/
-    journey-map-index.html          ← Journey Map Builder tool
-worker.js                           ← Cloudflare Worker API proxy
-WORKER_README.md                    ← deploy instructions for the worker
+    journey-map-index.html                    ← Customer Journey Map Builder (client-side)
+  hoshin-kanri/
+    hoshin-v2mom-index.html                   ← Hoshin Kanri + V2MOM (client-side)
+  prod-ops-radar/
+    prod-ops-radar-index.html                 ← Product Ops Health Radar (in development)
+  feature-intake/
+    feature-intake-index.html                 ← Feature Intake Pipeline (AI, direct API + key modal)
+    feature-intake-explainer.html             ← Plain-language explainer for the pipeline tool
+  AI-native-prodops/
+    AI-prodops-overview.html                  ← AI-native ProdOps overview article
+    prodops-network.html                      ← 85-node SVG network diagram (interactive)
+    enterprise-agentic-reference.html         ← Workato EARA reference (internal, noindex)
+perspectives/
+  perspectives-index.html                     ← Articles hub
+  pm-roles-ai.html                            ← Article: PM Roles and AI Operations Gaps (Nov 2025)
+  write-it-right.html                         ← Article: PI Planning / story writing (Apr 2025)
+  marquet-ai-cert.html                        ← Article: Marquet AI safety framework (May 2026)
+workshops/
+  workshops-index.html                        ← Workshops and coaching offerings
+about_me/
+  resume.html                                 ← Resume (linked from main nav)
+worker.js                                     ← Cloudflare Worker API proxy
+WORKER_README.md                              ← Deploy instructions for the Worker
+DESIGN_NOTES.md                              ← This file
+worker-vs-direct.html                         ← Infrastructure decision reference (noindex)
+sitemap.xml                                   ← XML sitemap for all public pages
+robots.txt                                    ← Crawl rules; blocks internal/reference pages
 ```
 
 ---
@@ -32,6 +58,7 @@ WORKER_README.md                    ← deploy instructions for the worker
 | `--muted` | `#6b6b6b` | Grey — secondary text, descriptions |
 | `--off` | `#f7f7f7` | Light grey — page backgrounds, card backgrounds |
 | `--rule` | `#e8e8e8` | Border/divider color |
+| `--accent-dark` | `#0f2640` | Darker navy — hover states, deep emphasis |
 | `--gold` | `#c8921a` | Gold — used sparingly in journey map |
 
 ### Journey map phase colors
@@ -42,12 +69,13 @@ WORKER_README.md                    ← deploy instructions for the worker
 | Claims and Services | `#c8662a` | Burnt orange — matches accent2 |
 | Recommendations and Renewals | `#7c5cbf` | Purple/lavender |
 
-### Journey map row label column
-- Background: `#c8662a` (burnt orange / accent2) — changed from original sage green
-
-### Journey map toolbar buttons (Add Stage, Toggle Rows, Export JSON, Copy for AI)
-- Background: `#7c5cbf` (lavender/purple)
-- Hover: `#6a4aaa`
+### Network diagram (prodops-network.html) color system
+- Data sources: `#2a6b6b` (teal)
+- MCP connections: `#1a3a5c` (navy)
+- Agents & HITL: `#5a3a8c` (purple)
+- Outputs: `#c8662a` (burnt orange)
+- Governance: `#b03030` (red)
+- Observability: `#2a7a3a` (green)
 
 ---
 
@@ -55,12 +83,21 @@ WORKER_README.md                    ← deploy instructions for the worker
 
 - Font: **Inter** (Google Fonts), weights 400–900
 - All pages use the same font stack: `'Inter', sans-serif`
+- `DM Mono` used in Feature Intake tool for monospace/code elements only
+
+### Type scale
+- Body: 15px / 1.6
+- Lead: 17px / 1.75 weight 500
+- H1: `clamp(28px, 4vw, 48px)` weight 900 tracking -.03em
+- H2: 22px weight 800 tracking -.02em
+- Eyebrow: 11px weight 700 tracking .18em uppercase
+- Section chips: 10px weight 700
 
 ---
 
 ## Nav bar — all pages
 
-The nav is consistent across all pages:
+Fixed top nav, white with blur backdrop. Left: wordmark "Rob Dull" linking to homepage. Right: text links with 2px border, 6px radius. Hover state: navy background + white text.
 
 ```css
 nav { position: fixed; top: 0; padding: 16px 40px; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--rule); }
@@ -68,25 +105,26 @@ nav { position: fixed; top: 0; padding: 16px 40px; background: rgba(255,255,255,
 .nl a:hover { background: var(--accent); color: white; border-color: var(--accent); }
 ```
 
-**Nav links on all pages:** Contact | About | Work  
-("About" not "About Me" — confirmed decision)
+**Standard nav links:** Contact | About | Work  
+**Wordmark:** "Rob Dull" — 22px weight 800, links to root `index.html`
 
-**Wordmark:** "Rob Dull" — 22px, weight 900, links to `../../index.html` (or `/index.html` from homepage)
+On AI tool pages (Business Case, Feature Intake), a key-status pill also appears in the nav showing whether an API key is loaded for the session.
 
 ---
 
-## Page intro section — tool pages
+## Page patterns
 
-All tool pages use the same left-aligned intro structure (matching persona and journey map):
+### Tool page head
+All tool pages use a left-aligned intro structure:
 
 ```html
-<div class="bc">                          <!-- breadcrumb -->
+<div class="bc">
   <div class="bc-inner">
-    <a href="../../index.html">robdull</a>
-    <span class="bc-sep">/</span>
-    <a href="../tools-index.html">tools</a>
-    <span class="bc-sep">/</span>
-    <span>tool-name</span>
+    <a href="../../index.html">Rob Dull</a>
+    <span class="bc-sep">›</span>
+    <a href="../tools-index.html">Tools</a>
+    <span class="bc-sep">›</span>
+    <span>Tool Name</span>
   </div>
 </div>
 
@@ -97,49 +135,44 @@ All tool pages use the same left-aligned intro structure (matching persona and j
 </div>
 ```
 
-**Not centered** — the business case page was updated from a centered hero to this left-aligned format to match the other tool pages.
+### Article page (perspectives/)
+Breadcrumb + orange eyebrow + H1 + date/source meta row + body with H2 sections + footnotes + art-nav (prev/next articles). Article pages also include a LinkedIn share button in the nav.
+
+### Callout block
+Navy left border (`border-left: 4px solid var(--accent)`) on `--off` background. Orange variant uses `var(--accent2)`. Red variant uses `#b03030`.
+
+### About/CTA strip
+Navy background (`#1a3a5c`), white H2 with orange `<em>`, white semi-transparent body text. Primary button: orange. Ghost button: transparent white border.
+
+### Reading strip (tools-index.html)
+`--off` background with `border-top: 2px solid var(--accent2)`. Used to surface the AI ProdOps reading at the bottom of the tools list.
 
 ---
 
-## Footer — all pages
+## Path reference
 
-```html
-<footer>
-  <p>Rob Dull · Product Management Practitioner and Product Operations Transformation Consultant</p>
-</footer>
-```
-
-Journey map has two footers:
-- `.map-footer` — sits at the bottom of the map table, navy background (`var(--accent)`), white text at 70% opacity, middle dots (`&middot;`) as separators: "PetHealth · Customer Journey Map · Editable template"
-- `.site-footer` — standard site footer below the map
+| File location | To site root | To tools-index | To perspectives/ |
+|---|---|---|---|
+| `tools/tool-name/file.html` | `../../index.html` | `../tools-index.html` | `../../perspectives/` |
+| `tools/AI-native-prodops/file.html` | `../../index.html` | `../tools-index.html` | `../../perspectives/` |
+| `perspectives/file.html` | `../index.html` | `../tools/tools-index.html` | `./other-article.html` |
+| `tools/tools-index.html` | `../index.html` | `./tools-index.html` | `../perspectives/` |
 
 ---
 
-## Tools index page
+## API / AI setup — current state
 
-Four tools listed in order:
-1. **Technical Business Case Generator** — Live
-2. **JTBD + Enterprise Persona Generator** — Live
-3. **Customer Journey Map Builder** — Live
-4. **Product Operations Health Radar** — In development
+Two tools call the Anthropic Claude API: **Business Case Generator** and **Feature Intake Pipeline**. Both currently use the direct browser API pattern with a visitor-supplied key modal.
 
-Stats: 3 live, 1 in development.
+| Setting | Value |
+|---|---|
+| Model | `claude-sonnet-4-6` |
+| Key storage | Browser `sessionStorage` only — cleared on tab close |
+| Key modal | Shown on first Run click if no key in session |
+| Worker URL | `https://tools.rob-dull.workers.dev` (deployed, not currently used by tool pages) |
+| Max tokens | 1000–2000 depending on tool step |
 
-Includes an API note between the hero strip and tool list explaining the Cloudflare Worker setup.
-
-Live/dev status shown with colored dot badges (green for live, grey for in development).
-
----
-
-## Cloudflare Worker / API setup
-
-- Worker file: `worker.js`
-- API key stored as encrypted secret named `ANTHROPIC_API_KEY` in Cloudflare Worker settings
-- Model hardcoded to `claude-sonnet-4-20250514` in the worker — cannot be overridden from the browser
-- `max_tokens` capped at 2000 in the worker regardless of what the browser sends
-- System prompts passed from the browser are silently dropped — move them into the worker's `safe` object if needed
-- Each tool HTML file has a `WORKER_URL` constant near the top that must be set to the deployed worker URL
-- See `WORKER_README.md` for full deploy instructions
+The Cloudflare Worker is deployed and operational. Switching from direct API to Worker requires ~10 minutes of file edits per tool (see `worker-vs-direct.html` for the exact steps).
 
 ---
 
@@ -147,41 +180,62 @@ Live/dev status shown with colored dot badges (green for live, grey for in devel
 
 - **Company name:** PetHealth (sample company used throughout)
 - **"Experience" row renamed to:** User Sentiment
-- **Sentiment chart:** Pure line chart — no area fill, no shading. SVG `fill="none"` set as attribute directly on both the line and area path elements. Area path `d` attribute is never set.
-- **Line color:** `#1a3a5c` (navy), `stroke-width: 2.5`, set as SVG attributes not CSS
+- **Sentiment chart:** Pure line chart — no area fill, no shading. `fill="none"` set as SVG attribute
+- **Line color:** `#1a3a5c` (navy), `stroke-width: 2.5`
 - **Toolbar sticky position:** `top: 58px` (below fixed nav)
-- **Phase banner sticky:** `top: 0` relative to `map-outer`
-- **Stage header sticky:** `top: 28px` relative to `map-outer`
-- **rows-container padding:** set to `0px` (headers are in normal flow, not floating over content at rest)
-- **map-outer margin-top:** `12px` (small gap between toolbar and map)
 
 ---
 
 ## Persona tool — key decisions
 
-- **Persona 3** replaced from "Jennifer Malhotra, Account Manager" to **Marcus Chen**, a PetHealth insurance member (policyholder) whose journey mirrors the Journey Map tool's example
-- Marcus has a golden retriever named Biscuit; enrolled after a $2,400 out-of-pocket vet bill; at renewal considering switching
-- This persona connects the persona tool and journey map tool as a coherent example set
-- `--accent2` in persona tool is `#c8662a` (orange), not the old sage green `#6b8f71`
+- **Persona 3:** Marcus Chen, PetHealth insurance member (policyholder). Golden retriever named Biscuit. Enrolled after a $2,400 vet bill; at renewal considering switching. Connects persona tool to journey map tool as a coherent example set.
+- `--accent2` is `#c8662a` (orange) — not the old sage green
 
 ---
 
 ## Business case tool — key decisions
 
-- Intro updated from centered hero to left-aligned breadcrumb + page-head (matching other tool pages)
-- Three new form fields added:
-  - **"Who owns this problem?"** — stakeholders who feel the pain (Section 1, all modes)
-  - **"Current workaround or old way"** — what people do today instead (Section 1, all modes)
-  - **"What specifically is better for these employees vs. the old way?"** — added to Section 3 Internal People Impacted (Standard+)
-  - **"What is specifically better vs. the old way or current workaround?"** — added to Section 4 External and Customer Impact (Full Analysis)
-- Section 3 renamed from "People Impacted" to "Internal People Impacted"
-- Section 4 renamed from "End-User Impact" to "External and Customer Impact"
-- All new fields feed into the AI prompt with labeled keys
+- Left-aligned breadcrumb + page-head intro (not centered hero)
+- Three additional form fields: "Who owns this problem?", "Current workaround or old way", and "What specifically is better vs. the old way?"
+- Section 3 renamed to "Internal People Impacted"; Section 4 to "External and Customer Impact"
+
+---
+
+## Feature intake tool — key decisions
+
+- Four-step pipeline with human checkpoint between each step (deliberate design — HITL as reliability mechanism, not UX preference)
+- Right-hand panel explains design decisions for a hiring-manager audience, not technical implementation
+- JSON schema enforcement on every step prevents drift between agentic steps
+
+---
+
+## prodops-network.html — key decisions
+
+- 85 SVG nodes organized in 5 columns: Data Sources | MCP Connections | Agents & HITL | Outputs | Governance/Observability
+- Interactive detail cards triggered on node click (JS)
+- Governance bar runs vertically across all columns
+- Observability log strip at bottom
+- Feedback loop arc removed (simplified visual)
+- Arrow marker viewBox corrected to `"0 0 10 10"`
+- CSS variable `--accent-dark: #0f2640` added
 
 ---
 
 ## Google Analytics
 
-All HTML pages include a Google Analytics 4 tag (measurement ID `G-0Y1JYXTE5J`) as the first element after `<head>`. This tag is present in every `.html` file in the site.
+GA4 tag `G-0Y1JYXTE5J` is present in every HTML file as the first element after `<head>`. If copying these files, either remove the tag block or replace the measurement ID with your own.
 
-If you copy or fork any of these pages, either remove the tag block entirely or replace the measurement ID with your own. See `WORKER_README.md` for full instructions.
+---
+
+## SEO — current state (May 2026)
+
+All 16 public pages have:
+- `<meta name="description">` (140–160 chars)
+- `<link rel="canonical">` pointing to `https://robdull.com/[path]`
+- `og:type`, `og:url`, `og:title`, `og:description`, `og:site_name`
+
+5 internal/reference pages (`ai-native-prodops.html` — now removed, `enterprise-agentic-reference.html`, `worker-vs-direct.html`, `hoshin-kanri-matrix.html`, `SESSION_NOTES.html`) have `<meta name="robots" content="noindex">`.
+
+`sitemap.xml` and `robots.txt` are in the repo root.
+
+`og:image` not yet implemented — requires a 1200×630px social preview image file.

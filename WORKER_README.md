@@ -2,25 +2,36 @@
 
 ## What this is
 
-All AI tools on this site call the Anthropic Claude API through a Cloudflare Worker proxy. The Worker acts as a secure middleman: the API key never touches the browser, and you control who can call the Worker. This file explains how to deploy the Worker, lock it to your own domain, and — if you want to share these tools — how visitors can wire in their own Anthropic API key.
+Two AI tools on this site — the Business Case Generator and the Feature Intake Pipeline — call the Anthropic Claude API. They currently do so via a direct browser call using a visitor-supplied API key. A Cloudflare Worker proxy is deployed and available as an alternative that removes that friction entirely. This file explains both setups and how to switch between them.
 
 ---
 
-## How the protection works
+## Current setup: Direct API with visitor key modal
 
-The `worker.js` file includes an **allowed-origins check**. When a browser calls the Worker, it sends an `Origin` header. The Worker checks that origin against an allowlist. If the origin isn't on the list, the Worker returns a `403 Forbidden` response and never touches the API key.
+The tools call `api.anthropic.com` directly from the browser. When a visitor clicks Run for the first time, a modal prompts them to enter their own Anthropic API key. The key is held in `sessionStorage` only and cleared when the tab is closed. Nothing is sent to any server other than Anthropic.
 
-This means:
-- Requests from your own site (e.g. `https://robdull.com`) are allowed through.
-- Requests from anyone else's site, Postman, curl, etc. are blocked.
-- Your API key is stored as an encrypted secret in Cloudflare — never visible in the browser or in any HTML file.
+**Affected files:**
+- `tools/business-case/business-case-index.html`
+- `tools/feature-intake/feature-intake-index.html`
 
 ---
 
-## Deploying the Worker (your setup)
+## Alternative setup: Cloudflare Worker proxy
+
+The Worker at `https://tools.rob-dull.workers.dev` is already deployed with the API key set. Switching to it removes the key modal entirely — visitors just use the tools.
+
+### How the protection works
+
+The `worker.js` file includes an **allowed-origins check**. Requests from `robdull.com` are allowed through. Requests from any other origin, curl, Postman, etc. are blocked with a `403 Forbidden`. Your API key is stored as an encrypted Cloudflare secret — never in source code or visible in the browser.
+
+---
+
+## Deploying the Worker (first-time setup)
+
+The Worker is already deployed for robdull.com. These steps are for anyone forking these tools for their own use.
 
 ### 1. Create a Cloudflare account
-Sign up at [cloudflare.com](https://cloudflare.com) if you don't have one. The Workers free tier is sufficient.
+Sign up at [cloudflare.com](https://cloudflare.com). The Workers free tier is sufficient.
 
 ### 2. Install Wrangler (Cloudflare CLI)
 ```bash
@@ -38,17 +49,12 @@ Replace the generated `src/index.js` with the contents of `worker.js` from this 
 ```bash
 wrangler secret put ANTHROPIC_API_KEY
 ```
-Paste your Anthropic API key when prompted. It is stored encrypted — never in source code.
+Paste your Anthropic API key when prompted. Stored encrypted — never in source code.
 
 ### 5. Set your allowed origin
-In `worker.js`, find the `ALLOWED_ORIGINS` array and replace with your own domain:
-
+In `worker.js`, update the `ALLOWED` array:
 ```js
-const ALLOWED_ORIGINS = [
-  'https://robdull.com',
-  'https://www.robdull.com',
-  // Add 'http://localhost:8080' etc. for local dev
-];
+const ALLOWED = ['https://yourdomain.com', 'https://www.yourdomain.com', 'http://localhost', 'http://127.0.0.1', 'null'];
 ```
 
 ### 6. Deploy
@@ -58,40 +64,58 @@ wrangler deploy
 Copy the Worker URL from the output (e.g. `https://my-claude-proxy.your-account.workers.dev`).
 
 ### 7. Set the WORKER_URL in each tool
-Each HTML tool file has a constant near the top of the `<script>` block:
-
+Each AI tool file has a constant near the top of the `<script>` block:
 ```js
 const WORKER_URL = 'YOUR_WORKER_URL_HERE';
 ```
-
-Replace `YOUR_WORKER_URL_HERE` with your deployed Worker URL. Repeat for each tool file:
-- `business-case/business-case-index.html`
-- `persona-generator/persona-index.html`
-- `journey-map/journey-map-index.html`
-- `hoshin-v2mom/hoshin-v2mom-index.html`
+Replace with your deployed Worker URL in:
+- `tools/business-case/business-case-index.html`
+- `tools/feature-intake/feature-intake-index.html`
 
 ---
 
-## For visitors who want to use these tools with their own tokens
+## Switching robdull.com tools from direct API to Worker
 
-These tools are open to copy and self-host. Here is how to run them independently:
+The Worker is already deployed and the API key is already set. Four changes per tool file:
 
-### Option A — Cloudflare Worker (recommended, same as above)
+**1. Set the Worker URL.**  
+Find the `fetch('https://api.anthropic.com/...')` call and replace the URL with `https://tools.rob-dull.workers.dev`.
 
-1. Follow the deployment steps above.
-2. Set your own Anthropic API key as the `ANTHROPIC_API_KEY` secret.
-3. Set `ALLOWED_ORIGINS` to your own domain.
-4. Replace `WORKER_URL` in the HTML files with your Worker URL.
-5. Host the HTML files anywhere (GitHub Pages, Netlify, Cloudflare Pages, etc.).
+**2. Revert the fetch headers.**  
+Remove `x-api-key` and `anthropic-dangerous-direct-browser-access` from the fetch headers. The Worker adds the key server-side.
 
-Your API key stays on your Worker. Nobody else's requests can reach it.
+**3. Remove the API key modal.**  
+Delete the modal HTML, modal CSS, and the `showApiKeyModal()`, `submitApiKey()`, and `clearApiKey()` functions. Remove the key-status pill from the nav.
 
-### Option B — Call the Anthropic API directly from the browser (simpler, less secure)
+**4. Remove the key check before each run.**  
+Delete the `if (!getApiKey())` block at the start of `generate()` and `runStep1()` functions.
 
-If you just want to run the tools locally and aren't worried about exposing your key in the browser:
+See `worker-vs-direct.html` for the full tradeoff comparison.
 
-1. In each HTML file, find the `buildWithAI()` or equivalent function.
-2. Replace the `fetch(WORKER_URL, ...)` call with a direct call to the Anthropic API:
+---
+
+## Worker configuration reference
+
+| Setting | Location | Value |
+|---|---|---|
+| API key | Cloudflare secret `ANTHROPIC_API_KEY` | Never in source code |
+| Model | Hardcoded in `worker.js` | `claude-sonnet-4-6` |
+| Max tokens | Hardcoded in `worker.js` | Capped at 2000 regardless of browser request |
+| System prompts | Dropped by Worker | Move into Worker's `safe` object if needed |
+| Allowed origins | `ALLOWED` array in `worker.js` | `robdull.com`, `www.robdull.com`, localhost |
+
+---
+
+## For visitors who want to self-host these tools
+
+### Option A — Cloudflare Worker (recommended)
+Follow the first-time setup steps above. Your API key stays server-side. Nobody else's requests can reach it.
+
+### Option B — Direct API with key modal (current robdull.com approach)
+The tools already support this. Visitors enter their own Anthropic API key in the modal when they first click Run. The key lives in `sessionStorage` only — cleared on tab close, never sent anywhere except Anthropic directly. This is the live setup on robdull.com as of May 2026.
+
+### Option C — Hardcoded key in source (local dev only)
+For local testing only — never deploy this to a public URL:
 
 ```js
 const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -103,140 +127,23 @@ const response = await fetch('https://api.anthropic.com/v1/messages', {
     'anthropic-dangerous-direct-browser-access': 'true'
   },
   body: JSON.stringify({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 1000,
     messages: [{ role: 'user', content: prompt }]
   })
 });
 ```
 
-**Warning:** This puts your API key in the browser where it is visible in DevTools. Only do this for local testing. Never deploy this to a public URL.
-
-### Option C — Paste your key into the tool at runtime (planned feature)
-
-A future version of these tools may include an optional API key input field, so visitors can enter their own key in the browser session. The key would only be held in memory for that session and never stored or sent to any server other than Anthropic directly.
-
----
-
-## Worker configuration reference
-
-| Setting | Location | Notes |
-|---|---|---|
-| API key | Cloudflare secret `ANTHROPIC_API_KEY` | Never in source code |
-| Model | Hardcoded in `worker.js` | `claude-sonnet-4-20250514` |
-| Max tokens | Hardcoded in `worker.js` | Capped at 2000 regardless of browser request |
-| System prompts | Dropped by worker | Move into worker's `safe` object if needed |
-| Allowed origins | `ALLOWED_ORIGINS` array in `worker.js` | Must include your exact domain(s) |
-
----
-
-## worker.js reference
-
-```js
-const ALLOWED_ORIGINS = [
-  'https://robdull.com',
-  'https://www.robdull.com',
-];
-
-export default {
-  async fetch(request, env) {
-    const origin = request.headers.get('Origin') || '';
-
-    // CORS preflight
-    if (request.method === 'OPTIONS') {
-      if (!ALLOWED_ORIGINS.includes(origin)) {
-        return new Response('Forbidden', { status: 403 });
-      }
-      return new Response(null, {
-        headers: {
-          'Access-Control-Allow-Origin': origin,
-          'Access-Control-Allow-Methods': 'POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type',
-        }
-      });
-    }
-
-    // Block non-allowed origins
-    if (!ALLOWED_ORIGINS.includes(origin)) {
-      return new Response('Forbidden', { status: 403 });
-    }
-
-    if (request.method !== 'POST') {
-      return new Response('Method not allowed', { status: 405 });
-    }
-
-    const body = await request.json();
-
-    // Force model and cap tokens — browser cannot override
-    const safe = {
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: Math.min(body.max_tokens || 1000, 2000),
-      messages: body.messages,
-    };
-
-    const anthropicResponse = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify(safe),
-    });
-
-    const data = await anthropicResponse.json();
-
-    return new Response(JSON.stringify(data), {
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': origin,
-      }
-    });
-  }
-};
-```
-
----
-
-## Questions
-
-For questions about deploying or adapting these tools, reach out via [rob.dull@gmail.com](mailto:rob.dull@gmail.com) or connect on [LinkedIn](https://linkedin.com/in/robdull).
+**Warning:** This exposes your API key in browser DevTools. Local testing only.
 
 ---
 
 ## Google Analytics
 
-All pages on robdull.com include a Google Analytics 4 tag (measurement ID `G-0Y1JYXTE5J`) immediately after the `<head>` opening tag in every HTML file:
+All pages include a GA4 tag (`G-0Y1JYXTE5J`) immediately after the `<head>` opening tag. If you self-host these tools, either remove the tag block entirely or replace the measurement ID with your own. A find-and-replace for `G-0Y1JYXTE5J` across all HTML files catches every instance.
 
-```html
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y1JYXTE5J"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-0Y1JYXTE5J');
-</script>
-```
+---
 
-### If you copy these tools for your own use
+## Questions
 
-This tag sends page view data to Rob Dull's Google Analytics account. If you self-host these tools, you should either:
-
-**Option A — Remove analytics entirely.** Delete the `<!-- Google tag (gtag.js) -->` block (the comment and the two `<script>` tags that follow it) from every HTML file. This is the simplest option if you don't need analytics.
-
-**Option B — Replace with your own GA4 tag.** Create a free Google Analytics 4 property at [analytics.google.com](https://analytics.google.com), then replace `G-0Y1JYXTE5J` with your own measurement ID in each file:
-
-```html
-gtag('config', 'G-YOUR-MEASUREMENT-ID');
-```
-
-And update the script src:
-
-```html
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YOUR-MEASUREMENT-ID"></script>
-```
-
-The tag appears once per file, always immediately after `<head>`. A find-and-replace for `G-0Y1JYXTE5J` across all HTML files will catch every instance.
-
-**Option C — Use a different analytics provider.** Remove the Google tag block entirely and add your preferred provider's snippet in the same location.
+For questions about deploying or adapting these tools: [rob.dull@gmail.com](mailto:rob.dull@gmail.com) or [LinkedIn](https://linkedin.com/in/robdull).

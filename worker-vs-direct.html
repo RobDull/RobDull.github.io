@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Worker vs Direct API: Configuration Options | Rob Dull</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0a0a0a;--white:#ffffff;--off:#f7f7f7;--rule:#e8e8e8;
+  --accent:#1a3a5c;--accent2:#c8662a;--muted:#6b6b6b;
+  --font:'Inter',sans-serif;
+}
+body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;min-height:100vh;padding:60px 40px 80px;}
+.page{max-width:720px;margin:0 auto;}
+
+h1{font-size:clamp(24px,4vw,38px);font-weight:900;letter-spacing:-.03em;line-height:1.08;color:var(--ink);margin-bottom:10px;}
+.subtitle{font-size:15px;color:var(--muted);margin-bottom:40px;line-height:1.7;}
+
+h2{font-size:16px;font-weight:800;letter-spacing:-.01em;color:var(--ink);margin:36px 0 12px;}
+
+p{font-size:15px;line-height:1.8;color:#1a1a1a;margin-bottom:18px;}
+
+/* COMPARISON TABLE */
+.compare{width:100%;border-collapse:collapse;margin:28px 0;}
+.compare th{padding:11px 16px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-align:left;border-bottom:2px solid var(--ink);}
+.compare th:first-child{color:var(--muted);}
+.compare th.col-a{color:var(--accent);}
+.compare th.col-b{color:var(--accent2);}
+.compare td{padding:11px 16px;border-bottom:1px solid var(--rule);font-size:14px;line-height:1.6;vertical-align:top;}
+.compare tr:last-child td{border-bottom:none;}
+.compare td:first-child{font-weight:600;color:var(--ink);width:36%;}
+.compare td.good{color:#2a6b6b;font-weight:600;}
+.compare td.warn{color:var(--accent2);font-weight:600;}
+.compare td.neutral{color:var(--muted);}
+
+/* STEPS */
+.steps{margin:20px 0 28px;}
+.step{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--rule);}
+.step:last-child{border-bottom:none;}
+.step-num{width:28px;height:28px;border-radius:6px;background:var(--ink);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.step-text{font-size:14px;line-height:1.7;color:#1a1a1a;}
+.step-text strong{color:var(--ink);}
+.step-text code{font-family:monospace;font-size:13px;background:var(--off);border:1px solid var(--rule);border-radius:3px;padding:1px 6px;}
+
+/* CALLOUT */
+.callout{background:var(--off);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:18px 22px;margin:24px 0;font-size:14px;line-height:1.8;color:#2a2a2a;}
+.callout strong{color:var(--ink);}
+.callout-orange{background:rgba(200,102,42,.06);border-left:4px solid var(--accent2);border-radius:0 8px 8px 0;padding:18px 22px;margin:24px 0;font-size:14px;line-height:1.8;color:#2a2a2a;}
+
+/* VERDICT */
+.verdict{background:var(--ink);border-radius:10px;padding:24px 28px;margin:36px 0;}
+.verdict-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px;}
+.verdict-text{font-size:15px;color:white;line-height:1.75;}
+.verdict-text strong{color:rgba(255,255,255,.9);}
+
+.divider{border:none;border-top:1px solid var(--rule);margin:36px 0;}
+
+@media(max-width:600px){
+  body{padding:40px 20px 60px;}
+  .compare td:first-child{width:auto;}
+}
+</style>
+<meta name="robots" content="noindex">
+</head>
+<body>
+<div class="page">
+
+  <h1>Worker vs Direct API</h1>
+  <p class="subtitle">Two ways to connect the Feature Intake Pipeline tools to the Anthropic API — what each one does, what it costs, and what you'd need to change to switch.</p>
+
+  <h2>How each setup works</h2>
+
+  <p><strong>Direct API (current setup):</strong> The tool in the browser calls Anthropic directly, using an API key the visitor pastes into a modal. The key lives in browser memory for that session only. Your Cloudflare Worker is not involved.</p>
+
+  <p><strong>Cloudflare Worker:</strong> The tool calls your Worker URL instead of Anthropic. The Worker forwards the request to Anthropic using your own API key, which is stored encrypted inside Cloudflare. Visitors enter nothing — the tool just works.</p>
+
+  <table class="compare">
+    <thead>
+      <tr>
+        <th></th>
+        <th class="col-a">Direct API (current)</th>
+        <th class="col-b">Cloudflare Worker</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Visitor experience</td>
+        <td class="warn">Must get their own Anthropic key — 2 min setup, but real friction</td>
+        <td class="good">Just use the tool — no key, no signup</td>
+      </tr>
+      <tr>
+        <td>Your cost</td>
+        <td class="good">Zero — visitor's key pays</td>
+        <td class="warn">Cents per session — negligible for portfolio traffic</td>
+      </tr>
+      <tr>
+        <td>Your API key</td>
+        <td class="good">Not used, not at risk</td>
+        <td class="good">Stored encrypted in Cloudflare, never in browser</td>
+      </tr>
+      <tr>
+        <td>Who can use it</td>
+        <td class="neutral">Anyone willing to get a key</td>
+        <td class="good">Anyone who visits the page</td>
+      </tr>
+      <tr>
+        <td>Setup required</td>
+        <td class="good">Already done</td>
+        <td class="warn">~10 minutes of file edits + GitHub push</td>
+      </tr>
+      <tr>
+        <td>Cost control</td>
+        <td class="good">Unlimited — not your bill</td>
+        <td class="neutral">Cloudflare Worker already has origin restriction — only robdull.com can call it</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>What you'd need to change to use the Worker</h2>
+
+  <p>Four changes to <code>business-case-index.html</code> and <code>feature-intake-index.html</code>. Nothing changes in Cloudflare — the Worker is already deployed and your API key is already set.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>Set the Worker URL.</strong> Find <code>YOUR_WORKER_URL_HERE</code> (or the current <code>api.anthropic.com</code> fetch URL) and replace with <code>https://tools.rob-dull.workers.dev</code>.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Revert the fetch headers.</strong> Remove <code>x-api-key</code> and <code>anthropic-dangerous-direct-browser-access</code> from the fetch call. The Worker adds its own key server-side — the browser doesn't send one.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Remove the API key modal.</strong> Delete the modal HTML, modal CSS, and the <code>showApiKeyModal()</code>, <code>submitApiKey()</code>, and <code>clearApiKey()</code> functions. Remove the key-status pill from the nav.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text"><strong>Remove the key check before each run.</strong> Delete the <code>if (!getApiKey())</code> block at the start of the <code>generate()</code> and <code>runStep1()</code> functions.</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>What the Worker already does for you:</strong> it locks incoming requests to <code>robdull.com</code> only, forces the model to <code>claude-sonnet-4-6</code>, caps output at 2000 tokens regardless of what the browser requests, and keeps your API key off the client entirely. None of that requires any changes.
+  </div>
+
+  <h2>The tradeoff in one sentence each</h2>
+
+  <p><strong>Direct API</strong> costs you nothing but asks visitors to do work before they can try the tool. The key-entry modal signals that this is a serious technical demonstration — but it also means a hiring manager who doesn't have a key will bounce.</p>
+
+  <p><strong>Cloudflare Worker</strong> costs you cents but removes all friction. Anyone who lands on the page can run the pipeline immediately. For a portfolio tool whose job is to demonstrate capability, that's probably the right call.</p>
+
+  <div class="verdict">
+    <div class="verdict-label">Bottom line</div>
+    <div class="verdict-text">The Worker setup is <strong>better for a portfolio</strong> — zero friction for the people you most want to impress. The direct API setup is better if you want to <strong>control who can run the tool</strong> or if you want to avoid any API cost entirely. Both are fully functional. Switching from one to the other is a 10-minute file edit.</div>
+  </div>
+
+</div>
+</body>
+</html>
