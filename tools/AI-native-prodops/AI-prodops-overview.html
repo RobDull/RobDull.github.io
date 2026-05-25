@@ -98,18 +98,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .element-item--labeled .element-num{width:auto;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:white;background:var(--accent2);border-radius:4px;padding:2px 8px;display:inline-block;align-self:flex-start;}
 
 /* phase grid — the four workflow phases */
-.phase-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;}
-.phase-card{border:1px solid var(--rule);border-radius:8px;overflow:hidden;}
-.phase-card-head{padding:14px 18px;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:10px;}
-.phase-num{font-size:10px;font-weight:800;color:var(--accent2);letter-spacing:.08em;}
-.phase-title{font-size:14px;font-weight:800;color:var(--ink);letter-spacing:-.01em;}
-.phase-body{padding:14px 18px;}
-.phase-body ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
-.phase-body li{font-size:12px;color:var(--muted);line-height:1.6;display:flex;gap:8px;align-items:flex-start;}
-.phase-body li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent2);flex-shrink:0;margin-top:6px;}
+.phase-grid{display:flex;flex-direction:column;gap:0;margin:28px 0;border:1px solid var(--rule);border-radius:10px;overflow:hidden;}
+.phase-card{display:grid;grid-template-columns:200px 1fr;border-bottom:1px solid var(--rule);}
+.phase-card:last-child{border-bottom:none;}
+.phase-card-head{padding:24px 22px;background:var(--off);border-right:1px solid var(--rule);display:flex;flex-direction:column;justify-content:flex-start;gap:6px;}
+.phase-num{font-size:9px;font-weight:800;color:var(--accent2);letter-spacing:.12em;text-transform:uppercase;}
+.phase-title{font-size:14px;font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1.3;}
+.phase-card-right{display:flex;flex-direction:column;}
+.phase-body{padding:20px 24px;flex:1;}
+.phase-body ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 28px;}
+.phase-body li{font-size:12.5px;color:#3a3a3a;line-height:1.65;display:flex;gap:9px;align-items:flex-start;}
+.phase-body li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent2);flex-shrink:0;margin-top:5px;}
 .phase-body li strong{color:var(--ink);font-weight:700;}
-.phase-mcp{background:rgba(200,146,26,.05);border-top:1px solid rgba(200,146,26,.2);padding:10px 18px;font-size:11px;color:#7a5700;font-weight:600;}
-.phase-mcp span{font-weight:800;}
+.phase-mcp{background:rgba(200,146,26,.04);border-top:1px solid rgba(200,146,26,.18);padding:9px 24px;font-size:11.5px;color:#7a5700;font-weight:500;display:flex;align-items:baseline;gap:6px;}
+.phase-mcp span{font-weight:800;white-space:nowrap;}
 
 /* MCP capability table */
 .mcp-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:13px;}
@@ -235,7 +237,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   .bc,.art-head,.toc-wrap,.art-body{padding-left:24px;padding-right:24px;}
   .tools-cta-strip{padding:36px 24px;}
   footer{padding:20px 24px;}
-  .phase-grid{grid-template-columns:1fr;}
+  .phase-card{grid-template-columns:1fr;}
+  .phase-card-head{border-right:none;border-bottom:1px solid var(--rule);padding:16px 18px;}
+  .phase-body ul{grid-template-columns:1fr;}
+  .phase-body{padding:16px 18px;}
+  .phase-mcp{padding:10px 18px;}
   .art-meta{gap:12px;}
   .art-tags{margin-left:0;}
   .mcp-table{font-size:12px;}
@@ -419,66 +425,74 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
     <div class="phase-card">
       <div class="phase-card-head">
-        <span class="phase-num">PHASE 01</span>
+        <span class="phase-num">Phase 01</span>
         <span class="phase-title">Continuous research &amp; discovery</span>
       </div>
-      <div class="phase-body">
-        <ul>
-          <li><strong>Autonomous synthesis:</strong> agents continuously ingest raw data from Gong, Zendesk, Intercom, and App Store reviews; no manual querying.</li>
-          <li><strong>Dynamic cluster mapping:</strong> the system automatically groups user pain points into real-time trend graphs, showing what's rising or resolving.</li>
-          <li><strong>Automated persona simulation:</strong> PMs test early concepts against AI agents trained on historical user behavior data, prior to design.</li>
-          <li><strong>Intent gap analysis:</strong> AI highlights areas where users search for utility but find no corresponding feature, surfacing unmet demand.</li>
-        </ul>
+      <div class="phase-card-right">
+        <div class="phase-body">
+          <ul>
+            <li><strong>Autonomous synthesis:</strong> agents continuously ingest raw data from Gong, Zendesk, Intercom, and App Store reviews; no manual querying.</li>
+            <li><strong>Dynamic cluster mapping:</strong> the system automatically groups user pain points into real-time trend graphs, showing what's rising or resolving.</li>
+            <li><strong>Automated persona simulation:</strong> PMs test early concepts against AI agents trained on historical user behavior data, prior to design.</li>
+            <li><strong>Intent gap analysis:</strong> AI highlights areas where users search for utility but find no corresponding feature, surfacing unmet demand.</li>
+          </ul>
+        </div>
+        <div class="phase-mcp"><span>MCP connections:</span> Research ingest MCP (Dovetail, Notion) · Signal aggregator MCP (Zendesk, Gong, Intercom) · Metrics MCP (Amplitude, Mixpanel)</div>
       </div>
-      <div class="phase-mcp"><span>MCP connections:</span> Research ingest MCP (Dovetail, Notion), Signal aggregator MCP (Zendesk, Gong, Intercom), Metrics MCP (Amplitude, Mixpanel)</div>
     </div>
 
     <div class="phase-card">
       <div class="phase-card-head">
-        <span class="phase-num">PHASE 02</span>
+        <span class="phase-num">Phase 02</span>
         <span class="phase-title">Predictive intake &amp; prioritization</span>
       </div>
-      <div class="phase-body">
-        <ul>
-          <li><strong>Auto-scoping RICE:</strong> AI drafts initial Reach, Impact, Confidence, and Effort scores by analyzing historical engineering data and market size — a starting point the PM refines, not a blank form they fill.</li>
-          <li><strong>Semantic duplicate detection:</strong> incoming feature requests are automatically merged with existing backlog items, preventing redundant work.</li>
-          <li><strong>Resource forecasting:</strong> the system predicts sprint bottleneck risks based on current team velocity and code complexity.</li>
-          <li><strong>Strategic alignment check:</strong> AI flags features that deviate from current OKRs before they enter the detailed intake pipeline.</li>
-        </ul>
+      <div class="phase-card-right">
+        <div class="phase-body">
+          <ul>
+            <li><strong>Auto-scoping RICE:</strong> AI drafts initial Reach, Impact, Confidence, and Effort scores by analyzing historical engineering data and market size — a starting point the PM refines, not a blank form they fill.</li>
+            <li><strong>Semantic duplicate detection:</strong> incoming feature requests are automatically merged with existing backlog items, preventing redundant work.</li>
+            <li><strong>Resource forecasting:</strong> the system predicts sprint bottleneck risks based on current team velocity and code complexity.</li>
+            <li><strong>Strategic alignment check:</strong> AI flags features that deviate from current OKRs before they enter the detailed intake pipeline.</li>
+          </ul>
+        </div>
+        <div class="phase-mcp"><span>MCP connections:</span> Intake source MCP (Jira, Linear, Productboard) · Strategy context MCP (Confluence, Notion, Lattice) · Metrics MCP (velocity, cycle time)</div>
       </div>
-      <div class="phase-mcp"><span>MCP connections:</span> Intake source MCP (Jira, Linear, Productboard), Strategy context MCP (Confluence, Notion, Lattice), Metrics MCP (velocity, cycle time)</div>
     </div>
 
     <div class="phase-card">
       <div class="phase-card-head">
-        <span class="phase-num">PHASE 03</span>
+        <span class="phase-num">Phase 03</span>
         <span class="phase-title">Automated specification &amp; execution</span>
       </div>
-      <div class="phase-body">
-        <ul>
-          <li><strong>Self-writing PRDs:</strong> PMs prompt the intake pipeline with a feature idea; the agentic chain generates user stories, edge cases, and technical constraints as a draft the PM refines.</li>
-          <li><strong>Synthetic test generation:</strong> AI writes automated QA test scripts and acceptance criteria simultaneously with the feature spec — cutting the handoff delay to zero.</li>
-          <li><strong>Bilingual code mapping:</strong> the system automatically converts PRD requirements into tracked Jira tickets and GitHub issues, maintaining traceability from idea to implementation.</li>
-          <li><strong>Assumption surfacing:</strong> critical assumptions about user behavior, technical feasibility, and market size are made explicit and ranked by risk before any code is written.</li>
-        </ul>
+      <div class="phase-card-right">
+        <div class="phase-body">
+          <ul>
+            <li><strong>Self-writing PRDs:</strong> PMs prompt the intake pipeline with a feature idea; the agentic chain generates user stories, edge cases, and technical constraints as a draft the PM refines.</li>
+            <li><strong>Synthetic test generation:</strong> AI writes automated QA test scripts and acceptance criteria simultaneously with the feature spec — cutting the handoff delay to zero.</li>
+            <li><strong>Bilingual code mapping:</strong> the system automatically converts PRD requirements into tracked Jira tickets and GitHub issues, maintaining traceability from idea to implementation.</li>
+            <li><strong>Assumption surfacing:</strong> critical assumptions about user behavior, technical feasibility, and market size are made explicit and ranked by risk before any code is written.</li>
+          </ul>
+        </div>
+        <div class="phase-mcp"><span>MCP connections:</span> Intake source MCP (Jira write-back, GitHub issues) · Strategy context MCP (acceptance criteria context) · Research ingest MCP (user behavior grounding)</div>
       </div>
-      <div class="phase-mcp"><span>MCP connections:</span> Intake source MCP (Jira write-back, GitHub issues), Strategy context MCP (acceptance criteria context), Research ingest MCP (user behavior grounding)</div>
     </div>
 
     <div class="phase-card">
       <div class="phase-card-head">
-        <span class="phase-num">PHASE 04</span>
+        <span class="phase-num">Phase 04</span>
         <span class="phase-title">Intelligent continuous deployment</span>
       </div>
-      <div class="phase-body">
-        <ul>
-          <li><strong>Automated release notes:</strong> AI reads final code commits and drafts personalized release notes for marketing, sales, and customers — scoped to each audience's language.</li>
-          <li><strong>Predictive canary testing:</strong> the deployment system monitors telemetry during rollouts and automatically rolls back if anomalies appear — without waiting for the PM to notice.</li>
-          <li><strong>Real-time feature tracking:</strong> AI builds custom analytics dashboards the moment a feature goes live, tracking conversion and adoption against the metrics defined at spec time.</li>
-          <li><strong>Feedback loop closure:</strong> the system automatically notifies the users who originally requested the feature once it is deployed — closing the signal-to-delivery loop explicitly.</li>
-        </ul>
+      <div class="phase-card-right">
+        <div class="phase-body">
+          <ul>
+            <li><strong>Automated release notes:</strong> AI reads final code commits and drafts personalized release notes for marketing, sales, and customers — scoped to each audience's language.</li>
+            <li><strong>Predictive canary testing:</strong> the deployment system monitors telemetry during rollouts and automatically rolls back if anomalies appear — without waiting for the PM to notice.</li>
+            <li><strong>Real-time feature tracking:</strong> AI builds custom analytics dashboards the moment a feature goes live, tracking conversion and adoption against the metrics defined at spec time.</li>
+            <li><strong>Feedback loop closure:</strong> the system automatically notifies the users who originally requested the feature once it is deployed — closing the signal-to-delivery loop explicitly.</li>
+          </ul>
+        </div>
+        <div class="phase-mcp"><span>MCP connections:</span> Metrics MCP (DataDog, Mixpanel, GA4 — canary monitoring) · Intake source MCP (write-back of release status) · Signal aggregator MCP (post-deploy NPS and CSAT capture)</div>
       </div>
-      <div class="phase-mcp"><span>MCP connections:</span> Metrics MCP (DataDog, Mixpanel, GA4 — canary monitoring), Intake source MCP (write-back of release status), Signal aggregator MCP (post-deploy NPS and CSAT capture)</div>
     </div>
 
   </div>
