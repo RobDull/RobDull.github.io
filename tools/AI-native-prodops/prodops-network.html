@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Operations Network | Rob Dull</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0a0a0a;
+  --white:#ffffff;
+  --off:#f7f7f7;
+  --rule:#e8e8e8;
+  --accent:#1a3a5c;
+  --accent-dark:#0f2640;
+  --accent2:#c8662a;
+  --muted:#6b6b6b;
+  --font:'Inter',sans-serif;
+  --c-data:#2a6b6b;
+  --c-tool:#1a3a5c;
+  --c-agent:#c8662a;
+  --c-hitl:#7c5cbf;
+  --c-mcp:#c8921a;
+  --c-output:#1a5c3a;
+  --c-gov:#b0303a;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;min-height:158vh;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
+.nn{font-size:21px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
+.nl{display:flex;gap:10px;align-items:center;}
+.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:7px 15px;border:2px solid var(--rule);border-radius:6px;transition:all .15s;background:white;}
+.nl a:hover{background:var(--accent);color:white;border-color:var(--accent);}
+
+/* BREADCRUMB */
+.bc{max-width:1280px;margin:0 auto;padding:88px 32px 0;}
+.bc-inner{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--muted);}
+.bc-inner a{color:var(--muted);text-decoration:none;}
+.bc-inner a:hover{color:var(--ink);}
+.bc-sep{color:var(--rule);}
+
+/* PAGE HEAD */
+.page-head{max-width:1280px;margin:0 auto;padding:24px 32px 0;}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;}
+.page-head h1{font-size:clamp(28px,3.8vw,48px);font-weight:900;line-height:1.0;letter-spacing:-.03em;color:var(--ink);}
+.page-head h1 em{font-style:normal;color:var(--accent);}
+.page-head p{font-size:15px;color:var(--muted);max-width:640px;margin-top:12px;line-height:1.7;}
+
+/* WORKFLOW REFERENCE STRIP */
+.workflow-strip{max-width:1280px;margin:16px auto 0;padding:0 32px;}
+.workflow-inner{background:var(--off);border:1px solid var(--rule);border-radius:8px;padding:14px 18px;}
+.workflow-label{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.workflow-steps{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.wf-step{display:flex;flex-direction:column;gap:2px;padding:7px 12px;border-radius:6px;background:white;border:1.5px solid var(--rule);text-decoration:none;transition:border-color .15s;min-width:88px;}
+.wf-step:hover{border-color:var(--accent);}
+.wf-native{border-color:rgba(26,58,92,.3);background:rgba(26,58,92,.04);}
+.wf-num{font-size:9px;font-weight:800;color:var(--accent2);letter-spacing:.08em;}
+.wf-name{font-size:12px;font-weight:800;color:var(--ink);}
+.wf-tools{font-size:10px;color:var(--muted);}
+.wf-arrow{font-size:13px;color:var(--rule);flex-shrink:0;}
+.wf-arrow-agents{font-size:10px;font-weight:700;color:var(--accent2);background:rgba(200,102,42,.07);border:1px solid rgba(200,102,42,.2);border-radius:4px;padding:4px 8px;flex-shrink:0;}
+.wf-cta{font-size:11px;font-weight:700;color:white;background:var(--accent);border-radius:6px;padding:6px 12px;text-decoration:none;white-space:nowrap;margin-left:auto;flex-shrink:0;transition:background .15s;}
+.wf-cta:hover{background:var(--accent-dark);}
+@media(max-width:800px){.workflow-strip{padding:0 20px;}.wf-cta{margin-left:0;width:100%;text-align:center;}}
+
+/* LEGEND / FILTER BAR */
+.legend-bar{max-width:1280px;margin:24px auto 0;padding:0 32px;}
+.legend-inner{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:13px 18px;background:var(--off);border-radius:8px;border:1px solid var(--rule);}
+.legend-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0;}
+
+/* Filter buttons — fixed contrast in both states */
+.leg-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 13px;border-radius:20px;border:2px solid;
+  font-size:12px;font-weight:700;cursor:pointer;
+  transition:background .15s, color .15s, border-color .15s;
+  background:white;
+}
+/* inactive state: colored text on white */
+.leg-btn[data-type="data"]         {border-color:var(--c-data);   color:var(--c-data);}
+.leg-btn[data-type="tool"]         {border-color:var(--c-tool);   color:var(--c-tool);}
+.leg-btn[data-type="agent"]        {border-color:var(--c-agent);  color:var(--c-agent);}
+.leg-btn[data-type="hitl"]         {border-color:var(--c-hitl);   color:var(--c-hitl);}
+.leg-btn[data-type="mcp"]          {border-color:var(--c-mcp);    color:var(--c-mcp);}
+.leg-btn[data-type="output"]       {border-color:var(--c-output); color:var(--c-output);}
+.leg-btn[data-type="governance"]   {border-color:var(--c-gov);    color:var(--c-gov);}
+/* active state: white text on solid color — explicit white, no inheritance bugs */
+.leg-btn[data-type="data"].active         {background:var(--c-data);   color:#fff !important;}
+.leg-btn[data-type="tool"].active         {background:var(--c-tool);   color:#fff !important;}
+.leg-btn[data-type="agent"].active        {background:var(--c-agent);  color:#fff !important;}
+.leg-btn[data-type="hitl"].active         {background:var(--c-hitl);   color:#fff !important;}
+.leg-btn[data-type="mcp"].active          {background:var(--c-mcp);    color:#fff !important;}
+.leg-btn[data-type="output"].active       {background:var(--c-output); color:#fff !important;}
+.leg-btn[data-type="governance"].active   {background:var(--c-gov);    color:#fff !important;}
+/* dot always matches type color — hidden when active since bg is solid */
+.leg-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:currentColor;}
+.leg-btn.active .leg-dot{background:rgba(255,255,255,0.6);}
+.legend-hint{font-size:11px;color:var(--muted);margin-left:auto;}
+
+/* OUTER LAYOUT: full-width single column */
+.outer-wrap{width:100%;margin:0;padding:0;}
+
+/* GOVERNANCE BAR — horizontal, spans full width below diagram */
+.gov-bar{max-width:1280px;margin:0 auto;padding:0 32px;}
+.gov-bar-inner{border:2px solid var(--c-gov);border-radius:10px;overflow:hidden;}
+.gov-bar-header{background:var(--c-gov);padding:11px 20px;display:flex;align-items:center;gap:16px;}
+.gov-bar-title{font-size:11px;font-weight:800;color:white;letter-spacing:.12em;text-transform:uppercase;}
+.gov-bar-subtitle{font-size:11px;color:rgba(255,255,255,.65);}
+.gov-bar-body{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+.gov-group{padding:14px 16px;border-right:1px solid rgba(176,48,58,.15);}
+.gov-group:last-child{border-right:none;}
+.gov-group-label{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--c-gov);margin-bottom:8px;}
+.gov-items{display:flex;flex-wrap:wrap;gap:5px;}
+.gov-item{font-size:11px;font-weight:600;color:#7a1a22;background:rgba(176,48,58,.06);border:1px solid rgba(176,48,58,.15);border-radius:4px;padding:4px 9px;cursor:pointer;transition:background .15s;white-space:nowrap;}
+.gov-item:hover{background:rgba(176,48,58,.12);}
+@media(max-width:800px){
+  .gov-bar-body{grid-template-columns:1fr 1fr;}
+  .gov-group{border-right:none;border-bottom:1px solid rgba(176,48,58,.15);}
+  .gov-group:nth-child(2n){border-left:1px solid rgba(176,48,58,.15);}
+  .gov-group:last-child,.gov-group:nth-last-child(2):nth-child(odd){border-bottom:none;}
+}
+
+/* DIAGRAM SCROLL */
+.diagram-scroll{width:100%;padding:0 16px;box-sizing:border-box;}
+svg.network{display:block;max-width:100%;width:auto;height:158vh;margin:0 auto;}
+
+/* node hover */
+.n:hover > rect, .n:hover > polygon{filter:brightness(0.93);}
+.n{cursor:pointer;}
+
+/* OBSERVABILITY PANEL */
+.obs-wrap{max-width:1280px;margin:20px auto 0;padding:0 32px;}
+.obs-panel{border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:var(--off);}
+.obs-header{padding:12px 18px;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:10px;}
+.obs-header-title{font-size:13px;font-weight:800;color:var(--ink);}
+.obs-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;background:var(--c-agent);color:white;letter-spacing:.04em;}
+/* explainer strip */
+.obs-explainer{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:0;border-bottom:1px solid var(--rule);}
+.obs-explainer-col{padding:18px 20px;border-right:1px solid var(--rule);}
+.obs-explainer-col:last-child{border-right:none;}
+.obs-explainer-head{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--c-agent);margin-bottom:8px;}
+.obs-explainer-text{font-size:12px;color:var(--muted);line-height:1.7;}
+.obs-benefit-list{list-style:none;display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--muted);line-height:1.6;}
+.obs-benefit-list li{padding-left:10px;position:relative;}
+.obs-benefit-list li::before{content:'·';position:absolute;left:0;color:var(--c-agent);}
+.obs-benefit-list strong{color:var(--ink);font-weight:700;}
+.obs-log-label{padding:8px 18px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--white);border-bottom:1px solid var(--rule);}
+.obs-log{padding:0 18px;display:flex;flex-direction:column;gap:0;max-height:260px;overflow-y:auto;background:white;}
+.obs-entry{display:grid;grid-template-columns:76px 148px 1fr auto;gap:12px;align-items:baseline;font-size:12px;padding:8px 0;border-bottom:1px solid var(--rule);}
+.obs-entry:last-child{border-bottom:none;}
+.obs-time{color:var(--muted);font-variant-numeric:tabular-nums;font-size:11px;font-family:monospace;}
+.obs-agent{font-weight:700;color:var(--c-agent);}
+.obs-msg{color:var(--ink);}
+.obs-status{font-size:10px;font-weight:700;padding:2px 7px;border-radius:8px;white-space:nowrap;}
+.obs-status.ok{background:rgba(26,92,58,0.1);color:var(--c-output);}
+.obs-status.hitl{background:rgba(124,92,191,0.1);color:var(--c-hitl);}
+.obs-status.warn{background:rgba(200,102,42,0.1);color:var(--c-agent);}
+@media(max-width:800px){
+  .obs-explainer{grid-template-columns:1fr;}
+  .obs-explainer-col{border-right:none;border-bottom:1px solid var(--rule);}
+  .obs-explainer-col:last-child{border-bottom:none;}
+  .obs-entry{grid-template-columns:60px 1fr;gap:6px;}
+  .obs-agent{display:none;}
+}
+
+/* DETAIL PANEL */
+.detail-wrap{max-width:1280px;margin:20px auto 0;padding:0 32px;}
+.detail-panel{display:none;background:var(--off);border-radius:10px;border:1px solid var(--rule);padding:24px 28px;}
+.detail-panel.open{display:block;animation:fadeUp .18s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.detail-eyebrow{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px;}
+.detail-title{font-size:20px;font-weight:800;letter-spacing:-.02em;margin-bottom:10px;}
+.detail-body{font-size:13px;color:var(--muted);line-height:1.75;max-width:760px;}
+.detail-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;}
+.chip{font-size:11px;font-weight:600;padding:3px 9px;border-radius:4px;border:1px solid var(--rule);color:var(--muted);}
+.detail-close{float:right;background:none;border:none;font-size:18px;cursor:pointer;color:var(--muted);margin-top:-2px;}
+.detail-close:hover{color:var(--ink);}
+
+/* ABOUT STRIP */
+.about-strip{margin-top:64px;background:var(--off);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:48px 32px;}
+.about-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap;}
+.about-strip h2{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.2;max-width:480px;}
+.about-strip h2 em{font-style:normal;color:var(--accent);}
+.about-strip p{font-size:14px;color:var(--muted);max-width:460px;margin-top:10px;line-height:1.7;}
+.about-links{display:flex;gap:10px;flex-shrink:0;margin-top:4px;}
+.about-btn{font-size:13px;font-weight:700;padding:10px 20px;border-radius:6px;text-decoration:none;transition:all .15s;}
+.about-btn.primary{background:var(--accent);color:white;}
+.about-btn.primary:hover{background:var(--accent-dark);}
+.about-btn.ghost{background:white;color:var(--ink);border:2px solid var(--rule);}
+.about-btn.ghost:hover{border-color:var(--ink);}
+
+footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);border-top:1px solid var(--rule);}
+
+
+@media(max-width:800px){
+  nav{padding:12px 20px;}
+  .bc,.page-head,.legend-bar,.detail-wrap,.about-strip{padding-left:20px;padding-right:20px;}
+  .obs-wrap,.gov-bar{padding:0 20px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nn" href="../../index.html">Rob Dull</a>
+  <div class="nl">
+    <a href="../../index.html#tools">Work</a>
+    <a href="../../index.html#about">About</a>
+    <a href="mailto:rob.dull@gmail.com">Contact</a>
+  </div>
+</nav>
+
+<div class="bc">
+  <div class="bc-inner">
+    <a href="../../index.html">Home</a>
+    <span class="bc-sep">/</span>
+    <a href="../tools-index.html">Tools</a>
+    <span class="bc-sep">/</span>
+    <a href="AI-prodops-overview.html">AI ProdOps</a>
+    <span class="bc-sep">/</span>
+    <span>Network diagram</span>
+  </div>
+</div>
+
+<div class="page-head">
+  <div class="eyebrow">Product Operations · System Architecture</div>
+  <h1>The tools as a <em>network</em>,<br>not a collection.</h1>
+  <p>Data sources, MCP integrations, AI tools, agents, HITL gates, and delivery outputs — connected into a single PM workflow system. Trust &amp; Governance is a cross-cutting concern that applies across every layer. Click any node to learn more.</p>
+</div>
+
+<!-- WORKFLOW REFERENCE STRIP -->
+<div class="workflow-strip">
+  <div class="workflow-inner">
+    <div class="workflow-label">How this maps to the AI-augmented → AI-native workflow</div>
+    <div class="workflow-steps">
+      <a href="AI-prodops-overview.html#evolution" class="wf-step">
+        <span class="wf-num">01</span>
+        <span class="wf-name">Discover</span>
+        <span class="wf-tools">Persona · Journey map</span>
+      </a>
+      <div class="wf-arrow">→</div>
+      <a href="AI-prodops-overview.html#evolution" class="wf-step">
+        <span class="wf-num">02</span>
+        <span class="wf-name">Align</span>
+        <span class="wf-tools">Hoshin + V2MOM</span>
+      </a>
+      <div class="wf-arrow">→</div>
+      <a href="AI-prodops-overview.html#evolution" class="wf-step">
+        <span class="wf-num">03</span>
+        <span class="wf-name">Justify</span>
+        <span class="wf-tools">Business case gen.</span>
+      </a>
+      <div class="wf-arrow">→</div>
+      <a href="AI-prodops-overview.html#evolution" class="wf-step wf-native">
+        <span class="wf-num">04</span>
+        <span class="wf-name">Intake</span>
+        <span class="wf-tools">Feature pipeline</span>
+      </a>
+      <div class="wf-arrow">→</div>
+      <a href="AI-prodops-overview.html#evolution" class="wf-step">
+        <span class="wf-num">05</span>
+        <span class="wf-name">Measure</span>
+        <span class="wf-tools">Ops radar</span>
+      </a>
+      <div class="wf-arrow wf-arrow-agents">⟳ agents &amp; MCP</div>
+      <a href="AI-prodops-overview.html" class="wf-cta">Full workflow overview ↗</a>
+    </div>
+  </div>
+</div>
+
+<div class="legend-bar">
+  <div class="legend-inner">
+    <span class="legend-label">Show / hide</span>
+    <button class="leg-btn active" data-type="data"><span class="leg-dot"></span>Data sources</button>
+    <button class="leg-btn active" data-type="mcp"><span class="leg-dot"></span>MCP layer</button>
+    <button class="leg-btn active" data-type="tool"><span class="leg-dot"></span>Tools</button>
+    <button class="leg-btn active" data-type="agent"><span class="leg-dot"></span>⟳ Agents</button>
+    <button class="leg-btn active" data-type="hitl"><span class="leg-dot"></span>✋ HITL gates</button>
+    <button class="leg-btn active" data-type="output"><span class="leg-dot"></span>Outputs</button>
+
+    <span class="legend-hint">Click node to expand · Filter by type above</span>
+
+  </div>
+</div>
+
+<!-- MAIN: diagram + governance sidebar -->
+<div class="outer-wrap">
+
+  <!-- SVG DIAGRAM -->
+  <div class="diagram-scroll">
+  <svg class="network" id="network" viewBox="0 6 498 419" width="100%"
+       role="img" aria-label="Product operations tool network — five columns from data sources to outputs">
+  <defs>
+    <!-- Arrow markers — one per color, thick -->
+    <marker id="a-def" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+      <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="#b4b2a9" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="a-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+      <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="#2a6b6b" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="a-navy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+      <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="#1a3a5c" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="a-gold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+      <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="#c8921a" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="a-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+      <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="#c8662a" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="a-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+      <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="#7c5cbf" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+      <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="#1a5c3a" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="a-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+      <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="#b0303a" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- ═══ COLUMN HEADERS ═══ -->
+  <text x="45"   y="11.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="700" letter-spacing=".13em" fill="#2a6b6b">DATA SOURCES</text>
+  <text x="137"  y="11.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="700" letter-spacing=".13em" fill="#c8921a">MCP LAYER</text>
+  <text x="257"  y="11.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="700" letter-spacing=".13em" fill="#1a3a5c">TOOLS</text>
+  <text x="364"  y="11.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="700" letter-spacing=".13em" fill="#c8662a">AGENTS &amp; HITL</text>
+  <text x="458"  y="11.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="700" letter-spacing=".13em" fill="#1a5c3a">OUTPUTS</text>
+
+  <!-- Column zone fills -->
+  <rect x="17"  y="13.0" width="56" height="402" rx="4" fill="#f7f7f7" fill-opacity="1" stroke="#d4d4d4" stroke-width=".4"/>
+  <rect x="106" y="13.0" width="80" height="402" rx="4" fill="#f7f7f7" fill-opacity="1" stroke="#d4d4d4" stroke-width=".4"/>
+  <rect x="219" y="13.0" width="76" height="402" rx="4" fill="#f7f7f7" fill-opacity="1" stroke="#d4d4d4" stroke-width=".4"/>
+  <rect x="328" y="13.0" width="72" height="402" rx="4" fill="#f7f7f7" fill-opacity="1" stroke="#d4d4d4" stroke-width=".4"/>
+  <rect x="433" y="13.0" width="64" height="402" rx="4" fill="#f7f7f7" fill-opacity="1" stroke="#d4d4d4" stroke-width=".4"/>
+
+  <!-- ═══ EDGES (drawn first so nodes sit on top) ═══ -->
+
+  <!-- data → MCP: thick, solid teal -->
+  <line x1="69" y1="22"  x2="110" y2="38.7" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="44.6" x2="110" y2="38.7" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="67.1" x2="110" y2="38.7" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="89.7" x2="110" y2="38.7" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="112.2" x2="110" y2="76.9" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="134.8" x2="110" y2="76.9" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="157.4" x2="110" y2="115.2" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="179.9" x2="110" y2="153.4" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="202.5" x2="110" y2="153.4" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="225" x2="110" y2="153.4" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="247.6" x2="110" y2="191.6" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="270.2" x2="110" y2="191.6" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+
+  <!-- MCP → tools: thick gold -->
+  <line x1="182" y1="38.7" x2="223" y2="32.9" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
+  <line x1="182" y1="38.7" x2="223" y2="72.4" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
+  <line x1="182" y1="38.7" x2="223" y2="32.9" stroke="#c8921a" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".5"/>
+  <line x1="182" y1="76.9" x2="223" y2="112" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
+  <line x1="182" y1="76.9" x2="223" y2="151.5" stroke="#c8921a" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".5"/>
+  <line x1="182" y1="115.2" x2="223" y2="151.5" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
+  <line x1="182" y1="153.4" x2="223" y2="191" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
+  <line x1="182" y1="191.6" x2="223" y2="230.5" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
+
+  <!-- Tools → agents/HITL: thick navy -->
+  <line x1="293" y1="32.9" x2="331" y2="32.1" stroke="#1a3a5c" stroke-width="1.0" marker-end="url(#a-navy)"/>
+  <line x1="293" y1="72.4" x2="331" y2="32.1" stroke="#1a3a5c" stroke-width="1.0" marker-end="url(#a-navy)"/>
+  <line x1="293" y1="32.9" x2="331" y2="64.6" stroke="#1a3a5c" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-navy)" opacity=".6"/>
+  <line x1="293" y1="72.4" x2="331" y2="64.6" stroke="#1a3a5c" stroke-width="1.0" marker-end="url(#a-navy)"/>
+  <line x1="293" y1="112" x2="331" y2="97.1" stroke="#1a3a5c" stroke-width="1.0" marker-end="url(#a-navy)"/>
+  <line x1="293" y1="112" x2="331" y2="129.6" stroke="#1a3a5c" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-navy)" opacity=".6"/>
+  <line x1="293" y1="151.5" x2="331" y2="162" stroke="#1a3a5c" stroke-width="1.0" marker-end="url(#a-navy)"/>
+  <line x1="293" y1="151.5" x2="331" y2="194.5" stroke="#1a3a5c" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-navy)" opacity=".6"/>
+  <line x1="293" y1="191" x2="331" y2="129.6" stroke="#1a3a5c" stroke-width="1.0" marker-end="url(#a-navy)"/>
+  <line x1="293" y1="230.5" x2="331" y2="129.6" stroke="#1a3a5c" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-navy)" opacity=".6"/>
+
+  <!-- Agents/HITL → outputs: thick orange/purple -->
+  <line x1="398" y1="32.1" x2="436" y2="34.4" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <line x1="398" y1="64.6" x2="436" y2="34.4" stroke="#7c5cbf" stroke-width="1.0" marker-end="url(#a-purple)"/>
+  <line x1="398" y1="97.1" x2="436" y2="62.8" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <line x1="398" y1="129.6" x2="436" y2="62.8" stroke="#7c5cbf" stroke-width="1.0" marker-end="url(#a-purple)"/>
+  <line x1="398" y1="162" x2="436" y2="91.2" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <line x1="398" y1="194.5" x2="436" y2="91.2" stroke="#7c5cbf" stroke-width="1.0" marker-end="url(#a-purple)"/>
+  <line x1="398" y1="129.6" x2="436" y2="119.6" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <line x1="398" y1="162" x2="436" y2="148" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <line x1="398" y1="162" x2="436" y2="176.4" stroke="#c8662a" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-orange)" opacity=".5"/>
+
+  <!-- Feedback loop arc -->
+  <g id="feedback-loops" class="feedback-group">
+  <!-- Backlog tool edges: intake pipeline → companion tools (feedback: right-to-left) -->
+  <line x1="291" y1="151.5" x2="223" y2="270" stroke="#1a3a5c" stroke-width="0.6" stroke-dasharray="5 4" marker-end="url(#a-navy)" opacity=".5" class="fb-arrow"/>
+  <line x1="291" y1="151.5" x2="223" y2="309.6" stroke="#1a3a5c" stroke-width="0.6" stroke-dasharray="5 4" marker-end="url(#a-navy)" opacity=".5" class="fb-arrow"/>
+  </g><!-- /feedback-loops early -->
+
+  <!-- Intake MCP → Jira write-back tool -->
+  <line x1="182" y1="115.2" x2="223" y2="349.1" stroke="#c8921a" stroke-width="0.8" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".6"/>
+  <!-- Metrics MCP → sprint planning tool -->
+  <line x1="182" y1="191.6" x2="223" y2="388.6" stroke="#c8921a" stroke-width="0.6" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".5"/>
+
+  <!-- new data → new MCP edges -->
+  <line x1="69" y1="292.7" x2="110" y2="268.1" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="315.3" x2="110" y2="306.4" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="337.8" x2="110" y2="306.4" stroke="#2a6b6b" stroke-width="0.9" stroke-dasharray="5 4" marker-end="url(#a-teal)" opacity=".4"/>
+  <line x1="69" y1="383" x2="110" y2="344.6" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+  <line x1="69" y1="405.5" x2="110" y2="382.8" stroke="#2a6b6b" stroke-width="0.9" marker-end="url(#a-teal)" opacity=".55"/>
+
+  <!-- new MCP → new agents edges -->
+  <line x1="182" y1="268.1" x2="332" y2="259.5" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
+  <line x1="182" y1="306.4" x2="332" y2="292" stroke="#c8921a" stroke-width="1.0" marker-end="url(#a-gold)"/>
+  <line x1="182" y1="344.6" x2="332" y2="324.4" stroke="#c8921a" stroke-width="1.0" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".6"/>
+  <line x1="182" y1="382.8" x2="332" y2="356.9" stroke="#c8921a" stroke-width="1.0" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".6"/>
+
+  <!-- new agents → new outputs edges -->
+  <line x1="397" y1="259.5" x2="437" y2="204.8" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <line x1="397" y1="292" x2="437" y2="233.2" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <line x1="397" y1="324.4" x2="437" y2="290" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <line x1="397" y1="356.9" x2="437" y2="318.4" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <line x1="397" y1="292" x2="437" y2="233.2" stroke="#b0303a" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-red)" opacity=".6"/>
+
+  <!-- ═══ DATA SOURCE NODES ═══ -->
+  <!-- each: rect fill teal-tint, stroke teal, rx=7, h=46, w=134 centered on x=90 -->
+
+  <g class="n" data-type="data" onclick="showDetail('interviews')">
+    <rect x="21" y="16" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="20.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Customer interviews</text>
+    <text x="45"  y="26" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Qual research · JTBD</text>
+  </g>
+
+  <g class="n" data-type="data" onclick="showDetail('analytics')">
+    <rect x="21" y="38.6" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="43.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Usage analytics</text>
+    <text x="45"  y="48.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Telemetry · funnels</text>
+  </g>
+
+  <g class="n" data-type="data" onclick="showDetail('support')">
+    <rect x="21" y="61.1" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="65.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Support tickets</text>
+    <text x="45"  y="71.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Zendesk · Intercom</text>
+  </g>
+
+  <g class="n" data-type="data" onclick="showDetail('sales')">
+    <rect x="21" y="83.7" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="88.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Sales transcripts</text>
+    <text x="45"  y="93.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Gong · call notes</text>
+  </g>
+
+  <g class="n" data-type="data" onclick="showDetail('market')">
+    <rect x="21" y="106.2" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="110.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Market research</text>
+    <text x="45"  y="116.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Competitive · trends</text>
+  </g>
+
+  <g class="n" data-type="data" onclick="showDetail('stakeholder')">
+    <rect x="21" y="128.8" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="133.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Stakeholder input</text>
+    <text x="45"  y="138.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Priorities · constraints</text>
+  </g>
+
+  <g class="n" data-type="data" onclick="showDetail('backlog')">
+    <rect x="21" y="151.4" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="155.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Product backlog</text>
+    <text x="45"  y="161.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Existing requests</text>
+  </g>
+
+  <g class="n" data-type="data" onclick="showDetail('orgstrategy')">
+    <rect x="21" y="173.9" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="178.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Org strategy / OKRs</text>
+    <text x="45"  y="183.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Vision · annual goals</text>
+  </g>
+
+  <g class="n" data-type="data" onclick="showDetail('financial')">
+    <rect x="21" y="196.5" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="201" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Financial targets</text>
+    <text x="45"  y="206.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">ROI · budget</text>
+  </g>
+
+  <g class="n" data-type="data" onclick="showDetail('deliverymetrics')">
+    <rect x="21" y="219" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="223.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Delivery metrics</text>
+    <text x="45"  y="229" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Velocity · DORA</text>
+  </g>
+
+  <g class="n" data-type="data" onclick="showDetail('retros')">
+    <rect x="21" y="241.6" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="246.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Team retros</text>
+    <text x="45"  y="251.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Process health</text>
+  </g>
+
+  <g class="n" data-type="data" onclick="showDetail('nps')">
+    <rect x="21" y="264.2" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="268.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">NPS / CSAT</text>
+    <text x="45"  y="274.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Satisfaction signals</text>
+  </g>
+
+  <g class="n" data-type="data" onclick="showDetail('winloss')">
+    <rect x="21" y="286.7" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="291.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Win / loss data</text>
+    <text x="45"  y="296.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">CRM · deal outcomes</text>
+  </g>
+
+  <g class="n" data-type="data" onclick="showDetail('competitive')">
+    <rect x="21" y="309.3" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="313.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Competitive signals</text>
+    <text x="45"  y="319.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Crayon · G2 · job posts</text>
+  </g>
+
+  <g class="n" data-type="data" onclick="showDetail('regulatory')">
+    <rect x="21" y="331.8" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="336.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Regulatory signals</text>
+    <text x="45"  y="341.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Compliance · policy updates</text>
+  </g>
+
+  <g class="n" data-type="data" onclick="showDetail('teamsurvey')">
+    <rect x="21" y="354.4" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="358.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Team health surveys</text>
+    <text x="45"  y="364.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Engagement · capacity</text>
+  </g>
+
+  <g class="n" data-type="data" onclick="showDetail('comms')">
+    <rect x="21" y="377" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="381.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">Internal comms</text>
+    <text x="45"  y="387" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">Slack · Teams channels</text>
+  </g>
+
+  <g class="n" data-type="data" onclick="showDetail('itsm')">
+    <rect x="21" y="399.5" width="48" height="12" rx="3" fill="#dff0ec" stroke="#2a6b6b" stroke-width="1"/>
+    <text x="45"  y="404" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#085041">ITSM / incidents</text>
+    <text x="45"  y="409.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#2a6b6b">ServiceNow · PagerDuty</text>
+  </g>
+
+  <!-- ═══ MCP NODES ═══ -->
+  <!-- x=262 center, w=164 -->
+
+  <g class="n" data-type="mcp" onclick="showDetail('mcp-research')">
+    <rect x="110" y="29.7" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
+    <text x="146"  y="34.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Research ingest MCP</text>
+ <text x="146"  y="39.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">a">Interviews · surveys → structured</text>
+    <rect x="110" y="41.7" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <text x="146"  y="45.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
+  </g>
+
+  <g class="n" data-type="mcp" onclick="showDetail('mcp-signal')">
+    <rect x="110" y="67.9" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
+    <text x="146"  y="72.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Signal aggregator MCP</text>
+    <text x="146"  y="77.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Zendesk · Gong · analytics</text>
+    <rect x="110" y="79.9" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <text x="146"  y="83.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
+  </g>
+
+  <g class="n" data-type="mcp" onclick="showDetail('mcp-intake')">
+    <rect x="110" y="106.2" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
+    <text x="146"  y="110.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Intake source MCP</text>
+    <text x="146"  y="116.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Jira · Linear · backlog sync</text>
+    <rect x="110" y="118.2" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <text x="146"  y="121.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
+  </g>
+
+  <g class="n" data-type="mcp" onclick="showDetail('mcp-strategy')">
+    <rect x="110" y="144.4" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
+    <text x="146"  y="148.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Strategy context MCP</text>
+    <text x="146"  y="154.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">OKRs · planning docs · wiki</text>
+    <rect x="110" y="156.4" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <text x="146"  y="159.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
+  </g>
+
+  <g class="n" data-type="mcp" onclick="showDetail('mcp-metrics')">
+    <rect x="110" y="182.6" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
+    <text x="146"  y="187.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Metrics MCP</text>
+    <text x="146"  y="192.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">DataDog · Mixpanel · GA4</text>
+    <rect x="110" y="194.6" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <text x="146"  y="198" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
+  </g>
+
+  <!-- Audit / governance MCP -->
+  <g class="n" data-type="governance" onclick="showDetail('mcp-audit')">
+    <rect x="110" y="220.9" width="72" height="18" rx="3" fill="#fceaeb" stroke="#b0303a" stroke-width="1"/>
+    <text x="146"  y="225.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#7a1a22">Audit log MCP</text>
+    <text x="146"  y="230.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#b0303a">All agent decisions logged</text>
+    <rect x="110" y="232.9" width="72" height="6" rx="0 0 3 3" fill="#b0303a" fill-opacity=".12"/>
+    <text x="146"  y="236.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#7a1a22" letter-spacing=".07em">GOVERNANCE · MCP</text>
+  </g>
+
+  <g class="n" data-type="mcp" onclick="showDetail('mcp-crm')">
+    <rect x="110" y="259.1" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
+    <text x="146"  y="263.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">CRM / sales MCP</text>
+    <text x="146"  y="269.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Salesforce · HubSpot · deals</text>
+    <rect x="110" y="271.1" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <text x="146"  y="274.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
+  </g>
+
+  <g class="n" data-type="mcp" onclick="showDetail('mcp-competitive')">
+    <rect x="110" y="297.4" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
+    <text x="146"  y="301.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Competitive intel MCP</text>
+    <text x="146"  y="307.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Crayon · Klue · web scrape</text>
+    <rect x="110" y="309.4" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <text x="146"  y="312.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
+  </g>
+
+  <g class="n" data-type="mcp" onclick="showDetail('mcp-comms')">
+    <rect x="110" y="335.6" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
+    <text x="146"  y="340.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Comms MCP</text>
+  <text x="146"  y="345.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Slack · Teams · signal mining</text>
+    <rect x="110" y="347.6" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <text x="146"  y="351" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
+  </g>
+
+  <g class="n" data-type="mcp" onclick="showDetail('mcp-itsm')">
+    <rect x="110" y="373.8" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
+    <text x="146"  y="378.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">ITSM MCP</text>
+    <text x="146"  y="383.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">ServiceNow · PagerDuty</text>
+    <rect x="110" y="385.8" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <text x="146"  y="389.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
+  </g>
+
+  <!-- ═══ TOOL NODES ═══ -->
+  <!-- x=470 center, w=204, h=60 -->
+
+  <g class="n" data-type="tool" onclick="showDetail('tool-persona')">
+    <rect x="223" y="20.9" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
+    <text x="226"  y="25.4" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">01 · DISCOVER</text>
+    <text x="257"  y="30.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Persona generator</text>
+  <text x="257"  y="36.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">JTBD + segment synthesis</text>
+    <rect x="223" y="38.9" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <text x="257"  y="42.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API</text>
+  </g>
+
+  <g class="n" data-type="tool" onclick="showDetail('tool-journey')">
+    <rect x="223" y="60.4" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
+    <text x="226"  y="64.9" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">01 · DISCOVER</text>
+    <text x="257"  y="70.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Journey map builder</text>
+    <text x="257"  y="75.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Touchpoints · pain · moments</text>
+    <rect x="223" y="78.4" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <text x="257"  y="81.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLIENT-SIDE</text>
+  </g>
+
+  <g class="n" data-type="tool" onclick="showDetail('tool-bizcase')">
+    <rect x="223" y="100" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
+    <text x="226"  y="104.5" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">03 · JUSTIFY</text>
+    <text x="257"  y="110" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Business case gen.</text>
+  <text x="257"  y="115.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">ROI · risk · inaction cost</text>
+    <rect x="223" y="118" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <text x="257"  y="121.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API</text>
+  </g>
+
+  <g class="n" data-type="tool" onclick="showDetail('tool-intake')">
+    <rect x="223" y="139.5" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
+    <text x="226"  y="144" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">04 · INTAKE · AI-NATIVE</text>
+    <text x="257"  y="149.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Feature intake pipeline</text>
+  <text x="257"  y="155" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Triage · JTBD · assumptions · RICE</text>
+    <rect x="223" y="157.5" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <text x="257"  y="160.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · AGENTIC · CLAUDE API</text>
+  </g>
+
+  <g class="n" data-type="tool" onclick="showDetail('tool-hoshin')">
+    <rect x="223" y="179" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
+    <text x="226"  y="183.5" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">02 · ALIGN</text>
+    <text x="257"  y="189" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Hoshin Kanri + V2MOM</text>
+  <text x="257"  y="194.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Strategy · values · measures</text>
+    <rect x="223" y="197" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <text x="257"  y="200.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLIENT-SIDE</text>
+  </g>
+
+  <g class="n" data-type="tool" onclick="showDetail('tool-radar')">
+    <rect x="223" y="218.5" width="68" height="24" rx="3" fill="#e4eaf3" stroke="#1a3a5c" stroke-width="1"/>
+    <text x="226"  y="223" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">05 · MEASURE</text>
+    <text x="257"  y="228.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Product ops radar</text>
+  <text x="257"  y="234" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Health · gaps · dim. scoring</text>
+    <rect x="223" y="236.5" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <text x="257"  y="239.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLIENT-SIDE</text>
+  </g>
+
+  <!-- ═══ BACKLOG + STORY TOOLS (companion tools) ═══ -->
+  <!-- Section label -->
+  <text x="221"  y="572" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" letter-spacing=".13em" fill="#1a3a5c" opacity=".5">COMPANION TOOLS</text>
+
+  <g class="n" data-type="tool" onclick="showDetail('tool-backlog')">
+    <rect x="223" y="258" width="68" height="24" rx="3" fill="#edf0f7" stroke="#1a3a5c" stroke-width="1" stroke-dasharray="5 3"/>
+    <text x="224"  y="262.5" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">04 · INTAKE → BACKLOG</text>
+    <text x="256"  y="268" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Backlog generator</text>
+  <text x="256"  y="273.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Brief → epics + user stories</text>
+    <rect x="223" y="276" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".08"/>
+    <text x="256"  y="279.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API · RECOMMENDED</text>
+  </g>
+
+  <g class="n" data-type="tool" onclick="showDetail('tool-stories')">
+    <rect x="223" y="297.6" width="68" height="24" rx="3" fill="#edf0f7" stroke="#1a3a5c" stroke-width="1" stroke-dasharray="5 3"/>
+    <text x="224"  y="302.1" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">04 · INTAKE → SPEC</text>
+    <text x="256"  y="307.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Story writer + AC gen.</text>
+    <text x="256"  y="313.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Acceptance criteria · edge cases</text>
+    <rect x="223" y="315.6" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".08"/>
+    <text x="256"  y="319" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API · RECOMMENDED</text>
+  </g>
+
+  <g class="n" data-type="tool" onclick="showDetail('tool-jira-sync')">
+    <rect x="223" y="337.1" width="68" height="24" rx="3" fill="#edf0f7" stroke="#c8921a" stroke-width="1" stroke-dasharray="5 3"/>
+    <text x="224"  y="341.6" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">04 · INTAKE → JIRA</text>
+  <text x="256"  y="347.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Jira write-back</text>
+  <text x="256"  y="352.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#7a5700">Intake MCP → Jira API · approved only</text>
+    <rect x="223" y="355.1" width="68" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".1"/>
+    <text x="256"  y="358.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#7a5700" letter-spacing=".07em">MCP WRITE · HITL-GATED</text>
+  </g>
+
+  <g class="n" data-type="tool" onclick="showDetail('tool-sprint')">
+    <rect x="223" y="376.6" width="68" height="24" rx="3" fill="#edf0f7" stroke="#1a3a5c" stroke-width="1" stroke-dasharray="5 3"/>
+    <text x="224"  y="381.1" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".08em">04 → 05 · PLANNING</text>
+    <text x="256"  y="386.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="800" fill="#0a1e30">Sprint planning assist.</text>
+  <text x="256"  y="392.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a3a5c">Velocity + backlog → sprint draft</text>
+    <rect x="223" y="394.6" width="68" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".08"/>
+    <text x="256"  y="398" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#1a3a5c" letter-spacing=".07em">TOOL · CLAUDE API · RECOMMENDED</text>
+  </g>
+
+  <!-- ═══ AGENT + HITL NODES ═══ -->
+  <!-- x=690 center, w=192 -->
+
+  <g class="n" data-type="agent" onclick="showDetail('agent-signal')">
+    <rect x="332" y="23.1" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
+    <text x="364"  y="27.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Signal synthesis</text>
+  <text x="364"  y="33.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Clusters themes · weekly delta</text>
+    <rect x="332" y="35.1" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <text x="364"  y="38.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · SCHEDULED</text>
+  </g>
+
+  <g class="n" data-type="hitl" onclick="showDetail('hitl-strategic')">
+    <rect x="332" y="55.6" width="64" height="18" rx="3" fill="#eeeafb" stroke="#7c5cbf" stroke-width="1"/>
+    <text x="364"  y="60.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#2e1060">✋ Strategic review</text>
+    <text x="364"  y="65.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#7c5cbf">PM ratifies opportunity map</text>
+    <rect x="332" y="67.6" width="64" height="6" rx="0 0 3 3" fill="#7c5cbf" fill-opacity=".12"/>
+    <text x="364"  y="71" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#2e1060" letter-spacing=".07em">HUMAN IN THE LOOP</text>
+  </g>
+
+  <g class="n" data-type="agent" onclick="showDetail('agent-merge')">
+    <rect x="332" y="88.1" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
+    <text x="364"  y="92.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Case enrichment</text>
+    <text x="364"  y="98.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Merges signal + financials</text>
+    <rect x="332" y="100.1" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <text x="364"  y="103.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT</text>
+  </g>
+
+  <g class="n" data-type="hitl" onclick="showDetail('hitl-case')">
+    <rect x="332" y="120.6" width="64" height="18" rx="3" fill="#eeeafb" stroke="#7c5cbf" stroke-width="1"/>
+    <text x="364"  y="125.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#2e1060">✋ Case approval</text>
+    <text x="364"  y="130.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#7c5cbf">Sponsor sign-off required</text>
+    <rect x="332" y="132.6" width="64" height="6" rx="0 0 3 3" fill="#7c5cbf" fill-opacity=".12"/>
+    <text x="364"  y="136" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#2e1060" letter-spacing=".07em">HUMAN IN THE LOOP</text>
+  </g>
+
+  <g class="n" data-type="agent" onclick="showDetail('agent-intake')">
+    <rect x="332" y="153" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
+    <text x="364"  y="157.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Intake chain</text>
+  <text x="364"  y="163" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">4-step agentic pipeline</text>
+    <rect x="332" y="165" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <text x="364"  y="168.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · SEQUENTIAL</text>
+  </g>
+
+  <g class="n" data-type="hitl" onclick="showDetail('hitl-intake')">
+    <rect x="332" y="185.5" width="64" height="18" rx="3" fill="#eeeafb" stroke="#7c5cbf" stroke-width="1"/>
+    <text x="364"  y="190" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#2e1060">✋ Intake review</text>
+    <text x="364"  y="195.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#7c5cbf">PM + stakeholders sign off</text>
+    <rect x="332" y="197.5" width="64" height="6" rx="0 0 3 3" fill="#7c5cbf" fill-opacity=".12"/>
+    <text x="364"  y="200.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#2e1060" letter-spacing=".07em">HUMAN IN THE LOOP</text>
+  </g>
+
+  <!-- Policy enforcement node (governance) — sits between agent layer and outputs -->
+  <g class="n" data-type="governance" onclick="showDetail('gov-policy')">
+    <rect x="332" y="218" width="64" height="18" rx="3" fill="#fceaeb" stroke="#b0303a" stroke-width="1"/>
+    <text x="364"  y="222.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#7a1a22">Policy enforcement</text>
+  <text x="364"  y="228" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#b0303a">Access · credentials · scope</text>
+    <rect x="332" y="230" width="64" height="6" rx="0 0 3 3" fill="#b0303a" fill-opacity=".12"/>
+    <text x="364"  y="233.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#7a1a22" letter-spacing=".07em">GOVERNANCE</text>
+  </g>
+  <!-- policy feeds outputs -->
+  <line x1="397" y1="227" x2="436" y2="176.4" stroke="#b0303a" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#a-red)" opacity=".6"/>
+
+  <!-- ═══ OUTPUT NODES ═══ -->
+
+  <g class="n" data-type="output" onclick="showDetail('out-opmap')">
+    <rect x="437" y="25.4" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="29.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Opportunity map</text>
+    <text x="465"  y="35.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Ranked pain clusters</text>
+    <rect x="437" y="37.4" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="40.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+  </g>
+
+  <g class="n" data-type="output" onclick="showDetail('out-bizcase')">
+    <rect x="437" y="53.8" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="58.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Approved biz case</text>
+    <text x="465"  y="63.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Funded · signed</text>
+    <rect x="437" y="65.8" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="69.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+  </g>
+
+  <g class="n" data-type="output" onclick="showDetail('out-brief')">
+    <rect x="437" y="82.2" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="86.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Feature brief</text>
+    <text x="465"  y="92.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">RICE · assumptions</text>
+    <rect x="437" y="94.2" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="97.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+  </g>
+
+  <g class="n" data-type="hitl" onclick="showDetail('out-gates')">
+    <rect x="437" y="110.6" width="56" height="18" rx="3" fill="#eeeafb" stroke="#7c5cbf" stroke-width="1"/>
+    <text x="465"  y="115.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#2e1060">✋ Review gates</text>
+    <text x="465"  y="120.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#7c5cbf">Arch · sec · business</text>
+    <rect x="437" y="122.6" width="56" height="6" rx="0 0 3 3" fill="#7c5cbf" fill-opacity=".12"/>
+    <text x="465"  y="126" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#2e1060" letter-spacing=".07em">3× HITL PARALLEL</text>
+  </g>
+
+  <g class="n" data-type="output" onclick="showDetail('out-hoshin')">
+    <rect x="437" y="139" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="143.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Strategy cascade</text>
+  <text x="465"  y="149" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Hoshin · V2MOM</text>
+    <rect x="437" y="151" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="154.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+  </g>
+
+  <g class="n" data-type="output" onclick="showDetail('out-radar')">
+    <rect x="437" y="167.4" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="171.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Ops health report</text>
+    <text x="465"  y="177.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Radar · gaps · recs</text>
+    <rect x="437" y="179.4" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="182.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+  </g>
+
+  <g class="n" data-type="agent" onclick="showDetail('agent-winloss')">
+    <rect x="332" y="250.5" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
+    <text x="364"  y="255" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Win/loss synthesis</text>
+    <text x="364"  y="260.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Patterns · theme clustering</text>
+    <rect x="332" y="262.5" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <text x="364"  y="265.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · TRIGGERED</text>
+  </g>
+
+  <g class="n" data-type="agent" onclick="showDetail('agent-competitive')">
+    <rect x="332" y="283" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
+    <text x="364"  y="287.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Competitive monitor</text>
+  <text x="364"  y="293" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Weekly delta · gap alerts</text>
+    <rect x="332" y="295" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <text x="364"  y="298.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · SCHEDULED</text>
+  </g>
+
+  <g class="n" data-type="agent" onclick="showDetail('agent-retro')">
+    <rect x="332" y="315.4" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
+    <text x="364"  y="319.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Retro summarizer</text>
+    <text x="364"  y="325.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Sprint health · action items</text>
+    <rect x="332" y="327.4" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <text x="364"  y="330.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · ON-DEMAND</text>
+  </g>
+
+  <g class="n" data-type="agent" onclick="showDetail('agent-release')">
+    <rect x="332" y="347.9" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
+    <text x="364"  y="352.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Release notes drafter</text>
+    <text x="364"  y="357.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Commits → audience-scoped notes</text>
+    <rect x="332" y="359.9" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <text x="364"  y="363.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · TRIGGERED ON DEPLOY</text>
+  </g>
+
+  <g class="n" data-type="agent" onclick="showDetail('agent-roi')">
+    <rect x="332" y="380.4" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
+    <text x="364"  y="384.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ ROI validation agent</text>
+    <text x="364"  y="390.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">30 / 60 / 90-day telemetry checks</text>
+    <rect x="332" y="392.4" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <text x="364"  y="395.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · SCHEDULED POST-DEPLOY</text>
+  </g>
+
+  <!-- ROI agent → telemetry output -->
+  <line x1="397" y1="389.4" x2="437" y2="346.8" stroke="#c8662a" stroke-width="1.0" marker-end="url(#a-orange)"/>
+  <!-- Metrics MCP → ROI validation agent -->
+  <line x1="182" y1="191.6" x2="332" y2="389.4" stroke="#c8921a" stroke-width="0.7" stroke-dasharray="5 4" marker-end="url(#a-gold)" opacity=".5"/>
+
+  <!-- ═══ NEW OUTPUT NODES ═══ -->
+
+  <g class="n" data-type="output" onclick="showDetail('out-winloss')">
+    <rect x="437" y="195.8" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="200.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Win/loss report</text>
+  <text x="465"  y="205.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Patterns · deal themes</text>
+    <rect x="437" y="207.8" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="211.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+  </g>
+
+  <g class="n" data-type="output" onclick="showDetail('out-competitive')">
+    <rect x="437" y="224.2" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="228.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Competitive brief</text>
+    <text x="465"  y="234.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Gaps · positioning delta</text>
+    <rect x="437" y="236.2" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="239.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+  </g>
+
+  <g class="n" data-type="output" onclick="showDetail('out-retro')">
+    <rect x="437" y="281" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="285.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Retro summary</text>
+    <text x="465"  y="291" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Health · action items</text>
+    <rect x="437" y="293" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="296.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+  </g>
+
+  <g class="n" data-type="output" onclick="showDetail('out-release')">
+    <rect x="437" y="309.4" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="313.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Release notes</text>
+  <text x="465"  y="319.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">PM · sales · customer scoped</text>
+    <rect x="437" y="285.4" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="324.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+  </g>
+
+  <g class="n" data-type="output" onclick="showDetail('out-regulatory')">
+    <rect x="437" y="252.6" width="56" height="18" rx="3" fill="#fceaeb" stroke="#b0303a" stroke-width="1"/>
+    <text x="465"  y="257.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#7a1a22">Regulatory impact</text>
+  <text x="465"  y="262.6" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#b0303a">Compliance · risk flags</text>
+    <rect x="437" y="264.6" width="56" height="6" rx="0 0 3 3" fill="#b0303a" fill-opacity=".1"/>
+    <text x="465"  y="268" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#7a1a22" letter-spacing=".07em">OUTPUT · GOVERNANCE</text>
+  </g>
+
+  <g class="n" data-type="output" onclick="showDetail('out-stakeholder')">
+    <rect x="437" y="337.8" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="342.3" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Stakeholder comms</text>
+  <text x="465"  y="347.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Roadmap · update briefs</text>
+    <rect x="437" y="349.8" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <text x="465"  y="353.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
+  </g>
+
+  <!-- ═══ ROI TELEMETRY VALIDATION (post-release) ═══ -->
+  <!-- Separator label -->
+  <text x="437"  y="361.5" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" letter-spacing=".13em" fill="#1a5c3a" opacity=".6">POST-RELEASE VALIDATION</text>
+
+  <!-- Main callout box — spans taller, distinct amber/teal style -->
+  <g class="n" data-type="output" onclick="showDetail('out-roi-telemetry')">
+    <rect x="437" y="366.2" width="56" height="30" rx="3" fill="#f2fbf6" stroke="#1a5c3a" stroke-width="1"/>
+    <text x="465"  y="370.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.2" font-weight="800" fill="#c8662a" letter-spacing=".06em">ROI HYPOTHESIS TEST</text>
+    <text x="465"  y="376.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="800" fill="#0a3320">Telemetry monitor</text>
+    <text x="465"  y="381.9" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.5" fill="#1a5c3a">Verify / deny post-release</text>
+  <text x="465"  y="387.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" fill="#1a5c3a">ROI claims from biz case</text>
+    <rect x="437" y="390.4" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".12"/>
+    <text x="465"  y="393.8" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT · CONTINUOUS</text>
+  </g>
+
+  <!-- Telemetry sources legend inside callout — small chips below -->
+
+  <g id="feedback-loops-2" class="feedback-group">
+  <!-- Edge: Metrics MCP → ROI telemetry (dashed, teal) — feedback -->
+  <line x1="182" y1="191.6" x2="437" y2="346.8" stroke="#2a6b6b" stroke-width="0.6" stroke-dasharray="5 4" marker-end="url(#a-teal)" opacity=".4"/>
+  <!-- Edge: biz case output → ROI telemetry (validates original hypothesis) — feedback -->
+  <!-- Label on the validation arrow -->
+
+  </g><!-- /feedback-loops-2 -->
+
+  </svg>
+  </div><!-- /scroll -->
+
+  <!-- GOVERNANCE SIDEBAR removed — see horizontal Trust & Governance bar below -->
+
+</div><!-- /outer-wrap -->
+
+<!-- OBSERVABILITY PANEL -->
+<!-- TRUST & GOVERNANCE BAR — spans full width below diagram -->
+<div class="gov-bar">
+  <div class="gov-bar-inner" data-type="governance">
+    <div class="gov-bar-header">
+      <div class="gov-bar-title">Trust &amp; Governance</div>
+      <div class="gov-bar-subtitle">A cross-cutting concern that applies across every layer of the diagram above — not a separate column, but a foundation every node depends on.</div>
+    </div>
+    <div class="gov-bar-body">
+      <div class="gov-group">
+        <div class="gov-group-label">Identity &amp; Access</div>
+        <div class="gov-items">
+          <div class="gov-item" onclick="showDetail('gov-identity')">Identity</div>
+          <div class="gov-item" onclick="showDetail('gov-access')">Access control</div>
+          <div class="gov-item" onclick="showDetail('gov-creds')">Credentials</div>
+        </div>
+      </div>
+      <div class="gov-group">
+        <div class="gov-group-label">Policy &amp; Scope</div>
+        <div class="gov-items">
+          <div class="gov-item" onclick="showDetail('gov-policy')">Policy enforcement</div>
+          <div class="gov-item" onclick="showDetail('gov-scope')">Scope limits</div>
+        </div>
+      </div>
+      <div class="gov-group">
+        <div class="gov-group-label">Observability &amp; Audit</div>
+        <div class="gov-items">
+          <div class="gov-item" onclick="showDetail('gov-audit')">Audit trail</div>
+          <div class="gov-item" onclick="showDetail('gov-obs')">Agent observability</div>
+          <div class="gov-item" onclick="showDetail('gov-cost')">Cost governance</div>
+        </div>
+      </div>
+      <div class="gov-group">
+        <div class="gov-group-label">Lifecycle &amp; Versioning</div>
+        <div class="gov-items">
+          <div class="gov-item" onclick="showDetail('gov-lifecycle')">Model lifecycle</div>
+          <div class="gov-item" onclick="showDetail('gov-version')">Schema versioning</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AGENT DECISION LOG — below Trust & Governance -->
+<div class="obs-wrap">
+  <div class="obs-panel">
+    <div class="obs-header">
+      <div class="obs-header-title">Agent decision log</div>
+      <span class="obs-badge">LIVE · Observability layer</span>
+    </div>
+
+    <div class="obs-explainer">
+      <div class="obs-explainer-col">
+        <div class="obs-explainer-head">What this is</div>
+        <p class="obs-explainer-text">Every agent run in this system writes a timestamped record to the audit log: which agent ran, what it produced, whether it was blocked or flagged, and whether a human reviewed it. This panel is a live view of that stream — what the observability layer looks like in practice.</p>
+      </div>
+      <div class="obs-explainer-col">
+        <div class="obs-explainer-head">Why it matters for PMs</div>
+        <p class="obs-explainer-text">In an AI-native workflow, a PM can't personally review every agent decision the way they reviewed every document they wrote. The decision log restores that visibility. When an agent flags a WARN, a PM knows to look. When a HITL gate pauses the pipeline, the log records who was waiting and why. When a run is BLOCKED by policy, there's a record — not a mystery. This is what makes it safe to delegate synthesis to agents: you always know what they did and why they stopped.</p>
+      </div>
+      <div class="obs-explainer-col">
+        <div class="obs-explainer-head">PM-specific benefits</div>
+        <ul class="obs-benefit-list">
+          <li><strong>Retrospective review:</strong> "Why did the intake chain recommend REJECT for this feature?" — the log shows every step and every input.</li>
+          <li><strong>Stakeholder accountability:</strong> Named HITL sign-offs are recorded with timestamps, not just implied by an email chain.</li>
+          <li><strong>Quality signals:</strong> WARN entries flag AI outputs that need PM attention before flowing downstream — catching low-confidence claims before they reach a sponsor.</li>
+          <li><strong>Audit readiness:</strong> Every approved business case, signed intake output, and gate decision is timestamped and attributable to a named person.</li>
+          <li><strong>Cost visibility:</strong> Token spend per agent run is tracked — AI operational costs become visible, budget-able, and attributable to the team or feature that incurred them.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="obs-log-label">Sample log entries — illustrative of actual output from a connected system</div>
+    <div class="obs-log" id="obsLog">
+      <div class="obs-entry">
+        <span class="obs-time">09:14:02</span>
+        <span class="obs-agent">Signal synthesis</span>
+        <span class="obs-msg">Weekly delta complete — 3 new themes surfaced, 1 trending down. Persona refresh recommended.</span>
+        <span class="obs-status ok">OK</span>
+      </div>
+      <div class="obs-entry">
+        <span class="obs-time">09:14:08</span>
+        <span class="obs-agent">Research ingest MCP</span>
+        <span class="obs-msg">4 Dovetail transcripts ingested — 12 themes extracted, 2 contradict existing persona assumptions</span>
+        <span class="obs-status warn">WARN</span>
+      </div>
+      <div class="obs-entry">
+        <span class="obs-time">09:15:33</span>
+        <span class="obs-agent">Intake chain — step 2</span>
+        <span class="obs-msg">JTBD frame produced — pipeline paused, awaiting PM review before assumption mapping proceeds</span>
+        <span class="obs-status hitl">HITL</span>
+      </div>
+      <div class="obs-entry">
+        <span class="obs-time">09:22:11</span>
+        <span class="obs-agent">Case enrichment</span>
+        <span class="obs-msg">Financial claim slide 4 low-confidence — benchmark data 14 months old. PM should verify before sponsor review.</span>
+        <span class="obs-status warn">WARN</span>
+      </div>
+      <div class="obs-entry">
+        <span class="obs-time">09:22:14</span>
+        <span class="obs-agent">Audit log MCP</span>
+        <span class="obs-msg">Case enrichment run logged — model: claude-sonnet-4-6 · tokens: 1,840 · caller: rob.dull@co.com</span>
+        <span class="obs-status ok">OK</span>
+      </div>
+      <div class="obs-entry">
+        <span class="obs-time">09:31:05</span>
+        <span class="obs-agent">Policy enforcement</span>
+        <span class="obs-msg">Jira write-back BLOCKED for feature #1042 — no signed business case approval record found in audit log</span>
+        <span class="obs-status warn">BLOCKED</span>
+      </div>
+      <div class="obs-entry">
+        <span class="obs-time">09:44:17</span>
+        <span class="obs-agent">Win/loss synthesis</span>
+        <span class="obs-msg">14 deals analysed — top loss theme: "missing SSO support" (6/14). Opportunity map flag raised.</span>
+        <span class="obs-status ok">OK</span>
+      </div>
+      <div class="obs-entry">
+        <span class="obs-time">10:02:50</span>
+        <span class="obs-agent">ROI validation agent</span>
+        <span class="obs-msg">Feature #1031 · 30-day check — conversion claim CONFIRMED (+4.2% vs +3% predicted) · ticket reduction claim REFUTED (volume unchanged)</span>
+        <span class="obs-status warn">PARTIAL</span>
+      </div>
+      <div class="obs-entry">
+        <span class="obs-time">10:15:00</span>
+        <span class="obs-agent">Strategic review gate</span>
+        <span class="obs-msg">Opportunity map ratified — rob.dull@co.com · Q2 cycle unlocked · next business case generation window open</span>
+        <span class="obs-status ok">HITL · SIGNED</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL PANEL -->
+<div class="detail-wrap">
+<div class="detail-panel" id="detailPanel">
+  <button class="detail-close" onclick="closeDetail()">&times;</button>
+  <div class="detail-eyebrow" id="detailEyebrow"></div>
+  <div class="detail-title" id="detailTitle"></div>
+  <div class="detail-body" id="detailBody"></div>
+  <div class="detail-chips" id="detailChips"></div>
+</div>
+</div>
+
+<div class="about-strip">
+  <div class="about-inner">
+    <div>
+      <h2>Each tool works standalone.<br>Connected, they're <em>AI-native</em>.</h2>
+      <p>This network diagram shows the full architecture — data sources, MCP connections, agents, HITL gates, and outputs — that makes these tools a system rather than a collection. The AI ProdOps overview explains the workflow in depth, including how MCP engineering is becoming a core PM skill.</p>
+    </div>
+    <div class="about-links">
+      <a href="AI-prodops-overview.html" class="about-btn primary">AI ProdOps overview &#8599;</a>
+      <a href="../tools-index.html" class="about-btn ghost">All tools &#8599;</a>
+    </div>
+  </div>
+</div>
+
+<footer>Rob Dull &bull; Product Management Practitioner and Product Operations Transformation Consultant</footer>
+
+<script>
+const C = {data:'#2a6b6b',tool:'#1a3a5c',agent:'#c8662a',hitl:'#7c5cbf',mcp:'#c8921a',output:'#1a5c3a',governance:'#b0303a'};
+
+const nodes = {
+  interviews:   {t:'data',  l:'Data source',    title:'Customer interviews',       body:'Structured qualitative research — JTBD-framed discovery, usability sessions, concept tests. The richest input for the Persona Generator. A Research ingest MCP ingests transcripts from Dovetail, Notion, or Google Docs and returns structured theme summaries.', chips:['Qual research','JTBD discovery','Usability','Dovetail MCP']},
+  analytics:    {t:'data',  l:'Data source',    title:'Usage analytics',           body:'Event streams, funnel analysis, session recordings, feature adoption. Feeds the Journey Map (where do users drop off?) and the Product Ops Radar (are activation and retention dimensions healthy?). The Metrics MCP pipes data from Mixpanel, Amplitude, or GA4 without manual export.', chips:['Telemetry','Funnel analysis','Mixpanel · Amplitude']},
+  support:      {t:'data',  l:'Data source',    title:'Support tickets',           body:'Zendesk or Intercom ticket volume by category is a leading indicator of journey pain and a RICE signal input. The Signal aggregator MCP clusters ticket themes and surfaces recurring issues weekly without manual triage.', chips:['Zendesk','Intercom','Theme clustering']},
+  sales:        {t:'data',  l:'Data source',    title:'Sales transcripts',         body:'Gong call recordings capture the exact language prospects use to describe problems — often different from how the product team frames them. Critical input for JTBD framing. The Signal aggregator MCP ingests Gong summaries and extracts recurring objections.', chips:['Gong','CRM notes','Win/loss','JTBD language']},
+  market:       {t:'data',  l:'Data source',    title:'Market research',           body:'Competitive positioning, analyst reports, job posting analysis, G2/Capterra review mining. Feeds the strategic context layer for business case generation — particularly competitive risk and market timing sections.', chips:['Competitive intel','Analyst reports','G2 · Capterra']},
+  stakeholder:  {t:'data',  l:'Data source',    title:'Stakeholder input',         body:'Priority signals from sales leadership, CS, finance, and executive sponsors — often informal (Slack, meeting notes, planning docs). The Strategy context MCP ingests planning documents from Confluence or Notion.', chips:['Exec priorities','CS input','Confluence · Notion']},
+  backlog:      {t:'data',  l:'Data source',    title:'Product backlog',           body:'The existing request queue in Jira, Linear, or Productboard. The Intake source MCP syncs the backlog so the Feature Intake Pipeline can detect duplicate requests and existing priority context before running its analysis.', chips:['Jira','Linear','Productboard','Duplicate detection']},
+  orgstrategy:  {t:'data',  l:'Data source',    title:'Org strategy / OKRs',       body:'The annual operating plan, OKR tree, and vision statements. Primary input to Hoshin Kanri + V2MOM and provides strategic alignment context for Business Case scoring. The Strategy context MCP ingests these from Notion, Google Slides, or Lattice.', chips:['OKR tree','Vision · mission','Annual plan']},
+  financial:    {t:'data',  l:'Data source',    title:'Financial targets',         body:'ROI benchmarks, payback period requirements, cost of capital, and budget availability. The financial parameters the Business Case generator uses to score investment recommendations.', chips:['ROI benchmarks','Budget','Payback targets']},
+  deliverymetrics:{t:'data',l:'Data source',    title:'Delivery metrics',          body:'Sprint velocity, cycle time, defect density, deployment frequency, change failure rate (DORA metrics). Primary input to the Product Ops Radar delivery dimension. The Metrics MCP can pull these from Jira sprint reports, GitHub, or LinearB.', chips:['Velocity','Cycle time','DORA','GitHub · Jira']},
+  retros:       {t:'data',  l:'Data source',    title:'Team retros',               body:'Sprint retrospective outputs. A retro summarizer agent would structure these into the Product Ops Radar\'s Process dimension, tracking whether action items are being followed through over time.', chips:['Sprint retros','Action items','Process health']},
+  nps:          {t:'data',  l:'Data source',    title:'NPS / CSAT',                body:'Net Promoter Score and CSAT scores are lagging indicators that validate or challenge the Journey Map. A sustained NPS decline in a segment should trigger a journey map refresh. The Metrics MCP can ingest these from Delighted, Qualtrics, or Intercom.', chips:['NPS','CSAT','Segment-level']},
+
+  'mcp-research':{t:'mcp', l:'MCP integration', title:'Research ingest MCP',      body:'Connects interview repositories, survey platforms, and research wikis to the Persona Generator and Journey Map Builder. Ingests raw transcripts from Dovetail, Notion, or Google Docs and returns structured theme summaries and direct quotes. Eliminates manual copy-paste of research context.\n\nRecommended: Dovetail MCP, Notion MCP, Google Drive MCP.', chips:['Dovetail MCP','Notion MCP','Google Drive MCP','Recommended']},
+  'mcp-signal':  {t:'mcp', l:'MCP integration', title:'Signal aggregator MCP',    body:'Connects support platforms, sales tools, and analytics into a unified signal stream. Runs on a schedule to cluster new tickets, extract Gong objections, and surface metric anomalies. Output is a structured weekly brief consumed by downstream tools and agents.\n\nRecommended: Zendesk MCP, Gong integration, Amplitude MCP.', chips:['Zendesk MCP','Gong','Amplitude','Recommended']},
+  'mcp-intake':  {t:'mcp', l:'MCP integration', title:'Intake source MCP',        body:'Syncs the live product backlog into Feature Intake Pipeline context. Checks whether the incoming idea already exists as a known issue or previous intake decision. Prevents redundant work and surfaces prior art.\n\nRecommended: Jira MCP (available), Linear MCP.', chips:['Jira MCP','Linear MCP','Productboard','Recommended']},
+  'mcp-strategy':{t:'mcp', l:'MCP integration', title:'Strategy context MCP',     body:'Provides the Hoshin Kanri tool and Business Case generator with live access to the current OKR tree and strategic priorities. Replaces manual copying of quarterly OKRs into tools at run time.\n\nRecommended: Notion MCP, Confluence MCP, Google Workspace MCP.', chips:['Notion MCP','Confluence MCP','Google Workspace MCP','Recommended']},
+  'mcp-metrics': {t:'mcp', l:'MCP integration', title:'Metrics MCP',              body:'Live connection to observability and analytics platforms. Feeds the Product Ops Radar with delivery metrics (DORA, velocity), the Journey Map with funnel data, and canary monitoring post-deployment.\n\nRecommended: DataDog MCP, Mixpanel API, GA4 connector.', chips:['DataDog MCP','Mixpanel','GA4','Recommended']},
+  'mcp-audit':   {t:'governance', l:'Governance · MCP', title:'Audit log MCP',   body:'Every agent decision — tool called, model used, tokens consumed, input hash, output summary, and timestamp — is written to an append-only audit log. Required for regulated industries and for any retrospective analysis of why an agent produced a particular output. This MCP is the write endpoint; governance dashboards query the read endpoint.\n\nAll entries include: agent ID, model version, caller identity, MCP scope used, and outcome status.', chips:['Append-only log','Model version tracking','Token accounting','Compliance']},
+
+  'tool-persona':{t:'tool', l:'Tool · Claude API · Step 01 — Discover', title:'Persona generator', body:'The upstream anchor of the entire network — every downstream tool produces better output when it has a grounded persona to work from. Takes structured research inputs (interview themes, segment data, JTBD statements) and produces a persona with job-to-be-done framing, functional and emotional needs, and underserved dimensions.\n\nStandalone (AI-augmented): AI synthesis from notes the PM enters. Connected (AI-native): the Research ingest MCP pre-populates from Dovetail or Notion at run time.\n\nSee the full workflow context: AI ProdOps overview.', chips:['Claude API','Step 01 · Discover','JTBD framing','Segment synthesis','AI-augmented standalone']},
+  'tool-journey':{t:'tool', l:'Tool · Client-side · Step 01 — Discover', title:'Journey map builder', body:'Produces the pain cluster map that feeds the opportunity merge agent. A fully client-side interactive canvas for mapping customer touchpoints, emotions, and pain points. JSON export is structured for direct consumption by downstream tools or an AI agent.\n\nUsed after the persona generator, a journey map grounded in a JTBD persona is significantly more predictive than one built from assumptions. The Signal aggregator MCP can enrich journey stages with live support ticket themes.\n\nSee the full workflow context: AI ProdOps overview.', chips:['Client-side','Step 01 · Discover','JSON export','Pain clustering','Signal MCP enrichment']},
+  'tool-bizcase':{t:'tool', l:'Tool · Claude API · Step 03 — Justify', title:'Business case gen.', body:'Sits at the case approval HITL gate — between the validated opportunity map and the feature intake pipeline. Takes a project description, stakeholder context, financial parameters, and opportunity map as inputs.\n\nStandalone (AI-augmented): PM drafts and edits before sponsor review. Connected (AI-native): the Case enrichment agent cross-references financial claims against live benchmarks via Strategy context MCP before PM review.\n\nSee the full workflow context: AI ProdOps overview.', chips:['Claude API','Step 03 · Justify','ROI model','Case approval HITL gate','Augmented → native']},
+  'tool-intake': {t:'tool', l:'Tool · Agentic · Step 04 — Intake', title:'Feature intake pipeline', body:'The most AI-native tool in the set — it is itself a 4-step agentic chain: (1) Intake triage, (2) JTBD framing with HITL review, (3) Assumption mapping, (4) RICE prioritization brief. Each step passes structured JSON to the next. Output feeds directly into backlog grooming and the three parallel review gates.\n\nWhen connected to the Intake source MCP, approved briefs write back to Jira automatically.\n\nSee the full workflow context: AI ProdOps overview.', chips:['Agentic chain','Step 04 · Intake','JTBD · Assumptions · RICE','HITL at step 2','Jira write-back via MCP']},
+  'tool-hoshin': {t:'tool', l:'Tool · Client-side · Step 02 — Align', title:'Hoshin Kanri + V2MOM', body:'Provides the strategic alignment context that every other tool depends on. Cascades V2MOM into a Hoshin Kanri X-matrix with multiple value groups, correlation mapping, and export for leadership review.\n\nStandalone (AI-augmented): clearest way to cascade a V2MOM into an actionable X-matrix. Connected (AI-native): the Strategy context MCP pre-populates from Confluence or Notion, and the strategy cascade agent flags OKR alignment gaps after each run.\n\nSee the full workflow context: AI ProdOps overview.', chips:['Client-side','Step 02 · Align','Hoshin matrix','V2MOM','Strategy context MCP']},
+  'tool-radar':  {t:'tool', l:'Tool · Client-side · Step 05 — Measure', title:'Product ops radar', body:'The feedback layer that closes the loop. Scored self-assessment across eight product operations dimensions: discovery, delivery, metrics, tooling, process, stakeholder alignment, strategy, and team capability.\n\nStandalone (AI-augmented): structured self-assessment with AI interpretation and prioritized recs. Connected (AI-native): the Metrics MCP auto-populates delivery and tooling dimensions from live DORA metrics and sprint data.\n\nSee the full workflow context: AI ProdOps overview.', chips:['Client-side','Step 05 · Measure','8 dimensions','Radar chart','Metrics MCP auto-populate']},
+
+  'agent-signal':{t:'agent', l:'Agent · Scheduled',  title:'Signal synthesis agent',  body:'Runs on a weekly schedule. Pulls from the Signal aggregator MCP, compares against the prior week\'s summary, and produces a structured delta brief: what\'s new, what\'s trending, what\'s declining. Output feeds the Persona Generator\'s periodic re-synthesis cycle and flags shifts that might invalidate journey map assumptions.\n\nEvery run is logged to the Audit log MCP with input hashes and output summary.', chips:['Weekly schedule','Delta analysis','Theme clustering','Audit logged']},
+  'hitl-strategic':{t:'hitl', l:'HITL gate',         title:'Strategic review gate',   body:'After the signal synthesis agent produces the opportunity map, the product leader reviews and ratifies it — typically quarterly, or when a major signal shift is detected. This is not just approval — it\'s the moment where the PM adds qualitative context the agent can\'t access: strategic bets, board mandates, competitive moves.\n\nRatification is a named, dated sign-off stored in the audit log.', chips:['Quarterly cadence','PM judgment','Named sign-off','Audit logged']},
+  'agent-merge': {t:'agent', l:'Agent · Triggered',  title:'Case enrichment agent',   body:'Takes the PM-drafted business case and automatically enriches it: pulls current financial benchmarks from the Strategy context MCP, cross-references claims against recent signal data, and flags assumptions that contradict the opportunity map. Returns a reviewed draft with confidence scores on each financial claim.\n\nLow-confidence claims are flagged as WARN entries in the Observability layer.', chips:['Auto-enrichment','Benchmark cross-check','Confidence scoring','WARN on low confidence']},
+  'hitl-case':   {t:'hitl', l:'HITL gate',           title:'Business case approval',  body:'The executive sponsor or investment committee reviews the enriched business case and signs off before any intake steps proceed. Approval is captured with a named sign-off, date, and scope. Rejected cases return to the synthesis layer with documented rationale.\n\nThis gate is enforced by Policy enforcement — the intake chain MCP credentials are not released until this sign-off record exists.', chips:['Exec sign-off','Named approval','Policy-gated','Unlocks intake']},
+  'agent-intake':{t:'agent', l:'Agent · Sequential', title:'Intake chain agent',      body:'The 4-step sequential agent inside the Feature Intake Pipeline. Step 1 (triage) extracts the problem core. Step 2 (JTBD framing) produces the job statement — a human reviews this before step 3 runs. Step 3 (assumption mapping) surfaces the five riskiest assumptions. Step 4 (RICE brief) scores and recommends disposition.\n\nEach step\'s input/output is logged. Blocked runs appear in the Observability panel.', chips:['4-step sequential','JTBD · Assumptions · RICE','Human checkpoint at step 2','Full audit trail']},
+  'hitl-intake': {t:'hitl', l:'HITL gate',           title:'Intake output review',    body:'PM and relevant stakeholders review the complete intake package: signal strength, JTBD frame, full assumption map, and RICE recommendation. Catches misframed job statements, missing assumptions, and unrealistic RICE scores. Only after explicit approval does the brief move to the three review gates.', chips:['Full package review','PM + stakeholders','Misframe detection','Unlocks review gates']},
+
+  'out-opmap':  {t:'output', l:'Output', title:'Opportunity map',         body:'A ranked matrix of validated pain clusters, mapped to ICP segments and strategic themes. Each cluster has a signal strength score, source citations, and a recommended priority tier. The foundation for every downstream tool in the network.', chips:['Ranked clusters','ICP mapping','Signal-backed','Quarterly refresh']},
+  'out-bizcase':{t:'output', l:'Output', title:'Approved business case',  body:'A sponsor-signed investment brief covering executive summary, financial model (ROI, payback, NPV), risk analysis, cost of inaction, and implementation timeline. Rejected cases return with documented rationale.', chips:['Sponsor signed','ROI model','Risk analysis','Rejection documented']},
+  'out-brief':  {t:'output', l:'Output', title:'Feature brief',           body:'The complete intake pipeline output: problem statement, JTBD job statement, assumption map with test methods, RICE score, and disposition recommendation (spike / prototype / backlog / reject). The handoff document between product strategy and engineering.', chips:['RICE scored','Assumption map','JTBD framed','Disposition set']},
+  'out-gates':  {t:'hitl',   l:'HITL',  title:'Three parallel review gates', body:'Architecture review (engineering lead), security review (security lead), and business review (finance + legal) run in parallel. All three must pass before any code is written. Each gate generates a named, timestamped sign-off record in the audit log. Policy enforcement will not release CI/CD credentials until all three records exist.', chips:['Architecture','Security','Business/legal','3× named sign-offs · Audit logged']},
+  'out-hoshin': {t:'output', l:'Output', title:'Strategy cascade',        body:'The Hoshin Kanri matrix and V2MOM document, reviewed for OKR alignment gaps. Shared with leadership as the quarterly planning reference. When the cascade is materially different from the prior period, the signal synthesis agent is triggered to check whether persona and journey map assumptions still hold.', chips:['Hoshin matrix','V2MOM doc','OKR aligned','Leadership reviewed']},
+  'out-radar':  {t:'output', l:'Output', title:'Ops health report',       body:'The Product Ops Radar output: scored dimension assessments, radar chart, AI-generated interpretation, and a prioritized improvement recommendation set. When the Metrics MCP is connected, delivery and tooling dimensions are auto-populated from live data.', chips:['8 dimensions','Radar chart','AI interpretation','Improvement recs']},
+
+  // NEW DATA SOURCES
+  'winloss':    {t:'data', l:'Data source', title:'Win / loss data',         body:'CRM deal outcomes — won, lost, churned — annotated with reason codes and deal context from Salesforce or HubSpot. The highest-signal source for understanding why customers choose or reject the product. The CRM/Sales MCP surfaces structured win/loss records and reasons for the win/loss synthesis agent, which clusters patterns weekly.', chips:['Salesforce','HubSpot','Deal outcomes','Reason codes','CRM MCP']},
+  'competitive':{t:'data', l:'Data source', title:'Competitive signals',      body:'Market intelligence from review platforms (G2, Capterra), competitor job postings (leading indicator of roadmap direction), Crayon or Klue competitive intelligence feeds, and manual competitive analysis notes. The Competitive intel MCP normalizes these into a structured signal stream the competitive monitoring agent processes weekly.', chips:['Crayon · Klue','G2 · Capterra','Job posting analysis','Competitive MCP']},
+  'regulatory': {t:'data', l:'Data source', title:'Regulatory signals',       body:'Compliance and regulatory updates relevant to the product\'s market — GDPR enforcement actions, SOC 2 requirement changes, industry-specific regulatory filings, and emerging policy drafts. Feeds the Regulatory impact output and surfaces flags that should enter the security review gate. Often manually curated but increasingly monitored by agents.', chips:['GDPR · SOC2','Policy updates','Compliance feeds','Risk flags']},
+  'teamsurvey': {t:'data', l:'Data source', title:'Team health surveys',       body:'Periodic engagement surveys, capacity planning inputs, and process health self-assessments from the delivery team. Primary input to the Retro summarizer agent and the Product Ops Radar\'s Process and Team Capability dimensions. When connected to the Comms MCP, Slack sentiment can supplement formal survey data.', chips:['Engagement survey','Capacity data','Process health','Comms MCP supplement']},
+  'comms':      {t:'data', l:'Data source', title:'Internal comms',           body:'Slack and Teams channels as a signal source — particularly #product, #eng, #customer-feedback, and escalation channels. The Comms MCP mines message patterns for recurring frustrations, decision blockers, and emerging priorities that never make it into formal systems. Treats internal communication as an unstructured signal layer that complements structured sources.', chips:['Slack MCP','Teams','Unstructured signal','Escalation patterns','Comms MCP']},
+  'itsm':       {t:'data', l:'Data source', title:'ITSM / incidents',         body:'ServiceNow, PagerDuty, and ITSM ticket data capturing production incidents, service requests, and change management records. Critical for the Product Ops Radar\'s Delivery dimension and for surfacing reliability patterns that should inform feature intake prioritization. The ITSM MCP surfaces MTTR trends, incident frequency by component, and change failure rates as structured signals.', chips:['ServiceNow','PagerDuty','MTTR · MTBF','Change failure rate','ITSM MCP']},
+
+  // NEW MCP SERVERS
+  'mcp-crm':       {t:'mcp', l:'MCP integration', title:'CRM / sales MCP',     body:'Connects Salesforce or HubSpot to the win/loss synthesis agent. Surfaces structured deal outcome records — won, lost, reason code, deal size, segment, and sales rep notes — as a real-time stream the agent can cluster and analyze. Also provides the Business Case Generator with market size and deal velocity context.\n\nRecommended: Salesforce MCP (available), HubSpot MCP.', chips:['Salesforce MCP','HubSpot MCP','Deal outcomes','Win/loss stream','Recommended']},
+  'mcp-competitive':{t:'mcp', l:'MCP integration', title:'Competitive intel MCP', body:'Normalizes competitive intelligence from Crayon, Klue, G2 review feeds, and job posting analysis APIs into a structured weekly signal. The competitive monitoring agent consumes this to produce a weekly delta brief: what changed in competitor positioning, what new features were announced, what review themes shifted.\n\nRecommended: Crayon MCP, Klue API, G2 MCP.', chips:['Crayon MCP','Klue','G2','Job posting API','Recommended']},
+  'mcp-comms':     {t:'mcp', l:'MCP integration', title:'Comms MCP',             body:'Reads designated Slack or Teams channels (product, eng, customer-feedback, escalations) and mines message patterns for signal. Respects channel permissions and only surfaces anonymized theme clusters — not individual messages — to agents. The Signal aggregator MCP and Comms MCP together cover both formal and informal organizational signal.\n\nRecommended: Slack MCP (available), Microsoft Teams MCP.', chips:['Slack MCP','Teams MCP','Channel permissions','Anonymized themes','Recommended']},
+  'mcp-itsm':      {t:'mcp', l:'MCP integration', title:'ITSM MCP',              body:'Connects ServiceNow, PagerDuty, and related ITSM platforms to the Product Ops Radar and signal layer. Surfaces MTTR trends, incident frequency by component, change failure rates, and service request volumes as structured metrics. When the radar\'s Delivery dimension is auto-populated, ITSM data is the primary source for reliability and change management scores.\n\nRecommended: ServiceNow MCP, PagerDuty MCP.', chips:['ServiceNow MCP','PagerDuty','MTTR · MTBF','Change failure rate','Recommended']},
+
+  // NEW AGENTS
+  'agent-winloss':    {t:'agent', l:'Agent · Triggered', title:'Win/loss synthesis agent', body:'Triggered weekly or when deal volume exceeds a threshold. Pulls structured deal outcome records from the CRM/Sales MCP, clusters win/loss reasons by segment, deal size, and competitive context, and produces a Win/Loss Report with ranked pattern summaries and implications for the product roadmap.\n\nOutput feeds directly into the Business Case Generator\'s competitive risk section and the Opportunity map\'s ICP coverage dimension.', chips:['Triggered weekly','CRM MCP','Deal clustering','Roadmap implications','Audit logged']},
+  'agent-competitive':{t:'agent', l:'Agent · Scheduled', title:'Competitive monitor agent', body:'Runs on a weekly schedule. Pulls from the Competitive intel MCP (Crayon/Klue feeds, G2 reviews, job postings), compares against the prior week\'s snapshot, and produces a delta brief: new feature announcements, positioning shifts, review sentiment changes, and hiring signals. Flags items that should update the opportunity map or business case risk sections.\n\nOutput is a structured competitive brief shared with the PM and fed into the next opportunity map refresh cycle.', chips:['Weekly schedule','Competitive MCP','Delta analysis','Opportunity map feed','Audit logged']},
+  'agent-retro':      {t:'agent', l:'Agent · On-demand', title:'Retro summarizer agent', body:'Triggered after each sprint retrospective. Takes raw retro notes (from Miro, FigJam, or a structured form) via the Comms MCP or a file upload, and produces a structured summary: what worked, what didn\'t, action items with owners, and a process health score across five dimensions. Output feeds the Product Ops Radar\'s Process dimension and the team health trend over time.\n\nThe retro summary also surfaces recurring blockers that should enter the feature intake pipeline as process improvement items.', chips:['On-demand','Comms MCP','Sprint health scoring','Radar feed','Action item extraction']},
+  'agent-release':    {t:'agent', l:'Agent · Triggered on deploy', title:'Release notes drafter', body:'Triggered automatically when a feature branch is merged to main or a release tag is created. Reads the final commit messages and feature brief from the Intake source MCP, then drafts three versions of release notes: a technical changelog (for engineering), a PM summary (for internal stakeholders), and a customer-facing release note (plain language, benefit-framed).\n\nPM reviews and edits before publish. Eliminates the last-minute scramble of release documentation that consistently blocks deployment velocity.', chips:['Deploy-triggered','Intake source MCP','3-audience drafts','PM review gate','Eliminates release scramble']},
+
+  'agent-roi':        {t:'agent', l:'Agent · Scheduled post-deploy', title:'ROI validation agent', body:'Runs at 30, 60, and 90 days after a feature is deployed to production. Pulls the original business case ROI claims from the approved business case document (via Strategy context MCP), pulls actual telemetry data from the Metrics MCP (Mixpanel, DataDog, GA4), and compares hypothesis against observed actuals.\n\nProduces a structured ROI validation brief: each claim from the original business case rated as Confirmed, Partially confirmed, Refuted, or Insufficient data — with the specific metric and measurement window cited for each verdict.\n\nWhen a claim is refuted, the agent flags it to the PM and suggests whether the business case assumptions should be updated or whether a follow-on intake item should be created to address the gap. This closes the most important loop in the product ops system: the connection between what was promised in the business case and what was actually delivered.', chips:['30/60/90-day cadence','Biz case vs actuals','Metrics MCP','Claim-level verdicts','Closes ROI loop']},
+
+  // NEW OUTPUTS
+  'out-winloss':    {t:'output', l:'Output', title:'Win/loss report',          body:'Clustered deal outcome analysis: why the product wins and loses by segment, deal size, and competitive context. Ranked pattern list with confidence scores. Direct input to the Business Case Generator\'s competitive risk section and the opportunity map ICP coverage dimension. Refreshed weekly when the win/loss synthesis agent runs.', chips:['Weekly refresh','Segment patterns','Competitive context','Roadmap implications']},
+  'out-competitive':{t:'output', l:'Output', title:'Competitive brief',         body:'Weekly competitive positioning delta: what changed in competitor feature sets, pricing, messaging, and G2 review sentiment. Flags the items that should update the opportunity map or the business case\'s competitive risk section. Designed for PM consumption, not executive briefing — specific enough to act on.', chips:['Weekly delta','Feature gaps','Positioning shifts','Review sentiment']},
+  'out-retro':      {t:'output', l:'Output', title:'Retro summary',             body:'Structured sprint retrospective output: what worked, what didn\'t, action items with owners, and a process health score across five dimensions (communication, tooling, process clarity, collaboration, delivery). Feeds the Product Ops Radar\'s Process dimension and tracks action item follow-through across sprints.', chips:['Sprint health score','5 dimensions','Action items','Process trend','Radar feed']},
+  'out-release':    {t:'output', l:'Output', title:'Release notes',             body:'Three audience-scoped release notes drafted automatically from commit messages and the feature brief: (1) technical changelog for engineering, (2) PM summary for internal stakeholders, (3) plain-language customer-facing note. PM reviews and edits before publish. Eliminates last-minute release documentation scramble.', chips:['3 audience versions','Auto-drafted','PM review gate','Deploy-triggered']},
+  'out-regulatory': {t:'governance', l:'Output · Governance', title:'Regulatory impact assessment', body:'A structured analysis of how a proposed feature or release intersects with applicable regulatory requirements — GDPR data handling, SOC 2 control coverage, industry-specific compliance obligations. Produced when the security review gate detects a feature with data handling, authentication, or third-party integration implications. Required before the business review gate can pass.', chips:['GDPR · SOC2','Security gate input','Business gate prerequisite','Compliance flags']},
+  'out-stakeholder':{t:'output', l:'Output', title:'Stakeholder comms',         body:'AI-drafted roadmap updates and stakeholder briefing documents — quarterly roadmap narratives, feature announcement briefs for sales and CS, and executive progress summaries. The Release notes drafter agent produces the customer-facing layer; this output covers the internal stakeholder and leadership communication layer. PM reviews before distribution.', chips:['Roadmap narrative','Sales enablement','CS briefing','Executive summary','PM review gate']},
+
+  // COMPANION BACKLOG + STORY TOOLS
+  'tool-backlog': {t:'tool', l:'Tool · Claude API · Recommended', title:'Backlog generator', body:'Converts the approved feature brief from the Feature Intake Pipeline into a structured set of Jira-ready epics and user stories. Takes the JTBD frame, assumption map, and RICE brief as inputs and produces a hierarchical backlog structure: one or more epics with decomposed stories, each sized against the complexity assessment from the intake pipeline.\n\nThis tool closes the most common handoff gap in product ops: the distance between an approved feature brief and an actionable backlog item. Recommended implementation as a Claude API tool with Intake source MCP write-back.', chips:['Claude API','Brief → epics + stories','Jira-ready','JTBD-grounded','Recommended build']},
+
+  'tool-stories': {t:'tool', l:'Tool · Claude API · Recommended', title:'Story writer + AC generator', body:'Produces granular acceptance criteria, edge cases, and test conditions for each user story. Takes a story title and context from the backlog generator and produces: a standard story (As a... I want... So that...), 3–5 acceptance criteria in Gherkin (Given/When/Then) format, edge cases and failure modes, and a sizing note.\n\nThe structured output feeds directly into the test generation step in CI — synthetic test scripts can be drafted from the same Gherkin criteria. Removes the most time-consuming part of backlog grooming: writing acceptance criteria that are actually testable.', chips:['Claude API','Gherkin AC','Edge cases','Test generation feed','Recommended build']},
+
+  'tool-jira-sync': {t:'tool', l:'MCP Write · HITL-gated', title:'Jira write-back', body:'The MCP write endpoint that connects the approved output of the backlog generator to Jira. Only activates after the intake review HITL gate has been passed — the Intake source MCP credential set does not include write access until a signed approval record exists in the audit log.\n\nWrites: epic, stories with AC, labels, story points (from sizing), and a link back to the original feature brief document. This is Phase 3 (Automated Specification) in the four-phase AI-native workflow closing into the Jira backlog without manual copy-paste.\n\nPolicy enforcement: no Jira write without audit log approval record.', chips:['Intake source MCP','Write-gated','HITL approval required','Audit log enforced','Phase 3 completion']},
+
+  'tool-sprint': {t:'tool', l:'Tool · Claude API · Recommended', title:'Sprint planning assistant', body:'Takes the current prioritized backlog (from Jira via Intake source MCP), team velocity data (from Metrics MCP), and upcoming capacity signals (from team health survey data) and suggests a sprint composition: which stories fit within the velocity budget, which carry the most strategic alignment weight, and which are blocked or dependent.\n\nProduces a draft sprint plan the PM and engineering lead review together — the HITL gate here is the sprint planning ceremony itself. Eliminates the prep work of manually sorting and sizing the backlog before planning, not the judgment about what actually goes in.', chips:['Claude API','Velocity-aware','Capacity-aware','Backlog MCP read','Recommended build']},
+
+  // ROI TELEMETRY OUTPUT
+  'out-roi-telemetry': {t:'output', l:'Output · Continuous', title:'ROI telemetry monitor', body:'The post-release validation layer that closes the loop on the business case. Every approved business case contains ROI claims — productivity gain, conversion improvement, support ticket reduction, revenue attribution. This output continuously measures whether those claims are being confirmed or refuted by actual production behaviour, using built-in telemetry sources available without custom instrumentation.\n\nBuilt-in telemetry sources:\n· Feature flag adoption rate — are users activating the feature at the rate assumed in the RICE reach estimate?\n· Funnel conversion delta — did the conversion rate for the target funnel step change in the direction predicted?\n· Session depth + task completion — are users completing the job-to-be-done more efficiently?\n· Support ticket volume change — did tickets in the relevant category decrease as the cost-of-inaction analysis predicted?\n· NPS / CSAT delta (segment) — did satisfaction improve for the affected user segment?\n· Revenue attribution — if the feature was tagged with UTM or a feature flag ID, did revenue from that cohort shift?\n· Error rate + latency vs pre-release baseline — is the feature causing degradation that offsets the claimed gains?\n\nAll sourced via the Metrics MCP (Mixpanel, DataDog, GA4). The ROI validation agent compares actuals against the business case hypothesis 30, 60, and 90 days post-release and surfaces a confirmation or refutation brief. This is the single most underbuilt component of most product operations systems.', chips:['Metrics MCP','30/60/90-day cadence','Biz case validation','Feature flag telemetry','Conversion · NPS · tickets · revenue','Closes the ROI loop']},
+
+  'gov-identity':  {t:'governance', l:'Trust & Governance', title:'Identity',           body:'Every agent, tool, and MCP call is tied to an authenticated identity — the PM or the agent acting on their behalf. Agent identity is federated from the enterprise IdP (Okta, Azure AD). Tool-level identity ensures that audit records name the specific human who authorized a run, not just the system.', chips:['Federated IdP','Agent identity','Per-run attribution']},
+  'gov-access':    {t:'governance', l:'Trust & Governance', title:'Access control',     body:'Role-based access governs which MCPs each agent can call and with what scope. The intake chain agent, for example, can read from Jira but cannot write until a HITL approval record exists. Access control is enforced at the MCP layer, not the application layer — tools cannot bypass it.', chips:['RBAC','MCP-layer enforcement','Scope limits']},
+  'gov-creds':     {t:'governance', l:'Trust & Governance', title:'Credentials',        body:'API keys, MCP tokens, and model API credentials are stored encrypted in a secrets manager (Vault, AWS Secrets Manager). No agent or tool ever has direct access to raw credentials — they receive short-lived tokens scoped to the specific operation. Rotation is automated.', chips:['Vault / Secrets Manager','Short-lived tokens','Automated rotation']},
+  'gov-policy':    {t:'governance', l:'Governance', title:'Policy enforcement',         body:'Declarative policies define what agents are allowed to do: maximum token spend per run, which MCP servers they can reach, whether they can take write actions, and under what conditions they can proceed without a HITL gate. Policy violations generate BLOCKED entries in the observability log and halt the run.\n\nExample policy: "Intake chain may not call any write MCP endpoint unless a business case approval record with status=approved exists in the audit log."', chips:['Declarative policies','Write-action gates','Token budget limits','Audit-gated actions']},
+  'gov-scope':     {t:'governance', l:'Trust & Governance', title:'Scope limits',       body:'Each MCP server exposes a defined set of operations. Agents request only the scopes they need for the current run — principle of least privilege. Scope expansions require a human approval step. Scopes are recorded in the audit log per run.', chips:['Least privilege','Per-run scopes','Human-approved expansion']},
+  'gov-audit':     {t:'governance', l:'Trust & Governance', title:'Audit trail',        body:'Every agent run writes an immutable record to the Audit log MCP: timestamp, agent ID, model version, token count, input hash, output summary, HITL outcome (if applicable), and caller identity. The audit trail is the compliance surface — it answers "who authorized this, when, and with what model?"', chips:['Immutable log','Model version','Token count','HITL outcome']},
+  'gov-obs':       {t:'governance', l:'Trust & Governance', title:'Agent observability', body:'Beyond the audit log, a live observability layer surfaces agent decision quality in real time: confidence scores on claims, HITL pause events, WARN flags on low-quality outputs, and BLOCKED policy violations. The observability panel at the bottom of this page is a simplified representation of this layer.\n\nIn production: Datadog, Langfuse, or a custom observability pipeline consuming the audit log stream.', chips:['Confidence scores','WARN / BLOCKED flags','Langfuse · DataDog','Real-time stream']},
+  'gov-cost':      {t:'governance', l:'Trust & Governance', title:'Cost governance',    body:'Token spend per agent, per tool, per user is tracked against a budget. Agents that exceed their token budget are rate-limited or require human override. Cost attribution flows back to the team or project that triggered the run — making AI operational costs visible and accountable.', chips:['Token budgets','Per-agent cost','Team attribution','Rate limiting']},
+  'gov-lifecycle': {t:'governance', l:'Trust & Governance', title:'Model lifecycle',    body:'When the model version changes (e.g. claude-sonnet-4-5 → claude-sonnet-4-6), all existing audit records retain the original version string. Existing agent prompts are regression-tested against the new model before the rollout is approved. Model pinning per tool is supported for critical workflows.', chips:['Version pinning','Regression testing','Rollout approval','Audit retention']},
+  'gov-version':   {t:'governance', l:'Trust & Governance', title:'Schema versioning',  body:'MCP servers expose versioned schemas. When a tool changes what it expects from an MCP response, both versions are supported during a migration window. Schema changes that break downstream agents require a human change approval. Version history is stored in the audit log.', chips:['Versioned schemas','Migration windows','Change approval','Backward compatibility']},
+};
+
+function showDetail(id) {
+  const d = nodes[id];
+  if (!d) return;
+  const panel = document.getElementById('detailPanel');
+  const ey = document.getElementById('detailEyebrow');
+  const ti = document.getElementById('detailTitle');
+  const bo = document.getElementById('detailBody');
+  const ch = document.getElementById('detailChips');
+  ey.style.color = C[d.t] || '#6b6b6b';
+  ey.textContent = d.l || d.t;
+  ti.textContent = d.title;
+  bo.innerHTML = (d.body||'').replace(/\n\n/g,'<br><br>');
+  ch.innerHTML = (d.chips||[]).map(c=>`<span class="chip">${c}</span>`).join('');
+  panel.classList.add('open');
+  setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+}
+function closeDetail(){document.getElementById('detailPanel').classList.remove('open');}
+
+// Filter logic — fixed button states
+const active = new Set(['data','mcp','tool','agent','hitl','output','governance']);
+document.querySelectorAll('.leg-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const t = btn.dataset.type;
+    if(active.has(t)){active.delete(t);btn.classList.remove('active');}
+    else{active.add(t);btn.classList.add('active');}
+    // SVG nodes
+    document.querySelectorAll('g[data-type]').forEach(g=>{
+      g.style.opacity = active.has(g.dataset.type) ? '1' : '0.1';
+    });
+    // Governance bar
+    const gBar = document.querySelector('.gov-bar-inner');
+    if(gBar) gBar.style.opacity = active.has('governance') ? '1' : '0.1';
+  });
+});
+const svgEl = document.getElementById('network');
+const COL5_RIGHT = 493; // right edge of outputs column in SVG coords
+const BUFFER = 20;      // gap between outputs right edge and SVG right edge
+function updateViewBox() {
+  const W = svgEl.parentElement.getBoundingClientRect().width - 32; // subtract padding
+  if (!W) return;
+  const vbW = Math.round(COL5_RIGHT * W / (W - BUFFER));
+  svgEl.setAttribute('viewBox', `0 6 ${vbW} 419`);
+}
+const ro = new ResizeObserver(updateViewBox);
+ro.observe(svgEl.parentElement);
+updateViewBox(); // initial call
+
+</script>
+</body>
+</html>
