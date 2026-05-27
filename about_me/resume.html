@@ -59,6 +59,7 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
 /* SKILLS GRID */
 .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
 .skill-item{font-size:12px;font-weight:500;color:var(--ink);background:var(--off);border:1px solid var(--rule);border-radius:5px;padding:6px 10px;}
+.skill-group-label{grid-column:1/-1;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:10px 2px 2px;border-bottom:1px solid var(--rule);margin-bottom:2px;}
 
 /* EXPERIENCE */
 .job{margin-bottom:28px;}
@@ -195,24 +196,39 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
   <div class="section" id="sec-tools">
     <div class="section-title">Tools &amp; Technology</div>
     <div class="skills-grid">
-      <div class="skill-item">Jira &amp; Jira Align</div>
-      <div class="skill-item">Confluence</div>
-      <div class="skill-item">Miro (power user)</div>
-      <div class="skill-item">Tableau &amp; PowerBI</div>
-      <div class="skill-item">Salesforce Platform</div>
-      <div class="skill-item">Salesforce Einstein AI</div>
-      <div class="skill-item">GitHub</div>
-      <div class="skill-item">GitHub CoPilot</div>
-      <div class="skill-item">Microsoft CoPilot</div>
-      <div class="skill-item">Microsoft Teams</div>
-      <div class="skill-item">ChatGPT</div>
+
+      <div class="skill-group-label">AI &amp; Intelligent Tools</div>
       <div class="skill-item">Claude Code</div>
       <div class="skill-item">Claude Design</div>
-      <div class="skill-item">Planview</div>
-      <div class="skill-item">Google Suite</div>
-      <div class="skill-item">Slack</div>
-      <div class="skill-item">SharePoint</div>
+      <div class="skill-item">ChatGPT</div>
+      <div class="skill-item">GitHub Copilot</div>
+      <div class="skill-item">Microsoft Copilot</div>
+      <div class="skill-item">Salesforce Einstein AI</div>
       <div class="skill-item">Prompt Engineering for Product Workflows</div>
+
+      <div class="skill-group-label">Data &amp; Analytics</div>
+      <div class="skill-item">Tableau</div>
+      <div class="skill-item">PowerBI</div>
+      <div class="skill-item">SQL</div>
+      <div class="skill-item">Python</div>
+
+      <div class="skill-group-label">Salesforce Platform</div>
+      <div class="skill-item">Salesforce Platform</div>
+      <div class="skill-item">Salesforce GUS</div>
+
+      <div class="skill-group-label">Project &amp; Planning</div>
+      <div class="skill-item">Jira &amp; Jira Align</div>
+      <div class="skill-item">Confluence</div>
+      <div class="skill-item">Planview</div>
+      <div class="skill-item">Miro (power user)</div>
+
+      <div class="skill-group-label">Collaboration &amp; Dev</div>
+      <div class="skill-item">GitHub</div>
+      <div class="skill-item">Microsoft Teams</div>
+      <div class="skill-item">Slack</div>
+      <div class="skill-item">Google Suite</div>
+      <div class="skill-item">SharePoint</div>
+
     </div>
   </div>
 
