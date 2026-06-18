@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI-Native Product Operations — Structural Elements | Rob Dull</title>
+<title>AI-Native Product Operations, Explained Simply | Rob Dull</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -52,12 +52,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 /* ARTICLE BODY */
 .art-body{max-width:1060px;margin:0 auto;padding:40px 40px 80px;}
 
-/* section-head replaces hr + h2 */
 .section-head{display:flex;align-items:flex-start;gap:14px;margin:64px 0 20px;padding-top:24px;border-top:3px solid var(--ink);}
 .section-head:first-child{margin-top:0;border-top:none;padding-top:0;}
 .section-icon{width:36px;height:36px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
 .section-icon svg{width:28px;height:28px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.section-head-text{}
 .section-head h2{font-size:22px;font-weight:900;letter-spacing:-.025em;color:var(--ink);line-height:1.15;margin:0 0 4px;}
 .section-head h2 em{font-style:normal;color:var(--accent);}
 .section-head p{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin:0;}
@@ -66,9 +64,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .art-body p{font-size:15px;color:#2a2a2a;line-height:1.8;margin-bottom:18px;}
 .art-body p:last-child{margin-bottom:0;}
 .art-body strong{font-weight:700;color:var(--ink);}
-
-/* legacy rule divider — keep for any remaining uses */
-.rule{border:none;border-top:1px solid var(--rule);margin:48px 0;}
 
 /* lead */
 .lead{font-size:17px;line-height:1.75;color:var(--ink);margin-bottom:28px;font-weight:500;}
@@ -80,84 +75,44 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .callout-gold{background:rgba(200,146,26,.06);border-left:4px solid #c8921a;border-radius:0 8px 8px 0;padding:16px 20px;margin:28px 0;font-size:14px;line-height:1.75;color:#2a2a2a;}
 .callout-gold strong{color:var(--ink);}
 
+/* glossary */
+.glossary{background:var(--off);border:1px solid var(--rule);border-radius:10px;padding:22px 24px;margin:28px 0;}
+.glossary-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
+.glossary dl{display:flex;flex-direction:column;gap:12px;}
+.glossary dt{font-size:13.5px;font-weight:800;color:var(--ink);margin-bottom:2px;}
+.glossary dd{font-size:13px;color:#3a3a3a;line-height:1.65;}
+
 /* stat pull */
 .stat-pull{border:1px solid var(--rule);border-radius:8px;padding:20px 24px;margin:28px 0;display:flex;align-items:baseline;gap:16px;}
 .stat-num{font-size:42px;font-weight:900;letter-spacing:-.04em;color:var(--accent);line-height:1;flex-shrink:0;}
 .stat-text{font-size:14px;color:var(--muted);line-height:1.6;}
 .stat-text strong{color:var(--ink);}
 
-/* element list */
-.element-list{list-style:none;margin:20px 0;display:flex;flex-direction:column;gap:0;}
-.element-item{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--rule);}
-.element-item:last-child{border-bottom:none;}
-.element-num{font-size:11px;font-weight:800;color:var(--accent2);letter-spacing:.06em;width:24px;flex-shrink:0;padding-top:2px;}
-.element-title{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:4px;letter-spacing:-.01em;}
-.element-desc{font-size:13px;color:var(--muted);line-height:1.7;}
-/* stacked variant for items with longer labels (MCP, AGENTS.md, Goose) */
-.element-item--labeled{flex-direction:column;gap:6px;}
-.element-item--labeled .element-num{width:auto;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:white;background:var(--accent2);border-radius:4px;padding:2px 8px;display:inline-block;align-self:flex-start;}
+/* three-modes grid */
+.mode-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:24px 0;}
+.mode-card{border:1px solid var(--rule);border-radius:10px;padding:20px;background:white;}
+.mode-card.is-native{border-color:var(--accent);background:rgba(26,58,92,.03);}
+.mode-label{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px;}
+.mode-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:12px;line-height:1.3;}
+.mode-card ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.mode-card li{font-size:12.5px;color:var(--muted);line-height:1.6;display:flex;gap:8px;align-items:flex-start;}
+.mode-card li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent2);flex-shrink:0;margin-top:6px;}
+@media(max-width:760px){.mode-grid{grid-template-columns:1fr;}}
 
-/* phase grid — the four workflow phases */
+/* phase grid — the four lifecycle stages */
 .phase-grid{display:flex;flex-direction:column;gap:0;margin:28px 0;border:1px solid var(--rule);border-radius:10px;overflow:hidden;}
 .phase-card{display:grid;grid-template-columns:200px 1fr;border-bottom:1px solid var(--rule);}
 .phase-card:last-child{border-bottom:none;}
 .phase-card-head{padding:24px 22px;background:var(--off);border-right:1px solid var(--rule);display:flex;flex-direction:column;justify-content:flex-start;gap:6px;}
 .phase-num{font-size:9px;font-weight:800;color:var(--accent2);letter-spacing:.12em;text-transform:uppercase;}
 .phase-title{font-size:14px;font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1.3;}
-.phase-card-right{display:flex;flex-direction:column;}
-.phase-body{padding:20px 24px;flex:1;}
-.phase-body ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 28px;}
-.phase-body li{font-size:12.5px;color:#3a3a3a;line-height:1.65;display:flex;gap:9px;align-items:flex-start;}
-.phase-body li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent2);flex-shrink:0;margin-top:5px;}
+.phase-body{padding:20px 24px;}
+.phase-body ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.phase-body li{font-size:13px;color:#3a3a3a;line-height:1.65;display:flex;gap:9px;align-items:flex-start;}
+.phase-body li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent2);flex-shrink:0;margin-top:6px;}
 .phase-body li strong{color:var(--ink);font-weight:700;}
-.phase-mcp{background:rgba(200,146,26,.04);border-top:1px solid rgba(200,146,26,.18);padding:9px 24px;font-size:11.5px;color:#7a5700;font-weight:500;display:flex;align-items:baseline;gap:6px;}
-.phase-mcp span{font-weight:800;white-space:nowrap;}
 
-/* MCP capability table */
-.mcp-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:13px;}
-.mcp-table th{text-align:left;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:8px 12px;border-bottom:2px solid var(--rule);}
-.mcp-table td{padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.5;}
-.mcp-table tr:last-child td{border-bottom:none;}
-.mcp-table td:first-child{font-weight:700;color:var(--ink);width:34%;}
-.mcp-table td:nth-child(2){color:var(--muted);width:34%;}
-.mcp-table td:last-child{color:#7a5700;font-weight:600;width:32%;}
-
-/* competency list */
-.competency-list{list-style:none;margin:20px 0;display:flex;flex-direction:column;gap:0;}
-.competency-item{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--rule);align-items:flex-start;}
-.competency-item:last-child{border-bottom:none;}
-.competency-icon{width:32px;height:32px;border-radius:6px;background:rgba(200,146,26,.1);border:1px solid rgba(200,146,26,.25);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
-.competency-title{font-size:13px;font-weight:800;color:var(--ink);margin-bottom:3px;}
-.competency-desc{font-size:12px;color:var(--muted);line-height:1.65;}
-
-/* chip row */
-.chip-row{display:flex;gap:6px;flex-wrap:wrap;margin:20px 0;}
-.chip{font-size:10px;font-weight:700;letter-spacing:.04em;color:var(--ink);background:var(--off);border:1px solid var(--rule);border-radius:4px;padding:4px 10px;}
-
-/* PM evolution table */
-.evolution-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:13px;}
-.evolution-table th{text-align:left;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:white;padding:10px 14px;background:var(--accent);}
-.evolution-table th:first-child{border-radius:6px 0 0 0;}
-.evolution-table th:last-child{border-radius:0 6px 0 0;}
-.evolution-table td{padding:11px 14px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.55;color:#2a2a2a;}
-.evolution-table tr:last-child td{border-bottom:none;}
-.evolution-table td:first-child{font-weight:700;color:var(--ink);width:22%;font-size:12px;}
-.evolution-table td:nth-child(2){width:26%;color:var(--muted);font-size:12px;}
-.evolution-table td:nth-child(3){width:26%;color:var(--muted);font-size:12px;}
-.evolution-table td:last-child{width:26%;font-size:12px;}
-/* section shading — alternating very light backgrounds per group */
-.evolution-table .grp-a td{background:#ffffff;}
-.evolution-table .grp-b td{background:#f9f9f8;}
-.evolution-table .grp-c td{background:#ffffff;}
-.evolution-table .grp-d td{background:#f9f9f8;}
-.evolution-table .grp-e td{background:#ffffff;}
-/* top border on first row of each group to visually separate sections */
-.evolution-table .grp-start td{border-top:2px solid var(--rule);}
-.evolution-table .grp-start:first-child td{border-top:none;}
-.evo-tool{font-size:11px;font-weight:700;color:var(--accent2);background:rgba(200,102,42,.07);border:1px solid rgba(200,102,42,.2);border-radius:4px;padding:2px 7px;display:inline-block;margin:2px 2px 2px 0;white-space:nowrap;text-decoration:none;}
-a.evo-tool:hover{background:rgba(200,102,42,.14);border-color:rgba(200,102,42,.4);}
-
-/* Marquet certification section */
+/* human-check / three pillars */
 .cert-section{background:var(--off);border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin:28px 0;}
 .cert-section-head{padding:16px 20px;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:12px;}
 .cert-section-eyebrow{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);}
@@ -173,7 +128,6 @@ a.evo-tool:hover{background:rgba(200,102,42,.14);border-color:rgba(200,102,42,.4
 .cert-pillar-label.clarity{color:#7c5cbf;}
 .cert-pillar-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px;}
 .cert-pillar-desc{font-size:12px;color:var(--muted);line-height:1.6;}
-.cert-pillar-q{font-size:11px;font-style:italic;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--rule);line-height:1.6;}
 .cert-footer{padding:12px 20px;border-top:1px solid var(--rule);font-size:12px;color:var(--muted);line-height:1.65;}
 .cert-footer strong{color:var(--ink);}
 @media(max-width:640px){
@@ -182,8 +136,13 @@ a.evo-tool:hover{background:rgba(200,102,42,.14);border-color:rgba(200,102,42,.4
   .cert-pillar:last-child{border-bottom:none;}
 }
 
-/* divider */
-.rule{border:none;border-top:1px solid var(--rule);margin:48px 0;}
+/* closing recap list */
+.element-list{list-style:none;margin:20px 0;display:flex;flex-direction:column;gap:0;}
+.element-item{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--rule);}
+.element-item:last-child{border-bottom:none;}
+.element-num{font-size:11px;font-weight:800;color:var(--accent2);letter-spacing:.06em;width:24px;flex-shrink:0;padding-top:2px;}
+.element-title{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:4px;letter-spacing:-.01em;}
+.element-desc{font-size:13px;color:var(--muted);line-height:1.7;}
 
 /* footnotes */
 .footnotes{margin-top:52px;padding-top:28px;border-top:2px solid var(--rule);}
@@ -239,20 +198,17 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   footer{padding:20px 24px;}
   .phase-card{grid-template-columns:1fr;}
   .phase-card-head{border-right:none;border-bottom:1px solid var(--rule);padding:16px 18px;}
-  .phase-body ul{grid-template-columns:1fr;}
   .phase-body{padding:16px 18px;}
-  .phase-mcp{padding:10px 18px;}
   .art-meta{gap:12px;}
   .art-tags{margin-left:0;}
-  .mcp-table{font-size:12px;}
 }
 </style>
-<meta name="description" content="How AI-native product operations actually works — from augmented tools to agents and MCPs. Research-grounded framework for PMs in 2026.">
+<meta name="description" content="A plain-language guide to how AI agents, MCP, and human review work together inside real software teams — no product management background required.">
 <link rel="canonical" href="https://robdull.com/tools/AI-native-prodops/AI-prodops-overview.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://robdull.com/tools/AI-native-prodops/AI-prodops-overview.html">
-<meta property="og:title" content="AI-Native Product Operations — Structural Elements | Rob Dull">
-<meta property="og:description" content="How AI-native product operations actually works — from augmented tools to agents and MCPs. Research-grounded framework for PMs in 2026.">
+<meta property="og:title" content="AI-Native Product Operations, Explained Simply | Rob Dull">
+<meta property="og:description" content="A plain-language guide to how AI agents, MCP, and human review work together inside real software teams — no product management background required.">
 <meta property="og:site_name" content="Rob Dull">
 </head>
 <body>
@@ -277,17 +233,16 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <div class="art-head">
-  <div class="eyebrow">Background Reading · Product Operations · AI</div>
-  <h1>AI-Augmented PM tools within <em>AI-native product operations</em></h1>
-  <p style="font-size:15px;color:var(--muted);margin-top:10px;max-width:640px;line-height:1.6;">Structural elements including MCP — how the tools connect, how agents orchestrate, and what product managers need to know to govern it all.</p>
+  <div class="eyebrow">Plain-Language Guide · How Software Gets Built With AI</div>
+  <h1>How AI tools become <em>part of the system</em></h1>
+  <p style="font-size:15px;color:var(--muted);margin-top:10px;max-width:640px;line-height:1.6;">AI agents, MCP, and human sign-offs — explained from scratch, for anyone who's curious. No product management background required.</p>
   <div class="art-meta">
-    <span class="art-meta-item"><strong>Published</strong> May 2026</span>
-    <span class="art-meta-item"><strong>Sources</strong> McKinsey, Gartner, Deloitte, arXiv, Institute of Product Leadership, Product School, Agentic AI Foundation (AAIF)</span>
+    <span class="art-meta-item"><strong>Published</strong> June 2026</span>
+    <span class="art-meta-item"><strong>Reading level</strong> No prior business or AI jargon assumed</span>
     <div class="art-tags">
-      <span class="tag">AI · Agents</span>
+      <span class="tag">AI Basics</span>
       <span class="tag">MCP</span>
-      <span class="tag">Product Ops</span>
-      <span class="tag">Governance</span>
+      <span class="tag">How Software Gets Built</span>
     </div>
   </div>
 </div>
@@ -296,616 +251,277 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <div class="toc">
     <div class="toc-label">In this piece</div>
     <ul class="toc-list">
-      <li><a href="#gap">The gap between using AI and being AI-native</a></li>
-      <li><a href="#elements">Eight structural elements</a></li>
-      <li><a href="#workflow">The four-phase AI-native PM workflow</a></li>
-      <li><a href="#evolution">How the PM role has evolved — and where the tools fit</a></li>
-      <li><a href="#marquet">Mastery, control, and clarity — certifying humans at every gate</a></li>
-      <li><a href="#mcp">MCP engineering as a core PM competency</a></li>
-      <li><a href="#bottleneck">Data access is the real bottleneck</a></li>
-      <li><a href="#throughline">The through-line</a></li>
+      <li><a href="#native">What "AI-native" means</a></li>
+      <li><a href="#modes">Three ways AI shows up in software work</a></li>
+      <li><a href="#connect">How AI tools plug into a company's data</a></li>
+      <li><a href="#check">Why a human still has to check the work</a></li>
+      <li><a href="#workflow">Where this shows up, step by step</a></li>
+      <li><a href="#takeaway">The big idea</a></li>
+      <li><a href="#tools">Try it yourself</a></li>
     </ul>
   </div>
 </div>
 
 <div class="art-body">
 
-  <p class="lead">The tools on this site were built on a specific hypothesis: AI is most valuable when it is inside the workflow at the moment of decision, not bolted on afterward. The research from 2025–2026 now provides the evidence base for what that actually looks like — and a new picture of what product managers need to know how to do.</p>
+  <p class="lead">AI chatbots like Claude or ChatGPT can write you an email or summarize a document — you open it, type a question, and copy the answer somewhere else. That's useful, but it's not what this page is about. This page is about something a level deeper: what happens when a software company builds AI directly into the actual process of building software, so the AI isn't just answering questions — it's reading live company data, drafting real work, and handing it to the next step on its own.</p>
 
-  <div class="section-head" id="gap">
+  <div class="glossary">
+    <div class="glossary-label">Quick definitions — refer back any time</div>
+    <dl>
+      <dt>Product Manager (PM)</dt>
+      <dd>The person who decides what a software team should build next, and why. Not the person writing the code — the person deciding what's worth coding.</dd>
+      <dt>AI agent</dt>
+      <dd>AI that can take multiple steps on its own — read some data, make a decision, take an action — instead of just answering one question and stopping.</dd>
+      <dt>LLM (large language model)</dt>
+      <dd>The underlying AI model — like Claude or GPT — that powers a chatbot or an AI agent. The "engine" inside the tool.</dd>
+      <dt>MCP (Model Context Protocol)</dt>
+      <dd>An open standard that lets AI tools connect to a company's software and data the same way every time, instead of needing custom one-off code for every connection.</dd>
+      <dt>HITL (human-in-the-loop)</dt>
+      <dd>A specific point in a process where a person reviews the AI's work before it's allowed to move forward.</dd>
+    </dl>
+  </div>
+
+  <div class="section-head" id="native">
     <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><line x1="0" y1="24" x2="24" y2="24" stroke-width=".5" opacity=".35"/><polygon points="0,24 2.5,17 5,24" stroke-width=".5" opacity=".28"/><polygon points="4,24 7,15 10,24" stroke-width=".6" opacity=".32"/><polygon points="9,24 12.5,13 16,24" stroke-width=".6" opacity=".3"/><polygon points="14,24 17,16 20,24" stroke-width=".5" opacity=".28"/><polygon points="19,24 21.5,18 24,24" stroke-width=".5" opacity=".25"/><line x1="3" y1="24" x2="3" y2="17" stroke-width="1.1" opacity=".55"/><polygon points="-1,17 3,7 7,17" stroke-width=".9" opacity=".55"/><line x1="20.5" y1="24" x2="20.5" y2="17" stroke-width="1.1" opacity=".5"/><polygon points="16.5,17 20.5,7 24.5,17" stroke-width=".9" opacity=".5"/><line x1="12" y1="24" x2="12" y2="16" stroke-width="1.5" opacity=".97"/><polygon points="12,1 5,16 19,16" stroke-width="1" opacity=".97"/></svg></div>
     <div class="section-head-text">
-      <p>Context</p>
-      <h2>The gap between <em>using AI</em> and being AI-native</h2>
+      <p>Getting oriented</p>
+      <h2>What "AI-native" <em>means</em></h2>
     </div>
   </div>
 
-  <p>The divide in 2026 is not between organizations that use AI and those that don't. The divide is between organizations using AI for isolated productivity tasks and those who have redesigned how work moves across the whole system.</p>
+  <p>There's a real difference between a company that <em>uses</em> AI and a company that's <strong>AI-native</strong>.</p>
+
+  <p>Using AI usually looks like this: someone opens a chatbot, types a question, and copies the answer into a document somewhere else. The AI is a tool sitting next to the work — helpful, but disconnected from everything around it.</p>
+
+  <p>Being AI-native looks different. AI agents are wired directly into the company's actual systems — its customer support tickets, its code, its project tracker — and they take action inside those systems on their own, with a person checking in at specific points rather than running every single step by hand.</p>
 
   <div class="stat-pull">
-    <div class="stat-num">88%</div>
-    <div class="stat-text"><strong>of organizations regularly use AI in at least one business function</strong> — yet only about one-third have started scaling it across the enterprise. McKinsey State of AI, 2025.</div>
+    <div class="stat-num">15×</div>
+    <div class="stat-text"><strong>more AI agents were running inside Microsoft's workplace software in 2026 than a year earlier.</strong> But most companies still haven't gotten an AI project past the testing phase — a widely-cited 2026 study found that 88% of AI agent pilot projects never reach everyday, real-world use. Microsoft Work Trend Index, 2026; Forrester / Anaconda, 2026.</div>
   </div>
-
-  <p>The more damning data point comes from engineering teams. Teams on high-AI-adoption workflows complete 21% more tasks and merge 98% more pull requests — but PR review time increases 91%. Without process redesign, the bottleneck just moves downstream. Leaders who invest in AI tooling without investing in the workflow redesign around it are paying for speed they can't capture.</p>
 
   <div class="callout-orange">
-    <strong>The test for AI-nativeness is not which tools you use.</strong> It's whether your decision architecture has been redesigned around AI's actual strengths — synthesis, pattern recognition, structured output at speed — and whether humans are reserved for the judgment calls AI structurally cannot make.
+    <strong>The real dividing line in 2026 isn't which companies use AI — almost all of them do now.</strong> It's whether a company has redesigned its actual workflow around what AI is good at, or just bolted a chatbot onto the same old process and called it done.
   </div>
 
-  <div class="section-head" id="elements">
-    <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round"><circle cx="12" cy="12" r="1.6" fill="white" stroke="none"/><path d="M12,10.4 Q12.8,6 12,1.5" stroke-width="1.1" opacity=".85"/><path d="M13.2,11 Q17,7.5 21,3.5" stroke-width="1.1" opacity=".85"/><path d="M13.6,12 Q18,12.8 22.5,12" stroke-width="1.1" opacity=".85"/><path d="M13.2,13 Q16.5,17 20.5,20.5" stroke-width="1.1" opacity=".85"/><path d="M12,13.6 Q11,18 12,22.5" stroke-width="1.1" opacity=".85"/><path d="M10.8,13 Q7.5,16.5 3.5,20.5" stroke-width="1.1" opacity=".85"/><path d="M10.4,12 Q6,11 1.5,12" stroke-width="1.1" opacity=".85"/><path d="M10.8,11 Q7,7 3.5,3.5" stroke-width="1.1" opacity=".85"/><circle cx="12" cy="1.5" r="1.3" fill="white" stroke="none" opacity=".9"/><rect x="19.5" y="1.5" width="2.5" height="2.5" rx=".5" fill="white" stroke="none" opacity=".85" transform="rotate(45,20.75,2.75)"/><circle cx="22.5" cy="12" r="1" fill="none" stroke="white" stroke-width="1.4" opacity=".9"/><circle cx="20.5" cy="20.5" r="1.5" fill="white" stroke="none" opacity=".8"/><rect x="10.7" y="21.5" width="2.5" height="2.5" rx=".5" fill="white" stroke="none" opacity=".8"/><circle cx="3.5" cy="20.5" r="1" fill="none" stroke="white" stroke-width="1.4" opacity=".85"/><circle cx="1.5" cy="12" r="1.3" fill="white" stroke="none" opacity=".75"/><polygon points="3.5,2 5,4.5 2,4.5" fill="white" stroke="none" opacity=".85"/></svg></div>
+  <div class="section-head" id="modes">
+    <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><polyline points="0,22 0,16 8,16 8,10 16,10 16,4 24,4" stroke-width="1.8" opacity=".9"/><circle cx="0" cy="22" r="1.4" fill="white" stroke="none" opacity=".7"/><circle cx="8" cy="16" r="1.4" fill="white" stroke="none" opacity=".82"/><circle cx="16" cy="10" r="1.4" fill="white" stroke="none" opacity=".92"/><circle cx="24" cy="4" r="1.6" fill="white" stroke="none"/></svg></div>
     <div class="section-head-text">
-      <p>Research findings</p>
-      <h2>Eight structural <em>elements</em></h2>
+      <p>The progression</p>
+      <h2>Three ways AI shows up <em>in software work</em></h2>
     </div>
   </div>
 
-  <p>The research from McKinsey, Gartner, Deloitte, Stanford's AI Index, and recent academic work on agentic AI in product management converges on eight elements that separate genuinely AI-native product operations from productivity-augmented versions of the old workflow.</p>
+  <p>It helps to think of this as three stages most teams pass through — not a single before-and-after switch.</p>
 
-  <ul class="element-list">
+  <div class="mode-grid">
+    <div class="mode-card">
+      <div class="mode-label">Stage 1</div>
+      <div class="mode-title">Doing it by hand</div>
+      <ul>
+        <li>A person gathers information, writes it up, and hands it to the next person.</li>
+        <li>Slow, but every step has a human directly making the call.</li>
+      </ul>
+    </div>
+    <div class="mode-card">
+      <div class="mode-label">Stage 2</div>
+      <div class="mode-title">AI as a writing assistant</div>
+      <ul>
+        <li>Same basic process — but a chatbot drafts the document faster.</li>
+        <li>The workflow itself doesn't change. AI just speeds up one step in it.</li>
+      </ul>
+    </div>
+    <div class="mode-card is-native">
+      <div class="mode-label">Stage 3 — AI-native</div>
+      <div class="mode-title">AI as part of the system</div>
+      <ul>
+        <li>AI agents read live data, draft the work, and pass it to the next agent or person automatically.</li>
+        <li>The whole pipeline is redesigned around what AI is good at.</li>
+      </ul>
+    </div>
+  </div>
 
-    <li class="element-item">
-      <span class="element-num">01</span>
-      <div class="element-body">
-        <div class="element-title">The PM role shifts from executor to orchestrator</div>
-        <div class="element-desc">Product managers currently spend roughly 30% of their time on data gathering and synthesis, 20% on stakeholder communication, and only 15% on strategic thinking. AI-native product ops inverts those proportions. The PM becomes a system orchestrator — directing, framing, and ratifying work that AI agents execute. Product organizations increasingly resemble intelligence systems rather than coordination hubs: teams become smaller but more leveraged as AI handles synthesis and coordination overhead.</div>
+  <p>Most companies in 2026 are still somewhere between Stage 1 and Stage 2 — they've added AI, but the underlying process hasn't moved. Stage 3 is what the rest of this page is about.</p>
+
+  <div class="section-head" id="connect">
+    <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round"><rect x="0" y="8" width="8" height="9" rx="1.3" stroke-width="1.5" opacity=".9"/><line x1="2.2" y1="8" x2="2.2" y2="5" stroke-width="1.8" opacity=".92"/><line x1="5.8" y1="8" x2="5.8" y2="5" stroke-width="1.8" opacity=".92"/><line x1="4" y1="8" x2="4" y2="6.2" stroke-width="1.4" opacity=".6"/><line x1="8" y1="12.5" x2="12" y2="12.5" stroke-width="1.2" stroke-dasharray="1.8 1.8" opacity=".7"/><rect x="12" y="6" width="12" height="13" rx="2" stroke-width="1.5" opacity=".9"/><rect x="14.5" y="9" width="2" height="3.5" rx=".7" fill="white" stroke="none" opacity=".75"/><rect x="18.5" y="9" width="2" height="3.5" rx=".7" fill="white" stroke="none" opacity=".75"/><path d="M15,15.5 Q15,18 18,18 Q21,18 21,15.5" stroke-width="1.2" opacity=".65"/></svg></div>
+    <div class="section-head-text">
+      <p>The connection layer</p>
+      <h2>How AI tools plug into <em>a company's data</em></h2>
+    </div>
+  </div>
+
+  <p>Here's a problem that doesn't get talked about enough: an AI agent is only as useful as the data it can see. If an AI tool can't read a company's support tickets, it can't summarize them, no matter how smart the underlying model is.</p>
+
+  <p>For years, connecting an AI tool to each different piece of software required custom, one-off code — a different "plug" for every system. <strong>Model Context Protocol (MCP)</strong> fixed that. It's an open standard, first released by Anthropic in late 2024, that lets any AI tool connect to any data source the same standardized way — read a support ticket, edit a file, look something up in a database — through one shared connection method instead of custom code for every single pairing. People sometimes call it <strong>the USB-C of AI</strong>: one universal plug shape instead of a different cable for every device.</p>
+
+  <div class="stat-pull">
+    <div class="stat-num">970×</div>
+    <div class="stat-text"><strong>growth in MCP's monthly downloads in about 18 months</strong> — from roughly 100,000 downloads a month at its November 2024 launch to more than 97 million a month by early 2026. By the end of 2025 it had been handed over to a neutral nonprofit, the Linux Foundation, so no single company controls the standard going forward. Anthropic / Linux Foundation, 2025–2026.</div>
+  </div>
+
+  <p>In practice, this might mean an AI agent automatically reads new customer support tickets overnight, groups them by topic, and flags the handful that look like a brand-new problem — instead of a person scrolling through hundreds of tickets every Monday morning.</p>
+
+  <div class="callout">
+    <strong>Want to see a fully wired-up example?</strong> The <a href="prodops-network.html" style="color:var(--accent);font-weight:600;">technical network diagram</a> on this site maps out a real version of this — every data source, every connection, and every AI agent in one interactive picture. It's more detailed than this page; this page is the plain-language version of the same idea.
+  </div>
+
+  <div class="section-head" id="check">
+    <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><path d="M0,12 Q6,2 13,12 Q6,22 0,12Z" stroke-width="1.6" opacity=".9"/><circle cx="7" cy="12" r="4" stroke-width="1.3" opacity=".85"/><circle cx="7" cy="12" r="1.7" fill="white" stroke="none" opacity=".95"/><line x1="13" y1="12" x2="16" y2="12" stroke-width="1.2" stroke-dasharray="1.5 1.5" opacity=".65"/><rect x="16" y="7" width="8" height="7" rx="1.5" stroke-width="1.4" opacity=".88"/><line x1="17.5" y1="10" x2="22.5" y2="10" stroke-width=".9" opacity=".45"/><line x1="17.5" y1="12" x2="21" y2="12" stroke-width=".9" opacity=".38"/></svg></div>
+    <div class="section-head-text">
+      <p>Human oversight</p>
+      <h2>Why a human still has to <em>check the work</em></h2>
+    </div>
+  </div>
+
+  <p>Just because an AI agent <em>can</em> act on its own doesn't mean it should act without anyone checking. A person reviewing the AI's work before it moves forward is called <strong>human-in-the-loop</strong>, usually shortened to <strong>HITL</strong>. Think of it like a teacher reviewing a draft before it gets turned in — except here, the "draft" might be a customer-facing report, or even a change pushed to a real, live product that people are using right now.</p>
+
+  <div class="callout-orange">
+    <strong>A January 2026 study from Anthropic found that engineers who relied heavily on AI assistance saw a 17% drop in certain hands-on skills over time</strong> — even as their output got faster. The risk isn't that the AI did a bad job. It's that if a person stops doing the work themselves, they can eventually lose the ability to tell when the AI got it wrong.
+  </div>
+
+  <p>This idea — that real authority requires real understanding — isn't new. It comes from David Marquet, a U.S. Navy submarine commander who argued that no one should approve a decision they don't understand, no matter how senior they are or how much they trust the person (or system) that made it. <a href="../../perspectives/marquet-ai-cert.html" style="color:var(--accent);font-weight:600;">Read the full story →</a></p>
+
+  <div class="cert-section">
+    <div class="cert-section-head">
+      <div>
+        <div class="cert-section-eyebrow">Three quick checks</div>
+        <div class="cert-section-title">Ask these before approving anything an AI produced</div>
       </div>
-    </li>
-
-    <li class="element-item">
-      <span class="element-num">02</span>
-      <div class="element-body">
-        <div class="element-title">Context engineering is the foundational discipline</div>
-        <div class="element-desc">By mid-2026, context engineering has emerged as a distinct professional discipline. Context engines coordinate data serving, metadata management, and optimization of context across multiple inference rounds — determining what information the model sees and when. Persistent, well-structured context is the prerequisite that makes every downstream agentic workflow produce consistent, high-quality output rather than generic responses. It is the difference between a tool that knows your user and a tool that generates a persona from scratch every time.</div>
+    </div>
+    <div class="cert-pillars">
+      <div class="cert-pillar">
+        <div class="cert-pillar-label mastery">Do I understand it?</div>
+        <div class="cert-pillar-title">Not just "it looks right"</div>
+        <div class="cert-pillar-desc">Could you explain, in your own words, why the AI did what it did? If you can't, you're not reviewing it — you're trusting it.</div>
       </div>
-    </li>
-
-    <li class="element-item">
-      <span class="element-num">03</span>
-      <div class="element-body">
-        <div class="element-title">Signal-to-decision is a continuous loop, not a quarterly report</div>
-        <div class="element-desc">The winning product organizations from 2026 to 2030 will be those who convert customer signal into validated strategic leverage before execution begins. The advanced end of this is fully autonomous: an agent detects an activation rate drop, forms a hypothesis, designs an in-app experiment, deploys it to a limited cohort, and reports back — without the PM initiating the workflow. The bottleneck is not technical capability but organizational trust in the governance framework that defines what agents can do autonomously versus what requires human approval.</div>
+      <div class="cert-pillar">
+        <div class="cert-pillar-label control">Could I catch it?</div>
+        <div class="cert-pillar-title">If it's wrong, would you notice</div>
+        <div class="cert-pillar-desc">If this output is wrong, would you spot it — or would it just sail through because it sounds confident?</div>
       </div>
-    </li>
-
-    <li class="element-item">
-      <span class="element-num">04</span>
-      <div class="element-body">
-        <div class="element-title">Agentic chains replace single-step prompts</div>
-        <div class="element-desc">The era of chatting with AI for product work is over. Agentic workflows involve agents that don't just generate text — they autonomously execute complex chains of tasks. A PM sets a goal ("analyze these 50 support tickets and update the backlog with high-priority bugs") and the agent executes, verifies output, and integrates into Jira or Linear. The market has converged on three orchestration patterns: workflow engines for predictable task flows, LLM orchestrators for complex prompt logic, and agentic orchestration for dynamic multi-domain problems. Most product ops workflows will use all three.</div>
+      <div class="cert-pillar">
+        <div class="cert-pillar-label clarity">Does it solve the real problem?</div>
+        <div class="cert-pillar-title">Not just the literal question</div>
+        <div class="cert-pillar-desc">Did the AI answer the exact thing it was asked, or the actual problem you were trying to solve? Those aren't always the same thing.</div>
       </div>
-    </li>
-
-    <li class="element-item">
-      <span class="element-num">05</span>
-      <div class="element-body">
-        <div class="element-title">HITL gates are structural, not optional</div>
-        <div class="element-desc">Research on agentic AI in product management emphasizes that the PM role must be reconceptualized as an orchestrator of intelligent ecosystems. The practical form: bounded autonomy architectures with clear operational limits, defined escalation paths for high-stakes decisions, and comprehensive audit trails. Agents handle first-pass execution; humans make the judgment calls that agents structurally cannot — strategic bets, ethical trade-offs, and decisions requiring organizational context that isn't in any dataset.</div>
-      </div>
-    </li>
-
-    <li class="element-item">
-      <span class="element-num">06</span>
-      <div class="element-body">
-        <div class="element-title">Governance is a prerequisite, not a compliance layer</div>
-        <div class="element-desc">As agentic systems begin to make decisions and take action, governance is no longer secondary — it is becoming a prerequisite for deployment. The shift in 2026 is from viewing governance as overhead to recognizing it as an enabler: mature governance frameworks increase organizational confidence to deploy agents in higher-value scenarios, creating a virtuous cycle. Trustworthy outcomes require engineering controls — distinct agent identities with least-privileged access, policy-as-code enforcement, full observability, and HITL at key decision points.</div>
-      </div>
-    </li>
-
-    <li class="element-item">
-      <span class="element-num">07</span>
-      <div class="element-body">
-        <div class="element-title">Evaluation engineering is the missing capability</div>
-        <div class="element-desc">Eval engineering is the missing piece of agentic AI governance. Evals are validation tests for your AI's reasoning — like automated acceptance criteria for workflow logic. They bridge the gap between "AI gave me an answer" and "I know why AI gave me this answer, and it's the right one." For any multi-modal or agentic system, designing an eval strategy — defining success metrics including latency, hallucination rate, and confidence scoring — is now identified as a first-class PM capability that separates junior from senior AI product work.</div>
-      </div>
-    </li>
-
-    <li class="element-item">
-      <span class="element-num">08</span>
-      <div class="element-body">
-        <div class="element-title">MCP is the connective tissue — and engineering it is a PM skill</div>
-        <div class="element-desc">Model Context Protocol represents a standardization breakthrough comparable to USB-C for hardware connectivity. It is how AI tools, agents, and the systems of record they act on are connected without bespoke integrations. In a product ops context, MCP servers provide the connection points between AI tools and the data sources that make them useful. Organizations that establish MCP infrastructure early are building a compounding advantage — each new agent or tool leverages the same connection layer. But MCP is not just infrastructure to be handed to engineering. Understanding what to connect, in what order, with what scope, is a product design decision. The PM who can specify and govern MCP connections is structurally more capable than the one who cannot. This is treated in depth below.</div>
-      </div>
-    </li>
-
-  </ul>
+    </div>
+  </div>
 
   <div class="section-head" id="workflow">
-    <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/></marker></defs><circle cx="12" cy="2"  r="2" stroke-width="1.5"/><circle cx="22" cy="12" r="2" stroke-width="1.5"/><circle cx="12" cy="22" r="2" stroke-width="1.5"/><circle cx="2"  cy="12" r="2" stroke-width="1.5"/><line x1="14" y1="3.7" x2="20.3" y2="10" stroke-width="1.3" marker-end="url(#arr)"/><line x1="20.3" y1="14" x2="14" y2="20.3" stroke-width="1.3" marker-end="url(#arr)"/><line x1="10" y1="20.3" x2="3.7" y2="14" stroke-width="1.3" marker-end="url(#arr)"/><path d="M2,10 Q0,4 10,2.2" fill="none" stroke-width="1.1" stroke-dasharray="2 2" marker-end="url(#arr)" opacity=".7"/></svg></div>
+    <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/></marker></defs><circle cx="12" cy="2" r="2" stroke-width="1.5"/><circle cx="22" cy="12" r="2" stroke-width="1.5"/><circle cx="12" cy="22" r="2" stroke-width="1.5"/><circle cx="2" cy="12" r="2" stroke-width="1.5"/><line x1="14" y1="3.7" x2="20.3" y2="10" stroke-width="1.3" marker-end="url(#arr)"/><line x1="20.3" y1="14" x2="14" y2="20.3" stroke-width="1.3" marker-end="url(#arr)"/><line x1="10" y1="20.3" x2="3.7" y2="14" stroke-width="1.3" marker-end="url(#arr)"/><path d="M2,10 Q0,4 10,2.2" fill="none" stroke-width="1.1" stroke-dasharray="2 2" marker-end="url(#arr)" opacity=".7"/></svg></div>
     <div class="section-head-text">
-      <p>Applied framework</p>
-      <h2>The four-phase <em>AI-native PM workflow</em></h2>
+      <p>Putting it together</p>
+      <h2>Where this shows up, <em>step by step</em></h2>
     </div>
   </div>
 
-  <p>Beyond the structural elements, an AI-native product operations workflow has a concrete shape. Drawing from the Institute of Product Leadership's AI Native Product Loop and Product School's decision-point framework, the workflow runs in four continuous phases — each one relying on MCP connections to the systems of record that make it ground in reality rather than generate in a vacuum.</p>
+  <p>Inside an actual product team, this plays out across four stages — and at every stage, AI agents handle more of the legwork while a person still signs off on the result.</p>
 
   <div class="phase-grid">
 
     <div class="phase-card">
       <div class="phase-card-head">
-        <span class="phase-num">Phase 01</span>
-        <span class="phase-title">Continuous research &amp; discovery</span>
+        <span class="phase-num">Stage 01</span>
+        <span class="phase-title">Figure out what people need</span>
       </div>
-      <div class="phase-card-right">
-        <div class="phase-body">
-          <ul>
-            <li><strong>Autonomous synthesis:</strong> agents continuously ingest raw data from Gong, Zendesk, Intercom, and App Store reviews; no manual querying.</li>
-            <li><strong>Dynamic cluster mapping:</strong> the system automatically groups user pain points into real-time trend graphs, showing what's rising or resolving.</li>
-            <li><strong>Automated persona simulation:</strong> PMs test early concepts against AI agents trained on historical user behavior data, prior to design.</li>
-            <li><strong>Intent gap analysis:</strong> AI highlights areas where users search for utility but find no corresponding feature, surfacing unmet demand.</li>
-          </ul>
-        </div>
-        <div class="phase-mcp"><span>MCP connections:</span> Research ingest MCP (Dovetail, Notion) · Signal aggregator MCP (Zendesk, Gong, Intercom) · Metrics MCP (Amplitude, Mixpanel)</div>
+      <div class="phase-body">
+        <ul>
+          <li>AI agents continuously scan support tickets, sales calls, and app reviews for patterns — instead of someone manually reading through all of it every few months.</li>
+          <li>A person still decides which patterns matter enough to act on.</li>
+        </ul>
       </div>
     </div>
 
     <div class="phase-card">
       <div class="phase-card-head">
-        <span class="phase-num">Phase 02</span>
-        <span class="phase-title">Predictive intake &amp; prioritization</span>
+        <span class="phase-num">Stage 02</span>
+        <span class="phase-title">Decide what to build next</span>
       </div>
-      <div class="phase-card-right">
-        <div class="phase-body">
-          <ul>
-            <li><strong>Auto-scoping RICE:</strong> AI drafts initial Reach, Impact, Confidence, and Effort scores by analyzing historical engineering data and market size — a starting point the PM refines, not a blank form they fill.</li>
-            <li><strong>Semantic duplicate detection:</strong> incoming feature requests are automatically merged with existing backlog items, preventing redundant work.</li>
-            <li><strong>Resource forecasting:</strong> the system predicts sprint bottleneck risks based on current team velocity and code complexity.</li>
-            <li><strong>Strategic alignment check:</strong> AI flags features that deviate from current OKRs before they enter the detailed intake pipeline.</li>
-          </ul>
-        </div>
-        <div class="phase-mcp"><span>MCP connections:</span> Intake source MCP (Jira, Linear, Productboard) · Strategy context MCP (Confluence, Notion, Lattice) · Metrics MCP (velocity, cycle time)</div>
+      <div class="phase-body">
+        <ul>
+          <li>AI drafts a first-pass ranking of which ideas seem worth doing, based on past data — a starting point, not a final answer.</li>
+          <li>A person checks that ranking against context the AI doesn't have, like a leadership commitment or a competitor's recent move.</li>
+        </ul>
       </div>
     </div>
 
     <div class="phase-card">
       <div class="phase-card-head">
-        <span class="phase-num">Phase 03</span>
-        <span class="phase-title">Automated specification &amp; execution</span>
+        <span class="phase-num">Stage 03</span>
+        <span class="phase-title">Write the plan and build it</span>
       </div>
-      <div class="phase-card-right">
-        <div class="phase-body">
-          <ul>
-            <li><strong>Self-writing PRDs:</strong> PMs prompt the intake pipeline with a feature idea; the agentic chain generates user stories, edge cases, and technical constraints as a draft the PM refines.</li>
-            <li><strong>Synthetic test generation:</strong> AI writes automated QA test scripts and acceptance criteria simultaneously with the feature spec — cutting the handoff delay to zero.</li>
-            <li><strong>Bilingual code mapping:</strong> the system automatically converts PRD requirements into tracked Jira tickets and GitHub issues, maintaining traceability from idea to implementation.</li>
-            <li><strong>Assumption surfacing:</strong> critical assumptions about user behavior, technical feasibility, and market size are made explicit and ranked by risk before any code is written.</li>
-          </ul>
-        </div>
-        <div class="phase-mcp"><span>MCP connections:</span> Intake source MCP (Jira write-back, GitHub issues) · Strategy context MCP (acceptance criteria context) · Research ingest MCP (user behavior grounding)</div>
+      <div class="phase-body">
+        <ul>
+          <li>AI drafts the detailed spec — what to build, what could go wrong, how to test it — starting from a one-line idea.</li>
+          <li>A person reviews it before any code gets written, catching the parts the AI got wrong or missed.</li>
+        </ul>
       </div>
     </div>
 
     <div class="phase-card">
       <div class="phase-card-head">
-        <span class="phase-num">Phase 04</span>
-        <span class="phase-title">Intelligent continuous deployment</span>
+        <span class="phase-num">Stage 04</span>
+        <span class="phase-title">Ship it and see what happens</span>
       </div>
-      <div class="phase-card-right">
-        <div class="phase-body">
-          <ul>
-            <li><strong>Automated release notes:</strong> AI reads final code commits and drafts personalized release notes for marketing, sales, and customers — scoped to each audience's language.</li>
-            <li><strong>Predictive canary testing:</strong> the deployment system monitors telemetry during rollouts and automatically rolls back if anomalies appear — without waiting for the PM to notice.</li>
-            <li><strong>Real-time feature tracking:</strong> AI builds custom analytics dashboards the moment a feature goes live, tracking conversion and adoption against the metrics defined at spec time.</li>
-            <li><strong>Feedback loop closure:</strong> the system automatically notifies the users who originally requested the feature once it is deployed — closing the signal-to-delivery loop explicitly.</li>
-          </ul>
-        </div>
-        <div class="phase-mcp"><span>MCP connections:</span> Metrics MCP (DataDog, Mixpanel, GA4 — canary monitoring) · Intake source MCP (write-back of release status) · Signal aggregator MCP (post-deploy NPS and CSAT capture)</div>
+      <div class="phase-body">
+        <ul>
+          <li>AI drafts release notes, watches for problems right after launch, and can pause the rollout automatically if something looks broken.</li>
+          <li>A person still makes the final call on rolling it out to everyone.</li>
+        </ul>
       </div>
     </div>
 
   </div>
 
-  <div class="callout">
-    <strong>The PM's job in this workflow is not to execute the phases — it is to govern the transitions between them.</strong> Each phase produces structured output that the next phase depends on. The HITL gates sit at those transitions: ratifying the opportunity map before intake begins, validating the JTBD frame before assumption mapping runs, approving the feature brief before spec work proceeds, and reviewing canary metrics before full rollout is authorized. Execution is agentic; judgment is human.
-  </div>
-
-  <div class="section-head" id="evolution">
-    <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><polyline points="0,22 0,16 8,16 8,10 16,10 16,4 24,4" stroke-width="1.8" opacity=".9"/><circle cx="0"  cy="22" r="1.4" fill="white" stroke="none" opacity=".7"/><circle cx="8"  cy="16" r="1.4" fill="white" stroke="none" opacity=".82"/><circle cx="16" cy="10" r="1.4" fill="white" stroke="none" opacity=".92"/><circle cx="24" cy="4"  r="1.6" fill="white" stroke="none"/></svg></div>
+  <div class="section-head" id="takeaway">
+    <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round"><defs><marker id="arri" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/></marker></defs><line x1="12" y1="0" x2="12" y2="9.5" stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="24" y1="0" x2="14.5" y2="9.5" stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="24" y1="12" x2="14.5" y2="12" stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="24" y1="24" x2="14.5" y2="14.5" stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="12" y1="24" x2="12" y2="14.5" stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="0" y1="24" x2="9.5" y2="14.5" stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="0" y1="12" x2="9.5" y2="12" stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="0" y1="0" x2="9.5" y2="9.5" stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><circle cx="12" cy="12" r="2.3" fill="white" stroke="none"/></svg></div>
     <div class="section-head-text">
-      <p>PM role evolution</p>
-      <h2>How the PM role has evolved — <em>and where the tools fit</em></h2>
+      <p>Wrapping up</p>
+      <h2>The <em>big idea</em></h2>
     </div>
   </div>
-
-  <p>The shift to AI-native product operations is not a single transition — it has happened in three distinct generations, each with its own dominant workflow pattern, primary bottleneck, and relationship between PM effort and product decision quality. The tools on this site were designed to serve the third generation.</p>
-
-  <h3>Generation 1 — Document-driven (pre-2022)</h3>
-  <p>The PM's primary output was a document: a PRD, a requirements brief, a business case memo. Research was gathered in periodic sprints, synthesized manually, and written up in a format that would survive the journey from discovery to engineering. The bottleneck was translation — the PM spent most of their time converting fuzzy organizational knowledge into structured text that a development team could act on. Quality depended entirely on the PM's individual capacity to synthesize and write.</p>
-
-  <h3>Generation 2 — AI-augmented (2022–2024)</h3>
-  <p>LLMs entered the workflow as writing accelerators. PRDs got written faster. Interview summaries got drafted from transcripts. Business cases got templated. But the workflow architecture stayed the same: PM gathers inputs manually, PM writes document, PM presents to stakeholders, development team executes. AI made the writing faster but left the information architecture untouched. This is where most organizations remain in 2026 — and why the McKinsey adoption gap exists. Speed was gained; leverage was not.</p>
-
-  <h3>Generation 3 — AI-native (2024–present)</h3>
-  <p>The workflow architecture itself changes. Data sources connect to tools via MCP. Agents synthesize signal continuously rather than at research sprint intervals. Tools produce structured output that other tools and agents can consume — not just PDFs that get emailed around. The PM's job shifts from producing documents to governing the transitions between agentic steps. The bottleneck moves from synthesis capacity to judgment quality.</p>
-
-  <div class="callout">
-    <strong>The tools on this site are designed for the third generation — not as faster document writers, but as nodes in a connected workflow.</strong> Each one produces structured output that is designed to be consumed by the next tool in the chain: the persona grounds the journey map, the journey map feeds the opportunity merge, the business case gates the intake pipeline, the intake brief unlocks engineering. The tools only realize their full value when they are connected.
-  </div>
-
-  <table class="evolution-table">
-    <thead>
-      <tr>
-        <th>Dimension</th>
-        <th>Gen 1 — Document-driven</th>
-        <th>Gen 2 — AI-augmented</th>
-        <th>Gen 3 — AI-native</th>
-      </tr>
-    </thead>
-    <tbody>
-
-      <!-- GROUP A: Work output -->
-      <tr class="grp-a grp-start">
-        <td>PM primary output</td>
-        <td>PRD, business case memo, requirements brief</td>
-        <td>AI-assisted PRD, faster brief</td>
-        <td>Structured JSON handoffs, approved gate records, strategy cascade</td>
-      </tr>
-
-      <!-- GROUP B: Discovery & research -->
-      <tr class="grp-b grp-start">
-        <td>Research cadence</td>
-        <td>Quarterly discovery sprints</td>
-        <td>Quarterly sprints, faster synthesis</td>
-        <td>Continuous signal loop, weekly delta brief from agent</td>
-      </tr>
-      <tr class="grp-b">
-        <td>User research</td>
-        <td>Interview notes in Notion, manual persona card</td>
-        <td>AI-summarized transcripts, faster persona draft</td>
-        <td>
-          Research ingest MCP → structured themes → live persona with JTBD framing
-          <br><a href="../persona-generator/persona-index.html" class="evo-tool">Persona generator &#8599;</a> <a href="../journey-map/journey-map-index.html" class="evo-tool">Journey map builder &#8599;</a>
-        </td>
-      </tr>
-
-      <!-- GROUP C: Intake & prioritisation -->
-      <tr class="grp-c grp-start">
-        <td>Prioritization method</td>
-        <td>Manual RICE in spreadsheet</td>
-        <td>AI-assisted scoring, still spreadsheet-native</td>
-        <td>Auto-scoped RICE from live backlog and velocity data via MCP</td>
-      </tr>
-      <tr class="grp-c">
-        <td>Business case</td>
-        <td>Manual financial modelling, slide deck</td>
-        <td>AI-drafted narrative, PM fills numbers</td>
-        <td>
-          AI draft enriched with live benchmarks via MCP, HITL approval gated
-          <br><a href="../business-case/business-case-index.html" class="evo-tool">Business case gen. &#8599;</a>
-        </td>
-      </tr>
-      <tr class="grp-c">
-        <td>Feature intake</td>
-        <td>Submission form → PM review → backlog item</td>
-        <td>AI-suggested tags and priorities on submission</td>
-        <td>
-          4-step agentic chain: triage → JTBD → assumptions → RICE, with HITL at step 2 and output
-          <br><a href="../feature-intake/feature-intake-index.html" class="evo-tool">Feature intake pipeline &#8599;</a>
-        </td>
-      </tr>
-
-      <!-- GROUP D: Strategy & health -->
-      <tr class="grp-d grp-start">
-        <td>Strategy alignment</td>
-        <td>Annual planning deck, quarterly OKR review</td>
-        <td>AI-drafted OKR summaries and gap notes</td>
-        <td>
-          Live strategy context MCP → Hoshin matrix → cascade gap agent → aligned output
-          <br><a href="../hoshin-kanri/hoshin-v2mom-index.html" class="evo-tool">Hoshin Kanri + V2MOM &#8599;</a>
-        </td>
-      </tr>
-      <tr class="grp-d">
-        <td>Ops health</td>
-        <td>Retrospective survey, ad hoc health checks</td>
-        <td>AI-themed retro summaries</td>
-        <td>
-          Metrics MCP → auto-populated radar → AI interpretation → prioritized recs
-          <br><a href="../prod-ops-radar/prod-ops-radar-index.html" class="evo-tool">Product ops radar &#8599;</a>
-        </td>
-      </tr>
-
-      <!-- GROUP E: The PM role -->
-      <tr class="grp-e grp-start">
-        <td>Human role</td>
-        <td>Synthesizer, writer, coordinator</td>
-        <td>Editor, prompter, reviewer</td>
-        <td>Orchestrator, framer, gate-keeper at the moments that matter</td>
-      </tr>
-      <tr class="grp-e">
-        <td>Primary bottleneck</td>
-        <td>PM writing and synthesis capacity</td>
-        <td>Prompt quality and tool selection</td>
-        <td>Judgment quality at HITL gates, data readiness of MCP layer</td>
-      </tr>
-
-    </tbody>
-  </table>
-
-  <p>The table above makes a specific claim: each tool on this site corresponds to a concrete Gen 3 capability that has no adequate equivalent in either Gen 1 or Gen 2 workflows. They are not writing accelerators. They are workflow nodes — and the value of each one compounds when it is connected to the others.</p>
-
-  <div class="section-head" id="marquet">
-    <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><path d="M0,12 Q6,2 13,12 Q6,22 0,12Z" stroke-width="1.6" opacity=".9"/><circle cx="7" cy="12" r="4" stroke-width="1.3" opacity=".85"/><circle cx="7" cy="12" r="1.7" fill="white" stroke="none" opacity=".95"/><line x1="13" y1="12" x2="16" y2="12" stroke-width="1.2" stroke-dasharray="1.5 1.5" opacity=".65"/><rect x="16" y="7" width="8" height="7" rx="1.5" stroke-width="1.4" opacity=".88"/><line x1="17.5" y1="10" x2="22.5" y2="10" stroke-width=".9" opacity=".45"/><line x1="17.5" y1="12" x2="21" y2="12" stroke-width=".9" opacity=".38"/></svg></div>
-    <div class="section-head-text">
-      <p>Human oversight</p>
-      <h2>Mastery, control, and clarity — <em>certifying humans at every gate</em></h2>
-    </div>
-  </div>
-
-  <p>Faster synthesis and autonomous agentic execution introduce a risk that sits underneath all the other ones: the PM who approves a HITL gate without genuinely understanding what the agent produced has not added a governance layer. They have added a rubber stamp with a human face.</p>
-
-  <p>The Anthropic-conducted RCT published in January 2026 documented a 17% decline in developer mastery among teams using AI assistance heavily — alongside the productivity gains. The finding was not that AI is bad for skill development. It was that <strong>productivity benefits can come at the cost of the debugging and validation skills needed to oversee AI-generated work.</strong> The same dynamic applies to product managers approving agentic intake outputs, reviewing enriched business cases, and ratifying opportunity maps they didn't synthesize themselves.</p>
-
-  <div class="callout-orange">
-    <strong>The most important safeguard in AI-native product operations is not the governance framework — it is a PM who understands the domain well enough to spot when the agent has gone wrong.</strong> David Marquet called this mastery. It is still the prerequisite for safe delegation, at any level of automation. The question "Is it safe?" requires a human who can credibly answer it — not just one who is standing at the gate.
-  </div>
-
-  <p>Drawing from <a href="../../perspectives/marquet-ai-cert.html" style="color:var(--accent);font-weight:600;">the Marquet certification framework</a> — which applies David Marquet's Leader-Leader model from <em>Turn the Ship Around!</em> to AI-native workflows — the right response to this risk is not to slow down the agents. It is to verify human understanding at every gate, consistently and as a matter of course. Marquet's certification questions focused on three pillars, each of which maps directly onto the HITL gates in the AI-native PM workflow.</p>
-
-  <div class="cert-section">
-    <div class="cert-section-head">
-      <div>
-        <div class="cert-section-eyebrow">Marquet Framework · Applied to AI-Native PM</div>
-        <div class="cert-section-title">The three-pillar certification for every HITL gate</div>
-      </div>
-      <a href="../../perspectives/marquet-ai-cert.html" class="cert-section-link">Read the full article &#8599;</a>
-    </div>
-    <div class="cert-pillars">
-      <div class="cert-pillar">
-        <div class="cert-pillar-label mastery">Mastery</div>
-        <div class="cert-pillar-title">Technical competence</div>
-        <div class="cert-pillar-desc">Does the PM understand what the agent produced and why it chose this approach over the obvious alternative? Can they identify which assumptions the agent made — and whether those assumptions hold in this specific context?</div>
-        <div class="cert-pillar-q">"Which parts of this output did you manually verify against your own understanding?"</div>
-      </div>
-      <div class="cert-pillar">
-        <div class="cert-pillar-label control">Control</div>
-        <div class="cert-pillar-title">Governance and guardrails</div>
-        <div class="cert-pillar-desc">Does the PM understand the failure modes, rollback procedures, and irreversible actions in this workflow step? Are the consequential actions — Jira write-backs, approved business cases, go/no-go decisions — explicitly gated behind human confirmation?</div>
-        <div class="cert-pillar-q">"Which actions in this workflow are irreversible? Are they gated behind explicit human confirmation?"</div>
-      </div>
-      <div class="cert-pillar">
-        <div class="cert-pillar-label clarity">Clarity</div>
-        <div class="cert-pillar-title">Clarity of intent</div>
-        <div class="cert-pillar-desc">Does this output serve the goal that was stated — or just the prompt that was written? A JTBD frame that answers the prompt perfectly but misframes the actual user problem will corrupt every downstream step. The PM who can distinguish these is the safeguard.</div>
-        <div class="cert-pillar-q">"How does this output serve the goal we stated, not just the prompt we wrote?"</div>
-      </div>
-    </div>
-    <div class="cert-footer">
-      <strong>Applied to the AI-native workflow:</strong> use two or three randomly selected questions from the full checklist during any consequential HITL gate — the JTBD frame review, the business case approval, the intake output review, and all three parallel review gates before engineering commitment. The goal is not to create bureaucracy. It is to verify that the human at the gate is a genuine safeguard, not a formality. <a href="../../perspectives/marquet-ai-cert.html" style="color:var(--accent);font-weight:600;">Full certification checklist &#8599;</a>
-    </div>
-  </div>
-
-  <p>The Marquet framework also surfaces a design principle for the tools themselves: every tool that produces output a PM will approve should make its reasoning visible, not just its conclusions. The business case generator's confidence scoring on financial claims, the feature intake pipeline's explicit assumption mapping, the opportunity map's signal source citations — these are not just usability features. They are the mechanism by which a PM can exercise mastery rather than trust-by-default.</p>
-
-  <p>Cognitive engagement with AI solutions, reinforced through active review and collaboration with other people, leads to greater skills mastery rather than a reduction. The PM who reads the assumption map critically, challenges the JTBD frame before approving it, and annotates the business case rather than just signing off is building the judgment capability that makes the whole system safer as it becomes more autonomous. The PM who approves without reading is not.</p>
-
-
-
-  <div class="section-head" id="mcp">
-    <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><rect x="0" y="8" width="8" height="9" rx="1.3" stroke-width="1.5" opacity=".9"/><line x1="2.2" y1="8"  x2="2.2" y2="5"  stroke-width="1.8" opacity=".92"/><line x1="5.8" y1="8"  x2="5.8" y2="5"  stroke-width="1.8" opacity=".92"/><line x1="4"   y1="8"  x2="4"   y2="6.2" stroke-width="1.4" opacity=".6"/><line x1="8" y1="12.5" x2="12" y2="12.5" stroke-width="1.2" stroke-dasharray="1.8 1.8" opacity=".7"/><rect x="12" y="6" width="12" height="13" rx="2" stroke-width="1.5" opacity=".9"/><rect x="14.5" y="9"   width="2" height="3.5" rx=".7" fill="white" stroke="none" opacity=".75"/><rect x="18.5" y="9"   width="2" height="3.5" rx=".7" fill="white" stroke="none" opacity=".75"/><path d="M15,15.5 Q15,18 18,18 Q21,18 21,15.5" stroke-width="1.2" opacity=".65"/></svg></div>
-    <div class="section-head-text">
-      <p>Core PM competency</p>
-      <h2>MCP engineering as a <em>core PM competency</em></h2>
-    </div>
-  </div>
-
-  <p>Model Context Protocol is often framed as an infrastructure concern — something engineering teams configure while product managers define requirements. That framing is wrong, and organizations that accept it will consistently underutilize their AI tooling.</p>
-
-  <p>MCP is fundamentally a product design decision. What data sources an agent can access, in what scope, at what moment in the workflow — these choices determine what the agent can know, what it can produce, and what it might hallucinate when the right context isn't there. A PM who can specify MCP connections is not doing engineering's job. They are doing their own job better.</p>
-
-  <h3>Why MCP is now safe infrastructure to build on</h3>
-
-  <p>One legitimate concern about building production workflows on MCP was single-vendor dependency — a protocol controlled by one company is a strategic risk. That concern was addressed in December 2025 when the Linux Foundation launched the Agentic AI Foundation (AAIF), bringing MCP under neutral, open governance alongside two complementary standards: AGENTS.md from OpenAI and Goose from Block.</p>
-
-  <div class="callout">
-    <strong>The AAIF's founding membership includes AWS, Anthropic, Block, Bloomberg, Cloudflare, Google, Microsoft, and OpenAI — every major cloud provider and AI lab.</strong> For enterprises evaluating whether to build production product operations workflows on MCP, this resolves the core adoption risk. Enterprises don't bet on protocols controlled by single vendors; they bet on open standards with transparent governance. The AAIF provides exactly that foundation.
-  </div>
-
-  <p>The three projects under AAIF governance each address a different layer of the agentic stack — and all three are relevant to a product operations context:</p>
 
   <ul class="element-list">
-    <li class="element-item element-item--labeled">
-      <span class="element-num">MCP</span>
-      <div class="element-body">
-        <div class="element-title">Model Context Protocol — the connection layer</div>
-        <div class="element-desc">The universal standard for connecting AI models to tools, data, and external applications. In a product ops context, this is what allows the Persona Generator to ingest Dovetail transcripts, the Feature Intake Pipeline to read from and write back to Jira, and the Business Case Generator to pull live financial benchmarks — without bespoke integrations for each connection. MCP became the industry standard within months of its open-source release in November 2024, and is now used across enterprises deploying on AWS, Google Cloud, and Azure.</div>
+    <li class="element-item">
+      <span class="element-num">01</span>
+      <div>
+        <div class="element-title">AI does the busywork, not the thinking</div>
+        <div class="element-desc">Agents handle the synthesis and the first draft. People still own the judgment calls — what matters, what's risky, what's worth doing.</div>
       </div>
     </li>
-    <li class="element-item element-item--labeled">
-      <span class="element-num">AGENTS.md</span>
-      <div class="element-body">
-        <div class="element-title">AGENTS.md — the behavioral context layer</div>
-        <div class="element-desc">A simple universal standard that gives AI coding agents a consistent source of project-specific guidance — the conventions, constraints, and context an agent needs to operate reliably across different repositories and toolchains. For a PM, AGENTS.md is the answer to the question: "when the intake chain agent touches our Jira backlog, how does it know our team's naming conventions, sprint cadence, and ticket structure?" Without AGENTS.md, that context must be re-established in every prompt. With it, it is declared once and inherited by every agent that operates on the repository.</div>
+    <li class="element-item">
+      <span class="element-num">02</span>
+      <div>
+        <div class="element-title">The connections matter more than the AI model itself</div>
+        <div class="element-desc">MCP sounds like boring plumbing, but it's the actual reason any of this works at scale — without it, AI can't see the data it needs to be useful.</div>
       </div>
     </li>
-    <li class="element-item element-item--labeled">
-      <span class="element-num">Goose</span>
-      <div class="element-body">
-        <div class="element-title">Goose — the local agent execution layer</div>
-        <div class="element-desc">An open-source, local-first AI agent framework from Block that combines language models, extensible tools, and MCP-based integration to provide a structured, reliable, trusted environment for executing agentic workflows. For product operations teams that cannot route all agent traffic through cloud APIs for data sensitivity reasons — customer interview recordings, internal financial data, personnel information — Goose provides a local execution environment that still follows MCP standards. The local-first architecture is directly relevant to the audit and governance layer: agent runs that never leave the local environment are easier to audit and scope.</div>
+    <li class="element-item">
+      <span class="element-num">03</span>
+      <div>
+        <div class="element-title">Checking the work is not optional</div>
+        <div class="element-desc">The more autonomous AI gets, the more a human who understands the work matters — not less.</div>
       </div>
     </li>
   </ul>
 
-  <p>The deeper significance of the AAIF for PM workflow design is what it solves at the infrastructure level. The single biggest friction point developers report is reconfiguring MCP servers, skills, memory, and context repeatedly for each new agent or integration. The AAIF's interoperability goal — agents that work across tools and environments without constant rewiring — means that MCP infrastructure investment compounds rather than depreciates. Each new agent or tool a product operations team adds leverages the same connection layer, the same behavioral context declarations, and the same governance framework built once.</p>
-
-  <div class="callout-gold">
-    <strong>The practical implication for a PM building out a product operations toolstack:</strong> the five MCP servers described below are not sunk costs that lock you into a particular vendor's ecosystem. They are open-standard connections that any AAIF-compliant agent or tool — today or in two years — will be able to use. That changes the investment calculus significantly.
-  </div>
-
-  <p>In 2012, the PM who understood what an API call could and couldn't do — who could read a spec and reason about latency, data freshness, and error states — was structurally more capable than the one who couldn't. MCP literacy is the 2026 equivalent. It is not coding. It is understanding the connection layer well enough to make informed product decisions about what to connect, in what order, with what scope, and under what governance constraints.</p>
-
-  <h3>What MCP engineering means in a PM context</h3>
-
-  <p>In practice, MCP engineering for a product manager means being able to answer five questions for any AI tool or agent in the workflow:</p>
-
-  <table class="mcp-table">
-    <thead>
-      <tr>
-        <th>Question</th>
-        <th>Why it matters to product</th>
-        <th>MCP design implication</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>What data does this agent need to produce good output?</td>
-        <td>Agents without the right context produce generic output that undermines trust and adoption.</td>
-        <td>Specify which MCP servers are required vs. optional for each tool. Define the minimum viable context set.</td>
-      </tr>
-      <tr>
-        <td>How fresh does that data need to be?</td>
-        <td>A persona built from 18-month-old interview data may actively mislead product decisions.</td>
-        <td>Specify refresh cadence for each MCP connection. Some need real-time (metrics); some need weekly (signal aggregation); some need quarterly (strategy context).</td>
-      </tr>
-      <tr>
-        <td>What scope should the agent have — read-only or write?</td>
-        <td>An agent with write access to Jira can create tickets. That's useful after HITL approval; it's a liability before it.</td>
-        <td>Define write-access MCP connections as post-HITL-gate only. Read access can be broader. Principle of least privilege applies per workflow step.</td>
-      </tr>
-      <tr>
-        <td>What happens when the connection is unavailable?</td>
-        <td>An agent that silently proceeds without its data source will produce confident-sounding output that isn't grounded in reality.</td>
-        <td>Define fallback behavior: does the tool block, warn, or degrade gracefully? This is a product requirement, not just a technical one.</td>
-      </tr>
-      <tr>
-        <td>Who audits what the agent did with that access?</td>
-        <td>Without audit trails on MCP calls, governance is theater. You can't review agent decisions you can't see.</td>
-        <td>Require audit log MCP connections for any agent that takes action. Specify what gets logged: server called, scope used, input hash, output summary, timestamp, caller identity.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>The five MCP servers every product ops team should build first</h3>
-
-  <p>Not all MCP connections are equal in value. Based on the workflow phases above and the data readiness research, the highest-leverage connections for a product operations team to establish — in order of compounding return — are:</p>
-
-  <ul class="competency-list">
-
-    <li class="competency-item">
-      <div class="competency-icon">1</div>
-      <div>
-        <div class="competency-title">Signal aggregator MCP — Zendesk, Gong, Intercom</div>
-        <div class="competency-desc">The single highest-leverage connection. Support tickets and sales call transcripts contain the most honest customer signal in the organization — and they're almost entirely unused in product decisions because they're not searchable at the moment of decision. A signal aggregator MCP that continuously clusters and surfaces themes eliminates the most common reason product decisions are made on gut: the data existed, it just wasn't accessible.</div>
-      </div>
-    </li>
-
-    <li class="competency-item">
-      <div class="competency-icon">2</div>
-      <div>
-        <div class="competency-title">Intake source MCP — Jira or Linear, with write-back</div>
-        <div class="competency-desc">Read access enables duplicate detection and prior art lookup before the intake pipeline runs. Write-back access — scoped post-HITL-approval — enables the story drafter agent to populate the backlog directly from the approved feature brief. This is the connection that eliminates the manual copy-paste from product brief to Jira ticket, which is consistently cited as one of the highest-friction handoffs in product development.</div>
-      </div>
-    </li>
-
-    <li class="competency-item">
-      <div class="competency-icon">3</div>
-      <div>
-        <div class="competency-title">Strategy context MCP — Confluence, Notion, or planning wiki</div>
-        <div class="competency-desc">Without this connection, every AI tool run requires the PM to manually paste in the current quarter's OKRs, strategic priorities, and operating context. With it, the Hoshin Kanri tool, business case generator, and feature intake pipeline all receive live strategic context at run time. This is the connection that makes the tools feel like they know your organization rather than generating for a generic enterprise.</div>
-      </div>
-    </li>
-
-    <li class="competency-item">
-      <div class="competency-icon">4</div>
-      <div>
-        <div class="competency-title">Metrics MCP — DataDog, Mixpanel, or GA4</div>
-        <div class="competency-desc">Closes the deployment feedback loop. Without a metrics MCP, the product ops radar requires manual data entry, canary monitoring requires the PM to check a dashboard, and post-release adoption tracking requires a separate analytical run. With it, the radar auto-populates, canary thresholds trigger automatically, and adoption dashboards instantiate the moment a feature goes live. This is the connection that makes phase four of the workflow genuinely continuous rather than episodic.</div>
-      </div>
-    </li>
-
-    <li class="competency-item">
-      <div class="competency-icon">5</div>
-      <div>
-        <div class="competency-title">Audit log MCP — append-only, all agent runs</div>
-        <div class="competency-desc">The connection that makes everything else trustworthy. Every agent run — which tool was called, which model version was used, what data was accessed, what was produced, and who approved it — written to an append-only log. This is the governance prerequisite that allows organizations to expand agent autonomy with confidence rather than anxiety. Without it, you cannot review agent decisions, you cannot comply with emerging AI audit requirements, and you cannot answer the question "why did the agent recommend this?" after the fact.</div>
-      </div>
-    </li>
-
-  </ul>
-
-  <div class="callout-orange">
-    <strong>The PM who can specify these connections, govern their scope, and design the HITL gates around them is not a technical PM in the old sense.</strong> They are an architect of intelligent workflows. That is the job description that is emerging in 2026 — and it is distinct from both the traditional PM role and the data engineering role. It lives in the space between them.
-  </div>
-
-  <div class="section-head" id="bottleneck">
-    <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round"><circle cx="12" cy="12" r="2.2" fill="white" stroke="none"/><circle cx="12" cy="7"  r="1.1" fill="white" stroke="none" opacity=".6"/><circle cx="17" cy="12" r="1.1" fill="white" stroke="none" opacity=".6"/><circle cx="12" cy="17" r="1.1" fill="white" stroke="none" opacity=".6"/><circle cx="7"  cy="12" r="1.1" fill="white" stroke="none" opacity=".6"/><line x1="12" y1="8.1"  x2="12" y2="9.8"  stroke-width="1.3" opacity=".85"/><line x1="15.9" y1="12" x2="14.2" y2="12" stroke-width="1.3" opacity=".85"/><line x1="12" y1="15.9" x2="12" y2="14.2" stroke-width="1.3" stroke-dasharray="1.8 1.8" opacity=".85"/><line x1="8.1" y1="12"  x2="9.8"  y2="12" stroke-width="1.3" stroke-dasharray="1.8 1.8" opacity=".85"/><circle cx="1.5" cy="1.5"  r="1.8" fill="white" stroke="none" opacity=".95"/><circle cx="12"  cy="0.5"  r="1.8" fill="white" stroke="none" opacity=".95"/><circle cx="22.5" cy="1.5" r="1.8" fill="white" stroke="none" opacity=".95"/><circle cx="23.5" cy="12" r="1.8" fill="white" stroke="none" opacity=".95"/><circle cx="22.5" cy="22.5" r="1.8" fill="white" stroke="none" opacity=".95"/><circle cx="12"  cy="23.5" r="1.8" fill="white" stroke="none" opacity=".95"/><circle cx="1.5" cy="22.5" r="1.8" fill="white" stroke="none" opacity=".95"/><circle cx="0.5" cy="12"  r="1.8" fill="white" stroke="none" opacity=".95"/></svg></div>
-    <div class="section-head-text">
-      <p>Systemic risk</p>
-      <h2>Data access is the <em>real bottleneck</em></h2>
-    </div>
-  </div>
-
-  <p>The data readiness problem is well-documented — and it shows up across industries, not just in product organizations. Salesforce reports that 55% of all organizational data qualifies as "Dark Data" — officially collected, processed, and stored within business systems, but rarely or never used again. In the CRM world this means customer history, interaction logs, and behavioral signals sitting inert in systems that were never designed to make that data queryable. In product operations, the equivalent is decision context: research notes, prior business cases, feature retrospectives, and outcome data that exists somewhere but isn't structured or accessible enough to ground agent output. The Deloitte 2025 AI survey confirms this extends to automation strategy directly: <strong>nearly half of organizations cited searchability of data (48%) and reusability of data (47%) as primary challenges to their AI automation initiatives.</strong></p>
-
-  <div class="callout">
-    <strong>The fundamental issue is that most organizational data isn't positioned to be consumed by agents that need to understand business context and make decisions.</strong> The solution involves contextualizing enterprise data through content and index stores built on knowledge graphs, making information discoverable without requiring extensive ETL processes. This is precisely what the five MCP connections above are designed to solve. Deloitte Insights, 2026; Salesforce, 2025.
-  </div>
-
-  <p>This is the layer below the tools layer. Before agents can synthesize customer signals, before the business case generator can cross-reference claims against live financial benchmarks, before the product ops radar can auto-populate from delivery metrics — the data has to be findable, structured, and MCP-accessible. Most organizations are not there yet. The teams that are will compound their advantage as agentic capabilities continue to accelerate.</p>
-
-  <div class="stat-pull">
-    <div class="stat-num">40%</div>
-    <div class="stat-text"><strong>of enterprise applications will embed AI agents by end of 2026</strong>, up from less than 5% in 2025. Gartner projects that by 2030, AI-native development platforms will result in 80% of organizations evolving large software engineering teams into smaller, more nimble, AI-augmented units.</div>
-  </div>
-
-  <div class="section-head" id="throughline">
-    <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round"><defs><marker id="arri" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/></marker></defs><line x1="12" y1="0"   x2="12" y2="9.5"  stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="24" y1="0"   x2="14.5" y2="9.5" stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="24" y1="12"  x2="14.5" y2="12"  stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="24" y1="24"  x2="14.5" y2="14.5" stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="12" y1="24"  x2="12" y2="14.5"  stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="0"  y1="24"  x2="9.5" y2="14.5" stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="0"  y1="12"  x2="9.5" y2="12"   stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="0"  y1="0"   x2="9.5" y2="9.5"   stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><circle cx="12" cy="12" r="2.3" fill="white" stroke="none"/></svg></div>
-    <div class="section-head-text">
-      <p>Summary</p>
-      <h2>The <em>through-line</em></h2>
-    </div>
-  </div>
-
-  <p>All of this research points to the same structural truth: AI-native product operations is not a set of tools — it is a decision architecture. The tools do the synthesis; humans own the judgment. Agents handle the signal-to-brief pipeline; PMs own the framing. MCP integrations handle the data access; governance frameworks own the scope.</p>
-
-  <p>The PM role is not disappearing into AI. It is becoming more consequential at a meta-level, because it is more important than ever to manage and continuously improve the entire product delivery lifecycle. The PM who understands how to specify context, design HITL gates, govern MCP scope, and evaluate agent output quality is operating at a level that is crucial for the next wave of innovation.</p>
-
-  <div class="callout-orange">
-    <strong>The practical implication for anyone building or evaluating product ops tooling:</strong> ask not whether the tool uses AI, but whether the workflow it sits inside has been redesigned around the tool's actual output — and whether the MCP connections that ground that output in real organizational context have been specified and governed. A business case generator producing a draft nobody reads hasn't changed anything. One that sits at the moment of funding decision, connected to the opportunity map that preceded it and the intake pipeline that follows, grounded in live financial benchmarks via MCP, is a different thing entirely.
-  </div>
-
-  <div class="chip-row">
-    <span class="chip">McKinsey State of AI 2025</span>
-    <span class="chip">Gartner 2026 agent projections</span>
-    <span class="chip">Deloitte Agentic AI Strategy 2026</span>
-    <span class="chip">Intetics AI-Native Engineering 2026</span>
-    <span class="chip">Parikh: Agentic AI in PM, arXiv 2025</span>
-    <span class="chip">Institute of Product Leadership — AI Native Loop</span>
-    <span class="chip">Product School — Decision Point Framework</span>
-    <span class="chip">SiliconAngle eval engineering May 2026</span>
-    <span class="chip">Dull: Marquet certification framework May 2026</span>
-    <span class="chip">Anthropic RCT developer skill study Jan 2026</span>
-    <span class="chip">Salesforce — Dark Data 2025</span>
-    <span class="chip">Agentic AI Foundation (AAIF) — Linux Foundation 2025–2026</span>
-  </div>
+  <p>None of this requires you to be a product manager, an engineer, or even particularly technical. It just requires understanding that AI agents are now a real part of how software gets built — and knowing enough to ask good questions about it.</p>
 
   <div class="footnotes">
     <div class="footnotes-label">Sources</div>
-    <p class="footnote">McKinsey &amp; Company, "The State of AI 2025," McKinsey Global Institute. 88% AI function adoption figure, one-third scaling figure.</p>
-    <p class="footnote">Gartner, 2026 projections: 40% enterprise application agent integration by end of 2026; 80% team restructuring by 2030.</p>
-    <p class="footnote">Deloitte Insights, "Agentic AI Strategy," February 2026. Data readiness bottleneck, searchability and reusability survey data.</p>
-    <p class="footnote">Salesforce, "The Hidden Cost of Data," <a href="https://www.salesforce.com/eu/blog/the-hidden-cost-of-data/" target="_blank">salesforce.com/eu/blog</a>, March 2025. Dark Data definition and 55% figure; unused organizational data in CRM and business systems context.</p>
-    <p class="footnote">Parikh, "Agentic AI in Product Management: A Co-Evolutionary Model," arXiv:2507.01069, 2025. PM role reconceptualization; agentic workflow orchestration framing.</p>
-    <p class="footnote">Intetics, "The State of AI-Native Software Engineering: 2026 Industry Analysis," March 2026. PR completion and review time data.</p>
-    <p class="footnote">Institute of Product Leadership, "AI Product Management: The AI-Native Loop," productleadership.com. Continuous signal-to-opportunity framework; four-phase workflow structure.</p>
-    <p class="footnote">Product School, "Product Management Workflow," productschool.com. Decision-point framework; "first pass by AI, final pass by PM" paradigm; RAG pattern grounding.</p>
-    <p class="footnote">SiliconAngle, "Eval engineering: The missing piece of agentic AI governance," May 2026. Eval engineering as first-class PM capability.</p>
-    <p class="footnote">Productside, "The AI Product Management Workflows Every PM Needs In 2026," February 2026. Context engineering and agentic workflow framing; PM time allocation data.</p>
-    <p class="footnote">Machine Learning Mastery, "7 Agentic AI Trends to Watch in 2026," January 2026. Bounded autonomy and governance-as-enabler framing.</p>
-    <p class="footnote">Kellton, "Agentic AI Trends 2026." MCP as USB-C analogy; MCP as infrastructure prerequisite.</p>
-    <p class="footnote">Shrivastava, S., <em>Zero to GenAI Product Leader</em>. Agentic PM frameworks and tooling evaluation methodology.</p>
-    <p class="footnote">Nika, M., <em>Building AI-Powered Products</em>. AI product specification and multi-agent workflow design patterns.</p>
-    <p class="footnote">Dull, R., "Is it Safe to Use AI? A Submarine Commander vs. YOLO Mode and Loss of Skill," <a href="../../perspectives/marquet-ai-cert.html">robdull.com/perspectives</a>, May 2026. Marquet Leader-Leader model applied to AI-native workflows; three-pillar certification framework (Mastery, Control, Clarity).</p>
-    <p class="footnote">Anthropic, Randomized Controlled Trial on AI-assisted software development, January 2026. 17% decline in developer mastery among heavy AI tool users; productivity and skill trade-off finding.</p>
-    <p class="footnote">Linux Foundation / Agentic AI Foundation (AAIF), founding announcement, December 2025. <a href="https://aaif.io" target="_blank">aaif.io</a>. MCP, AGENTS.md, and Goose brought under neutral open governance; 49 founding member organizations including AWS, Anthropic, Block, Bloomberg, Cloudflare, Google, Microsoft, OpenAI. Source for: MCP governance neutrality argument; AGENTS.md behavioral context standard; Goose local-first agent execution; interoperability as compounding infrastructure investment.</p>
-    <p class="footnote">Jones, A., "Building the Foundation for Agentic AI," AAIF Blog, April 2026. <a href="https://aaif.io/blog/building-the-foundation-for-agentic-ai/" target="_blank">aaif.io/blog</a>. Reconfiguration tax framing; practical interoperability as the standard's core value proposition.</p>
+    <p class="footnote">Microsoft, "2026 Work Trend Index: Agents, Human Agency, and Opportunity," May 2026. 15x year-over-year growth in active Microsoft 365 Copilot agents.</p>
+    <p class="footnote">Forrester / Anaconda, 2026 agentic AI pilot data. 88% of AI agent pilot projects never reach production use.</p>
+    <p class="footnote">Anthropic, "MCP and the Agentic AI Foundation," December 2025, and Model Context Protocol ecosystem update, early 2026. MCP downloads growing from ~100,000/month at November 2024 launch to 97 million+/month by early 2026; donation to the Linux Foundation's Agentic AI Foundation (AAIF).</p>
+    <p class="footnote">Anthropic, Randomized Controlled Trial on AI-assisted software development, January 2026. 17% decline in a measured developer skill among heavy AI tool users.</p>
+    <p class="footnote">Dull, R., "Is it Safe to Use AI? A Submarine Commander vs. YOLO Mode and Loss of Skill," <a href="../../perspectives/marquet-ai-cert.html">robdull.com/perspectives</a>, May 2026. David Marquet's Leader-Leader model applied to AI-native workflows.</p>
+    <p class="footnote">Gartner, 2026 Hype Cycle for Agentic AI. 40% of enterprise applications projected to embed task-specific AI agents by end of 2026, up from under 5% in 2025.</p>
   </div>
 
 </div><!-- /art-body -->
 
-<div class="tools-grid-strip">
+<div class="tools-grid-strip" id="tools">
   <div class="tools-grid-inner">
     <div class="tools-grid-head">
       <div class="tools-grid-eyebrow">The tools — direct links</div>
@@ -924,35 +540,35 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <a href="../feature-intake/feature-intake-index.html" class="tool-card">
         <div class="tool-card-label">Agentic workflow demo</div>
         <div class="tool-card-name">Feature intake pipeline</div>
-        <div class="tool-card-desc">4-step agentic chain: triage → JTBD → assumptions → RICE. The concrete implementation of Phase 2 and Phase 3 in the AI-native workflow.</div>
+        <div class="tool-card-desc">4-step agentic chain: triage → JTBD → assumptions → RICE. The concrete implementation of Stage 2 and Stage 3 above.</div>
         <div class="tool-card-tags"><span class="tc-tag">Agentic chain</span><span class="tc-tag">4 steps</span><span class="tc-tag tc-live">Live</span></div>
       </a>
 
       <a href="../persona-generator/persona-index.html" class="tool-card">
         <div class="tool-card-label">Enterprise user research</div>
         <div class="tool-card-name">JTBD + persona generator</div>
-        <div class="tool-card-desc">The upstream anchor of the entire network. Produces the user context — job statement, org context, friction — that grounds every other tool's output.</div>
+        <div class="tool-card-desc">The upstream anchor of the entire network. Produces the user context that grounds every other tool's output.</div>
         <div class="tool-card-tags"><span class="tc-tag">JTBD framing</span><span class="tc-tag">Client-side</span><span class="tc-tag tc-live">Live</span></div>
       </a>
 
       <a href="../journey-map/journey-map-index.html" class="tool-card">
         <div class="tool-card-label">Customer experience</div>
         <div class="tool-card-name">Journey map builder</div>
-        <div class="tool-card-desc">Editable stage-by-stage canvas for touchpoints, emotions, and pain points. Export for AI prompt or JSON. Feeds the opportunity merge agent.</div>
+        <div class="tool-card-desc">Editable stage-by-stage canvas for touchpoints, emotions, and pain points. Export for AI prompt or JSON.</div>
         <div class="tool-card-tags"><span class="tc-tag">Pain clusters</span><span class="tc-tag">JSON export</span><span class="tc-tag tc-live">Live</span></div>
       </a>
 
       <a href="../hoshin-kanri/hoshin-v2mom-index.html" class="tool-card">
         <div class="tool-card-label">Strategy and execution</div>
         <div class="tool-card-name">Hoshin Kanri + V2MOM</div>
-        <div class="tool-card-desc">Cascades V2MOM into a Hoshin X-matrix. Connects to the Strategy context MCP layer and feeds the strategy cascade agent for OKR alignment gap analysis.</div>
+        <div class="tool-card-desc">Cascades V2MOM into a Hoshin X-matrix. Connects to live strategy context for alignment gap analysis.</div>
         <div class="tool-card-tags"><span class="tc-tag">Strategy cascade</span><span class="tc-tag">Client-side</span><span class="tc-tag tc-live">Live</span></div>
       </a>
 
       <a href="../prod-ops-radar/prod-ops-radar-index.html" class="tool-card tool-card-dev">
         <div class="tool-card-label">Organizational health</div>
         <div class="tool-card-name">Product ops health radar</div>
-        <div class="tool-card-desc">Scored self-assessment across eight product operations dimensions. Designed to auto-populate delivery and metrics dimensions from the Metrics MCP.</div>
+        <div class="tool-card-desc">Scored self-assessment across eight product operations dimensions, designed to auto-populate from live metrics.</div>
         <div class="tool-card-tags"><span class="tc-tag">8 dimensions</span><span class="tc-tag">Radar chart</span><span class="tc-tag tc-dev">In development</span></div>
       </a>
 
@@ -967,8 +583,8 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 <div class="tools-cta-strip">
   <div class="tools-cta-inner">
     <div>
-      <h2>The tools are built for<br>the <em>middle of this architecture</em>.</h2>
-      <p>Each tool sits at the Capabilities Interface and Enterprise Orchestration layers — with MCP connections as the data layer that makes them useful and Mastery / Control / Clarity as the human governance layer that makes them safe.</p>
+      <h2>Want the more technical<br>version of <em>this same idea</em>?</h2>
+      <p>The network diagram shows every data source, AI agent, and connection in one interactive picture — built for anyone who wants to go deeper than the plain-language version above.</p>
     </div>
     <div class="cta-links">
       <a href="../../perspectives/marquet-ai-cert.html" class="cta-btn filled">Is it safe? &#8599;</a>
