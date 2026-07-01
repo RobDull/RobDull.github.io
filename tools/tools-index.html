@@ -864,7 +864,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
         <div class="tool-category">Browser Game</div>
         <div class="tool-name">500 Card Night</div>
         <div class="tool-status live">Live</div>
-        <p class="tool-desc">500 is the card game I've played with the same group of friends since college — simpler than bridge, more interesting than euchre. The existing online versions are buggy, clumsily monetized, and don't follow our house rules. I've wanted to build my own since I was working in the Java games division at Nokia. That was twenty years ago. I finally built it in two days with Claude. I'm sending the link to the old gang today.</p>
+        <p class="tool-desc">500 is the card game I've played with the same group of friends since college — simpler than bridge, more interesting than euchre. The existing online versions are buggy, clumsily monetized, and don't follow our house rules. I've wanted to build my own since I was working in the Java games division at Nokia. That was twenty years ago. I finally built it in two days with Claude.</p>
         <p class="tool-desc" style="margin-top:-8px;">No accounts, no server, no database. Share a room code; play from anywhere. Four players, peer-to-peer, entirely in the browser.</p>
         <div class="tool-workflow">
           <div class="tool-workflow-label">Try it solo — no friends required</div>
@@ -888,21 +888,24 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
         <div style="margin-bottom:8px;">
           <img src="500-screenshots/lobby.png" alt="500 Card Night — lobby showing room code, team seating, and Start Game button" style="width:100%;border-radius:6px;border:1.5px solid var(--rule);display:block;"/>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
           <img src="500-screenshots/play-view.png" alt="500 Card Night — play view showing the four-player table with active trick and player hand" style="width:100%;border-radius:6px;border:1.5px solid var(--rule);display:block;"/>
           <img src="500-screenshots/end-of-hand.png" alt="500 Card Night — end of hand showing kitty and tricks-taken summary" style="width:100%;border-radius:6px;border:1.5px solid var(--rule);display:block;"/>
           <img src="500-screenshots/bidding.png" alt="500 Card Night — bidding view with full bid table and player hand" style="width:100%;border-radius:6px;border:1.5px solid var(--rule);display:block;"/>
           <img src="500-screenshots/bidding-2.png" alt="500 Card Night — bidding round 2 showing kitty and waiting status" style="width:100%;border-radius:6px;border:1.5px solid var(--rule);display:block;"/>
         </div>
-        <div class="tool-right-label">How it's built</div>
-        <ul class="tech-detail-list">
-          <li class="tech-detail-item"><span class="tech-detail-label">Three-repo architecture.</span> Pure TS rules engine, WebRTC network layer, and React/Vite UI are independent packages cross-installed via git+https npm deps — clean dependency direction, explicit upgrade discipline. The tradeoff: a fix upstream doesn't reach the UI until explicitly reinstalled. A stale-dep trap that has already caused one production bug.</li>
-          <li class="tech-detail-item"><span class="tech-detail-label">Type-enforced secret hiding.</span> <code style="font-family:monospace;font-size:11px;background:var(--off);border:1px solid var(--rule);padding:1px 4px;border-radius:3px;">GameState</code> (everyone's hand, the kitty) is never sent over the wire. <code style="font-family:monospace;font-size:11px;background:var(--off);border:1px solid var(--rule);padding:1px 4px;border-radius:3px;">redact(state, forPlayerId)</code> produces a structurally distinct type — leaking the wrong object is a compile error, not a runtime hope.</li>
-          <li class="tech-detail-item"><span class="tech-detail-label">Errors as values.</span> The engine never throws for game-legality reasons — illegal moves return typed <code style="font-family:monospace;font-size:11px;background:var(--off);border:1px solid var(--rule);padding:1px 4px;border-radius:3px;">&#123; ok: false, error &#125;</code>. UI code always destructures; no try/catch wrappers.</li>
-          <li class="tech-detail-item"><span class="tech-detail-label">Fuzz-tested rules engine.</span> ~112 Vitest unit tests plus a fast-check property-based fuzz layer covering card conservation, immutability, and scoring against an independent reference table. <code style="font-family:monospace;font-size:11px;background:var(--off);border:1px solid var(--rule);padding:1px 4px;border-radius:3px;">crypto.getRandomValues()</code> for shuffling, not <code style="font-family:monospace;font-size:11px;background:var(--off);border:1px solid var(--rule);padding:1px 4px;border-radius:3px;">Math.random()</code>.</li>
-          <li class="tech-detail-item"><span class="tech-detail-label">Explicit tradeoffs.</span> No accounts, no anti-cheat, no matchmaking — the trust model is "friends with a shared room code." Host disconnect ends the game; non-host players rejoin via a durable per-seat token. Accepted limitations, not oversights.</li>
-        </ul>
       </div>
+    </div>
+
+    <!-- Full-width tech detail section -->
+    <div style="padding-top:36px;border-top:1px solid var(--rule);margin-top:40px;">
+      <div class="tool-right-label" style="margin-bottom:14px;">How it's built</div>
+      <ul class="tech-detail-list" style="display:grid;grid-template-columns:2fr 3fr;gap:0 48px;">
+        <li class="tech-detail-item"><span class="tech-detail-label">Three-repo architecture.</span> Pure TS rules engine, WebRTC network layer, and React/Vite UI are independent packages cross-installed via git+https npm deps — clean dependency direction, explicit upgrade discipline.</li>
+        <li class="tech-detail-item"><span class="tech-detail-label">Type-enforced secret hiding.</span> <code style="font-family:monospace;font-size:11px;background:var(--off);border:1px solid var(--rule);padding:1px 4px;border-radius:3px;">GameState</code> (everyone's hand, the kitty) is never sent over the wire.</li>
+<li class="tech-detail-item"><span class="tech-detail-label">Fuzz-tested rules engine.</span> ~112 Vitest unit tests plus a fast-check property-based fuzz layer covering card conservation, immutability, and scoring against an independent reference table.</li>
+        <li class="tech-detail-item"><span class="tech-detail-label">Explicit tradeoffs.</span> No accounts, no anti-cheat, no matchmaking — the trust model is "friends with a shared room code." Host disconnect ends the game; non-host players rejoin via a durable per-seat token. Accepted limitations, not oversights.</li>
+      </ul>
     </div>
   </div>
 </div>
