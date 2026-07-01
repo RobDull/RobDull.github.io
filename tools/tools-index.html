@@ -104,6 +104,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .chip{font-size:10px;font-weight:600;letter-spacing:.04em;color:var(--ink);background:var(--off);border:1px solid var(--rule);border-radius:4px;padding:3px 9px;}
 .hero-btn{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:13px;font-weight:700;color:var(--accent);text-decoration:none;padding:9px 18px;border:2px solid var(--accent);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:transparent;}
 .hero-btn:hover{background:var(--accent);color:white;}
+.tool-cta{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:13px;font-weight:700;color:white;background:var(--ink);text-decoration:none;padding:9px 18px;border-radius:6px;transition:all .15s;letter-spacing:-.01em;border:2px solid var(--ink);}
 .tool-cta:hover{background:#2a2a2a;transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,.12);}
 
 /* STATUS BADGE */
@@ -122,6 +123,22 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .feature-item{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--rule);font-size:13px;color:#2a2a2a;line-height:1.55;}
 .feature-item:last-child{border-bottom:none;}
 .feature-item::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent2);flex-shrink:0;margin-top:7px;}
+
+/* ── SIDE PROJECTS SECTION ── */
+.side-section{max-width:1060px;margin:0 auto;padding:0 40px 0;}
+.side-section-header{padding:56px 0 0;border-top:2px solid var(--rule);display:flex;align-items:baseline;gap:16px;margin-bottom:0;}
+.side-section-eyebrow{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);}
+.side-section-title{font-size:clamp(22px,3vw,32px);font-weight:900;letter-spacing:-.03em;color:var(--ink);line-height:1.1;}
+.side-section-title em{font-style:normal;color:var(--accent);}
+.side-section-desc{font-size:14px;color:var(--muted);line-height:1.8;max-width:580px;margin:10px 0 0;}
+.side-section-wrap{padding-bottom:80px;}
+
+/* side project tech detail list */
+.tech-detail-list{list-style:none;margin-top:0;}
+.tech-detail-item{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--rule);font-size:13px;color:#2a2a2a;line-height:1.55;}
+.tech-detail-item:last-child{border-bottom:none;}
+.tech-detail-item::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent2);flex-shrink:0;margin-top:7px;}
+.tech-detail-label{font-weight:700;color:var(--ink);margin-right:4px;}
 
 /* ── READING STRIP ── */
 .reading-strip{background:var(--off);border-top:2px solid var(--accent2);border-bottom:1px solid var(--rule);padding:32px 40px;}
@@ -829,6 +846,64 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="reading-desc">Each tool here can stand alone as an AI-augmented workflow — faster synthesis, better structured output. But they were designed to connect: persona informs journey map, journey map feeds opportunity mapping, business case gates the intake pipeline, intake brief drives strategy alignment. At full connection, with agents and MCP threading the workflow, that's AI-native product ops. This piece maps where each tool sits, how the architecture hangs together, and what it means for the PM role.</div>
     </div>
     <a href="AI-native-prodops/AI-prodops-overview.html" class="reading-btn">Explore AI ProdOps &#8599;</a>
+  </div>
+</div>
+
+<div class="side-section">
+  <div class="side-section-wrap">
+    <div class="side-section-header">
+      <div>
+        <div class="side-section-eyebrow">Side Projects</div>
+        <div class="side-section-title">Built for <em>fun</em>, engineered with care.</div>
+        <p class="side-section-desc">Not everything here is a PM tool. This is what I build when the constraint is a friend group and a weekend, not a product roadmap.</p>
+      </div>
+    </div>
+
+    <div class="tool-row" id="project-500" style="border-bottom:none;">
+      <div class="tool-left">
+        <div class="tool-category">Browser Game</div>
+        <div class="tool-name">500 Card Night</div>
+        <div class="tool-status live">Live</div>
+        <p class="tool-desc">500 is the card game I've played with the same group of friends since college — simpler than bridge, more interesting than euchre. The existing online versions are buggy, clumsily monetized, and don't follow our house rules. I've wanted to build my own since I was working in the Java games division at Nokia. That was twenty years ago. I finally built it in two days with Claude. I'm sending the link to the old gang today.</p>
+        <p class="tool-desc" style="margin-top:-8px;">No accounts, no server, no database. Share a room code; play from anywhere. Four players, peer-to-peer, entirely in the browser.</p>
+        <div class="tool-workflow">
+          <div class="tool-workflow-label">Try it solo — no friends required</div>
+          <div class="tool-workflow-text">Open the game in four separate browser tabs. Each tab joins the same room and plays as a different seat. It's how I test every change — the full four-player game running on one machine, no network required.</div>
+        </div>
+        <div class="tool-workflow" style="border-left-color:var(--accent2);">
+          <div class="tool-workflow-label">The defining architecture decision</div>
+          <div class="tool-workflow-text"><strong>Host-authoritative P2P.</strong> One tab runs the authoritative rules engine as the single source of truth. Every other tab is a pure renderer sending <code style="font-family:monospace;font-size:11px;background:var(--off);border:1px solid var(--rule);padding:1px 5px;border-radius:3px;">PlayerAction</code> messages. Transport is WebRTC over PeerJS — the broker sees only the handshake, never game state. Host vs. client is a runtime role, not a build.</div>
+        </div>
+        <div class="tool-chips">
+          <span class="chip">TypeScript</span>
+          <span class="chip">React / Vite</span>
+          <span class="chip">WebRTC / PeerJS</span>
+          <span class="chip">Three-repo architecture</span>
+          <span class="chip">Property-based testing</span>
+          <span class="chip">No backend</span>
+        </div>
+        <a href="https://robdull.com/500-cardnight/" class="tool-cta" target="_blank" rel="noopener">Play the game &#8599;</a>
+      </div>
+      <div class="tool-right">
+        <div style="margin-bottom:8px;">
+          <img src="500-screenshots/lobby.png" alt="500 Card Night — lobby showing room code, team seating, and Start Game button" style="width:100%;border-radius:6px;border:1.5px solid var(--rule);display:block;"/>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;">
+          <img src="500-screenshots/play-view.png" alt="500 Card Night — play view showing the four-player table with active trick and player hand" style="width:100%;border-radius:6px;border:1.5px solid var(--rule);display:block;"/>
+          <img src="500-screenshots/end-of-hand.png" alt="500 Card Night — end of hand showing kitty and tricks-taken summary" style="width:100%;border-radius:6px;border:1.5px solid var(--rule);display:block;"/>
+          <img src="500-screenshots/bidding.png" alt="500 Card Night — bidding view with full bid table and player hand" style="width:100%;border-radius:6px;border:1.5px solid var(--rule);display:block;"/>
+          <img src="500-screenshots/bidding-2.png" alt="500 Card Night — bidding round 2 showing kitty and waiting status" style="width:100%;border-radius:6px;border:1.5px solid var(--rule);display:block;"/>
+        </div>
+        <div class="tool-right-label">How it's built</div>
+        <ul class="tech-detail-list">
+          <li class="tech-detail-item"><span class="tech-detail-label">Three-repo architecture.</span> Pure TS rules engine, WebRTC network layer, and React/Vite UI are independent packages cross-installed via git+https npm deps — clean dependency direction, explicit upgrade discipline. The tradeoff: a fix upstream doesn't reach the UI until explicitly reinstalled. A stale-dep trap that has already caused one production bug.</li>
+          <li class="tech-detail-item"><span class="tech-detail-label">Type-enforced secret hiding.</span> <code style="font-family:monospace;font-size:11px;background:var(--off);border:1px solid var(--rule);padding:1px 4px;border-radius:3px;">GameState</code> (everyone's hand, the kitty) is never sent over the wire. <code style="font-family:monospace;font-size:11px;background:var(--off);border:1px solid var(--rule);padding:1px 4px;border-radius:3px;">redact(state, forPlayerId)</code> produces a structurally distinct type — leaking the wrong object is a compile error, not a runtime hope.</li>
+          <li class="tech-detail-item"><span class="tech-detail-label">Errors as values.</span> The engine never throws for game-legality reasons — illegal moves return typed <code style="font-family:monospace;font-size:11px;background:var(--off);border:1px solid var(--rule);padding:1px 4px;border-radius:3px;">&#123; ok: false, error &#125;</code>. UI code always destructures; no try/catch wrappers.</li>
+          <li class="tech-detail-item"><span class="tech-detail-label">Fuzz-tested rules engine.</span> ~112 Vitest unit tests plus a fast-check property-based fuzz layer covering card conservation, immutability, and scoring against an independent reference table. <code style="font-family:monospace;font-size:11px;background:var(--off);border:1px solid var(--rule);padding:1px 4px;border-radius:3px;">crypto.getRandomValues()</code> for shuffling, not <code style="font-family:monospace;font-size:11px;background:var(--off);border:1px solid var(--rule);padding:1px 4px;border-radius:3px;">Math.random()</code>.</li>
+          <li class="tech-detail-item"><span class="tech-detail-label">Explicit tradeoffs.</span> No accounts, no anti-cheat, no matchmaking — the trust model is "friends with a shared room code." Host disconnect ends the game; non-host players rejoin via a durable per-seat token. Accepted limitations, not oversights.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
 
