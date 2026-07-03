@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y1JYXTE5J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0Y1JYXTE5J');
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work & Capabilities | Rob Dull</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0a0a0a;--white:#ffffff;--off:#f7f7f7;--rule:#e8e8e8;
+  --accent:#1a3a5c;--accent2:#c8662a;--muted:#6b6b6b;
+  --font:'Inter',sans-serif;
+}
+body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;min-height:100vh;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
+.nn{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
+.nl a{font-size:13px;font-weight:600;color:white;text-decoration:none;padding:8px 16px;border:2px solid var(--accent);border-radius:6px;background:var(--accent);transition:all .15s;}
+.nl a:hover{background:#0f2540;border-color:#0f2540;text-decoration:none;}
+
+/* BREADCRUMB */
+.bc{padding:88px 40px 0;max-width:860px;margin:0 auto;}
+.bc-inner{font-size:12px;font-weight:500;color:var(--muted);display:flex;align-items:center;gap:6px;}
+.bc-inner a{color:var(--muted);text-decoration:none;}
+.bc-inner a:hover{color:var(--accent);}
+.bc-sep{color:var(--rule);}
+
+/* PAGE HEAD */
+.page-head{max-width:860px;margin:0 auto;padding:24px 40px 40px;}
+.page-tag{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);margin-bottom:14px;}
+.page-head h1{font-size:clamp(26px,4vw,44px);font-weight:900;line-height:1.1;letter-spacing:-.03em;color:var(--ink);margin-bottom:16px;}
+.page-head h1 em{font-style:normal;color:var(--accent);}
+.page-head .sub{font-size:15px;color:var(--muted);line-height:1.7;max-width:580px;}
+
+/* CONTEXT STRIP */
+.context-strip{max-width:860px;margin:0 auto;padding:0 40px 48px;}
+.context-inner{background:var(--off);border-radius:8px;padding:20px 24px;display:flex;flex-wrap:wrap;gap:24px;}
+.ctx-item{}
+.ctx-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.ctx-value{font-size:14px;font-weight:700;color:var(--ink);}
+.ctx-sub{font-size:12px;color:var(--muted);margin-top:1px;}
+
+/* CAPABILITY SECTIONS */
+.caps{max-width:860px;margin:0 auto;padding:0 40px 24px;}
+
+.cap-block{border-top:3px solid var(--ink);padding:32px 0 36px;border-bottom:1px solid var(--rule);}
+.cap-block:last-child{border-bottom:none;}
+
+.cap-header{margin-bottom:20px;}
+.cap-eyebrow{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:6px;}
+.cap-title{font-size:20px;font-weight:900;letter-spacing:-.02em;color:var(--ink);margin-bottom:8px;}
+.cap-desc{font-size:13.5px;color:var(--muted);line-height:1.7;}
+
+/* WORK PRODUCTS */
+.wp-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:20px 0 10px;}
+.wp-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
+.wp-tag{font-size:12px;font-weight:500;color:var(--ink);background:var(--off);border:1px solid var(--rule);border-radius:4px;padding:4px 10px;}
+
+/* DOMAINS */
+.domain-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.domain-groups{display:flex;flex-direction:column;gap:10px;}
+.domain-group{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;}
+.domain-group-name{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);white-space:nowrap;min-width:160px;}
+.domain-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.domain-tag{font-size:11px;color:var(--muted);background:white;border:1px solid var(--rule);border-radius:3px;padding:3px 8px;}
+
+/* CTA */
+.cta{max-width:860px;margin:0 auto;padding:40px 40px 64px;}
+.cta-strip{background:var(--accent);border-radius:10px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.cta-strip p{font-size:15px;font-weight:600;color:white;}
+.cta-strip p span{color:rgba(255,255,255,.6);font-weight:400;font-size:13px;display:block;margin-top:3px;}
+.cta-links{display:flex;gap:10px;flex-wrap:wrap;}
+.cta-links a{font-size:13px;font-weight:600;color:white;border:2px solid rgba(255,255,255,.5);border-radius:6px;padding:8px 18px;text-decoration:none;transition:all .15s;}
+.cta-links a:hover{background:white;color:var(--ink);border-color:white;text-decoration:none;}
+
+footer{padding:28px 40px;border-top:1px solid var(--rule);}
+footer p{font-size:12px;color:var(--muted);}
+
+@media(max-width:680px){
+  nav{padding:14px 20px;}
+  .bc{padding:76px 20px 0;}
+  .page-head,.context-strip,.caps,.cta{padding-left:20px;padding-right:20px;}
+  .context-inner{gap:16px;}
+  .domain-group{flex-direction:column;gap:5px;}
+  .domain-group-name{min-width:unset;}
+  .cta-strip{flex-direction:column;align-items:flex-start;}
+  footer{padding:20px;}
+}
+</style>
+<meta name="description" content="Work and capabilities — Rob Dull, Product Manager and Product Operations leader. Strategic planning, discovery, delivery, operations, and coaching across enterprise and consumer platforms.">
+<link rel="canonical" href="https://robdull.com/about_me/work-history.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://robdull.com/about_me/work-history.html">
+<meta property="og:title" content="Work & Capabilities | Rob Dull">
+<meta property="og:description" content="Work and capabilities — Rob Dull, Product Manager and Product Operations leader. Strategic planning, discovery, delivery, operations, and coaching across enterprise and consumer platforms.">
+<meta property="og:site_name" content="Rob Dull">
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nn">Rob Dull</a>
+  <div class="nl">
+    <a href="resume.html">Resume</a>
+    <a href="mailto:rob.dull@gmail.com">Contact</a>
+  </div>
+</nav>
+
+<div class="bc">
+  <div class="bc-inner">
+    <a href="../index.html">Rob Dull</a>
+    <span class="bc-sep">›</span>
+    <span>Work &amp; Capabilities</span>
+  </div>
+</div>
+
+<div class="page-head">
+  <div class="page-tag">Experience</div>
+  <h1>What I do and<br><em>what I produce.</em></h1>
+  <p class="sub">15 years at Salesforce and Delta Dental, producing work product at every level from portfolio strategy to team-level stories.</p>
+</div>
+
+<div class="context-strip">
+  <div class="context-inner">
+    <div class="ctx-item">
+      <div class="ctx-label">Where</div>
+      <div class="ctx-value">Salesforce IT · Delta Dental</div>
+      <div class="ctx-sub">+ Nokia, Portrait Displays, Bio-Rad</div>
+    </div>
+    <div class="ctx-item">
+      <div class="ctx-label">Scope</div>
+      <div class="ctx-value">35+ teams · 5 portfolios</div>
+      <div class="ctx-sub">25 → 115+ teams at Salesforce</div>
+    </div>
+    <div class="ctx-item">
+      <div class="ctx-label">Roles</div>
+      <div class="ctx-value">PM · ProdOps Lead · Agile Coach</div>
+      <div class="ctx-sub">Direct PM earlier in career</div>
+    </div>
+  </div>
+</div>
+
+<div class="caps">
+
+  <!-- STRATEGIC PLANNING -->
+  <div class="cap-block">
+    <div class="cap-header">
+      <div class="cap-eyebrow">Strategic Planning</div>
+      <div class="cap-title">Connecting business goals to team-level work</div>
+      <p class="cap-desc">Artifacts that translate executive priorities into plans product teams can deliver against, with visibility into outcomes for leadership.</p>
+    </div>
+
+    <div class="wp-label">Work products</div>
+    <div class="wp-tags">
+      <span class="wp-tag">OKRs &amp; KPI frameworks</span>
+      <span class="wp-tag">Portfolio roadmaps</span>
+      <span class="wp-tag">Cost-of-delay analysis</span>
+      <span class="wp-tag">Big Rocks / Hoshin alignment</span>
+      <span class="wp-tag">North Star metric definition</span>
+      <span class="wp-tag">Business canvases</span>
+      <span class="wp-tag">Value proposition frameworks</span>
+      <span class="wp-tag">Executive dashboards</span>
+      <span class="wp-tag">Quarterly planning pre-work</span>
+    </div>
+
+    <div class="domain-label">Applied across</div>
+    <div class="domain-groups">
+      <div class="domain-group">
+        <div class="domain-group-name">Customer-facing</div>
+        <div class="domain-tags">
+          <span class="domain-tag">Consumer mobile</span>
+          <span class="domain-tag">Member portals</span>
+          <span class="domain-tag">Provider portals</span>
+        </div>
+      </div>
+      <div class="domain-group">
+        <div class="domain-group-name">Revenue &amp; operations</div>
+        <div class="domain-tags">
+          <span class="domain-tag">Claims processing</span>
+          <span class="domain-tag">Revenue management &amp; billing</span>
+          <span class="domain-tag">Oracle RMB</span>
+          <span class="domain-tag">Metavance</span>
+        </div>
+      </div>
+      <div class="domain-group">
+        <div class="domain-group-name">Enterprise systems</div>
+        <div class="domain-tags">
+          <span class="domain-tag">Workday</span>
+          <span class="domain-tag">Salesforce platform</span>
+          <span class="domain-tag">Concur</span>
+          <span class="domain-tag">Finance &amp; accounting</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DISCOVERY & RESEARCH -->
+  <div class="cap-block">
+    <div class="cap-header">
+      <div class="cap-eyebrow">Discovery &amp; Research</div>
+      <div class="cap-title">Grounding product decisions in real user needs</div>
+      <p class="cap-desc">Structured outputs that carry customer insight into roadmap and delivery decisions.</p>
+    </div>
+
+    <div class="wp-label">Work products</div>
+    <div class="wp-tags">
+      <span class="wp-tag">Journey maps</span>
+      <span class="wp-tag">Persona &amp; JTBD frameworks</span>
+      <span class="wp-tag">Empathy maps</span>
+      <span class="wp-tag">User interview synthesis</span>
+      <span class="wp-tag">Opportunity assessments</span>
+      <span class="wp-tag">Business case documents</span>
+      <span class="wp-tag">ROI &amp; cost-of-delay models</span>
+    </div>
+
+    <div class="domain-label">Applied across</div>
+    <div class="domain-groups">
+      <div class="domain-group">
+        <div class="domain-group-name">Customer-facing</div>
+        <div class="domain-tags">
+          <span class="domain-tag">Customer onboarding</span>
+          <span class="domain-tag">Customer support</span>
+          <span class="domain-tag">Consumer mobile</span>
+          <span class="domain-tag">Member &amp; provider portals</span>
+        </div>
+      </div>
+      <div class="domain-group">
+        <div class="domain-group-name">Internal customers</div>
+        <div class="domain-tags">
+          <span class="domain-tag">Sales support</span>
+          <span class="domain-tag">Marketing support</span>
+          <span class="domain-tag">Employee onboarding</span>
+          <span class="domain-tag">Legal support</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELIVERY -->
+  <div class="cap-block">
+    <div class="cap-header">
+      <div class="cap-eyebrow">Delivery</div>
+      <div class="cap-title">From portfolio to team — structured, traceable work</div>
+      <p class="cap-desc">Delivery artifacts at every level of the hierarchy, with intake and refinement processes that keep backlogs healthy.</p>
+    </div>
+
+    <div class="wp-label">Work products</div>
+    <div class="wp-tags">
+      <span class="wp-tag">Epics &amp; features</span>
+      <span class="wp-tag">User stories &amp; acceptance criteria</span>
+      <span class="wp-tag">Given-When-Then specifications</span>
+      <span class="wp-tag">Work breakdown structures</span>
+      <span class="wp-tag">Dependency maps</span>
+      <span class="wp-tag">Release plans</span>
+      <span class="wp-tag">Backlog intake frameworks</span>
+      <span class="wp-tag">Requirements documentation</span>
+      <span class="wp-tag">Technical design briefs</span>
+    </div>
+
+    <div class="domain-label">Applied across</div>
+    <div class="domain-groups">
+      <div class="domain-group">
+        <div class="domain-group-name">Content &amp; marketing</div>
+        <div class="domain-tags">
+          <span class="domain-tag">AEM</span>
+          <span class="domain-tag">CMS</span>
+          <span class="domain-tag">Marketo</span>
+        </div>
+      </div>
+      <div class="domain-group">
+        <div class="domain-group-name">Enterprise systems</div>
+        <div class="domain-tags">
+          <span class="domain-tag">Workday</span>
+          <span class="domain-tag">Concur</span>
+          <span class="domain-tag">Enterprise business desktop</span>
+          <span class="domain-tag">Finance &amp; accounting</span>
+        </div>
+      </div>
+      <div class="domain-group">
+        <div class="domain-group-name">Revenue &amp; operations</div>
+        <div class="domain-tags">
+          <span class="domain-tag">Multi-product billing</span>
+          <span class="domain-tag">Claims processing</span>
+          <span class="domain-tag">Oracle RMB</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPERATIONS -->
+  <div class="cap-block">
+    <div class="cap-header">
+      <div class="cap-eyebrow">Product Operations</div>
+      <div class="cap-title">Making the system visible and improvable</div>
+      <p class="cap-desc">Operational infrastructure that gives product organizations visibility into how they're doing and a path to improvement, without adding process overhead.</p>
+    </div>
+
+    <div class="wp-label">Work products</div>
+    <div class="wp-tags">
+      <span class="wp-tag">Delivery health metrics</span>
+      <span class="wp-tag">Agile maturity surveys</span>
+      <span class="wp-tag">Engineering excellence assessments</span>
+      <span class="wp-tag">Retrospective synthesis</span>
+      <span class="wp-tag">Process improvement plans</span>
+      <span class="wp-tag">Operating playbooks</span>
+      <span class="wp-tag">Jira &amp; Jira Align configuration</span>
+      <span class="wp-tag">Portfolio visibility dashboards</span>
+      <span class="wp-tag">Root cause analyses</span>
+    </div>
+  </div>
+
+  <!-- COACHING & ENABLEMENT -->
+  <div class="cap-block">
+    <div class="cap-header">
+      <div class="cap-eyebrow">Coaching &amp; Enablement</div>
+      <div class="cap-title">Building PM capability at the individual and org level</div>
+      <p class="cap-desc">Programs, tools, and frameworks that help product managers grow, with concrete benchmarks managers can evaluate and develop against.</p>
+    </div>
+
+    <div class="wp-label">Work products</div>
+    <div class="wp-tags">
+      <span class="wp-tag">PM maturity frameworks</span>
+      <span class="wp-tag">Role capability benchmarks</span>
+      <span class="wp-tag">Training curricula</span>
+      <span class="wp-tag">Workshop design &amp; facilitation</span>
+      <span class="wp-tag">Community of practice design</span>
+      <span class="wp-tag">1:1 coaching frameworks</span>
+      <span class="wp-tag">Performance improvement plans</span>
+      <span class="wp-tag">Internal certification programs</span>
+    </div>
+  </div>
+
+  <!-- FIRST PRODUCT OWNERSHIP -->
+  <div class="cap-block">
+    <div class="cap-header">
+      <div class="cap-eyebrow">First Product Ownership</div>
+      <div class="cap-title">Full end-to-end PM for a shipped product</div>
+      <p class="cap-desc">At Portrait Displays, I held complete product ownership for <strong>DisplayTune</strong> — consumer monitor calibration software and firmware — from customer research through engineering delivery, localization, and OEM release. Sales led customer engagement; I owned everything else.</p>
+    </div>
+
+    <div class="wp-label">Work products</div>
+    <div class="wp-tags">
+      <span class="wp-tag">Product requirements</span>
+      <span class="wp-tag">Engineering specifications</span>
+      <span class="wp-tag">Firmware testing</span>
+      <span class="wp-tag">Software releases</span>
+      <span class="wp-tag">Support site (25 languages)</span>
+      <span class="wp-tag">OEM partner coordination</span>
+      <span class="wp-tag">Iterative delivery from customer feedback</span>
+    </div>
+
+    <div class="domain-label">OEM partners</div>
+    <div class="wp-tags">
+      <span class="wp-tag">Hyundai</span>
+      <span class="wp-tag">Iiyama</span>
+      <span class="wp-tag">Acer</span>
+      <span class="wp-tag">Sony</span>
+      <span class="wp-tag">Fujitsu-Siemens</span>
+    </div>
+  </div>
+
+</div><!-- /caps -->
+
+<div class="cta">
+  <div class="cta-strip">
+    <p>Happy to walk through specific examples.
+      <span>Resume, LinkedIn, or email below.</span>
+    </p>
+    <div class="cta-links">
+      <a href="resume.html">Resume &#8599;</a>
+      <a href="https://linkedin.com/in/robdull" target="_blank">LinkedIn &#8599;</a>
+      <a href="mailto:rob.dull@gmail.com">Email &#8599;</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Rob Dull &bull; Product Management Practitioner and Product Operations Transformation Consultant</p>
+</footer>
+
+</body>
+</html>

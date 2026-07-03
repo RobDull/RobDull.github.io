@@ -2,102 +2,85 @@
 <html lang="en">
 <head>
 
-<meta name="keywords" content="Product Manager, Product Operations, Technical Program Management, Product Strategy, Agile Coach, AI Product Management, San Francisco">
-<meta name="author" content="Rob Dull">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y1JYXTE5J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0Y1JYXTE5J');
+</script>
 
+<meta name="keywords" content="Product Manager, Product Operations, Product Strategy, Agile Coach, AI Product Management, San Francisco">
+<meta name="author" content="Rob Dull">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rob Dull | Product Operations & Technical Program Management</title>
+<title>Rob Dull | Product Management & Product Operations</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
   --ink:#0a0a0a;--white:#ffffff;--off:#f7f7f7;--rule:#e8e8e8;
-  --accent:#1a3a5c;--accent2:#c8662a;--muted:#6b6b6b;--gold:#c8921a;
+  --accent:#1a3a5c;--accent2:#c8662a;--muted:#6b6b6b;
   --font:'Inter',sans-serif;
 }
 html{scroll-behavior:smooth;}
 body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;min-height:100vh;}
 a{color:var(--accent);text-decoration:none;}
-a:hover{text-decoration:underline;}
 
+/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
 .nn{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
 .nl{display:flex;gap:10px;align-items:center;}
-.nl a{font-size:13px;font-weight:600;color:white;text-decoration:none;padding:8px 16px;border:2px solid var(--accent);border-radius:6px;transition:all .15s;letter-spacing:-.01em;background:var(--accent);}
-.nl a:hover{background:var(--accent);color:white;border-color:var(--accent);}
+.nl a{font-size:13px;font-weight:600;color:white;text-decoration:none;padding:8px 16px;border:2px solid var(--accent);border-radius:6px;background:var(--accent);transition:all .15s;}
+.nl a:hover{background:#0f2540;border-color:#0f2540;}
 
-.hero{padding:140px 40px 60px;max-width:900px;margin:0 auto;text-align:center;}
-.he{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:20px;animation:fu .5s ease both;}
-.hero h1{font-size:clamp(28px,4vw,52px);font-weight:900;line-height:1.1;letter-spacing:-.03em;color:var(--ink);margin-bottom:28px;animation:fu .5s .08s ease both;}
+/* HERO */
+.hero{padding:120px 40px 48px;max-width:860px;margin:0 auto;}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);margin-bottom:14px;}
+.hero h1{font-size:clamp(26px,4vw,44px);font-weight:900;line-height:1.15;letter-spacing:-.03em;color:var(--ink);margin-bottom:14px;}
 .hero h1 em{font-style:normal;color:var(--accent);}
-.hlinks{list-style:none;margin:0 auto 0;max-width:580px;padding-left:40px;display:flex;flex-direction:column;gap:4px;animation:fu .5s .16s ease both;text-align:center;}
-.hlinks li{font-size:17px;font-weight:600;line-height:1.7;}
-.hlinks li::marker{color:var(--accent2);}
-.hlinks li a{color:var(--accent);text-decoration:none;border-bottom:1.5px solid rgba(26,58,92,.25);padding-bottom:1px;transition:all .15s;}
-.hlinks li a:hover{color:var(--accent2);border-bottom-color:var(--accent2);}
-.hb{max-width:580px;margin:0 auto 44px;color:var(--muted);font-size:17px;line-height:1.7;font-weight:400;animation:fu .5s .16s ease both;}
-.hc{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;animation:fu .5s .24s ease both;}
-.bp{background:white;color:var(--ink);border:2px solid var(--ink);border-radius:6px;font-size:13px;font-weight:700;letter-spacing:-.01em;padding:12px 28px;text-decoration:none;display:inline-block;transition:all .15s;}
-.bp:hover{background:var(--accent);color:white;border-color:var(--accent);}
-.bg{background:white;color:var(--ink);border:2px solid var(--ink);border-radius:6px;font-size:13px;font-weight:700;letter-spacing:-.01em;padding:12px 28px;text-decoration:none;display:inline-block;transition:all .15s;}
-.bg:hover{background:var(--accent);color:white;border-color:var(--accent);}
+.hero .byline{font-size:14px;color:var(--muted);line-height:1.6;}
+.hero .byline strong{color:var(--ink);font-weight:600;}
 
-.sd{max-width:860px;margin:0 auto;padding:0 40px;border-top:1px solid var(--rule);}
-
-.approach{max-width:760px;margin:0 auto;padding:48px 40px;text-align:center;}
-.approach h2{font-size:clamp(26px,3.5vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1.15;color:var(--ink);margin-bottom:20px;}
-.approach h2 em{font-style:normal;color:var(--accent);}
-.approach p{color:var(--muted);font-size:16px;line-height:1.8;margin-bottom:14px;}
-
-.ts{max-width:1000px;margin:0 auto;padding:48px 40px;text-align:center;}
-.th{margin-bottom:48px;}
-.th h2{font-size:clamp(28px,3.5vw,42px);font-weight:800;letter-spacing:-.03em;color:var(--ink);margin-bottom:6px;}
-.tc{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
-.tg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;text-align:left;}
+/* CARD GRID */
+.grid-wrap{max-width:860px;margin:0 auto;padding:0 40px 64px;}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
 
 a.card{background:var(--off);border:2px solid var(--rule);border-radius:10px;padding:28px;text-decoration:none;color:inherit;display:block;transition:all .18s;position:relative;overflow:hidden;}
 a.card:hover{border-color:var(--ink);background:white;box-shadow:0 4px 20px rgba(0,0,0,.08);}
 .ctag{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;}
 a.card h3{font-size:18px;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin-bottom:10px;line-height:1.2;}
 a.card p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:18px;}
-.cm{display:flex;gap:8px;flex-wrap:wrap;}
-.chip{font-size:10px;font-weight:600;letter-spacing:.04em;color:var(--ink);background:var(--rule);border-radius:4px;padding:3px 9px;}
-.ca{position:absolute;top:24px;right:24px;font-size:16px;color:var(--rule);transition:all .18s;}
+.chips{display:flex;gap:6px;flex-wrap:wrap;}
+.chip{font-size:10px;font-weight:600;letter-spacing:.03em;color:var(--ink);background:var(--rule);border-radius:4px;padding:3px 9px;}
+.ca{position:absolute;top:22px;right:22px;font-size:16px;color:var(--rule);transition:all .18s;}
 a.card:hover .ca{color:var(--ink);transform:translate(2px,-2px);}
-.ph-card{background:transparent;border:2px dashed var(--rule);border-radius:10px;padding:28px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:180px;}
-.ph-card p{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--rule);}
 
-.as{background:var(--accent);padding:64px 40px;margin-top:40px;}
-.as-inner{max-width:700px;margin:0 auto;text-align:center;}
-.as h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.03em;color:white;line-height:1.15;margin-bottom:20px;}
-.as h2 em{font-style:normal;color:var(--accent2);}
-.as p{color:rgba(255,255,255,.65);font-size:15px;line-height:1.8;margin-bottom:14px;}
-.as p strong{color:white;font-weight:700;}
-.as-li-btn{display:inline-flex;align-items:center;gap:8px;margin-top:28px;background:transparent;color:white;border:2px solid rgba(255,255,255,.6);border-radius:6px;font-size:13px;font-weight:700;letter-spacing:-.01em;padding:12px 28px;text-decoration:none;transition:all .15s;}
-.as-li-btn:hover{background:white;color:var(--ink);border-color:white;}
+/* FOOTER */
+footer{padding:28px 40px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+footer p{font-size:12px;color:var(--muted);}
+.footer-links{display:flex;gap:16px;}
+.footer-links a{font-size:12px;font-weight:600;color:var(--muted);transition:color .15s;}
+.footer-links a:hover{color:var(--accent);}
 
-footer{padding:28px 40px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
-footer p{font-size:12px;font-weight:500;color:var(--muted);}
-
-@keyframes fu{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
-
+@media(max-width:780px){
+  .grid{grid-template-columns:1fr;}
+}
 @media(max-width:680px){
   nav{padding:14px 20px;}
   .nl a{padding:7px 12px;font-size:12px;}
-  .hero{padding:120px 24px 40px;}
-  .approach,.ts{padding:36px 24px;}
-  .sd{padding:0 24px;}
-  .as{padding:48px 24px;}
-  footer{padding:20px 24px;flex-direction:column;text-align:center;}
+  .hero{padding:90px 20px 36px;}
+  .grid-wrap{padding:0 20px 48px;}
+  footer{padding:20px;flex-direction:column;gap:10px;}
 }
 </style>
-<meta name="description" content="Product Operations and Technical Program Management leader with 15+ years at Salesforce and Delta Dental. AI-native tools, delivery frameworks, and writing on the future of technical program leadership.">
+<meta name="description" content="Product Manager and Product Operations leader with 15 years at Salesforce and Delta Dental. AI-native tools, writing, and frameworks for modern PM practice.">
 <link rel="canonical" href="https://robdull.com/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://robdull.com/">
-<meta property="og:title" content="Rob Dull | Product Operations & Technical Program Management">
-<meta property="og:description" content="Product Operations and Technical Program Management leader with 15+ years at Salesforce and Delta Dental. AI-native tools, delivery frameworks, and writing on the future of technical program leadership.">
+<meta property="og:title" content="Rob Dull | Product Management & Product Operations">
+<meta property="og:description" content="Product Manager and Product Operations leader with 15 years at Salesforce and Delta Dental. AI-native tools, writing, and frameworks for modern PM practice.">
 <meta property="og:site_name" content="Rob Dull">
 </head>
 <body>
@@ -106,90 +89,65 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <a href="/" class="nn">Rob Dull</a>
   <div class="nl">
     <a href="mailto:rob.dull@gmail.com">Contact</a>
-    <a href="#about">About Me</a>
-    <a href="#tools">Work</a>
   </div>
 </nav>
 
-<section class="hero">
-  <h1>Product Operations and Technical Program Management Leader,<br>partnering with engineering and product teams to<br><em>deliver complex programs</em> and <br><em>transform Product Management</em></h1>
-  <p class="hb" style="margin-bottom:10px;">I design methods to reduce waste, untangle cross-team dependencies, and let technical organizations move faster. This site showcases examples of my work, including:</p>
-  <ul class="hlinks">
-    <li>AI-augmented product and program management <a href="tools/tools-index.html">tools</a></li>
-    <li><a href="perspectives/perspectives-index.html">Articles</a> about delivery and program operations</li>
-    <li>A menu of <a href="workshops/workshops-index.html">workshops and trainings</a></li>
-  </ul>
-  <p class="hb" style="margin-top:18px;">The site is part portfolio, part exploration, and entirely a conversation starter. If this resonates with you, <a href="mailto:rob.dull@gmail.com">let me know!</a></p>
-  <div class="hc">
-    <a href="mailto:rob.dull@gmail.com" class="bp">Contact Me</a>
-    <a href="#tools" class="bg">Explore Work</a>
-  </div>
-</section>
+<div class="hero">
+  <div class="eyebrow">Product Management · Product Operations</div>
+  <h1>15 years building products<br>and <em>the teams that ship them.</em></h1>
+  <p class="byline"><strong>Salesforce · Delta Dental of California · Nokia.</strong> Open to Product Management and Product Operations roles.</p>
 
+</div>
 
-<section class="approach">
-  <h2>AI as <em>operational infrastructure</em></h2>
-  <p>Each of these tools demonstrates the use of AI to facilitate the creation of key product and program management assets. You are welcome to copy them and insert your own AI keys. Feedback is welcome!</p>
-</section>
+<div class="grid-wrap">
+  <div class="grid">
 
+    <a href="about_me/work-history.html" class="card">
+      <div class="ca">&#8599;</div>
+      <div class="ctag">Experience</div>
+      <h3>Background</h3>
+      <p>What I've built, led, and produced, organized by capability and work product type. Includes my full resume.</p>
+      <div class="chips">
+        <span class="chip">Work &amp; capabilities</span>
+        <span class="chip">Resume</span>
+        <span class="chip">PM · ProdOps · TPM</span>
+      </div>
+    </a>
 
-<section class="ts" id="tools">
-  <div class="th">
-    <h2>3 Focus Areas</h2>
-    <div class="tc">What I'm working on • What I'm thinking • What I can do for you</div>
-  </div>
-  <div class="tg">
     <a href="tools/tools-index.html" class="card">
       <div class="ca">&#8599;</div>
-      <div class="ctag">Growing collection</div>
-      <h3>Tools and Interfaces</h3>
-      <p>AI-augmented tools that translate complex technical programs and operational problems into clear, executive-ready outputs. Use these tools to accelerate planning, cross-team coordination, and decision-making.</p>
-      <div class="cm">
-        <span class="chip">Business case generator</span>
-        <span class="chip">User Persona generator</span>
-        <span class="chip">AI-generated</span>
-        <span class="chip">ROI analysis</span>
+      <div class="ctag">Now</div>
+      <h3>AI Portfolio</h3>
+      <p>AI-native PM tools built for practice and demos, from business case generators to agentic intake pipelines. Also includes a card game that I wanted to play with friends, so I built it to host on my site.</p>
+      <div class="chips">
+        <span class="chip">Business case</span>
+        <span class="chip">Feature intake</span>
+        <span class="chip">Persona generator</span>
       </div>
     </a>
+
     <a href="perspectives/perspectives-index.html" class="card">
       <div class="ca">&#8599;</div>
-      <div class="ctag">Writing</div>
-      <h3>Perspectives and Advice</h3>
-      <p>Practical takes on product operations, technical program management, and organizational effectiveness — drawn from 20 years in product management, including 12 years of product operations transformation and coaching.</p>
-      <div class="cm">
-        <span class="chip">Product ops</span>
+      <div class="ctag">Thinking</div>
+      <h3>Perspectives &amp; Advice</h3>
+      <p>Writing on AI, product operations, and what the PM role is becoming.</p>
+      <div class="chips">
         <span class="chip">AI in PM</span>
-        <span class="chip">Org design</span>
+        <span class="chip">Product ops</span>
+        <span class="chip">MCP &amp; agents</span>
       </div>
     </a>
-    <a href="workshops/workshops-index.html" class="card">
-      <div class="ca">&#8599;</div>
-      <div class="ctag">Facilitation</div>
-      <h3>Training and Workshops</h3>
-      <p>Structured sessions for technical program teams, product managers, engineering leads, and stakeholders.</p>
-      <div class="cm">
-        <span class="chip">Roadmap facilitation</span>
-        <span class="chip">Stakeholder alignment</span>
-        <span class="chip">AI workflows</span>
-      </div>
-    </a>
-  </div>
-</section>
 
-<section class="as" id="about">
-  <div class="as-inner">
-    <h2>Over 15 years in<br><em>Product Management</em><br>Product Operations<br><em>Program Management</em><br>Organizational Transformation</h2>
-    <p>I have spent my career embedded in delivery teams, working groups with engineering and operational leaders, and senior management teams during periods of rapid growth and organizational change, most recently at <strong>Salesforce</strong> and <strong>Delta Dental of California</strong>. My work is about coordinating complex, multi-team technical programs: how people communicate across dependencies, learn from delivery data, and make decisions under deadline pressure.</p>
-    <p>The tools in this site represent a new dimension of that work: designing AI-augmented interfaces that bring the same operational discipline to individual decisions and workflows. Each tool addresses discovery, decision, and presentation challenges that I have addressed during my time working with hundreds of product managers, engineering leads, and key collaborators.</p>
-    <p>Currently exploring senior Product Operations, Technical Program Management, and Product Leadership roles (full-time or consulting).</p>
-    <a href="https://linkedin.com/in/robdull" target="_blank" class="as-li-btn">Connect on LinkedIn &#8599;</a>
-    <a href="about_me/resume.html" class="as-li-btn">View Resume &#8599;</a>
-    <a href="mailto:rob.dull@gmail.com" class="as-li-btn">Contact Me &#8599;</a>
   </div>
-</section>
+</div>
 
 <footer>
-  <p>Rob Dull &bull; Product Operations and Technical Program Management Leader</p>
+  <p>Rob Dull &bull; San Francisco, CA</p>
+  <div class="footer-links">
+    <a href="https://linkedin.com/in/robdull" target="_blank">LinkedIn &#8599;</a>
+    <a href="about_me/resume.html">Resume</a>
+    <a href="mailto:rob.dull@gmail.com">Email</a>
+  </div>
 </footer>
 
 </body>
