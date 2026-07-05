@@ -207,7 +207,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <div class="hero-strip">
-  <p class="hero-desc">AI-native PM tools covering the full product workflow, from discovery and persona generation to agentic feature intake. Each tool works standalone. Connected by agents and MCP, they form an AI-native product ops pipeline.</p>
+  <p class="hero-desc">AI-native PM tools covering the full product workflow. Each works standalone &mdash; and each can hand its output to the next.</p>
   <div style="display:flex;flex-direction:column;gap:10px;flex-shrink:0;">
     <a href="AI-native-prodops/prodops-network.html" class="hero-btn" style="margin-top:0;padding-top:7px;padding-bottom:7px;">Network Diagram &#8599;</a>
     <a href="AI-native-prodops/AI-prodops-overview.html" class="hero-btn" style="margin-top:0;padding-top:7px;padding-bottom:7px;">Explore AI ProdOps &#8599;</a>
@@ -215,68 +215,55 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <div class="api-note">
-  <strong>How the AI works:</strong> Two tools call the Anthropic Claude API directly from your browser. When you click Run for the first time, you'll be prompted to enter your own API key; it is held in session memory only and cleared when you close the tab. The other four tools run entirely in your browser with no API calls and no key required.
+  <strong>How the AI works:</strong> Four tools call the Claude API directly from your browser with your own key (you'll be prompted on first run; the key lives in session memory and clears when the tab closes). No key? Every tool still works &mdash; sample runs, worked examples, instant layouts, or the editor itself.
 </div>
 
 <div class="continuum-strip">
-  <div class="continuum-label">How the tools connect: AI-augmented to AI-native</div>
+  <div class="continuum-label">One connected workflow</div>
   <div class="continuum-diagram">
 
     <div class="continuum-node">
       <div class="continuum-node-num">01 — DISCOVER</div>
-      <div class="continuum-node-name">Research &amp; persona</div>
-      <div class="continuum-node-mode mode-aug">AI-augmented</div><br>
-      <a href="persona-generator/persona-index.html" class="continuum-node-tool">Persona generator ↗</a><br>
-      <a href="journey-map/journey-map-index.html" class="continuum-node-tool">Journey map ↗</a>
+      <div class="continuum-node-name">Persona generator</div>
+      <a href="persona-generator/persona-index.html" class="continuum-node-tool">Open ↗</a>
     </div>
 
     <div class="continuum-node">
-      <div class="continuum-node-num">02 — ALIGN</div>
-      <div class="continuum-node-name">Strategy cascade</div>
-      <div class="continuum-node-mode mode-aug">AI-augmented</div><br>
-      <a href="hoshin-kanri/hoshin-v2mom-index.html" class="continuum-node-tool">Hoshin + V2MOM ↗</a>
+      <div class="continuum-node-num">02 — MAP</div>
+      <div class="continuum-node-name">Journey map</div>
+      <a href="journey-map/" class="continuum-node-tool">Open ↗</a>
     </div>
 
     <div class="continuum-node">
-      <div class="continuum-node-num">03 — JUSTIFY</div>
+      <div class="continuum-node-num">03 — VET</div>
+      <div class="continuum-node-name">Feature intake</div>
+      <a href="feature-intake/" class="continuum-node-tool">Open ↗</a>
+    </div>
+
+    <div class="continuum-node">
+      <div class="continuum-node-num">04 — ALIGN</div>
+      <div class="continuum-node-name">Hoshin + V2MOM</div>
+      <a href="hoshin-kanri/" class="continuum-node-tool">Open ↗</a>
+    </div>
+
+    <div class="continuum-node">
+      <div class="continuum-node-num">05 — FUND</div>
       <div class="continuum-node-name">Business case</div>
-      <div class="continuum-node-mode mode-both">Augmented → native</div><br>
-      <a href="business-case/business-case-index.html" class="continuum-node-tool">Business case gen. ↗</a>
+      <a href="business-case/" class="continuum-node-tool">Open ↗</a>
     </div>
 
     <div class="continuum-node">
-      <div class="continuum-node-num">04 — INTAKE</div>
-      <div class="continuum-node-name">Feature pipeline</div>
-      <div class="continuum-node-mode mode-native">AI-native</div><br>
-      <a href="feature-intake/feature-intake-index.html" class="continuum-node-tool">Feature intake ↗</a>
-    </div>
-
-    <div class="continuum-node">
-      <div class="continuum-node-num">05 — MEASURE</div>
-      <div class="continuum-node-name">Ops health</div>
-      <div class="continuum-node-mode mode-both">Augmented → native</div><br>
-      <a href="prod-ops-radar/prod-ops-radar-index.html" class="continuum-node-tool">Ops radar ↗</a>
-    </div>
-
-    <div class="continuum-node" style="background:rgba(26,58,92,.03);">
-      <div class="continuum-node-num">CONNECTED</div>
-      <div class="continuum-node-name">Agents + MCP threading the workflow</div>
-      <div class="continuum-node-mode mode-native">AI-native</div><br>
-      <a href="AI-native-prodops/AI-prodops-overview.html" class="continuum-node-tool">See the architecture ↗</a>
+      <div class="continuum-node-num">06 — MEASURE</div>
+      <div class="continuum-node-name">Ops radar</div>
+      <a href="prod-ops-radar/prod-ops-radar-index.html" class="continuum-node-tool">Open ↗</a>
     </div>
 
   </div>
 
   <div class="continuum-arrow">
     <div class="continuum-arrow-line"></div>
-    <div class="continuum-arrow-label">Each tool works standalone (AI-augmented) &nbsp;·&nbsp; Connected by agents and MCP, the whole is AI-native</div>
+    <div class="continuum-arrow-label">Each tool hands its output to the next</div>
     <div class="continuum-arrow-line"></div>
-  </div>
-
-  <div class="continuum-modes">
-    <div class="continuum-mode-key"><div class="continuum-mode-pip" style="background:rgba(200,146,26,.4);"></div>AI-augmented: tool accelerates a workflow step. Works standalone.</div>
-    <div class="continuum-mode-key"><div class="continuum-mode-pip" style="background:rgba(200,102,42,.4);"></div>Augmented → native: standalone or connected, depending on setup.</div>
-    <div class="continuum-mode-key"><div class="continuum-mode-pip" style="background:rgba(26,58,92,.4);"></div>AI-native: designed for connection. Full value when agents and MCP are in place.</div>
   </div>
 </div>
 
@@ -384,7 +371,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
         <span class="chip">Business goals</span>
         <span class="chip">Export for AI</span>
       </div>
-      <a href="journey-map/journey-map-index.html" class="tool-cta">Open tool &#8599;</a>
+      <a href="journey-map/" class="tool-cta">Open tool &#8599;</a>
     </div>
     <div class="tool-right">
       <div class="tool-thumb">
@@ -481,7 +468,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
         <span class="chip">AI alignment</span>
         <span class="chip">Vision alignment row</span>
       </div>
-      <a href="hoshin-kanri/hoshin-v2mom-index.html" class="tool-cta">Open tool &#8599;</a>
+      <a href="hoshin-kanri/" class="tool-cta">Open tool &#8599;</a>
     </div>
     <div class="tool-right">
       <div class="tool-thumb">
@@ -602,7 +589,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
         <span class="chip">Salary-based productivity</span>
         <span class="chip">Risks of inaction</span>
       </div>
-      <a href="business-case/business-case-index.html" class="tool-cta">Open tool &#8599;</a>
+      <a href="business-case/" class="tool-cta">Open tool &#8599;</a>
     </div>
     <div class="tool-right">
       <div class="tool-thumb">
@@ -676,7 +663,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
         <span class="chip">RICE scoring</span>
         <span class="chip">Human checkpoints</span>
       </div>
-      <a href="feature-intake/feature-intake-index.html" class="tool-cta">Open tool &#8599;</a>
+      <a href="feature-intake/" class="tool-cta">Open tool &#8599;</a>
     </div>
     <div class="tool-right">
       <div class="tool-thumb">
