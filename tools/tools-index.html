@@ -59,7 +59,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 /* ── WORKFLOW CONTINUUM STRIP ── */
 .continuum-strip{max-width:1060px;margin:0 auto;padding:36px 40px 40px;border-bottom:2px solid var(--rule);}
 .continuum-label{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
-.continuum-diagram{display:grid;grid-template-columns:repeat(6,1fr);gap:0;border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:20px;}
+.continuum-diagram{display:grid;grid-template-columns:repeat(7,1fr);gap:0;border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:20px;}
 .continuum-node{padding:12px 14px;border-right:1px solid var(--rule);background:white;position:relative;}
 .continuum-node:last-child{border-right:none;}
 .continuum-node-num{font-size:9px;font-weight:800;color:var(--accent2);letter-spacing:.08em;margin-bottom:4px;}
@@ -215,7 +215,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <div class="api-note">
-  <strong>How the AI works:</strong> Four tools call the Claude API directly from your browser with your own key (you'll be prompted on first run; the key lives in session memory and clears when the tab closes). No key? Every tool still works &mdash; sample runs, worked examples, instant layouts, or the editor itself.
+  <strong>How the AI works:</strong> Five tools call the Claude API directly from your browser with your own key (you'll be prompted on first run; the key lives in session memory and clears when the tab closes). No key? Every tool still works &mdash; sample runs, worked examples, instant layouts, or the editor itself.
 </div>
 
 <div class="continuum-strip">
@@ -241,19 +241,25 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
 
     <div class="continuum-node">
-      <div class="continuum-node-num">04 — ALIGN</div>
+      <div class="continuum-node-num">04 — SPEC</div>
+      <div class="continuum-node-name">Docs generator</div>
+      <a href="docs-generator/" class="continuum-node-tool">Open ↗</a>
+    </div>
+
+    <div class="continuum-node">
+      <div class="continuum-node-num">05 — ALIGN</div>
       <div class="continuum-node-name">Hoshin + V2MOM</div>
       <a href="hoshin-kanri/" class="continuum-node-tool">Open ↗</a>
     </div>
 
     <div class="continuum-node">
-      <div class="continuum-node-num">05 — FUND</div>
+      <div class="continuum-node-num">06 — FUND</div>
       <div class="continuum-node-name">Business case</div>
       <a href="business-case/" class="continuum-node-tool">Open ↗</a>
     </div>
 
     <div class="continuum-node">
-      <div class="continuum-node-num">06 — MEASURE</div>
+      <div class="continuum-node-num">07 — MEASURE</div>
       <div class="continuum-node-name">Ops radar</div>
       <a href="prod-ops-radar/prod-ops-radar-index.html" class="continuum-node-tool">Open ↗</a>
     </div>
@@ -275,6 +281,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <li><a href="#tool-03" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Hoshin Kanri + V2MOM Alignment</a></li>
     <li><a href="#tool-04" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Technical Business Case Generator</a></li>
     <li><a href="#tool-05" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Feature Intake Pipeline</a></li>
+    <li><a href="#tool-07" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> PDLC Docs Generator</a></li>
     <li><a href="#tool-06" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Product Operations Health Radar</a></li>
   </ul>
 </div>
@@ -724,6 +731,111 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
         <li class="feature-item">Assumption map ranked by uncertainty &times; impact, each with a fastest-test method</li>
         <li class="feature-item">RICE scoring rationale with recommended next action: spike, prototype, backlog, or reject</li>
         <li class="feature-item">Explanation panel at each step showing the design decision behind the chain</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="tool-row" id="tool-07">
+    <div class="tool-left">
+      <div class="tool-category">Agentic PDLC Demo</div>
+      <div class="tool-name">PDLC Docs<br><em>Generator</em></div>
+      <div class="tool-status live">Live</div>
+      <p class="tool-desc">Four sequential AI calls that turn a feature brief into delivery-grade documentation: a classified requirements register (FR/NFR/BR/DR/CON with MoSCoW priorities and explicit/inferred/assumed confidence markers), a proposed solution outline with measurable NFR thresholds, and two finished documents &mdash; a developer spec and a plain-language user guide with structured screenshot placeholders &mdash; every section traced back to numbered requirement IDs.</p>
+      <div class="tool-workflow">
+        <div class="tool-workflow-label">Where it fits in the workflow</div>
+        <div class="tool-workflow-text"><strong>Design &amp; requirements.</strong> The step between intake and delivery. One click on a finished Feature Intake brief carries it here; the tool applies full-scale PDLC disciplines &mdash; numbered requirement IDs, open questions instead of invention, NFR evidence plans, end-to-end traceability &mdash; compressed into a browser chain. On completion it saves a requirements register that a future backlog-decomposition tool will consume.</div>
+        <span class="tool-workflow-mode mode-native">AI-native</span>
+      </div>
+      <div class="tool-chips">
+        <span class="chip">Requirements register</span>
+        <span class="chip">MoSCoW + confidence</span>
+        <span class="chip">NFR thresholds</span>
+        <span class="chip">Traceability index</span>
+        <span class="chip">Screenshot placeholders</span>
+        <span class="chip">.md download</span>
+      </div>
+      <a href="docs-generator/" class="tool-cta">Open tool &#8599;</a>
+    </div>
+    <div class="tool-right">
+      <div class="tool-thumb">
+        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="160" fill="#f7f7f7"/>
+          <!-- Step pipeline bar -->
+          <rect x="0" y="0" width="300" height="22" fill="#0a0a0a"/>
+          <rect x="8"   y="5" width="66" height="12" rx="3" fill="#1a3a5c"/>
+          <rect x="82"  y="5" width="62" height="12" rx="3" fill="#7c5cbf"/>
+          <rect x="152" y="5" width="62" height="12" rx="3" fill="#2a6b6b"/>
+          <rect x="222" y="5" width="70" height="12" rx="3" fill="#c8662a"/>
+          <text x="41"  y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">01 REGISTER</text>
+          <text x="113" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">02 OUTLINE</text>
+          <text x="183" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">03 DEV DOC</text>
+          <text x="257" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">04 USER GUIDE</text>
+          <!-- Requirements register card -->
+          <rect x="8" y="28" width="130" height="126" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
+          <text x="16" y="40" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#1a3a5c" letter-spacing="0.5">REQUIREMENTS REGISTER</text>
+          <text x="16" y="52" font-family="DM Mono,monospace" font-size="5.5" fill="#0a0a0a">FR-001</text>
+          <rect x="44" y="47" width="52" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="100" y="46" width="12" height="7" rx="2" fill="#0a0a0a"/>
+          <text x="106" y="51.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.5" font-weight="800" fill="white">M</text>
+          <rect x="114" y="46" width="18" height="7" rx="2" fill="#e3efe7"/>
+          <text x="123" y="51.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="#1d5c38">EXPL</text>
+          <text x="16" y="64" font-family="DM Mono,monospace" font-size="5.5" fill="#0a0a0a">FR-004</text>
+          <rect x="44" y="59" width="52" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="100" y="58" width="12" height="7" rx="2" fill="#0a0a0a"/>
+          <text x="106" y="63.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.5" font-weight="800" fill="white">M</text>
+          <rect x="114" y="58" width="18" height="7" rx="2" fill="#eee7f6"/>
+          <text x="123" y="63.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="#5b3d8f">INFR</text>
+          <text x="16" y="76" font-family="DM Mono,monospace" font-size="5.5" fill="#0a0a0a">NFR-002</text>
+          <rect x="44" y="71" width="52" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="100" y="70" width="12" height="7" rx="2" fill="#0a0a0a"/>
+          <text x="106" y="75.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.5" font-weight="800" fill="white">M</text>
+          <rect x="114" y="70" width="18" height="7" rx="2" fill="#eee7f6"/>
+          <text x="123" y="75.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="#5b3d8f">INFR</text>
+          <text x="16" y="88" font-family="DM Mono,monospace" font-size="5.5" fill="#0a0a0a">NFR-003</text>
+          <rect x="44" y="83" width="52" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="100" y="82" width="12" height="7" rx="2" fill="#1a3a5c"/>
+          <text x="106" y="87.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.5" font-weight="800" fill="white">S</text>
+          <rect x="114" y="82" width="18" height="7" rx="2" fill="#f8e9dd"/>
+          <text x="123" y="87.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="#9a4f14">ASSM</text>
+          <text x="16" y="100" font-family="DM Mono,monospace" font-size="5.5" fill="#0a0a0a">DR-001</text>
+          <rect x="44" y="95" width="52" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="100" y="94" width="12" height="7" rx="2" fill="#1a3a5c"/>
+          <text x="106" y="99.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.5" font-weight="800" fill="white">S</text>
+          <rect x="114" y="94" width="18" height="7" rx="2" fill="#f8e9dd"/>
+          <text x="123" y="99.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="#9a4f14">ASSM</text>
+          <text x="16" y="116" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#c8662a" letter-spacing="0.5">OPEN QUESTIONS</text>
+          <text x="16" y="127" font-family="DM Mono,monospace" font-size="5" fill="#c8662a">OQ-001</text>
+          <rect x="42" y="123" width="60" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="106" y="122" width="26" height="6" rx="2" fill="#f6dede"/>
+          <text x="119" y="127" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="#8f2727">BLOCKING</text>
+          <text x="16" y="139" font-family="DM Mono,monospace" font-size="5" fill="#c8662a">OQ-002</text>
+          <rect x="42" y="135" width="60" height="4" rx="2" fill="#e8e8e8"/>
+          <!-- Dev doc card -->
+          <rect x="148" y="28" width="144" height="58" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
+          <text x="156" y="40" font-family="DM Serif Display,serif" font-size="7" fill="#0a0a0a">Developer Documentation</text>
+          <rect x="156" y="45" width="128" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="156" y="53" width="110" height="4" rx="2" fill="#e8e8e8"/>
+          <text x="156" y="66" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#2a6b6b" letter-spacing="0.5">API ENDPOINTS</text>
+          <text x="156" y="75" font-family="DM Mono,monospace" font-size="5" fill="#0a0a0a"><tspan fill="#c8662a" font-weight="700">POST</tspan> /api/exports</text>
+          <text x="156" y="82" font-family="DM Mono,monospace" font-size="4.5" fill="#6b6b6b">Realizes: FR-001, NFR-005</text>
+          <!-- User guide card with screenshot placeholder -->
+          <rect x="148" y="92" width="144" height="62" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
+          <text x="156" y="103" font-family="DM Serif Display,serif" font-size="7" fill="#0a0a0a">User Guide</text>
+          <text x="156" y="113" font-family="Inter,sans-serif" font-size="5" font-weight="700" fill="#0a0a0a">Step 1: Open the export drawer</text>
+          <rect x="156" y="117" width="120" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="156" y="126" width="128" height="22" rx="3" fill="#1a3a5c" fill-opacity="0.035" stroke="#1a3a5c" stroke-width="1" stroke-dasharray="3,2"/>
+          <text x="161" y="135" font-family="Inter,sans-serif" font-size="4.5" font-weight="800" fill="#1a3a5c" letter-spacing="0.5">SCREENSHOT PLACEHOLDER · SHOT-01</text>
+          <text x="161" y="143" font-family="Inter,sans-serif" font-size="4.5" fill="#6b6b6b">Capture: drawer open over the data view</text>
+        </svg>
+      </div>
+      <div class="tool-right-label">What it produces</div>
+      <ul class="feature-list">
+        <li class="feature-item">Requirements register: FR/NFR/BR/DR/CON with IDs, MoSCoW, and confidence markers</li>
+        <li class="feature-item">Open questions and a conflict scan instead of invented certainty</li>
+        <li class="feature-item">Proposed solution outline: file tree, API surface, NFR thresholds and evidence plans</li>
+        <li class="feature-item">Developer spec and user guide as downloadable markdown, cross-referenced both ways</li>
+        <li class="feature-item">Deterministic traceability index mapping every requirement to where it is realized</li>
       </ul>
     </div>
   </div>
