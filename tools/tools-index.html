@@ -59,7 +59,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 /* ── WORKFLOW CONTINUUM STRIP ── */
 .continuum-strip{max-width:1060px;margin:0 auto;padding:36px 40px 40px;border-bottom:2px solid var(--rule);}
 .continuum-label{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
-.continuum-diagram{display:grid;grid-template-columns:repeat(7,1fr);gap:0;border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:20px;}
+.continuum-diagram{display:grid;grid-template-columns:repeat(8,1fr);gap:0;border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:20px;}
 .continuum-node{padding:12px 14px;border-right:1px solid var(--rule);background:white;position:relative;}
 .continuum-node:last-child{border-right:none;}
 .continuum-node-num{font-size:9px;font-weight:800;color:var(--accent2);letter-spacing:.08em;margin-bottom:4px;}
@@ -215,7 +215,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <div class="api-note">
-  <strong>How the AI works:</strong> Five tools call the Claude API directly from your browser with your own key (you'll be prompted on first run; the key lives in session memory and clears when the tab closes). No key? Every tool still works &mdash; sample runs, worked examples, instant layouts, or the editor itself.
+  <strong>How the AI works:</strong> Six tools call the Claude API directly from your browser with your own key (you'll be prompted on first run; the key lives in session memory and clears when the tab closes). No key? Every tool still works &mdash; sample runs, worked examples, instant layouts, or the editor itself.
 </div>
 
 <div class="continuum-strip">
@@ -247,19 +247,25 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
 
     <div class="continuum-node">
-      <div class="continuum-node-num">05 — ALIGN</div>
+      <div class="continuum-node-num">05 — PLAN</div>
+      <div class="continuum-node-name">Backlog builder</div>
+      <a href="backlog-builder/" class="continuum-node-tool">Open ↗</a>
+    </div>
+
+    <div class="continuum-node">
+      <div class="continuum-node-num">06 — ALIGN</div>
       <div class="continuum-node-name">Hoshin + V2MOM</div>
       <a href="hoshin-kanri/" class="continuum-node-tool">Open ↗</a>
     </div>
 
     <div class="continuum-node">
-      <div class="continuum-node-num">06 — FUND</div>
+      <div class="continuum-node-num">07 — FUND</div>
       <div class="continuum-node-name">Business case</div>
       <a href="business-case/" class="continuum-node-tool">Open ↗</a>
     </div>
 
     <div class="continuum-node">
-      <div class="continuum-node-num">07 — MEASURE</div>
+      <div class="continuum-node-num">08 — MEASURE</div>
       <div class="continuum-node-name">Ops radar</div>
       <a href="prod-ops-radar/prod-ops-radar-index.html" class="continuum-node-tool">Open ↗</a>
     </div>
@@ -282,6 +288,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <li><a href="#tool-04" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Technical Business Case Generator</a></li>
     <li><a href="#tool-05" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Feature Intake Pipeline</a></li>
     <li><a href="#tool-07" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> PDLC Docs Generator</a></li>
+    <li><a href="#tool-08" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> WSJF Backlog Builder</a></li>
     <li><a href="#tool-06" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Product Operations Health Radar</a></li>
   </ul>
 </div>
@@ -836,6 +843,104 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
         <li class="feature-item">Proposed solution outline: file tree, API surface, NFR thresholds and evidence plans</li>
         <li class="feature-item">Developer spec and user guide as downloadable markdown, cross-referenced both ways</li>
         <li class="feature-item">Deterministic traceability index mapping every requirement to where it is realized</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="tool-row" id="tool-08">
+    <div class="tool-left">
+      <div class="tool-category">Agentic PDLC Demo</div>
+      <div class="tool-name">WSJF Backlog<br><em>Builder</em></div>
+      <div class="tool-status live">Live</div>
+      <p class="tool-desc">Four sequential AI calls from a portfolio goal to a delivery-ready backlog: a goal cascade with leading and lagging indicators, outcome-based epics and features with SAFe enabler work, WSJF feature ROI &mdash; recomputed in code, never trusted from the model &mdash; and a risk-sequenced story backlog with Given/When/Then acceptance criteria and a calculated requirement-coverage matrix.</p>
+      <div class="tool-workflow">
+        <div class="tool-workflow-label">Where it fits in the workflow</div>
+        <div class="tool-workflow-text"><strong>Delivery planning.</strong> The step between the spec and the sprint. One click on a finished Docs Generator run carries its requirements register here; a portfolio goal anchors the cascade so every feature ROI traces to a strategic indicator. Enabler epics, features, and stories are first-class citizens &mdash; scored honestly on risk reduction, and sequenced first when the runway demands it. Its saved backlog is the seed for a future sprint-plan tool.</div>
+        <span class="tool-workflow-mode mode-native">AI-native</span>
+      </div>
+      <div class="tool-chips">
+        <span class="chip">Goal cascade</span>
+        <span class="chip">Enabler epics &amp; stories</span>
+        <span class="chip">WSJF scoring</span>
+        <span class="chip">Risk-first sequencing</span>
+        <span class="chip">BDD acceptance criteria</span>
+        <span class="chip">.md + .csv export</span>
+      </div>
+      <a href="backlog-builder/" class="tool-cta">Open tool &#8599;</a>
+    </div>
+    <div class="tool-right">
+      <div class="tool-thumb">
+        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="160" fill="#f7f7f7"/>
+          <!-- Step pipeline bar -->
+          <rect x="0" y="0" width="300" height="22" fill="#0a0a0a"/>
+          <rect x="8"   y="5" width="66" height="12" rx="3" fill="#1a3a5c"/>
+          <rect x="82"  y="5" width="70" height="12" rx="3" fill="#7c5cbf"/>
+          <rect x="160" y="5" width="62" height="12" rx="3" fill="#2a6b6b"/>
+          <rect x="230" y="5" width="62" height="12" rx="3" fill="#c8662a"/>
+          <text x="41"  y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">01 GOAL CASCADE</text>
+          <text x="117" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">02 EPICS</text>
+          <text x="191" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">03 WSJF</text>
+          <text x="261" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">04 STORIES</text>
+          <!-- WSJF table card -->
+          <rect x="8" y="28" width="160" height="80" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
+          <text x="16" y="40" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#2a6b6b" letter-spacing="0.5">FEATURE ROI — WSJF</text>
+          <text x="16" y="52" font-family="DM Mono,monospace" font-size="5" fill="#c8662a" font-weight="700">1</text>
+          <text x="24" y="52" font-family="DM Mono,monospace" font-size="5" fill="#0a0a0a">FEAT-03</text>
+          <rect x="56" y="47" width="26" height="7" rx="2" fill="#c8662a"/>
+          <text x="69" y="52.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="white">ENABLER</text>
+          <rect x="88" y="48" width="48" height="4" rx="2" fill="#e8e8e8"/>
+          <text x="146" y="52" font-family="DM Mono,monospace" font-size="6" font-weight="700" fill="#0a0a0a">2.5</text>
+          <text x="16" y="64" font-family="DM Mono,monospace" font-size="5" fill="#c8662a" font-weight="700">2</text>
+          <text x="24" y="64" font-family="DM Mono,monospace" font-size="5" fill="#0a0a0a">FEAT-04</text>
+          <rect x="56" y="59" width="26" height="7" rx="2" fill="#1a3a5c"/>
+          <text x="69" y="64.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="white">BUSINESS</text>
+          <rect x="88" y="60" width="48" height="4" rx="2" fill="#e8e8e8"/>
+          <text x="146" y="64" font-family="DM Mono,monospace" font-size="6" font-weight="700" fill="#0a0a0a">7.0</text>
+          <text x="16" y="76" font-family="DM Mono,monospace" font-size="5" fill="#c8662a" font-weight="700">3</text>
+          <text x="24" y="76" font-family="DM Mono,monospace" font-size="5" fill="#0a0a0a">FEAT-01</text>
+          <rect x="56" y="71" width="26" height="7" rx="2" fill="#1a3a5c"/>
+          <text x="69" y="76.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="white">BUSINESS</text>
+          <rect x="88" y="72" width="48" height="4" rx="2" fill="#e8e8e8"/>
+          <text x="146" y="76" font-family="DM Mono,monospace" font-size="6" font-weight="700" fill="#0a0a0a">4.8</text>
+          <text x="16" y="90" font-family="Inter,sans-serif" font-size="4.5" font-style="italic" fill="#6b6b6b">Enabler ranked last on WSJF,</text>
+          <text x="16" y="97" font-family="Inter,sans-serif" font-size="4.5" font-style="italic" fill="#6b6b6b">sequenced first: hard dependency.</text>
+          <!-- Goal cascade card -->
+          <rect x="176" y="28" width="116" height="80" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
+          <text x="184" y="40" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#1a3a5c" letter-spacing="0.5">GOAL CASCADE</text>
+          <rect x="184" y="45" width="100" height="10" rx="2" fill="#1a3a5c" fill-opacity="0.08"/>
+          <text x="188" y="52" font-family="Inter,sans-serif" font-size="4.8" font-weight="700" fill="#1a3a5c">NRR → 120% by FY27</text>
+          <text x="184" y="66" font-family="DM Mono,monospace" font-size="4.5" fill="#0a0a0a">SO-1</text>
+          <rect x="204" y="62" width="80" height="4" rx="2" fill="#e8e8e8"/>
+          <text x="184" y="76" font-family="DM Mono,monospace" font-size="4.5" fill="#0a0a0a">IND-1</text>
+          <rect x="204" y="72" width="60" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="268" y="71" width="16" height="6" rx="2" fill="#e3f0ef"/>
+          <text x="276" y="76" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.8" font-weight="800" fill="#1d5c5c">LEAD</text>
+          <text x="184" y="86" font-family="DM Mono,monospace" font-size="4.5" fill="#0a0a0a">IND-3</text>
+          <rect x="204" y="82" width="60" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="268" y="81" width="16" height="6" rx="2" fill="#e9e9f5"/>
+          <text x="276" y="86" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.8" font-weight="800" fill="#3d3d8f">LAG</text>
+          <text x="184" y="99" font-family="Inter,sans-serif" font-size="4.5" font-style="italic" fill="#6b6b6b">Goal → outcome → indicator</text>
+          <!-- Story card -->
+          <rect x="8" y="114" width="284" height="40" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
+          <rect x="8" y="114" width="4" height="40" fill="#c8662a"/>
+          <text x="20" y="126" font-family="DM Mono,monospace" font-size="5" fill="#6b6b6b">ST-02 · EPIC-2 / FEAT-03</text>
+          <rect x="130" y="120" width="26" height="7" rx="2" fill="#c8662a"/>
+          <text x="143" y="125.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="white">ENABLER</text>
+          <rect x="262" y="120" width="22" height="8" rx="2" fill="#0a0a0a"/>
+          <text x="273" y="126" text-anchor="middle" font-family="DM Mono,monospace" font-size="4.5" font-weight="700" fill="white">5 pts</text>
+          <rect x="20" y="132" width="200" height="4" rx="2" fill="#e8e8e8"/>
+          <text x="20" y="147" font-family="Inter,sans-serif" font-size="4.5" fill="#3a3a3a">✓ Given a queued export job, when a worker picks it up, then rows stream…</text>
+        </svg>
+      </div>
+      <div class="tool-right-label">What it produces</div>
+      <ul class="feature-list">
+        <li class="feature-item">Goal cascade: strategic outcomes and leading/lagging indicators with confidence markers</li>
+        <li class="feature-item">Outcome-based epics and features with SAFe enabler typing and NFR placement</li>
+        <li class="feature-item">WSJF feature ROI recomputed in code, with honest enabler economics and risk-first sequencing</li>
+        <li class="feature-item">Story backlog with Given/When/Then acceptance criteria, points, and sprint suggestions</li>
+        <li class="feature-item">Calculated requirement-coverage matrix plus markdown and CSV export</li>
       </ul>
     </div>
   </div>
