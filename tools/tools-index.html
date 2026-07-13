@@ -59,7 +59,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 /* ── WORKFLOW CONTINUUM STRIP ── */
 .continuum-strip{max-width:1060px;margin:0 auto;padding:36px 40px 40px;border-bottom:2px solid var(--rule);}
 .continuum-label{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
-.continuum-diagram{display:grid;grid-template-columns:repeat(8,1fr);gap:0;border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:20px;}
+.continuum-diagram{display:grid;grid-template-columns:repeat(9,1fr);gap:0;border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:20px;}
 .continuum-node{padding:12px 14px;border-right:1px solid var(--rule);background:white;position:relative;}
 .continuum-node:last-child{border-right:none;}
 .continuum-node-num{font-size:9px;font-weight:800;color:var(--accent2);letter-spacing:.08em;margin-bottom:4px;}
@@ -215,7 +215,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <div class="api-note">
-  <strong>How the AI works:</strong> Six tools call the Claude API directly from your browser with your own key (you'll be prompted on first run; the key lives in session memory and clears when the tab closes). No key? Every tool still works &mdash; sample runs, worked examples, instant layouts, or the editor itself.
+  <strong>How the AI works:</strong> Seven tools call the Claude API directly from your browser with your own key (you'll be prompted on first run; the key lives in session memory and clears when the tab closes). No key? Every tool still works &mdash; sample runs, worked examples, instant layouts, or the editor itself.
 </div>
 
 <div class="continuum-strip">
@@ -241,31 +241,37 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
 
     <div class="continuum-node">
-      <div class="continuum-node-num">04 — SPEC</div>
+      <div class="continuum-node-num">04 — PITCH</div>
+      <div class="continuum-node-name">Feature pitch</div>
+      <a href="business-case/" class="continuum-node-tool">Open ↗</a>
+    </div>
+
+    <div class="continuum-node">
+      <div class="continuum-node-num">05 — SPEC</div>
       <div class="continuum-node-name">Docs generator</div>
       <a href="docs-generator/" class="continuum-node-tool">Open ↗</a>
     </div>
 
     <div class="continuum-node">
-      <div class="continuum-node-num">05 — PLAN</div>
+      <div class="continuum-node-num">06 — RANK</div>
+      <div class="continuum-node-name">Portfolio WSJF</div>
+      <a href="portfolio-wsjf/" class="continuum-node-tool">Open ↗</a>
+    </div>
+
+    <div class="continuum-node">
+      <div class="continuum-node-num">07 — PLAN</div>
       <div class="continuum-node-name">Backlog builder</div>
       <a href="backlog-builder/" class="continuum-node-tool">Open ↗</a>
     </div>
 
     <div class="continuum-node">
-      <div class="continuum-node-num">06 — ALIGN</div>
+      <div class="continuum-node-num">08 — ALIGN</div>
       <div class="continuum-node-name">Hoshin + V2MOM</div>
       <a href="hoshin-kanri/" class="continuum-node-tool">Open ↗</a>
     </div>
 
     <div class="continuum-node">
-      <div class="continuum-node-num">07 — FUND</div>
-      <div class="continuum-node-name">Business case</div>
-      <a href="business-case/" class="continuum-node-tool">Open ↗</a>
-    </div>
-
-    <div class="continuum-node">
-      <div class="continuum-node-num">08 — MEASURE</div>
+      <div class="continuum-node-num">09 — MEASURE</div>
       <div class="continuum-node-name">Ops radar</div>
       <a href="prod-ops-radar/prod-ops-radar-index.html" class="continuum-node-tool">Open ↗</a>
     </div>
@@ -285,10 +291,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <li><a href="#tool-01" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> JTBD + Enterprise Persona Generator</a></li>
     <li><a href="#tool-02" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Customer Journey Map Builder</a></li>
     <li><a href="#tool-03" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Hoshin Kanri + V2MOM Alignment</a></li>
-    <li><a href="#tool-04" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Technical Business Case Generator</a></li>
+    <li><a href="#tool-04" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Feature Business Pitch Generator</a></li>
     <li><a href="#tool-05" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Feature Intake Pipeline</a></li>
     <li><a href="#tool-07" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> PDLC Docs Generator</a></li>
     <li><a href="#tool-08" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> WSJF Backlog Builder</a></li>
+    <li><a href="#tool-09" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Portfolio WSJF Prioritizer</a></li>
     <li><a href="#tool-06" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Product Operations Health Radar</a></li>
   </ul>
 </div>
@@ -586,22 +593,22 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
   <div class="tool-row" id="tool-04">
       <div class="tool-left">
-      <div class="tool-category">Business Justification</div>
-      <div class="tool-name">Technical Business<br><em>Case Generator</em></div>
+      <div class="tool-category">Feature Value &amp; Urgency</div>
+      <div class="tool-name">Feature Business<br><em>Pitch Generator</em></div>
       <div class="tool-status live">Live</div>
-      <p class="tool-desc">Translates project inputs into a structured, stakeholder-ready business case in three analysis depths: quick pitch, standard, or full analysis with ROI modeling.</p>
+      <p class="tool-desc">Turns a candidate feature — user-facing or back-end enabler — into an executive-ready pitch in three depths. Enabler pitches argue what they unblock and what breaks without them. The value-and-urgency evidence that feeds portfolio WSJF.</p>
       <div class="tool-workflow">
         <div class="tool-workflow-label">Where it fits in the workflow</div>
-        <div class="tool-workflow-text"><strong>Step 03 — Justify.</strong> Sits at the business case approval HITL gate between the opportunity map and the feature intake pipeline. Used standalone: AI-augmented — the PM drafts and edits. Connected to the signal aggregator MCP and strategy context MCP: the agent enriches financial claims with live benchmarks before the PM reviews.</div>
+        <div class="tool-workflow-text"><strong>Step 04 — Pitch.</strong> One of two evidence artifacts per candidate feature, alongside the Docs Generator's scoping. One click on a finished Feature Intake brief pre-fills the form; each generated pitch is saved for the Portfolio WSJF tool, where its value and urgency become the WSJF numerator. The business/enabler toggle keeps enabler economics honest.</div>
         <span class="tool-workflow-mode mode-both">AI-augmented → AI-native</span>
       </div>
       <div class="tool-chips">
-        <span class="chip">Quick Pitch</span>
-        <span class="chip">Standard</span>
-        <span class="chip">Full Analysis</span>
-        <span class="chip">ROI calculation</span>
-        <span class="chip">Salary-based productivity</span>
+        <span class="chip">Business / enabler toggle</span>
+        <span class="chip">Quick, standard, full depth</span>
+        <span class="chip">Salary-based ROI</span>
         <span class="chip">Risks of inaction</span>
+        <span class="chip">Brief intake</span>
+        <span class="chip">Saved for WSJF</span>
       </div>
       <a href="business-case/" class="tool-cta">Open tool &#8599;</a>
     </div>
@@ -611,7 +618,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
           <rect width="300" height="160" fill="#f7f7f7"/>
           <!-- Header bar -->
           <rect x="0" y="0" width="300" height="28" fill="#1a3a5c"/>
-          <text x="12" y="18" font-family="Inter,sans-serif" font-size="8" font-weight="800" fill="white" letter-spacing="0.5">TECHNICAL BUSINESS CASE</text>
+          <text x="12" y="18" font-family="Inter,sans-serif" font-size="8" font-weight="800" fill="white" letter-spacing="0.5">FEATURE BUSINESS PITCH</text>
           <rect x="220" y="8" width="64" height="12" rx="3" fill="#c8662a"/>
           <text x="252" y="17" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" font-weight="700" fill="white">FULL ANALYSIS</text>
           <!-- Executive summary block -->
@@ -941,6 +948,84 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
         <li class="feature-item">WSJF feature ROI recomputed in code, with honest enabler economics and risk-first sequencing</li>
         <li class="feature-item">Story backlog with Given/When/Then acceptance criteria, points, and sprint suggestions</li>
         <li class="feature-item">Calculated requirement-coverage matrix plus markdown and CSV export</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tool-row" id="tool-09">
+    <div class="tool-left">
+      <div class="tool-category">Agentic PDLC Demo</div>
+      <div class="tool-name">Portfolio WSJF<br><em>Prioritizer</em></div>
+      <div class="tool-status live">Live</div>
+      <p class="tool-desc">Two sequential AI calls that rank every candidate feature — business and enabler — in one relative WSJF pass. Each candidate arrives as an evidence pair: a business pitch (value and urgency) and a scoping register (risk, dependencies, level of effort). The board recomputes every score in code and anchors job size to the scoped effort.</p>
+      <div class="tool-workflow">
+        <div class="tool-workflow-label">Where it fits in the workflow</div>
+        <div class="tool-workflow-text"><strong>Portfolio prioritization.</strong> The funding decision. It pools pitches and scoping registers from across journeys, auto-pairs them into candidates, digests the evidence into quoted claims, and scores the whole set in one relative pass. Enablers score on what they unblock and routinely outrank business features they make possible &mdash; then the funded work flows to the Backlog Builder for delivery planning.</div>
+        <span class="tool-workflow-mode mode-native">AI-native</span>
+      </div>
+      <div class="tool-chips">
+        <span class="chip">Evidence digest with quotes</span>
+        <span class="chip">Relative WSJF</span>
+        <span class="chip">Honest enabler economics</span>
+        <span class="chip">LOE-anchored job size</span>
+        <span class="chip">Funding line</span>
+        <span class="chip">.md + .csv export</span>
+      </div>
+      <a href="portfolio-wsjf/" class="tool-cta">Open tool &#8599;</a>
+    </div>
+    <div class="tool-right">
+      <div class="tool-thumb">
+        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="160" fill="#f7f7f7"/>
+          <rect x="0" y="0" width="300" height="22" fill="#0a0a0a"/>
+          <rect x="8"   y="5" width="130" height="12" rx="3" fill="#1a3a5c"/>
+          <rect x="146" y="5" width="146" height="12" rx="3" fill="#2a6b6b"/>
+          <text x="73"  y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">01 EVIDENCE DIGEST</text>
+          <text x="219" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">02 WSJF SCORING</text>
+          <rect x="8" y="28" width="284" height="90" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
+          <text x="16" y="40" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#2a6b6b" letter-spacing="0.5">RANKING BOARD — WSJF RECOMPUTED IN CODE</text>
+          <text x="16" y="52" font-family="Inter,sans-serif" font-size="4.2" font-weight="700" fill="#6b6b6b">RANK</text>
+          <text x="34" y="52" font-family="Inter,sans-serif" font-size="4.2" font-weight="700" fill="#6b6b6b">CANDIDATE</text>
+          <text x="248" y="52" font-family="Inter,sans-serif" font-size="4.2" font-weight="700" fill="#6b6b6b">SIZE</text>
+          <text x="276" y="52" font-family="Inter,sans-serif" font-size="4.2" font-weight="700" fill="#6b6b6b">WSJF</text>
+          <text x="18" y="64" font-family="DM Mono,monospace" font-size="6" font-weight="700" fill="#c8662a">1</text>
+          <text x="34" y="64" font-family="DM Mono,monospace" font-size="5" fill="#0a0a0a">Async export worker pool</text>
+          <rect x="146" y="59" width="26" height="7" rx="2" fill="#c8662a"/>
+          <text x="159" y="64.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="white">ENABLER</text>
+          <text x="250" y="64" font-family="DM Mono,monospace" font-size="5" fill="#0a0a0a">3†</text>
+          <text x="276" y="64" font-family="DM Mono,monospace" font-size="7" font-weight="700" fill="#0a0a0a">8.0</text>
+          <text x="18" y="76" font-family="DM Mono,monospace" font-size="6" font-weight="700" fill="#c8662a">2</text>
+          <text x="34" y="76" font-family="DM Mono,monospace" font-size="5" fill="#0a0a0a">Self-serve bulk export</text>
+          <rect x="146" y="71" width="26" height="7" rx="2" fill="#1a3a5c"/>
+          <text x="159" y="76.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="white">BUSINESS</text>
+          <text x="250" y="76" font-family="DM Mono,monospace" font-size="5" fill="#0a0a0a">5†</text>
+          <text x="276" y="76" font-family="DM Mono,monospace" font-size="7" font-weight="700" fill="#0a0a0a">4.8</text>
+          <line x1="16" y1="82" x2="284" y2="82" stroke="#c8662a" stroke-width="1" stroke-dasharray="3,2"/>
+          <text x="16" y="90" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="#c8662a" letter-spacing="0.5">FUNDING LINE — TOP 2</text>
+          <text x="18" y="101" font-family="DM Mono,monospace" font-size="6" font-weight="700" fill="#9a9a9a">3</text>
+          <text x="34" y="101" font-family="DM Mono,monospace" font-size="5" fill="#9a9a9a">Scheduled export delivery</text>
+          <rect x="146" y="96" width="30" height="7" rx="2" fill="#f8e9dd"/>
+          <text x="161" y="101" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.6" font-weight="800" fill="#9a4f14">PITCH-ONLY</text>
+          <text x="250" y="101" font-family="DM Mono,monospace" font-size="5" fill="#9a9a9a">3</text>
+          <text x="276" y="101" font-family="DM Mono,monospace" font-size="7" font-weight="700" fill="#9a9a9a">3.3</text>
+          <text x="16" y="113" font-family="Inter,sans-serif" font-size="4.2" font-style="italic" fill="#6b6b6b">Enabler tops the board on risk reduction; † job size anchored to scoped LOE.</text>
+          <rect x="8" y="124" width="140" height="30" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
+          <text x="16" y="135" font-family="Inter,sans-serif" font-size="4.5" font-weight="700" fill="#1a3a5c" letter-spacing="0.4">PITCH — VALUE + URGENCY</text>
+          <rect x="16" y="139" width="100" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="16" y="146" width="80" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="152" y="124" width="140" height="30" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
+          <text x="160" y="135" font-family="Inter,sans-serif" font-size="4.5" font-weight="700" fill="#2a6b6b" letter-spacing="0.4">SCOPE — RISK + DEPS + LOE</text>
+          <rect x="160" y="139" width="100" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="160" y="146" width="80" height="4" rx="2" fill="#e8e8e8"/>
+        </svg>
+      </div>
+      <div class="tool-right-label">What it produces</div>
+      <ul class="feature-list">
+        <li class="feature-item">Evidence digest: value claims quoted verbatim with confidence marks, urgency, risk retired, and gaps</li>
+        <li class="feature-item">One relative WSJF pass over the whole candidate set, business and enabler pooled together</li>
+        <li class="feature-item">Honest enabler economics — scored on what they unblock, not zero-by-default</li>
+        <li class="feature-item">Ranking board with job size anchored to the scoping register's level of effort in code</li>
+        <li class="feature-item">Funding line and markdown + CSV export; funded work flows to the Backlog Builder</li>
       </ul>
     </div>
   </div>
