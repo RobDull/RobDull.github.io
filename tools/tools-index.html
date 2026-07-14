@@ -59,7 +59,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 /* ── WORKFLOW CONTINUUM STRIP ── */
 .continuum-strip{max-width:1060px;margin:0 auto;padding:36px 40px 40px;border-bottom:2px solid var(--rule);}
 .continuum-label{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
-.continuum-diagram{display:grid;grid-template-columns:repeat(9,1fr);gap:0;border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:20px;}
+.continuum-diagram{display:grid;grid-template-columns:repeat(10,1fr);gap:0;border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:20px;}
 .continuum-node{padding:12px 14px;border-right:1px solid var(--rule);background:white;position:relative;}
 .continuum-node:last-child{border-right:none;}
 .continuum-node-num{font-size:9px;font-weight:800;color:var(--accent2);letter-spacing:.08em;margin-bottom:4px;}
@@ -215,7 +215,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <div class="api-note">
-  <strong>How the AI works:</strong> Seven tools call the Claude API directly from your browser with your own key (you'll be prompted on first run; the key lives in session memory and clears when the tab closes). No key? Every tool still works &mdash; sample runs, worked examples, instant layouts, or the editor itself.
+  <strong>How the AI works:</strong> Eight tools call the Claude API directly from your browser with your own key (you'll be prompted on first run; the key lives in session memory and clears when the tab closes). No key? Every tool still works &mdash; sample runs, worked examples, instant layouts, or the editor itself.
 </div>
 
 <div class="continuum-strip">
@@ -265,13 +265,19 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
 
     <div class="continuum-node">
-      <div class="continuum-node-num">08 — ALIGN</div>
+      <div class="continuum-node-num">08 — DELIVER</div>
+      <div class="continuum-node-name">Sprint planner</div>
+      <a href="sprint-plan/" class="continuum-node-tool">Open ↗</a>
+    </div>
+
+    <div class="continuum-node">
+      <div class="continuum-node-num">09 — ALIGN</div>
       <div class="continuum-node-name">Hoshin + V2MOM</div>
       <a href="hoshin-kanri/" class="continuum-node-tool">Open ↗</a>
     </div>
 
     <div class="continuum-node">
-      <div class="continuum-node-num">09 — MEASURE</div>
+      <div class="continuum-node-num">10 — MEASURE</div>
       <div class="continuum-node-name">Ops radar</div>
       <a href="prod-ops-radar/prod-ops-radar-index.html" class="continuum-node-tool">Open ↗</a>
     </div>
@@ -296,6 +302,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <li><a href="#tool-07" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> PDLC Docs Generator</a></li>
     <li><a href="#tool-08" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> WSJF Backlog Builder</a></li>
     <li><a href="#tool-09" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Portfolio WSJF Prioritizer</a></li>
+    <li><a href="#tool-10" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Sprint Planner &amp; RAID</a></li>
     <li><a href="#tool-06" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Product Operations Health Radar</a></li>
   </ul>
 </div>
@@ -1026,6 +1033,88 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
         <li class="feature-item">Honest enabler economics — scored on what they unblock, not zero-by-default</li>
         <li class="feature-item">Ranking board with job size anchored to the scoping register's level of effort in code</li>
         <li class="feature-item">Funding line and markdown + CSV export; funded work flows to the Backlog Builder</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tool-row" id="tool-10">
+    <div class="tool-left">
+      <div class="tool-category">Agentic PDLC Demo</div>
+      <div class="tool-name">Sprint Planner<br><em>&amp; RAID</em></div>
+      <div class="tool-status live">Live</div>
+      <p class="tool-desc">Two sequential AI calls that turn a story backlog into a delivery plan: MVP scope, a capacity-checked sprint-by-sprint allocation, baseline and worst-case estimates, and a RAID log. Sprint loads are recomputed in code against a fixed velocity, and over-capacity sprints raise a visible warning.</p>
+      <div class="tool-workflow">
+        <div class="tool-workflow-label">Where it fits in the workflow</div>
+        <div class="tool-workflow-text"><strong>Delivery.</strong> The last step before the sprint. One click on a finished Backlog Builder run carries its WSJF-scored stories here; the planner sizes them against a team's velocity, sequences them into sprints respecting enabler dependencies, and produces two estimates &mdash; a baseline once open questions resolve and a worst-case if they don't. The RAID log names the risks, assumptions, issues, and dependencies that drive the gap.</div>
+        <span class="tool-workflow-mode mode-native">AI-native</span>
+      </div>
+      <div class="tool-chips">
+        <span class="chip">MVP scope</span>
+        <span class="chip">Capacity-checked sprints</span>
+        <span class="chip">Baseline vs worst-case</span>
+        <span class="chip">Risk-first sequencing</span>
+        <span class="chip">RAID log</span>
+        <span class="chip">.md + .csv export</span>
+      </div>
+      <a href="sprint-plan/" class="tool-cta">Open tool &#8599;</a>
+    </div>
+    <div class="tool-right">
+      <div class="tool-thumb">
+        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="160" fill="#f7f7f7"/>
+          <rect x="0" y="0" width="300" height="22" fill="#0a0a0a"/>
+          <rect x="8"   y="5" width="140" height="12" rx="3" fill="#1a3a5c"/>
+          <rect x="156" y="5" width="136" height="12" rx="3" fill="#2a6b6b"/>
+          <text x="78"  y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">01 SPRINT PLAN</text>
+          <text x="224" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">02 RAID LOG</text>
+          <rect x="8" y="28" width="180" height="90" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
+          <text x="16" y="40" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#2a6b6b" letter-spacing="0.5">SPRINT-BY-SPRINT — LOAD IN CODE</text>
+          <text x="16" y="53" font-family="DM Mono,monospace" font-size="5" font-weight="700" fill="#1a3a5c">SPRINT 1</text>
+          <rect x="60" y="48" width="90" height="6" rx="2" fill="#e8e8e8"/>
+          <rect x="60" y="48" width="40" height="6" rx="2" fill="#2a6b6b"/>
+          <text x="156" y="53" font-family="DM Mono,monospace" font-size="5" fill="#0a0a0a">14/32</text>
+          <text x="16" y="65" font-family="DM Mono,monospace" font-size="5" font-weight="700" fill="#1a3a5c">SPRINT 2</text>
+          <rect x="60" y="60" width="90" height="6" rx="2" fill="#e8e8e8"/>
+          <rect x="60" y="60" width="34" height="6" rx="2" fill="#2a6b6b"/>
+          <text x="156" y="65" font-family="DM Mono,monospace" font-size="5" fill="#0a0a0a">12/32</text>
+          <text x="16" y="77" font-family="DM Mono,monospace" font-size="5" font-weight="700" fill="#1a3a5c">SPRINT 3</text>
+          <rect x="60" y="72" width="90" height="6" rx="2" fill="#e8e8e8"/>
+          <rect x="60" y="72" width="28" height="6" rx="2" fill="#2a6b6b"/>
+          <text x="156" y="77" font-family="DM Mono,monospace" font-size="5" fill="#0a0a0a">10/32</text>
+          <rect x="16" y="88" width="80" height="22" rx="3" fill="#1a3a5c" fill-opacity="0.06"/>
+          <text x="24" y="97" font-family="Inter,sans-serif" font-size="4.5" font-weight="700" fill="#1a3a5c">BASELINE</text>
+          <text x="24" y="106" font-family="DM Mono,monospace" font-size="7" font-weight="700" fill="#1a3a5c">3 sprints</text>
+          <rect x="102" y="88" width="80" height="22" rx="3" fill="#c8662a" fill-opacity="0.08"/>
+          <text x="110" y="97" font-family="Inter,sans-serif" font-size="4.5" font-weight="700" fill="#9a4f14">WORST CASE</text>
+          <text x="110" y="106" font-family="DM Mono,monospace" font-size="7" font-weight="700" fill="#9a4f14">5 sprints</text>
+          <rect x="196" y="28" width="96" height="90" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
+          <text x="204" y="40" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#2a6b6b" letter-spacing="0.5">RAID</text>
+          <rect x="204" y="46" width="20" height="7" rx="2" fill="#f6dede"/>
+          <text x="214" y="51" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.8" font-weight="800" fill="#8f2727">RISK</text>
+          <rect x="226" y="46" width="58" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="204" y="58" width="20" height="7" rx="2" fill="#f8e9dd"/>
+          <text x="214" y="63" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="800" fill="#9a4f14">ASSM</text>
+          <rect x="226" y="58" width="58" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="204" y="70" width="20" height="7" rx="2" fill="#eee7f6"/>
+          <text x="214" y="75" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.6" font-weight="800" fill="#5b3d8f">ISSUE</text>
+          <rect x="226" y="70" width="58" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="204" y="82" width="20" height="7" rx="2" fill="#e3f0ef"/>
+          <text x="214" y="87" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="800" fill="#1d5c5c">DEP</text>
+          <rect x="226" y="82" width="58" height="4" rx="2" fill="#e8e8e8"/>
+          <text x="204" y="102" font-family="Inter,sans-serif" font-size="4" font-style="italic" fill="#6b6b6b">Worker pool</text>
+          <text x="204" y="109" font-family="Inter,sans-serif" font-size="4" font-style="italic" fill="#6b6b6b">before business</text>
+          <rect x="8" y="124" width="284" height="30" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
+          <text x="16" y="135" font-family="Inter,sans-serif" font-size="4.5" font-weight="700" fill="#1a3a5c" letter-spacing="0.4">MVP SCOPE</text>
+          <text x="16" y="147" font-family="DM Mono,monospace" font-size="4.8" fill="#3a3a3a">ST-01  ST-02  ST-03  ST-04  ST-06  ST-07  ST-09  ST-10</text>
+        </svg>
+      </div>
+      <div class="tool-right-label">What it produces</div>
+      <ul class="feature-list">
+        <li class="feature-item">MVP scope — the must-have stories for the first release, pulled from the backlog</li>
+        <li class="feature-item">A sprint-by-sprint plan with goals, honoring points capacity and risk-first sequencing</li>
+        <li class="feature-item">Per-sprint load recomputed in code against a fixed velocity, with over-capacity warnings</li>
+        <li class="feature-item">Baseline and worst-case delivery estimates, with the open questions that drive the gap</li>
+        <li class="feature-item">A RAID log (risks, assumptions, issues, dependencies) plus markdown and CSV export</li>
       </ul>
     </div>
   </div>
