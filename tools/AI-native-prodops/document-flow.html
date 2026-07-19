@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDLC Document Flow | Rob Dull</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y1JYXTE5J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0Y1JYXTE5J');
+</script>
+<meta name="description" content="The real document flow of the agentic PDLC toolchain: what each of the nine tools actually produces, the key handoff documents (BRD, Roadmap, Backlog, Jira export), and the evidence and organizational inputs already wired into the chain.">
+<link rel="canonical" href="https://robdull.com/tools/AI-native-prodops/document-flow.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://robdull.com/tools/AI-native-prodops/document-flow.html">
+<meta property="og:title" content="PDLC Document Flow | Rob Dull">
+<meta property="og:description" content="The real document flow of the agentic PDLC toolchain: what each tool actually produces, the key handoff documents, and the evidence/organizational inputs already wired into the chain.">
+<meta property="og:site_name" content="Rob Dull">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0a0a0a; --white:#ffffff; --off:#f7f7f7; --rule:#e8e8e8;
+  --accent:#1a3a5c; --accent2:#c8662a; --muted:#6b6b6b;
+  --teal:#2a6b6b; --purple:#7c5cbf; --gold:#c8921a; --green:#1a5c3a;
+  --font:'Inter',sans-serif; --mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
+.nn{font-size:21px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
+.nl{display:flex;gap:10px;align-items:center;}
+.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:7px 15px;border:2px solid var(--rule);border-radius:6px;transition:all .15s;background:white;}
+.nl a:hover{background:var(--accent);color:white;border-color:var(--accent);}
+
+/* BREADCRUMB */
+.bc{max-width:1100px;margin:0 auto;padding:88px 32px 0;}
+.bc-inner{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--muted);}
+.bc-inner a{color:var(--muted);text-decoration:none;}
+.bc-inner a:hover{color:var(--ink);}
+.bc-sep{color:var(--rule);}
+
+/* PAGE HEAD */
+.page-head{max-width:1100px;margin:0 auto;padding:24px 32px 0;}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;}
+.page-head h1{font-size:clamp(28px,3.6vw,44px);font-weight:900;line-height:1.05;letter-spacing:-.03em;color:var(--ink);}
+.page-head h1 em{font-style:normal;color:var(--accent);}
+.page-head p{font-size:15px;color:var(--muted);max-width:700px;margin-top:14px;line-height:1.75;}
+
+/* TOGGLE BAR */
+.toggle-wrap{max-width:1100px;margin:24px auto 0;padding:0 32px;}
+.toggle-inner{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 18px;background:var(--off);border:1px solid var(--rule);border-radius:8px;}
+.toggle-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+.toggle-btns{display:flex;gap:0;border:2px solid var(--accent);border-radius:7px;overflow:hidden;}
+.tbtn{font-size:12.5px;font-weight:700;padding:7px 16px;border:none;background:white;color:var(--accent);cursor:pointer;transition:background .15s,color .15s;}
+.tbtn.active{background:var(--accent);color:white;}
+.toggle-hint{font-size:12px;color:var(--muted);margin-left:4px;}
+body.show-inputs .hint-real-only{display:none;}
+body:not(.show-inputs) .hint-plus-inputs{display:none;}
+
+/* KEY DOCS STRIP */
+.keydocs-wrap{max-width:1100px;margin:28px auto 0;padding:0 32px;}
+.keydocs-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.keydocs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.keydoc-card{border:2px solid var(--gold);border-radius:8px;padding:14px 16px;background:rgba(200,146,26,.05);text-decoration:none;color:inherit;display:block;transition:background .15s;}
+.keydoc-card:hover{background:rgba(200,146,26,.11);}
+.keydoc-num{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--gold);letter-spacing:.06em;}
+.keydoc-name{font-size:14px;font-weight:800;color:var(--ink);margin-top:3px;}
+.keydoc-desc{font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.5;}
+@media(max-width:800px){.keydocs-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:520px){.keydocs-grid{grid-template-columns:1fr;}}
+
+/* TIMELINE */
+.timeline-wrap{max-width:1100px;margin:36px auto 0;padding:0 32px;}
+.timeline{position:relative;padding-left:36px;}
+.timeline::before{content:'';position:absolute;left:13px;top:8px;bottom:8px;width:2px;background:var(--rule);}
+.trow{position:relative;padding-bottom:28px;}
+.trow:last-child{padding-bottom:0;}
+.tbadge{position:absolute;left:-36px;top:0;width:28px;height:28px;border-radius:50%;background:var(--accent);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:var(--mono);z-index:2;}
+.tcard{border:1px solid var(--rule);border-radius:10px;padding:16px 18px;background:white;}
+.tcard-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+.tname{font-size:16px;font-weight:800;color:var(--ink);text-decoration:none;}
+.tname:hover{color:var(--accent);}
+.tcat{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+.tdesc{font-size:13px;color:#3a3a3a;line-height:1.6;margin-top:6px;max-width:640px;}
+
+.tproduces{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.prod-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:2px;}
+.chip{font-size:11.5px;font-weight:600;color:var(--teal);background:rgba(42,107,107,.08);border:1px solid rgba(42,107,107,.25);border-radius:5px;padding:3px 9px;}
+.chip-key{font-size:11.5px;font-weight:800;color:#7a5700;background:rgba(200,146,26,.13);border:1.5px solid var(--gold);border-radius:5px;padding:3px 9px 3px 7px;display:inline-flex;align-items:center;gap:4px;}
+.chip-key::before{content:'★';font-size:10px;color:var(--gold);}
+.handoff-key{font-family:var(--mono);font-size:10.5px;color:var(--muted);}
+
+.tinputs{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--rule);flex-wrap:wrap;gap:6px;align-items:center;}
+body.show-inputs .tinputs{display:flex;}
+.inp-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:2px;}
+.chip-mcp{font-size:11px;font-weight:600;color:var(--gold);background:rgba(200,146,26,.08);border:1px solid rgba(200,146,26,.3);border-radius:5px;padding:3px 8px;}
+.chip-org{font-size:11px;font-weight:600;color:var(--purple);background:rgba(124,92,191,.08);border:1px solid rgba(124,92,191,.3);border-radius:5px;padding:3px 8px;}
+.chip-rec{font-size:11px;font-weight:600;color:var(--accent2);background:rgba(200,102,42,.07);border:1px dashed var(--accent2);border-radius:5px;padding:3px 8px;}
+.no-inputs-note{font-size:11.5px;color:var(--muted);font-style:italic;}
+
+/* OFF-CHAIN SECTION */
+.offchain-wrap{max-width:1100px;margin:40px auto 0;padding:0 32px;}
+.offchain-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.offchain-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.offchain-card{border:1.5px dashed var(--rule);border-radius:10px;padding:14px 16px;background:var(--off);}
+.offchain-name{font-size:14px;font-weight:800;color:var(--ink);}
+.offchain-name a{color:inherit;text-decoration:none;}
+.offchain-name a:hover{color:var(--accent);}
+.offchain-desc{font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.6;}
+@media(max-width:640px){.offchain-grid{grid-template-columns:1fr;}}
+
+/* LEGEND */
+.legend-wrap{max-width:1100px;margin:36px auto 0;padding:0 32px;}
+.legend-inner{display:flex;flex-wrap:wrap;gap:14px;padding:14px 18px;background:var(--off);border:1px solid var(--rule);border-radius:8px;font-size:12px;color:var(--muted);}
+.legend-item{display:flex;align-items:center;gap:6px;}
+.legend-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0;}
+
+/* NOTE STRIP */
+.note-strip{max-width:1100px;margin:36px auto 0;padding:0 32px 60px;}
+.note-inner{border-left:4px solid var(--accent2);background:rgba(200,102,42,.05);border-radius:0 8px 8px 0;padding:16px 20px;font-size:13.5px;color:#3a3a3a;line-height:1.7;}
+.note-inner strong{color:var(--ink);}
+
+footer{border-top:1px solid var(--rule);padding:28px 40px;max-width:1100px;margin:0 auto;}
+footer p{font-size:13px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nn">Rob Dull</a>
+  <div class="nl">
+    <a href="mailto:rob.dull@gmail.com">Contact</a>
+  </div>
+</nav>
+
+<div class="bc">
+  <div class="bc-inner">
+    <a href="../../index.html">Rob Dull</a>
+    <span class="bc-sep">&#8250;</span>
+    <a href="../tools-index.html">Tools</a>
+    <span class="bc-sep">&#8250;</span>
+    <span>Document Flow</span>
+  </div>
+</div>
+
+<div class="page-head">
+  <div class="eyebrow">Agentic PDLC &bull; Real Toolchain, Real Handoffs</div>
+  <h1>The <em>document flow</em>, tool by tool.</h1>
+  <p>
+    What each of the nine tools in the chain actually produces, and where it goes next — every
+    handoff below is a real same-origin <code>localStorage</code> key written by one tool and read
+    by the next, not a conceptual diagram. Four documents carry the most weight for program
+    stakeholders: the <strong>BRD</strong>, the <strong>Roadmap</strong>, the <strong>Feature
+    list</strong> (the extended backlog), and the <strong>Jira export</strong>. Toggle below to see
+    the evidence and organizational inputs already wired into the chain — support tickets, internal
+    comms, financials, DoR/DoD — alongside it.
+  </p>
+</div>
+
+<div class="toggle-wrap">
+  <div class="toggle-inner">
+    <span class="toggle-label">View:</span>
+    <div class="toggle-btns">
+      <button class="tbtn active" id="btn-real" onclick="setMode(false)">Real Flow</button>
+      <button class="tbtn" id="btn-plus" onclick="setMode(true)">Real Flow + Inputs</button>
+    </div>
+    <span class="toggle-hint hint-real-only">Just the nine tools and what they hand off.</span>
+    <span class="toggle-hint hint-plus-inputs">Adds the evidence sources and organizational inputs that ground each step.</span>
+  </div>
+</div>
+
+<div class="keydocs-wrap">
+  <div class="keydocs-label">The four documents that matter most</div>
+  <div class="keydocs-grid">
+    <a href="#step-07" class="keydoc-card">
+      <div class="keydoc-num">STEP 07</div>
+      <div class="keydoc-name">BRD</div>
+      <div class="keydoc-desc">Standard-template Business Requirements Document, one per funded epic.</div>
+    </a>
+    <a href="#step-06" class="keydoc-card">
+      <div class="keydoc-num">STEP 06</div>
+      <div class="keydoc-name">Roadmap</div>
+      <div class="keydoc-desc">Release windows across up to 18 months, funded epics first.</div>
+    </a>
+    <a href="#step-08" class="keydoc-card">
+      <div class="keydoc-num">STEP 08</div>
+      <div class="keydoc-name">Feature list</div>
+      <div class="keydoc-desc">MoSCoW'd features + ordered stories — the extended backlog.</div>
+    </a>
+    <a href="#step-09" class="keydoc-card">
+      <div class="keydoc-num">STEP 09</div>
+      <div class="keydoc-name">Jira export</div>
+      <div class="keydoc-desc">Bulk-import CSV: priority, points, sprint, dependency links.</div>
+    </a>
+  </div>
+</div>
+
+<div class="timeline-wrap">
+  <div class="timeline">
+
+    <div class="trow" id="step-01">
+      <div class="tbadge">01</div>
+      <div class="tcard">
+        <div class="tcard-head">
+          <a href="../persona-generator/persona-index.html" class="tname">Persona Generator</a>
+          <span class="tcat">Discover</span>
+        </div>
+        <div class="tdesc">A rough user description becomes a detailed enterprise persona — JTBD statement, org context, key interactions, relationship friction.</div>
+        <div class="tproduces">
+          <span class="prod-label">Produces</span>
+          <span class="chip">Persona</span>
+          <span class="handoff-key">robdull:personas</span>
+        </div>
+        <div class="tinputs">
+          <span class="inp-label">Inputs</span>
+          <span class="no-inputs-note">No MCP evidence wired in yet — built from the description you provide.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="trow" id="step-02">
+      <div class="tbadge">02</div>
+      <div class="tcard">
+        <div class="tcard-head">
+          <a href="../journey-map/" class="tname">Journey Map</a>
+          <span class="tcat">Map</span>
+        </div>
+        <div class="tdesc">Stage-by-stage canvas — actions, goals, touchpoints, emotions, and pain points — seeded from a persona.</div>
+        <div class="tproduces">
+          <span class="prod-label">Produces</span>
+          <span class="chip">Journey / opportunity seeds</span>
+          <span class="handoff-key">robdull:journey-seeds &middot; robdull:opportunity-seeds</span>
+        </div>
+        <div class="tinputs">
+          <span class="inp-label">Inputs</span>
+          <span class="chip-mcp">Research repo (Dovetail/Notion)</span>
+          <span class="chip-mcp">Customer support (Zendesk)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="trow" id="step-03">
+      <div class="tbadge">03</div>
+      <div class="tcard">
+        <div class="tcard-head">
+          <a href="../feature-intake/" class="tname">Initiative Intake</a>
+          <span class="tcat">Portfolio Tradeoff</span>
+        </div>
+        <div class="tdesc">Frames one Initiative against competitors, then decomposes it into Business and Architecture Epics with Demand/Feasibility/Viability assumptions and a benefits-realization plan.</div>
+        <div class="tproduces">
+          <span class="prod-label">Produces</span>
+          <span class="chip">Epics (business + architecture)</span>
+          <span class="handoff-key">robdull:epics</span>
+        </div>
+        <div class="tinputs">
+          <span class="inp-label">Inputs</span>
+          <span class="chip-mcp">Internal comms</span>
+          <span class="chip-mcp">Financial tracking</span>
+          <span class="chip-mcp">External comms (NPS, reviews)</span>
+          <span class="chip-mcp">Analytics</span>
+          <span class="chip-rec">Strategic KPIs (recommended)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="trow" id="step-04">
+      <div class="tbadge">04</div>
+      <div class="tcard">
+        <div class="tcard-head">
+          <a href="../business-case/" class="tname">Business Cases</a>
+          <span class="tcat">Justify</span>
+        </div>
+        <div class="tdesc">One case per epic — value, cost, strategic alignment, and a rough order-of-magnitude effort estimate that anchors the Epic Prioritizer's job size.</div>
+        <div class="tproduces">
+          <span class="prod-label">Produces</span>
+          <span class="chip">Business Case per epic</span>
+          <span class="handoff-key">robdull:business-cases</span>
+        </div>
+        <div class="tinputs">
+          <span class="inp-label">Inputs</span>
+          <span class="chip-mcp">Financial tracking</span>
+          <span class="chip-mcp">External comms</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="trow" id="step-05">
+      <div class="tbadge">05</div>
+      <div class="tcard">
+        <div class="tcard-head">
+          <a href="../portfolio-wsjf/" class="tname">Epic Prioritizer</a>
+          <span class="tcat">Rank</span>
+        </div>
+        <div class="tdesc">Scores every epic on WSJF and RICE components in one pass. Editable weights recompute the board live — raising risk-reduction can flip an architecture epic to #1 with no re-run.</div>
+        <div class="tproduces">
+          <span class="prod-label">Produces</span>
+          <span class="chip">Epic Ranking + funding line</span>
+          <span class="handoff-key">robdull:epic-ranking</span>
+        </div>
+        <div class="tinputs">
+          <span class="inp-label">Inputs</span>
+          <span class="chip-mcp">Internal comms (leadership weighting)</span>
+          <span class="chip-mcp">Customer support (reach/severity)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="trow" id="step-06">
+      <div class="tbadge">06</div>
+      <div class="tcard">
+        <div class="tcard-head">
+          <a href="../roadmap/" class="tname">Roadmap &amp; Milestones</a>
+          <span class="tcat">Schedule</span>
+        </div>
+        <div class="tdesc">Sequences every prioritized epic — funded first, the rest as capacity frees — into release windows across up to 18 months. Dependencies stay light: named approvals or genuine architecture-epic runway only.</div>
+        <div class="tproduces">
+          <span class="prod-label">Produces</span>
+          <span class="chip-key">Roadmap</span>
+          <span class="handoff-key">robdull:roadmaps</span>
+        </div>
+        <div class="tinputs">
+          <span class="inp-label">Inputs</span>
+          <span class="chip-mcp">Delivery systems (sprint velocity)</span>
+          <span class="chip-mcp">Internal comms (approvals)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="trow" id="step-07">
+      <div class="tbadge">07</div>
+      <div class="tcard">
+        <div class="tcard-head">
+          <a href="../docs-generator/" class="tname">Business Documents</a>
+          <span class="tcat">Spec</span>
+        </div>
+        <div class="tdesc">Standard-template BRD for one funded epic — requirements core (scope, prioritized business requirements, high-level NFRs) plus the executive package (summary, objectives, stakeholders, cost-benefit, sign-off). Refuses epics below the funding line.</div>
+        <div class="tproduces">
+          <span class="prod-label">Produces</span>
+          <span class="chip-key">BRD</span>
+          <span class="handoff-key">robdull:brds</span>
+        </div>
+        <div class="tinputs">
+          <span class="inp-label">Inputs</span>
+          <span class="chip-mcp">Internal comms (stakeholders, sign-off)</span>
+          <span class="chip-mcp">Analytics (what's instrumentable today)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="trow" id="step-08">
+      <div class="tbadge">08</div>
+      <div class="tcard">
+        <div class="tcard-head">
+          <a href="../backlog-builder/" class="tname">Backlog Builder</a>
+          <span class="tcat">Plan</span>
+        </div>
+        <div class="tdesc">Turns the BRD into the full delivery-doc suite: MoSCoW'd Features with feature-level NFRs and refined sizing, ordered Stories with BDD acceptance criteria and dependsOn sequencing, a solution outline, security/UAT plan, and dev/user docs. Requirement coverage is computed, not generated.</div>
+        <div class="tproduces">
+          <span class="prod-label">Produces</span>
+          <span class="chip-key">Feature list (extended backlog)</span>
+          <span class="handoff-key">robdull:backlogs (v2)</span>
+        </div>
+        <div class="tinputs">
+          <span class="inp-label">Inputs</span>
+          <span class="chip-mcp">Customer support (edge cases → acceptance criteria)</span>
+          <span class="chip-org">DoR / DoD</span>
+          <span class="chip-org">Style guide</span>
+          <span class="chip-org">Current-state architecture</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="trow" id="step-09">
+      <div class="tbadge">09</div>
+      <div class="tcard">
+        <div class="tcard-head">
+          <a href="../sprint-plan/" class="tname">Sprint Planner</a>
+          <span class="tcat">Deliver</span>
+        </div>
+        <div class="tdesc">MVP scope, a sprint-by-sprint allocation, and a RAID log. Capacity AND dependsOn ordering are both recomputed in code — a story landing no earlier than its dependency raises a visible warning wherever the plan is consumed.</div>
+        <div class="tproduces">
+          <span class="prod-label">Produces</span>
+          <span class="chip-key">Jira bulk-import CSV</span>
+          <span class="chip">Sprint Plan</span>
+          <span class="chip">RAID log</span>
+          <span class="handoff-key">terminal — exports to Jira, no further handoff</span>
+        </div>
+        <div class="tinputs">
+          <span class="inp-label">Inputs</span>
+          <span class="no-inputs-note">No dedicated MCP evidence yet — consumes the DoR/DoD flag already carried on the backlog from Step 08.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="offchain-wrap">
+  <div class="offchain-label">Off-chain by design — not part of the numbered flow</div>
+  <div class="offchain-grid">
+    <div class="offchain-card">
+      <div class="offchain-name"><a href="../hoshin-kanri/">Hoshin Kanri + V2MOM</a></div>
+      <div class="offchain-desc">Strategic alignment — the layer the whole portfolio should trace back to, not a step any one initiative passes through. Cascades a V2MOM into an X-matrix.</div>
+    </div>
+    <div class="offchain-card">
+      <div class="offchain-name"><a href="../prod-ops-radar/prod-ops-radar-index.html">Prod Ops Radar</a></div>
+      <div class="offchain-desc">Measurement — watches whether the ops system itself is healthy across every initiative, not any single one. In development.</div>
+    </div>
+  </div>
+</div>
+
+<div class="legend-wrap">
+  <div class="legend-inner">
+    <div class="legend-item"><span class="legend-dot" style="background:var(--gold);"></span> ★ Key document</div>
+    <div class="legend-item"><span class="legend-dot" style="background:rgba(42,107,107,.5);"></span> Handoff artifact</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--gold);"></span> MCP evidence source (real, fixture-based)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--purple);"></span> Organizational input (human-supplied, never generated)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--accent2);border:1px dashed var(--accent2);"></span> Recommended, not yet built</div>
+  </div>
+</div>
+
+<div class="note-strip">
+  <div class="note-inner">
+    <strong>What's real vs. recommended:</strong> every chip above except "Strategic KPIs" reflects code
+    that actually runs today — the MCP evidence is fixture-based (PetHealth-flavored, keyless demo data
+    with the same shape a live connector would have) but genuinely wired into each tool's prompts, and
+    every handoff key is a real <code>localStorage</code> write you can inspect in devtools after a run.
+    Strategic KPIs is flagged separately because Initiative Intake currently only picks up strategy
+    signals informally through Internal Comms evidence — a dedicated, structured KPI source is a natural
+    next input, not yet built. The next layer beyond this page — agents for prioritization, versioning,
+    and dedup of ingested comms — is a further step past that.
+  </div>
+</div>
+
+<footer>
+  <p>Rob Dull &bull; Product Management Practitioner and Product Operations Transformation Consultant</p>
+</footer>
+
+<script>
+function setMode(showInputs) {
+  document.body.classList.toggle('show-inputs', showInputs);
+  document.getElementById('btn-real').classList.toggle('active', !showInputs);
+  document.getElementById('btn-plus').classList.toggle('active', showInputs);
+}
+</script>
+
+</body>
+</html>
