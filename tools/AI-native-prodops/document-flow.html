@@ -62,7 +62,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 40px;display:fl
 .tbtn{font-size:12.5px;font-weight:700;padding:7px 15px;border:none;border-left:1px solid rgba(255,255,255,.4);background:white;color:var(--accent);cursor:pointer;transition:background .15s,color .15s;}
 .tbtn:first-child{border-left:none;}
 .tbtn.active{background:var(--accent);color:white;}
-.tbtn.active[data-level="2"]{background:var(--steel);}
+.tbtn.active[data-level="1"]{background:var(--steel);}
 #toggle-hint{font-size:12px;color:var(--muted);margin-left:4px;}
 
 /* KEY DOCS STRIP */
@@ -98,22 +98,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 40px;display:fl
 .sample-link.muted:hover{background:var(--muted);color:white;}
 .sample-note{font-size:11px;color:var(--muted);}
 
-.io-row{margin-top:12px;padding-top:12px;border-top:1px dashed var(--rule);display:flex;flex-wrap:wrap;gap:6px 8px;align-items:baseline;}
-.io-row:first-of-type{border-top:1px dashed var(--rule);}
-.io-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:2px;}
-.io-label.sub{color:var(--muted);font-weight:600;font-size:9.5px;margin-left:6px;}
 .chip{font-size:11.5px;font-weight:600;color:var(--teal);background:rgba(42,107,107,.08);border:1px solid rgba(42,107,107,.25);border-radius:5px;padding:3px 9px;}
 .chip-key{font-size:11.5px;font-weight:800;color:#7a5700;background:rgba(200,146,26,.13);border:1.5px solid var(--gold);border-radius:5px;padding:3px 9px 3px 7px;display:inline-flex;align-items:center;gap:4px;}
 .chip-key::before{content:'★';font-size:10px;color:var(--gold);}
-.handoff-key{font-family:var(--mono);font-size:10.5px;color:var(--muted);}
 
-.tinputs{display:none;flex-direction:column;gap:8px;}
-body.show-inputs .tinputs{display:flex;}
-.inp-row{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline;}
+.io-cols{margin-top:12px;padding-top:12px;border-top:1px dashed var(--rule);display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;}
+.io-col-head{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--rule);}
+.io-col-in .io-col-head{color:#3d5266;}
+.io-col-out .io-col-head{color:#7a5700;}
+
+.io-tier{margin-bottom:10px;}
+.io-tier:last-child{margin-bottom:0;}
+.io-tier-head{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:5px;}
+.io-tier-body{margin-left:11px;padding-left:9px;border-left:2px solid var(--rule);display:flex;flex-direction:column;gap:7px;}
+.io-group-label{font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin-bottom:3px;}
+.chip-row{display:flex;flex-wrap:wrap;gap:5px;}
 .chip-mcp{font-size:11px;font-weight:600;color:var(--gold);background:rgba(200,146,26,.08);border:1px solid rgba(200,146,26,.3);border-radius:5px;padding:3px 8px;}
 .chip-org{font-size:11px;font-weight:600;color:var(--purple);background:rgba(124,92,191,.08);border:1px solid rgba(124,92,191,.3);border-radius:5px;padding:3px 8px;}
 .chip-rec{font-size:11px;font-weight:600;color:var(--accent2);background:rgba(200,102,42,.07);border:1px dashed var(--accent2);border-radius:5px;padding:3px 8px;}
 .no-inputs-note{font-size:11.5px;color:var(--muted);font-style:italic;}
+@media(max-width:640px){.io-cols{grid-template-columns:1fr;gap:14px;}}
 
 .ttertiary{display:none;flex-direction:column;gap:8px;margin-top:10px;padding:10px 12px;background:rgba(91,114,144,.05);border:1px dotted var(--steel);border-radius:7px;}
 body.show-tertiary .ttertiary{display:flex;}
@@ -193,10 +197,9 @@ footer p{font-size:13px;color:var(--muted);}
     <span class="toggle-label">View:</span>
     <div class="toggle-btns">
       <button class="tbtn active" data-level="0" onclick="setMode(0)">Core Flow</button>
-      <button class="tbtn" data-level="1" onclick="setMode(1)">+ Wired Inputs</button>
-      <button class="tbtn" data-level="2" onclick="setMode(2)">+ External (Network)</button>
+      <button class="tbtn" data-level="1" onclick="setMode(1)">+ External (Network)</button>
     </div>
-    <span id="toggle-hint">Primary and secondary outputs only — the nine tools and what they hand off.</span>
+    <span id="toggle-hint">Primary and secondary inputs/outputs for the nine tools — wired and real.</span>
   </div>
 </div>
 
@@ -238,16 +241,31 @@ footer p{font-size:13px;color:var(--muted);}
         </div>
         <div class="tdesc">A rough user description becomes a detailed enterprise persona — JTBD statement, org context, key interactions, relationship friction.</div>
 
-        <div class="io-row">
-          <span class="io-label">Primary output</span>
-          <span class="chip">Persona</span>
-          <span class="handoff-key">robdull:personas</span>
-        </div>
-
-        <div class="tinputs">
-          <div class="inp-row">
-            <span class="io-label">Primary input</span>
-            <span class="no-inputs-note">No MCP evidence wired in yet — built from the description you provide.</span>
+        <div class="io-cols">
+          <div class="io-col io-col-in">
+            <div class="io-col-head">Inputs</div>
+            <div class="io-tier">
+              <div class="io-tier-head">Primary</div>
+              <div class="io-tier-body">
+                <div>
+                  <div class="io-group-label" style="color:var(--gold);">MCP</div>
+                  <div class="chip-row">
+                    <span class="chip-mcp">Research repo (Dovetail/Notion)</span>
+                    <span class="chip-mcp">Analytics</span>
+                    <span class="chip-mcp">Customer support (Zendesk)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="io-col io-col-out">
+            <div class="io-col-head">Outputs</div>
+            <div class="io-tier">
+              <div class="io-tier-head">Primary</div>
+              <div class="io-tier-body">
+                <div class="chip-row"><span class="chip">Persona</span></div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -276,20 +294,36 @@ footer p{font-size:13px;color:var(--muted);}
         </div>
         <div class="tdesc">Stage-by-stage canvas — actions, goals, touchpoints, emotions, and pain points — seeded from a persona.</div>
 
-        <div class="io-row">
-          <span class="io-label">Primary output</span>
-          <span class="chip">Opportunity seeds</span>
-          <span class="handoff-key">robdull:opportunity-seeds</span>
-          <span class="io-label sub">Secondary</span>
-          <span class="chip">Journey map (JSON / Copy for AI)</span>
-          <span class="handoff-key">robdull:journey-seeds</span>
-        </div>
-
-        <div class="tinputs">
-          <div class="inp-row">
-            <span class="io-label">Primary input</span>
-            <span class="chip-mcp">Research repo (Dovetail/Notion)</span>
-            <span class="chip-mcp">Customer support (Zendesk)</span>
+        <div class="io-cols">
+          <div class="io-col io-col-in">
+            <div class="io-col-head">Inputs</div>
+            <div class="io-tier">
+              <div class="io-tier-head">Primary</div>
+              <div class="io-tier-body">
+                <div>
+                  <div class="io-group-label" style="color:var(--gold);">MCP</div>
+                  <div class="chip-row">
+                    <span class="chip-mcp">Research repo (Dovetail/Notion)</span>
+                    <span class="chip-mcp">Customer support (Zendesk)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="io-col io-col-out">
+            <div class="io-col-head">Outputs</div>
+            <div class="io-tier">
+              <div class="io-tier-head">Primary</div>
+              <div class="io-tier-body">
+                <div class="chip-row"><span class="chip">Opportunity seeds</span></div>
+              </div>
+            </div>
+            <div class="io-tier">
+              <div class="io-tier-head">Secondary</div>
+              <div class="io-tier-body">
+                <div class="chip-row"><span class="chip">Journey map (JSON / Copy for AI)</span></div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -317,26 +351,50 @@ footer p{font-size:13px;color:var(--muted);}
         </div>
         <div class="tdesc">Frames one Initiative against competitors, then decomposes it into Business and Architecture Epics with Demand/Feasibility/Viability assumptions and a benefits-realization plan.</div>
 
-        <div class="io-row">
-          <span class="io-label">Primary output</span>
-          <span class="chip">Epics (business + architecture)</span>
-          <span class="handoff-key">robdull:epics</span>
-          <span class="io-label sub">Secondary</span>
-          <span class="chip">D/F/V assumption map</span>
-          <span class="chip">Benefits-realization plan</span>
-        </div>
-
-        <div class="tinputs">
-          <div class="inp-row">
-            <span class="io-label">Primary input</span>
-            <span class="chip-mcp">Internal comms</span>
-            <span class="chip-mcp">Financial tracking</span>
-            <span class="chip-mcp">External comms (NPS, reviews)</span>
-            <span class="chip-mcp">Analytics</span>
+        <div class="io-cols">
+          <div class="io-col io-col-in">
+            <div class="io-col-head">Inputs</div>
+            <div class="io-tier">
+              <div class="io-tier-head">Primary</div>
+              <div class="io-tier-body">
+                <div>
+                  <div class="io-group-label" style="color:var(--gold);">MCP</div>
+                  <div class="chip-row">
+                    <span class="chip-mcp">Internal comms</span>
+                    <span class="chip-mcp">Financial tracking</span>
+                    <span class="chip-mcp">External comms (NPS, reviews)</span>
+                    <span class="chip-mcp">Analytics</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="io-tier">
+              <div class="io-tier-head">Secondary</div>
+              <div class="io-tier-body">
+                <div>
+                  <div class="io-group-label" style="color:var(--accent2);">Recommended</div>
+                  <div class="chip-row"><span class="chip-rec">Strategic KPIs</span></div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="inp-row">
-            <span class="io-label">Secondary input</span>
-            <span class="chip-rec">Strategic KPIs (recommended)</span>
+          <div class="io-col io-col-out">
+            <div class="io-col-head">Outputs</div>
+            <div class="io-tier">
+              <div class="io-tier-head">Primary</div>
+              <div class="io-tier-body">
+                <div class="chip-row"><span class="chip">Epics (business + architecture)</span></div>
+              </div>
+            </div>
+            <div class="io-tier">
+              <div class="io-tier-head">Secondary</div>
+              <div class="io-tier-body">
+                <div class="chip-row">
+                  <span class="chip">D/F/V assumption map</span>
+                  <span class="chip">Benefits-realization plan</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -366,17 +424,30 @@ footer p{font-size:13px;color:var(--muted);}
         </div>
         <div class="tdesc">One case per epic — value, cost, strategic alignment, and a rough order-of-magnitude effort estimate that anchors the Epic Prioritizer's job size.</div>
 
-        <div class="io-row">
-          <span class="io-label">Primary output</span>
-          <span class="chip">Business Case per epic</span>
-          <span class="handoff-key">robdull:business-cases</span>
-        </div>
-
-        <div class="tinputs">
-          <div class="inp-row">
-            <span class="io-label">Primary input</span>
-            <span class="chip-mcp">Financial tracking</span>
-            <span class="chip-mcp">External comms</span>
+        <div class="io-cols">
+          <div class="io-col io-col-in">
+            <div class="io-col-head">Inputs</div>
+            <div class="io-tier">
+              <div class="io-tier-head">Primary</div>
+              <div class="io-tier-body">
+                <div>
+                  <div class="io-group-label" style="color:var(--gold);">MCP</div>
+                  <div class="chip-row">
+                    <span class="chip-mcp">Financial tracking</span>
+                    <span class="chip-mcp">External comms</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="io-col io-col-out">
+            <div class="io-col-head">Outputs</div>
+            <div class="io-tier">
+              <div class="io-tier-head">Primary</div>
+              <div class="io-tier-body">
+                <div class="chip-row"><span class="chip">Business Case per epic</span></div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -405,24 +476,45 @@ footer p{font-size:13px;color:var(--muted);}
         </div>
         <div class="tdesc">Reads each epic's Business Case as its candidate record — value statement, cost/benefit, strategic alignment, and the rough effort (LOE) from Step 04 — and scores every one on WSJF and RICE components in one pass. Editable weights recompute the board live — raising risk-reduction can flip an architecture epic to #1 with no re-run.</div>
 
-        <div class="io-row">
-          <span class="io-label">Primary output</span>
-          <span class="chip">Epic Ranking + funding line</span>
-          <span class="handoff-key">robdull:epic-ranking</span>
-          <span class="io-label sub">Secondary</span>
-          <span class="chip">RICE alternative scoring</span>
-        </div>
-
-        <div class="tinputs">
-          <div class="inp-row">
-            <span class="io-label">Primary input</span>
-            <span class="chip">Business Cases (candidate records)</span>
-            <span class="handoff-key">robdull:business-cases</span>
+        <div class="io-cols">
+          <div class="io-col io-col-in">
+            <div class="io-col-head">Inputs</div>
+            <div class="io-tier">
+              <div class="io-tier-head">Primary</div>
+              <div class="io-tier-body">
+                <div>
+                  <div class="io-group-label" style="color:var(--teal);">Toolchain</div>
+                  <div class="chip-row"><span class="chip">Business Cases (candidate records)</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="io-tier">
+              <div class="io-tier-head">Secondary</div>
+              <div class="io-tier-body">
+                <div>
+                  <div class="io-group-label" style="color:var(--gold);">MCP</div>
+                  <div class="chip-row">
+                    <span class="chip-mcp">Internal comms (leadership weighting)</span>
+                    <span class="chip-mcp">Customer support (reach/severity)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="inp-row">
-            <span class="io-label">Secondary input</span>
-            <span class="chip-mcp">Internal comms (leadership weighting)</span>
-            <span class="chip-mcp">Customer support (reach/severity)</span>
+          <div class="io-col io-col-out">
+            <div class="io-col-head">Outputs</div>
+            <div class="io-tier">
+              <div class="io-tier-head">Primary</div>
+              <div class="io-tier-body">
+                <div class="chip-row"><span class="chip">Epic Ranking + funding line</span></div>
+              </div>
+            </div>
+            <div class="io-tier">
+              <div class="io-tier-head">Secondary</div>
+              <div class="io-tier-body">
+                <div class="chip-row"><span class="chip">RICE alternative scoring</span></div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -451,17 +543,30 @@ footer p{font-size:13px;color:var(--muted);}
         </div>
         <div class="tdesc">Sequences every prioritized epic — funded first, the rest as capacity frees — into release windows across up to 18 months. Dependencies stay light: named approvals or genuine architecture-epic runway only.</div>
 
-        <div class="io-row">
-          <span class="io-label">Primary output</span>
-          <span class="chip-key">Roadmap</span>
-          <span class="handoff-key">robdull:roadmaps</span>
-        </div>
-
-        <div class="tinputs">
-          <div class="inp-row">
-            <span class="io-label">Primary input</span>
-            <span class="chip-mcp">Delivery systems (sprint velocity)</span>
-            <span class="chip-mcp">Internal comms (approvals)</span>
+        <div class="io-cols">
+          <div class="io-col io-col-in">
+            <div class="io-col-head">Inputs</div>
+            <div class="io-tier">
+              <div class="io-tier-head">Primary</div>
+              <div class="io-tier-body">
+                <div>
+                  <div class="io-group-label" style="color:var(--gold);">MCP</div>
+                  <div class="chip-row">
+                    <span class="chip-mcp">Delivery systems (sprint velocity)</span>
+                    <span class="chip-mcp">Internal comms (approvals)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="io-col io-col-out">
+            <div class="io-col-head">Outputs</div>
+            <div class="io-tier">
+              <div class="io-tier-head">Primary</div>
+              <div class="io-tier-body">
+                <div class="chip-row"><span class="chip-key">Roadmap</span></div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -493,17 +598,30 @@ footer p{font-size:13px;color:var(--muted);}
         </div>
         <div class="tdesc">Standard-template BRD for one funded epic — requirements core (scope, prioritized business requirements, high-level NFRs) plus the executive package (summary, objectives, stakeholders, cost-benefit, sign-off). Refuses epics below the funding line.</div>
 
-        <div class="io-row">
-          <span class="io-label">Primary output</span>
-          <span class="chip-key">BRD</span>
-          <span class="handoff-key">robdull:brds</span>
-        </div>
-
-        <div class="tinputs">
-          <div class="inp-row">
-            <span class="io-label">Primary input</span>
-            <span class="chip-mcp">Internal comms (stakeholders, sign-off)</span>
-            <span class="chip-mcp">Analytics (what's instrumentable today)</span>
+        <div class="io-cols">
+          <div class="io-col io-col-in">
+            <div class="io-col-head">Inputs</div>
+            <div class="io-tier">
+              <div class="io-tier-head">Primary</div>
+              <div class="io-tier-body">
+                <div>
+                  <div class="io-group-label" style="color:var(--gold);">MCP</div>
+                  <div class="chip-row">
+                    <span class="chip-mcp">Internal comms (stakeholders, sign-off)</span>
+                    <span class="chip-mcp">Analytics (what's instrumentable today)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="io-col io-col-out">
+            <div class="io-col-head">Outputs</div>
+            <div class="io-tier">
+              <div class="io-tier-head">Primary</div>
+              <div class="io-tier-body">
+                <div class="chip-row"><span class="chip-key">BRD</span></div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -535,25 +653,49 @@ footer p{font-size:13px;color:var(--muted);}
         </div>
         <div class="tdesc">Turns the BRD into the full delivery-doc suite: MoSCoW'd Features with feature-level NFRs and refined sizing, ordered Stories with BDD acceptance criteria and dependsOn sequencing, a solution outline, security/UAT plan, and dev/user docs. Requirement coverage is computed, not generated.</div>
 
-        <div class="io-row">
-          <span class="io-label">Primary output</span>
-          <span class="chip-key">Feature list (extended backlog)</span>
-          <span class="handoff-key">robdull:backlogs (v2)</span>
-          <span class="io-label sub">Secondary</span>
-          <span class="chip">Security &amp; UAT plan</span>
-          <span class="chip">Developer &amp; user docs</span>
-        </div>
-
-        <div class="tinputs">
-          <div class="inp-row">
-            <span class="io-label">Primary input</span>
-            <span class="chip-mcp">Customer support (edge cases → acceptance criteria)</span>
+        <div class="io-cols">
+          <div class="io-col io-col-in">
+            <div class="io-col-head">Inputs</div>
+            <div class="io-tier">
+              <div class="io-tier-head">Primary</div>
+              <div class="io-tier-body">
+                <div>
+                  <div class="io-group-label" style="color:var(--gold);">MCP</div>
+                  <div class="chip-row"><span class="chip-mcp">Customer support (edge cases → acceptance criteria)</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="io-tier">
+              <div class="io-tier-head">Secondary</div>
+              <div class="io-tier-body">
+                <div>
+                  <div class="io-group-label" style="color:var(--purple);">Organizational</div>
+                  <div class="chip-row">
+                    <span class="chip-org">DoR / DoD</span>
+                    <span class="chip-org">Style guide</span>
+                    <span class="chip-org">Current-state architecture</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="inp-row">
-            <span class="io-label">Secondary input</span>
-            <span class="chip-org">DoR / DoD</span>
-            <span class="chip-org">Style guide</span>
-            <span class="chip-org">Current-state architecture</span>
+          <div class="io-col io-col-out">
+            <div class="io-col-head">Outputs</div>
+            <div class="io-tier">
+              <div class="io-tier-head">Primary</div>
+              <div class="io-tier-body">
+                <div class="chip-row"><span class="chip-key">Feature list (extended backlog)</span></div>
+              </div>
+            </div>
+            <div class="io-tier">
+              <div class="io-tier-head">Secondary</div>
+              <div class="io-tier-body">
+                <div class="chip-row">
+                  <span class="chip">Security &amp; UAT plan</span>
+                  <span class="chip">Developer &amp; user docs</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -581,19 +723,34 @@ footer p{font-size:13px;color:var(--muted);}
         </div>
         <div class="tdesc">MVP scope, a sprint-by-sprint allocation, and a RAID log. Capacity AND dependsOn ordering are both recomputed in code — a story landing no earlier than its dependency raises a visible warning wherever the plan is consumed.</div>
 
-        <div class="io-row">
-          <span class="io-label">Primary output</span>
-          <span class="chip-key">Jira bulk-import CSV</span>
-          <span class="handoff-key">terminal — exports to Jira, no further handoff</span>
-          <span class="io-label sub">Secondary</span>
-          <span class="chip">Sprint Plan</span>
-          <span class="chip">RAID log</span>
-        </div>
-
-        <div class="tinputs">
-          <div class="inp-row">
-            <span class="io-label">Primary input</span>
-            <span class="no-inputs-note">No dedicated MCP evidence yet — consumes the DoR/DoD flag already carried on the backlog from Step 08.</span>
+        <div class="io-cols">
+          <div class="io-col io-col-in">
+            <div class="io-col-head">Inputs</div>
+            <div class="io-tier">
+              <div class="io-tier-head">Primary</div>
+              <div class="io-tier-body">
+                <span class="no-inputs-note">No dedicated MCP evidence yet — consumes the DoR/DoD flag already carried on the backlog from Step 08.</span>
+              </div>
+            </div>
+          </div>
+          <div class="io-col io-col-out">
+            <div class="io-col-head">Outputs</div>
+            <div class="io-tier">
+              <div class="io-tier-head">Primary</div>
+              <div class="io-tier-body">
+                <div class="chip-row"><span class="chip-key">Jira bulk-import CSV</span></div>
+                <span class="no-inputs-note">Terminal — exports to Jira, no further handoff.</span>
+              </div>
+            </div>
+            <div class="io-tier">
+              <div class="io-tier-head">Secondary</div>
+              <div class="io-tier-body">
+                <div class="chip-row">
+                  <span class="chip">Sprint Plan</span>
+                  <span class="chip">RAID log</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -672,14 +829,11 @@ footer p{font-size:13px;color:var(--muted);}
 
 <script>
 function setMode(level) {
-  document.body.classList.toggle('show-inputs', level >= 1);
-  document.body.classList.toggle('show-tertiary', level >= 2);
+  document.body.classList.toggle('show-tertiary', level >= 1);
   document.querySelectorAll('.tbtn').forEach(b => b.classList.toggle('active', Number(b.dataset.level) === level));
   const hint = document.getElementById('toggle-hint');
   if (level === 0) {
-    hint.textContent = 'Primary and secondary outputs only — the nine tools and what they hand off.';
-  } else if (level === 1) {
-    hint.textContent = 'Adds the primary (MCP evidence) and secondary (organizational) inputs already wired into each step.';
+    hint.textContent = 'Primary and secondary inputs/outputs for the nine tools — wired and real.';
   } else {
     hint.textContent = 'Adds external/tertiary inputs and outputs from the full network diagram — real nodes, not yet wired into this flow.';
   }
