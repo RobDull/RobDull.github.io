@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical Notes | Rob Dull</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y1JYXTE5J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0Y1JYXTE5J');
+</script>
+<meta name="description" content="How the AI-native PDLC toolchain is actually built: two build systems by design, a shared TypeScript package instead of nine forks, versioned data contracts between tools, guardrails enforced in code, the API key trust boundary, deploy model, and known technical debt, stated plainly for a technical or delivery-systems reviewer.">
+<link rel="canonical" href="https://robdull.com/tools/AI-native-prodops/technical-notes.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://robdull.com/tools/AI-native-prodops/technical-notes.html">
+<meta property="og:title" content="Technical Notes | Rob Dull">
+<meta property="og:description" content="How the toolchain is actually built: the stack, the shared package, the data contracts between tools, guardrails enforced in code, the trust boundary, deploy model, and known debt, stated plainly.">
+<meta property="og:site_name" content="Rob Dull">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0a0a0a; --white:#ffffff; --off:#f7f7f7; --rule:#e8e8e8;
+  --accent:#1a3a5c; --accent2:#c8662a; --muted:#6b6b6b;
+  --teal:#2a6b6b; --purple:#7c5cbf; --gold:#c8921a; --green:#1a5c3a; --steel:#5b7290;
+  --font:'Inter',sans-serif; --mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
+.nn{font-size:21px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
+.nl{display:flex;gap:10px;align-items:center;}
+.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:7px 15px;border:2px solid var(--rule);border-radius:6px;transition:all .15s;background:white;}
+.nl a:hover{background:var(--accent);color:white;border-color:var(--accent);}
+
+/* BREADCRUMB */
+.bc{max-width:1100px;margin:0 auto;padding:88px 32px 0;}
+.bc-inner{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--muted);flex-wrap:wrap;}
+.bc-inner a{color:var(--muted);text-decoration:none;}
+.bc-inner a:hover{color:var(--ink);}
+.bc-sep{color:var(--rule);}
+
+/* PAGE HEAD */
+.page-head{max-width:1100px;margin:0 auto;padding:24px 32px 0;}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;}
+.page-head h1{font-size:clamp(28px,3.6vw,44px);font-weight:900;line-height:1.05;letter-spacing:-.03em;color:var(--ink);}
+.page-head h1 em{font-style:normal;color:var(--accent);}
+.page-head p{font-size:15px;color:var(--muted);max-width:740px;margin-top:14px;line-height:1.75;}
+
+/* STACK CHIPS */
+.stack-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
+.stack-chip{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);background:rgba(26,58,92,.06);border:1px solid rgba(26,58,92,.22);border-radius:6px;padding:5px 11px;}
+
+.wrap{max-width:1100px;margin:0 auto;padding:0 32px;}
+.section{margin-top:44px;}
+.section-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.section h2{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:10px;}
+.section > p{font-size:14.5px;color:#3a3a3a;max-width:740px;line-height:1.75;margin-bottom:10px;}
+
+/* TWO BUILD SYSTEMS */
+.build-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;}
+.build-card{border:1px solid var(--rule);border-radius:10px;padding:18px 20px;background:white;}
+.build-card.spine{border-color:var(--accent);background:rgba(26,58,92,.03);}
+.build-card h3{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
+.build-card.static h3{color:var(--steel);}
+.build-card.spine h3{color:var(--accent);}
+.build-card p{font-size:13px;color:#3a3a3a;line-height:1.6;}
+.build-card ul{list-style:none;margin-top:8px;display:flex;flex-direction:column;gap:6px;}
+.build-card li{font-size:12.5px;color:#3a3a3a;line-height:1.55;padding-left:14px;position:relative;}
+.build-card li::before{content:'';position:absolute;left:2px;top:8px;width:4px;height:4px;border-radius:50%;background:currentColor;}
+.build-card.static li::before{color:var(--steel);}
+.build-card.spine li::before{color:var(--accent);}
+@media(max-width:760px){.build-grid{grid-template-columns:1fr;}}
+
+.rationale{margin-top:12px;border-left:3px solid var(--gold);background:rgba(200,146,26,.05);border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;color:#3a3a3a;line-height:1.65;}
+
+/* PACKAGE CONTENTS */
+.pkg-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;}
+.pkg-col{border:1px solid var(--rule);border-radius:10px;padding:16px 18px;background:white;}
+.pkg-col h3{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.pkg-col ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.pkg-col li{font-size:13px;color:#3a3a3a;line-height:1.55;padding-left:16px;position:relative;}
+.pkg-col li::before{content:'';position:absolute;left:2px;top:8px;width:4px;height:4px;border-radius:50%;background:var(--accent2);}
+.pkg-col li .mono{font-family:var(--mono);font-size:12px;background:var(--off);border:1px solid var(--rule);border-radius:4px;padding:1px 6px;}
+@media(max-width:700px){.pkg-grid{grid-template-columns:1fr;}}
+
+/* CONTRACT TABLE */
+.contract-wrap{margin-top:16px;border:1px solid var(--rule);border-radius:10px;overflow:hidden;overflow-x:auto;}
+table.contract-table{width:100%;border-collapse:collapse;min-width:600px;}
+.contract-table th{text-align:left;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--off);padding:10px 14px;border-bottom:1px solid var(--rule);}
+.contract-table td{font-size:13px;color:#3a3a3a;padding:10px 14px;border-bottom:1px solid var(--rule);vertical-align:top;}
+.contract-table tr:last-child td{border-bottom:none;}
+.contract-table td.mono{font-family:var(--mono);font-size:12px;color:var(--accent);white-space:nowrap;}
+.contract-table td.stage{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap;}
+
+/* GUARDRAILS */
+.guard-list{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:10px;}
+.guard-list li{border:1px solid var(--rule);border-radius:8px;padding:12px 16px;font-size:13.5px;color:#3a3a3a;line-height:1.6;padding-left:38px;position:relative;}
+.guard-list li::before{content:'✓';position:absolute;left:14px;top:12px;color:var(--green);font-weight:800;}
+
+/* TRUST / DEPLOY BOXES */
+.info-box{margin-top:16px;border:1.5px solid var(--teal);border-radius:10px;padding:18px 20px;background:rgba(42,107,107,.04);}
+.info-box h3{font-size:14px;font-weight:800;color:var(--teal);margin-bottom:8px;}
+.info-box p{font-size:13.5px;color:#3a3a3a;line-height:1.7;max-width:740px;}
+.info-box p + p{margin-top:8px;}
+.info-box a{color:var(--teal);font-weight:700;}
+
+.info-box.amber{border-color:var(--gold);background:rgba(200,146,26,.05);}
+.info-box.amber h3{color:#7a5700;}
+.info-box.amber a{color:#7a5700;}
+
+.info-box.muted{border-color:var(--muted);border-style:dashed;background:var(--off);}
+.info-box.muted h3{color:var(--ink);}
+.info-box.muted a{color:var(--accent);}
+
+/* DEBT LIST */
+.debt-list{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:9px;}
+.debt-list li{font-size:13.5px;color:#3a3a3a;line-height:1.65;padding-left:18px;position:relative;max-width:760px;}
+.debt-list li::before{content:'';position:absolute;left:2px;top:9px;width:6px;height:6px;border-radius:1px;background:var(--accent2);transform:rotate(45deg);}
+
+/* CTA */
+.next{margin-top:52px;border:2px solid var(--accent);border-radius:12px;padding:24px 26px;background:rgba(26,58,92,.03);}
+.next h2{font-size:20px;font-weight:800;color:var(--accent);margin-bottom:8px;letter-spacing:-.02em;}
+.next p{font-size:14px;color:#3a3a3a;line-height:1.7;max-width:720px;}
+.next-links{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;}
+.next-a{font-size:13px;font-weight:800;color:white;background:var(--accent);border-radius:7px;padding:10px 18px;text-decoration:none;transition:background .15s;}
+.next-a:hover{background:#122b45;}
+.next-b{font-size:13px;font-weight:800;color:var(--accent);border:2px solid var(--accent);border-radius:7px;padding:8px 18px;text-decoration:none;transition:all .15s;}
+.next-b:hover{background:var(--accent);color:white;}
+
+footer{border-top:1px solid var(--rule);padding:28px 40px;max-width:1100px;margin:56px auto 0;}
+footer p{font-size:13px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nn">Rob Dull</a>
+  <div class="nl">
+    <a href="mailto:rob.dull@gmail.com">Contact</a>
+  </div>
+</nav>
+
+<div class="bc">
+  <div class="bc-inner">
+    <a href="../../index.html">Rob Dull</a><span class="bc-sep">/</span>
+    <a href="../tools-index.html">Tools</a><span class="bc-sep">/</span>
+    <a href="AI-prodops-overview.html">AI ProdOps</a><span class="bc-sep">/</span>
+    <span>Technical notes</span>
+  </div>
+</div>
+
+<div class="page-head">
+  <div class="eyebrow">Agentic PDLC · Engineering Notes</div>
+  <h1>How this is <em>actually built.</em></h1>
+  <p>This page is for a technical program manager, delivery systems leader, or engineer sizing up the judgment behind the toolchain rather than the product pitch. It states the stack, the component boundaries, the data contracts between tools, what's enforced in code versus asserted by a model, the trust boundary around API keys, the deploy model, and the debt that's tracked but not yet paid. Plainly, not promotionally.</p>
+  <div class="stack-chips">
+    <span class="stack-chip">React</span>
+    <span class="stack-chip">Vite</span>
+    <span class="stack-chip">TypeScript</span>
+    <span class="stack-chip">npm workspaces</span>
+    <span class="stack-chip">Hand-authored HTML</span>
+    <span class="stack-chip">GitHub Pages</span>
+    <span class="stack-chip">Claude API, browser-direct</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- TWO BUILD SYSTEMS -->
+  <div class="section">
+    <div class="section-label">Build systems</div>
+    <h2>Two build systems, deliberately, not one</h2>
+    <div class="build-grid">
+      <div class="build-card static">
+        <h3>Hand-authored HTML</h3>
+        <p>No build step. The <span style="font-family:var(--mono);">.html</span> file is the deployable artifact: markup, an inline stylesheet, and an inline script where the page is interactive.</p>
+        <ul>
+          <li>The resume, work history, every Perspectives essay, the tools hub, workshops</li>
+          <li>Two of the eleven tools: the persona generator and the product ops radar, which make no network calls at all</li>
+          <li>Zero dependencies, trivial to edit, nothing to build or version</li>
+        </ul>
+      </div>
+      <div class="build-card spine">
+        <h3>React + Vite + TypeScript monorepo</h3>
+        <p>An npm-workspaces monorepo (private repo, separate from this site's repo) holding the nine-tool PDLC spine: persona generator through sprint planner.</p>
+        <ul>
+          <li>Each app builds independently with <span style="font-family:var(--mono);">vite build</span></li>
+          <li>The hashed output is copied into this site's <span style="font-family:var(--mono);">/tools/&lt;app&gt;/</span> directory</li>
+          <li>A shared internal package (below) is what keeps nine apps from becoming nine forks</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rationale">Neither approach is the default. Content that doesn't call an API or hand data to another tool stays hand-authored HTML. Anything with sequential AI calls, shared scoring logic, or a handoff another tool consumes moves into the monorepo, where the shared package prevents the same bug from being fixed eight times.</div>
+  </div>
+
+  <!-- SHARED PACKAGE -->
+  <div class="section">
+    <div class="section-label">Reuse</div>
+    <h2>One shared package, not nine forks</h2>
+    <p>Every spine app imports the same internal <span style="font-family:var(--mono);font-size:13px;">@robdull/toolkit</span> package rather than re-implementing its own client, scoring math, or handoff logic.</p>
+    <div class="pkg-grid">
+      <div class="pkg-col">
+        <h3>Shared runtime</h3>
+        <ul>
+          <li>An API client shared by all nine apps</li>
+          <li>A generic <span class="mono">useAgenticChain(steps)</span> hook that drives run, edit, back, and reset for any array of pipeline steps</li>
+          <li>Shared React components: PipelineBar, RunButton, ResponseSurface, KeyModal</li>
+          <li>Design-token CSS shared across the spine apps</li>
+        </ul>
+      </div>
+      <div class="pkg-col">
+        <h3>Shared domain logic</h3>
+        <ul>
+          <li>A single scoring module: the one WSJF and RICE implementation every prioritization-touching app calls into, so there is exactly one formula to get right</li>
+          <li>A fixture-based MCP evidence layer, keyless, that grounds prompts in cited PetHealth data until live connectors exist</li>
+          <li>Every cross-tool handoff module (next section)</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:14px;">Each pipeline step is a declarative config object: <span style="font-family:var(--mono);font-size:12.5px;">{ id, buildPrompt, parse, render, maxTokens }</span>. The hook is generic over an array of these, so no app hand-rolls its own step state machine. Every spine app also ships a keyless <span style="font-family:var(--mono);font-size:12.5px;">demo.html</span>: a real captured run rendered through the same step renderers as the live tool, so evaluating a tool costs a visitor nothing and needs no key. Two apps, Business Cases and Roadmap, don't have one yet; every other app does.</p>
+  </div>
+
+  <!-- DATA CONTRACTS -->
+  <div class="section">
+    <div class="section-label">Interfaces</div>
+    <h2>The data contracts between tools</h2>
+    <p>The chain runs entirely same-origin through <span style="font-family:var(--mono);">localStorage</span>, not a backend. Each arrow below is a small versioned TypeScript module, not a loose object shape passed by convention, playing the same role an internal API schema plays between two services.</p>
+    <div class="contract-wrap">
+      <table class="contract-table">
+        <thead><tr><th>Handoff key</th><th>Stage</th><th>What crosses</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">robdull:personas</td><td class="stage">01 → 02</td><td>Persona → journey seed</td></tr>
+          <tr><td class="mono">robdull:opportunity-seeds</td><td class="stage">02 → 03</td><td>Journey pain clusters → intake candidates</td></tr>
+          <tr><td class="mono">robdull:journey-seeds</td><td class="stage">03 → 02</td><td>Bidirectional: intake can request more journey detail</td></tr>
+          <tr><td class="mono">robdull:epics</td><td class="stage">03 → 04</td><td>Business + Architecture epics, D/F/V, benefits-realization plan</td></tr>
+          <tr><td class="mono">robdull:business-cases</td><td class="stage">04 → 05</td><td>kind, caseType, roughEffort, execSummarySeed</td></tr>
+          <tr><td class="mono">robdull:epic-ranking</td><td class="stage">05 → 06</td><td>Method, weights, scores, funding line</td></tr>
+          <tr><td class="mono">robdull:roadmaps</td><td class="stage">06 → 07</td><td>Milestones, release windows</td></tr>
+          <tr><td class="mono">robdull:brds</td><td class="stage">07 → 08</td><td>One BRD per funded epic</td></tr>
+          <tr><td class="mono">robdull:backlogs</td><td class="stage">08 → 09</td><td>One backlog per epic</td></tr>
+          <tr><td class="mono">Jira CSV</td><td class="stage">09 → Jira</td><td>File download; terminal handoff, no further chain</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- GUARDRAILS -->
+  <div class="section">
+    <div class="section-label">Correctness</div>
+    <h2>Guardrails enforced in code, not asserted by the model</h2>
+    <p>The AI drafts every artifact. It does not get the final word on whether that artifact is internally consistent; a handful of checks are computed in plain code and cannot be talked around by a confident-sounding response.</p>
+    <ul class="guard-list">
+      <li>Requirement coverage in the Backlog Builder is computed against the BRD, not claimed by the model that wrote the backlog.</li>
+      <li>Sprint load and <span style="font-family:var(--mono);font-size:12.5px;">dependsOn</span> ordering are recomputed in code in the Sprint Planner; an over-capacity sprint or an out-of-order dependency raises a visible warning wherever the plan is read.</li>
+      <li>The Business Documents tool refuses to generate a BRD for an epic that hasn't cleared the funding line computed upstream in the prioritizer.</li>
+      <li>WSJF and RICE scores recompute live when weights change, in the shared scoring module, without a model call.</li>
+    </ul>
+  </div>
+
+  <!-- TRUST BOUNDARY -->
+  <div class="section">
+    <div class="section-label">Security</div>
+    <h2>The trust boundary: how API keys are handled</h2>
+    <div class="info-box">
+      <h3>Visitor-supplied key, direct to Anthropic, no server in the path</h3>
+      <p>All nine spine apps, plus the strategy-alignment tool, call <span style="font-family:var(--mono);">api.anthropic.com</span> directly from the visitor's browser using a key the visitor supplies. The key lives in <span style="font-family:var(--mono);">sessionStorage</span> and clears on tab close. Two tools, the persona generator and the product ops radar, make no network calls at all. There is no server anywhere in this system holding anyone's key.</p>
+      <p>A Cloudflare Worker pattern that would hold a server-side key was evaluated and deliberately not adopted for this deployment. The full reasoning, cost per session, blast radius of a leaked key, and the UX trade-off of asking a visitor for their own key, is written up on its own page rather than asserted here. <a href="../../worker-vs-direct.html">Read the trade-off ↗</a></p>
+    </div>
+  </div>
+
+  <!-- DEPLOY -->
+  <div class="section">
+    <div class="section-label">Operations</div>
+    <h2>Deploy model, plainly stated</h2>
+    <div class="info-box amber">
+      <h3>Manual, no CI/CD, no staging</h3>
+      <p><span style="font-family:var(--mono);">main</span> is production on both repos. GitHub Pages republishes on every push to this repo's <span style="font-family:var(--mono);">main</span>. There is no staging environment and no automated pipeline. For a solo-maintained portfolio project this is a scope choice, not an oversight: a broken push is caught by hand within minutes, and the alternative, a pipeline maintained for two repos with no team behind them, buys safety this project doesn't currently need.</p>
+      <p>One deploy-safety habit worth naming: at least one spine app's site directory holds a hand-authored page that is not a build artifact and would be silently deleted by a naive copy-and-overwrite. Deploys diff the existing directory against the fresh build output before wiping anything, specifically to catch that class of mistake before it ships.</p>
+    </div>
+  </div>
+
+  <!-- DEBT -->
+  <div class="section">
+    <div class="section-label">Honesty</div>
+    <h2>Debt tracked, not hidden</h2>
+    <p>A short, current list, not an exhaustive one:</p>
+    <ul class="debt-list">
+      <li>Two spine apps, Business Cases and Roadmap, don't have a keyless <span style="font-family:var(--mono);font-size:12.5px;">demo.html</span> yet; every other app does.</li>
+      <li>A legacy backlog data shape is read by nothing live but is kept in the handoff types so older saved runs don't corrupt on load.</li>
+      <li>Design tokens (color, spacing, type scale) are duplicated inline across roughly twenty static HTML files rather than centralized. That's the next static-page refactor, not a hypothetical one.</li>
+    </ul>
+  </div>
+
+  <!-- VERIFIABILITY -->
+  <div class="section">
+    <div class="section-label">Limits of this page</div>
+    <h2>What isn't verifiable from here</h2>
+    <div class="info-box muted">
+      <h3>The monorepo is private</h3>
+      <p>The repository behind the nine-tool spine is private, so this page describes the architecture rather than lets you inspect it directly. There is no documented automated test suite; correctness currently leans on the computed guardrails above and manual verification at each release, not CI-gated tests. If you'd like to look at representative code directly, the scoring module or a single handoff contract, I'm glad to walk through it on request: <a href="mailto:rob.dull@gmail.com?subject=Toolchain%20code%20walkthrough">rob.dull@gmail.com</a>.</p>
+    </div>
+  </div>
+
+  <div class="next">
+    <h2>Looking for the product case instead?</h2>
+    <p>This page covers the engineering. For what the system actually produces, the end-to-end case study traces one initiative through all nine tools with the real captured output at each step, and the evaluator guide routes PM, ProdOps, and delivery leaders to the proof points for their seat.</p>
+    <div class="next-links">
+      <a class="next-a" href="case-study-pethealth.html">End-to-end case study</a>
+      <a class="next-b" href="for-evaluators.html">Evaluation guide by role</a>
+      <a class="next-b" href="prodops-network.html">Network diagram</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Rob Dull &bull; Product Management Practitioner and Product Operations Transformation Consultant</p>
+</footer>
+
+</body>
+</html>
