@@ -99,7 +99,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .mode-card li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent2);flex-shrink:0;margin-top:6px;}
 @media(max-width:760px){.mode-grid{grid-template-columns:1fr;}}
 
-/* phase grid — the four lifecycle stages */
+/* phase grid: the four lifecycle stages */
 .phase-grid{display:flex;flex-direction:column;gap:0;margin:28px 0;border:1px solid var(--rule);border-radius:10px;overflow:hidden;}
 .phase-card{display:grid;grid-template-columns:200px 1fr;border-bottom:1px solid var(--rule);}
 .phase-card:last-child{border-bottom:none;}
@@ -203,12 +203,12 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   .art-tags{margin-left:0;}
 }
 </style>
-<meta name="description" content="A plain-language guide to how AI agents, MCP, and human review work together inside real software teams — no product management background required.">
+<meta name="description" content="A plain-language guide to how AI agents, MCP, and human review work together inside real software teams, no product management background required.">
 <link rel="canonical" href="https://robdull.com/tools/AI-native-prodops/AI-prodops-overview.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://robdull.com/tools/AI-native-prodops/AI-prodops-overview.html">
 <meta property="og:title" content="AI-Native Product Operations, Explained Simply | Rob Dull">
-<meta property="og:description" content="A plain-language guide to how AI agents, MCP, and human review work together inside real software teams — no product management background required.">
+<meta property="og:description" content="A plain-language guide to how AI agents, MCP, and human review work together inside real software teams, no product management background required.">
 <meta property="og:site_name" content="Rob Dull">
 </head>
 <body>
@@ -233,7 +233,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 <div class="art-head">
   <div class="eyebrow">Plain-Language Guide · How Software Gets Built With AI</div>
   <h1>How AI tools become <em>part of the system</em></h1>
-  <p style="font-size:15px;color:var(--muted);margin-top:10px;max-width:640px;line-height:1.6;">AI agents, MCP, and human sign-offs — explained from scratch, for anyone who's curious. No product management background required.</p>
+  <p style="font-size:15px;color:var(--muted);margin-top:10px;max-width:640px;line-height:1.6;">AI agents, MCP, and human sign-offs, explained from scratch, for anyone who's curious. No product management background required.</p>
   <div class="art-meta">
     <span class="art-meta-item"><strong>Published</strong> June 2026</span>
     <span class="art-meta-item"><strong>Reading level</strong> No prior business or AI jargon assumed</span>
@@ -262,17 +262,17 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
 <div class="art-body">
 
-  <p class="lead">AI chatbots like Claude or ChatGPT can write you an email or summarize a document — you open it, type a question, and copy the answer somewhere else. That's useful, but it's not what this page is about. This page is about something a level deeper: what happens when a software company builds AI directly into the actual process of building software, so the AI isn't just answering questions — it's reading live company data, drafting real work, and handing it to the next step on its own.</p>
+  <p class="lead">AI chatbots like Claude or ChatGPT can write you an email or summarize a document: you open it, type a question, and copy the answer somewhere else. That's useful, but it's not what this page is about. This page is about something a level deeper: what happens when a software company builds AI directly into the actual process of building software, so the AI isn't just answering questions, it's reading live company data, drafting real work, and handing it to the next step on its own.</p>
 
   <div class="glossary">
-    <div class="glossary-label">Quick definitions — refer back any time</div>
+    <div class="glossary-label">Quick definitions, refer back any time</div>
     <dl>
       <dt>Product Manager (PM)</dt>
-      <dd>The person who decides what a software team should build next, and why. Not the person writing the code — the person deciding what's worth coding.</dd>
+      <dd>The person who decides what a software team should build next, and why. Not the person writing the code, the person deciding what's worth coding.</dd>
       <dt>AI agent</dt>
-      <dd>AI that can take multiple steps on its own — read some data, make a decision, take an action — instead of just answering one question and stopping.</dd>
+      <dd>AI that can take multiple steps on its own: read some data, make a decision, take an action, instead of just answering one question and stopping.</dd>
       <dt>LLM (large language model)</dt>
-      <dd>The underlying AI model — like Claude or GPT — that powers a chatbot or an AI agent. The "engine" inside the tool.</dd>
+      <dd>The underlying AI model, like Claude or GPT, that powers a chatbot or an AI agent. The "engine" inside the tool.</dd>
       <dt>MCP (Model Context Protocol)</dt>
       <dd>An open standard that lets AI tools connect to a company's software and data the same way every time, instead of needing custom one-off code for every connection.</dd>
       <dt>HITL (human-in-the-loop)</dt>
@@ -290,17 +290,17 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
   <p>There's a real difference between a company that <em>uses</em> AI and a company that's <strong>AI-native</strong>.</p>
 
-  <p>Using AI usually looks like this: someone opens a chatbot, types a question, and copies the answer into a document somewhere else. The AI is a tool sitting next to the work — helpful, but disconnected from everything around it.</p>
+  <p>Using AI usually looks like this: someone opens a chatbot, types a question, and copies the answer into a document somewhere else. The AI is a tool sitting next to the work: helpful, but disconnected from everything around it.</p>
 
-  <p>Being AI-native looks different. AI agents are wired directly into the company's actual systems — its customer support tickets, its code, its project tracker — and they take action inside those systems on their own, with a person checking in at specific points rather than running every single step by hand.</p>
+  <p>Being AI-native looks different. AI agents are wired directly into the company's actual systems: its customer support tickets, its code, its project tracker, and they take action inside those systems on their own, with a person checking in at specific points rather than running every single step by hand.</p>
 
   <div class="stat-pull">
     <div class="stat-num">15×</div>
-    <div class="stat-text"><strong>more AI agents were running inside Microsoft's workplace software in 2026 than a year earlier.</strong> But most companies still haven't gotten an AI project past the testing phase — a widely-cited 2026 study found that 88% of AI agent pilot projects never reach everyday, real-world use. Microsoft Work Trend Index, 2026; Forrester / Anaconda, 2026.</div>
+    <div class="stat-text"><strong>more AI agents were running inside Microsoft's workplace software in 2026 than a year earlier.</strong> But most companies still haven't gotten an AI project past the testing phase: a widely-cited 2026 study found that 88% of AI agent pilot projects never reach everyday, real-world use. Microsoft Work Trend Index, 2026; Forrester / Anaconda, 2026.</div>
   </div>
 
   <div class="callout-orange">
-    <strong>The real dividing line in 2026 isn't which companies use AI — almost all of them do now.</strong> It's whether a company has redesigned its actual workflow around what AI is good at, or just bolted a chatbot onto the same old process and called it done.
+    <strong>The real dividing line in 2026 isn't which companies use AI, almost all of them do now.</strong> It's whether a company has redesigned its actual workflow around what AI is good at, or just bolted a chatbot onto the same old process and called it done.
   </div>
 
   <div class="section-head" id="modes">
@@ -311,7 +311,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
   </div>
 
-  <p>It helps to think of this as three stages most teams pass through — not a single before-and-after switch.</p>
+  <p>It helps to think of this as three stages most teams pass through, not a single before-and-after switch.</p>
 
   <div class="mode-grid">
     <div class="mode-card">
@@ -326,12 +326,12 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="mode-label">Stage 2</div>
       <div class="mode-title">AI as a writing assistant</div>
       <ul>
-        <li>Same basic process — but a chatbot drafts the document faster.</li>
+        <li>Same basic process, but a chatbot drafts the document faster.</li>
         <li>The workflow itself doesn't change. AI just speeds up one step in it.</li>
       </ul>
     </div>
     <div class="mode-card is-native">
-      <div class="mode-label">Stage 3 — AI-native</div>
+      <div class="mode-label">Stage 3: AI-native</div>
       <div class="mode-title">AI as part of the system</div>
       <ul>
         <li>AI agents read live data, draft the work, and pass it to the next agent or person automatically.</li>
@@ -340,7 +340,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
   </div>
 
-  <p>Most companies in 2026 are still somewhere between Stage 1 and Stage 2 — they've added AI, but the underlying process hasn't moved. Stage 3 is what the rest of this page is about.</p>
+  <p>Most companies in 2026 are still somewhere between Stage 1 and Stage 2: they've added AI, but the underlying process hasn't moved. Stage 3 is what the rest of this page is about.</p>
 
   <div class="section-head" id="connect">
     <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round"><rect x="0" y="8" width="8" height="9" rx="1.3" stroke-width="1.5" opacity=".9"/><line x1="2.2" y1="8" x2="2.2" y2="5" stroke-width="1.8" opacity=".92"/><line x1="5.8" y1="8" x2="5.8" y2="5" stroke-width="1.8" opacity=".92"/><line x1="4" y1="8" x2="4" y2="6.2" stroke-width="1.4" opacity=".6"/><line x1="8" y1="12.5" x2="12" y2="12.5" stroke-width="1.2" stroke-dasharray="1.8 1.8" opacity=".7"/><rect x="12" y="6" width="12" height="13" rx="2" stroke-width="1.5" opacity=".9"/><rect x="14.5" y="9" width="2" height="3.5" rx=".7" fill="white" stroke="none" opacity=".75"/><rect x="18.5" y="9" width="2" height="3.5" rx=".7" fill="white" stroke="none" opacity=".75"/><path d="M15,15.5 Q15,18 18,18 Q21,18 21,15.5" stroke-width="1.2" opacity=".65"/></svg></div>
@@ -352,17 +352,17 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
   <p>Here's a problem that doesn't get talked about enough: an AI agent is only as useful as the data it can see. If an AI tool can't read a company's support tickets, it can't summarize them, no matter how smart the underlying model is.</p>
 
-  <p>For years, connecting an AI tool to each different piece of software required custom, one-off code — a different "plug" for every system. <strong>Model Context Protocol (MCP)</strong> fixed that. It's an open standard, first released by Anthropic in late 2024, that lets any AI tool connect to any data source the same standardized way — read a support ticket, edit a file, look something up in a database — through one shared connection method instead of custom code for every single pairing. People sometimes call it <strong>the USB-C of AI</strong>: one universal plug shape instead of a different cable for every device.</p>
+  <p>For years, connecting an AI tool to each different piece of software required custom, one-off code: a different "plug" for every system. <strong>Model Context Protocol (MCP)</strong> fixed that. It's an open standard, first released by Anthropic in late 2024, that lets any AI tool connect to any data source the same standardized way, read a support ticket, edit a file, look something up in a database, through one shared connection method instead of custom code for every single pairing. People sometimes call it <strong>the USB-C of AI</strong>: one universal plug shape instead of a different cable for every device.</p>
 
   <div class="stat-pull">
     <div class="stat-num">970×</div>
-    <div class="stat-text"><strong>growth in MCP's monthly downloads in about 18 months</strong> — from roughly 100,000 downloads a month at its November 2024 launch to more than 97 million a month by early 2026. By the end of 2025 it had been handed over to a neutral nonprofit, the Linux Foundation, so no single company controls the standard going forward. Anthropic / Linux Foundation, 2025–2026.</div>
+    <div class="stat-text"><strong>growth in MCP's monthly downloads in about 18 months</strong>, from roughly 100,000 downloads a month at its November 2024 launch to more than 97 million a month by early 2026. By the end of 2025 it had been handed over to a neutral nonprofit, the Linux Foundation, so no single company controls the standard going forward. Anthropic / Linux Foundation, 2025–2026.</div>
   </div>
 
-  <p>In practice, this might mean an AI agent automatically reads new customer support tickets overnight, groups them by topic, and flags the handful that look like a brand-new problem — instead of a person scrolling through hundreds of tickets every Monday morning.</p>
+  <p>In practice, this might mean an AI agent automatically reads new customer support tickets overnight, groups them by topic, and flags the handful that look like a brand-new problem, instead of a person scrolling through hundreds of tickets every Monday morning.</p>
 
   <div class="callout">
-    <strong>Want to see a fully wired-up example?</strong> The <a href="prodops-network.html" style="color:var(--accent);font-weight:600;">technical network diagram</a> on this site maps out a real version of this — every data source, every connection, and every AI agent in one interactive picture. It's more detailed than this page; this page is the plain-language version of the same idea.
+    <strong>Want to see a fully wired-up example?</strong> The <a href="prodops-network.html" style="color:var(--accent);font-weight:600;">technical network diagram</a> on this site maps out a real version of this: every data source, every connection, and every AI agent in one interactive picture. It's more detailed than this page; this page is the plain-language version of the same idea.
   </div>
 
   <p>The network diagram shows the wiring. If you want to see what moves through those wires, the <a href="document-flow.html" style="color:var(--accent);font-weight:600;">document flow</a> page is the tool-by-tool version: nine real steps, each one showing its <strong>primary input</strong> (the thing it can't run without) separately from supplementary evidence, and its <strong>primary output</strong> (the document that gates the next step) separately from what's just produced alongside it. Every step links to that tool's own real sample run, not a mockup.</p>
@@ -375,13 +375,13 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
   </div>
 
-  <p>Just because an AI agent <em>can</em> act on its own doesn't mean it should act without anyone checking. A person reviewing the AI's work before it moves forward is called <strong>human-in-the-loop</strong>, usually shortened to <strong>HITL</strong>. Think of it like a teacher reviewing a draft before it gets turned in — except here, the "draft" might be a customer-facing report, or even a change pushed to a real, live product that people are using right now.</p>
+  <p>Just because an AI agent <em>can</em> act on its own doesn't mean it should act without anyone checking. A person reviewing the AI's work before it moves forward is called <strong>human-in-the-loop</strong>, usually shortened to <strong>HITL</strong>. Think of it like a teacher reviewing a draft before it gets turned in, except here, the "draft" might be a customer-facing report, or even a change pushed to a real, live product that people are using right now.</p>
 
   <div class="callout-orange">
-    <strong>A January 2026 study from Anthropic found that engineers who relied heavily on AI assistance saw a 17% drop in certain hands-on skills over time</strong> — even as their output got faster. The risk isn't that the AI did a bad job. It's that if a person stops doing the work themselves, they can eventually lose the ability to tell when the AI got it wrong.
+    <strong>A January 2026 study from Anthropic found that engineers who relied heavily on AI assistance saw a 17% drop in certain hands-on skills over time</strong>, even as their output got faster. The risk isn't that the AI did a bad job. It's that if a person stops doing the work themselves, they can eventually lose the ability to tell when the AI got it wrong.
   </div>
 
-  <p>This idea — that real authority requires real understanding — isn't new. It comes from David Marquet, a U.S. Navy submarine commander who argued that no one should approve a decision they don't understand, no matter how senior they are or how much they trust the person (or system) that made it. <a href="../../perspectives/marquet-ai-cert.html" style="color:var(--accent);font-weight:600;">Read the full story →</a></p>
+  <p>This idea, that real authority requires real understanding, isn't new. It comes from David Marquet, a U.S. Navy submarine commander who argued that no one should approve a decision they don't understand, no matter how senior they are or how much they trust the person (or system) that made it. <a href="../../perspectives/marquet-ai-cert.html" style="color:var(--accent);font-weight:600;">Read the full story →</a></p>
 
   <div class="cert-section">
     <div class="cert-section-head">
@@ -394,12 +394,12 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="cert-pillar">
         <div class="cert-pillar-label mastery">Do I understand it?</div>
         <div class="cert-pillar-title">Not just "it looks right"</div>
-        <div class="cert-pillar-desc">Could you explain, in your own words, why the AI did what it did? If you can't, you're not reviewing it — you're trusting it.</div>
+        <div class="cert-pillar-desc">Could you explain, in your own words, why the AI did what it did? If you can't, you're not reviewing it, you're trusting it.</div>
       </div>
       <div class="cert-pillar">
         <div class="cert-pillar-label control">Could I catch it?</div>
         <div class="cert-pillar-title">If it's wrong, would you notice</div>
-        <div class="cert-pillar-desc">If this output is wrong, would you spot it — or would it just sail through because it sounds confident?</div>
+        <div class="cert-pillar-desc">If this output is wrong, would you spot it, or would it just sail through because it sounds confident?</div>
       </div>
       <div class="cert-pillar">
         <div class="cert-pillar-label clarity">Does it solve the real problem?</div>
@@ -437,7 +437,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
   </div>
 
-  <p>Inside an actual product team, this plays out across four stages — and at every stage, AI agents handle more of the legwork while a person still signs off on the result.</p>
+  <p>Inside an actual product team, this plays out across four stages, and at every stage, AI agents handle more of the legwork while a person still signs off on the result.</p>
 
   <div class="phase-grid">
 
@@ -508,26 +508,26 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <span class="element-num">01</span>
       <div>
         <div class="element-title">AI does the busywork, not the thinking</div>
-        <div class="element-desc">Agents handle the synthesis and the first draft. People still own the judgment calls — what matters, what's risky, what's worth doing.</div>
+        <div class="element-desc">Agents handle the synthesis and the first draft. People still own the judgment calls: what matters, what's risky, what's worth doing.</div>
       </div>
     </li>
     <li class="element-item">
       <span class="element-num">02</span>
       <div>
         <div class="element-title">The connections matter more than the AI model itself</div>
-        <div class="element-desc">MCP sounds like boring plumbing, but it's the actual reason any of this works at scale — without it, AI can't see the data it needs to be useful.</div>
+        <div class="element-desc">MCP sounds like boring plumbing, but it's the actual reason any of this works at scale: without it, AI can't see the data it needs to be useful.</div>
       </div>
     </li>
     <li class="element-item">
       <span class="element-num">03</span>
       <div>
         <div class="element-title">Checking the work is not optional</div>
-        <div class="element-desc">The more autonomous AI gets, the more a human who understands the work matters — not less.</div>
+        <div class="element-desc">The more autonomous AI gets, the more a human who understands the work matters, not less.</div>
       </div>
     </li>
   </ul>
 
-  <p>None of this requires you to be a product manager, an engineer, or even particularly technical. It just requires understanding that AI agents are now a real part of how software gets built — and knowing enough to ask good questions about it.</p>
+  <p>None of this requires you to be a product manager, an engineer, or even particularly technical. It just requires understanding that AI agents are now a real part of how software gets built, and knowing enough to ask good questions about it.</p>
 
   <div class="footnotes">
     <div class="footnotes-label">Sources</div>
