@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: PetHealth Claims, End to End | Rob Dull</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y1JYXTE5J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0Y1JYXTE5J');
+</script>
+<meta name="description" content="One initiative traced through all nine tools of the agentic PDLC chain: from an enterprise persona and journey map, through intake, business cases, WSJF ranking, and roadmap, to a BRD, backlog, sprint plan, and Jira-ready CSV. Every step links to the real captured run.">
+<link rel="canonical" href="https://robdull.com/tools/AI-native-prodops/case-study-pethealth.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://robdull.com/tools/AI-native-prodops/case-study-pethealth.html">
+<meta property="og:title" content="Case Study: PetHealth Claims, End to End | Rob Dull">
+<meta property="og:description" content="One initiative traced through all nine tools of the agentic PDLC chain, from persona to Jira-ready CSV. Every step links to the real captured run.">
+<meta property="og:site_name" content="Rob Dull">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0a0a0a; --white:#ffffff; --off:#f7f7f7; --rule:#e8e8e8;
+  --accent:#1a3a5c; --accent2:#c8662a; --muted:#6b6b6b;
+  --teal:#2a6b6b; --purple:#7c5cbf; --gold:#c8921a; --green:#1a5c3a; --steel:#5b7290;
+  --font:'Inter',sans-serif; --mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
+.nn{font-size:21px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
+.nl{display:flex;gap:10px;align-items:center;}
+.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:7px 15px;border:2px solid var(--rule);border-radius:6px;transition:all .15s;background:white;}
+.nl a:hover{background:var(--accent);color:white;border-color:var(--accent);}
+
+/* BREADCRUMB */
+.bc{max-width:1100px;margin:0 auto;padding:88px 32px 0;}
+.bc-inner{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--muted);flex-wrap:wrap;}
+.bc-inner a{color:var(--muted);text-decoration:none;}
+.bc-inner a:hover{color:var(--ink);}
+.bc-sep{color:var(--rule);}
+
+/* PAGE HEAD */
+.page-head{max-width:1100px;margin:0 auto;padding:24px 32px 0;}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;}
+.page-head h1{font-size:clamp(28px,3.6vw,44px);font-weight:900;line-height:1.05;letter-spacing:-.03em;color:var(--ink);}
+.page-head h1 em{font-style:normal;color:var(--accent);}
+.page-head p{font-size:15px;color:var(--muted);max-width:720px;margin-top:14px;line-height:1.75;}
+
+.wrap{max-width:1100px;margin:0 auto;padding:0 32px;}
+
+/* CONTEXT BOX */
+.context{margin-top:32px;border:1px solid var(--rule);border-radius:10px;background:var(--off);padding:20px 22px;}
+.context-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.context p{font-size:13.5px;color:#3a3a3a;line-height:1.7;max-width:820px;}
+.context p + p{margin-top:8px;}
+.context strong{color:var(--ink);}
+
+/* STAT STRIP */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px;}
+.stat{border:1px solid var(--rule);border-radius:8px;padding:14px 16px;background:white;}
+.stat-num{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--accent);}
+.stat-lbl{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.45;}
+@media(max-width:800px){.stats{grid-template-columns:1fr 1fr;}}
+
+/* TIMELINE */
+.timeline-wrap{margin-top:44px;}
+.timeline{position:relative;padding-left:36px;}
+.timeline::before{content:'';position:absolute;left:13px;top:8px;bottom:8px;width:2px;background:var(--rule);}
+.trow{position:relative;padding-bottom:26px;}
+.trow:last-child{padding-bottom:0;}
+.tbadge{position:absolute;left:-36px;top:0;width:28px;height:28px;border-radius:50%;background:var(--accent);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:var(--mono);z-index:2;}
+.tcard{border:1px solid var(--rule);border-radius:10px;padding:16px 18px;background:white;}
+.tcard-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+.tname{font-size:16px;font-weight:800;color:var(--ink);}
+.tcat{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+.tdesc{font-size:13.5px;color:#3a3a3a;line-height:1.65;margin-top:8px;max-width:700px;}
+.tdesc strong{color:var(--ink);}
+
+.artifact{margin-top:12px;border-left:3px solid var(--gold);background:rgba(200,146,26,.05);border-radius:0 8px 8px 0;padding:12px 16px;}
+.artifact-label{font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#7a5700;margin-bottom:5px;}
+.artifact p{font-size:13px;color:#3a3a3a;line-height:1.6;max-width:680px;}
+.artifact ul{list-style:none;margin-top:4px;display:flex;flex-direction:column;gap:4px;}
+.artifact li{font-size:12.5px;color:#3a3a3a;line-height:1.55;padding-left:14px;position:relative;}
+.artifact li::before{content:'';position:absolute;left:2px;top:8px;width:4px;height:4px;border-radius:50%;background:var(--gold);}
+.artifact .mono{font-family:var(--mono);font-size:12px;}
+
+.handoff{margin-top:10px;font-size:11.5px;color:var(--steel);font-weight:600;}
+.handoff .mono{font-family:var(--mono);font-size:10.5px;background:var(--off);border:1px solid var(--rule);border-radius:4px;padding:1px 6px;}
+
+.trow-foot{margin-top:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.sample-link{font-size:11.5px;font-weight:700;color:var(--accent2);text-decoration:none;border:1.5px solid var(--accent2);border-radius:5px;padding:3px 11px;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;transition:background .15s,color .15s;}
+.sample-link:hover{background:var(--accent2);color:white;}
+.sample-link.muted{color:var(--muted);border-color:var(--rule);}
+.sample-link.muted:hover{background:var(--muted);color:white;}
+.gate{font-size:11px;font-weight:700;color:var(--purple);background:rgba(124,92,191,.08);border:1px solid rgba(124,92,191,.3);border-radius:5px;padding:3px 9px;}
+
+/* PROVES BOX */
+.proves{margin-top:52px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.prove-card{border:1px solid var(--rule);border-radius:10px;padding:18px 20px;}
+.prove-card.does{border-color:var(--green);background:rgba(26,92,58,.03);}
+.prove-card h3{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
+.prove-card.does h3{color:var(--green);}
+.prove-card.doesnt h3{color:var(--muted);}
+.prove-card ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.prove-card li{font-size:13px;color:#3a3a3a;line-height:1.55;padding-left:16px;position:relative;}
+.prove-card.does li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;}
+.prove-card.doesnt li::before{content:'·';position:absolute;left:2px;color:var(--muted);font-weight:800;}
+@media(max-width:700px){.proves{grid-template-columns:1fr;}}
+
+/* CTA */
+.next{margin-top:40px;border:2px solid var(--accent);border-radius:12px;padding:24px 26px;background:rgba(26,58,92,.03);}
+.next h2{font-size:20px;font-weight:800;color:var(--accent);margin-bottom:8px;letter-spacing:-.02em;}
+.next p{font-size:14px;color:#3a3a3a;line-height:1.7;max-width:720px;}
+.next-links{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;}
+.next-a{font-size:13px;font-weight:800;color:white;background:var(--accent);border-radius:7px;padding:10px 18px;text-decoration:none;transition:background .15s;}
+.next-a:hover{background:#122b45;}
+.next-b{font-size:13px;font-weight:800;color:var(--accent);border:2px solid var(--accent);border-radius:7px;padding:8px 18px;text-decoration:none;transition:all .15s;}
+.next-b:hover{background:var(--accent);color:white;}
+
+footer{border-top:1px solid var(--rule);padding:28px 40px;max-width:1100px;margin:56px auto 0;}
+footer p{font-size:13px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nn">Rob Dull</a>
+  <div class="nl">
+    <a href="mailto:rob.dull@gmail.com">Contact</a>
+  </div>
+</nav>
+
+<div class="bc">
+  <div class="bc-inner">
+    <a href="../../index.html">Rob Dull</a><span class="bc-sep">/</span>
+    <a href="../tools-index.html">Tools</a><span class="bc-sep">/</span>
+    <a href="AI-prodops-overview.html">AI ProdOps</a><span class="bc-sep">/</span>
+    <span>Case study</span>
+  </div>
+</div>
+
+<div class="page-head">
+  <div class="eyebrow">End-to-End Case Study · Real Captured Runs</div>
+  <h1>One initiative, nine tools, <em>zero copy-paste.</em></h1>
+  <p>This page traces a single initiative through the entire chain: from an enterprise persona to a Jira-ready sprint plan. Every handoff below happened through the tools' real same-origin handoffs, one click each. Every step links to the captured run itself, so you are judging real output, not a slideware summary of it. The human work in this chain is the review at each gate; the drafting is the AI's.</p>
+</div>
+
+<div class="wrap">
+
+  <div class="context">
+    <div class="context-label">The scenario</div>
+    <p><strong>PetHealth</strong> is a fictional mid-size pet insurer with a real-shaped problem: members don't trust the claims process. Claim-status questions alone account for <strong>22% of all support contacts</strong>, members describe the period after submitting a claim as a black hole, and leakage in adjudication quietly erodes margin. The company context, evidence set, and competing priorities are held constant across every tool, which is what makes the chain a fair test: each tool inherits its input from the one before, not from a hand-tuned prompt.</p>
+    <p>The names are fictional. The runs are not: each artifact below is captured output from the live tool.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num">1 → 5</div><div class="stat-lbl">One funded initiative, decomposed into five epics with framed assumptions</div></div>
+    <div class="stat"><div class="stat-num">8</div><div class="stat-lbl">Business requirements in the BRD, each traceable downstream</div></div>
+    <div class="stat"><div class="stat-num">7 / 15</div><div class="stat-lbl">MoSCoW'd features and ordered stories in the extended backlog</div></div>
+    <div class="stat"><div class="stat-num">8 of 8</div><div class="stat-lbl">BR coverage in the backlog: computed by code, not claimed by the model</div></div>
+  </div>
+
+  <div class="timeline-wrap">
+    <div class="timeline">
+
+      <!-- 01 -->
+      <div class="trow">
+        <div class="tbadge">01</div>
+        <div class="tcard">
+          <div class="tcard-head"><span class="tname">Persona Generator</span><span class="tcat">Discover</span></div>
+          <div class="tdesc">A rough description of a PetHealth member becomes a full enterprise persona, detailed enough to anchor everything downstream.</div>
+          <div class="artifact">
+            <div class="artifact-label">★ What came out</div>
+            <p><strong>Marcus Chen</strong>, software engineer and PetHealth member. His quote sets the tone for the whole initiative: <em>"I just want to know it's working." Until he needs it.</em> The card carries his Jobs to Be Done statement, tech comfort across channels, key interactions with friction badges, and the quantified organizational impact of his unmet job.</p>
+          </div>
+          <div class="handoff">HANDOFF → the persona seeds the journey map directly.</div>
+          <div class="trow-foot">
+            <a class="sample-link" href="../persona-generator/persona-index.html">Open the tool: it is its own demo ↗</a>
+            <span class="gate">✋ Human gate: PM ratifies the persona before mapping</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div class="trow">
+        <div class="tbadge">02</div>
+        <div class="tcard">
+          <div class="tcard-head"><span class="tname">Journey Map Builder</span><span class="tcat">Map</span></div>
+          <div class="tdesc">Marcus's journey across pre-enrollment, account management, claims, and renewal, with a draggable sentiment curve and row-level pain points. The sentiment trough lands exactly where the support data says it should: the silence after a claim is submitted.</div>
+          <div class="artifact">
+            <div class="artifact-label">★ What came out</div>
+            <p>A stage-by-stage map whose pain clusters become <strong>opportunity seeds</strong>: structured, exportable statements of where the experience breaks and what it costs.</p>
+          </div>
+          <div class="handoff">HANDOFF → opportunity seeds feed initiative intake.</div>
+          <div class="trow-foot">
+            <a class="sample-link" href="../journey-map/">View the live sample (PetHealth) ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="trow">
+        <div class="tbadge">03</div>
+        <div class="tcard">
+          <div class="tcard-head"><span class="tname">Initiative Intake</span><span class="tcat">Portfolio tradeoff</span></div>
+          <div class="tdesc">Four sequential AI calls weigh <strong>Claims Transparency &amp; Leakage Reduction</strong> against two competing initiatives: <strong>Renewal &amp; Pricing Experience Revamp</strong> and the <strong>Vet-Clinic Partner Portal</strong>, using cited strategy, budget, and demand evidence. The funded initiative is then decomposed into five epics, split between front-stage business work and backstage architecture runway.</div>
+          <div class="artifact">
+            <div class="artifact-label">★ What came out</div>
+            <ul>
+              <li><span class="mono">EPIC-01</span> Auto-Adjudication Engine Modernization</li>
+              <li><span class="mono">EPIC-02</span> Reimbursement Payout Upgrade</li>
+              <li><span class="mono">EPIC-03</span> Real-Time Claim Status Tracking</li>
+              <li><span class="mono">EPIC-04</span> Vet-Clinic Direct Submission Integration</li>
+              <li><span class="mono">EPIC-05</span> Fraud &amp; Leakage Analytics</li>
+            </ul>
+            <p style="margin-top:8px;">Each epic carries its riskiest Demand, Feasibility, and Viability assumptions and a benefits-realization plan naming the measurement instrumentation that has to exist. The headline benefit target: <strong>claim-status share of support contacts falls from 22% to ≤12%</strong>.</p>
+          </div>
+          <div class="handoff">HANDOFF → the five epics hand off to Business Cases, one case per epic, carrying their D/F/V risk surface with them.</div>
+          <div class="trow-foot">
+            <a class="sample-link" href="../feature-intake/demo.html">View the captured run ↗</a>
+            <span class="gate">✋ Human gate: PM + stakeholders sign off on the intake</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="trow">
+        <div class="tbadge">04</div>
+        <div class="tcard">
+          <div class="tcard-head"><span class="tname">Business Cases</span><span class="tcat">Justify</span></div>
+          <div class="tdesc">One case per epic: value, cost, strategic alignment, cost of inaction, and a rough order-of-magnitude effort estimate. That estimate is not decoration: it anchors the job-size input the prioritizer uses next, so the ranking and the funding conversation share one number.</div>
+          <div class="artifact">
+            <div class="artifact-label">★ What came out</div>
+            <p>Five business cases in a standard format, including the <strong>Real-Time Claim Status Tracking</strong> case that the rest of this page follows.</p>
+          </div>
+          <div class="handoff">HANDOFF → the cases become the prioritizer's candidate records.</div>
+          <div class="trow-foot">
+            <a class="sample-link" href="../business-case/#examples">View the example gallery (Claim Status tab) ↗</a>
+            <span class="gate">✋ Human gate: sponsor sign-off per case</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05 -->
+      <div class="trow">
+        <div class="tbadge">05</div>
+        <div class="tcard">
+          <div class="tcard-head"><span class="tname">Epic Prioritizer</span><span class="tcat">Rank</span></div>
+          <div class="tdesc">All five epics scored on WSJF and RICE components in a single pass, customer-facing features and infrastructure work on the same board. The weights are editable and the board recomputes live: raise risk-reduction and an architecture epic can take the top slot with no re-run. This is the page to show whoever in your org still ranks epics in a spreadsheet fight.</div>
+          <div class="artifact">
+            <div class="artifact-label">★ What came out</div>
+            <p>A defensible ranking with an explicit <strong>funding line</strong>. <strong>Real-Time Claim Status Tracking</strong> clears it, and becomes the epic the delivery half of the chain executes.</p>
+          </div>
+          <div class="handoff">HANDOFF → the ranking plus funding line feed the roadmap.</div>
+          <div class="trow-foot">
+            <a class="sample-link" href="../portfolio-wsjf/demo.html">View the captured run ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 06 -->
+      <div class="trow">
+        <div class="tbadge">06</div>
+        <div class="tcard">
+          <div class="tcard-head"><span class="tname">Roadmap &amp; Milestones</span><span class="tcat">Schedule</span></div>
+          <div class="tdesc">Every prioritized epic sequenced into release windows across up to 18 months, funded epics first, the rest as capacity frees. Dependencies stay deliberately light: named approvals or genuine architecture-epic runway only, so the roadmap stays a communication tool instead of a Gantt chart.</div>
+          <div class="artifact">
+            <div class="artifact-label">★ What came out</div>
+            <p>The <strong>Roadmap</strong>: one of the four primary outputs program stakeholders care most about.</p>
+          </div>
+          <div class="handoff">HANDOFF → the roadmap gates which epic gets a BRD.</div>
+          <div class="trow-foot">
+            <a class="sample-link" href="../roadmap/demo.html">View the captured run ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 07 -->
+      <div class="trow">
+        <div class="tbadge">07</div>
+        <div class="tcard">
+          <div class="tcard-head"><span class="tname">Business Documents</span><span class="tcat">Spec</span></div>
+          <div class="tdesc">A standard-template BRD for the funded epic: scope, prioritized business requirements, and high-level NFRs, plus the executive package (summary, objectives, stakeholders, cost-benefit, sign-off). One structural guardrail worth noticing: <strong>the tool refuses to write a BRD for an epic below the funding line.</strong> Process discipline enforced in code, not in a wiki page nobody reads.</div>
+          <div class="artifact">
+            <div class="artifact-label">★ What came out</div>
+            <p>The <strong>BRD for Real-Time Claim Status Tracking</strong> with <strong>eight business requirements</strong> (<span class="mono">BR-01</span> through <span class="mono">BR-08</span>), an assumptions section, and the exec sign-off package.</p>
+          </div>
+          <div class="handoff">HANDOFF → the BRD is the single primary input to the backlog.</div>
+          <div class="trow-foot">
+            <a class="sample-link" href="../docs-generator/demo.html">View the captured run: BRD with Assumptions ↗</a>
+            <span class="gate">✋ Human gate: architecture, security, and business review</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 08 -->
+      <div class="trow">
+        <div class="tbadge">08</div>
+        <div class="tcard">
+          <div class="tcard-head"><span class="tname">Backlog Builder</span><span class="tcat">Plan</span></div>
+          <div class="tdesc">The BRD becomes the full delivery-doc suite: features, stories, solution outline, security and UAT plan, and dev and user docs. The part that matters for trust: <strong>requirement coverage is computed, not generated.</strong> The tool checks, in code, that every business requirement is covered by at least one feature, and flags sizing variance against the earlier estimate instead of quietly smoothing it over.</div>
+          <div class="artifact">
+            <div class="artifact-label">★ What came out</div>
+            <ul>
+              <li><strong>7 MoSCoW'd features</strong> (<span class="mono">FEAT-01</span> to <span class="mono">FEAT-07</span>) with feature-level NFRs and refined sizing</li>
+              <li><strong>15 ordered stories</strong> with BDD acceptance criteria, points, and <span class="mono">dependsOn</span> sequencing</li>
+              <li>Computed coverage: <strong>8 of 8 business requirements covered</strong>, with the refined-versus-rough sizing variance flagged</li>
+            </ul>
+          </div>
+          <div class="handoff">HANDOFF → the extended backlog carries its dependency graph into sprint planning.</div>
+          <div class="trow-foot">
+            <a class="sample-link" href="../backlog-builder/demo.html">View the captured run ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 09 -->
+      <div class="trow">
+        <div class="tbadge">09</div>
+        <div class="tcard">
+          <div class="tcard-head"><span class="tname">Sprint Planner &amp; Jira Export</span><span class="tcat">Deliver</span></div>
+          <div class="tdesc">Two AI calls turn the extended backlog into a delivery plan: MVP scope from the Must-priority features, a sprint-by-sprint allocation, baseline and worst-case estimates with the drivers that widen the gap, and a RAID log. Sprint loads and <span style="font-family:var(--mono);font-size:12.5px;">dependsOn</span> ordering are <strong>recomputed in code</strong>: an over-capacity sprint or a story scheduled before its dependency raises a visible warning wherever the plan is consumed.</div>
+          <div class="artifact">
+            <div class="artifact-label">★ What came out</div>
+            <p>The delivery plan, and the chain's outbound handoff: a <strong>Jira bulk-import CSV</strong> with Summary, Issue Type, Epic Link, Priority, Story Points, Sprint, Acceptance Criteria, and Issue Links. The chain ends inside your delivery system, not in a document nobody imports.</p>
+          </div>
+          <div class="trow-foot">
+            <a class="sample-link" href="../sprint-plan/demo.html">View the captured run ↗</a>
+            <span class="gate">✋ Human gate: delivery lead owns the plan before import</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WHAT IT PROVES -->
+  <div class="proves">
+    <div class="prove-card does">
+      <h3>What this run demonstrates</h3>
+      <ul>
+        <li>The handoffs are real: each tool consumed the previous tool's primary output, unedited, through same-origin handoffs</li>
+        <li>Traceability survives the whole chain: a support-contact statistic from the scenario context shows up as a benefits target in intake, a requirement in the BRD, and covered stories in the backlog</li>
+        <li>Business and architecture work compete on one board instead of in separate meetings</li>
+        <li>The guardrails hold: funding-line refusal, computed coverage, and sprint-load and dependency warnings all fired where they should</li>
+      </ul>
+    </div>
+    <div class="prove-card doesnt">
+      <h3>What it does not claim</h3>
+      <ul>
+        <li>PetHealth is fictional: this shows the chain working end to end, not a customer deployment</li>
+        <li>A human reviewed at each gate: the chain removes drafting toil, not judgment</li>
+        <li>Model output varies run to run; the computed checks are the repeatable part</li>
+        <li>The MCP data sources shown in the network diagram were not live for this run; the evidence set was provided as context</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="next">
+    <h2>Judge it against your own bar</h2>
+    <p>The fastest way to evaluate this system is to open the two or three captured runs above that your role would be accountable for, and ask whether they would survive review in your organization. If the answer is "mostly, and I can see what I'd change," that is exactly the conversation the beta is for.</p>
+    <div class="next-links">
+      <a class="next-a" href="for-evaluators.html#beta">Join the beta</a>
+      <a class="next-b" href="for-evaluators.html">Evaluation guide by role</a>
+      <a class="next-b" href="document-flow.html">Full document flow</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Rob Dull &bull; Product Management Practitioner and Product Operations Transformation Consultant</p>
+</footer>
+
+</body>
+</html>
