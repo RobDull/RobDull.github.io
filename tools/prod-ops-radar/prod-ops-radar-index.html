@@ -177,7 +177,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 <div class="page-head">
   <div class="page-tag">Diagnostic Tool</div>
   <h1>Product Operations<br><em>Health Radar</em></h1>
-  <p>Score your organization across eight delivery maturity dimensions — four DORA metrics and four product operations indicators. Enter scores and evidence, then copy the structured output to an AI tool for maturity analysis and recommendations.</p>
+  <p>Score your organization across eight delivery maturity dimensions: four DORA metrics and four product operations indicators. Enter scores and evidence, then copy the structured output to an AI tool for maturity analysis and recommendations.</p>
 </div>
 
 <div class="tool-layout">
@@ -186,7 +186,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <div class="form-panel">
     <div class="form-panel-head">
       <h2>Enter dimension scores and evidence</h2>
-      <p>Rate each dimension 1–5. Add evidence notes — specific metrics, examples, or observations — to enable AI-assisted analysis. Load sample data to see an example output.</p>
+      <p>Rate each dimension 1–5. Add evidence notes (specific metrics, examples, or observations) to enable AI-assisted analysis. Load sample data to see an example output.</p>
     </div>
     <div class="form-body" id="form-body"></div>
     <div class="form-actions">
@@ -248,7 +248,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="framework-card">
       <div class="fw-tag">Step 1 — Score and evidence</div>
       <h3>Enter specific, observable evidence</h3>
-      <p>Scores without evidence are opinions. Scores with specific evidence — deployment frequency in the last 30 days, number of dependencies that became blockers last PI, percentage of features that achieved their stated metric — enable AI to validate scoring and identify blind spots. The more specific the evidence, the more precise the analysis.</p>
+      <p>Scores without evidence are opinions. Scores with specific evidence (deployment frequency in the last 30 days, number of dependencies that became blockers last PI, percentage of features that achieved their stated metric) enable AI to validate scoring and identify blind spots. The more specific the evidence, the more precise the analysis.</p>
     </div>
     <div class="framework-card">
       <div class="fw-tag">Step 2 — AI analysis prompt</div>
@@ -258,22 +258,22 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="framework-card">
       <div class="fw-tag">Step 3 — Pattern interpretation</div>
       <h3>What the radar shape tells you</h3>
-      <p>A narrow, irregular shape indicates high variance — some dimensions are strong, others weak — which typically signals siloed improvement efforts. A wider but uneven shape indicates systemic progress with specific gaps. A consistently wide shape approaching level 4–5 across all dimensions indicates an organization operating with intentional, measurable delivery discipline.</p>
+      <p>A narrow, irregular shape indicates high variance (some dimensions are strong, others weak), which typically signals siloed improvement efforts. A wider but uneven shape indicates systemic progress with specific gaps. A consistently wide shape approaching level 4–5 across all dimensions indicates an organization operating with intentional, measurable delivery discipline.</p>
     </div>
     <div class="framework-card">
       <div class="fw-tag">Step 4 — DORA vs Ops balance</div>
       <h3>Engineering and organizational factors</h3>
-      <p>DORA metrics measure technical delivery capability. Product ops dimensions measure organizational effectiveness. Organizations frequently advance DORA metrics while ops dimensions remain low — this indicates engineering progress without corresponding organizational maturity, which limits the business value realized from technical improvements. Balanced advancement across both is the target.</p>
+      <p>DORA metrics measure technical delivery capability. Product ops dimensions measure organizational effectiveness. Organizations frequently advance DORA metrics while ops dimensions remain low: this indicates engineering progress without corresponding organizational maturity, which limits the business value realized from technical improvements. Balanced advancement across both is the target.</p>
     </div>
     <div class="framework-card">
       <div class="fw-tag">Step 5 — Uploaded data</div>
       <h3>Enhancing analysis with data exports</h3>
-      <p>The structured output is designed to accompany data uploads — Jira exports, deployment logs, sprint completion reports, or planning accuracy tracking. When uploading data to an AI tool alongside this output, specify which dimensions the data covers. The combination of scored evidence and raw data enables AI to validate scores, surface contradictions, and identify trends not visible in point-in-time scoring.</p>
+      <p>The structured output is designed to accompany data uploads: Jira exports, deployment logs, sprint completion reports, or planning accuracy tracking. When uploading data to an AI tool alongside this output, specify which dimensions the data covers. The combination of scored evidence and raw data enables AI to validate scores, surface contradictions, and identify trends not visible in point-in-time scoring.</p>
     </div>
     <div class="framework-card">
       <div class="fw-tag">Scoring guidance</div>
       <h3>Common scoring errors to avoid</h3>
-      <p>Over-scoring is the most common error — rating aspirational practices rather than current observed behavior. Score what is consistently happening, not what happens occasionally or what you intend to implement. If a practice exists in one team but not others, score for the median, not the best case. A conservative score with strong evidence is more useful than an optimistic score with weak evidence.</p>
+      <p>Over-scoring is the most common error: rating aspirational practices rather than current observed behavior. Score what is consistently happening, not what happens occasionally or what you intend to implement. If a practice exists in one team but not others, score for the median, not the best case. A conservative score with strong evidence is more useful than an optimistic score with weak evidence.</p>
     </div>
   </div>
 </div>
@@ -306,7 +306,7 @@ const SAMPLE = {
   'wip-ctrl':  {score:2, notes:'No formal WIP limits. Average 9 items in progress per engineer. Lead time has increased 22% over the last 2 quarters. Teams aware of overload but no enforcement mechanism.'},
   'inc-ins':   {score:2, notes:'Post-mortems conducted for ~60% of P1 incidents. Average time to publish: 14 days. Action items documented in Confluence but no tracking system. Completion rate ~40%.'},
   'dep-freq':  {score:3, notes:'We deploy weekly to staging, bi-weekly to production. 34 deployments last month. Pipelines exist in GitHub Actions but some services still have manual deployment steps.'},
-  'chg-lead':  {score:2, notes:'P50 lead time: 6.1 days. P90: 12 days. PR review is the biggest bottleneck — avg 28 hours in queue. Weekly release windows constrain deployment.'},
+  'chg-lead':  {score:2, notes:'P50 lead time: 6.1 days. P90: 12 days. PR review is the biggest bottleneck: avg 28 hours in queue. Weekly release windows constrain deployment.'},
   'chg-fail':  {score:3, notes:'Change failure rate averaged 11% last quarter, down from 18% a year ago. P1 incidents tracked in PagerDuty. Post-mortems inconsistent. Integration test coverage is the main gap.'},
   'rec-time':  {score:3, notes:'P1 MTTR: avg 3.1 hours last 90 days. On-call rotation in place. Runbooks exist for ~50% of common failure modes. Detection is reactive.'}
 };
