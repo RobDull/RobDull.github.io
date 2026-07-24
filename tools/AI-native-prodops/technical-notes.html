@@ -223,7 +223,7 @@ footer p{font-size:13px;color:var(--muted);}
         </ul>
       </div>
     </div>
-    <p style="margin-top:14px;">Each pipeline step is a declarative config object: <span style="font-family:var(--mono);font-size:12.5px;">{ id, buildPrompt, parse, render, maxTokens }</span>. The hook is generic over an array of these, so no app hand-rolls its own step state machine. Every spine app also ships a keyless <span style="font-family:var(--mono);font-size:12.5px;">demo.html</span>: a real captured run rendered through the same step renderers as the live tool, so evaluating a tool costs a visitor nothing and needs no key. Two apps, Business Cases and Roadmap, don't have one yet; every other app does.</p>
+    <p style="margin-top:14px;">Each pipeline step is a declarative config object: <span style="font-family:var(--mono);font-size:12.5px;">{ id, buildPrompt, parse, render, maxTokens }</span>. The hook is generic over an array of these, so no app hand-rolls its own step state machine. Every spine app also ships a keyless sample: for most, a <span style="font-family:var(--mono);font-size:12.5px;">demo.html</span> rendering a real captured run through the same step renderers as the live tool; for Business Cases, a worked-example gallery on the tool itself (including the PetHealth EPIC-03 case the demo thread follows). Evaluating any tool costs a visitor nothing and needs no key.</p>
   </div>
 
   <!-- DATA CONTRACTS -->
@@ -291,7 +291,6 @@ footer p{font-size:13px;color:var(--muted);}
     <h2>Debt tracked, not hidden</h2>
     <p>A short, current list, not an exhaustive one:</p>
     <ul class="debt-list">
-      <li>Two spine apps, Business Cases and Roadmap, don't have a keyless <span style="font-family:var(--mono);font-size:12.5px;">demo.html</span> yet; every other app does.</li>
       <li>A legacy backlog data shape is read by nothing live but is kept in the handoff types so older saved runs don't corrupt on load.</li>
       <li>Design tokens (color, spacing, type scale) are duplicated inline across roughly twenty static HTML files rather than centralized. That's the next static-page refactor, not a hypothetical one.</li>
     </ul>
