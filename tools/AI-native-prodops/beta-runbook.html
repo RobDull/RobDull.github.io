@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beta Runbook | Rob Dull</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y1JYXTE5J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0Y1JYXTE5J');
+</script>
+<meta name="description" content="The operator guide for beta testing the agentic PDLC toolchain: what to prepare, the 60-to-90-minute path from intake to sprint plan, how your data is handled, and how to send back a run file with your feedback.">
+<link rel="canonical" href="https://robdull.com/tools/AI-native-prodops/beta-runbook.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://robdull.com/tools/AI-native-prodops/beta-runbook.html">
+<meta property="og:title" content="Beta Runbook | Rob Dull">
+<meta property="og:description" content="The operator guide for beta testing the agentic PDLC toolchain: what to prepare, the 60-to-90-minute path, data handling, and how to send back a run file.">
+<meta property="og:site_name" content="Rob Dull">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0a0a0a; --white:#ffffff; --off:#f7f7f7; --rule:#e8e8e8;
+  --accent:#1a3a5c; --accent2:#c8662a; --muted:#6b6b6b;
+  --teal:#2a6b6b; --purple:#7c5cbf; --gold:#c8921a; --green:#1a5c3a; --steel:#5b7290;
+  --font:'Inter',sans-serif; --mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
+.nn{font-size:21px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
+.nl{display:flex;gap:10px;align-items:center;}
+.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:7px 15px;border:2px solid var(--rule);border-radius:6px;transition:all .15s;background:white;}
+.nl a:hover{background:var(--accent);color:white;border-color:var(--accent);}
+
+.bc{max-width:1100px;margin:0 auto;padding:88px 32px 0;}
+.bc-inner{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--muted);flex-wrap:wrap;}
+.bc-inner a{color:var(--muted);text-decoration:none;}
+.bc-inner a:hover{color:var(--ink);}
+.bc-sep{color:var(--rule);}
+
+.page-head{max-width:1100px;margin:0 auto;padding:24px 32px 0;}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;}
+.page-head h1{font-size:clamp(28px,3.6vw,44px);font-weight:900;line-height:1.05;letter-spacing:-.03em;color:var(--ink);}
+.page-head h1 em{font-style:normal;color:var(--accent);}
+.page-head p{font-size:15px;color:var(--muted);max-width:720px;margin-top:14px;line-height:1.75;}
+
+.wrap{max-width:1100px;margin:0 auto;padding:0 32px;}
+.section{margin-top:44px;}
+.section-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.section h2{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:10px;}
+.section > p{font-size:14.5px;color:#3a3a3a;max-width:720px;line-height:1.75;margin-bottom:10px;}
+
+/* PREP CARDS */
+.prep-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;}
+.prep-card{border:1px solid var(--rule);border-radius:10px;padding:16px 18px;background:white;}
+.prep-num{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--accent2);}
+.prep-title{font-size:14px;font-weight:800;color:var(--ink);margin-top:4px;}
+.prep-desc{font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.6;}
+@media(max-width:760px){.prep-grid{grid-template-columns:1fr;}}
+
+.tier-block{margin-top:28px;}
+.tier-block:first-child{margin-top:0;}
+.tier-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+.tier-head h3{font-size:15px;font-weight:800;color:var(--ink);}
+.tier-time{font-size:11.5px;font-weight:700;color:var(--muted);font-family:var(--mono);}
+.tier-why{font-size:13px;color:#3a3a3a;line-height:1.65;max-width:700px;margin-bottom:6px;}
+.mono-block{font-family:var(--mono);font-size:12px;color:var(--ink);background:var(--off);border:1px solid var(--rule);border-radius:6px;padding:9px 12px;margin:8px 0;line-height:1.6;overflow-x:auto;white-space:pre-wrap;}
+
+/* PATH TIMELINE */
+.path{position:relative;padding-left:36px;margin-top:18px;}
+.path::before{content:'';position:absolute;left:13px;top:8px;bottom:8px;width:2px;background:var(--rule);}
+.prow{position:relative;padding-bottom:22px;}
+.prow:last-child{padding-bottom:0;}
+.pbadge{position:absolute;left:-36px;top:0;width:28px;height:28px;border-radius:50%;background:var(--accent);color:white;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:var(--mono);z-index:2;}
+.pbadge.min{background:var(--steel);}
+.pcard{border:1px solid var(--rule);border-radius:10px;padding:14px 18px;background:white;}
+.pcard h3{font-size:15px;font-weight:800;color:var(--ink);}
+.pcard h3 a{color:var(--accent);text-decoration:none;}
+.pcard h3 a:hover{text-decoration:underline;}
+.pcard p{font-size:13px;color:#3a3a3a;line-height:1.65;margin-top:6px;max-width:680px;}
+.pcard .watch{margin-top:8px;font-size:12px;color:var(--steel);font-weight:600;}
+.pcard .watch strong{color:var(--ink);font-weight:800;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;margin-right:6px;}
+
+/* INFO BOXES */
+.info-box{margin-top:16px;border:1.5px solid var(--teal);border-radius:10px;padding:18px 20px;background:rgba(42,107,107,.04);}
+.info-box h3{font-size:14px;font-weight:800;color:var(--teal);margin-bottom:8px;}
+.info-box p{font-size:13.5px;color:#3a3a3a;line-height:1.7;max-width:740px;}
+.info-box p + p{margin-top:8px;}
+.info-box a{color:var(--teal);font-weight:700;}
+.info-box .mono{font-family:var(--mono);font-size:12px;background:white;border:1px solid var(--rule);border-radius:4px;padding:1px 6px;}
+
+.info-box.amber{border-color:var(--gold);background:rgba(200,146,26,.05);}
+.info-box.amber h3{color:#7a5700;}
+.info-box.amber a{color:#7a5700;}
+
+/* FEEDBACK LIST */
+.fb-list{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:9px;}
+.fb-list li{font-size:13.5px;color:#3a3a3a;line-height:1.6;padding-left:18px;position:relative;max-width:720px;}
+.fb-list li::before{content:'';position:absolute;left:2px;top:9px;width:6px;height:6px;border-radius:1px;background:var(--accent2);transform:rotate(45deg);}
+
+/* CTA */
+.send{margin-top:52px;border:2px solid var(--accent);border-radius:12px;padding:24px 26px;background:rgba(26,58,92,.03);}
+.send h2{font-size:20px;font-weight:800;color:var(--accent);margin-bottom:8px;letter-spacing:-.02em;}
+.send p{font-size:14px;color:#3a3a3a;line-height:1.7;max-width:720px;}
+.send-cta{display:inline-block;margin-top:16px;font-size:14px;font-weight:800;color:white;background:var(--accent);border-radius:8px;padding:12px 24px;text-decoration:none;transition:background .15s;}
+.send-cta:hover{background:#122b45;}
+
+footer{border-top:1px solid var(--rule);padding:28px 40px;max-width:1100px;margin:56px auto 0;}
+footer p{font-size:13px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nn">Rob Dull</a>
+  <div class="nl">
+    <a href="mailto:rob.dull@gmail.com">Contact</a>
+  </div>
+</nav>
+
+<div class="bc">
+  <div class="bc-inner">
+    <a href="../../index.html">Rob Dull</a><span class="bc-sep">/</span>
+    <a href="../tools-index.html">Tools</a><span class="bc-sep">/</span>
+    <a href="AI-prodops-overview.html">AI ProdOps</a><span class="bc-sep">/</span>
+    <span>Beta runbook</span>
+  </div>
+</div>
+
+<div class="page-head">
+  <div class="eyebrow">Agentic PDLC · Beta Operator Guide</div>
+  <h1>The beta runbook: <em>one initiative, one sitting.</em></h1>
+  <p>You've read the <a href="for-evaluators.html" style="color:var(--accent);font-weight:700;">pitch</a> and decided to try it. This page is the operator guide: what to have ready, the suggested 60-to-90-minute path through the chain, what to pay attention to at each gate, and how to send your run back when you're done. Nothing here requires reading anything else first.</p>
+</div>
+
+<div class="wrap">
+
+  <!-- PREP -->
+  <div class="section">
+    <div class="section-label">Before you start</div>
+    <h2>What to bring</h2>
+    <p>Two tiers. Tier 1 is enough to run the chain end to end and judge the mechanics. Tier 2 is what turns the run into a genuine test of output quality, because a few of the steps below quietly invent plausible-sounding detail when you don't give them anything real to work with. Bring what your time allows; more real input produces a more honest verdict.</p>
+
+    <div class="tier-block">
+      <div class="tier-head"><h3>Tier 1 · Minimum</h3><span class="tier-time">~5 min prep</span></div>
+      <div class="prep-grid">
+        <div class="prep-card">
+          <div class="prep-num">01</div>
+          <div class="prep-title">One initiative, one paragraph</div>
+          <div class="prep-desc">A real problem from your org, or a realistically disguised one: what's broken, who it hurts, and one number that shows it matters.</div>
+        </div>
+        <div class="prep-card">
+          <div class="prep-num">02</div>
+          <div class="prep-title">An Anthropic API key (optional)</div>
+          <div class="prep-desc">From console.anthropic.com. A full pass costs well under a dollar of API credit. No key? Walk the same path through the captured sample runs instead; you'll evaluate output quality, just not on your own initiative.</div>
+        </div>
+        <div class="prep-card">
+          <div class="prep-num">03</div>
+          <div class="prep-title">One browser, kept open</div>
+          <div class="prep-desc">The chain hands work between tools inside your browser's storage. Stay in one browser for the session. You can download your whole run as a file at any point (see below), so nothing is lost if you stop early.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tier-block">
+      <div class="tier-head"><h3>Tier 2 · Recommended for a genuinely evaluative run</h3><span class="tier-time">+15&ndash;20 min prep</span></div>
+      <div class="tier-why">Without the items below, Initiative Intake (step 03) will invent plausible-sounding competing initiatives and a budget assumption to fill the gap, because that's what the prompt is designed to do when nothing real is given. That's a reasonable fallback for a five-minute look, but it isn't a fair test of the tool's actual judgment. Bring the real thing and you're testing the tool; skip it and you're mostly testing the model's imagination.</div>
+      <ul class="fb-list">
+        <li><strong>Two named competing initiatives</strong>, each with a one-line reason they lose the capacity to yours. This is what actually exercises the portfolio-tradeoff step instead of letting it improvise.</li>
+        <li><strong>A real quote, stat, or budget line</strong>, pasted below your paragraph as an evidence line so the model cites it with provenance instead of assuming it. The format:
+          <div class="mono-block">[REF-SUPPORT-01 support-ticket] "Members message support asking where their claim is; we can't tell them anything past 'still processing.'"</div>
+          Any short id and kind works, e.g. <span style="font-family:var(--mono);font-size:12px;">[REF-BUDGET-Q3 financial-tracking]</span> or <span style="font-family:var(--mono);font-size:12px;">[REF-NPS-091 external-comms]</span>. This format isn't shown anywhere in the tool itself, the visible evidence chips are fixture demo data, so bringing your own only works if you know to paste it this way.</li>
+        <li><strong>A one-line budget ceiling or OKR</strong> the initiative should ladder to, so the tradeoff rationale grounds in something real.</li>
+        <li><strong>If you'll reach Backlog Builder (step 08):</strong> an excerpt of your org's actual DoR/DoD, a style-guide snippet, and one line on your current-state architecture. All three are real optional fields on that tool and visibly change the NFRs and solution outline from generic to grounded.</li>
+        <li><strong>If you're starting from the top (steps 01&ndash;02):</strong> real persona or interview notes for the Journey Map input rather than a cold start. Its own placeholder text says it plainly: the more specific, the better the suggestions.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PATH -->
+  <div class="section">
+    <div class="section-label">The path · 60 to 90 minutes</div>
+    <h2>Intake to sprint plan, seven stops</h2>
+    <p>This is the recommended beta path. It starts at Initiative Intake (step 03) rather than the very top of the chain: personas and journey maps are worth a look later, but the intake-to-Jira stretch is where the system earns or loses your trust. Each stop names what to watch for, because where the output falls short of your org's bar is exactly the feedback this beta exists to collect.</p>
+    <div class="path">
+
+      <div class="prow">
+        <div class="pbadge">03</div>
+        <div class="pcard">
+          <h3><a href="../feature-intake/">Initiative Intake</a> · ~15 min</h3>
+          <p>Paste your one-paragraph initiative and run the four-step chain: portfolio tradeoff, epic decomposition, riskiest assumptions, benefits realization. Review each step before running the next; edit anything that's wrong before it flows downstream.</p>
+          <div class="watch"><strong>Watch for</strong> Would the Demand / Feasibility / Viability assumptions survive your stakeholders? Are the epics it framed genuinely yours, or generic?</div>
+        </div>
+      </div>
+
+      <div class="prow">
+        <div class="pbadge">04</div>
+        <div class="pcard">
+          <h3><a href="../business-case/">Business Cases</a> · ~10 min</h3>
+          <p>One click on a framed epic pre-fills the case form. Generate a case for one or two epics, not all of them; the point is judging the quality bar, not exhaustive coverage.</p>
+          <div class="watch"><strong>Watch for</strong> Would you put this case in front of your sponsor? Is the rough effort estimate credible enough to anchor prioritization?</div>
+        </div>
+      </div>
+
+      <div class="prow">
+        <div class="pbadge">05</div>
+        <div class="pcard">
+          <h3><a href="../portfolio-wsjf/">Epic Prioritizer</a> · ~10 min</h3>
+          <p>Score your cases on WSJF and RICE in one pass, then drag the weights around. The board recomputes live, including the funding line.</p>
+          <div class="watch"><strong>Watch for</strong> Does the ranking hold up when you raise risk-reduction? Would this board survive your loudest stakeholder?</div>
+        </div>
+      </div>
+
+      <div class="prow">
+        <div class="pbadge">06</div>
+        <div class="pcard">
+          <h3><a href="../roadmap/">Roadmap &amp; Milestones</a> · ~5 min</h3>
+          <p>One click carries the ranking here; the funded epics sequence into release windows with a deliberately light dependency list.</p>
+          <div class="watch"><strong>Watch for</strong> Are the dependencies real blockers or invented ceremony?</div>
+        </div>
+      </div>
+
+      <div class="prow">
+        <div class="pbadge">07</div>
+        <div class="pcard">
+          <h3><a href="../docs-generator/">Business Documents</a> · ~10 min</h3>
+          <p>Generate the BRD for your funded epic. Note that the tool refuses epics below the funding line; that's a guardrail, not a bug.</p>
+          <div class="watch"><strong>Watch for</strong> The requirements core and the executive package: which sections would your org keep, cut, or fight about?</div>
+        </div>
+      </div>
+
+      <div class="prow">
+        <div class="pbadge">08</div>
+        <div class="pcard">
+          <h3><a href="../backlog-builder/">Backlog Builder</a> · ~15 min</h3>
+          <p>The BRD becomes MoSCoW'd features and ordered stories with BDD acceptance criteria. Requirement coverage is computed against the BRD, not claimed.</p>
+          <div class="watch"><strong>Watch for</strong> Would your engineers pick up these stories? Are the acceptance criteria testable or vague?</div>
+        </div>
+      </div>
+
+      <div class="prow">
+        <div class="pbadge">09</div>
+        <div class="pcard">
+          <h3><a href="../sprint-plan/">Sprint Planner</a> · ~10 min</h3>
+          <p>MVP scope, a capacity-and-dependency-checked sprint plan, baseline and worst-case estimates, a RAID log, and the Jira bulk-import CSV that ends the chain.</p>
+          <div class="watch"><strong>Watch for</strong> Do the sprint loads and the worst-case gap reflect how delivery actually goes where you work?</div>
+        </div>
+      </div>
+
+      <div class="prow">
+        <div class="pbadge min">+</div>
+        <div class="pcard">
+          <h3>If you have another 20 minutes</h3>
+          <p>Start from the top instead: generate a <a href="../persona-generator/persona-index.html" style="color:var(--accent);font-weight:700;">persona</a> (01), build a <a href="../journey-map/" style="color:var(--accent);font-weight:700;">journey map</a> from it (02), and let its pain clusters seed the intake. That's the full chain, research to Jira.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DATA -->
+  <div class="section">
+    <div class="section-label">Data handling</div>
+    <h2>Where your initiative goes</h2>
+    <div class="info-box">
+      <h3>Your browser to Anthropic and back; nothing else</h3>
+      <p>Your key lives in session memory and clears when the tab closes. Your inputs travel from your browser to Anthropic's API and back; there is no server of mine in the path, no account, and no database. All saved artifacts live in your browser's localStorage. If your initiative is sensitive, disguise the names and numbers; the chain works just as well on a realistic fiction. The full statement, including what is and isn't verifiable, is on the <a href="technical-notes.html">technical notes</a> page.</p>
+    </div>
+  </div>
+
+  <!-- RUN FILE -->
+  <div class="section">
+    <div class="section-label">Saving and sharing your run</div>
+    <h2>The run file: your save button and your feedback channel</h2>
+    <div class="info-box amber">
+      <h3>Download early, download often</h3>
+      <p>At the bottom of every tool there's a <span class="mono">Run file</span> row with <strong>Download</strong> and <strong>Load</strong> buttons. Download snapshots everything the chain has saved, from any tool, into one JSON file. Load restores it in any browser, on any machine. Download whenever you finish a stage; if a cache clear or a browser switch would otherwise lose your session, the file gets it all back.</p>
+      <p>It's also how you send me your run: attach the JSON to your feedback email and I can load your exact state, see what you saw, and debug or improve from the real thing instead of a screenshot.</p>
+    </div>
+  </div>
+
+  <!-- FEEDBACK -->
+  <div class="section">
+    <div class="section-label">What to note as you go</div>
+    <h2>The feedback that actually helps</h2>
+    <p>You don't need a structured report. A few honest sentences on any of these is a full contribution:</p>
+    <ul class="fb-list">
+      <li>Where an artifact would pass review in your org as-is, and where it would get torn apart. Name the section.</li>
+      <li>Anywhere you stopped trusting the output, and what triggered it.</li>
+      <li>Anywhere you got stuck, confused, or hit an error. The run file plus one sentence beats any bug template.</li>
+      <li>The one thing that, if added or fixed, would make you run a second initiative through it.</li>
+    </ul>
+  </div>
+
+  <!-- SEND -->
+  <div class="send">
+    <h2>Done? Send it in.</h2>
+    <p>Email your notes, with the run file attached if you're willing, with subject "PDLC beta". I read and reply to everything, and a single pass with a few honest reactions is exactly what I asked for.</p>
+    <a class="send-cta" href="mailto:rob.dull@gmail.com?subject=PDLC%20beta">rob.dull@gmail.com</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>Rob Dull &bull; Product Management Practitioner and Product Operations Transformation Consultant</p>
+</footer>
+
+</body>
+</html>
