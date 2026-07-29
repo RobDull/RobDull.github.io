@@ -13,7 +13,7 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Work & Capabilities | Rob Dull</title>
+<title>Work, Capabilities & Selected Cases | Rob Dull</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -90,6 +90,30 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 footer{padding:28px 40px;border-top:1px solid var(--rule);}
 footer p{font-size:12px;color:var(--muted);}
 
+/* NARRATIVE BULLETS */
+.bullets{list-style:none;margin:14px 0;}
+.bullets li{font-size:13.5px;line-height:1.7;color:var(--muted);padding-left:16px;position:relative;margin-bottom:8px;}
+.bullets li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent);}
+
+/* PULL QUOTE */
+.pull-quote{font-size:15px;font-style:italic;color:var(--ink);line-height:1.6;border-left:3px solid var(--accent2);padding:2px 0 2px 18px;margin-top:20px;max-width:640px;}
+
+/* HOW-I-WORK STEPS */
+.steps{list-style:none;counter-reset:step;margin-top:16px;}
+.steps li{counter-increment:step;font-size:13.5px;line-height:1.7;color:var(--muted);padding-left:30px;position:relative;margin-bottom:12px;}
+.steps li::before{content:counter(step);position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.steps li strong{color:var(--ink);font-weight:700;}
+
+/* CASE INSIGHT */
+.case-insight{font-size:13px;font-style:italic;color:var(--muted);line-height:1.7;margin-top:14px;padding-top:14px;border-top:1px dashed var(--rule);}
+
+/* SUB-CAP HEADING */
+.subcap{margin-top:22px;}
+.subcap-title{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:6px;}
+
+/* WP GROUP NOTE */
+.wp-note{font-size:12.5px;color:var(--muted);line-height:1.6;margin:-10px 0 20px;}
+
 @media(max-width:680px){
   nav{padding:14px 20px;}
   .bc{padding:76px 20px 0;}
@@ -101,12 +125,12 @@ footer p{font-size:12px;color:var(--muted);}
   footer{padding:20px;}
 }
 </style>
-<meta name="description" content="Work and capabilities — Rob Dull, Product Manager and Product Operations leader. Strategic planning, discovery, delivery, operations, and coaching across enterprise and consumer platforms.">
+<meta name="description" content="Work, capabilities, and selected cases — Rob Dull. How I turn ambiguity into product decisions, operating systems, and cross-functional execution.">
 <link rel="canonical" href="https://robdull.com/about_me/work-history.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://robdull.com/about_me/work-history.html">
-<meta property="og:title" content="Work & Capabilities | Rob Dull">
-<meta property="og:description" content="Work and capabilities — Rob Dull, Product Manager and Product Operations leader. Strategic planning, discovery, delivery, operations, and coaching across enterprise and consumer platforms.">
+<meta property="og:title" content="Work, Capabilities & Selected Cases | Rob Dull">
+<meta property="og:description" content="Work, capabilities, and selected cases — Rob Dull. How I turn ambiguity into product decisions, operating systems, and cross-functional execution.">
 <meta property="og:site_name" content="Rob Dull">
 </head>
 <body>
@@ -129,247 +153,243 @@ footer p{font-size:12px;color:var(--muted);}
 
 <div class="page-head">
   <div class="page-tag">Experience</div>
-  <h1>What I do and<br><em>what I produce.</em></h1>
-  <p class="sub">15 years at Salesforce and Delta Dental, producing work product at every level from portfolio strategy to team-level stories.</p>
-</div>
-
-<div class="context-strip">
-  <div class="context-inner">
-    <div class="ctx-item">
-      <div class="ctx-label">Where</div>
-      <div class="ctx-value">Salesforce IT · Delta Dental</div>
-      <div class="ctx-sub">+ Nokia, Portrait Displays, Bio-Rad</div>
-    </div>
-    <div class="ctx-item">
-      <div class="ctx-label">Scope</div>
-      <div class="ctx-value">35+ teams · 5 portfolios</div>
-      <div class="ctx-sub">25 → 115+ teams at Salesforce</div>
-    </div>
-    <div class="ctx-item">
-      <div class="ctx-label">Roles</div>
-      <div class="ctx-value">PM · ProdOps Lead · Agile Coach</div>
-      <div class="ctx-sub">Direct PM earlier in career</div>
-    </div>
-  </div>
+  <h1>Work, capabilities, and<br><em>selected cases.</em></h1>
+  <p class="sub">How I turn ambiguity into product decisions, operating systems, and cross-functional execution.</p>
 </div>
 
 <div class="caps">
 
-  <!-- STRATEGIC PLANNING -->
+  <!-- WHAT I DO -->
   <div class="cap-block">
     <div class="cap-header">
-      <div class="cap-eyebrow">Strategic Planning</div>
-      <div class="cap-title">Connecting business goals to team-level work</div>
-      <p class="cap-desc">Artifacts that translate executive priorities into plans product teams can deliver against, with visibility into outcomes for leadership.</p>
+      <div class="cap-title">What I Do</div>
+      <p class="cap-desc">I help organizations connect business intent, product decisions, engineering delivery, support operations, and measurable outcomes. My work often begins where priorities are unclear, teams are using inconsistent practices, or leaders lack a reliable view of how work is moving. I diagnose the operating system, frame the decision, design the minimum structure needed, and stay with the work through implementation.</p>
+    </div>
+    <blockquote class="pull-quote">My strongest work sits between strategy and execution: making priorities explicit, making the system visible, and helping people change how the work actually gets done.</blockquote>
+  </div>
+
+  <!-- HOW I WORK -->
+  <div class="cap-block">
+    <div class="cap-header">
+      <div class="cap-title">How I Work</div>
+    </div>
+    <ol class="steps">
+      <li><strong>Diagnose the system:</strong> Understand the actual workflow, decision paths, incentives, handoffs, and constraints before prescribing a framework.</li>
+      <li><strong>Frame the decision:</strong> Clarify what leaders or product teams need to decide, what evidence matters, and what tradeoffs are real.</li>
+      <li><strong>Design the mechanism:</strong> Create the roadmap, playbook, dashboard, workflow, business case, assessment, or operating model that makes the decision executable.</li>
+      <li><strong>Pilot and learn:</strong> Test the approach with willing teams, inspect the results, and adjust before broader adoption.</li>
+      <li><strong>Build capability:</strong> Teach the system, create reusable guidance, and transfer ownership so progress does not depend on the person who introduced the change.</li>
+      <li><strong>Reduce management complexity:</strong> Standardize the parts of the operating model that benefit from consistency while preserving local judgment where it adds value.</li>
+    </ol>
+  </div>
+
+  <!-- CASE 1 -->
+  <div class="cap-block">
+    <div class="cap-header">
+      <div class="cap-eyebrow">Case 1</div>
+      <div class="cap-title">Salesforce Project Playbook</div>
+      <p class="cap-desc">Salesforce IT was growing rapidly across the United States, Ireland, and India. Large programs combined traditional program governance with Agile team delivery, but expectations, artifacts, and support handoffs varied widely.</p>
+    </div>
+    <ul class="bullets">
+      <li>At the request of the CIO and PMO leader, authored a three-phase enterprise Playbook covering initiation, iterative delivery, operational transition, required artifacts, and support handoffs.</li>
+      <li>Balanced iterative team delivery with the enterprise controls leadership required, then translated the approved model into workshops, project-start walkthroughs, and adoption support.</li>
+      <li>The Playbook became the reference model for large programs involving roughly 80% of IT delivery teams.</li>
+    </ul>
+    <p class="case-insight">The deeper value was reduced management complexity: leaders gained shared language and repeatable controls instead of having to interpret every team and program as a separate exception.</p>
+  </div>
+
+  <!-- CASE 2 -->
+  <div class="cap-block">
+    <div class="cap-header">
+      <div class="cap-eyebrow">Case 2</div>
+      <div class="cap-title">Delta Planning and Product Investment Decisions</div>
+      <p class="cap-desc">Quarterly planning was absorbing too much time because feature shaping, dependency discovery, and readiness work often happened too late. Technical work was also often presented as a threat rather than an economic decision.</p>
+    </div>
+    <ul class="bullets">
+      <li>Moved refinement, readiness, and dependency discovery into a continuous preparation cycle. Most teams reduced planning from about three business days to two; one highly engaged team reduced planning from 3.5 days to one.</li>
+      <li>Taught Engineering Managers to quantify labor savings, operating cost, and risk — for example, 300 hours of monthly labor avoided at $200 per hour.</li>
+      <li>Used business cases and Cost of Delay to combine business and technical roadmaps into one ranked portfolio view.</li>
+    </ul>
+    <p class="case-insight">The result was both faster planning and better investment judgment: technical debt, cost reduction, and risk work could compete credibly with customer-facing features.</p>
+  </div>
+
+  <!-- CASE 3 -->
+  <div class="cap-block">
+    <div class="cap-header">
+      <div class="cap-eyebrow">Case 3</div>
+      <div class="cap-title">Direct Product Management at Portrait Displays</div>
+      <p class="cap-desc">DisplayTune was a graphical calibration interface bundled with premium LCD monitors from OEM customers including Fujitsu-Siemens, Hyundai, Acer, iiyama, and Sony.</p>
+    </div>
+    <ul class="bullets">
+      <li>Owned product requirements and release planning.</li>
+      <li>Managed two-to-six-week production windows, production schedules, support-site delivery, feature tradeoffs, validation, and release readiness.</li>
+      <li>Partnered daily with another Product Manager and the VP of Sales and Product to re-sequence work across overlapping OEM launches.</li>
+    </ul>
+    <p class="case-insight">A successful gold-master release shipped with the first production monitors and generated little or no follow-up support demand. Additional feature requests provided a second signal of product value.</p>
+  </div>
+
+  <!-- CASE 4 -->
+  <div class="cap-block">
+    <div class="cap-header">
+      <div class="cap-eyebrow">Case 4</div>
+      <div class="cap-title">Practical Scrum-to-Kanban Transition</div>
+      <p class="cap-desc">Many transitions change board labels and meeting names without changing how teams manage waiting, handoffs, blockers, or WIP. At Delta Dental, I developed and tested a six-to-twelve-month model that treated Kanban as an organizational capability.</p>
+    </div>
+    <ul class="bullets">
+      <li>Begin with truthful active, ready, waiting, pending, blocked, and handoff columns.</li>
+      <li>Shift the Daily Stand-Up toward flow, aging work, unresolved dependencies, and team ownership of blockers.</li>
+      <li>Introduce Expedite, Small, Medium, and Large swim lanes when the team is ready, rather than on a fixed calendar.</li>
+      <li>Use filtered Control Charts to compare active versus waiting time, isolate functional delays, compare like-sized work, and cluster recurring blocker causes.</li>
+      <li>Build cross-functional response capability before introducing meaningful WIP limits.</li>
+    </ul>
+    <p class="case-insight">The model was proven with several teams and used to put six additional teams on a credible path toward genuine flow-based delivery. A separate detailed case study documents the full method.</p>
+  </div>
+
+  <!-- CASE 5 -->
+  <div class="cap-block">
+    <div class="cap-header">
+      <div class="cap-eyebrow">Case 5</div>
+      <div class="cap-title">CTO-Sponsored DevOps Modernization</div>
+      <p class="cap-desc">Delta Dental needed a shared approach to slow releases, inconsistent quality, technical debt, insufficient automation, and uneven engineering practices across approximately 40 delivery teams.</p>
+    </div>
+    <ul class="bullets">
+      <li>Co-created a 24-practice, 11-stage maturity model, survey, workshop materials, reporting approach, and team improvement process.</li>
+      <li>Directly coached close to 30 teams across two survey rounds.</li>
+      <li>Helped teams prioritize findings and create quarterly roadmaps extending 18 months.</li>
+      <li>Presented findings to teams and leadership and used demonstrations to make stronger practices concrete and motivating.</li>
+    </ul>
+    <p class="case-insight">The initiative gave leadership a shared view of engineering maturity and teams a sequenced path toward stronger automation, quality controls, release practices, monitoring, and engineering excellence.</p>
+  </div>
+
+  <!-- ADDITIONAL DIRECT PRODUCT AND PLATFORM WORK -->
+  <div class="cap-block">
+    <div class="cap-header">
+      <div class="cap-title">Additional Direct Product and Platform Work</div>
     </div>
 
-    <div class="wp-label">Work products</div>
-    <div class="wp-tags">
-      <span class="wp-tag">OKRs &amp; KPI frameworks</span>
-      <span class="wp-tag">Portfolio roadmaps</span>
-      <span class="wp-tag">Cost-of-delay analysis</span>
-      <span class="wp-tag">Big Rocks / Hoshin alignment</span>
-      <span class="wp-tag">North Star metric definition</span>
-      <span class="wp-tag">Business canvases</span>
-      <span class="wp-tag">Value proposition frameworks</span>
-      <span class="wp-tag">Executive dashboards</span>
-      <span class="wp-tag">Quarterly planning pre-work</span>
+    <div class="subcap">
+      <div class="subcap-title">Nokia SNAP Mobile</div>
+      <p class="cap-desc">Managed compliance, certification, and provisioning for third-party games on Nokia's Java gaming platform. Made onboarding, release-timing, exception, and compatibility decisions; co-developed rules for interface clarity, account management, error handling, and interrupted connections; and reviewed the SDK for completeness and usability.</p>
+      <ul class="bullets">
+        <li>Reduced provisioning handoff time from days to hours by establishing dedicated communication channels and service-level expectations.</li>
+        <li>Applied judgment by tailoring error-handling requirements to the mechanics and risk profile of individual games.</li>
+      </ul>
     </div>
 
-    <div class="domain-label">Applied across</div>
-    <div class="domain-groups">
-      <div class="domain-group">
-        <div class="domain-group-name">Customer-facing</div>
-        <div class="domain-tags">
-          <span class="domain-tag">Consumer mobile</span>
-          <span class="domain-tag">Member portals</span>
-          <span class="domain-tag">Provider portals</span>
-        </div>
-      </div>
-      <div class="domain-group">
-        <div class="domain-group-name">Revenue &amp; operations</div>
-        <div class="domain-tags">
-          <span class="domain-tag">Claims processing</span>
-          <span class="domain-tag">Revenue management &amp; billing</span>
-          <span class="domain-tag">Oracle RMB</span>
-          <span class="domain-tag">Metavance</span>
-        </div>
-      </div>
-      <div class="domain-group">
-        <div class="domain-group-name">Enterprise systems</div>
-        <div class="domain-tags">
-          <span class="domain-tag">Workday</span>
-          <span class="domain-tag">Salesforce platform</span>
-          <span class="domain-tag">Concur</span>
-          <span class="domain-tag">Finance &amp; accounting</span>
-        </div>
-      </div>
+    <div class="subcap">
+      <div class="subcap-title">Bio-Rad</div>
+      <p class="cap-desc">Managed content and release operations for a global medical-diagnostics e-commerce platform and reduced lead time by approximately 80% for selected categories of website changes and defect-resolution work.</p>
     </div>
   </div>
 
-  <!-- DISCOVERY & RESEARCH -->
+  <!-- REPRESENTATIVE WORK PRODUCTS -->
   <div class="cap-block">
     <div class="cap-header">
-      <div class="cap-eyebrow">Discovery &amp; Research</div>
-      <div class="cap-title">Grounding product decisions in real user needs</div>
-      <p class="cap-desc">Structured outputs that carry customer insight into roadmap and delivery decisions.</p>
+      <div class="cap-title">Representative Work Products</div>
     </div>
 
-    <div class="wp-label">Work products</div>
+    <div class="wp-label">Product strategy and investment</div>
     <div class="wp-tags">
-      <span class="wp-tag">Journey maps</span>
-      <span class="wp-tag">Persona &amp; JTBD frameworks</span>
-      <span class="wp-tag">Empathy maps</span>
-      <span class="wp-tag">User interview synthesis</span>
-      <span class="wp-tag">Opportunity assessments</span>
-      <span class="wp-tag">Business case documents</span>
-      <span class="wp-tag">ROI &amp; cost-of-delay models</span>
-    </div>
-
-    <div class="domain-label">Applied across</div>
-    <div class="domain-groups">
-      <div class="domain-group">
-        <div class="domain-group-name">Customer-facing</div>
-        <div class="domain-tags">
-          <span class="domain-tag">Customer onboarding</span>
-          <span class="domain-tag">Customer support</span>
-          <span class="domain-tag">Consumer mobile</span>
-          <span class="domain-tag">Member &amp; provider portals</span>
-        </div>
-      </div>
-      <div class="domain-group">
-        <div class="domain-group-name">Internal customers</div>
-        <div class="domain-tags">
-          <span class="domain-tag">Sales support</span>
-          <span class="domain-tag">Marketing support</span>
-          <span class="domain-tag">Employee onboarding</span>
-          <span class="domain-tag">Legal support</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DELIVERY -->
-  <div class="cap-block">
-    <div class="cap-header">
-      <div class="cap-eyebrow">Delivery</div>
-      <div class="cap-title">From portfolio to team — structured, traceable work</div>
-      <p class="cap-desc">Delivery artifacts at every level of the hierarchy, with intake and refinement processes that keep backlogs healthy.</p>
-    </div>
-
-    <div class="wp-label">Work products</div>
-    <div class="wp-tags">
-      <span class="wp-tag">Epics &amp; features</span>
-      <span class="wp-tag">User stories &amp; acceptance criteria</span>
-      <span class="wp-tag">Given-When-Then specifications</span>
-      <span class="wp-tag">Work breakdown structures</span>
-      <span class="wp-tag">Dependency maps</span>
+      <span class="wp-tag">Business cases</span>
+      <span class="wp-tag">ROI models</span>
+      <span class="wp-tag">Cost of Delay</span>
+      <span class="wp-tag">Prioritization models</span>
+      <span class="wp-tag">Roadmaps</span>
       <span class="wp-tag">Release plans</span>
-      <span class="wp-tag">Backlog intake frameworks</span>
-      <span class="wp-tag">Requirements documentation</span>
-      <span class="wp-tag">Technical design briefs</span>
+      <span class="wp-tag">Goal frameworks</span>
+      <span class="wp-tag">Risk-first proof-of-concept design</span>
     </div>
 
-    <div class="domain-label">Applied across</div>
-    <div class="domain-groups">
-      <div class="domain-group">
-        <div class="domain-group-name">Content &amp; marketing</div>
-        <div class="domain-tags">
-          <span class="domain-tag">AEM</span>
-          <span class="domain-tag">CMS</span>
-          <span class="domain-tag">Marketo</span>
-        </div>
-      </div>
-      <div class="domain-group">
-        <div class="domain-group-name">Enterprise systems</div>
-        <div class="domain-tags">
-          <span class="domain-tag">Workday</span>
-          <span class="domain-tag">Concur</span>
-          <span class="domain-tag">Enterprise business desktop</span>
-          <span class="domain-tag">Finance &amp; accounting</span>
-        </div>
-      </div>
-      <div class="domain-group">
-        <div class="domain-group-name">Revenue &amp; operations</div>
-        <div class="domain-tags">
-          <span class="domain-tag">Multi-product billing</span>
-          <span class="domain-tag">Claims processing</span>
-          <span class="domain-tag">Oracle RMB</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- OPERATIONS -->
-  <div class="cap-block">
-    <div class="cap-header">
-      <div class="cap-eyebrow">Product Operations</div>
-      <div class="cap-title">Making the system visible and improvable</div>
-      <p class="cap-desc">Operational infrastructure that gives product organizations visibility into how they're doing and a path to improvement, without adding process overhead.</p>
-    </div>
-
-    <div class="wp-label">Work products</div>
+    <div class="wp-label">Customer and problem discovery</div>
     <div class="wp-tags">
-      <span class="wp-tag">Delivery health metrics</span>
-      <span class="wp-tag">Agile maturity surveys</span>
-      <span class="wp-tag">Engineering excellence assessments</span>
-      <span class="wp-tag">Retrospective synthesis</span>
-      <span class="wp-tag">Process improvement plans</span>
-      <span class="wp-tag">Operating playbooks</span>
-      <span class="wp-tag">Jira &amp; Jira Align configuration</span>
-      <span class="wp-tag">Portfolio visibility dashboards</span>
-      <span class="wp-tag">Root cause analyses</span>
+      <span class="wp-tag">User interviews and synthesis</span>
+      <span class="wp-tag">Journey maps</span>
+      <span class="wp-tag">Personas</span>
+      <span class="wp-tag">Jobs-to-be-done</span>
+      <span class="wp-tag">Empathy maps</span>
+      <span class="wp-tag">Opportunity framing</span>
+      <span class="wp-tag">Business canvases</span>
+      <span class="wp-tag">Value-proposition tools</span>
     </div>
-  </div>
+    <p class="wp-note">I used these directly in earlier product work and later taught or facilitated them with Product Managers and teams.</p>
 
-  <!-- COACHING & ENABLEMENT -->
-  <div class="cap-block">
-    <div class="cap-header">
-      <div class="cap-eyebrow">Coaching &amp; Enablement</div>
-      <div class="cap-title">Building PM capability at the individual and org level</div>
-      <p class="cap-desc">Programs, tools, and frameworks that help product managers grow, with concrete benchmarks managers can evaluate and develop against.</p>
-    </div>
-
-    <div class="wp-label">Work products</div>
-    <div class="wp-tags">
-      <span class="wp-tag">PM maturity frameworks</span>
-      <span class="wp-tag">Role capability benchmarks</span>
-      <span class="wp-tag">Training curricula</span>
-      <span class="wp-tag">Workshop design &amp; facilitation</span>
-      <span class="wp-tag">Community of practice design</span>
-      <span class="wp-tag">1:1 coaching frameworks</span>
-      <span class="wp-tag">Performance improvement plans</span>
-      <span class="wp-tag">Internal certification programs</span>
-    </div>
-  </div>
-
-  <!-- FIRST PRODUCT OWNERSHIP -->
-  <div class="cap-block">
-    <div class="cap-header">
-      <div class="cap-eyebrow">First Product Ownership</div>
-      <div class="cap-title">Full end-to-end PM for a shipped product</div>
-      <p class="cap-desc">At Portrait Displays, I held complete product ownership for <strong>DisplayTune</strong> (consumer monitor calibration software and firmware), from customer research through engineering delivery, localization, and OEM release. Sales led customer engagement; I owned everything else.</p>
-    </div>
-
-    <div class="wp-label">Work products</div>
+    <div class="wp-label">Delivery-ready product definition</div>
     <div class="wp-tags">
       <span class="wp-tag">Product requirements</span>
-      <span class="wp-tag">Engineering specifications</span>
-      <span class="wp-tag">Firmware testing</span>
-      <span class="wp-tag">Software releases</span>
-      <span class="wp-tag">Support site (25 languages)</span>
-      <span class="wp-tag">OEM partner coordination</span>
-      <span class="wp-tag">Iterative delivery from customer feedback</span>
+      <span class="wp-tag">Epics</span>
+      <span class="wp-tag">Features</span>
+      <span class="wp-tag">User stories</span>
+      <span class="wp-tag">Acceptance criteria</span>
+      <span class="wp-tag">Given-When-Then specifications</span>
+      <span class="wp-tag">Requirements registers</span>
+      <span class="wp-tag">Dependency maps</span>
+      <span class="wp-tag">Work breakdown structures</span>
+      <span class="wp-tag">Release plans</span>
+      <span class="wp-tag">Technical-design briefs</span>
     </div>
 
-    <div class="domain-label">OEM partners</div>
+    <div class="wp-label">Product operations and decision visibility</div>
     <div class="wp-tags">
-      <span class="wp-tag">Hyundai</span>
-      <span class="wp-tag">Iiyama</span>
-      <span class="wp-tag">Acer</span>
-      <span class="wp-tag">Sony</span>
-      <span class="wp-tag">Fujitsu-Siemens</span>
+      <span class="wp-tag">Feature intake systems</span>
+      <span class="wp-tag">Readiness criteria</span>
+      <span class="wp-tag">Planning pre-work</span>
+      <span class="wp-tag">Portfolio dashboards</span>
+      <span class="wp-tag">Jira and Jira Align workflow design</span>
+      <span class="wp-tag">Delivery-health measures</span>
+      <span class="wp-tag">Operating playbooks</span>
+      <span class="wp-tag">Support handoff models</span>
+      <span class="wp-tag">Progress reporting</span>
     </div>
+
+    <div class="wp-label">Diagnosis and engineering improvement</div>
+    <div class="wp-tags">
+      <span class="wp-tag">Control-chart analysis</span>
+      <span class="wp-tag">Blocker clustering</span>
+      <span class="wp-tag">Retrospective synthesis</span>
+      <span class="wp-tag">Root-cause analysis</span>
+      <span class="wp-tag">Process-improvement plans</span>
+      <span class="wp-tag">Maturity assessments</span>
+      <span class="wp-tag">DevOps roadmaps</span>
+      <span class="wp-tag">Flow analysis</span>
+      <span class="wp-tag">Team-level improvement experiments</span>
+    </div>
+
+    <div class="wp-label">Organizational capability</div>
+    <div class="wp-tags">
+      <span class="wp-tag">Role maturity frameworks</span>
+      <span class="wp-tag">Capability benchmarks</span>
+      <span class="wp-tag">Training curricula</span>
+      <span class="wp-tag">Internal certifications</span>
+      <span class="wp-tag">Communities of Practice</span>
+      <span class="wp-tag">Workshop design and facilitation</span>
+      <span class="wp-tag">One-to-one coaching</span>
+      <span class="wp-tag">Manager-supported improvement plans</span>
+      <span class="wp-tag">AI-assisted backlog methods</span>
+    </div>
+  </div>
+
+  <!-- WHERE I HAVE APPLIED THE WORK -->
+  <div class="cap-block">
+    <div class="cap-header">
+      <div class="cap-title">Where I Have Applied the Work</div>
+    </div>
+    <ul class="bullets">
+      <li>Customer-facing products, portals, mobile applications, and support experiences</li>
+      <li>Enterprise applications including Salesforce, Workday, Concur, Adobe Experience Manager, finance, and billing platforms</li>
+      <li>Developer platforms and third-party ecosystems</li>
+      <li>Claims, support, ticketing, document management, and mixed planned-and-service-demand environments</li>
+      <li>Globally distributed organizations across the United States, Ireland, and India</li>
+      <li>Rapid-growth, regulated, acquisition-integration, and enterprise-transformation contexts</li>
+    </ul>
+  </div>
+
+  <!-- THE KIND OF WORK I WANT TO DO -->
+  <div class="cap-block">
+    <div class="cap-header">
+      <div class="cap-title">The Kind of Work I Want to Do</div>
+      <p class="cap-desc">I am most interested in Product Management, Product Operations, and strategy-to-execution leadership roles where complex organizations need clearer decisions, stronger operating systems, and better cross-functional execution. I am particularly effective when the role requires both high-level synthesis and enough operating depth to design, pilot, and implement the solution.</p>
+    </div>
+    <blockquote class="pull-quote">The common thread is helping organizations make better decisions, reduce avoidable complexity, and move important work from intent to measurable value.</blockquote>
   </div>
 
 </div><!-- /caps -->
