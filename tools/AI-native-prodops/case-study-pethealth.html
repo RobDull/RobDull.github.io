@@ -99,6 +99,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 40px;display:fl
 .handoff{margin-top:10px;font-size:11.5px;color:var(--steel);font-weight:600;}
 .handoff .mono{font-family:var(--mono);font-size:10.5px;background:var(--off);border:1px solid var(--rule);border-radius:4px;padding:1px 6px;}
 
+.evalq{margin-top:8px;font-size:11.5px;color:#3a3a3a;line-height:1.5;padding-left:14px;position:relative;max-width:680px;}
+.evalq::before{content:'?';position:absolute;left:0;top:0;color:var(--accent2);font-weight:800;font-size:11px;}
+.evalq strong{color:var(--ink);font-weight:700;}
+
 .trow-foot{margin-top:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 .sample-link{font-size:11.5px;font-weight:700;color:var(--accent2);text-decoration:none;border:1.5px solid var(--accent2);border-radius:5px;padding:3px 11px;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;transition:background .15s,color .15s;}
 .sample-link:hover{background:var(--accent2);color:white;}
@@ -160,6 +164,13 @@ footer p{font-size:13px;color:var(--muted);}
 <div class="wrap">
 
   <div class="context">
+    <div class="context-label">Evidence disclosure</div>
+    <p><strong>PetHealth is fictional.</strong> The company, people, source records, metrics, approvals, and operating environment in this example were created for demonstration. The displayed artifacts use the structures produced by the tools and are intended for evaluation.</p>
+    <p>The example contains four kinds of information: <strong>scenario facts</strong> (fictional inputs intentionally supplied to keep the test coherent, such as the 22% support-contact baseline), <strong>fixture evidence</strong> (fictional records with source-like identifiers used to test provenance and propagation), <strong>model-generated content</strong> (draft requirements, assumptions, estimates, NFRs, risks, and narrative), and <strong>deterministic results</strong> (selected calculations and structural conditions recomputed in code).</p>
+    <p>A fixture citation shows that a generated claim was associated with a supplied record. It does not make the fictional claim independently true. The review gates shown in this case are modeled checkpoints, not records of approvals by real PetHealth employees.</p>
+  </div>
+
+  <div class="context">
     <div class="context-label">The scenario</div>
     <p><strong>PetHealth</strong> is a fictional mid-size pet insurer with a real-shaped problem: members don't trust the claims process. Claim-status questions alone account for <strong>22% of all support contacts</strong>, members describe the period after submitting a claim as a black hole, and leakage in adjudication quietly erodes margin. The company context, evidence set, and competing priorities are held constant across every tool, which is what makes the chain a fair test: each tool inherits its input from the one before, not from a hand-tuned prompt.</p>
     <p>The names are fictional. The runs are not: each artifact below is captured output from the live tool.</p>
@@ -179,13 +190,14 @@ footer p{font-size:13px;color:var(--muted);}
       <div class="trow">
         <div class="tbadge">01</div>
         <div class="tcard">
-          <div class="tcard-head"><span class="tname">Persona Generator</span><span class="tcat">Discover</span></div>
+          <div class="tcard-head"><span class="tname">Enterprise Persona</span><span class="tcat">Discover</span></div>
           <div class="tdesc">A rough description of a PetHealth member becomes a full enterprise persona, detailed enough to anchor everything downstream.</div>
           <div class="artifact">
             <div class="artifact-label">★ What came out</div>
             <p><strong>Marcus Chen</strong>, software engineer and PetHealth member. His quote sets the tone for the whole initiative: <em>"I just want to know it's working." Until he needs it.</em> The card carries his Jobs to Be Done statement, tech comfort across channels, key interactions with friction badges, and the quantified organizational impact of his unmet job.</p>
           </div>
           <div class="handoff">HANDOFF → the persona seeds the journey map directly.</div>
+          <div class="evalq"><strong>What to evaluate:</strong> Does the persona clarify the job and operating context, or merely add plausible detail? Which attributes would require real research?</div>
           <div class="trow-foot">
             <a class="sample-link" href="../persona-generator/persona-index.html">Open the tool: it is its own demo ↗</a>
             <span class="gate">✋ Human gate: PM ratifies the persona before mapping</span>
@@ -204,6 +216,7 @@ footer p{font-size:13px;color:var(--muted);}
             <p>A stage-by-stage map whose pain clusters become <strong>opportunity seeds</strong>: structured, exportable statements of where the experience breaks and what it costs.</p>
           </div>
           <div class="handoff">HANDOFF → opportunity seeds feed initiative intake.</div>
+          <div class="evalq"><strong>What to evaluate:</strong> Is the pain point actually supported by evidence, and does the map distinguish observation from interpretation?</div>
           <div class="trow-foot">
             <a class="sample-link" href="../journey-map/">View the live sample (PetHealth) ↗</a>
           </div>
@@ -228,6 +241,7 @@ footer p{font-size:13px;color:var(--muted);}
             <p style="margin-top:8px;">Each epic carries its riskiest Demand, Feasibility, and Viability assumptions and a benefits-realization plan naming the measurement instrumentation that has to exist. The headline benefit target: <strong>claim-status share of support contacts falls from 22% to ≤12%</strong>.</p>
           </div>
           <div class="handoff">HANDOFF → the five epics hand off to Business Cases, one case per epic, carrying their D/F/V risk surface with them.</div>
+          <div class="evalq"><strong>What to evaluate:</strong> Are the alternatives and epic boundaries credible? Which assumptions are useful risk framing, and which are invented context?</div>
           <div class="trow-foot">
             <a class="sample-link" href="../feature-intake/demo.html">View the captured run ↗</a>
             <span class="gate">✋ Human gate: PM + stakeholders sign off on the intake</span>
@@ -246,6 +260,7 @@ footer p{font-size:13px;color:var(--muted);}
             <p>Five business cases in a standard format, including the <strong>Real-Time Claim Status Tracking</strong> case that the rest of this page follows.</p>
           </div>
           <div class="handoff">HANDOFF → the cases become the prioritizer's candidate records.</div>
+          <div class="evalq"><strong>What to evaluate:</strong> Would the case support an investment conversation after correction, or does its format overstate the quality of its evidence?</div>
           <div class="trow-foot">
             <a class="sample-link" href="../business-case/#examples">View the example gallery (Claim Status tab) ↗</a>
             <span class="gate">✋ Human gate: sponsor sign-off per case</span>
@@ -264,6 +279,7 @@ footer p{font-size:13px;color:var(--muted);}
             <p>A defensible ranking with an explicit <strong>funding line</strong>. <strong>Real-Time Claim Status Tracking</strong> clears it, and becomes the epic the delivery half of the chain executes.</p>
           </div>
           <div class="handoff">HANDOFF → the ranking plus funding line feed the roadmap.</div>
+          <div class="evalq"><strong>What to evaluate:</strong> Are the inputs defensible? Does one board improve the funding conversation, or create false comparability?</div>
           <div class="trow-foot">
             <a class="sample-link" href="../portfolio-wsjf/demo.html">View the captured run ↗</a>
           </div>
@@ -281,6 +297,7 @@ footer p{font-size:13px;color:var(--muted);}
             <p>The <strong>Roadmap</strong>: one of the four primary outputs program stakeholders care most about.</p>
           </div>
           <div class="handoff">HANDOFF → the roadmap gates which epic gets a BRD.</div>
+          <div class="evalq"><strong>What to evaluate:</strong> Does the roadmap preserve priorities and dependencies without implying knowledge of capacity that was never supplied?</div>
           <div class="trow-foot">
             <a class="sample-link" href="../roadmap/demo.html">View the captured run ↗</a>
           </div>
@@ -298,6 +315,7 @@ footer p{font-size:13px;color:var(--muted);}
             <p>The <strong>BRD for Real-Time Claim Status Tracking</strong> with <strong>eight business requirements</strong> (<span class="mono">BR-01</span> through <span class="mono">BR-08</span>), an assumptions section, and the exec sign-off package.</p>
           </div>
           <div class="handoff">HANDOFF → the BRD is the single primary input to the backlog.</div>
+          <div class="evalq"><strong>What to evaluate:</strong> Which sections are reviewable, which need correction, and which should be omitted until evidence exists?</div>
           <div class="trow-foot">
             <a class="sample-link" href="../docs-generator/demo.html">View the captured run: BRD with Assumptions ↗</a>
             <span class="gate">✋ Human gate: architecture, security, and business review</span>
@@ -320,6 +338,7 @@ footer p{font-size:13px;color:var(--muted);}
             </ul>
           </div>
           <div class="handoff">HANDOFF → the extended backlog carries its dependency graph into sprint planning.</div>
+          <div class="evalq"><strong>What to evaluate:</strong> Does identifier coverage reflect meaningful satisfaction of the requirement? Would engineering consider the stories sufficiently grounded and testable?</div>
           <div class="trow-foot">
             <a class="sample-link" href="../backlog-builder/demo.html">View the captured run ↗</a>
           </div>
@@ -336,6 +355,7 @@ footer p{font-size:13px;color:var(--muted);}
             <div class="artifact-label">★ What came out</div>
             <p>The delivery plan, and the chain's outbound handoff: a <strong>Jira bulk-import CSV</strong> with Summary, Issue Type, Epic Link, Priority, Story Points, Sprint, Acceptance Criteria, and Issue Links. The chain ends inside your delivery system, not in a document nobody imports.</p>
           </div>
+          <div class="evalq"><strong>What to evaluate:</strong> Are the estimates credible? What work or constraints are missing? Would the CSV import cleanly and preserve the intended relationships?</div>
           <div class="trow-foot">
             <a class="sample-link" href="../sprint-plan/demo.html">View the captured run ↗</a>
             <span class="gate">✋ Human gate: delivery lead owns the plan before import</span>
@@ -366,6 +386,19 @@ footer p{font-size:13px;color:var(--muted);}
         <li>The MCP data sources shown in the network diagram were not live for this run; the evidence set was provided as context</li>
       </ul>
     </div>
+  </div>
+
+  <div class="prove-card doesnt" style="margin-top:24px;">
+    <h3>Known corrections and open questions</h3>
+    <p style="font-size:12.5px;color:var(--muted);margin-bottom:8px;">This section should be updated as external evaluations occur. Current issues visible in the worked example:</p>
+    <ul>
+      <li>Some NFR thresholds are unsupported by the supplied evidence.</li>
+      <li>The cost estimate is not accompanied by a transparent calculation.</li>
+      <li>"Confirmed" assumptions and sign-offs belong to the fictional scenario and can look more authoritative than intended.</li>
+      <li>Requirement coverage measures identifier mapping, not solution adequacy.</li>
+      <li>Roadmap and sprint outputs depend on estimates and capacity assumptions the model cannot validate.</li>
+      <li>The same polished structure that improves readability can conceal weak evidence.</li>
+    </ul>
   </div>
 
   <div class="next">

@@ -125,6 +125,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 40px;display:fl
 .no-inputs-note{font-size:11.5px;color:var(--muted);font-style:italic;}
 @media(max-width:640px){.io-cols{grid-template-columns:1fr;gap:14px;}}
 
+.trisk{margin-top:10px;padding-top:10px;border-top:1px dashed var(--rule);font-size:12px;color:#3a3a3a;line-height:1.6;}
+.trisk strong{color:var(--ink);font-weight:800;}
+.trisk p{margin-top:3px;}
 .ttertiary{display:none;flex-direction:column;gap:8px;margin-top:10px;padding:10px 12px;background:rgba(91,114,144,.05);border:1px dotted var(--steel);border-radius:7px;}
 body.show-tertiary .ttertiary{display:flex;}
 .tert-row{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline;}
@@ -213,6 +216,16 @@ footer p{font-size:13px;color:var(--muted);}
   </div>
 </div>
 
+<div class="legend-wrap">
+  <div class="legend-inner">
+    <div class="legend-item"><span class="legend-dot" style="background:rgba(42,107,107,.5);"></span> Toolchain: structured state produced by another working tool</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--gold);"></span> Fixture evidence: fictional PetHealth records shaped like potential enterprise evidence</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--purple);"></span> Human-supplied: context entered by the practitioner</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--accent2);border:1px dashed var(--accent2);"></span> Target architecture: proposed data or service connection that is not implemented</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--steel);"></span> Deterministic check: a specific condition recalculated in code, not asserted by the model</div>
+  </div>
+</div>
+
 <div class="keydocs-wrap">
   <div class="keydocs-label">The four primary outputs that matter most</div>
   <div class="keydocs-grid">
@@ -278,6 +291,8 @@ footer p{font-size:13px;color:var(--muted);}
             </div>
           </div>
         </div>
+
+        <div class="trisk"><p><strong>Primary risk:</strong> A plausible composite can be mistaken for research.</p><p><strong>Required review:</strong> Confirm which attributes are supported, inferred, or invented.</p></div>
 
         <div class="ttertiary">
           <div class="tert-row">
@@ -345,6 +360,8 @@ footer p{font-size:13px;color:var(--muted);}
             </div>
           </div>
         </div>
+
+        <div class="trisk"><p><strong>Primary risk:</strong> Team assumptions can be rendered with the visual authority of research.</p><p><strong>Required review:</strong> Separate observed evidence from hypotheses.</p></div>
 
         <div class="ttertiary">
           <div class="tert-row">
@@ -421,6 +438,8 @@ footer p{font-size:13px;color:var(--muted);}
           </div>
         </div>
 
+        <div class="trisk"><p><strong>Primary risk:</strong> Missing portfolio context may be filled with plausible competitors, budgets, or benefits.</p><p><strong>Required review:</strong> Validate the comparison set, epic boundaries, assumptions, KPIs, baselines, and proposed instrumentation.</p></div>
+
         <div class="ttertiary">
           <div class="tert-row">
             <span class="tert-label">External inputs</span>
@@ -482,6 +501,8 @@ footer p{font-size:13px;color:var(--muted);}
             </div>
           </div>
         </div>
+
+        <div class="trisk"><p><strong>Primary risk:</strong> Generated cost, benefit, and effort statements can appear more certain than the evidence supports.</p><p><strong>Required review:</strong> Replace unsupported estimates and financial precision with sourced values or explicit unknowns.</p></div>
 
         <div class="ttertiary">
           <div class="tert-row">
@@ -550,6 +571,8 @@ footer p{font-size:13px;color:var(--muted);}
           </div>
         </div>
 
+        <div class="trisk"><p><strong>Primary risk:</strong> Correct arithmetic can lend false authority to weak input values.</p><p><strong>Required review:</strong> Own every input, weight, and funding decision.</p></div>
+
         <div class="ttertiary">
           <div class="tert-row">
             <span class="tert-label">External inputs</span>
@@ -610,6 +633,8 @@ footer p{font-size:13px;color:var(--muted);}
             </div>
           </div>
         </div>
+
+        <div class="trisk"><p><strong>Primary risk:</strong> Release windows can imply capacity knowledge the workflow does not possess.</p><p><strong>Required review:</strong> Confirm capacity, runway, dependencies, commitments, and rollout assumptions.</p></div>
 
         <div class="ttertiary">
           <div class="tert-row">
@@ -674,6 +699,8 @@ footer p{font-size:13px;color:var(--muted);}
             </div>
           </div>
         </div>
+
+        <div class="trisk"><p><strong>Primary risk:</strong> NFR thresholds, costs, stakeholders, and sign-offs may be inferred or invented.</p><p><strong>Required review:</strong> Confirm scope, requirement quality, evidence, assumptions, NFRs, financials, stakeholders, and approval authority.</p></div>
 
         <div class="ttertiary">
           <div class="tert-row">
@@ -753,6 +780,8 @@ footer p{font-size:13px;color:var(--muted);}
           </div>
         </div>
 
+        <div class="trisk"><p><strong>Primary risk:</strong> Identifier coverage can be mistaken for adequate design or requirement satisfaction.</p><p><strong>Required review:</strong> Engineers, architecture, security, QA, and product stakeholders must assess substance.</p></div>
+
         <div class="ttertiary">
           <div class="tert-row">
             <span class="tert-label">External inputs</span>
@@ -812,6 +841,8 @@ footer p{font-size:13px;color:var(--muted);}
           </div>
         </div>
 
+        <div class="trisk"><p><strong>Primary risk:</strong> The plan can only check the estimates and dependencies it was given. It cannot discover missing work or hidden capacity constraints.</p><p><strong>Required review:</strong> Delivery leadership owns the plan and must inspect the CSV before import.</p></div>
+
         <div class="ttertiary">
           <div class="tert-row">
             <span class="tert-label">External inputs</span>
@@ -858,6 +889,7 @@ footer p{font-size:13px;color:var(--muted);}
     <div class="legend-item"><span class="legend-dot" style="background:var(--purple);"></span> Purple: organizational input, human-supplied, never generated</div>
     <div class="legend-item"><span class="legend-dot" style="background:var(--accent2);border:1px dashed var(--accent2);"></span> Dashed orange: recommended for this flow, not yet built</div>
     <div class="legend-item"><span class="legend-dot dotted"></span> Dotted steel: external/tertiary, seen only in the network diagram, not wired into this flow</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--steel);"></span> Deterministic check: a specific condition recalculated in code, not asserted by the model</div>
     <div class="legend-item"><span style="color:var(--accent2);font-weight:700;">↗</span> Link to a real sample run, not a mockup</div>
   </div>
 </div>

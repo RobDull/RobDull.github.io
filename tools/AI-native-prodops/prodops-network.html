@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-<title>Product Operations Network | Rob Dull</title>
+<title>Target Architecture: The Product Operations Network | Rob Dull</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -193,12 +193,12 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
   .obs-wrap,.gov-bar{padding:0 20px;}
 }
 </style>
-<meta name="description" content="Interactive network diagram mapping an AI-native product operations system: agents, MCPs, data sources, HITL gates, and outputs across the full PM workflow.">
+<meta name="description" content="What would be required to turn the working prototype into an agentic Product Operations system: target-architecture diagram of data sources, MCP services, agents, HITL gates, and outputs, labeled by what's built versus designed.">
 <link rel="canonical" href="https://robdull.com/tools/AI-native-prodops/prodops-network.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://robdull.com/tools/AI-native-prodops/prodops-network.html">
-<meta property="og:title" content="AI-Native ProdOps Network Diagram | Rob Dull">
-<meta property="og:description" content="Interactive network diagram mapping an AI-native product operations system: agents, MCPs, data sources, HITL gates, and outputs across the full PM workflow.">
+<meta property="og:title" content="Target Architecture: The Product Operations Network | Rob Dull">
+<meta property="og:description" content="What would be required to turn the working prototype into an agentic Product Operations system: target-architecture diagram labeled by what's built versus designed.">
 <meta property="og:site_name" content="Rob Dull">
 <meta property="og:image" content="https://robdull.com/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -228,9 +228,22 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
 </div>
 
 <div class="page-head">
-  <div class="eyebrow">Product Operations · System Architecture</div>
-  <h1>The tools as a <em>network</em>,<br>not a collection.</h1>
-  <p>The zoomed-out view of the <a href="document-flow.html">Document Flow</a> page: the same real 01-09 toolchain sits at the center (highlighted below), flanked by the tertiary data sources and MCP integrations that feed it and the agents, HITL gates, and outputs it feeds, out to enterprise data on the left edge and artifact alignment on the right. Trust &amp; Governance is a cross-cutting concern that applies across every layer. Click any node to learn more.</p>
+  <div class="eyebrow">Target Architecture · Agentic Product Operations</div>
+  <h1>What would be required to turn <em>the prototype</em><br>into an operating system.</h1>
+  <p>The working nine-step browser toolchain is shown at the center of this diagram (highlighted below). The surrounding data sources, MCP services, scheduled agents, authenticated human gates, observability, and system write-backs describe a target architecture. Unless a node is explicitly marked <strong>working prototype</strong>, it should not be interpreted as implemented. Click any node to learn more.</p>
+</div>
+
+<div class="legend-bar" style="margin-top:24px;">
+  <div class="legend-inner" style="flex-direction:column;align-items:flex-start;gap:10px;">
+    <span class="legend-label" style="margin-right:0;">How to read this diagram — every node should display one of four status labels</span>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted);">
+      <span><strong style="color:var(--ink);">Working prototype:</strong> implemented and testable on this site.</span>
+      <span><strong style="color:var(--ink);">Fixture-backed:</strong> implemented with fictional local records rather than a live source.</span>
+      <span><strong style="color:var(--ink);">Designed, not built:</strong> architectural proposal.</span>
+      <span><strong style="color:var(--ink);">In development:</strong> partially implemented but not ready for evaluation.</span>
+    </div>
+    <span style="font-size:12px;color:var(--muted);">The solid center path represents the current browser workflow. Connections outside that path represent the capabilities that would be required for a production agentic Product Operations system.</span>
+  </div>
 </div>
 
 <div class="legend-bar">
@@ -1068,21 +1081,21 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
 <div class="obs-wrap">
   <div class="obs-panel">
     <div class="obs-header">
-      <div class="obs-header-title">Agent decision log</div>
-      <span class="obs-badge">LIVE · Observability layer</span>
+      <div class="obs-header-title">Illustrative target-state decision log</div>
+      <span class="obs-badge" style="background:rgba(107,107,107,.1);color:var(--muted);border-color:var(--muted);">ILLUSTRATIVE · Not live</span>
     </div>
 
     <div class="obs-explainer">
       <div class="obs-explainer-col">
         <div class="obs-explainer-head">What this is</div>
-        <p class="obs-explainer-text">Every agent run in this system writes a timestamped record to the audit log: which agent ran, what it produced, whether it was blocked or flagged, and whether a human reviewed it. This panel is a live view of that stream: what the observability layer looks like in practice.</p>
+        <p class="obs-explainer-text">The entries below show the kinds of events a production observability service could record: agent identity, input sources, model and schema versions, warnings, policy blocks, human decisions, cost, and downstream actions. They are illustrative examples, not live events emitted by the current prototype.</p>
       </div>
       <div class="obs-explainer-col">
-        <div class="obs-explainer-head">Why it matters for PMs</div>
-        <p class="obs-explainer-text">In an AI-native workflow, a PM can't personally review every agent decision the way they reviewed every document they wrote. The decision log restores that visibility. When an agent flags a WARN, a PM knows to look. When a HITL gate pauses the pipeline, the log records who was waiting and why. When a run is BLOCKED by policy, there's a record, not a mystery. This is what makes it safe to delegate synthesis to agents: you always know what they did and why they stopped.</p>
+        <div class="obs-explainer-head">Why this would matter</div>
+        <p class="obs-explainer-text">A decision log would allow reviewers to reconstruct what an agent did, what evidence it used, which checks ran, what was changed by a person, and why the workflow continued or stopped. Building that capability would require a persistent service, authenticated identities, policy enforcement, and a defined audit schema. Those capabilities are not present today.</p>
       </div>
       <div class="obs-explainer-col">
-        <div class="obs-explainer-head">PM-specific benefits</div>
+        <div class="obs-explainer-head">Hypothetical PM-specific benefits, once built</div>
         <ul class="obs-benefit-list">
           <li><strong>Retrospective review:</strong> "Why did the intake chain recommend REJECT for this feature?": the log shows every step and every input.</li>
           <li><strong>Stakeholder accountability:</strong> Named HITL sign-offs are recorded with timestamps, not just implied by an email chain.</li>
@@ -1153,6 +1166,28 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
   </div>
 </div>
 
+<!-- HITL GATES / FEEDBACK LOOPS / DESIGN QUESTIONS -->
+<div class="legend-bar" style="margin-top:24px;">
+  <div class="legend-inner" style="flex-direction:column;align-items:flex-start;gap:10px;">
+    <span class="legend-label" style="margin-right:0;">Human-in-the-loop gates</span>
+    <span style="font-size:12px;color:var(--muted);">The diagram identifies places where human review would be appropriate: opportunity framing, initiative and assumption review, business-case approval, funding decision, architecture/security/business requirements review, delivery-plan ownership, and production-system write-back. In the current prototype, these are recommended review points in a human-operated workflow. They are not authenticated approvals, electronic signatures, or audit records.</span>
+  </div>
+</div>
+
+<div class="legend-bar" style="margin-top:16px;">
+  <div class="legend-inner" style="flex-direction:column;align-items:flex-start;gap:10px;">
+    <span class="legend-label" style="margin-right:0;">Feedback loops (the ↻ toggle above)</span>
+    <span style="font-size:12px;color:var(--muted);">The target architecture includes post-release feedback loops because producing a backlog is not the end of Product Management: a mature system would need to compare predicted benefits with observed outcomes and route new evidence back into prioritization. The proposed loops: support and usage-signal updates, win/loss synthesis, competitive and regulatory change detection, retrospective themes, release communications, and 30-, 60-, and 90-day outcome checks. These are architectural hypotheses; their value, cadence, ownership, and governance would need to be validated before implementation.</span>
+  </div>
+</div>
+
+<div class="legend-bar" style="margin-top:16px;">
+  <div class="legend-inner" style="flex-direction:column;align-items:flex-start;gap:10px;">
+    <span class="legend-label" style="margin-right:0;">The design question</span>
+    <span style="font-size:12px;color:var(--muted);">This diagram is not evidence that the full system exists. It is evidence of the operating-model questions the prototype is intended to explore: What context must survive each decision? Which actions may be delegated? Which conditions should be deterministic? Where must a human exercise accountable judgment? What evidence must be retained? What should cause the system to stop? How should post-release evidence challenge the original investment case?</span>
+  </div>
+</div>
+
 <!-- DETAIL PANEL -->
 <div class="detail-wrap">
 <div class="detail-panel" id="detailPanel">
@@ -1167,8 +1202,8 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
 <div class="about-strip">
   <div class="about-inner">
     <div>
-      <h2>Each tool works standalone.<br>Connected, they're <em>AI-native</em>.</h2>
-      <p>This network diagram shows the full architecture (data sources, MCP connections, agents, HITL gates, and outputs) that makes these tools a system rather than a collection. The AI ProdOps overview explains the workflow in depth, including how MCP engineering is becoming a core PM skill.</p>
+      <h2>Each tool works today.<br>The rest is <em>target architecture</em>.</h2>
+      <p>This network diagram shows the full target architecture (data sources, MCP connections, agents, HITL gates, and outputs) that a mature version of this system would need. The AI ProdOps overview explains where the working prototype sits on that path, and what separates AI-assisted drafting from a truly agentic operating system.</p>
     </div>
     <div class="about-links">
       <a href="AI-prodops-overview.html" class="about-btn primary">AI ProdOps overview &#8599;</a>

@@ -12,7 +12,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-<title>Experimental Tools for Product Management | Rob Dull</title>
+<title>Product Workflow Prototypes | Rob Dull</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -177,12 +177,12 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   footer{padding:20px 24px;flex-direction:column;text-align:center;}
 }
 </style>
-<meta name="description" content="AI-powered tools for product management: persona generation, journey mapping, business cases, feature intake, and more. Built on 15 years of PM practice.">
+<meta name="description" content="Working prototypes exploring how AI can support Product Management and Product Operations: a nine-step browser workflow from customer understanding through requirements, delivery planning, and Jira CSV export. Sample outputs, implementation notes, and candid limitations.">
 <link rel="canonical" href="https://robdull.com/tools/tools-index.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://robdull.com/tools/tools-index.html">
-<meta property="og:title" content="AI-Powered PM Tools | Rob Dull">
-<meta property="og:description" content="AI-powered tools for product management: persona generation, journey mapping, business cases, feature intake, and more. Built on 15 years of PM practice.">
+<meta property="og:title" content="Product Workflow Prototypes | Rob Dull">
+<meta property="og:description" content="Working prototypes exploring how AI can support Product Management and Product Operations: a nine-step browser workflow from customer understanding through requirements, delivery planning, and Jira CSV export.">
 <meta property="og:site_name" content="Rob Dull">
 <meta property="og:image" content="https://robdull.com/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -208,12 +208,12 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <div class="hero">
-  <div class="hero-tag">AI Portfolio</div>
-  <h1>PM tools built for<br><em>practice and demos</em></h1>
+  <div class="hero-tag">AI-assisted Product Operations · Working prototypes</div>
+  <h1>Product workflow prototypes<br><em>built to be inspected</em></h1>
 </div>
 
 <div class="hero-strip">
-  <p class="hero-desc">AI-native PM tools covering the full product workflow. Each works standalone, and each can hand its output to the next.</p>
+  <p class="hero-desc">This portfolio explores a practical question: can AI reduce the drafting and translation work between product discovery, prioritization, requirements, and delivery without obscuring where human judgment is still required? The primary prototype is a nine-step, single-user browser workflow. Each step produces a structured artifact that can be reviewed, edited, and passed to the next tool. Selected consistency checks are computed in code. The workflow ends with a Jira bulk-import CSV.</p>
   <div style="display:flex;flex-direction:column;gap:10px;flex-shrink:0;">
     <a href="AI-native-prodops/document-flow.html" class="hero-btn" style="margin-top:0;padding-top:7px;padding-bottom:7px;">Document Flow &#8599;</a>
     <a href="AI-native-prodops/prodops-network.html" class="hero-btn" style="margin-top:0;padding-top:7px;padding-bottom:7px;">Network Diagram &#8599;</a>
@@ -222,11 +222,21 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <div class="api-note" style="border-color:var(--accent);background:rgba(26,58,92,.04);">
-  <strong>Evaluating this for your team?</strong> Start with the <a href="AI-native-prodops/case-study-pethealth.html" style="color:var(--accent);font-weight:700;">end-to-end case study</a>: one initiative traced from persona to Jira CSV, every step linked to its real captured run. Or jump to the <a href="AI-native-prodops/for-evaluators.html" style="color:var(--accent);font-weight:700;">evaluation guide for PM, ProdOps, and Delivery leaders</a>, which routes each role to its proof points and ends with an open invitation to beta test it. Sizing up the engineering behind it instead? Read the <a href="AI-native-prodops/technical-notes.html" style="color:var(--accent);font-weight:700;">technical notes</a>: the stack, the data contracts between tools, and the security trade-offs, stated plainly.
+  <strong>Working proof of concept.</strong> This is not a customer deployment or a production Product Operations platform. It is a working prototype built to test workflow design, artifact continuity, deterministic guardrails, and the quality limits of AI-generated product documentation.
+  <ul style="margin-top:10px;padding-left:18px;display:flex;flex-direction:column;gap:6px;">
+    <li><strong>Working prototype:</strong> browser tools, structured handoffs, sample outputs, selected code-based checks, run-file export, and Jira CSV export.</li>
+    <li><strong>Fixture-backed demonstration:</strong> fictional PetHealth evidence records shaped like possible enterprise inputs. They are not live integrations or customer data.</li>
+    <li><strong>Target architecture:</strong> live MCP connections, scheduled agents, authenticated approvals, shared workspaces, audit services, Jira write-back, and post-release outcome monitoring. These are designed, not built.</li>
+  </ul>
 </div>
 
 <div class="api-note">
-  <strong>How the AI works:</strong> Nine tools call the Claude API directly from your browser with your own key (you'll be prompted on first run; the key lives in session memory and clears when the tab closes). No key? Every tool still works: sample runs, worked examples, instant layouts, or the editor itself.
+  <strong>Evaluate the working example:</strong> follow one fictional initiative from customer context through a Jira-ready delivery plan in the <a href="AI-native-prodops/case-study-pethealth.html" style="color:var(--accent);font-weight:700;">end-to-end PetHealth case study</a>. <strong>Understand the implementation:</strong> review the stack, data contracts, deterministic checks, and limitations in the <a href="AI-native-prodops/technical-notes.html" style="color:var(--accent);font-weight:700;">technical notes</a>. <strong>Join the Limited Evaluation Beta:</strong> test the prototype with a fictional, public, or sanitized initiative using the <a href="AI-native-prodops/for-evaluators.html" style="color:var(--accent);font-weight:700;">evaluation guide</a>.
+</div>
+
+<div class="api-note">
+  <strong>How the workflow operates:</strong> The nine tools share structured state in the browser. A practitioner initiates each step, reviews the draft, makes corrections where needed, and decides whether to continue. Some tools use multi-step model calls; others are primarily deterministic browser interfaces. The workflow does not autonomously choose its own objective, select tools, or operate enterprise systems.
+  <p style="margin-top:8px;">Several tools can generate new content by calling the Claude API directly from your browser with a visitor-supplied key. Other tools are client-side. Every stage can be inspected without a key through a worked example or its non-generative interface, but generating new AI output requires a key in the tools that use the model. State is stored locally in the browser and can be downloaded as a run file. There are no user accounts, team workspaces, or server-side project records.</p>
 </div>
 
 <div class="continuum-strip">
@@ -319,12 +329,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="tool-left">
       <div class="tool-category">Enterprise User Research</div>
       <div class="tool-name">JTBD + Enterprise<br><em>Persona Generator</em></div>
-      <div class="tool-status live">Live</div>
+      <div class="tool-status live">Working prototype</div>
       <p class="tool-desc">Takes a rough user description and produces a detailed enterprise persona with Jobs to Be Done statement, org context, tech comfort, key interactions, and relationship friction, detailed enough to anchor a journey map.</p>
       <div class="tool-workflow">
-        <div class="tool-workflow-label">Where it fits in the workflow</div>
-        <div class="tool-workflow-text"><strong>Step 01 — Discover.</strong> The upstream anchor of the entire network. Every downstream tool produces better output when it has a grounded persona to work from. Used standalone: AI-augmented synthesis from interview notes. In a connected workflow, the Research ingest MCP pre-populates the tool with structured themes from Dovetail or Notion interview repositories.</div>
-        <span class="tool-workflow-mode mode-aug">AI-augmented</span>
+        <div class="tool-workflow-label">Produces &middot; passes forward &middot; status &middot; human responsibility</div>
+        <div class="tool-workflow-text"><strong>Produces:</strong> Persona record. <strong>Passes forward:</strong> Persona context for journey mapping. <strong>Status:</strong> Working prototype &middot; Client-side. <strong>Human responsibility:</strong> Confirm that the persona reflects evidence rather than a convenient composite.</div>
       </div>
       <div class="tool-chips">
         <span class="chip">Jobs to Be Done</span>
@@ -394,12 +403,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="tool-left">
       <div class="tool-category">Customer Experience</div>
       <div class="tool-name">Customer<br><em>Journey Map Builder</em></div>
-      <div class="tool-status live">Live</div>
+      <div class="tool-status live">Working prototype</div>
       <p class="tool-desc">A journey map is only useful if it reflects what actually happens, not what teams assume. This tool provides an editable, stage-by-stage canvas for mapping customer actions, goals, touchpoints, emotions, and organizational responses, with a draggable sentiment curve and one-click AI export for analysis.</p>
       <div class="tool-workflow">
-        <div class="tool-workflow-label">Where it fits in the workflow</div>
-        <div class="tool-workflow-text"><strong>Step 02 — Map.</strong> Produces the pain cluster map that feeds the opportunity merge agent. The JSON export is structured for direct consumption by downstream tools or an AI agent. Used after the persona generator, a journey map grounded in a JTBD persona is significantly more predictive than one built from assumptions. The signal aggregator MCP can enrich journey stages with live support ticket themes.</div>
-        <span class="tool-workflow-mode mode-aug">AI-augmented</span>
+        <div class="tool-workflow-label">Produces &middot; passes forward &middot; status &middot; human responsibility</div>
+        <div class="tool-workflow-text"><strong>Produces:</strong> Journey map and structured opportunity seeds. <strong>Passes forward:</strong> Candidate pain clusters for initiative framing. <strong>Status:</strong> Working prototype &middot; Client-side. <strong>Human responsibility:</strong> Separate observed evidence from team assumptions.</div>
       </div>
       <div class="tool-chips">
         <span class="chip">Editable stages</span>
@@ -492,12 +500,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="tool-left">
       <div class="tool-category">Agentic PDLC Demo</div>
       <div class="tool-name">Initiative<br><em>Intake</em></div>
-      <div class="tool-status live">Live</div>
+      <div class="tool-status live">Working prototype</div>
       <p class="tool-desc">Four sequential AI calls that weigh one Initiative against competing initiatives with strategy, budget, and demand evidence, then decompose it into front-stage Business Epics and backstage Architecture Epics, exploring both together, splitting only where an epic genuinely needs runway before front-stage work can start. Each epic gets its riskiest Demand/Feasibility/Viability assumptions and a benefits-realization plan naming the measurement instrumentation that must be built.</p>
       <div class="tool-workflow">
-        <div class="tool-workflow-label">Where it fits in the workflow</div>
-        <div class="tool-workflow-text"><strong>Step 03 — Intake.</strong> Portfolio-level tradeoff analysis, not a single-feature form. The epics it frames hand off directly to Business Cases, one case per epic, carrying kind, caseType, and the D/F/V risk surface downstream all the way to the BRD's high-level NFRs. MCP evidence chips (strategy, budget, demand, support) ground every claim with a citable source.</div>
-        <span class="tool-workflow-mode mode-native">AI-native</span>
+        <div class="tool-workflow-label">Produces &middot; passes forward &middot; status &middot; human responsibility</div>
+        <div class="tool-workflow-text"><strong>Produces:</strong> Epic set, assumption map, and measurement-enabler proposals. <strong>Passes forward:</strong> Candidate epics for business-case development. <strong>Status:</strong> Working prototype &middot; Multi-step AI chain &middot; Fixture-backed evidence available. <strong>Human responsibility:</strong> Correct invented context, reject generic epics, and validate every assumption and proposed metric.</div>
       </div>
       <div class="tool-chips">
         <span class="chip">Portfolio tradeoff</span>
@@ -575,12 +582,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="tool-left">
       <div class="tool-category">Agentic PDLC Demo</div>
       <div class="tool-name">Business<br><em>Cases</em></div>
-      <div class="tool-status live">Live</div>
+      <div class="tool-status live">Working prototype</div>
       <p class="tool-desc">One executive-ready pitch per epic, Business or Architecture, grounded in financial and demand evidence, with a rough order-of-magnitude effort estimate for the Epic Prioritizer's WSJF/RICE job size. Pitch framing follows the epic's caseType, not its kind: a backstage Architecture epic with a customer-facing case (fraud analytics protecting member trust) still gets the customer-value narrative, not a generic technical writeup.</p>
       <div class="tool-workflow">
-        <div class="tool-workflow-label">Where it fits in the workflow</div>
-        <div class="tool-workflow-text"><strong>Step 04 — Pitch.</strong> One click on a framed epic from Initiative Intake pre-fills the form. The saved case's exec-summary seed carries forward verbatim into the BRD's executive summary, and its rough effort anchors WSJF/RICE job size in code, then gets refined into delivery-ready sizing at the Backlog Builder, with a variance flag if the two disagree.</div>
-        <span class="tool-workflow-mode mode-both">AI-augmented → AI-native</span>
+        <div class="tool-workflow-label">Produces &middot; passes forward &middot; status &middot; human responsibility</div>
+        <div class="tool-workflow-text"><strong>Produces:</strong> Business-case record per epic. <strong>Passes forward:</strong> Candidate records for prioritization. <strong>Status:</strong> Working prototype &middot; AI-assisted. <strong>Human responsibility:</strong> Verify costs, benefits, effort, strategic claims, and the cost of inaction.</div>
       </div>
       <div class="tool-chips">
         <span class="chip">One case per epic</span>
@@ -642,7 +648,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
         <li class="feature-item">Rough order-of-magnitude effort (LOE), anchoring the prioritizer's job size in code</li>
         <li class="feature-item">Strategic alignment statement tying the epic back to the initiative</li>
         <li class="feature-item">An exec-summary seed that carries forward verbatim into the BRD</li>
-        <li class="feature-item">Evidence citations from financial and demand MCP sources</li>
+        <li class="feature-item">Evidence citations from fixture-backed financial and demand records</li>
       </ul>
     </div>
   </div>
@@ -651,12 +657,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="tool-left">
       <div class="tool-category">Agentic PDLC Demo</div>
       <div class="tool-name">Epic<br><em>Prioritizer</em></div>
-      <div class="tool-status live">Live</div>
+      <div class="tool-status live">Working prototype</div>
       <p class="tool-desc">Two sequential AI calls that rank every Business and Architecture epic in one pass, scored on BOTH the WSJF components and the RICE components at once, so the board toggles between methods instantly with no re-run. Architecture epics take their business value from what they unblock and typically dominate risk-reduction; the board recomputes every score in code and anchors job size to the epic's Business Case effort.</p>
       <div class="tool-workflow">
-        <div class="tool-workflow-label">Where it fits in the workflow</div>
-        <div class="tool-workflow-text"><strong>Step 05 — Rank.</strong> The funding decision. Digests every selected Business Case into quoted value/urgency/risk claims, then scores the whole set. Editable WSJF weights let leadership raise risk-reduction with a cited rationale. The money shot: a backstage fraud-analytics ARCHITECTURE epic can overtake a customer-facing epic when risk-reduction is weighted up. The funding line flows to Roadmap &amp; Milestones.</div>
-        <span class="tool-workflow-mode mode-native">AI-native</span>
+        <div class="tool-workflow-label">Produces &middot; passes forward &middot; status &middot; human responsibility</div>
+        <div class="tool-workflow-text"><strong>Produces:</strong> Ranked epic set and a proposed funding line. <strong>Passes forward:</strong> Prioritization record for roadmap sequencing. <strong>Status:</strong> Working prototype &middot; AI-assisted inputs &middot; Deterministic calculations. <strong>Human responsibility:</strong> Validate the input values and own the weighting decision. A correctly calculated score is not automatically a defensible investment decision.</div>
       </div>
       <div class="tool-chips">
         <span class="chip">Evidence digest with quotes</span>
@@ -729,12 +734,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="tool-left">
       <div class="tool-category">Agentic PDLC Demo</div>
       <div class="tool-name">Roadmap<br><em>&amp; Milestones</em></div>
-      <div class="tool-status live">Live</div>
+      <div class="tool-status live">Working prototype</div>
       <p class="tool-desc">One AI call that sequences every prioritized epic, funded this increment or profitable and awaiting capacity, into a milestone plan spanning up to 18 months. Funded epics fill the earliest release windows; the rest follow in rank order as capacity frees. The dependency list stays deliberately light: a named approval or a genuine architecture-epic runway prerequisite, nothing more.</p>
       <div class="tool-workflow">
-        <div class="tool-workflow-label">Where it fits in the workflow</div>
-        <div class="tool-workflow-text"><strong>Step 06 — Schedule.</strong> Sits between prioritization and documentation: one click on a saved Epic Prioritizer ranking carries every funded and near-funded epic here. Rollout assumes continuous deployment and release on demand, so the plan is release windows, not a Gantt chart. Its saved roadmap is what Business Documents reads next, so a BRD only gets written for an epic that actually has a release slot.</div>
-        <span class="tool-workflow-mode mode-native">AI-native</span>
+        <div class="tool-workflow-label">Produces &middot; passes forward &middot; status &middot; human responsibility</div>
+        <div class="tool-workflow-text"><strong>Produces:</strong> Roadmap and milestone proposal. <strong>Passes forward:</strong> Funded epic and release context for documentation. <strong>Status:</strong> Working prototype. <strong>Human responsibility:</strong> Validate capacity, dependencies, organizational commitments, and release assumptions.</div>
       </div>
       <div class="tool-chips">
         <span class="chip">Up to 18-month horizon</span>
@@ -802,12 +806,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="tool-left">
       <div class="tool-category">Agentic PDLC Demo</div>
       <div class="tool-name">Business<br><em>Documents</em></div>
-      <div class="tool-status live">Live</div>
+      <div class="tool-status live">Working prototype</div>
       <p class="tool-desc">Two sequential AI calls that write a standard-template Business Requirements Document for ONE funded epic: never a feature, story, or technical breakdown. A requirements core (scope boundary, prioritized business requirements with measurement enablers flagged, high-level NFRs each tied to the epic's Feasibility assumption) followed by the executive package: summary, objectives, stakeholders, constraints, cost-benefit, and sign-off.</p>
       <div class="tool-workflow">
-        <div class="tool-workflow-label">Where it fits in the workflow</div>
-        <div class="tool-workflow-text"><strong>Step 07 — Spec.</strong> Documents strictly follow prioritization, never feed it: a BRD is only generated for an epic that has a roadmap release slot. One click on a saved Roadmap milestone carries its funded epic here, seeded with the Business Case's exec summary. The saved BRD is what the Backlog Builder reads next, one backlog per epic.</div>
-        <span class="tool-workflow-mode mode-native">AI-native</span>
+        <div class="tool-workflow-label">Produces &middot; passes forward &middot; status &middot; human responsibility</div>
+        <div class="tool-workflow-text"><strong>Produces:</strong> BRD. <strong>Passes forward:</strong> Structured requirements for backlog development. <strong>Status:</strong> Working prototype &middot; Two-step AI chain &middot; Funding gate enforced in code. <strong>Human responsibility:</strong> Remove unsupported precision, validate NFR thresholds, confirm stakeholders, and replace assumed financial claims with evidence.</div>
       </div>
       <div class="tool-chips">
         <span class="chip">Standard BRD template</span>
@@ -888,12 +891,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="tool-left">
       <div class="tool-category">Agentic PDLC Demo</div>
       <div class="tool-name">Backlog<br><em>Builder</em></div>
-      <div class="tool-status live">Live</div>
+      <div class="tool-status live">Working prototype</div>
       <p class="tool-desc">Five sequential AI calls that turn one funded epic's BRD into its full delivery-doc suite: MoSCoW'd Features with feature-level NFRs and refined sizing (stories inherit their feature's priority, never prioritized themselves), a Solution Outline with target-state architecture and simple user flows, a Security &amp; UAT plan, and Developer/User documentation. Requirement coverage is computed in code, not generated.</p>
       <div class="tool-workflow">
-        <div class="tool-workflow-label">Where it fits in the workflow</div>
-        <div class="tool-workflow-text"><strong>Step 08 — Plan.</strong> One click on a saved BRD carries its epic here. Org assets (DoR/DoD, style guide, current architecture) are inputs the tool consumes, never invents; support-ticket evidence grounds edge cases in acceptance criteria. Its saved backlog, one per epic, is exactly what the Sprint Planner reads next.</div>
-        <span class="tool-workflow-mode mode-native">AI-native</span>
+        <div class="tool-workflow-label">Produces &middot; passes forward &middot; status &middot; human responsibility</div>
+        <div class="tool-workflow-text"><strong>Produces:</strong> Extended backlog and supporting delivery documents. <strong>Passes forward:</strong> Stories, estimates, priorities, and dependency relationships. <strong>Status:</strong> Working prototype &middot; Multi-step AI chain &middot; Requirement-coverage check in code. <strong>Human responsibility:</strong> Confirm technical feasibility, testability, architectural fit, and whether apparent requirement &ldquo;coverage&rdquo; is substantively appropriate.</div>
       </div>
       <div class="tool-chips">
         <span class="chip">MoSCoW at the feature level</span>
@@ -978,12 +980,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="tool-left">
       <div class="tool-category">Agentic PDLC Demo</div>
       <div class="tool-name">Sprint Planner<br><em>&amp; Jira Export</em></div>
-      <div class="tool-status live">Live</div>
+      <div class="tool-status live">Working prototype</div>
       <p class="tool-desc">Two sequential AI calls that turn one epic's extended backlog into a delivery plan: MVP scope, a sprint-by-sprint allocation, baseline and worst-case estimates, and a RAID log. Sprint loads and dependsOn ordering are recomputed in code: an over-capacity sprint or a story landing no earlier than its dependency both raise a visible warning, wherever the plan is consumed. Finishes with a Jira bulk-import CSV.</p>
       <div class="tool-workflow">
-        <div class="tool-workflow-label">Where it fits in the workflow</div>
-        <div class="tool-workflow-text"><strong>Step 09 — Deliver.</strong> The terminal step. One click on a saved Backlog Builder run carries its MoSCoW'd stories and dependsOn graph here; the planner sequences them respecting real dependencies, not a sprint hint. The Jira CSV (Summary, Issue Type, Epic Link, Priority, Story Points, Sprint, Acceptance Criteria, Issue Links) closes the chain with an outbound handoff, not a dead end.</div>
-        <span class="tool-workflow-mode mode-native">AI-native</span>
+        <div class="tool-workflow-label">Produces &middot; status &middot; human responsibility</div>
+        <div class="tool-workflow-text"><strong>Produces:</strong> Delivery-plan proposal, RAID log, and Jira CSV. <strong>Status:</strong> Working prototype &middot; AI-assisted planning &middot; Deterministic load and dependency checks. <strong>Human responsibility:</strong> Own the plan, validate team capacity, and inspect the CSV before importing it into a delivery system.</div>
       </div>
       <div class="tool-chips">
         <span class="chip">MVP scope</span>
@@ -1060,12 +1061,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="tool-left">
       <div class="tool-category">Strategy and Execution</div>
       <div class="tool-name">Hoshin Kanri<br><em>+ V2MOM Alignment</em></div>
-      <div class="tool-status live">Live</div>
+      <div class="tool-status live">Working prototype</div>
       <p class="tool-desc">Enter your V2MOM (vision, values, methods, and measures) and this tool cascades it directly into a Hoshin Kanri X-matrix. Values become annual objectives. Methods map exactly to activities. Measures drive key metrics. The matrix is color-coded by value group, correlation dots are interactive, and Claude can align and refine the whole thing on demand.</p>
       <div class="tool-workflow">
-        <div class="tool-workflow-label">Where it fits in the workflow</div>
-        <div class="tool-workflow-text"><strong>Strategic alignment — off-chain.</strong> Sits outside the numbered 01&ndash;09 delivery chain by design: it's the strategy layer the whole portfolio should trace back to, not a step any one initiative passes through. Used standalone: the clearest way to cascade a V2MOM into an actionable X-matrix. In a connected workflow, the Strategy context MCP pre-populates the tool from your Confluence or Notion planning wiki, and the strategy cascade agent flags OKR alignment gaps after each run.</div>
-        <span class="tool-workflow-mode mode-aug">AI-augmented</span>
+        <div class="tool-workflow-label">Off-chain prototype</div>
+        <div class="tool-workflow-text">Explores how a V2MOM can be represented as a Hoshin Kanri X-matrix. This is a standalone strategy-alignment tool, not a step in the nine-stage initiative workflow. <strong>Status:</strong> Working prototype.</div>
       </div>
       <div class="tool-chips">
         <span class="chip">V2MOM cascade</span>
@@ -1184,9 +1184,8 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="tool-status dev">In development</div>
       <p class="tool-desc">A structured self-assessment across the core dimensions of product operations delivery. Surfaces where teams are strong, where they are struggling, and what to prioritize first.</p>
       <div class="tool-workflow">
-        <div class="tool-workflow-label">Where it fits in the workflow</div>
-        <div class="tool-workflow-text"><strong>Measurement — off-chain.</strong> Sits outside the numbered 01&ndash;09 delivery chain by design: the feedback layer that watches whether the ops system itself is healthy, across every initiative rather than any single one. Used standalone: AI-augmented self-assessment with prioritized recommendations. In a connected workflow, the Metrics MCP auto-populates the delivery and tooling dimensions from live DORA metrics and sprint data, so the PM fills in only the qualitative dimensions.</div>
-        <span class="tool-workflow-mode mode-both">AI-augmented → AI-native</span>
+        <div class="tool-workflow-label">Off-chain prototype</div>
+        <div class="tool-workflow-text">Explores a structured self-assessment of Product Operations practices and delivery conditions. <strong>Status:</strong> In development.</div>
       </div>
       <div class="tool-chips">
         <span class="chip">Delivery health</span>
@@ -1266,14 +1265,30 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
   </div>
 
+<div class="reading-strip" style="border-top:2px solid var(--accent);">
+  <div class="reading-inner" style="max-width:1060px;margin:0 auto;flex-direction:column;align-items:flex-start;">
+    <div class="reading-eyebrow">What this portfolio demonstrates</div>
+    <ul style="list-style:none;padding-left:0;margin-top:6px;display:flex;flex-direction:column;gap:6px;max-width:720px;">
+      <li style="font-size:13px;color:#2a2a2a;line-height:1.65;padding-left:14px;position:relative;"><span style="position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent2);"></span>Product Operations workflow design</li>
+      <li style="font-size:13px;color:#2a2a2a;line-height:1.65;padding-left:14px;position:relative;"><span style="position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent2);"></span>Structured transitions from strategy to execution</li>
+      <li style="font-size:13px;color:#2a2a2a;line-height:1.65;padding-left:14px;position:relative;"><span style="position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent2);"></span>Requirements and artifact traceability</li>
+      <li style="font-size:13px;color:#2a2a2a;line-height:1.65;padding-left:14px;position:relative;"><span style="position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent2);"></span>Separation of AI drafting from deterministic validation</li>
+      <li style="font-size:13px;color:#2a2a2a;line-height:1.65;padding-left:14px;position:relative;"><span style="position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent2);"></span>Human review gates and the limits of those gates</li>
+      <li style="font-size:13px;color:#2a2a2a;line-height:1.65;padding-left:14px;position:relative;"><span style="position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent2);"></span>Practical prototyping across product and delivery artifacts</li>
+      <li style="font-size:13px;color:#2a2a2a;line-height:1.65;padding-left:14px;position:relative;"><span style="position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent2);"></span>Technical and operating-model trade-offs</li>
+    </ul>
+    <p style="font-size:12.5px;color:var(--muted);margin-top:10px;max-width:720px;">It does not demonstrate customer adoption, production reliability, enterprise integration, security approval, or measured business outcomes.</p>
+  </div>
+</div>
+
 <div class="reading-strip">
   <div class="reading-inner">
     <div class="reading-left">
-      <div class="reading-eyebrow">Background reading · AI-augmented → AI-native</div>
-      <div class="reading-title">These tools exist on a <em>continuum</em>, from AI-augmented to AI-native product operations.</div>
-      <div class="reading-desc">Each tool here can stand alone as an AI-augmented workflow: faster synthesis, better structured output. But they were designed to connect: persona informs journey map, journey map feeds opportunity mapping, business case gates the intake pipeline, intake brief drives strategy alignment. At full connection, with agents and MCP threading the workflow, that's AI-native product ops. This piece maps where each tool sits, how the architecture hangs together, and what it means for the PM role.</div>
+      <div class="reading-eyebrow">Limited Evaluation Beta</div>
+      <div class="reading-title">I'm recruiting a small group of practitioners to test the <em>working prototype</em>.</div>
+      <div class="reading-desc">The objective is not to prove that the system can replace professional judgment. It is to learn whether the workflow produces useful first drafts, where continuity survives the handoffs, where unsupported claims enter the chain, and which controls would be required before the approach could be used in a real organization. Use fictional, public, or sanitized information only.</div>
     </div>
-    <a href="AI-native-prodops/AI-prodops-overview.html" class="reading-btn">Explore AI ProdOps &#8599;</a>
+    <a href="AI-native-prodops/for-evaluators.html" class="reading-btn">Evaluate the prototype &#8599;</a>
   </div>
 </div>
 

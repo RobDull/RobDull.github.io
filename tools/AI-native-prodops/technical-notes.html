@@ -194,7 +194,7 @@ footer p{font-size:13px;color:var(--muted);}
       </div>
       <div class="build-card spine">
         <h3>React + Vite + TypeScript monorepo</h3>
-        <p>An npm-workspaces monorepo (private repo, separate from this site's repo) holding the nine-tool PDLC spine: persona generator through sprint planner.</p>
+        <p>An npm-workspaces monorepo (private repo, separate from this site's repo) holding nine of the eleven tools: everything except the persona generator and the product ops radar, which are hand-authored HTML with no network calls.</p>
         <ul>
           <li>Each app builds independently with <span style="font-family:var(--mono);">vite build</span></li>
           <li>The hashed output is copied into this site's <span style="font-family:var(--mono);">/tools/&lt;app&gt;/</span> directory</li>
@@ -269,15 +269,38 @@ footer p{font-size:13px;color:var(--muted);}
     </ul>
   </div>
 
+  <!-- PROVENANCE -->
+  <div class="section">
+    <div class="section-label">Labeling</div>
+    <h2>Sample-output provenance</h2>
+    <p>Every public example should identify its origin using one of four labels, applied consistently rather than alternated.</p>
+    <ul class="debt-list">
+      <li><strong>Captured unedited run:</strong> stored output from a live model run, displayed without content edits.</li>
+      <li><strong>Captured edited run:</strong> stored output from a live model run with the edits documented.</li>
+      <li><strong>Schema-conformant worked example:</strong> manually or collaboratively authored content using the same structure as the tool.</li>
+      <li><strong>Illustrative target-state output:</strong> fictional content showing an unbuilt capability.</li>
+    </ul>
+  </div>
+
   <!-- TRUST BOUNDARY -->
   <div class="section">
     <div class="section-label">Security</div>
     <h2>The trust boundary: how API keys are handled</h2>
     <div class="info-box">
       <h3>Visitor-supplied key, direct to Anthropic, no server in the path</h3>
-      <p>All nine spine apps, plus the strategy-alignment tool, call <span style="font-family:var(--mono);">api.anthropic.com</span> directly from the visitor's browser using a key the visitor supplies. The key lives in <span style="font-family:var(--mono);">sessionStorage</span> and clears on tab close. Two tools, the persona generator and the product ops radar, make no network calls at all. There is no server anywhere in this system holding anyone's key.</p>
+      <p>All nine apps in the shared workspace, including the strategy-alignment tool, call <span style="font-family:var(--mono);">api.anthropic.com</span> directly from the visitor's browser using a key the visitor supplies. The key lives in <span style="font-family:var(--mono);">sessionStorage</span> and clears on tab close. Two tools, the persona generator and the product ops radar, make no network calls at all. There is no server anywhere in this system holding anyone's key.</p>
       <p>A Cloudflare Worker pattern that would hold a server-side key was evaluated and deliberately not adopted for this deployment. The full reasoning, cost per session, blast radius of a leaked key, and the UX trade-off of asking a visitor for their own key, is written up on its own page rather than asserted here. <a href="../../worker-vs-direct.html">Read the trade-off ↗</a></p>
+      <p style="margin-top:8px;"><strong>Relevant risks</strong> include malicious or compromised site JavaScript, compromised third-party dependencies, browser extensions, shared or unmanaged devices, cross-site scripting, accidental exposure through debugging or screenshots, broadly privileged API keys, and sensitive content transmitted to the model provider.</p>
+      <p style="margin-top:8px;"><strong>Appropriate controls before broader testing</strong> include a strict Content Security Policy, a dependency inventory and update process, no unnecessary third-party scripts, clear model-provider disclosure, restricted-key guidance, usage monitoring, a sanitized-data requirement, a documented incident contact, and a security review before accepting confidential data.</p>
     </div>
+  </div>
+
+  <!-- CLIENT STATE -->
+  <div class="section">
+    <div class="section-label">Client state</div>
+    <h2>Browser state and run files</h2>
+    <p>Workflow state is stored in browser local storage, which enables same-origin handoffs without a backend but creates real limits: state belongs to one browser profile, clearing site data removes it, shared work and concurrent edits aren't supported, there is no server backup, and local data may remain on the device.</p>
+    <p style="margin-top:8px;">Run-file download and restore provide portability, but a run file can contain everything entered and generated, and should be treated as potentially sensitive. Before a run file changes hands: it should be reviewed and sanitized first, notes alone are an acceptable substitute for the file, how received files are stored and eventually deleted should be stated, and files containing employer-confidential content shouldn't be collected.</p>
   </div>
 
   <!-- DEPLOY -->
@@ -288,6 +311,7 @@ footer p{font-size:13px;color:var(--muted);}
       <h3>Manual, no CI/CD, no staging</h3>
       <p><span style="font-family:var(--mono);">main</span> is production on both repos. GitHub Pages republishes on every push to this repo's <span style="font-family:var(--mono);">main</span>. There is no staging environment and no automated pipeline. For a solo-maintained portfolio project this is a scope choice, not an oversight: a broken push is caught by hand within minutes, and the alternative, a pipeline maintained for two repos with no team behind them, buys safety this project doesn't currently need.</p>
       <p>One deploy-safety habit worth naming: at least one spine app's site directory holds a hand-authored page that is not a build artifact and would be silently deleted by a naive copy-and-overwrite. Deploys diff the existing directory against the fresh build output before wiping anything, specifically to catch that class of mistake before it ships.</p>
+      <p style="margin-top:8px;"><strong>Release checklist:</strong> build every application, confirm no unexpected file deletion, open each public route, test one complete handoff path, verify sample pages, verify key-modal and API-error behavior, verify run-file download and load, verify Jira CSV generation, check console errors, and record the release version and date.</p>
     </div>
   </div>
 
@@ -308,8 +332,41 @@ footer p{font-size:13px;color:var(--muted);}
     <h2>What isn't verifiable from here</h2>
     <div class="info-box muted">
       <h3>The monorepo is private</h3>
-      <p>The repository behind the nine-tool spine is private, so this page describes the architecture rather than lets you inspect it directly. There is no documented automated test suite; correctness currently leans on the computed guardrails above and manual verification at each release, not CI-gated tests. If you'd like to look at representative code directly, the scoring module or a single handoff contract, I'm glad to walk through it on request: <a href="mailto:rob.dull@gmail.com?subject=Toolchain%20code%20walkthrough">rob.dull@gmail.com</a>.</p>
+      <p>The repository behind the nine-tool spine is private, so this page describes the architecture rather than lets you inspect it directly. The shared package has unit test coverage for scoring parity, chain-state handling, and API client behavior. There is no CI gate, no per-app test suite, and no end-to-end test; correctness beyond that unit coverage currently leans on the computed guardrails above and manual verification at each release. If you'd like to look at representative code directly, the scoring module or a single handoff contract, I'm glad to walk through it on request: <a href="mailto:rob.dull@gmail.com?subject=Toolchain%20code%20walkthrough">rob.dull@gmail.com</a>.</p>
     </div>
+    <div class="pkg-grid">
+      <div class="pkg-col">
+        <h3>What can be verified publicly</h3>
+        <ul>
+          <li>The public interfaces exist</li>
+          <li>Worked examples can be inspected</li>
+          <li>Browser handoffs can be exercised</li>
+          <li>Scoring behavior can be changed interactively</li>
+          <li>The BRD funding restriction can be tested</li>
+          <li>Requirement mapping and sprint warnings can be observed</li>
+          <li>Run-file behavior can be tested</li>
+          <li>Jira CSV output can be inspected</li>
+        </ul>
+      </div>
+      <div class="pkg-col">
+        <h3>What cannot be verified publicly</h3>
+        <ul>
+          <li>The private source implementation</li>
+          <li>Correctness or completeness of the shared package</li>
+          <li>Automated test coverage</li>
+          <li>Security properties</li>
+          <li>Production reliability</li>
+          <li>Enterprise integration</li>
+          <li>Customer use</li>
+          <li>Productivity or decision-quality improvement</li>
+          <li>Business outcomes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p style="font-size:13px;color:var(--muted);line-height:1.7;max-width:720px;">This is a working proof of concept suitable for portfolio review and limited evaluation with fictional, public, or sanitized information. It is not suitable for confidential enterprise work or production use.</p>
   </div>
 
   <div class="next">

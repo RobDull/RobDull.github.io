@@ -137,6 +137,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 40px;display:fl
 
 footer{border-top:1px solid var(--rule);padding:28px 40px;max-width:1100px;margin:56px auto 0;}
 footer p{font-size:13px;color:var(--muted);}
+
+/* EVAL PATH */
+.eval-path{margin-top:14px;padding-left:22px;display:flex;flex-direction:column;gap:8px;}
+.eval-path li{font-size:13.5px;color:#3a3a3a;line-height:1.6;padding-left:4px;}
 </style>
 </head>
 <body>
@@ -319,6 +323,61 @@ footer p{font-size:13px;color:var(--muted);}
         <div class="limit-desc">This is a working system by a practitioner, not a funded product with an SLA. That is exactly why the beta feedback below matters.</div>
       </div>
     </div>
+  </div>
+
+  <!-- WHO -->
+  <div class="section">
+    <div class="section-label">Who I'm looking for</div>
+    <h2>The first cohort is small, on purpose</h2>
+    <p>The first cohort is limited to approximately 5&ndash;10 evaluators with experience in one or more of the following: Product Management, Product Operations, Technical Product Management, engineering or delivery operations, business analysis or requirements, architecture/security/QA/UAT review, portfolio prioritization, or Agile delivery/technical program management.</p>
+    <p>You do not need to endorse the concept. Skeptical feedback is more useful than encouragement.</p>
+  </div>
+
+  <!-- EVALUATION MATERIAL -->
+  <div class="section">
+    <div class="section-label">Appropriate evaluation material</div>
+    <h2>Use fictional, public, or sanitized information only</h2>
+    <p>This is a single-user proof of concept, not a secure or production system.</p>
+    <div class="pos-grid">
+      <div class="pos-card is">
+        <h3>Use one of these</h3>
+        <ul>
+          <li>A fictional initiative</li>
+          <li>A public product scenario</li>
+          <li>A realistically disguised initiative, with names and numbers changed</li>
+          <li>The supplied PetHealth scenario</li>
+        </ul>
+      </div>
+      <div class="pos-card isnt">
+        <h3>Do not enter</h3>
+        <ul>
+          <li>Confidential strategy</li>
+          <li>Customer personal data</li>
+          <li>Proprietary financials</li>
+          <li>Source code</li>
+          <li>Security architecture</li>
+          <li>Credentials other than an API key entered into the designated key field</li>
+          <li>Regulated or export-controlled information</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUGGESTED PATH -->
+  <div class="section">
+    <div class="section-label">Suggested evaluation path</div>
+    <h2>About 60&ndash;90 minutes, starting at Initiative Intake</h2>
+    <ol class="eval-path">
+      <li>Frame one initiative and two alternatives.</li>
+      <li>Review the proposed epics and D/F/V assumptions.</li>
+      <li>Generate one or two business cases.</li>
+      <li>Compare the prioritization views and adjust the weights.</li>
+      <li>Review the roadmap proposal.</li>
+      <li>Generate the BRD for one funded epic.</li>
+      <li>Review the backlog and requirement mapping.</li>
+      <li>Review the sprint proposal and Jira CSV.</li>
+    </ol>
+    <p style="margin-top:12px;">Starting with the Persona and Journey Map adds approximately 20 minutes. The <a href="beta-runbook.html" style="color:var(--accent);font-weight:700;">beta runbook</a> walks each stop in more detail, including what to watch for at every gate.</p>
   </div>
 
   <!-- BETA -->

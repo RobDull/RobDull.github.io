@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-<title>AI-Native Product Operations, Explained Simply | Rob Dull</title>
+<title>Where This Prototype Sits on the Path to AI-Native Product Operations | Rob Dull</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -204,12 +204,12 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   .art-tags{margin-left:0;}
 }
 </style>
-<meta name="description" content="A plain-language guide to how AI agents, MCP, and human review work together inside real software teams, no product management background required.">
+<meta name="description" content="AI can help draft a document without changing how an organization works. This page explains where a working prototype fits between AI-assisted drafting and a fully agentic Product Operations system, and what separates the two.">
 <link rel="canonical" href="https://robdull.com/tools/AI-native-prodops/AI-prodops-overview.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://robdull.com/tools/AI-native-prodops/AI-prodops-overview.html">
-<meta property="og:title" content="AI-Native Product Operations, Explained Simply | Rob Dull">
-<meta property="og:description" content="A plain-language guide to how AI agents, MCP, and human review work together inside real software teams, no product management background required.">
+<meta property="og:title" content="Where This Prototype Sits on the Path to AI-Native Product Operations | Rob Dull">
+<meta property="og:description" content="AI can help draft a document without changing how an organization works. This page explains where a working prototype fits between AI-assisted drafting and a fully agentic Product Operations system.">
 <meta property="og:site_name" content="Rob Dull">
 <meta property="og:image" content="https://robdull.com/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -232,14 +232,14 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <span class="bc-sep">›</span>
     <a href="../tools-index.html">Tools</a>
     <span class="bc-sep">›</span>
-    <span>AI-native product ops</span>
+    <span>AI ProdOps overview</span>
   </div>
 </div>
 
 <div class="art-head">
-  <div class="eyebrow">Plain-Language Guide · How Software Gets Built With AI</div>
-  <h1>How AI tools become <em>part of the system</em></h1>
-  <p style="font-size:15px;color:var(--muted);margin-top:10px;max-width:640px;line-height:1.6;">AI agents, MCP, and human sign-offs, explained from scratch, for anyone who's curious. No product management background required.</p>
+  <div class="eyebrow">Plain-Language Guide · From AI Assistance to Agentic Operations</div>
+  <h1>Where this prototype sits <em>on the path to AI-native Product Operations</em></h1>
+  <p style="font-size:15px;color:var(--muted);margin-top:10px;max-width:640px;line-height:1.6;">AI can help draft a document without changing how an organization works. An agentic operating model goes further: systems retrieve context, perform multi-step work, invoke tools, pause for review, record decisions, and respond to new information. This portfolio contains a working prototype of the middle ground and a target architecture for the longer-term system.</p>
   <div class="art-meta">
     <span class="art-meta-item"><strong>Published</strong> June 2026</span>
     <span class="art-meta-item"><strong>Reading level</strong> No prior business or AI jargon assumed</span>
@@ -255,20 +255,20 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <div class="toc">
     <div class="toc-label">In this piece</div>
     <ul class="toc-list">
-      <li><a href="#native">What "AI-native" means</a></li>
-      <li><a href="#modes">Three ways AI shows up in software work</a></li>
+      <li><a href="#native">The problem is not document creation alone</a></li>
+      <li><a href="#modes">Three operating modes</a></li>
       <li><a href="#connect">How AI tools plug into a company's data</a></li>
-      <li><a href="#check">Why a human still has to check the work</a></li>
+      <li><a href="#check">Why human review is still required</a></li>
       <li><a href="#workflow">Where this shows up, step by step</a></li>
       <li><a href="#takeaway">The big idea</a></li>
-      <li><a href="#tools">Try it yourself</a></li>
+      <li><a href="#tools">Explore the evidence</a></li>
     </ul>
   </div>
 </div>
 
 <div class="art-body">
 
-  <p class="lead">AI chatbots like Claude or ChatGPT can write you an email or summarize a document: you open it, type a question, and copy the answer somewhere else. That's useful, but it's not what this page is about. This page is about something a level deeper: what happens when a software company builds AI directly into the actual process of building software, so the AI isn't just answering questions, it's reading live company data, drafting real work, and handing it to the next step on its own.</p>
+  <p class="lead">AI can help draft a document without changing how an organization works. An agentic operating model goes further: systems retrieve context, perform multi-step work, invoke tools, pause for review, record decisions, and respond to new information. This portfolio contains a working prototype of the middle ground, and a target architecture for the longer-term system.</p>
 
   <div class="glossary">
     <div class="glossary-label">Quick definitions, refer back any time</div>
@@ -290,63 +290,61 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><line x1="0" y1="24" x2="24" y2="24" stroke-width=".5" opacity=".35"/><polygon points="0,24 2.5,17 5,24" stroke-width=".5" opacity=".28"/><polygon points="4,24 7,15 10,24" stroke-width=".6" opacity=".32"/><polygon points="9,24 12.5,13 16,24" stroke-width=".6" opacity=".3"/><polygon points="14,24 17,16 20,24" stroke-width=".5" opacity=".28"/><polygon points="19,24 21.5,18 24,24" stroke-width=".5" opacity=".25"/><line x1="3" y1="24" x2="3" y2="17" stroke-width="1.1" opacity=".55"/><polygon points="-1,17 3,7 7,17" stroke-width=".9" opacity=".55"/><line x1="20.5" y1="24" x2="20.5" y2="17" stroke-width="1.1" opacity=".5"/><polygon points="16.5,17 20.5,7 24.5,17" stroke-width=".9" opacity=".5"/><line x1="12" y1="24" x2="12" y2="16" stroke-width="1.5" opacity=".97"/><polygon points="12,1 5,16 19,16" stroke-width="1" opacity=".97"/></svg></div>
     <div class="section-head-text">
       <p>Getting oriented</p>
-      <h2>What "AI-native" <em>means</em></h2>
+      <h2>The problem is not <em>document creation alone</em></h2>
     </div>
   </div>
 
-  <p>There's a real difference between a company that <em>uses</em> AI and a company that's <strong>AI-native</strong>.</p>
+  <p>Product organizations already produce large numbers of documents: research summaries, initiative proposals, business cases, prioritization records, roadmaps, requirements, features, stories, delivery plans, and status updates.</p>
 
-  <p>Using AI usually looks like this: someone opens a chatbot, types a question, and copies the answer into a document somewhere else. The AI is a tool sitting next to the work: helpful, but disconnected from everything around it.</p>
+  <p>The harder problem is maintaining continuity between them.</p>
 
-  <p>Being AI-native looks different. AI agents are wired directly into the company's actual systems: its customer support tickets, its code, its project tracker, and they take action inside those systems on their own, with a person checking in at specific points rather than running every single step by hand.</p>
+  <p>Evidence is summarized into an initiative. The initiative becomes a business case. The business case becomes a score. The score influences a roadmap. The roadmap becomes requirements. Requirements become a backlog. The backlog becomes a delivery plan. At every translation, context can be lost, assumptions can become facts, and a decision made for one reason can later appear to have been made for another.</p>
+
+  <div class="callout-orange">
+    <strong>The prototype on this site explores whether structured AI-assisted handoffs can reduce that loss while preserving human review.</strong> It is not a claim that the loss has been eliminated.
+  </div>
 
   <div class="stat-pull">
     <div class="stat-num">15×</div>
     <div class="stat-text"><strong>more AI agents were running inside Microsoft's workplace software in 2026 than a year earlier.</strong> But most companies still haven't gotten an AI project past the testing phase: a widely-cited 2026 study found that 88% of AI agent pilot projects never reach everyday, real-world use. Microsoft Work Trend Index, 2026; Forrester / Anaconda, 2026.</div>
   </div>
 
-  <div class="callout-orange">
-    <strong>The real dividing line in 2026 isn't which companies use AI, almost all of them do now.</strong> It's whether a company has redesigned its actual workflow around what AI is good at, or just bolted a chatbot onto the same old process and called it done.
-  </div>
-
   <div class="section-head" id="modes">
     <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><polyline points="0,22 0,16 8,16 8,10 16,10 16,4 24,4" stroke-width="1.8" opacity=".9"/><circle cx="0" cy="22" r="1.4" fill="white" stroke="none" opacity=".7"/><circle cx="8" cy="16" r="1.4" fill="white" stroke="none" opacity=".82"/><circle cx="16" cy="10" r="1.4" fill="white" stroke="none" opacity=".92"/><circle cx="24" cy="4" r="1.6" fill="white" stroke="none"/></svg></div>
     <div class="section-head-text">
       <p>The progression</p>
-      <h2>Three ways AI shows up <em>in software work</em></h2>
+      <h2>Three <em>operating modes</em></h2>
     </div>
   </div>
 
-  <p>It helps to think of this as three stages most teams pass through, not a single before-and-after switch.</p>
+  <p>It helps to think of this as three modes, not a single before-and-after switch. The working prototype on this site is primarily in the middle mode.</p>
 
   <div class="mode-grid">
     <div class="mode-card">
-      <div class="mode-label">Stage 1</div>
-      <div class="mode-title">Doing it by hand</div>
+      <div class="mode-label">1. Manual workflow</div>
+      <div class="mode-title">A person carries the context</div>
       <ul>
-        <li>A person gathers information, writes it up, and hands it to the next person.</li>
-        <li>Slow, but every step has a human directly making the call.</li>
-      </ul>
-    </div>
-    <div class="mode-card">
-      <div class="mode-label">Stage 2</div>
-      <div class="mode-title">AI as a writing assistant</div>
-      <ul>
-        <li>Same basic process, but a chatbot drafts the document faster.</li>
-        <li>The workflow itself doesn't change. AI just speeds up one step in it.</li>
+        <li>A practitioner gathers information, creates each artifact, and manually carries the relevant context into the next document or system.</li>
+        <li>This provides direct human control but creates repeated drafting, reformatting, and translation work. Continuity depends heavily on individual discipline.</li>
       </ul>
     </div>
     <div class="mode-card is-native">
-      <div class="mode-label">Stage 3: AI-native</div>
-      <div class="mode-title">AI as part of the system</div>
+      <div class="mode-label">2. AI-assisted workflow</div>
+      <div class="mode-title">A person still operates the workflow</div>
       <ul>
-        <li>AI agents read live data, draft the work, and pass it to the next agent or person automatically.</li>
-        <li>The whole pipeline is redesigned around what AI is good at.</li>
+        <li>A practitioner supplies context to an AI tool and receives a draft, still choosing the task, initiating each step, reviewing the result, and moving the output forward.</li>
+        <li>This can reduce drafting time, but it can also accelerate weak reasoning: if generated claims are not visibly distinguished from supplied evidence, polished output can be mistaken for validated output. The prototype here adds structured handoffs, selected multi-step chains, and deterministic checks, but a person still operates the workflow.</li>
+      </ul>
+    </div>
+    <div class="mode-card">
+      <div class="mode-label">3. Agentic operating system</div>
+      <div class="mode-title">Target architecture, not built</div>
+      <ul>
+        <li>Would retrieve live context, select and invoke approved tools, perform multi-step work toward a defined objective, test portions of its own output, pause at enforceable human gates, record its decisions, recover from failures, and respond to scheduled or event-driven triggers.</li>
+        <li>That target state also requires identity, access control, observability, cost management, data governance, schema versioning, and clear limits on what agents are allowed to change. Most of that surrounding integration and governance layer is not implemented.</li>
       </ul>
     </div>
   </div>
-
-  <p>Most companies in 2026 are still somewhere between Stage 1 and Stage 2: they've added AI, but the underlying process hasn't moved. Stage 3 is what the rest of this page is about.</p>
 
   <div class="section-head" id="connect">
     <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round"><rect x="0" y="8" width="8" height="9" rx="1.3" stroke-width="1.5" opacity=".9"/><line x1="2.2" y1="8" x2="2.2" y2="5" stroke-width="1.8" opacity=".92"/><line x1="5.8" y1="8" x2="5.8" y2="5" stroke-width="1.8" opacity=".92"/><line x1="4" y1="8" x2="4" y2="6.2" stroke-width="1.4" opacity=".6"/><line x1="8" y1="12.5" x2="12" y2="12.5" stroke-width="1.2" stroke-dasharray="1.8 1.8" opacity=".7"/><rect x="12" y="6" width="12" height="13" rx="2" stroke-width="1.5" opacity=".9"/><rect x="14.5" y="9" width="2" height="3.5" rx=".7" fill="white" stroke="none" opacity=".75"/><rect x="18.5" y="9" width="2" height="3.5" rx=".7" fill="white" stroke="none" opacity=".75"/><path d="M15,15.5 Q15,18 18,18 Q21,18 21,15.5" stroke-width="1.2" opacity=".65"/></svg></div>
@@ -368,20 +366,91 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <p>In practice, this might mean an AI agent automatically reads new customer support tickets overnight, groups them by topic, and flags the handful that look like a brand-new problem, instead of a person scrolling through hundreds of tickets every Monday morning.</p>
 
   <div class="callout">
-    <strong>Want to see a fully wired-up example?</strong> The <a href="prodops-network.html" style="color:var(--accent);font-weight:600;">technical network diagram</a> on this site maps out a real version of this: every data source, every connection, and every AI agent in one interactive picture. It's more detailed than this page; this page is the plain-language version of the same idea.
+    <strong>Want to see the target architecture?</strong> The <a href="prodops-network.html" style="color:var(--accent);font-weight:600;">network diagram</a> on this site maps every data source, connection, and AI agent that a mature version of this system would need, with each node labeled by whether it's a working prototype, fixture-backed, in development, or designed and not built. Unless a node is explicitly marked working prototype, it isn't implemented.
   </div>
 
-  <p>The network diagram shows the wiring. If you want to see what moves through those wires, the <a href="document-flow.html" style="color:var(--accent);font-weight:600;">document flow</a> page is the tool-by-tool version: nine real steps, each one showing its <strong>primary input</strong> (the thing it can't run without) separately from supplementary evidence, and its <strong>primary output</strong> (the document that gates the next step) separately from what's just produced alongside it. Every step links to that tool's own real sample run, not a mockup.</p>
+  <p>The network diagram shows the target wiring. If you want to see what's actually implemented today, the <a href="document-flow.html" style="color:var(--accent);font-weight:600;">document flow</a> page is the tool-by-tool version: nine real steps, each one showing what it consumes and produces, and which conditions are checked in code. Every step links to that tool's own real sample run, not a mockup.</p>
+
+  <h3>What "agentic" means here</h3>
+  <p>An AI agent does more than produce one response. It performs multiple related steps, maintains state, uses tools or data sources, and decides or acts within defined boundaries. The Initiative Intake, Business Documents, Backlog Builder, and Sprint Planner tools contain multi-step AI chains, so calling those subchains agentic is reasonable when the term is tied to their actual behavior. Calling the complete portfolio an autonomous or end-to-end agentic Product Development Lifecycle would be inaccurate: the current workflow does not independently choose its objectives, select among the tools, retrieve live enterprise data, write into operating systems, or monitor outcomes after release.</p>
+
+  <h3>What is working today</h3>
+  <p>The working prototype includes:</p>
+  <ul class="element-list" style="margin-top:0;">
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Nine connected browser tools</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Structured artifact handoffs stored in the browser</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Multi-step AI calls in selected tools</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Worked examples that can be inspected without an API key</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Fixture-backed evidence records for the fictional PetHealth scenario</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Deterministic recalculation of WSJF and RICE scores</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">A code-enforced funding gate before BRD generation</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Computed requirement-to-feature coverage</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Computed sprint load and declared dependency-order checks</div></li>
+    <li class="element-item" style="padding:9px 0;border-bottom:none;"><div class="element-desc">Downloadable run files and Jira bulk-import CSV export</div></li>
+  </ul>
+  <p>The practitioner still initiates and reviews every stage.</p>
+
+  <h3>What is not working today</h3>
+  <p>The following appear only in the target architecture:</p>
+  <ul class="element-list" style="margin-top:0;">
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Live retrieval from research repositories, support platforms, analytics, CRM, financial systems, internal communications, or ITSM systems</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Production MCP servers</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Scheduled signal-synthesis, competitive-monitoring, release-note, or ROI-validation agents</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Authenticated approvals and a persistent audit and observability service</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Team workspaces and enterprise access controls</div></li>
+    <li class="element-item" style="padding:9px 0;border-bottom:none;"><div class="element-desc">Jira write-back and post-release telemetry validation</div></li>
+  </ul>
+  <p>Fixture data is used to explore how evidence might be shaped and cited. It does not prove that a live connector exists or that the underlying evidence is accurate.</p>
 
   <div class="section-head" id="check">
     <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><path d="M0,12 Q6,2 13,12 Q6,22 0,12Z" stroke-width="1.6" opacity=".9"/><circle cx="7" cy="12" r="4" stroke-width="1.3" opacity=".85"/><circle cx="7" cy="12" r="1.7" fill="white" stroke="none" opacity=".95"/><line x1="13" y1="12" x2="16" y2="12" stroke-width="1.2" stroke-dasharray="1.5 1.5" opacity=".65"/><rect x="16" y="7" width="8" height="7" rx="1.5" stroke-width="1.4" opacity=".88"/><line x1="17.5" y1="10" x2="22.5" y2="10" stroke-width=".9" opacity=".45"/><line x1="17.5" y1="12" x2="21" y2="12" stroke-width=".9" opacity=".38"/></svg></div>
     <div class="section-head-text">
       <p>Human oversight</p>
-      <h2>Why a human still has to <em>check the work</em></h2>
+      <h2>Why human review is <em>still required</em></h2>
     </div>
   </div>
 
-  <p>Just because an AI agent <em>can</em> act on its own doesn't mean it should act without anyone checking. A person reviewing the AI's work before it moves forward is called <strong>human-in-the-loop</strong>, usually shortened to <strong>HITL</strong>. Think of it like a teacher reviewing a draft before it gets turned in, except here, the "draft" might be a customer-facing report, or even a change pushed to a real, live product that people are using right now.</p>
+  <p>Human review is not a decorative approval at the end of the chain. The reviewer must be able to identify what came from evidence, what was inferred, what was generated, and what remains unresolved. At each stage, the reviewer should ask five questions.</p>
+
+  <ul class="element-list">
+    <li class="element-item">
+      <span class="element-num">01</span>
+      <div>
+        <div class="element-title">Do I understand the reasoning?</div>
+        <div class="element-desc">Can I explain why this recommendation or requirement exists?</div>
+      </div>
+    </li>
+    <li class="element-item">
+      <span class="element-num">02</span>
+      <div>
+        <div class="element-title">Can I trace the claim?</div>
+        <div class="element-desc">Is the claim supported by supplied evidence, or did the model introduce it?</div>
+      </div>
+    </li>
+    <li class="element-item">
+      <span class="element-num">03</span>
+      <div>
+        <div class="element-title">Could I detect a failure?</div>
+        <div class="element-desc">Do I have enough subject-matter knowledge to recognize invented precision or missing constraints?</div>
+      </div>
+    </li>
+    <li class="element-item">
+      <span class="element-num">04</span>
+      <div>
+        <div class="element-title">Does this solve the actual problem?</div>
+        <div class="element-desc">Is the output merely well structured, or does it reflect the real operating context?</div>
+      </div>
+    </li>
+    <li class="element-item">
+      <span class="element-num">05</span>
+      <div>
+        <div class="element-title">What authority am I exercising?</div>
+        <div class="element-desc">Am I reviewing a draft, approving an investment, authorizing system access, or accepting operational risk?</div>
+      </div>
+    </li>
+  </ul>
+
+  <p>The more consequential the decision, the more the review must be grounded in real evidence and accountable authority.</p>
 
   <div class="callout-orange">
     <strong>A January 2026 study from Anthropic found that engineers who relied heavily on AI assistance saw a 17% drop in certain hands-on skills over time</strong>, even as their output got faster. The risk isn't that the AI did a bad job. It's that if a person stops doing the work themselves, they can eventually lose the ability to tell when the AI got it wrong.
@@ -389,51 +458,28 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
   <p>This idea, that real authority requires real understanding, isn't new. It comes from David Marquet, a U.S. Navy submarine commander who argued that no one should approve a decision they don't understand, no matter how senior they are or how much they trust the person (or system) that made it. <a href="../../perspectives/marquet-ai-cert.html" style="color:var(--accent);font-weight:600;">Read the full story →</a></p>
 
-  <div class="cert-section">
-    <div class="cert-section-head">
-      <div>
-        <div class="cert-section-eyebrow">Three quick checks</div>
-        <div class="cert-section-title">Ask these before approving anything an AI produced</div>
-      </div>
-    </div>
-    <div class="cert-pillars">
-      <div class="cert-pillar">
-        <div class="cert-pillar-label mastery">Do I understand it?</div>
-        <div class="cert-pillar-title">Not just "it looks right"</div>
-        <div class="cert-pillar-desc">Could you explain, in your own words, why the AI did what it did? If you can't, you're not reviewing it, you're trusting it.</div>
-      </div>
-      <div class="cert-pillar">
-        <div class="cert-pillar-label control">Could I catch it?</div>
-        <div class="cert-pillar-title">If it's wrong, would you notice</div>
-        <div class="cert-pillar-desc">If this output is wrong, would you spot it, or would it just sail through because it sounds confident?</div>
-      </div>
-      <div class="cert-pillar">
-        <div class="cert-pillar-label clarity">Does it solve the real problem?</div>
-        <div class="cert-pillar-title">Not just the literal question</div>
-        <div class="cert-pillar-desc">Did the AI answer the exact thing it was asked, or the actual problem you were trying to solve? Those aren't always the same thing.</div>
-      </div>
-    </div>
-  </div>
-
-  <p>Those three checks are easy to state and hard to build for. Here's what they look like as real engineering, not just a review habit, in the nine-tool chain on this site. See <a href="document-flow.html" style="color:var(--accent);font-weight:600;">Document Flow</a> for the specifics:</p>
-
+  <h3>Why deterministic checks matter</h3>
+  <p>Language models are useful for synthesis and drafting. They are not reliable authorities for arithmetic, schema compliance, dependency order, or whether every requirement has been represented downstream. The prototype therefore recalculates a small number of structural conditions in code:</p>
+  <ul class="element-list" style="margin-top:0;">
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">WSJF and RICE calculations</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Funding-line eligibility for BRD generation</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Requirement identifiers represented by downstream features</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Sprint capacity based on declared points</div></li>
+    <li class="element-item" style="padding:9px 0;border-bottom:none;"><div class="element-desc">Story order based on declared dependency relationships</div></li>
+  </ul>
+  <p>These checks are useful but narrow. They do not validate:</p>
+  <ul class="element-list" style="margin-top:0;">
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Whether a requirement is correct</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Whether a feature adequately satisfies a requirement</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Whether a cost or benefit is real</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Whether an NFR threshold is justified</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Whether an estimate is credible</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Whether a stakeholder has actually approved anything</div></li>
+    <li class="element-item" style="padding:9px 0;border-bottom:none;"><div class="element-desc">Whether the product should be built</div></li>
+  </ul>
   <div class="callout-gold">
-    <strong>Nothing quantitative is ever trusted to the model.</strong> WSJF and RICE scores, requirement-coverage percentages, and sprint capacity are all recomputed in code from the underlying data. The LLM drafts the qualitative reasoning, but a human (or a deterministic function) always owns the number. That's <em>"could I catch it?"</em> made structural instead of hopeful.
+    <strong>&ldquo;Computed&rdquo; should never be treated as synonymous with &ldquo;true.&rdquo;</strong> A related, more general framework for this idea is written up in <a href="../../perspectives/four-guardrails-ai-pipelines.html" style="color:var(--accent);font-weight:600;">The Four Guardrails</a>.
   </div>
-
-  <div class="callout-gold">
-    <strong>The riskiest step has a human checkpoint built into the middle of it, not just at the end.</strong> The Initiative Intake pipeline is a 4-step agentic chain: after step 2 (JTBD framing), a person reviews before step 3 (risk assumptions) and step 4 (RICE scoring) are allowed to run on top of it. A bad frame doesn't get to compound silently through two more AI-generated steps before anyone sees it.
-  </div>
-
-  <div class="callout-gold">
-    <strong>Every generated claim traces back to a source.</strong> Evidence citations like <code>[SLACK-CLAIMS-LEAD-2026-06-03]</code> or <code>[ERP-LEAKAGE-2026Q1]</code> run through every generated document: the BRD, the epic ranking, the sprint plan's RAID log. That's <em>"do I understand it?"</em> made checkable: a reviewer isn't asked to trust a sentence, they can click through to what it's citing.
-  </div>
-
-  <div class="callout-gold">
-    <strong>A stale plan gets flagged, not trusted forever.</strong> The sprint planner recomputes dependsOn ordering in code at the point the plan is read. A story scheduled before its own dependency raises a visible warning wherever the plan is consumed, not a note buried in a RAID log no one reopens. That's <em>"could I catch it?"</em> applied to time, not just to a single review moment.
-  </div>
-
-  <p style="font-size:14px;color:var(--muted);"><em>These four together are a reusable framework, not just facts about this particular pipeline. I wrote up the general version in <a href="../../perspectives/four-guardrails-ai-pipelines.html" style="color:var(--accent);font-weight:600;">The Four Guardrails</a>.</em></p>
 
   <div class="section-head" id="workflow">
     <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/></marker></defs><circle cx="12" cy="2" r="2" stroke-width="1.5"/><circle cx="22" cy="12" r="2" stroke-width="1.5"/><circle cx="12" cy="22" r="2" stroke-width="1.5"/><circle cx="2" cy="12" r="2" stroke-width="1.5"/><line x1="14" y1="3.7" x2="20.3" y2="10" stroke-width="1.3" marker-end="url(#arr)"/><line x1="20.3" y1="14" x2="14" y2="20.3" stroke-width="1.3" marker-end="url(#arr)"/><line x1="10" y1="20.3" x2="3.7" y2="14" stroke-width="1.3" marker-end="url(#arr)"/><path d="M2,10 Q0,4 10,2.2" fill="none" stroke-width="1.1" stroke-dasharray="2 2" marker-end="url(#arr)" opacity=".7"/></svg></div>
@@ -443,7 +489,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
   </div>
 
-  <p>Inside an actual product team, this plays out across four stages, and at every stage, AI agents handle more of the legwork while a person still signs off on the result.</p>
+  <p>Inside an actual product team, this plays out across four stages, and at every stage, AI tools handle more of the drafting and synthesis while a person still signs off on the result.</p>
 
   <div class="phase-grid">
 
@@ -514,7 +560,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <span class="element-num">01</span>
       <div>
         <div class="element-title">AI does the busywork, not the thinking</div>
-        <div class="element-desc">Agents handle the synthesis and the first draft. People still own the judgment calls: what matters, what's risky, what's worth doing.</div>
+        <div class="element-desc">The tools handle synthesis and the first draft. People still own the judgment calls: what matters, what's risky, what's worth doing.</div>
       </div>
     </li>
     <li class="element-item">
@@ -533,11 +579,51 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </li>
   </ul>
 
-  <p>None of this requires you to be a product manager, an engineer, or even particularly technical. It just requires understanding that AI agents are now a real part of how software gets built, and knowing enough to ask good questions about it.</p>
+  <p>None of this requires you to be a product manager, an engineer, or even particularly technical. It just requires understanding that AI tools are now a real part of how software gets built, and knowing enough to ask good questions about it.</p>
 
+  <h3>The role of MCP in the target architecture</h3>
+  <p>Model Context Protocol can provide a standard way for AI applications to access approved tools and data sources. In a future Product Operations system, MCP services could expose research, support, analytics, strategy, delivery, or financial context without requiring every workflow component to implement a separate integration pattern.</p>
+  <p>MCP alone does not make a workflow agentic, accurate, or safe. The quality of the system would still depend on which sources are authorized, what the agent is allowed to read or change, how evidence provenance is preserved, how stale or conflicting data is handled, where human approval is enforceable, what is logged, and how failures are detected and recovered. The MCP nodes in the network diagram are architectural proposals, not working connections.</p>
+
+  <h3>The practical proposition</h3>
+  <p>The proposition being tested is narrower than &ldquo;AI can run Product Management.&rdquo; It is:</p>
   <div class="callout">
-    <strong>Here as a PM, ProdOps, or delivery leader sizing this up for your team?</strong> Two shortcuts: the <a href="case-study-pethealth.html" style="color:var(--accent);font-weight:600;">end-to-end case study</a> traces one initiative from persona to Jira CSV with the real captured run behind every step, and the <a href="for-evaluators.html" style="color:var(--accent);font-weight:600;">evaluation guide</a> routes each role to its strongest proof points, states what is built versus planned, and explains how to join the beta.
+    <strong>A structured AI-assisted workflow may reduce first-draft effort and context loss across product artifacts, provided that evidence, assumptions, generated content, deterministic checks, and human decisions remain distinguishable.</strong> That proposition still requires external evaluation.
   </div>
+
+  <h3>Explore the evidence</h3>
+  <ul class="element-list">
+    <li class="element-item">
+      <div>
+        <div class="element-title">See the current implementation</div>
+        <div class="element-desc">The <a href="document-flow.html" style="color:var(--accent);font-weight:600;">Document Flow</a> page shows what each working tool consumes and produces.</div>
+      </div>
+    </li>
+    <li class="element-item">
+      <div>
+        <div class="element-title">Follow one worked example</div>
+        <div class="element-desc">The <a href="case-study-pethealth.html" style="color:var(--accent);font-weight:600;">PetHealth case study</a> traces a fictional initiative through the chain and identifies both useful continuity and quality risks.</div>
+      </div>
+    </li>
+    <li class="element-item">
+      <div>
+        <div class="element-title">Review the target architecture</div>
+        <div class="element-desc">The <a href="prodops-network.html" style="color:var(--accent);font-weight:600;">Network Diagram</a> shows what would be required to evolve the prototype into an agentic Product Operations system.</div>
+      </div>
+    </li>
+    <li class="element-item">
+      <div>
+        <div class="element-title">Inspect the implementation decisions</div>
+        <div class="element-desc">The <a href="technical-notes.html" style="color:var(--accent);font-weight:600;">Technical Notes</a> describe the stack, data contracts, checks, limitations, security boundary, deployment model, and test gaps.</div>
+      </div>
+    </li>
+    <li class="element-item">
+      <div>
+        <div class="element-title">Evaluate it yourself</div>
+        <div class="element-desc">The <a href="for-evaluators.html" style="color:var(--accent);font-weight:600;">Limited Evaluation Beta</a> is for practitioners willing to test a fictional, public, or sanitized initiative and identify where the workflow helps or fails.</div>
+      </div>
+    </li>
+  </ul>
 
   <div class="footnotes">
     <div class="footnotes-label">Sources</div>
@@ -555,8 +641,8 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <div class="tools-grid-inner">
     <div class="tools-grid-head">
       <div class="tools-grid-eyebrow">The tools, direct links</div>
-      <h2 class="tools-grid-title">Nine tools, one real chain, not a loose collection</h2>
-      <p class="tools-grid-desc">These aren't nine standalone demos. Each one hands its real output to the next via a same-origin <code>localStorage</code> write, the same handoffs mapped in the <a href="document-flow.html" style="color:var(--accent);font-weight:600;">Document Flow</a> page below. Start at Step 01 and follow the chain, or jump straight to whichever stage you care about.</p>
+      <h2 class="tools-grid-title">Nine connected tools, not a loose collection of demos</h2>
+      <p class="tools-grid-desc">Each one hands its output to the next via a same-origin <code>localStorage</code> write, the same handoffs mapped in the <a href="document-flow.html" style="color:var(--accent);font-weight:600;">Document Flow</a> page below. Start at Step 01 and follow the chain, or jump straight to whichever stage you care about.</p>
     </div>
     <div class="tools-grid">
 
@@ -633,7 +719,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <a href="../prod-ops-radar/prod-ops-radar-index.html" class="tool-card tool-card-dev">
         <div class="tool-card-label">Off-chain · Measure</div>
         <div class="tool-card-name">Product ops health radar</div>
-        <div class="tool-card-desc">Scored self-assessment across eight product operations dimensions, designed to auto-populate from live metrics.</div>
+        <div class="tool-card-desc">Scored self-assessment across eight product operations dimensions. Auto-population from live metrics is target architecture, not built.</div>
         <div class="tool-card-tags"><span class="tc-tag">8 dimensions</span><span class="tc-tag">Radar chart</span><span class="tc-tag tc-dev">In development</span></div>
       </a>
 
@@ -652,7 +738,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <div class="tools-cta-inner">
     <div>
       <h2>Want the more technical<br>version of <em>this same idea</em>?</h2>
-      <p>The network diagram shows every data source, AI agent, and connection in one interactive picture. Document Flow shows the nine real steps and what moves between them, built for anyone who wants to go deeper than the plain-language version above.</p>
+      <p>The network diagram shows the target architecture: every data source, agent, and connection a mature system would need. Document Flow shows the nine steps that are actually implemented today and what moves between them, built for anyone who wants to go deeper than the plain-language version above.</p>
     </div>
     <div class="cta-links">
       <a href="../../perspectives/four-guardrails-ai-pipelines.html" class="cta-btn filled">The Four Guardrails &#8599;</a>
