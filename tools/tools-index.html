@@ -239,6 +239,11 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <p style="margin-top:8px;">Several tools can generate new content by calling the Claude API directly from your browser with a visitor-supplied key. Other tools are client-side. Every stage can be inspected without a key through a worked example or its non-generative interface, but generating new AI output requires a key in the tools that use the model. State is stored locally in the browser and can be downloaded as a run file. There are no user accounts, team workspaces, or server-side project records.</p>
 </div>
 
+<div class="api-note">
+  <strong>Review gates and where the workflow could extend:</strong> Most tools break their work into multiple steps, and each step is a human review point: the practitioner sees the draft before deciding whether it carries forward. Beyond that review, each step is also a natural extension point for supplying additional context, currently by pasting it in directly.
+  <p style="margin-top:8px;">In the target architecture, that extension point could be served by knowledge management agents: services that pull relevant material from connected systems, contextualize it against the step at hand, and prioritize what's worth surfacing to the reviewer before a draft is generated. That layer is designed, not built. Today, a step only knows what the practitioner supplies to it.</p>
+</div>
+
 <div class="continuum-strip">
   <div class="continuum-label">One connected workflow</div>
   <div class="continuum-diagram">
