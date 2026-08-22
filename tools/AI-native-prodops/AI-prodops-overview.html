@@ -113,6 +113,23 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:fl
 .phase-body li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent2);flex-shrink:0;margin-top:6px;}
 .phase-body li strong{color:var(--ink);font-weight:700;}
 
+/* PM vs ProdOps overlap/division grid */
+.divide-grid{display:flex;flex-direction:column;gap:0;margin:28px 0;border:1px solid var(--rule);border-radius:10px;overflow:hidden;}
+.divide-card{padding:22px 24px;border-bottom:1px solid var(--rule);}
+.divide-card:last-child{border-bottom:none;}
+.divide-num{font-size:9px;font-weight:800;color:var(--accent2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;}
+.divide-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:14px;letter-spacing:-.01em;}
+.divide-row{display:grid;grid-template-columns:100px 1fr;gap:14px;margin-bottom:10px;}
+.divide-row:last-child{margin-bottom:0;}
+.divide-row-label{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding-top:2px;}
+.divide-row-label.overlap{color:var(--muted);}
+.divide-row-label.division{color:var(--accent);}
+.divide-row-text{font-size:13px;color:#3a3a3a;line-height:1.65;}
+.divide-row-text strong{color:var(--ink);font-weight:700;}
+.divide-foot{padding:16px 20px;background:var(--off);font-size:12.5px;color:var(--muted);line-height:1.7;border-top:2px solid var(--rule);}
+.divide-foot strong{color:var(--ink);}
+@media(max-width:600px){.divide-row{grid-template-columns:1fr;gap:4px;}}
+
 /* human-check / three pillars */
 .cert-section{background:var(--off);border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin:28px 0;}
 .cert-section-head{padding:16px 20px;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:12px;}
@@ -256,6 +273,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="toc-label">In this piece</div>
     <ul class="toc-list">
       <li><a href="#native">The problem is not document creation alone</a></li>
+      <li><a href="#divide">Product Management vs. Product Operations</a></li>
       <li><a href="#modes">Three operating modes</a></li>
       <li><a href="#connect">How AI tools plug into a company's data</a></li>
       <li><a href="#check">Why human review is still required</a></li>
@@ -302,6 +320,74 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
   <div class="callout-orange">
     <strong>The prototype on this site explores whether structured AI-assisted handoffs can reduce that loss while preserving human review.</strong> It is not a claim that the loss has been eliminated.
+  </div>
+
+  <div class="callout-orange">
+    <strong>Scope: AI-assisted Product Management, not full Product Operations.</strong> Product Operations spans six practice areas. This toolchain works with three: Data Collection, Feedback Management, and Roadmap Alignment. It does not cover Release Operations (feature flags, beta testing, deployment communications), Enablement and Training (preparing sales, marketing, and support for a launch), or Performance Analytics (measuring post-launch impact against KPIs). Those three remain target architecture, not built.
+  </div>
+
+  <div class="section-head" id="divide">
+    <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="12" r="8" stroke-width="1.6" opacity=".85"/><circle cx="15" cy="12" r="8" stroke-width="1.6" opacity=".85"/></svg></div>
+    <div class="section-head-text">
+      <p>Where the line actually falls</p>
+      <h2>Product Management vs. <em>Product Operations</em></h2>
+    </div>
+  </div>
+
+  <p>The two roles share the same raw material &mdash; user data, customer feedback, release plans, and planning frameworks &mdash; which is exactly why the boundary gets blurry. In each of the four areas below, Product Operations builds and runs the underlying system; Product Management uses what that system produces to decide what to build and communicate why.</p>
+
+  <div class="divide-grid">
+    <div class="divide-card">
+      <div class="divide-num">01</div>
+      <div class="divide-title">Data and Insights Infrastructure</div>
+      <div class="divide-row">
+        <div class="divide-row-label overlap">Overlap</div>
+        <div class="divide-row-text">Both roles depend on user data to make decisions.</div>
+      </div>
+      <div class="divide-row">
+        <div class="divide-row-label division">Division</div>
+        <div class="divide-row-text">Product Operations selects, sets up, and cleans the data tools (e.g., Mixpanel, Pendo). <strong>Product Managers</strong> use those tools to analyze feature performance and decide what to build next.</div>
+      </div>
+    </div>
+    <div class="divide-card">
+      <div class="divide-num">02</div>
+      <div class="divide-title">Customer Feedback Aggregation</div>
+      <div class="divide-row">
+        <div class="divide-row-label overlap">Overlap</div>
+        <div class="divide-row-text">Both need to understand user pain points from support tickets, sales calls, and surveys.</div>
+      </div>
+      <div class="divide-row">
+        <div class="divide-row-label division">Division</div>
+        <div class="divide-row-text">Product Operations builds the pipeline to collect, categorize, and centralize feedback from across departments. <strong>Product Managers</strong> review the centralized data to identify specific user problems and prioritize the roadmap.</div>
+      </div>
+    </div>
+    <div class="divide-card">
+      <div class="divide-num">03</div>
+      <div class="divide-title">Release Management and Launch Readiness</div>
+      <div class="divide-row">
+        <div class="divide-row-label overlap">Overlap</div>
+        <div class="divide-row-text">Both ensure new features roll out smoothly to users and internal teams.</div>
+      </div>
+      <div class="divide-row">
+        <div class="divide-row-label division">Division</div>
+        <div class="divide-row-text"><strong>Product Managers</strong> define the feature value and launch timeline. Product Operations coordinates beta testing programs, manages feature flags, and updates internal documentation for sales, marketing, and support teams.</div>
+      </div>
+    </div>
+    <div class="divide-card">
+      <div class="divide-num">04</div>
+      <div class="divide-title">Process Standardization</div>
+      <div class="divide-row">
+        <div class="divide-row-label overlap">Overlap</div>
+        <div class="divide-row-text">Both want consistent frameworks for planning and roadmapping.</div>
+      </div>
+      <div class="divide-row">
+        <div class="divide-row-label division">Division</div>
+        <div class="divide-row-text">Product Operations designs the templates, runs the tools (e.g., Jira, Productboard), and establishes the operating cadence. <strong>Product Managers</strong> apply these templates to write PRDs and present their roadmaps.</div>
+      </div>
+    </div>
+    <div class="divide-foot">
+      <strong>Where this toolchain sits:</strong> on the Product Manager side of every row above. It assumes the data tools, feedback pipeline, and templates already exist, and it does not select, build, or administer any of them. It analyzes what those systems produce (area 1), works from already-centralized feedback (area 2), stops at defining feature value and timeline rather than coordinating the release itself (area 3), and applies standard frameworks rather than designing or operating the tooling behind them (area 4).
+    </div>
   </div>
 
   <div class="stat-pull">
