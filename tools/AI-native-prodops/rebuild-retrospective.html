@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<title>Case Study: Rebuilding the PDLC Chain | Rob Dull</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y1JYXTE5J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0Y1JYXTE5J');
+</script>
+<meta name="description" content="Nine AI-assisted product tools looked connected but weren't. A first-person retrospective on rebuilding them into one real chain: the problem, the tools used, how instructions were structured, what got checked in code, how traceability was enforced, where humans stayed in the loop, and what the process taught.">
+<link rel="canonical" href="https://robdull.com/tools/AI-native-prodops/rebuild-retrospective.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://robdull.com/tools/AI-native-prodops/rebuild-retrospective.html">
+<meta property="og:title" content="Case Study: Rebuilding the PDLC Chain | Rob Dull">
+<meta property="og:description" content="Nine AI-assisted product tools looked connected but weren't. A first-person retrospective on the rebuild: process, guardrails, traceability, and what the work taught.">
+<meta property="og:site_name" content="Rob Dull">
+<meta property="og:image" content="https://robdull.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://robdull.com/og-image.png">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0a0a0a; --white:#ffffff; --off:#f7f7f7; --rule:#e8e8e8;
+  --accent:#1a3a5c; --accent2:#c8662a; --muted:#6b6b6b;
+  --teal:#2a6b6b; --purple:#7c5cbf; --gold:#c8921a; --green:#1a5c3a; --steel:#5b7290;
+  --font:'Inter',sans-serif; --mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
+.nn{font-size:21px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
+.nl{display:flex;gap:10px;align-items:center;}
+.nl a{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:7px 15px;border:2px solid var(--rule);border-radius:6px;transition:all .15s;background:white;}
+.nl a:hover{background:var(--accent);color:white;border-color:var(--accent);}
+
+/* BREADCRUMB */
+.bc{max-width:1100px;margin:0 auto;padding:88px 32px 0;}
+.bc-inner{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--muted);flex-wrap:wrap;}
+.bc-inner a{color:var(--muted);text-decoration:none;}
+.bc-inner a:hover{color:var(--ink);}
+.bc-sep{color:var(--rule);}
+
+/* PAGE HEAD */
+.page-head{max-width:1100px;margin:0 auto;padding:24px 32px 0;}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;}
+.page-head h1{font-size:clamp(28px,3.6vw,44px);font-weight:900;line-height:1.05;letter-spacing:-.03em;color:var(--ink);}
+.page-head h1 em{font-style:normal;color:var(--accent);}
+.page-head p{font-size:15px;color:var(--muted);max-width:720px;margin-top:14px;line-height:1.75;}
+
+.wrap{max-width:1100px;margin:0 auto;padding:0 32px;}
+
+/* CONTEXT BOX */
+.context{margin-top:32px;border:1px solid var(--rule);border-radius:10px;background:var(--off);padding:20px 22px;}
+.context-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.context p{font-size:13.5px;color:#3a3a3a;line-height:1.7;max-width:820px;}
+.context p + p{margin-top:8px;}
+.context strong{color:var(--ink);}
+
+/* STAT STRIP */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px;}
+.stat{border:1px solid var(--rule);border-radius:8px;padding:14px 16px;background:white;}
+.stat-num{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--accent);}
+.stat-lbl{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.45;}
+@media(max-width:800px){.stats{grid-template-columns:1fr 1fr;}}
+
+/* TIMELINE */
+.timeline-wrap{margin-top:44px;}
+.timeline{position:relative;padding-left:36px;}
+.timeline::before{content:'';position:absolute;left:13px;top:8px;bottom:8px;width:2px;background:var(--rule);}
+.trow{position:relative;padding-bottom:26px;}
+.trow:last-child{padding-bottom:0;}
+.tbadge{position:absolute;left:-36px;top:0;width:28px;height:28px;border-radius:50%;background:var(--accent);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:var(--mono);z-index:2;}
+.tcard{border:1px solid var(--rule);border-radius:10px;padding:16px 18px;background:white;}
+.tcard-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+.tname{font-size:16px;font-weight:800;color:var(--ink);}
+.tcat{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+.tdesc{font-size:13.5px;color:#3a3a3a;line-height:1.65;margin-top:8px;max-width:700px;}
+.tdesc strong{color:var(--ink);}
+.tdesc p + p{margin-top:8px;}
+
+.artifact{margin-top:12px;border-left:3px solid var(--gold);background:rgba(200,146,26,.05);border-radius:0 8px 8px 0;padding:12px 16px;}
+.artifact-label{font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#7a5700;margin-bottom:5px;}
+.artifact p{font-size:13px;color:#3a3a3a;line-height:1.6;max-width:680px;}
+.artifact ul{list-style:none;margin-top:4px;display:flex;flex-direction:column;gap:5px;}
+.artifact li{font-size:12.5px;color:#3a3a3a;line-height:1.55;padding-left:14px;position:relative;}
+.artifact li::before{content:'';position:absolute;left:2px;top:8px;width:4px;height:4px;border-radius:50%;background:var(--gold);}
+.artifact .mono{font-family:var(--mono);font-size:12px;background:var(--off);border:1px solid var(--rule);border-radius:4px;padding:1px 6px;}
+
+.trace-row{margin-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:7px;border:1px solid var(--rule);border-radius:8px;background:white;padding:12px 14px;}
+.trace-row .mono{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--teal);background:rgba(42,107,107,.08);border-radius:5px;padding:3px 9px;}
+.trace-row .arr{color:var(--muted);font-size:13px;}
+
+.evalq{margin-top:10px;font-size:11.5px;color:#3a3a3a;line-height:1.5;padding-left:14px;position:relative;max-width:680px;}
+.evalq::before{content:'?';position:absolute;left:0;top:0;color:var(--accent2);font-weight:800;font-size:11px;}
+.evalq strong{color:var(--ink);font-weight:700;}
+
+.trow-foot{margin-top:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.sample-link{font-size:11.5px;font-weight:700;color:var(--accent2);text-decoration:none;border:1.5px solid var(--accent2);border-radius:5px;padding:3px 11px;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;transition:background .15s,color .15s;}
+.sample-link:hover{background:var(--accent2);color:white;}
+.gate{font-size:11px;font-weight:700;color:var(--purple);background:rgba(124,92,191,.08);border:1px solid rgba(124,92,191,.3);border-radius:5px;padding:3px 9px;}
+
+/* TOOL GRID (03) */
+.tool-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px;}
+.tool-item{border:1px solid var(--rule);border-radius:8px;padding:11px 14px;background:white;}
+.tool-item .tn{font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--accent);display:block;margin-bottom:3px;}
+.tool-item .td{font-size:12.5px;color:#3a3a3a;line-height:1.5;}
+@media(max-width:700px){.tool-grid{grid-template-columns:1fr;}}
+
+/* LESSONS (08) */
+.lessons{margin-top:12px;display:flex;flex-direction:column;gap:14px;}
+.lesson{display:grid;grid-template-columns:26px 1fr;gap:10px;}
+.lesson .ln{font-family:var(--mono);font-size:12px;font-weight:800;color:var(--accent2);padding-top:1px;}
+.lesson h4{font-size:13.5px;font-weight:800;color:var(--ink);margin-bottom:3px;}
+.lesson p{font-size:12.5px;color:#3a3a3a;line-height:1.55;}
+
+/* PROVES BOX */
+.proves{margin-top:52px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.prove-card{border:1px solid var(--rule);border-radius:10px;padding:18px 20px;}
+.prove-card.does{border-color:var(--green);background:rgba(26,92,58,.03);}
+.prove-card h3{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
+.prove-card.does h3{color:var(--green);}
+.prove-card.doesnt h3{color:var(--muted);}
+.prove-card ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.prove-card li{font-size:13px;color:#3a3a3a;line-height:1.55;padding-left:16px;position:relative;}
+.prove-card.does li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;}
+.prove-card.doesnt li::before{content:'·';position:absolute;left:2px;color:var(--muted);font-weight:800;}
+@media(max-width:700px){.proves{grid-template-columns:1fr;}}
+
+/* CTA */
+.next{margin-top:40px;border:2px solid var(--accent);border-radius:12px;padding:24px 26px;background:rgba(26,58,92,.03);}
+.next h2{font-size:20px;font-weight:800;color:var(--accent);margin-bottom:8px;letter-spacing:-.02em;}
+.next p{font-size:14px;color:#3a3a3a;line-height:1.7;max-width:720px;}
+.next-links{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;}
+.next-a{font-size:13px;font-weight:800;color:white;background:var(--accent);border-radius:7px;padding:10px 18px;text-decoration:none;transition:background .15s;}
+.next-a:hover{background:#122b45;}
+.next-b{font-size:13px;font-weight:800;color:var(--accent);border:2px solid var(--accent);border-radius:7px;padding:8px 18px;text-decoration:none;transition:all .15s;}
+.next-b:hover{background:var(--accent);color:white;}
+
+footer{border-top:1px solid var(--rule);padding:28px 40px;max-width:1100px;margin:56px auto 0;}
+footer p{font-size:13px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nn">Rob Dull</a>
+  <div class="nl">
+    <a href="mailto:rob.dull@gmail.com">Contact</a>
+  </div>
+</nav>
+
+<div class="bc">
+  <div class="bc-inner">
+    <a href="../../index.html">Rob Dull</a><span class="bc-sep">/</span>
+    <a href="../tools-index.html">Tools</a><span class="bc-sep">/</span>
+    <a href="AI-prodops-overview.html">AI ProdOps</a><span class="bc-sep">/</span>
+    <span>Rebuild retrospective</span>
+  </div>
+</div>
+
+<div class="page-head">
+  <div class="eyebrow">Build Process · Retrospective</div>
+  <h1>Nine tools that looked connected. <em>Weren't.</em></h1>
+  <p>This page is the process story behind the toolchain, not the product tour. It covers the problem that forced a rebuild, what got built, which tools did the work, how instructions were structured, what got checked in code instead of trusted from a model, how traceability was enforced end to end, where a human stayed in the loop, and what the process taught. If the <a href="case-study-pethealth.html" style="color:var(--accent);font-weight:700;">PetHealth case study</a> shows the chain working, this shows the discipline that got it there.</p>
+</div>
+
+<div class="wrap">
+
+  <div class="context">
+    <div class="context-label">The starting point</div>
+    <p>Eight separate AI-assisted tools spanning the product-delivery lifecycle — persona research, journey mapping, feature intake, business-case generation, prioritization, requirements docs, backlog building, sprint planning. Each one worked in isolation. Tracing the actual data flow between them told a different story.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num">8&nbsp;&rarr;&nbsp;9</div><div class="stat-lbl">Disconnected tools rebuilt into one real nine-stage chain</div></div>
+    <div class="stat"><div class="stat-num">2&nbsp;&rarr;&nbsp;1</div><div class="stat-lbl">Independent scoring implementations, collapsed to a shared source of truth</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-lbl">Deterministic guard classes computed in code, never trusted from a model</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-lbl">Real bugs found only by human testing, missed entirely by scripted checks</div></div>
+  </div>
+
+  <div class="timeline-wrap">
+    <div class="timeline">
+
+      <!-- 01 -->
+      <div class="trow">
+        <div class="tbadge">01</div>
+        <div class="tcard">
+          <div class="tcard-head"><span class="tname">The problem</span><span class="tcat">Diagnosis</span></div>
+          <div class="tdesc">
+            <p>It looked automated on the tools index page: eight cards, each claiming to hand its output to the next. It wasn't. The prioritization tool wrote no output another tool could consume — it only exported a static file. The backlog tool downstream re-implemented its own prioritization math from scratch, so two independent scoring implementations could silently disagree. Persona data had to be manually copy-pasted into the journey-mapping tool. Epic-level and feature-level planning were conflated in the shared schema, so prioritization decisions and delivery-team sizing decisions were happening on the same object when they needed to be separable.</p>
+            <p><strong>"Automated" was actually several people's worth of manual copy-paste hiding behind a clean UI</strong> — a common failure mode with AI tooling, where individually plausible outputs don't actually chain.</p>
+          </div>
+          <div class="evalq"><strong>Worth asking of any AI pipeline:</strong> does each stage actually consume the previous stage's real output, or does it just look like it does on the index page?</div>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div class="trow">
+        <div class="tbadge">02</div>
+        <div class="tcard">
+          <div class="tcard-head"><span class="tname">What got built</span><span class="tcat">Rebuild</span></div>
+          <div class="tdesc">
+            <p>A restructured, nine-stage chain, deployed live: Persona &rarr; Journey Mapping &rarr; Initiative Intake &rarr; Business Cases &rarr; Epic Prioritizer &rarr; Roadmap &amp; Milestones &rarr; Business Documents (the BRD) &rarr; Backlog Builder &rarr; Sprint Planner, ending in a Jira-importable CSV. Every stage's output became the next stage's real input, through the tools' actual same-origin handoffs — not a manual re-entry.</p>
+            <p>The demo runs an insurance-claims initiative through the whole chain with both a front-stage persona and a backstage persona, deliberately, so the chain has to handle customer-facing and infrastructure work correctly — exactly where the original tool broke down: backstage work kept getting mis-scoped as if it were customer-facing.</p>
+          </div>
+          <div class="trow-foot">
+            <a class="sample-link" href="document-flow.html">See the full document flow &#8599;</a>
+            <a class="sample-link" href="case-study-pethealth.html">Walk the captured run &#8599;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="trow">
+        <div class="tbadge">03</div>
+        <div class="tcard">
+          <div class="tcard-head"><span class="tname">Tools used</span><span class="tcat">Stack</span></div>
+          <div class="tdesc">Not just "an AI wrote it." The build itself leaned on a deliberate set of tools, each doing a specific job.</div>
+          <div class="tool-grid">
+            <div class="tool-item"><span class="tn">Claude</span><span class="td">Multiple model tiers by phase — a faster model to scaffold a stage, a stronger model for a dedicated adversarial review pass.</span></div>
+            <div class="tool-item"><span class="tn">Claude Code</span><span class="td">The agentic build environment: multi-step builds, live browser verification, and file-level review in one loop.</span></div>
+            <div class="tool-item"><span class="tn">React + TypeScript monorepo</span><span class="td">One shared toolkit package for data types and scoring math, so the duplicate-implementation bug can't recur by construction.</span></div>
+            <div class="tool-item"><span class="tn">MCP-style evidence layer</span><span class="td">Fixture data standing in for real connectors, so every generated artifact has something real to cite.</span></div>
+          </div>
+          <div class="trow-foot">
+            <a class="sample-link" href="technical-notes.html">Full engineering notes &#8599;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="trow">
+        <div class="tbadge">04</div>
+        <div class="tcard">
+          <div class="tcard-head"><span class="tname">Structured instructions</span><span class="tcat">Prompting</span></div>
+          <div class="tdesc">
+            <p>Nothing in the chain runs on free-text handoffs. Every stage has a typed input/output contract defined once in a shared package — the model isn't asked to figure out the shape, it's constrained to fill in a schema.</p>
+            <p>Two instruction patterns did the most work. <strong>Cite only what's present:</strong> every generative step references evidence by a <span class="mono">[REF]</span> id and may only use ids actually included in its input — anything it lacks evidence for is marked <span class="mono">ASSUMED</span> rather than invented. <strong>Keep independently-varying concepts decoupled:</strong> an early version conflated "is this epic customer-facing or infrastructure" with "does its business case rest on a customer metric or an engineering one" — two genuinely independent questions collapsed into one field, producing wrong framing downstream. Splitting them into two fields, classified independently, was verified with a controlled test: two epics with identical infrastructure classification produced correctly divergent business-case framing.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05 -->
+      <div class="trow">
+        <div class="tbadge">05</div>
+        <div class="tcard">
+          <div class="tcard-head"><span class="tname">Quality checks</span><span class="tcat">Guardrails</span></div>
+          <div class="tdesc">The rule running through the whole build: <strong>the model never gets to be the source of truth for anything checkable.</strong> Wherever an output could be computed or verified deterministically, it is — in code, downstream of the model, every time.</div>
+          <div class="artifact">
+            <div class="artifact-label">★ Enforced in code, not asserted by the model</div>
+            <ul>
+              <li>Prioritization scores recomputed from structured inputs — never read from the model's own arithmetic</li>
+              <li>Requirement coverage checked: every business requirement must be addressed by a downstream feature before a run proceeds</li>
+              <li>Dependency ordering enforced: a plan that schedules a story before something it depends on is rejected — checked against every export path, not just the screen</li>
+              <li>Output shape defended everywhere: one missing field from a model response can't take down a page</li>
+            </ul>
+          </div>
+          <div class="trow-foot">
+            <a class="sample-link" href="technical-notes.html#guardrails">See the guardrails in the codebase &#8599;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 06 -->
+      <div class="trow">
+        <div class="tbadge">06</div>
+        <div class="tcard">
+          <div class="tcard-head"><span class="tname">Traceability</span><span class="tcat">Provenance</span></div>
+          <div class="tdesc">Every artifact downstream carries forward the ids of what produced it. Nothing is allowed to reference an id that doesn't actually exist upstream — code enforces it, not convention.</div>
+          <div class="trace-row">
+            <span class="mono">BR-04</span><span class="arr">&rarr;</span>
+            <span class="mono">FEAT-02</span><span class="arr">&rarr;</span>
+            <span class="mono">ST-07</span><span class="arr">&rarr;</span>
+            <span class="mono">ST-09</span><span class="arr">&rarr;</span>
+            <span class="mono">Jira: Blocks</span>
+          </div>
+          <div class="tdesc" style="margin-top:10px;">A feature cites the business-requirement ids it satisfies; a story cites its parent feature and the other stories it depends on; the final export's dependency links are read directly off that same story graph rather than re-derived. An exec summary generated at one stage seeds directly into the next stage's document rather than being independently reauthored.</div>
+        </div>
+      </div>
+
+      <!-- 07 -->
+      <div class="trow">
+        <div class="tbadge">07</div>
+        <div class="tcard">
+          <div class="tcard-head"><span class="tname">Human review</span><span class="tcat">Judgment</span></div>
+          <div class="tdesc">
+            <p>Two tiers. First, a second AI pass on complex phases, explicitly framed as adversarial review — hunting for bugs, not confirming the build looked fine. Second, and more important: every phase was live-tested with real inputs, not the clean fixture data used for automated verification.</p>
+            <p><strong>Scripted verification proved every code path executed — but it kept missing real bugs, because hand-authored test fixtures are too clean.</strong></p>
+          </div>
+          <div class="artifact">
+            <div class="artifact-label">★ Caught only by a human running the real workflow</div>
+            <ul>
+              <li>A paste box silently accepted the wrong shape of data because two nearly-identical text boxes sat next to each other on the same screen</li>
+              <li>A rule displayed a correct warning on screen but silently vanished from the exported file</li>
+              <li>Generated documentation described a feature the prompt explicitly said shouldn't appear</li>
+            </ul>
+          </div>
+          <div class="trow-foot">
+            <span class="gate">✋ Human gate: every phase reviewed with real inputs before it counted as done</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 08 -->
+      <div class="trow">
+        <div class="tbadge">08</div>
+        <div class="tcard">
+          <div class="tcard-head"><span class="tname">What the process taught</span><span class="tcat">Retrospective</span></div>
+          <div class="lessons">
+            <div class="lesson"><div class="ln">01</div><div><h4>Scripted and human testing catch different bugs</h4><p>They aren't redundant. Skipping the human pass on anything with a paste or free-form intake step is exactly where the real bugs hide.</p></div></div>
+            <div class="lesson"><div class="ln">02</div><div><h4>Never trust a model's own math or ordering</h4><p>Recompute deterministically downstream, every time — even after it gets something right once.</p></div></div>
+            <div class="lesson"><div class="ln">03</div><div><h4>Design for visible failure, not silent guessing</h4><p>A system that marks content <span class="mono">ASSUMED</span> or refuses below a threshold is more trustworthy than one that always sounds confident.</p></div></div>
+            <div class="lesson"><div class="ln">04</div><div><h4>"Connected" has to be tested end to end</h4><p>Not asserted because each individual piece works in isolation — that gap was the exact failure that started this rebuild.</p></div></div>
+            <div class="lesson"><div class="ln">05</div><div><h4>Decouple concepts that vary independently</h4><p>Folding two real distinctions into one field for simplicity produces silently wrong downstream framing that's hard to trace back to its cause.</p></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WHAT IT PROVES -->
+  <div class="proves">
+    <div class="prove-card does">
+      <h3>What this process demonstrates</h3>
+      <ul>
+        <li>A chain that "looks connected" was tested end to end, not asserted — and the gap between those two things was the entire original bug</li>
+        <li>Deterministic guards ran downstream of every generative step, catching what the model got wrong even when it sounded confident</li>
+        <li>Traceability held across the full chain: an id from an early stage is still checkable at the last one</li>
+        <li>Live human testing with real inputs found real bugs that scripted, fixture-based verification missed entirely</li>
+      </ul>
+    </div>
+    <div class="prove-card doesnt">
+      <h3>What it does not claim</h3>
+      <ul>
+        <li>This is a working prototype, not a customer deployment — see the scope disclosures on the case study and technical notes pages</li>
+        <li>Guardrails reduce, they don't eliminate, the need for human judgment at each gate</li>
+        <li>Model behavior varies run to run; the computed checks are the repeatable part, not the model's prose</li>
+        <li>Some review passes (the second-model adversarial pass) ran on select complex phases, not uniformly on every phase</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="next">
+    <h2>See it working, or see how it's built</h2>
+    <p>This page is the process behind the chain. To see the chain itself running against one real fictional initiative, walk the captured run. To see the actual code — data contracts, guardrails, and the trust boundary around API keys — read the engineering notes.</p>
+    <div class="next-links">
+      <a class="next-a" href="case-study-pethealth.html">Walk the PetHealth case study</a>
+      <a class="next-b" href="technical-notes.html">Read the technical notes</a>
+      <a class="next-b" href="for-evaluators.html">Evaluation guide by role</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Rob Dull &bull; Product Management Practitioner and Product Operations Transformation Consultant</p>
+</footer>
+
+</body>
+</html>
