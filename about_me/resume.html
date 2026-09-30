@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y1JYXTE5J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0Y1JYXTE5J');
+</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-<title>Rob Dull | Product Management & Operations</title>
+<title>Resume: Product Operations &amp; Delivery Leadership | Rob Dull</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -13,20 +23,14 @@
   --accent:#1a3a5c;--accent2:#c8662a;--muted:#5a5a5a;--light:#8a8a8a;
   --font:'Inter',sans-serif;
 }
-@media print{
-  body{font-size:11pt;}
-  nav,.print-hide{display:none!important;}
 
-  a{color:inherit;text-decoration:none;}
-  .section{page-break-inside:avoid;}
-}
 body{background:var(--off);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.6;min-height:100vh;}
 
 /* NAV */
 nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;}
-.nav-name{font-size:14px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
-.nav-links{display:flex;gap:10px;}
-.nav-links a{font-size:12px;font-weight:600;color:var(--ink);text-decoration:none;padding:7px 14px;border:2px solid var(--ink);border-radius:5px;transition:all .15s;}
+.nav-name{font-size:14px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.nav-links{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;}
+.nav-links a{font-size:12px;font-weight:600;color:var(--ink);text-decoration:none;white-space:nowrap;padding:7px 14px;border:2px solid var(--ink);border-radius:5px;transition:all .15s;}
 .nav-links a:hover{background:var(--ink);color:white;}
 .nav-links a.accent{background:var(--accent);color:white;border-color:var(--accent);}
 .nav-links a.accent:hover{background:#0f2540;border-color:#0f2540;}
@@ -45,6 +49,7 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
 .contact-row a,.contact-row span{font-size:12px;font-weight:500;color:var(--muted);text-decoration:none;}
 .contact-row a:hover{color:var(--accent);}
 .sep{color:var(--rule);}
+.availability{font-size:12.5px;font-weight:600;color:var(--accent2);margin-top:12px;}
 
 /* SUMMARY */
 .summary-block{padding:28px 48px;background:var(--off);border-bottom:1px solid var(--rule);}
@@ -56,10 +61,15 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
 .section:last-child{border-bottom:none;}
 .section-title{font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
 .section-title::after{content:'';flex:1;height:1px;background:var(--rule);}
+.section-note{font-size:12.5px;color:var(--muted);margin:-8px 0 16px;}
+.section-note a{color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1.5px solid rgba(26,58,92,.25);}
+.section-note a:hover{color:var(--accent2);border-bottom-color:var(--accent2);}
 
 /* SKILLS GRID */
 .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
 .skill-item{font-size:12px;font-weight:500;color:var(--ink);background:var(--off);border:1px solid var(--rule);border-radius:5px;padding:6px 10px;}
+.skills-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--light);margin:18px 0 8px;}
+.skills-label:first-of-type{margin-top:0;}
 
 /* EXPERIENCE */
 .job{margin-bottom:28px;}
@@ -79,6 +89,8 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
 .bullets li{font-size:12.5px;line-height:1.65;color:var(--muted);padding-left:14px;position:relative;margin-bottom:5px;}
 .bullets li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;}
 .bullets li strong{color:var(--ink);font-weight:600;}
+.bullets li a{color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(26,58,92,.25);}
+.bullets li a:hover{color:var(--accent2);border-bottom-color:var(--accent2);}
 
 /* EARLIER ROLES */
 .earlier-roles{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
@@ -88,12 +100,6 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
 .er-date{font-size:10px;color:var(--light);font-weight:500;}
 .er-desc{font-size:11.5px;color:var(--muted);line-height:1.6;margin-top:6px;}
 
-/* EDUCATION */
-.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.edu-item{}
-.edu-degree{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:2px;}
-.edu-school{font-size:12px;color:var(--muted);}
-
 /* CERTS */
 .cert-groups{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .cert-group-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--light);margin-bottom:8px;}
@@ -101,39 +107,85 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
 .cert-list li{font-size:12px;color:var(--muted);padding-left:12px;position:relative;margin-bottom:3px;line-height:1.5;}
 .cert-list li::before{content:'';position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%;background:var(--rule);}
 
-/* METRICS */
-.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
-.metric-card{background:var(--off);border:1px solid var(--rule);border-radius:8px;padding:14px;text-align:center;}
-.metric-num{font-size:20px;font-weight:800;color:var(--accent);letter-spacing:-.03em;line-height:1;margin-bottom:5px;}
-.metric-label{font-size:10px;font-weight:600;color:var(--muted);line-height:1.4;}
+/* EVIDENCE CARDS */
+.metrics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.metric-card{background:var(--off);border:1px solid var(--rule);border-radius:8px;padding:16px 14px;text-align:center;}
+.metric-num{font-size:20px;font-weight:800;color:var(--accent);letter-spacing:-.03em;line-height:1.1;margin-bottom:6px;}
+.metric-label{font-size:11px;font-weight:500;color:var(--muted);line-height:1.5;}
+.metric-label a{color:var(--accent);font-weight:600;text-decoration:none;}
 
 /* SECTION NAV */
 .sec-nav{display:none;}
 
-
-
-
-
+@media(max-width:700px){
   .resume-header,.summary-block,.section{padding-left:24px;padding-right:24px;}
   .skills-grid{grid-template-columns:1fr 1fr;}
-  .earlier-roles,.cert-groups,.edu-grid{grid-template-columns:1fr;}
-  .metrics-grid{grid-template-columns:1fr 1fr;}
+  .earlier-roles,.cert-groups{grid-template-columns:1fr;}
+  .metrics-grid{grid-template-columns:1fr;}
   nav{padding:12px 20px;}
+  /* Pipes only work on one line; once the row wraps, spacing does the separating. */
+  .contact-row{gap:6px 18px;}
+  .contact-row .sep{display:none;}
 }
 .section,.summary-block{scroll-margin-top:90px;}
-</style>
-<meta name="description" content="Resumé: Rob Dull, Product Management, Product Operations, and Strategy-to-Execution Leader with 15+ years at Salesforce and Delta Dental.">
+
+/* PRINT (last, so it overrides the screen rules above) */
+@page{size:letter;margin:.5in .55in;}
+@media print{
+  html,body{background:#fff!important;min-height:0!important;}
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  nav,.print-hide{display:none!important;}
+  a{color:inherit;text-decoration:none;border-bottom:none!important;}
+  /* Paper already has margins: drop the screen padding and let long sections flow across pages. */
+  .page{background:#fff;}
+  .resume-header,.summary-block,.section{max-width:none;padding-left:0;padding-right:0;}
+  .resume-header{padding-top:0;padding-bottom:16px;}
+  .name{font-size:30px;}
+  .summary-block{background:#fff;padding-top:14px;padding-bottom:14px;}
+  .section{padding-top:14px;padding-bottom:14px;break-inside:auto;page-break-inside:auto;}
+  .section-title{margin-bottom:12px;break-after:avoid;page-break-after:avoid;}
+  .metric-card{padding:10px;}
+  .job{margin-bottom:16px;}
+  .job-header,.job-context{break-after:avoid;page-break-after:avoid;}
+  .bullets li,.metric-card,.earlier-role,.cert-groups>div,.skill-item{break-inside:avoid;page-break-inside:avoid;}
+  .skills-label{break-after:avoid;page-break-after:avoid;margin:12px 0 6px;}
+  /* Compact tags and cards on paper; the screen layout keeps the roomier grid. */
+  .skills-grid{display:flex;flex-wrap:wrap;gap:4px;}
+  .skill-item{padding:2px 8px;font-size:11px;border-radius:4px;}
+  .earlier-roles{gap:10px;}
+  .earlier-role{padding:10px 12px;}
+  /* Short sections move as a unit so a heading never sits alone at the bottom of a page. */
+  #sec-evidence,#sec-education,#sec-tools{break-inside:avoid;page-break-inside:avoid;}
+}</style>
+<meta name="description" content="Rob Dull&#x27;s resume: Product Operations and delivery leadership at Salesforce and Delta Dental. San Francisco based and seeking a full-time role.">
 <link rel="canonical" href="https://robdull.com/about_me/resume.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://robdull.com/about_me/resume.html">
-<meta property="og:title" content="Rob Dull — PM & Product Operations Resumé">
-<meta property="og:description" content="Resumé: Rob Dull, Product Management, Product Operations, and Strategy-to-Execution Leader with 15+ years at Salesforce and Delta Dental.">
+<meta property="og:title" content="Resume: Product Operations &amp; Delivery Leadership | Rob Dull">
+<meta property="og:description" content="Rob Dull&#x27;s resume: Product Operations and delivery leadership at Salesforce and Delta Dental. San Francisco based and seeking a full-time role.">
 <meta property="og:site_name" content="Rob Dull">
 <meta property="og:image" content="https://robdull.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://robdull.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "url": "https://robdull.com/about_me/resume.html",
+  "mainEntity": {
+    "@type": "Person",
+    "@id": "https://robdull.com/#person",
+    "name": "Rob Dull",
+    "url": "https://robdull.com/",
+    "jobTitle": "Product Operations and Delivery Leader",
+    "sameAs": [
+      "https://linkedin.com/in/robdull"
+    ]
+  }
+}
+</script>
 </head>
 <body>
 
@@ -150,7 +202,7 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
   <!-- HEADER -->
   <div class="resume-header">
     <h1 class="name">Rob Dull</h1>
-    <div class="title">Product Management, Product Operations, and Strategy-to-Execution Leader</div>
+    <div class="title">Product Operations &amp; Delivery Leadership</div>
     <div class="contact-row">
       <span>San Francisco, CA</span>
       <span class="sep">|</span>
@@ -160,37 +212,67 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
       <span class="sep">|</span>
       <a href="https://robdull.com" target="_blank">robdull.com</a>
     </div>
+    <div class="availability">Seeking a full-time role in Product Operations, product and engineering delivery, or organizational transformation.</div>
     <div class="resume-header-nav print-hide">
       <a href="#sec-summary">Summary</a>
-      <a href="#sec-skills">Leadership</a>
+      <a href="#sec-evidence">Highlights</a>
       <a href="#sec-experience">Experience</a>
       <a href="#sec-earlier">Earlier Roles</a>
       <a href="#sec-education">Education</a>
       <a href="#sec-tools">Tools</a>
+      <a href="work-history.html">Selected Cases</a>
     </div>
   </div>
 
   <!-- SUMMARY -->
   <div class="summary-block" id="sec-summary">
-    <p>During 15 years of organizational design and change enablement, I have helped product and technology organizations translate ambiguous priorities into product decisions, operating systems, and cross-functional execution. My experience spans product strategy, business cases, prioritization, delivery systems, engineering effectiveness, organizational transformation, global operating models, and capability development.</p>
+    <p>I build the operating practices that help Product and Engineering teams make clearer decisions and deliver more effectively. At Salesforce and Delta Dental, my work included enterprise playbooks, product planning, capability development, delivery visibility, and engineering improvement. My current consulting combines operating-model design with built AI-assisted Product Management workflow prototypes.</p>
   </div>
 
-  <!-- AREAS OF LEADERSHIP -->
-  <div class="section" id="sec-skills">
-    <div class="section-title">Areas of Leadership</div>
-    <ul class="bullets">
-      <li>Product strategy, requirements, prioritization, and release planning</li>
-      <li>Product operations, intake, planning, dependencies, and delivery visibility</li>
-      <li>Executive decision support and implementation leadership</li>
-      <li>Business cases, ROI framing, Cost of Delay, and investment tradeoffs</li>
-      <li>Engineering effectiveness, DevOps modernization, and flow improvement</li>
-      <li>Operating models, playbooks, dashboards, standards, and capability development</li>
-    </ul>
+  <!-- HIGHLIGHTS -->
+  <div class="section" id="sec-evidence">
+    <h2 class="section-title">Highlights</h2>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-num">~80% of IT teams</div>
+        <div class="metric-label">Salesforce: the Project Playbook I authored became the reference model for large programs involving roughly 80% of IT delivery teams.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">3 days to 2</div>
+        <div class="metric-label">Delta Dental: common quarterly planning cycles across multiple teams, after moving refinement and dependency discovery into continuous preparation.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">9-step prototype</div>
+        <div class="metric-label">Now: an AI-assisted Product Management workflow with human review gates, published at <a href="../tools/tools-index.html">robdull.com/tools</a>.</div>
+      </div>
+    </div>
   </div>
 
   <!-- EXPERIENCE -->
   <div class="section" id="sec-experience">
-    <div class="section-title">Professional Experience</div>
+    <h2 class="section-title">Professional Experience</h2>
+    <p class="section-note print-hide">Problem, action, and result detail for the main examples is on the <a href="work-history.html">Selected Cases</a> page.</p>
+
+    <!-- CURRENT CONSULTING -->
+    <div class="job">
+      <div class="job-header">
+        <div class="job-company">Independent Consulting</div>
+        <div class="job-meta">
+          <div>
+            <span class="job-title">Organizational Design, Process Architecture and Change Management</span>
+          </div>
+          <div class="job-date">2025 – Present</div>
+        </div>
+      </div>
+      <div class="job-context">Advisory work on operating-model design, process architecture, and change management, alongside building AI-assisted Product Management workflow prototypes.</div>
+
+      <ul class="bullets">
+        <li>Advise on operating-model design and process architecture, including reusable transition guidance for teams changing how they plan and deliver work.</li>
+        <li>Built a nine-step AI-assisted Product Management workflow, from persona and journey mapping through intake, business cases, prioritization, roadmap, backlog, and sprint planning, published as working prototypes at <a href="../tools/tools-index.html">robdull.com/tools</a>.</li>
+        <li>Designed the prototypes with human review gates and deterministic validation checks between steps, so AI output is inspected before it moves downstream.</li>
+        <li>Evaluated with a small group of practitioners. These are working prototypes, not production systems.</li>
+      </ul>
+    </div>
 
     <!-- DELTA DENTAL -->
     <div class="job">
@@ -203,19 +285,20 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
           <div class="job-date">March 2021 – April 2025</div>
         </div>
       </div>
-      <div class="job-context">Embedded enterprise advisor across more than 35 product and engineering teams and five portfolios in a regulated insurance environment. Partnered with Product Managers, Product Owners, Engineering leaders, Scrum Masters, Release Train Engineers, business stakeholders, and the Lean-Agile Center of Excellence.</div>
+      <div class="job-context">Embedded partner across more than 35 product and engineering teams and five portfolios in a regulated insurance environment, working with Product Managers, Product Owners, Engineering leaders, Scrum Masters, Release Train Engineers, business stakeholders, and the Lean-Agile Center of Excellence. Scope included product operations, planning, delivery visibility, and engineering improvement.</div>
 
       <ul class="bullets">
-        <li>Redesigned feature and story preparation so refinement, readiness, and dependency discovery occurred before quarterly planning. Most teams reduced planning from about three business days to two; one highly engaged team reduced planning from 3.5 days to one.</li>
-        <li>Partnered on dozens of business cases, leading, mentoring, or reviewing analysis that estimated labor savings, revenue potential, risk-adjusted value, effort, and dependencies.</li>
-        <li>Taught Engineering Managers to frame technical work in economic terms — for example, translating 300 hours of monthly labor avoided at $200 per hour into a decision-ready value case.</li>
+        <li>Moved refinement, readiness, and dependency discovery into continuous preparation. Common quarterly planning cycles across multiple teams fell from roughly three days to two; one highly mature team reduced planning from approximately 3.5 days to one.</li>
+        <li>Reduced scope creep through clearer requirements, incremental validation, and earlier dependency identification.</li>
+        <li>Worked with Engineering Managers to frame business cases and quantify expected returns for technology-driven development and system upgrades, for stakeholder communication and tradeoff analysis alongside Product-driven business cases.</li>
         <li>Combined business and technical roadmaps into one ranked view using relative Cost of Delay, giving technical debt, cost reduction, and risk work a credible basis for competing with customer-facing features.</li>
-        <li>Co-led a CTO-sponsored DevOps modernization across approximately 40 teams; co-created a 24-practice, 11-stage maturity model and directly coached close to 30 teams across two survey rounds.</li>
-        <li>Helped teams turn assessment findings into quarterly objectives and roadmaps extending 18 months, with leadership reporting and practical implementation guidance.</li>
-        <li>Developed and tested a six-to-twelve-month Scrum-to-Kanban transition model, proving it with several teams and putting six more on a path toward true flow, meaningful WIP limits, and control-chart-driven improvement.</li>
-        <li>Improved delivery systems supporting insurance claims, including a customer-facing support bot that escalated unresolved issues into ticketing and a document-management team balancing roadmap work with service demand.</li>
+        <li>Co-created a CTO-sponsored engineering maturity assessment and improvement process involving approximately 40 delivery teams; directly coached close to 30 teams across two survey rounds, helping translate findings into quarterly improvement roadmaps extending 18 months.</li>
+        <li>Co-created Delta Dental's Product Management Toolkit and delivered guidance and training for product definition, prioritization, business cases, and delivery readiness.</li>
+        <li>Lead contributor to Product Manager job-family definitions; contributed to Delta Dental's Scrum Master role guidelines.</li>
+        <li>Developed and tested a six-to-twelve-month Scrum-to-Kanban transition model with several teams and used it to put six more teams on a path toward flow-based delivery.</li>
         <li>Piloted Microsoft Copilot backlog workflows with Product Owners and Scrum Masters, using transcripts and source documents to draft features and stories with business context, measures, dependencies, and acceptance criteria.</li>
-        <li>Promoted from Senior to Expert Agile Coach in recognition of practical depth, experience, and ability to translate complex systems into usable frameworks.</li>
+        <li>Improved delivery systems supporting insurance claims, including a customer-facing support bot that escalated unresolved issues into ticketing and a document-management team balancing roadmap work with service demand.</li>
+        <li>Co-authored <a href="../perspectives/write-it-right.html">Write It Right</a> with Tanya Jones and Karen Benbow, a whitepaper on how one team fixed story writing upstream to shorten quarterly planning.</li>
       </ul>
     </div>
 
@@ -230,19 +313,19 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
           <div class="job-date">January 2014 – July 2020</div>
         </div>
       </div>
-      <div class="job-context">Sole dedicated Agile Coach for Salesforce IT for three years and a CIO-level internal advisor during growth from approximately 25 to more than 115 teams across the United States, Ireland, and India.</div>
+      <div class="job-context">Sole dedicated Agile Coach for Salesforce IT for three years, during growth from approximately 25 to more than 115 teams across the United States, Ireland, and India. Scope included organizational transformation, program playbooks, delivery operations, and capability development.</div>
 
       <ul class="bullets">
-        <li>Authored an enterprise Project Playbook at the request of the CIO and PMO leader, creating a three-phase model for initiation, iterative delivery, operational transition, required artifacts, and support handoffs.</li>
+        <li>Authored an enterprise Project Playbook at the request of the CIO and PMO leader: a three-phase model for initiation, iterative delivery, and operational transition, with required artifacts and support handoffs.</li>
         <li>Rolled out the Playbook through workshops and project-start walkthroughs; it became the reference model for large multi-team programs involving roughly 80% of IT delivery teams.</li>
-        <li>Designed and scaled a longitudinal maturity program from approximately 30 teams in five verticals to 80 teams in eight verticals, more than 500 respondents, and approximately eight cycles over five years.</li>
-        <li>Prepared recurring dashboards, slide decks, and recommendations for the CIO staff and PMO leader, supporting decisions about staffing, team structure, coaching investment, priorities, sequencing, and operating changes.</li>
-        <li>Maturity findings helped leadership determine that Business Technology was not ready to combine QA and Development, supporting retention of QA as a separate function.</li>
-        <li>Contributed to analysis of team size, geographic distribution, backlog health, and delivery performance that informed global team-design guidance.</li>
-        <li>Supported operating-model and delivery integration following the ExactTarget acquisition, helping teams reconcile different processes, tools, roles, and expectations while maintaining active delivery.</li>
-        <li>Taught Product Managers and Product Owners prioritization methods including Kano, WSJF, Sum of Squares, and MoSCoW, plus a riskiest-failure-mode-first approach to proofs of concept.</li>
-        <li>Designed role-specific capability programs, internal certifications, Communities of Practice, workshops, and onboarding resources; hosted more than 72 multi-day events, reaching approximately 1,300 attendees and training more than 250 practitioners.</li>
-        <li>Led Kanban transitions for support, maintenance, design, and rapid-release teams whose work did not fit a two-week sprint model.</li>
+        <li>Designed and scaled a longitudinal maturity assessment from approximately 30 teams in five verticals to 80 teams in eight verticals over about eight cycles in five years, peaking at more than 500 respondents.</li>
+        <li>Prepared recurring dashboards, decks, and recommendations for the CIO staff and the PMO leader, supporting decisions about staffing, team structure, coaching investment, priorities, sequencing, and operating changes.</li>
+        <li>Maturity findings helped leadership decide to keep QA separate from Development; contributed to analysis of team size, geographic distribution, backlog health, and delivery performance behind global team-design guidance.</li>
+        <li>Supported operating-model and delivery integration after the ExactTarget acquisition, helping teams reconcile different processes, tools, roles, and expectations while delivery continued.</li>
+        <li>Designed role-specific capability programs, internal certifications, Communities of Practice, workshops, and onboarding; hosted more than 72 multi-day events reaching approximately 1,300 attendees and trained more than 250 Product Managers and Product Owners.</li>
+        <li>Lead contributor to Product Management and Business Analyst job-family definitions.</li>
+        <li>Taught Product Managers and Product Owners prioritization methods including Kano, Weighted Shortest Job First (WSJF), and MoSCoW, plus a riskiest-failure-mode-first approach to proofs of concept.</li>
+        <li>Led Kanban transitions for support, maintenance, design, and rapid-release teams whose work did not fit a two-week sprint.</li>
       </ul>
     </div>
 
@@ -250,26 +333,12 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
 
   <!-- EARLIER EXPERIENCE -->
   <div class="section" id="sec-earlier">
-    <div class="section-title">Earlier Product and Operations Experience</div>
+    <h2 class="section-title">Earlier Experience</h2>
     <div class="earlier-roles">
 
       <div class="earlier-role">
-        <div class="er-company">Portrait Displays</div>
-        <div class="er-title">Project Manager; promoted to Product Manager</div>
-        <div class="er-date">2004–2006</div>
-        <div class="er-desc">Owned product requirements and release planning for DisplayTune, a graphical calibration interface bundled with premium LCD monitors from Acer, Sony, Fujitsu-Siemens, Hyundai, and iiyama. Managed two-to-six-week OEM launch windows, production schedules, support-site delivery, feature tradeoffs, validation, and releases across 25 language localizations.</div>
-      </div>
-
-      <div class="earlier-role">
-        <div class="er-company">Nokia</div>
-        <div class="er-title">Compliance Manager — Product Management Job Family</div>
-        <div class="er-date">2007–2009</div>
-        <div class="er-desc">Managed compliance, certification, provisioning, and developer enablement for Nokia's SNAP Mobile Java gaming platform. Made onboarding, exception, compatibility, and release-timing decisions; reduced provisioning handoff time from days to hours by establishing dedicated communication channels and service-level expectations.</div>
-      </div>
-
-      <div class="earlier-role">
         <div class="er-company">Bio-Rad Laboratories</div>
-        <div class="er-title">Web Publishing Manager — E-commerce and CMS</div>
+        <div class="er-title">Web Publishing Manager, E-commerce and CMS</div>
         <div class="er-date">2012</div>
         <div class="er-desc">Managed content and release operations for a global medical-diagnostics e-commerce platform. Reduced lead time by approximately 80% for selected categories of website content changes and defect-resolution work.</div>
       </div>
@@ -281,59 +350,93 @@ nav{background:var(--white);border-bottom:1px solid var(--rule);padding:14px 32p
         <div class="er-desc">Advised technology and nonprofit clients on operating processes, digital products, and marketing strategy.</div>
       </div>
 
+      <div class="earlier-role">
+        <div class="er-company">Nokia</div>
+        <div class="er-title">Compliance Testing Manager</div>
+        <div class="er-date">2007–2009</div>
+        <div class="er-desc">Managed platform onboarding for third-party game developers on Nokia's SNAP Mobile Java gaming platform, covering compliance testing, certification, and provisioning. Reduced provisioning handoff time from days to hours by establishing dedicated communication channels and service-level expectations.</div>
+      </div>
+
+      <div class="earlier-role">
+        <div class="er-company">Portrait Displays</div>
+        <div class="er-title">Project Manager; promoted to Product Manager</div>
+        <div class="er-date">2004–2006</div>
+        <div class="er-desc">Owned consumer software product management for DisplayTune, a calibration interface bundled with premium LCD monitors from Acer, Sony, Fujitsu-Siemens, Hyundai, and iiyama. Managed two-to-six-week OEM launch windows, production schedules, support-site delivery, feature tradeoffs, validation, and releases across 25 language localizations.</div>
+      </div>
+
     </div>
   </div>
 
   <!-- EDUCATION AND CREDENTIALS -->
   <div class="section" id="sec-education">
-    <div class="section-title">Education and Credentials</div>
-    <ul class="cert-list">
-      <li>MBA, Managing Technology and Innovation; Marketing — Santa Clara University</li>
-      <li>BA — Swarthmore College</li>
-      <li>SAFe Program Consultant 6.0</li>
-      <li>Certified Scrum Professional — Product Owner</li>
-      <li>Kanban Management Professional</li>
-      <li>Enterprise Services Planning</li>
-      <li>MIT Sloan — Mastering Design Thinking</li>
-    </ul>
+    <h2 class="section-title">Education and Credentials</h2>
+    <div class="cert-groups">
+      <div>
+        <div class="cert-group-title">Education</div>
+        <ul class="cert-list">
+          <li>MBA, Managing Technology and Innovation; Marketing, Santa Clara University</li>
+          <li>BA, Swarthmore College</li>
+          <li>MIT Sloan, Mastering Design Thinking (2018)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="cert-group-title">Certifications</div>
+        <ul class="cert-list">
+          <li>SAFe Practice Consultant 6.0 (SPC): Product/Portfolio Management, AI SAFe, and DevOps trainer-certified</li>
+          <li>Certified ScrumMaster (CSM)</li>
+          <li>Certified Scrum Professional, ScrumMaster (CSP-SM)</li>
+          <li>Certified Scrum Professional, Product Owner (CSP-PO)</li>
+          <li>Kanban Management Professional (KMP)</li>
+          <li>Enterprise Services Planning (ESP)</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <!-- TOOLS AND METHODS -->
   <div class="section" id="sec-tools">
-    <div class="section-title">Tools and Methods</div>
+    <h2 class="section-title">Tools and Methods</h2>
+    <div class="skills-label">Tools used directly</div>
     <div class="skills-grid">
       <div class="skill-item">Jira</div>
+      <div class="skill-item">Jira Query Language (JQL)</div>
       <div class="skill-item">Jira Align</div>
       <div class="skill-item">Confluence</div>
       <div class="skill-item">Miro</div>
       <div class="skill-item">Power BI</div>
       <div class="skill-item">Tableau</div>
-      <div class="skill-item">Salesforce Platform and GUS</div>
-      <div class="skill-item">Planview</div>
-      <div class="skill-item">Workday</div>
-      <div class="skill-item">Concur</div>
-      <div class="skill-item">Adobe Experience Manager</div>
+      <div class="skill-item">Salesforce Platform &amp; GUS</div>
       <div class="skill-item">Google Workspace</div>
       <div class="skill-item">SharePoint</div>
       <div class="skill-item">GitHub</div>
+      <div class="skill-item">Claude (Code, Design, API)</div>
       <div class="skill-item">ChatGPT</div>
-      <div class="skill-item">Claude</div>
       <div class="skill-item">Microsoft Copilot</div>
       <div class="skill-item">GitHub Copilot</div>
-      <div class="skill-item">Kanban</div>
+    </div>
+    <div class="skills-label">Enterprise environments supported</div>
+    <div class="skills-grid">
+      <div class="skill-item">Workday</div>
+      <div class="skill-item">Concur</div>
+      <div class="skill-item">Finance &amp; billing platforms</div>
+    </div>
+    <div class="skills-label">Methods</div>
+    <div class="skills-grid">
       <div class="skill-item">Scrum</div>
+      <div class="skill-item">Kanban</div>
       <div class="skill-item">SAFe</div>
       <div class="skill-item">Cost of Delay</div>
       <div class="skill-item">Business-case development</div>
       <div class="skill-item">Kano</div>
       <div class="skill-item">WSJF</div>
       <div class="skill-item">MoSCoW</div>
-      <div class="skill-item">Sum of Squares</div>
       <div class="skill-item">Given-When-Then</div>
+      <div class="skill-item">OKRs &amp; KPIs</div>
       <div class="skill-item">Maturity assessments</div>
       <div class="skill-item">Process modeling</div>
-      <div class="skill-item">Dashboard design</div>
+      <div class="skill-item">Control-chart &amp; flow analysis</div>
       <div class="skill-item">Root-cause analysis</div>
+      <div class="skill-item">Dashboard design</div>
     </div>
   </div>
 
