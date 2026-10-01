@@ -176,13 +176,41 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   .bc,.hero,.hero-strip,.api-note,.tool-list,.about-strip{padding-left:20px;padding-right:20px;}
   footer{padding:20px 24px;flex-direction:column;text-align:center;}
 }
+
+/* ── NINE STEPS ── */
+.steps{max-width:1060px;margin:0 auto;padding:40px 40px 56px;}
+.steps-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px 16px;flex-wrap:wrap;margin-bottom:8px;}
+.steps-title{font-size:clamp(22px,3vw,30px);font-weight:900;letter-spacing:-.03em;line-height:1.15;color:var(--ink);}
+.steps-title em{font-style:normal;color:var(--accent);}
+.steps-link{font-size:12px;font-weight:700;color:var(--accent);text-decoration:none;}
+.steps-link:hover{color:var(--accent2);}
+.steps-intro{font-size:14px;color:var(--muted);margin-bottom:18px;}
+.step-grid{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
+.step-grid-2{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:14px;}
+.step{border:1px solid var(--rule);border-radius:8px;padding:16px 18px;background:white;display:flex;flex-direction:column;gap:8px;}
+.step-num{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);}
+.step-name{font-size:17px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;line-height:1.25;}
+.step-name:hover{color:var(--accent);}
+.step-desc{font-size:13px;color:#2a2a2a;line-height:1.6;}
+.step-meta{font-size:12.5px;color:var(--muted);line-height:1.55;}
+.step-meta strong{color:var(--ink);font-weight:700;}
+.step-links{margin-top:auto;padding-top:4px;display:flex;gap:6px 14px;flex-wrap:wrap;font-size:12px;font-weight:700;}
+.step-links a{color:var(--accent);text-decoration:none;}
+.step-links a:hover{color:var(--accent2);}
+.tool-cta{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:white;background:var(--ink);text-decoration:none;padding:10px 20px;border-radius:6px;transition:all .15s;}
+@media(max-width:860px){.step-grid,.step-grid-2{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:560px){.step-grid,.step-grid-2{grid-template-columns:1fr;}.steps{padding:28px 20px 40px;}}
+.tool-status.beta{color:var(--accent2);}
+.tool-status.beta::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent2);flex-shrink:0;}
+.beta-note{margin-top:0;margin-bottom:18px;border-left-color:var(--accent2);background:rgba(200,102,42,.07);}
+.beta-note .tool-workflow-label{color:var(--accent2);}
 </style>
-<meta name="description" content="Working prototypes exploring how AI can support Product Management and Product Operations: a nine-step browser workflow from customer understanding through requirements, delivery planning, and Jira CSV export. Sample outputs, implementation notes, and candid limitations.">
+<meta name="description" content="Nine browser tools that carry a product initiative from customer context to a draft delivery plan and Jira import file, with code checks and human review.">
 <link rel="canonical" href="https://robdull.com/tools/tools-index.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://robdull.com/tools/tools-index.html">
 <meta property="og:title" content="Product Workflow Prototypes | Rob Dull">
-<meta property="og:description" content="Working prototypes exploring how AI can support Product Management and Product Operations: a nine-step browser workflow from customer understanding through requirements, delivery planning, and Jira CSV export.">
+<meta property="og:description" content="Nine browser tools that carry a product initiative from customer context to a draft delivery plan and Jira import file, with code checks and human review.">
 <meta property="og:site_name" content="Rob Dull">
 <meta property="og:image" content="https://robdull.com/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -208,1086 +236,128 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <div class="hero">
-  <div class="hero-tag">AI-assisted Product Operations · Working prototypes</div>
-  <h1>Product workflow prototypes<br><em>built to be inspected</em></h1>
+  <div class="hero-tag">AI-assisted workflow · Working prototypes</div>
+  <h1>A product workflow<br><em>in nine tools</em></h1>
 </div>
 
 <div class="hero-strip">
-  <p class="hero-desc">This portfolio explores a practical question: can AI reduce the drafting and translation work between product discovery, prioritization, requirements, and delivery without obscuring where human judgment is still required? The primary prototype is a nine-step, single-user browser workflow. Each step produces a structured artifact that can be reviewed, edited, and passed to the next tool. Selected consistency checks are computed in code. The workflow ends with a Jira bulk-import CSV.</p>
+  <p class="hero-desc">I built nine browser tools that carry a product initiative from customer context to a draft delivery plan and a Jira import file. Each tool hands a structured record to the next, and code checks the prioritization math, the funding cutoff, requirement coverage, unconfirmed assumptions, sprint load, and dependency order. A person starts and reviews every step.</p>
   <div style="display:flex;flex-direction:column;gap:10px;flex-shrink:0;">
-    <a href="AI-native-prodops/document-flow.html" class="hero-btn" style="margin-top:0;padding-top:7px;padding-bottom:7px;">Document Flow &#8599;</a>
-    <a href="AI-native-prodops/prodops-network.html" class="hero-btn" style="margin-top:0;padding-top:7px;padding-bottom:7px;">Network Diagram &#8599;</a>
-    <a href="AI-native-prodops/AI-prodops-overview.html" class="hero-btn" style="margin-top:0;padding-top:7px;padding-bottom:7px;">Explore AI ProdOps &#8599;</a>
+    <a href="AI-native-prodops/case-study-pethealth.html" class="hero-btn" style="margin-top:0;padding-top:7px;padding-bottom:7px;">Walk through the PetHealth example &#8599;</a>
+    <a href="AI-native-prodops/document-flow.html" class="hero-btn" style="margin-top:0;padding-top:7px;padding-bottom:7px;">See it step by step &#8599;</a>
+    <a href="AI-native-prodops/technical-notes.html" class="hero-btn" style="margin-top:0;padding-top:7px;padding-bottom:7px;">Technical notes &#8599;</a>
   </div>
 </div>
 
 <div class="api-note" style="border-color:var(--accent);background:rgba(26,58,92,.04);">
-  <strong>Working proof of concept.</strong> This is not a customer deployment or a production Product Operations platform. It is a working prototype built to test workflow design, artifact continuity, deterministic guardrails, and the quality limits of AI-generated product documentation.
-  <ul style="margin-top:10px;padding-left:18px;display:flex;flex-direction:column;gap:6px;">
-    <li><strong>Working prototype:</strong> browser tools, structured handoffs, sample outputs, selected code-based checks, run-file export, and Jira CSV export.</li>
-    <li><strong>Fixture-backed demonstration:</strong> fictional PetHealth evidence records shaped like possible enterprise inputs. They are not live integrations or customer data.</li>
-    <li><strong>Target architecture:</strong> live MCP connections, scheduled agents, authenticated approvals, shared workspaces, audit services, Jira write-back, and post-release outcome monitoring. These are designed, not built.</li>
+  <strong>Status.</strong> A single-user prototype running on fictional PetHealth data. It hasn&rsquo;t been used inside a customer organization, and live data connections, signed approvals, and Jira write-back are proposed, not built.
+  <p style="margin-top:8px;"><strong>Scope.</strong> The tools support Product Management work; designing them was Product Operations work. Background: <a href="AI-native-prodops/AI-prodops-overview.html" style="color:var(--accent);font-weight:700;">where this sits between AI assistance and agentic operations</a>, <a href="AI-native-prodops/prodops-network.html" style="color:var(--accent);font-weight:700;">the proposed architecture</a>, and <a href="AI-native-prodops/rebuild-retrospective.html" style="color:var(--accent);font-weight:700;">how the tools were rebuilt</a>.</p>
+</div>
+
+<div class="api-note">
+  <strong>How it runs.</strong> Everything runs in your browser. Tools that call Claude use your own API key, sent straight to Anthropic, and every step can be inspected without a key through a worked example. Records stay in your browser and can be downloaded as a run file. There are no accounts and no server-side records.
+</div>
+
+<div class="steps">
+  <div class="steps-head">
+    <h2 class="steps-title">The <em>nine steps</em></h2>
+    <a class="steps-link" href="AI-native-prodops/document-flow.html">Inputs and outputs for each step &#8599;</a>
+  </div>
+  <p class="steps-intro">Each card says what the tool drafts, what the code checks, and what a person has to review.</p>
+  <ol class="step-grid">
+    <li class="step">
+      <div class="step-num">01 · Discover</div>
+      <a class="step-name" href="persona-generator/persona-index.html">Persona Generator</a>
+      <p class="step-desc">Turns a job statement and role context into a persona card. No AI call.</p>
+      <p class="step-meta"><strong>Review:</strong> whether the persona reflects evidence or a convenient composite.</p>
+      <div class="step-links"><a href="persona-generator/persona-index.html">Open tool &#8599;</a></div>
+    </li>
+    <li class="step">
+      <div class="step-num">02 · Map</div>
+      <a class="step-name" href="journey-map/">Journey Map</a>
+      <p class="step-desc">Maps the customer journey stage by stage and passes opportunity seeds to intake. Optional AI fill; opens with a PetHealth example.</p>
+      <p class="step-meta"><strong>Review:</strong> which parts were observed and which are the team’s assumptions.</p>
+      <div class="step-links"><a href="journey-map/">Open tool &#8599;</a></div>
+    </li>
+    <li class="step">
+      <div class="step-num">03 · Intake</div>
+      <a class="step-name" href="feature-intake/">Initiative Intake</a>
+      <p class="step-desc">Four AI calls: weigh the initiative against competing ones, draft candidate epics, record their riskiest assumptions, and propose how to measure benefits.</p>
+      <p class="step-meta"><strong>Review:</strong> invented context, generic epics, and every assumption and metric.</p>
+      <div class="step-links"><a href="feature-intake/demo.html">Sample run &#8599;</a> <a href="feature-intake/">Open tool &#8599;</a></div>
+    </li>
+    <li class="step">
+      <div class="step-num">04 · Justify</div>
+      <a class="step-name" href="business-case/">Business Cases</a>
+      <p class="step-desc">Drafts a business case for each epic, with a rough effort estimate the prioritizer uses.</p>
+      <p class="step-meta"><strong>Review:</strong> costs, benefits, effort, and strategic claims.</p>
+      <div class="step-links"><a href="business-case/#examples">Example gallery &#8599;</a> <a href="business-case/">Open tool &#8599;</a></div>
+    </li>
+    <li class="step">
+      <div class="step-num">05 · Rank</div>
+      <a class="step-name" href="portfolio-wsjf/">Epic Prioritizer</a>
+      <p class="step-desc">Two AI calls propose WSJF and RICE inputs. The tool ranks the epics and draws a funding cutoff.</p>
+      <p class="step-meta"><strong>Code checks:</strong> recalculates every score and ties job size to the business-case effort.</p>
+      <p class="step-meta"><strong>Review:</strong> the inputs. Someone has to own the weighting decision.</p>
+      <div class="step-links"><a href="portfolio-wsjf/demo.html">Sample run &#8599;</a> <a href="portfolio-wsjf/">Open tool &#8599;</a></div>
+    </li>
+    <li class="step">
+      <div class="step-num">06 · Schedule</div>
+      <a class="step-name" href="roadmap/">Roadmap &amp; Milestones</a>
+      <p class="step-desc">One AI call proposes a milestone plan over up to 18 months, funded epics first.</p>
+      <p class="step-meta"><strong>Review:</strong> capacity, dependencies, commitments, and release assumptions.</p>
+      <div class="step-links"><a href="roadmap/demo.html">Sample run &#8599;</a> <a href="roadmap/">Open tool &#8599;</a></div>
+    </li>
+    <li class="step">
+      <div class="step-num">07 · Spec</div>
+      <a class="step-name" href="docs-generator/">Business Documents</a>
+      <p class="step-desc">Two AI calls draft a business requirements document (BRD) for one funded epic and mark each requirement explicit, inferred, or assumed.</p>
+      <p class="step-meta"><strong>Code checks:</strong> refuses epics below the funding cutoff.</p>
+      <p class="step-meta"><strong>Review:</strong> non-functional thresholds, stakeholders, and financial claims without evidence.</p>
+      <div class="step-links"><a href="docs-generator/demo.html">Sample run &#8599;</a> <a href="docs-generator/">Open tool &#8599;</a></div>
+    </li>
+    <li class="step">
+      <div class="step-num">08 · Plan</div>
+      <a class="step-name" href="backlog-builder/">Backlog Builder</a>
+      <p class="step-desc">Five AI calls draft features, stories with acceptance criteria, a solution outline, security and user-acceptance test plans, and documentation.</p>
+      <p class="step-meta"><strong>Code checks:</strong> computes requirement coverage, and won’t accept a BRD until a named person confirms or defers each assumed requirement.</p>
+      <p class="step-meta"><strong>Review:</strong> feasibility, testability, and whether “covered” really means satisfied.</p>
+      <div class="step-links"><a href="backlog-builder/demo.html">Sample run &#8599;</a> <a href="backlog-builder/">Open tool &#8599;</a></div>
+    </li>
+    <li class="step">
+      <div class="step-num">09 · Deliver</div>
+      <a class="step-name" href="sprint-plan/">Sprint Planner</a>
+      <p class="step-desc">Two AI calls draft MVP scope, a sprint plan, baseline and worst-case estimates, and a RAID log (risks, assumptions, issues, dependencies), then export a CSV for Jira’s bulk import.</p>
+      <p class="step-meta"><strong>Code checks:</strong> rechecks sprint load and dependency order.</p>
+      <p class="step-meta"><strong>Review:</strong> team capacity, and the CSV before you import it.</p>
+      <div class="step-links"><a href="sprint-plan/demo.html">Sample run &#8599;</a> <a href="sprint-plan/">Open tool &#8599;</a></div>
+    </li>
+  </ol>
+
+  <div class="steps-head" style="margin-top:40px;">
+    <h2 class="steps-title">Two tools <em>outside the chain</em></h2>
+  </div>
+  <ul class="step-grid step-grid-2">
+    <li class="step">
+      <div class="step-num">Strategy · Working prototype</div>
+      <a class="step-name" href="hoshin-kanri/">Hoshin Kanri + V2MOM</a>
+      <p class="step-desc">An experiment in laying a V2MOM (vision, values, methods, obstacles, measures) onto a Hoshin Kanri X-matrix, with an optional AI cleanup pass.</p>
+      <div class="step-links"><a href="hoshin-kanri/">Open tool &#8599;</a></div>
+    </li>
+    <li class="step">
+      <div class="step-num">Measurement · In development</div>
+      <a class="step-name" href="prod-ops-radar/prod-ops-radar-index.html">Product Ops Health Radar</a>
+      <p class="step-desc">A self-assessment across nine dimensions, five product operations indicators and the four DORA delivery metrics. You paste its output into an AI tool for analysis.</p>
+      <div class="step-links"><a href="prod-ops-radar/prod-ops-radar-index.html">Open tool &#8599;</a></div>
+    </li>
   </ul>
 </div>
-
-<div class="api-note" style="border-color:var(--accent2);background:rgba(200,102,42,.04);">
-  <strong>Scope: the tools support Product Management work; designing them is Product Operations work.</strong> Using a six-area view of Product Operations to scope the project, the toolchain works with three of them: <strong>Data Collection</strong> (customer and market evidence feeding the persona, journey, and intake tools), <strong>Feedback Management</strong> (support tickets, sales notes, and user requests synthesized into initiatives and business cases), and <strong>Roadmap Alignment</strong> (prioritizing initiatives by data, strategy, and capacity in the epic prioritizer and roadmap). It does not cover <strong>Release Operations</strong> (feature flags, beta testing, deployment communications), <strong>Enablement and Training</strong> (preparing sales, marketing, and support for launches), or <strong>Performance Analytics</strong> (measuring post-launch impact against KPIs). See <a href="AI-native-prodops/AI-prodops-overview.html#divide" style="color:var(--accent2);font-weight:700;">how the work splits between PM and Product Operations &#8599;</a>.
-</div>
-
-<div class="api-note">
-  <strong>Evaluate the working example:</strong> follow one fictional initiative from customer context through a Jira-ready delivery plan in the <a href="AI-native-prodops/case-study-pethealth.html" style="color:var(--accent);font-weight:700;">end-to-end PetHealth case study</a>. <strong>Understand the implementation:</strong> review the stack, data contracts, deterministic checks, and limitations in the <a href="AI-native-prodops/technical-notes.html" style="color:var(--accent);font-weight:700;">technical notes</a>. <strong>See how it got this way:</strong> the tools looked connected and weren't &mdash; a first-person retrospective on the rebuild, the guardrails, and what the process taught, in <a href="AI-native-prodops/rebuild-retrospective.html" style="color:var(--accent);font-weight:700;">the rebuild retrospective</a>. <strong>Join the Limited Evaluation Beta:</strong> test the prototype with a fictional, public, or sanitized initiative using the <a href="AI-native-prodops/for-evaluators.html" style="color:var(--accent);font-weight:700;">evaluation guide</a>.
-</div>
-
-<div class="api-note">
-  <strong>How the workflow operates:</strong> The nine tools share structured state in the browser. A practitioner initiates each step, reviews the draft, makes corrections where needed, and decides whether to continue. Some tools use multi-step model calls; others are primarily deterministic browser interfaces. The workflow does not autonomously choose its own objective, select tools, or operate enterprise systems.
-  <p style="margin-top:8px;">Several tools can generate new content by calling the Claude API directly from your browser with a visitor-supplied key. Other tools are client-side. Every stage can be inspected without a key through a worked example or its non-generative interface, but generating new AI output requires a key in the tools that use the model. State is stored locally in the browser and can be downloaded as a run file. There are no user accounts, team workspaces, or server-side project records.</p>
-</div>
-
-<div class="api-note">
-  <strong>Review gates and where the workflow could extend:</strong> Most tools break their work into multiple steps, and each step is a human review point: the practitioner sees the draft before deciding whether it carries forward. Beyond that review, each step is also a natural extension point for supplying additional context, currently by pasting it in directly.
-  <p style="margin-top:8px;">In the target architecture, that extension point could be served by knowledge management agents: services that pull relevant material from connected systems, contextualize it against the step at hand, and prioritize what's worth surfacing to the reviewer before a draft is generated. That layer is designed, not built. Today, a step only knows what the practitioner supplies to it.</p>
-</div>
-
-<div class="continuum-strip">
-  <div class="continuum-label">One connected workflow</div>
-  <div class="continuum-diagram">
-
-    <div class="continuum-node">
-      <div class="continuum-node-num">01 — DISCOVER</div>
-      <div class="continuum-node-name">Persona generator</div>
-      <a href="persona-generator/persona-index.html" class="continuum-node-tool">Open ↗</a>
-    </div>
-
-    <div class="continuum-node">
-      <div class="continuum-node-num">02 — MAP</div>
-      <div class="continuum-node-name">Journey map</div>
-      <a href="journey-map/" class="continuum-node-tool">Open ↗</a>
-    </div>
-
-    <div class="continuum-node">
-      <div class="continuum-node-num">03 — INTAKE</div>
-      <div class="continuum-node-name">Initiative intake</div>
-      <a href="feature-intake/" class="continuum-node-tool">Open ↗</a>
-    </div>
-
-    <div class="continuum-node">
-      <div class="continuum-node-num">04 — JUSTIFY</div>
-      <div class="continuum-node-name">Business cases</div>
-      <a href="business-case/" class="continuum-node-tool">Open ↗</a>
-    </div>
-
-    <div class="continuum-node">
-      <div class="continuum-node-num">05 — RANK</div>
-      <div class="continuum-node-name">Epic prioritizer</div>
-      <a href="portfolio-wsjf/" class="continuum-node-tool">Open ↗</a>
-    </div>
-
-    <div class="continuum-node">
-      <div class="continuum-node-num">06 — SCHEDULE</div>
-      <div class="continuum-node-name">Roadmap &amp; milestones</div>
-      <a href="roadmap/" class="continuum-node-tool">Open ↗</a>
-    </div>
-
-    <div class="continuum-node">
-      <div class="continuum-node-num">07 — SPEC</div>
-      <div class="continuum-node-name">Business documents</div>
-      <a href="docs-generator/" class="continuum-node-tool">Open ↗</a>
-    </div>
-
-    <div class="continuum-node">
-      <div class="continuum-node-num">08 — PLAN</div>
-      <div class="continuum-node-name">Backlog builder</div>
-      <a href="backlog-builder/" class="continuum-node-tool">Open ↗</a>
-    </div>
-
-    <div class="continuum-node">
-      <div class="continuum-node-num">09 — DELIVER</div>
-      <div class="continuum-node-name">Sprint planner</div>
-      <a href="sprint-plan/" class="continuum-node-tool">Open ↗</a>
-    </div>
-
-  </div>
-
-  <div class="continuum-arrow">
-    <div class="continuum-arrow-line"></div>
-    <div class="continuum-arrow-label">Each tool hands its output to the next</div>
-    <div class="continuum-arrow-line"></div>
-  </div>
-  <div style="text-align:center;margin-top:10px;">
-    <a href="AI-native-prodops/document-flow.html" style="font-size:12px;font-weight:700;color:var(--accent);text-decoration:none;">See the full document flow: BRD, Roadmap, Backlog, Jira export &#8599;</a>
-  </div>
-</div>
-
-<div class="tool-list">
-<div style="padding:40px 0 0;">
-  <ul style="list-style:none;padding-left:0;display:flex;flex-direction:column;gap:4px;">
-    <li><a href="#tool-01" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> JTBD + Enterprise Persona Generator</a></li>
-    <li><a href="#tool-02" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Customer Journey Map Builder</a></li>
-    <li><a href="#tool-03" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Initiative Intake</a></li>
-    <li><a href="#tool-04" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Business Cases</a></li>
-    <li><a href="#tool-05" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Epic Prioritizer</a></li>
-    <li><a href="#tool-06" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Roadmap &amp; Milestones</a></li>
-    <li><a href="#tool-07" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Business Documents</a></li>
-    <li><a href="#tool-08" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Backlog Builder</a></li>
-    <li><a href="#tool-09" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Sprint Planner &amp; Jira Export</a></li>
-    <li><a href="#tool-hoshin" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Hoshin Kanri + V2MOM Alignment</a></li>
-    <li><a href="#tool-radar" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--accent)'"><span style="color:var(--accent2);">→</span> Product Operations Health Radar</a></li>
-  </ul>
-</div>
-<div class="tool-row" id="tool-01">
-    <div class="tool-left">
-      <div class="tool-category">Enterprise User Research</div>
-      <div class="tool-name">JTBD + Enterprise<br><em>Persona Generator</em></div>
-      <div class="tool-status live">Working prototype</div>
-      <p class="tool-desc">Takes a rough user description and produces a detailed enterprise persona with Jobs to Be Done statement, org context, tech comfort, key interactions, and relationship friction, detailed enough to anchor a journey map.</p>
-      <div class="tool-workflow">
-        <div class="tool-workflow-label">Produces &middot; passes forward &middot; status &middot; human responsibility</div>
-        <div class="tool-workflow-text"><strong>Produces:</strong> Persona record. <strong>Passes forward:</strong> Persona context for journey mapping. <strong>Status:</strong> Working prototype &middot; Client-side. <strong>Human responsibility:</strong> Confirm that the persona reflects evidence rather than a convenient composite.</div>
-      </div>
-      <div class="tool-chips">
-        <span class="chip">Jobs to Be Done</span>
-        <span class="chip">Persona card</span>
-        <span class="chip">Key interactions</span>
-        <span class="chip">Relationship friction</span>
-        <span class="chip">Info preference</span>
-        <span class="chip">Copy to export</span>
-      </div>
-      <a href="persona-generator/persona-index.html" class="tool-cta">Open tool &#8599;</a>
-    </div>
-    <div class="tool-right">
-      <div class="tool-thumb">
-        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg">
-          <rect width="300" height="160" fill="#f7f7f7"/>
-          <!-- Header -->
-          <rect x="0" y="0" width="300" height="28" fill="#1a3a5c"/>
-          <text x="12" y="18" font-family="Inter,sans-serif" font-size="8" font-weight="800" fill="white" letter-spacing="0.5">PERSONA CARD</text>
-          <!-- Avatar circle -->
-          <circle cx="36" cy="66" r="18" fill="#e8e8e8" stroke="#1a3a5c" stroke-width="1.5"/>
-          <circle cx="36" cy="60" r="7" fill="#1a3a5c" fill-opacity="0.4"/>
-          <ellipse cx="36" cy="80" rx="11" ry="7" fill="#1a3a5c" fill-opacity="0.3"/>
-          <!-- Name and title -->
-          <text x="62" y="46" font-family="Inter,sans-serif" font-size="10" font-weight="900" fill="#0a0a0a">Marcus Chen</text>
-          <text x="62" y="57" font-family="Inter,sans-serif" font-size="7" fill="#6b6b6b">Software Engineer · PetHealth Member</text>
-          <!-- Quote -->
-          <rect x="62" y="63" width="140" height="20" rx="3" fill="#f0f4f8" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="68" y="72" font-family="Inter,sans-serif" font-size="6.5" font-style="italic" fill="#1a3a5c">"I just want to know it's working."</text>
-          <text x="68" y="79" font-family="Inter,sans-serif" font-size="6" fill="#6b6b6b">Until he needs it.</text>
-          <!-- JTBD block -->
-          <rect x="12" y="94" width="130" height="54" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="20" y="106" font-family="Inter,sans-serif" font-size="6" font-weight="700" fill="#c8662a" letter-spacing="0.5">JOBS TO BE DONE</text>
-          <text x="20" y="116" font-family="Inter,sans-serif" font-size="6" font-weight="700" fill="#6b6b6b">When</text>
-          <rect x="40" y="112" width="80" height="4" rx="2" fill="#e8e8e8"/>
-          <text x="20" y="126" font-family="Inter,sans-serif" font-size="6" font-weight="700" fill="#6b6b6b">I want to</text>
-          <rect x="48" y="122" width="80" height="4" rx="2" fill="#e8e8e8"/>
-          <text x="20" y="136" font-family="Inter,sans-serif" font-size="6" font-weight="700" fill="#6b6b6b">So I can</text>
-          <rect x="44" y="132" width="80" height="4" rx="2" fill="#e8e8e8"/>
-          <!-- Tech comfort bars -->
-          <rect x="150" y="94" width="138" height="54" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="158" y="106" font-family="Inter,sans-serif" font-size="6" font-weight="700" fill="#c8662a" letter-spacing="0.5">TECH COMFORT</text>
-          <text x="158" y="117" font-family="Inter,sans-serif" font-size="6" fill="#6b6b6b">Mobile App</text>
-          <rect x="196" y="112" width="80" height="5" rx="2" fill="#e8e8e8"/>
-          <rect x="196" y="112" width="72" height="5" rx="2" fill="#1a3a5c" fill-opacity="0.7"/>
-          <text x="158" y="129" font-family="Inter,sans-serif" font-size="6" fill="#6b6b6b">Web Portal</text>
-          <rect x="196" y="124" width="80" height="5" rx="2" fill="#e8e8e8"/>
-          <rect x="196" y="124" width="55" height="5" rx="2" fill="#1a3a5c" fill-opacity="0.7"/>
-          <text x="158" y="141" font-family="Inter,sans-serif" font-size="6" fill="#6b6b6b">Phone / Chat</text>
-          <rect x="196" y="136" width="80" height="5" rx="2" fill="#e8e8e8"/>
-          <rect x="196" y="136" width="30" height="5" rx="2" fill="#1a3a5c" fill-opacity="0.7"/>
-        </svg>
-      </div>
-      <div class="tool-right-label">What it produces</div>
-      <ul class="feature-list">
-        <li class="feature-item">Full persona card: name, title, department, tenure, reports-to, location</li>
-        <li class="feature-item">First-person quote, bio, wants and needs, frustrations</li>
-        <li class="feature-item">Technology comfort ratings across five relevant platforms</li>
-        <li class="feature-item">Information preference: how this person consumes data and why it matters for design</li>
-        <li class="feature-item">Key interactions table with color-coded friction, dependency, and reporting badges</li>
-        <li class="feature-item">Organizational impact of unmet job: three quantified consequences</li>
-        <li class="feature-item">Copy-to-clipboard export formatted for Miro, Figma, or product briefs</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="tool-row" id="tool-02">
-    <div class="tool-left">
-      <div class="tool-category">Customer Experience</div>
-      <div class="tool-name">Customer<br><em>Journey Map Builder</em></div>
-      <div class="tool-status live">Working prototype</div>
-      <p class="tool-desc">A journey map is only useful if it reflects what actually happens, not what teams assume. This tool provides an editable, stage-by-stage canvas for mapping customer actions, goals, touchpoints, emotions, and organizational responses, with a draggable sentiment curve and one-click AI export for analysis.</p>
-      <div class="tool-workflow">
-        <div class="tool-workflow-label">Produces &middot; passes forward &middot; status &middot; human responsibility</div>
-        <div class="tool-workflow-text"><strong>Produces:</strong> Journey map and structured opportunity seeds. <strong>Passes forward:</strong> Candidate pain clusters for initiative framing. <strong>Status:</strong> Working prototype &middot; Client-side, with an optional AI fill that uses your API key. <strong>Human responsibility:</strong> Separate observed evidence from team assumptions.</div>
-      </div>
-      <div class="tool-chips">
-        <span class="chip">Editable stages</span>
-        <span class="chip">User sentiment curve</span>
-        <span class="chip">Touchpoints</span>
-        <span class="chip">Pain points</span>
-        <span class="chip">Business goals</span>
-        <span class="chip">Export for AI</span>
-      </div>
-      <a href="journey-map/" class="tool-cta">Open tool &#8599;</a>
-    </div>
-    <div class="tool-right">
-      <div class="tool-thumb">
-        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg">
-          <rect width="300" height="160" fill="#f7f7f7"/>
-          <!-- Phase banner -->
-          <rect x="0" y="0" width="300" height="18" fill="#1a3a5c"/>
-          <rect x="40" y="0" width="65" height="18" fill="#1a3a5c"/>
-          <rect x="105" y="0" width="65" height="18" fill="#2a6b6b"/>
-          <rect x="170" y="0" width="65" height="18" fill="#c8662a"/>
-          <rect x="235" y="0" width="65" height="18" fill="#7c5cbf"/>
-          <text x="72" y="12" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="800" fill="white" letter-spacing="0.5">PRE-ENROLL</text>
-          <text x="137" y="12" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="800" fill="white" letter-spacing="0.3">ACCOUNT MGMT</text>
-          <text x="202" y="12" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="800" fill="white" letter-spacing="0.3">CLAIMS</text>
-          <text x="267" y="12" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="800" fill="white" letter-spacing="0.3">RENEWAL</text>
-          <!-- Row label column -->
-          <rect x="0" y="18" width="40" height="142" fill="#c8662a"/>
-          <text x="20" y="48" text-anchor="middle" font-family="Inter,sans-serif" font-size="5" font-weight="800" fill="white" transform="rotate(-90,20,48)">ACTIVITIES</text>
-          <text x="20" y="80" text-anchor="middle" font-family="Inter,sans-serif" font-size="5" font-weight="800" fill="white" transform="rotate(-90,20,80)">TOUCHPOINTS</text>
-          <text x="20" y="112" text-anchor="middle" font-family="Inter,sans-serif" font-size="5" font-weight="800" fill="white" transform="rotate(-90,20,112)">SENTIMENT</text>
-          <text x="20" y="144" text-anchor="middle" font-family="Inter,sans-serif" font-size="5" font-weight="800" fill="white" transform="rotate(-90,20,144)">KPIs</text>
-          <!-- Grid lines horizontal -->
-          <line x1="40" y1="58" x2="300" y2="58" stroke="#e8e8e8" stroke-width="0.75"/>
-          <line x1="40" y1="95" x2="300" y2="95" stroke="#e8e8e8" stroke-width="0.75"/>
-          <line x1="40" y1="128" x2="300" y2="128" stroke="#e8e8e8" stroke-width="0.75"/>
-          <!-- Grid lines vertical -->
-          <line x1="105" y1="18" x2="105" y2="160" stroke="#e8e8e8" stroke-width="0.75"/>
-          <line x1="170" y1="18" x2="170" y2="160" stroke="#e8e8e8" stroke-width="0.75"/>
-          <line x1="235" y1="18" x2="235" y2="160" stroke="#e8e8e8" stroke-width="0.75"/>
-          <!-- Cell content squiggles -->
-          <rect x="46" y="24" width="50" height="4" rx="2" fill="#d8e4ef"/>
-          <rect x="46" y="32" width="38" height="4" rx="2" fill="#d8e4ef"/>
-          <rect x="46" y="40" width="44" height="4" rx="2" fill="#d8e4ef"/>
-          <rect x="46" y="48" width="30" height="4" rx="2" fill="#d8e4ef"/>
-          <rect x="111" y="24" width="48" height="4" rx="2" fill="#d8e4ef"/>
-          <rect x="111" y="32" width="36" height="4" rx="2" fill="#d8e4ef"/>
-          <rect x="111" y="40" width="52" height="4" rx="2" fill="#d8e4ef"/>
-          <rect x="176" y="24" width="44" height="4" rx="2" fill="#d8e4ef"/>
-          <rect x="176" y="32" width="55" height="4" rx="2" fill="#d8e4ef"/>
-          <rect x="176" y="40" width="32" height="4" rx="2" fill="#d8e4ef"/>
-          <rect x="241" y="24" width="46" height="4" rx="2" fill="#d8e4ef"/>
-          <rect x="241" y="32" width="38" height="4" rx="2" fill="#d8e4ef"/>
-          <rect x="241" y="40" width="50" height="4" rx="2" fill="#d8e4ef"/>
-          <!-- Touchpoint icons row -->
-          <circle cx="72" cy="76" r="5" fill="#1a3a5c" fill-opacity="0.2" stroke="#1a3a5c" stroke-width="1"/>
-          <text x="72" y="79" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" fill="#1a3a5c">📱</text>
-          <circle cx="137" cy="76" r="5" fill="#2a6b6b" fill-opacity="0.2" stroke="#2a6b6b" stroke-width="1"/>
-          <text x="137" y="79" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" fill="#2a6b6b">🌐</text>
-          <circle cx="202" cy="76" r="5" fill="#c8662a" fill-opacity="0.2" stroke="#c8662a" stroke-width="1"/>
-          <text x="202" y="79" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" fill="#c8662a">📋</text>
-          <circle cx="267" cy="76" r="5" fill="#7c5cbf" fill-opacity="0.2" stroke="#7c5cbf" stroke-width="1"/>
-          <text x="267" y="79" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" fill="#7c5cbf">✉️</text>
-          <!-- Sentiment curve -->
-          <rect x="40" y="95" width="260" height="33" fill="white"/>
-          <polyline points="55,120 105,106 150,124 202,104 252,108 290,112" fill="none" stroke="#1a3a5c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- KPI row -->
-          <rect x="46" y="133" width="44" height="4" rx="2" fill="#d8e4ef"/>
-          <rect x="111" y="133" width="52" height="4" rx="2" fill="#d8e4ef"/>
-          <rect x="176" y="133" width="36" height="4" rx="2" fill="#d8e4ef"/>
-          <rect x="241" y="133" width="48" height="4" rx="2" fill="#d8e4ef"/>
-          <rect x="46" y="141" width="32" height="4" rx="2" fill="#d8e4ef"/>
-          <rect x="111" y="141" width="44" height="4" rx="2" fill="#d8e4ef"/>
-          <rect x="176" y="141" width="50" height="4" rx="2" fill="#d8e4ef"/>
-          <rect x="241" y="141" width="36" height="4" rx="2" fill="#d8e4ef"/>
-        </svg>
-      </div>
-      <div class="tool-right-label">What it produces</div>
-      <ul class="feature-list">
-        <li class="feature-item">Draggable sentiment curve that captures emotional highs and lows across the journey</li>
-        <li class="feature-item">Row-level data for activities, goals, touchpoints, pain points, and business OKRs</li>
-        <li class="feature-item">Toggleable rows: show only the layers relevant to your current audience</li>
-        <li class="feature-item">Add and remove stages dynamically without losing other row data</li>
-        <li class="feature-item">One-click plain-text export structured for pasting directly into an AI prompt</li>
-        <li class="feature-item">JSON export for version control or integration into other tools</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="tool-row" id="tool-03">
-    <div class="tool-left">
-      <div class="tool-category">AI-assisted workflow</div>
-      <div class="tool-name">Initiative<br><em>Intake</em></div>
-      <div class="tool-status live">Working prototype</div>
-      <p class="tool-desc">Four sequential AI calls that weigh one Initiative against competing initiatives with strategy, budget, and demand evidence, then decompose it into front-stage Business Epics and backstage Architecture Epics, exploring both together, splitting only where an epic genuinely needs runway before front-stage work can start. Each epic gets its riskiest Demand/Feasibility/Viability assumptions and a benefits-realization plan naming the measurement instrumentation that must be built.</p>
-      <div class="tool-workflow">
-        <div class="tool-workflow-label">Produces &middot; passes forward &middot; status &middot; human responsibility</div>
-        <div class="tool-workflow-text"><strong>Produces:</strong> Epic set, assumption map, and measurement-enabler proposals. <strong>Passes forward:</strong> Candidate epics for business-case development. <strong>Status:</strong> Working prototype &middot; Multi-step AI chain &middot; Fixture-backed evidence available. <strong>Human responsibility:</strong> Correct invented context, reject generic epics, and validate every assumption and proposed metric.</div>
-      </div>
-      <div class="tool-chips">
-        <span class="chip">Portfolio tradeoff</span>
-        <span class="chip">Business + Architecture epics</span>
-        <span class="chip">D/F/V assumptions</span>
-        <span class="chip">Measurement enablers</span>
-        <span class="chip">Evidence citations</span>
-      </div>
-      <a href="feature-intake/" class="tool-cta">Open tool &#8599;</a>
-    </div>
-    <div class="tool-right">
-      <div class="tool-thumb">
-        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg">
-          <rect width="300" height="160" fill="#f7f7f7"/>
-          <!-- Step pipeline bar -->
-          <rect x="0" y="0" width="300" height="22" fill="#0a0a0a"/>
-          <rect x="8"   y="5" width="62" height="12" rx="3" fill="#1a3a5c"/>
-          <rect x="78"  y="5" width="62" height="12" rx="3" fill="#7c5cbf"/>
-          <rect x="148" y="5" width="62" height="12" rx="3" fill="#2a6b6b"/>
-          <rect x="218" y="5" width="74" height="12" rx="3" fill="#c8662a"/>
-          <text x="39"  y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">01 TRADEOFF</text>
-          <text x="109" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">02 EPICS</text>
-          <text x="179" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">03 D/F/V</text>
-          <text x="255" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">04 BENEFITS</text>
-          <!-- Step 1 card -->
-          <rect x="8" y="28" width="130" height="58" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="16" y="40" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#1a3a5c" letter-spacing="0.5">INITIATIVE</text>
-          <rect x="16" y="44" width="100" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="16" y="52" width="114" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="16" y="60" width="80" height="4" rx="2" fill="#e8e8e8"/>
-          <text x="16" y="74" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#1a3a5c" letter-spacing="0.5">TRADEOFF</text>
-          <rect x="16" y="77" width="40" height="5" rx="2" fill="#2a6b6b" fill-opacity="0.3"/>
-          <text x="18" y="82" font-family="Inter,sans-serif" font-size="5" font-weight="700" fill="#2a6b6b">FUNDED</text>
-          <!-- Step 2 card -->
-          <rect x="8" y="92" width="130" height="62" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="16" y="103" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#7c5cbf" letter-spacing="0.5">EPIC-03</text>
-          <rect x="16" y="107" width="114" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="16" y="115" width="90" height="4" rx="2" fill="#e8e8e8"/>
-          <text x="16" y="128" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#7c5cbf" letter-spacing="0.5">KIND / CASE</text>
-          <rect x="16" y="131" width="55" height="5" rx="2" fill="#7c5cbf" fill-opacity="0.15"/>
-          <text x="18" y="136" font-family="Inter,sans-serif" font-size="5" font-weight="700" fill="#7c5cbf">BUSINESS</text>
-          <!-- Step 3+4 right column -->
-          <rect x="148" y="28" width="144" height="58" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="156" y="40" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#2a6b6b" letter-spacing="0.5">DEMAND / FEASIBILITY / VIABILITY</text>
-          <rect x="156" y="44" width="120" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="248" y="43" width="22" height="6" rx="2" fill="#b03030" fill-opacity="0.15"/>
-          <text x="249" y="48" font-family="Inter,sans-serif" font-size="5" font-weight="700" fill="#b03030">DMD</text>
-          <rect x="156" y="53" width="120" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="248" y="52" width="22" height="6" rx="2" fill="#c8662a" fill-opacity="0.15"/>
-          <text x="249" y="57" font-family="Inter,sans-serif" font-size="5" font-weight="700" fill="#c8662a">FEAS</text>
-          <rect x="156" y="63" width="120" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="248" y="62" width="22" height="6" rx="2" fill="#2a6b6b" fill-opacity="0.15"/>
-          <text x="249" y="67" font-family="Inter,sans-serif" font-size="5" font-weight="700" fill="#2a6b6b">VIAB</text>
-          <!-- Benefits realization -->
-          <rect x="148" y="92" width="144" height="62" rx="4" fill="#0a0a0a"/>
-          <text x="156" y="104" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="rgba(255,255,255,0.45)" letter-spacing="0.5">BENEFITS REALIZATION</text>
-          <text x="156" y="118" font-family="Inter,sans-serif" font-size="9.5" font-weight="900" fill="#c8662a">≥60% engaged</text>
-          <rect x="156" y="122" width="128" height="4" rx="2" fill="rgba(255,255,255,0.12)"/>
-          <rect x="156" y="130" width="110" height="4" rx="2" fill="rgba(255,255,255,0.12)"/>
-          <text x="156" y="146" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="rgba(255,255,255,0.35)" letter-spacing="0.5">3 MEASUREMENT ENABLERS</text>
-        </svg>
-      </div>
-      <div class="tool-right-label">What it produces</div>
-      <ul class="feature-list">
-        <li class="feature-item">A framed Initiative weighed against competing initiatives with cited strategy, budget, and demand evidence</li>
-        <li class="feature-item">3&ndash;6 epics in two kinds, front-stage Business and backstage Architecture, each with a problem statement and JTBD</li>
-        <li class="feature-item">Per-epic Demand, Feasibility, and Viability assumptions: the risk surface the Business Case builds on</li>
-        <li class="feature-item">A benefits-realization plan per epic: KPIs, baseline, and the measurement enablers that must be built</li>
-        <li class="feature-item">Framing note explaining which enablers earned a separate architecture epic, and why</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="tool-row" id="tool-04">
-      <div class="tool-left">
-      <div class="tool-category">AI-assisted workflow</div>
-      <div class="tool-name">Business<br><em>Cases</em></div>
-      <div class="tool-status live">Working prototype</div>
-      <p class="tool-desc">One executive-ready pitch per epic, Business or Architecture, grounded in financial and demand evidence, with a rough order-of-magnitude effort estimate for the Epic Prioritizer's WSJF/RICE job size. Pitch framing follows the epic's caseType, not its kind: a backstage Architecture epic with a customer-facing case (fraud analytics protecting member trust) still gets the customer-value narrative, not a generic technical writeup.</p>
-      <div class="tool-workflow">
-        <div class="tool-workflow-label">Produces &middot; passes forward &middot; status &middot; human responsibility</div>
-        <div class="tool-workflow-text"><strong>Produces:</strong> Business-case record per epic. <strong>Passes forward:</strong> Candidate records for prioritization. <strong>Status:</strong> Working prototype &middot; AI-assisted. <strong>Human responsibility:</strong> Verify costs, benefits, effort, strategic claims, and the cost of inaction.</div>
-      </div>
-      <div class="tool-chips">
-        <span class="chip">One case per epic</span>
-        <span class="chip">caseType-driven framing</span>
-        <span class="chip">Rough LOE effort</span>
-        <span class="chip">Exec-summary seed</span>
-        <span class="chip">Evidence citations</span>
-        <span class="chip">Saved for prioritizer</span>
-      </div>
-      <a href="business-case/" class="tool-cta">Open tool &#8599;</a>
-    </div>
-    <div class="tool-right">
-      <div class="tool-thumb">
-        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg">
-          <rect width="300" height="160" fill="#f7f7f7"/>
-          <!-- Header bar -->
-          <rect x="0" y="0" width="300" height="28" fill="#1a3a5c"/>
-          <text x="12" y="18" font-family="Inter,sans-serif" font-size="8" font-weight="800" fill="white" letter-spacing="0.5">EPIC BUSINESS CASE</text>
-          <rect x="220" y="8" width="64" height="12" rx="3" fill="#c8662a"/>
-          <text x="252" y="17" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" font-weight="700" fill="white">EPIC-03</text>
-          <!-- Executive summary block -->
-          <rect x="12" y="36" width="186" height="54" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="20" y="48" font-family="Inter,sans-serif" font-size="6.5" font-weight="700" fill="#c8662a" letter-spacing="0.8">EXECUTIVE PITCH</text>
-          <rect x="20" y="52" width="120" height="5" rx="2" fill="#e8e8e8"/>
-          <rect x="20" y="61" width="160" height="5" rx="2" fill="#e8e8e8"/>
-          <rect x="20" y="70" width="140" height="5" rx="2" fill="#e8e8e8"/>
-          <rect x="20" y="79" width="100" height="5" rx="2" fill="#e8e8e8"/>
-          <!-- ROI box -->
-          <rect x="206" y="36" width="82" height="54" rx="4" fill="#1a3a5c"/>
-          <text x="247" y="54" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" font-weight="900" fill="white">3.2x</text>
-          <text x="247" y="67" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" font-weight="700" fill="rgba(255,255,255,0.6)">ROI</text>
-          <text x="247" y="78" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" fill="rgba(255,255,255,0.5)">18 mo. payback</text>
-          <!-- Bottom sections -->
-          <rect x="12" y="98" width="88" height="50" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="20" y="110" font-family="Inter,sans-serif" font-size="6" font-weight="700" fill="#c8662a" letter-spacing="0.5">PEOPLE IMPACT</text>
-          <rect x="20" y="115" width="60" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="20" y="123" width="70" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="20" y="131" width="50" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="20" y="139" width="65" height="4" rx="2" fill="#e8e8e8"/>
-
-          <rect x="108" y="98" width="88" height="50" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="116" y="110" font-family="Inter,sans-serif" font-size="6" font-weight="700" fill="#c8662a" letter-spacing="0.5">RISKS OF INACTION</text>
-          <rect x="116" y="115" width="55" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="116" y="123" width="70" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="116" y="131" width="45" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="116" y="139" width="60" height="4" rx="2" fill="#e8e8e8"/>
-
-          <rect x="204" y="98" width="84" height="50" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="212" y="110" font-family="Inter,sans-serif" font-size="6" font-weight="700" fill="#c8662a" letter-spacing="0.5">COST / BENEFIT</text>
-          <rect x="212" y="115" width="50" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="212" y="123" width="65" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="212" y="131" width="40" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="212" y="139" width="58" height="4" rx="2" fill="#e8e8e8"/>
-        </svg>
-      </div>
-      <div class="tool-right-label">What it produces</div>
-      <ul class="feature-list">
-        <li class="feature-item">Value and cost statements framed by the epic's caseType: technical or customer-facing</li>
-        <li class="feature-item">Rough order-of-magnitude effort (LOE), anchoring the prioritizer's job size in code</li>
-        <li class="feature-item">Strategic alignment statement tying the epic back to the initiative</li>
-        <li class="feature-item">An exec-summary seed that carries forward verbatim into the BRD</li>
-        <li class="feature-item">Evidence citations from fixture-backed financial and demand records</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="tool-row" id="tool-05">
-    <div class="tool-left">
-      <div class="tool-category">AI-assisted workflow</div>
-      <div class="tool-name">Epic<br><em>Prioritizer</em></div>
-      <div class="tool-status live">Working prototype</div>
-      <p class="tool-desc">Two sequential AI calls that rank every Business and Architecture epic in one pass, scored on BOTH the WSJF components and the RICE components at once, so the board toggles between methods instantly with no re-run. Architecture epics take their business value from what they unblock and typically dominate risk-reduction; the board recomputes every score in code and anchors job size to the epic's Business Case effort.</p>
-      <div class="tool-workflow">
-        <div class="tool-workflow-label">Produces &middot; passes forward &middot; status &middot; human responsibility</div>
-        <div class="tool-workflow-text"><strong>Produces:</strong> Ranked epic set and a proposed funding line. <strong>Passes forward:</strong> Prioritization record for roadmap sequencing. <strong>Status:</strong> Working prototype &middot; AI-assisted inputs &middot; Deterministic calculations. <strong>Human responsibility:</strong> Validate the input values and own the weighting decision. A correctly calculated score is not automatically a defensible investment decision.</div>
-      </div>
-      <div class="tool-chips">
-        <span class="chip">Evidence digest with quotes</span>
-        <span class="chip">WSJF ⇄ RICE toggle</span>
-        <span class="chip">Editable weights</span>
-        <span class="chip">Architecture-epic economics</span>
-        <span class="chip">Funding line</span>
-        <span class="chip">Weight rationale citations</span>
-      </div>
-      <a href="portfolio-wsjf/" class="tool-cta">Open tool &#8599;</a>
-    </div>
-    <div class="tool-right">
-      <div class="tool-thumb">
-        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg">
-          <rect width="300" height="160" fill="#f7f7f7"/>
-          <rect x="0" y="0" width="300" height="22" fill="#0a0a0a"/>
-          <rect x="8"   y="5" width="130" height="12" rx="3" fill="#1a3a5c"/>
-          <rect x="146" y="5" width="146" height="12" rx="3" fill="#2a6b6b"/>
-          <text x="73"  y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">01 EVIDENCE DIGEST</text>
-          <text x="219" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">02 WSJF + RICE</text>
-          <rect x="8" y="28" width="284" height="90" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="16" y="40" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#2a6b6b" letter-spacing="0.5">RANKING BOARD — RECOMPUTED IN CODE</text>
-          <text x="16" y="52" font-family="Inter,sans-serif" font-size="4.2" font-weight="700" fill="#6b6b6b">RANK</text>
-          <text x="34" y="52" font-family="Inter,sans-serif" font-size="4.2" font-weight="700" fill="#6b6b6b">EPIC</text>
-          <text x="248" y="52" font-family="Inter,sans-serif" font-size="4.2" font-weight="700" fill="#6b6b6b">SIZE</text>
-          <text x="276" y="52" font-family="Inter,sans-serif" font-size="4.2" font-weight="700" fill="#6b6b6b">WSJF</text>
-          <text x="18" y="64" font-family="DM Mono,monospace" font-size="6" font-weight="700" fill="#c8662a">1</text>
-          <text x="34" y="64" font-family="DM Mono,monospace" font-size="5" fill="#0a0a0a">Fraud &amp; Leakage Analytics</text>
-          <rect x="146" y="59" width="34" height="7" rx="2" fill="#c8662a"/>
-          <text x="163" y="64.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.6" font-weight="800" fill="white">ARCHITECTURE</text>
-          <text x="250" y="64" font-family="DM Mono,monospace" font-size="5" fill="#0a0a0a">5</text>
-          <text x="276" y="64" font-family="DM Mono,monospace" font-size="7" font-weight="700" fill="#0a0a0a">6.0</text>
-          <text x="18" y="76" font-family="DM Mono,monospace" font-size="6" font-weight="700" fill="#c8662a">2</text>
-          <text x="34" y="76" font-family="DM Mono,monospace" font-size="5" fill="#0a0a0a">Auto-Adjudication Engine</text>
-          <rect x="146" y="71" width="34" height="7" rx="2" fill="#c8662a"/>
-          <text x="163" y="76.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.6" font-weight="800" fill="white">ARCHITECTURE</text>
-          <text x="250" y="76" font-family="DM Mono,monospace" font-size="5" fill="#0a0a0a">8</text>
-          <text x="276" y="76" font-family="DM Mono,monospace" font-size="7" font-weight="700" fill="#0a0a0a">5.6</text>
-          <line x1="16" y1="82" x2="284" y2="82" stroke="#c8662a" stroke-width="1" stroke-dasharray="3,2"/>
-          <text x="16" y="90" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="#c8662a" letter-spacing="0.5">FUNDING LINE — TOP 3</text>
-          <text x="18" y="101" font-family="DM Mono,monospace" font-size="6" font-weight="700" fill="#9a9a9a">3</text>
-          <text x="34" y="101" font-family="DM Mono,monospace" font-size="5" fill="#9a9a9a">Real-Time Claim Status</text>
-          <rect x="146" y="96" width="28" height="7" rx="2" fill="#1a3a5c"/>
-          <text x="160" y="101" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.6" font-weight="800" fill="white">BUSINESS</text>
-          <text x="250" y="101" font-family="DM Mono,monospace" font-size="5" fill="#9a9a9a">3</text>
-          <text x="276" y="101" font-family="DM Mono,monospace" font-size="7" font-weight="700" fill="#9a9a9a">5.0</text>
-          <text x="16" y="113" font-family="Inter,sans-serif" font-size="4.2" font-style="italic" fill="#6b6b6b">Raise RR|OE weight to 2: fraud analytics overtakes claim status for #1.</text>
-          <rect x="8" y="124" width="140" height="30" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="16" y="135" font-family="Inter,sans-serif" font-size="4.5" font-weight="700" fill="#1a3a5c" letter-spacing="0.4">WSJF — BV / TC / RR|OE</text>
-          <rect x="16" y="139" width="100" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="16" y="146" width="80" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="152" y="124" width="140" height="30" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="160" y="135" font-family="Inter,sans-serif" font-size="4.5" font-weight="700" fill="#2a6b6b" letter-spacing="0.4">RICE — REACH / IMPACT / CONF.</text>
-          <rect x="160" y="139" width="100" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="160" y="146" width="80" height="4" rx="2" fill="#e8e8e8"/>
-        </svg>
-      </div>
-      <div class="tool-right-label">What it produces</div>
-      <ul class="feature-list">
-        <li class="feature-item">Evidence digest: value claims quoted verbatim with confidence marks, urgency, risk retired, and gaps</li>
-        <li class="feature-item">Both WSJF and RICE components scored in one pass: the board toggles methods with no re-run</li>
-        <li class="feature-item">Architecture-epic economics: scored on what they unblock, not zero-by-default</li>
-        <li class="feature-item">Editable weights with a one-click risk-weighted preset, citing leadership's rationale</li>
-        <li class="feature-item">A real funding line; funded epics flow to Roadmap &amp; Milestones</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="tool-row" id="tool-06">
-    <div class="tool-left">
-      <div class="tool-category">AI-assisted workflow</div>
-      <div class="tool-name">Roadmap<br><em>&amp; Milestones</em></div>
-      <div class="tool-status live">Working prototype</div>
-      <p class="tool-desc">One AI call that sequences every prioritized epic, funded this increment or profitable and awaiting capacity, into a milestone plan spanning up to 18 months. Funded epics fill the earliest release windows; the rest follow in rank order as capacity frees. The dependency list stays deliberately light: a named approval or a genuine architecture-epic runway prerequisite, nothing more.</p>
-      <div class="tool-workflow">
-        <div class="tool-workflow-label">Produces &middot; passes forward &middot; status &middot; human responsibility</div>
-        <div class="tool-workflow-text"><strong>Produces:</strong> Roadmap and milestone proposal. <strong>Passes forward:</strong> Funded epic and release context for documentation. <strong>Status:</strong> Working prototype. <strong>Human responsibility:</strong> Validate capacity, dependencies, organizational commitments, and release assumptions.</div>
-      </div>
-      <div class="tool-chips">
-        <span class="chip">Up to 18-month horizon</span>
-        <span class="chip">Rank-ordered sequencing</span>
-        <span class="chip">Light dependency list</span>
-        <span class="chip">Release-on-demand stance</span>
-        <span class="chip">.md export</span>
-      </div>
-      <a href="roadmap/" class="tool-cta">Open tool &#8599;</a>
-    </div>
-    <div class="tool-right">
-      <div class="tool-thumb">
-        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg">
-          <rect width="300" height="160" fill="#f7f7f7"/>
-          <rect x="0" y="0" width="300" height="22" fill="#1a3a5c"/>
-          <text x="12" y="15" font-family="Inter,sans-serif" font-size="7.5" font-weight="800" fill="white" letter-spacing="0.5">ROADMAP &amp; MILESTONES</text>
-          <rect x="222" y="5" width="66" height="12" rx="3" fill="#2a6b6b"/>
-          <text x="255" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" font-weight="700" fill="white">18-MO PLAN</text>
-          <!-- Timeline axis -->
-          <line x1="16" y1="42" x2="284" y2="42" stroke="#cfcfcf" stroke-width="1.5"/>
-          <!-- Quarter ticks -->
-          <line x1="16" y1="38" x2="16" y2="46" stroke="#9a9a9a" stroke-width="1"/>
-          <text x="16" y="34" text-anchor="middle" font-family="DM Mono,monospace" font-size="5" fill="#6b6b6b">Q3 &#39;26</text>
-          <line x1="106" y1="38" x2="106" y2="46" stroke="#9a9a9a" stroke-width="1"/>
-          <text x="106" y="34" text-anchor="middle" font-family="DM Mono,monospace" font-size="5" fill="#6b6b6b">Q4 &#39;26</text>
-          <line x1="196" y1="38" x2="196" y2="46" stroke="#9a9a9a" stroke-width="1"/>
-          <text x="196" y="34" text-anchor="middle" font-family="DM Mono,monospace" font-size="5" fill="#6b6b6b">Q1 &#39;27</text>
-          <line x1="284" y1="38" x2="284" y2="46" stroke="#9a9a9a" stroke-width="1"/>
-          <text x="284" y="34" text-anchor="middle" font-family="DM Mono,monospace" font-size="5" fill="#6b6b6b">Q2 &#39;27</text>
-          <!-- Milestone card MS-01 -->
-          <rect x="16" y="52" width="150" height="30" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <rect x="16" y="52" width="4" height="30" fill="#c8662a"/>
-          <text x="26" y="63" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#1a3a5c">MS-01 &middot; Runway</text>
-          <rect x="26" y="67" width="26" height="7" rx="2" fill="#c8662a"/>
-          <text x="39" y="72.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="white">EPIC-01</text>
-          <text x="58" y="72.5" font-family="Inter,sans-serif" font-size="4.2" fill="#6b6b6b">funded</text>
-          <!-- Milestone card MS-02 -->
-          <rect x="106" y="88" width="150" height="30" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <rect x="106" y="88" width="4" height="30" fill="#7c5cbf"/>
-          <text x="116" y="99" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#1a3a5c">MS-02 &middot; Fraud live</text>
-          <rect x="116" y="103" width="26" height="7" rx="2" fill="#7c5cbf"/>
-          <text x="129" y="108.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="white">EPIC-05</text>
-          <text x="148" y="108.5" font-family="Inter,sans-serif" font-size="4.2" fill="#6b6b6b">funded</text>
-          <!-- Milestone card MS-03 -->
-          <rect x="16" y="124" width="268" height="30" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <rect x="16" y="124" width="4" height="30" fill="#2a6b6b"/>
-          <text x="26" y="135" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#1a3a5c">MS-03 &middot; Claim status transparency live</text>
-          <rect x="26" y="139" width="26" height="7" rx="2" fill="#2a6b6b"/>
-          <text x="39" y="144.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="white">EPIC-03</text>
-          <text x="58" y="144.5" font-family="Inter,sans-serif" font-size="4" fill="#6b6b6b">deps: EPIC-01 runway, security review sign-off</text>
-        </svg>
-      </div>
-      <div class="tool-right-label">What it produces</div>
-      <ul class="feature-list">
-        <li class="feature-item">A milestone plan sequencing every funded and near-funded epic across up to 18 months</li>
-        <li class="feature-item">Funded epics fill the earliest release windows; the rest follow in rank order</li>
-        <li class="feature-item">A deliberately light dependency list: named approvals and genuine runway prerequisites only</li>
-        <li class="feature-item">A rollout stance note assuming continuous deployment and release on demand</li>
-        <li class="feature-item">Markdown export; the saved roadmap gates which epics get a BRD next</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="tool-row" id="tool-07">
-    <div class="tool-left">
-      <div class="tool-category">AI-assisted workflow</div>
-      <div class="tool-name">Business<br><em>Documents</em></div>
-      <div class="tool-status live">Working prototype</div>
-      <p class="tool-desc">Two sequential AI calls that write a standard-template Business Requirements Document for ONE funded epic: never a feature, story, or technical breakdown. A requirements core (scope boundary, prioritized business requirements with measurement enablers flagged, high-level NFRs each tied to the epic's Feasibility assumption) followed by the executive package: summary, objectives, stakeholders, constraints, cost-benefit, and sign-off.</p>
-      <div class="tool-workflow">
-        <div class="tool-workflow-label">Produces &middot; passes forward &middot; status &middot; human responsibility</div>
-        <div class="tool-workflow-text"><strong>Produces:</strong> BRD. <strong>Passes forward:</strong> Structured requirements for backlog development. <strong>Status:</strong> Working prototype &middot; Two-step AI chain &middot; Funding gate enforced in code. <strong>Human responsibility:</strong> Remove unsupported precision, validate NFR thresholds, confirm stakeholders, and replace assumed financial claims with evidence.</div>
-      </div>
-      <div class="tool-chips">
-        <span class="chip">Standard BRD template</span>
-        <span class="chip">Measurement enablers</span>
-        <span class="chip">High-level NFRs</span>
-        <span class="chip">Stakeholder &amp; sign-off tables</span>
-        <span class="chip">Cost-benefit analysis</span>
-        <span class="chip">.md download</span>
-      </div>
-      <a href="docs-generator/" class="tool-cta">Open tool &#8599;</a>
-    </div>
-    <div class="tool-right">
-      <div class="tool-thumb">
-        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg">
-          <rect width="300" height="160" fill="#f7f7f7"/>
-          <!-- Step pipeline bar -->
-          <rect x="0" y="0" width="300" height="22" fill="#0a0a0a"/>
-          <rect x="8"   y="5" width="130" height="12" rx="3" fill="#1a3a5c"/>
-          <rect x="146" y="5" width="146" height="12" rx="3" fill="#2a6b6b"/>
-          <text x="73"  y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">01 REQUIREMENTS CORE</text>
-          <text x="219" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">02 EXECUTIVE PACKAGE</text>
-          <!-- Business requirements card -->
-          <rect x="8" y="28" width="130" height="126" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="16" y="40" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#1a3a5c" letter-spacing="0.5">BUSINESS REQUIREMENTS</text>
-          <text x="16" y="52" font-family="DM Mono,monospace" font-size="5.5" fill="#0a0a0a">BR-01</text>
-          <rect x="40" y="47" width="46" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="94" y="46" width="18" height="7" rx="2" fill="#0a0a0a"/>
-          <text x="103" y="51.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="white">HIGH</text>
-          <text x="16" y="64" font-family="DM Mono,monospace" font-size="5.5" fill="#0a0a0a">BR-02</text>
-          <rect x="40" y="59" width="46" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="94" y="58" width="18" height="7" rx="2" fill="#0a0a0a"/>
-          <text x="103" y="63.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="white">HIGH</text>
-          <text x="16" y="76" font-family="DM Mono,monospace" font-size="5.5" fill="#0a0a0a">BR-03</text>
-          <rect x="40" y="71" width="46" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="94" y="70" width="18" height="7" rx="2" fill="#1a3a5c"/>
-          <text x="103" y="75.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="white">MED</text>
-          <rect x="16" y="80" width="76" height="6" rx="2" fill="#e3efe7"/>
-          <text x="54" y="84.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.6" font-weight="800" fill="#1d5c38">MEASUREMENT ENABLER</text>
-          <text x="16" y="98" font-family="DM Mono,monospace" font-size="5.5" fill="#0a0a0a">BR-04</text>
-          <rect x="40" y="93" width="46" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="94" y="92" width="18" height="7" rx="2" fill="#1a3a5c"/>
-          <text x="103" y="97.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="white">MED</text>
-          <text x="16" y="116" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#c8662a" letter-spacing="0.5">HIGH-LEVEL NFRS</text>
-          <text x="16" y="127" font-family="DM Mono,monospace" font-size="5" fill="#c8662a">NFR-01</text>
-          <rect x="46" y="123" width="56" height="4" rx="2" fill="#e8e8e8"/>
-          <text x="16" y="139" font-family="Inter,sans-serif" font-size="4" font-style="italic" fill="#6b6b6b">&#8623; tied to the Feasibility assumption</text>
-          <!-- Executive summary card -->
-          <rect x="148" y="28" width="144" height="58" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="156" y="40" font-family="DM Serif Display,serif" font-size="7" fill="#0a0a0a">Executive Summary</text>
-          <rect x="156" y="45" width="128" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="156" y="53" width="110" height="4" rx="2" fill="#e8e8e8"/>
-          <text x="156" y="66" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#2a6b6b" letter-spacing="0.5">OBJECTIVES</text>
-          <text x="156" y="75" font-family="DM Mono,monospace" font-size="5" fill="#0a0a0a">&#8805;60% engaged &middot; &#8804;12% contacts</text>
-          <text x="156" y="82" font-family="DM Mono,monospace" font-size="4.5" fill="#6b6b6b">Rank #3 &middot; funded, 2026 Q4</text>
-          <!-- Stakeholders + sign-off card -->
-          <rect x="148" y="92" width="144" height="62" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="156" y="103" font-family="DM Serif Display,serif" font-size="7" fill="#0a0a0a">Stakeholders &amp; Sign-off</text>
-          <rect x="156" y="108" width="60" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="220" y="107" width="60" height="6" rx="2" fill="#f8e9dd"/>
-          <text x="250" y="112" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.6" font-weight="800" fill="#9a4f14">APPROVER</text>
-          <rect x="156" y="120" width="120" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="156" y="129" width="128" height="18" rx="3" fill="#1a3a5c" fill-opacity="0.05" stroke="#1a3a5c" stroke-width="1" stroke-dasharray="3,2"/>
-          <text x="161" y="139" font-family="Inter,sans-serif" font-size="4.5" font-weight="800" fill="#1a3a5c" letter-spacing="0.5">COST-BENEFIT &middot; TOTAL COST &middot; ROI</text>
-        </svg>
-      </div>
-      <div class="tool-right-label">What it produces</div>
-      <ul class="feature-list">
-        <li class="feature-item">Scope boundary and 5&ndash;9 business requirements with priority, criticality, and measurement-enabler flags</li>
-        <li class="feature-item">High-level NFRs, each tied to the epic's Feasibility assumption from Initiative Intake</li>
-        <li class="feature-item">Executive summary seeded from the Business Case, plus measurable objectives and KPI baselines</li>
-        <li class="feature-item">Stakeholder, constraint, and cost-benefit tables with total cost, expected ROI, and sign-off list</li>
-        <li class="feature-item">Refuses epics below the funding line: only documents what the Roadmap actually scheduled</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="tool-row" id="tool-08">
-    <div class="tool-left">
-      <div class="tool-category">AI-assisted workflow</div>
-      <div class="tool-name">Backlog<br><em>Builder</em></div>
-      <div class="tool-status live">Working prototype</div>
-      <p class="tool-desc">Five sequential AI calls that turn one funded epic's BRD into its full delivery-doc suite: MoSCoW'd Features with feature-level NFRs and refined sizing (stories inherit their feature's priority, never prioritized themselves), a Solution Outline with target-state architecture and simple user flows, a Security &amp; UAT plan, and Developer/User documentation. Requirement coverage is computed in code, not generated.</p>
-      <div class="tool-workflow">
-        <div class="tool-workflow-label">Produces &middot; passes forward &middot; status &middot; human responsibility</div>
-        <div class="tool-workflow-text"><strong>Produces:</strong> Extended backlog and supporting delivery documents. <strong>Passes forward:</strong> Stories, estimates, priorities, and dependency relationships. <strong>Status:</strong> Working prototype &middot; Multi-step AI chain &middot; Requirement-coverage check in code. <strong>Human responsibility:</strong> Confirm technical feasibility, testability, architectural fit, and whether apparent requirement &ldquo;coverage&rdquo; is substantively appropriate.</div>
-      </div>
-      <div class="tool-chips">
-        <span class="chip">MoSCoW at the feature level</span>
-        <span class="chip">Refined sizing + variance flag</span>
-        <span class="chip">Solution outline + architecture</span>
-        <span class="chip">Security &amp; UAT plan</span>
-        <span class="chip">Coverage computed, not generated</span>
-        <span class="chip">.md download</span>
-      </div>
-      <a href="backlog-builder/" class="tool-cta">Open tool &#8599;</a>
-    </div>
-    <div class="tool-right">
-      <div class="tool-thumb">
-        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg">
-          <rect width="300" height="160" fill="#f7f7f7"/>
-          <!-- Step pipeline bar -->
-          <rect x="0" y="0" width="300" height="22" fill="#0a0a0a"/>
-          <rect x="8"   y="5" width="66" height="12" rx="3" fill="#1a3a5c"/>
-          <rect x="82"  y="5" width="70" height="12" rx="3" fill="#7c5cbf"/>
-          <rect x="160" y="5" width="62" height="12" rx="3" fill="#2a6b6b"/>
-          <rect x="230" y="5" width="62" height="12" rx="3" fill="#c8662a"/>
-          <text x="41"  y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">01 FEATURES</text>
-          <text x="117" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">02 STORIES</text>
-          <text x="191" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">03 SOLUTION</text>
-          <text x="261" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">04–05 DOCS</text>
-          <!-- MoSCoW features card -->
-          <rect x="8" y="28" width="160" height="80" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="16" y="40" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#2a6b6b" letter-spacing="0.5">FEATURES — MOSCOW</text>
-          <text x="16" y="52" font-family="DM Mono,monospace" font-size="5" fill="#c8662a" font-weight="700">FEAT-01</text>
-          <rect x="56" y="47" width="24" height="7" rx="2" fill="#0a0a0a"/>
-          <text x="68" y="52.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="white">MUST</text>
-          <rect x="86" y="48" width="48" height="4" rx="2" fill="#e8e8e8"/>
-          <text x="146" y="52" font-family="DM Mono,monospace" font-size="6" font-weight="700" fill="#0a0a0a">L</text>
-          <text x="16" y="64" font-family="DM Mono,monospace" font-size="5" fill="#c8662a" font-weight="700">FEAT-02</text>
-          <rect x="56" y="59" width="24" height="7" rx="2" fill="#0a0a0a"/>
-          <text x="68" y="64.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="white">MUST</text>
-          <rect x="86" y="60" width="48" height="4" rx="2" fill="#e8e8e8"/>
-          <text x="146" y="64" font-family="DM Mono,monospace" font-size="6" font-weight="700" fill="#0a0a0a">M</text>
-          <text x="16" y="76" font-family="DM Mono,monospace" font-size="5" fill="#c8662a" font-weight="700">FEAT-06</text>
-          <rect x="56" y="71" width="24" height="7" rx="2" fill="#1a3a5c"/>
-          <text x="68" y="76.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="white">SHLD</text>
-          <rect x="86" y="72" width="48" height="4" rx="2" fill="#e8e8e8"/>
-          <text x="146" y="76" font-family="DM Mono,monospace" font-size="6" font-weight="700" fill="#0a0a0a">M</text>
-          <text x="16" y="90" font-family="Inter,sans-serif" font-size="4.5" font-style="italic" fill="#6b6b6b">MoSCoW lives here, never on</text>
-          <text x="16" y="97" font-family="Inter,sans-serif" font-size="4.5" font-style="italic" fill="#6b6b6b">stories; they inherit it.</text>
-          <!-- Coverage + variance card -->
-          <rect x="176" y="28" width="116" height="80" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="184" y="40" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#1a3a5c" letter-spacing="0.5">COVERAGE — COMPUTED</text>
-          <rect x="184" y="45" width="100" height="10" rx="2" fill="#1a3a5c" fill-opacity="0.08"/>
-          <text x="188" y="52" font-family="Inter,sans-serif" font-size="4.8" font-weight="700" fill="#1a3a5c">✓ 8 of 8 BRs covered</text>
-          <text x="184" y="66" font-family="DM Mono,monospace" font-size="4.5" fill="#0a0a0a">Refined Σ</text>
-          <rect x="204" y="62" width="60" height="4" rx="2" fill="#e8e8e8"/>
-          <text x="184" y="76" font-family="DM Mono,monospace" font-size="4.5" fill="#0a0a0a">vs. rough</text>
-          <rect x="204" y="72" width="60" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="268" y="71" width="16" height="6" rx="2" fill="#e3f0ef"/>
-          <text x="276" y="76" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.6" font-weight="800" fill="#1d5c5c">OK</text>
-          <text x="184" y="99" font-family="Inter,sans-serif" font-size="4.5" font-style="italic" fill="#6b6b6b">Sizing variance flagged, not fixed</text>
-          <!-- Story card -->
-          <rect x="8" y="114" width="284" height="40" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <rect x="8" y="114" width="4" height="40" fill="#c8662a"/>
-          <text x="20" y="126" font-family="DM Mono,monospace" font-size="5" fill="#6b6b6b">ST-04 · FEAT-01 · dependsOn ST-01</text>
-          <rect x="150" y="120" width="24" height="7" rx="2" fill="#0a0a0a"/>
-          <text x="162" y="125.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="800" fill="white">MUST</text>
-          <rect x="262" y="120" width="22" height="8" rx="2" fill="#0a0a0a"/>
-          <text x="273" y="126" text-anchor="middle" font-family="DM Mono,monospace" font-size="4.5" font-weight="700" fill="white">8 pts</text>
-          <rect x="20" y="132" width="200" height="4" rx="2" fill="#e8e8e8"/>
-          <text x="20" y="147" font-family="Inter,sans-serif" font-size="4.5" fill="#3a3a3a">✓ Given a member opens the status view, when it loads, then…</text>
-        </svg>
-      </div>
-      <div class="tool-right-label">What it produces</div>
-      <ul class="feature-list">
-        <li class="feature-item">4&ndash;9 MoSCoW'd Features with feature-level NFRs and refined delivery sizing</li>
-        <li class="feature-item">2&ndash;4 ordered stories per feature, BDD acceptance criteria, points, and dependsOn sequencing</li>
-        <li class="feature-item">Solution outline: summary, target-state architecture, and simple per-feature user flows</li>
-        <li class="feature-item">Security review guidelines/plan and a UAT approach for the org doc repository</li>
-        <li class="feature-item">Developer &amp; user docs, computed BR coverage, and an effort-variance flag against WSJF sizing</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="tool-row" id="tool-09">
-    <div class="tool-left">
-      <div class="tool-category">AI-assisted workflow</div>
-      <div class="tool-name">Sprint Planner<br><em>&amp; Jira Export</em></div>
-      <div class="tool-status live">Working prototype</div>
-      <p class="tool-desc">Two sequential AI calls that turn one epic's extended backlog into a delivery plan: MVP scope, a sprint-by-sprint allocation, baseline and worst-case estimates, and a RAID log. Sprint loads and dependency order are rechecked in code: an over-capacity sprint, or a story placed in the same sprint as or an earlier sprint than a story it depends on, raises a visible warning wherever the plan is used. Finishes with a Jira bulk-import CSV.</p>
-      <div class="tool-workflow">
-        <div class="tool-workflow-label">Produces &middot; status &middot; human responsibility</div>
-        <div class="tool-workflow-text"><strong>Produces:</strong> Delivery-plan proposal, RAID log, and Jira CSV. <strong>Status:</strong> Working prototype &middot; AI-assisted planning &middot; Deterministic load and dependency checks. <strong>Human responsibility:</strong> Own the plan, validate team capacity, and inspect the CSV before importing it into a delivery system.</div>
-      </div>
-      <div class="tool-chips">
-        <span class="chip">MVP scope</span>
-        <span class="chip">Capacity + dependency guards</span>
-        <span class="chip">Baseline vs worst-case</span>
-        <span class="chip">dependsOn sequencing</span>
-        <span class="chip">RAID log</span>
-        <span class="chip">Jira bulk-import .csv</span>
-      </div>
-      <a href="sprint-plan/" class="tool-cta">Open tool &#8599;</a>
-    </div>
-    <div class="tool-right">
-      <div class="tool-thumb">
-        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg">
-          <rect width="300" height="160" fill="#f7f7f7"/>
-          <rect x="0" y="0" width="300" height="22" fill="#0a0a0a"/>
-          <rect x="8"   y="5" width="140" height="12" rx="3" fill="#1a3a5c"/>
-          <rect x="156" y="5" width="136" height="12" rx="3" fill="#2a6b6b"/>
-          <text x="78"  y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">01 SPRINT PLAN</text>
-          <text x="224" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="white">02 RAID LOG</text>
-          <rect x="8" y="28" width="180" height="90" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="16" y="40" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#2a6b6b" letter-spacing="0.5">SPRINT-BY-SPRINT — LOAD IN CODE</text>
-          <text x="16" y="53" font-family="DM Mono,monospace" font-size="5" font-weight="700" fill="#1a3a5c">SPRINT 1</text>
-          <rect x="60" y="48" width="90" height="6" rx="2" fill="#e8e8e8"/>
-          <rect x="60" y="48" width="40" height="6" rx="2" fill="#2a6b6b"/>
-          <text x="156" y="53" font-family="DM Mono,monospace" font-size="5" fill="#0a0a0a">14/32</text>
-          <text x="16" y="65" font-family="DM Mono,monospace" font-size="5" font-weight="700" fill="#1a3a5c">SPRINT 2</text>
-          <rect x="60" y="60" width="90" height="6" rx="2" fill="#e8e8e8"/>
-          <rect x="60" y="60" width="34" height="6" rx="2" fill="#2a6b6b"/>
-          <text x="156" y="65" font-family="DM Mono,monospace" font-size="5" fill="#0a0a0a">12/32</text>
-          <text x="16" y="77" font-family="DM Mono,monospace" font-size="5" font-weight="700" fill="#1a3a5c">SPRINT 3</text>
-          <rect x="60" y="72" width="90" height="6" rx="2" fill="#e8e8e8"/>
-          <rect x="60" y="72" width="28" height="6" rx="2" fill="#2a6b6b"/>
-          <text x="156" y="77" font-family="DM Mono,monospace" font-size="5" fill="#0a0a0a">10/32</text>
-          <rect x="16" y="88" width="80" height="22" rx="3" fill="#1a3a5c" fill-opacity="0.06"/>
-          <text x="24" y="97" font-family="Inter,sans-serif" font-size="4.5" font-weight="700" fill="#1a3a5c">BASELINE</text>
-          <text x="24" y="106" font-family="DM Mono,monospace" font-size="7" font-weight="700" fill="#1a3a5c">3 sprints</text>
-          <rect x="102" y="88" width="80" height="22" rx="3" fill="#c8662a" fill-opacity="0.08"/>
-          <text x="110" y="97" font-family="Inter,sans-serif" font-size="4.5" font-weight="700" fill="#9a4f14">WORST CASE</text>
-          <text x="110" y="106" font-family="DM Mono,monospace" font-size="7" font-weight="700" fill="#9a4f14">5 sprints</text>
-          <rect x="196" y="28" width="96" height="90" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="204" y="40" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#2a6b6b" letter-spacing="0.5">RAID</text>
-          <rect x="204" y="46" width="20" height="7" rx="2" fill="#f6dede"/>
-          <text x="214" y="51" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.8" font-weight="800" fill="#8f2727">RISK</text>
-          <rect x="226" y="46" width="58" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="204" y="58" width="20" height="7" rx="2" fill="#f8e9dd"/>
-          <text x="214" y="63" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="800" fill="#9a4f14">ASSM</text>
-          <rect x="226" y="58" width="58" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="204" y="70" width="20" height="7" rx="2" fill="#eee7f6"/>
-          <text x="214" y="75" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.6" font-weight="800" fill="#5b3d8f">ISSUE</text>
-          <rect x="226" y="70" width="58" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="204" y="82" width="20" height="7" rx="2" fill="#e3f0ef"/>
-          <text x="214" y="87" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" font-weight="800" fill="#1d5c5c">DEP</text>
-          <rect x="226" y="82" width="58" height="4" rx="2" fill="#e8e8e8"/>
-          <text x="204" y="102" font-family="Inter,sans-serif" font-size="4" font-style="italic" fill="#6b6b6b">Stage registry</text>
-          <text x="204" y="109" font-family="Inter,sans-serif" font-size="4" font-style="italic" fill="#6b6b6b">gates the chain</text>
-          <rect x="8" y="124" width="284" height="30" rx="4" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="16" y="135" font-family="Inter,sans-serif" font-size="4.5" font-weight="700" fill="#1a3a5c" letter-spacing="0.4">MVP SCOPE</text>
-          <text x="16" y="147" font-family="DM Mono,monospace" font-size="4.8" fill="#3a3a3a">ST-01  ST-02  ST-03  ST-04  ST-05  ST-06  ST-07  ST-08  ST-09  ST-10  ST-11</text>
-        </svg>
-      </div>
-      <div class="tool-right-label">What it produces</div>
-      <ul class="feature-list">
-        <li class="feature-item">MVP scope: the must-have stories for the first release, pulled from the Must-priority features</li>
-        <li class="feature-item">A sprint-by-sprint plan with goals, honoring points capacity and each story's dependsOn edges</li>
-        <li class="feature-item">Per-sprint load AND dependency order both recomputed in code, with visible violation warnings</li>
-        <li class="feature-item">Baseline and worst-case delivery estimates, with the drivers that widen the gap</li>
-        <li class="feature-item">A RAID log plus a Jira bulk-import CSV: Summary, Priority, Points, Sprint, and Blocks links</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="tool-row" id="tool-hoshin">
-    <div class="tool-left">
-      <div class="tool-category">Strategy and Execution</div>
-      <div class="tool-name">Hoshin Kanri<br><em>+ V2MOM Alignment</em></div>
-      <div class="tool-status live">Working prototype</div>
-      <p class="tool-desc">Enter your V2MOM (vision, values, methods, obstacles, and measures) and this tool maps it onto a Hoshin Kanri X-matrix. Values become annual objectives, methods become activities, and measures become key metrics. The matrix is color-coded by value group, correlation dots are interactive, and Claude can align and refine the whole thing on demand.</p>
-      <div class="tool-workflow">
-        <div class="tool-workflow-label">Off-chain prototype</div>
-        <div class="tool-workflow-text">Explores how a V2MOM can be represented as a Hoshin Kanri X-matrix. This is a standalone strategy-alignment tool, not a step in the nine-stage initiative workflow. <strong>Status:</strong> Working prototype.</div>
-      </div>
-      <div class="tool-chips">
-        <span class="chip">V2MOM cascade</span>
-        <span class="chip">X-matrix visualization</span>
-        <span class="chip">Color-coded by value</span>
-        <span class="chip">Interactive correlation dots</span>
-        <span class="chip">AI alignment</span>
-        <span class="chip">Vision alignment row</span>
-      </div>
-      <a href="hoshin-kanri/" class="tool-cta">Open tool &#8599;</a>
-    </div>
-    <div class="tool-right">
-      <div class="tool-thumb">
-        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg">
-          <rect width="300" height="160" fill="#f7f7f7"/>
-          <!-- Header bar -->
-          <rect x="0" y="0" width="300" height="22" fill="#1a3a5c"/>
-          <text x="12" y="15" font-family="Inter,sans-serif" font-size="7.5" font-weight="800" fill="white" letter-spacing="0.5">HOSHIN KANRI + V2MOM</text>
-          <rect x="230" y="5" width="58" height="12" rx="3" fill="#7c5cbf"/>
-          <text x="259" y="14" text-anchor="middle" font-family="Inter,sans-serif" font-size="6.5" font-weight="700" fill="white">X-MATRIX</text>
-          <!-- Vision alignment row -->
-          <rect x="0" y="22" width="300" height="10" fill="#f0eef8"/>
-          <text x="90" y="30" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#7c5cbf" letter-spacing="0.5">VISION ALIGNMENT</text>
-          <circle cx="16" cy="27" r="3" fill="#111"/>
-          <circle cx="30" cy="27" r="3" fill="#111"/>
-          <circle cx="44" cy="27" r="3" stroke="#111" stroke-width="1.5" fill="none"/>
-          <circle cx="58" cy="27" r="3" fill="#111"/>
-          <circle cx="72" cy="27" r="3" stroke="#111" stroke-width="1.5" fill="none"/>
-          <!-- Activity rows (top) — 4 rows, color coded -->
-          <rect x="0" y="32" width="85" height="9" fill="rgba(26,58,92,0.12)"/>
-          <rect x="0" y="32" width="85" height="9" fill="none" stroke="#bbb" stroke-width="0.5"/>
-          <rect x="86" y="32" width="120" height="9" fill="#1a3a5c"/>
-          <text x="96" y="39" font-family="Inter,sans-serif" font-size="5.5" font-weight="600" fill="white">Redesign claim submission flow</text>
-          <circle cx="10" cy="36" r="3" fill="#111"/>
-          <circle cx="26" cy="36" r="3" stroke="#111" stroke-width="1.5" fill="none"/>
-
-          <rect x="0" y="41" width="85" height="9" fill="rgba(42,107,107,0.12)"/>
-          <rect x="0" y="41" width="85" height="9" fill="none" stroke="#bbb" stroke-width="0.5"/>
-          <rect x="86" y="41" width="120" height="9" fill="#2a6b6b"/>
-          <text x="96" y="48" font-family="Inter,sans-serif" font-size="5.5" font-weight="600" fill="white">Proactive renewal outreach</text>
-          <circle cx="26" cy="45" r="3" fill="#111"/>
-          <circle cx="40" cy="45" r="3" stroke="#111" stroke-width="1.5" fill="none"/>
-
-          <rect x="0" y="50" width="85" height="9" fill="rgba(200,102,42,0.12)"/>
-          <rect x="0" y="50" width="85" height="9" fill="none" stroke="#bbb" stroke-width="0.5"/>
-          <rect x="86" y="50" width="120" height="9" fill="#c8662a"/>
-          <text x="96" y="57" font-family="Inter,sans-serif" font-size="5.5" font-weight="600" fill="white">Launch in-app vet directory</text>
-          <circle cx="40" cy="54" r="3" fill="#111"/>
-          <circle cx="54" cy="54" r="3" stroke="#111" stroke-width="1.5" fill="none"/>
-
-          <rect x="0" y="59" width="85" height="9" fill="rgba(124,92,191,0.12)"/>
-          <rect x="0" y="59" width="85" height="9" fill="none" stroke="#bbb" stroke-width="0.5"/>
-          <rect x="86" y="59" width="120" height="9" fill="#7c5cbf"/>
-          <text x="96" y="66" font-family="Inter,sans-serif" font-size="5.5" font-weight="600" fill="white">Member sentiment dashboard</text>
-          <circle cx="54" cy="63" r="3" fill="#111"/>
-          <circle cx="68" cy="63" r="3" stroke="#111" stroke-width="1.5" fill="none"/>
-
-          <!-- Center X block -->
-          <rect x="86" y="68" width="120" height="52" fill="white" stroke="#bbb" stroke-width="0.5"/>
-          <line x1="86" y1="68" x2="206" y2="120" stroke="#ccc" stroke-width="1"/>
-          <line x1="206" y1="68" x2="86" y2="120" stroke="#ccc" stroke-width="1"/>
-          <text x="146" y="80" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" font-weight="600" fill="#333">Priorities and</text>
-          <text x="146" y="88" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" font-weight="600" fill="#333">Activities</text>
-          <text x="96" y="96" font-family="Inter,sans-serif" font-size="5.5" font-weight="600" fill="#555">Annual</text>
-          <text x="96" y="103" font-family="Inter,sans-serif" font-size="5.5" font-weight="600" fill="#555">Objectives</text>
-          <text x="196" y="96" text-anchor="end" font-family="Inter,sans-serif" font-size="5.5" font-weight="600" fill="#555">Key</text>
-          <text x="196" y="103" text-anchor="end" font-family="Inter,sans-serif" font-size="5.5" font-weight="600" fill="#555">Metrics</text>
-          <text x="146" y="114" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="600" fill="#555">Long-term Objectives</text>
-
-          <!-- OBJ vertical columns (left) — color coded -->
-          <rect x="0" y="68" width="14" height="52" fill="#1a3a5c"/>
-          <rect x="14" y="68" width="14" height="52" fill="#2a6b6b"/>
-          <rect x="28" y="68" width="14" height="52" fill="#c8662a"/>
-          <rect x="42" y="68" width="14" height="52" fill="#7c5cbf"/>
-          <rect x="56" y="68" width="14" height="52" fill="#c8921a"/>
-          <rect x="70" y="68" width="16" height="52" fill="#1a3a5c"/>
-
-          <!-- KPI vertical columns (right) — color coded -->
-          <rect x="206" y="68" width="12" height="52" fill="#1a3a5c"/>
-          <rect x="218" y="68" width="11" height="52" fill="#1a3a5c"/>
-          <rect x="229" y="68" width="11" height="52" fill="#2a6b6b"/>
-          <rect x="240" y="68" width="11" height="52" fill="#2a6b6b"/>
-          <rect x="251" y="68" width="11" height="52" fill="#c8662a"/>
-          <rect x="262" y="68" width="11" height="52" fill="#c8662a"/>
-          <rect x="273" y="68" width="14" height="52" fill="#7c5cbf"/>
-          <!-- Co-owners sage green -->
-          <rect x="287" y="68" width="13" height="52" fill="#b8d4a8"/>
-
-          <!-- LT rows (bottom) — vision text merged -->
-          <rect x="0" y="120" width="85" height="9" fill="rgba(0,0,0,0.04)" stroke="#bbb" stroke-width="0.5"/>
-          <rect x="0" y="129" width="85" height="9" fill="rgba(0,0,0,0.04)" stroke="#bbb" stroke-width="0.5"/>
-          <rect x="0" y="138" width="85" height="9" fill="rgba(0,0,0,0.04)" stroke="#bbb" stroke-width="0.5"/>
-          <rect x="86" y="120" width="120" height="27" fill="#1a3a5c"/>
-          <text x="146" y="131" text-anchor="middle" font-family="Inter,sans-serif" font-size="5" fill="rgba(255,255,255,0.65)" font-style="italic">A seamless, trustworthy member</text>
-          <text x="146" y="139" text-anchor="middle" font-family="Inter,sans-serif" font-size="5" fill="rgba(255,255,255,0.65)" font-style="italic">experience across every stage</text>
-          <rect x="206" y="120" width="94" height="27" fill="#b8d4a8" stroke="#bbb" stroke-width="0.5"/>
-          <text x="253" y="134" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#2a4a1a" letter-spacing="0.5">CO-OWNERS</text>
-        </svg>
-      </div>
-      <div class="tool-right-label">What it produces</div>
-      <ul class="feature-list">
-        <li class="feature-item">A full Hoshin Kanri X-matrix cascaded directly from your V2MOM: values to objectives, methods to activities, measures to KPIs</li>
-        <li class="feature-item">Color coding by value group flows across activity rows, objective columns, and KPI columns for instant visual correlation</li>
-        <li class="feature-item">Vision alignment row showing how directly each annual objective expresses the stated vision</li>
-        <li class="feature-item">Interactive dot cells: click to cycle through direct, complementary, and empty correlation states</li>
-        <li class="feature-item">AI cleanup and realignment that improves phrasing, adjusts correlations, and preserves your manual edits</li>
-        <li class="feature-item">Adjustable matrix dimensions: add or remove rows and columns for any zone on the fly</li>
-      </ul>
-    </div>
-  </div>
-
-<div class="tool-row" id="tool-radar">
-    <div class="tool-left">
-      <div class="tool-category">Organizational Health</div>
-      <div class="tool-name">Product Operations<br><em>Health Radar</em></div>
-      <div class="tool-status dev">In development</div>
-      <p class="tool-desc">A structured self-assessment across nine dimensions: five product operations indicators and the four DORA delivery metrics. Meant to show where teams are strong, where they struggle, and what to work on first.</p>
-      <div class="tool-workflow">
-        <div class="tool-workflow-label">Off-chain prototype</div>
-        <div class="tool-workflow-text">Explores a structured self-assessment of Product Operations practices and delivery conditions. <strong>Status:</strong> In development.</div>
-      </div>
-      <div class="tool-chips">
-        <span class="chip">Delivery health</span>
-        <span class="chip">Radar visualization</span>
-        <span class="chip">Prioritized recommendations</span>
-        <span class="chip">Team assessment</span>
-      </div>
-    </div>
-    <div class="tool-right">
-      <div class="tool-thumb">
-        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg">
-          <rect width="300" height="160" fill="#f7f7f7"/>
-          <!-- Header -->
-          <rect x="0" y="0" width="300" height="20" fill="#1a3a5c"/>
-          <text x="12" y="14" font-family="Inter,sans-serif" font-size="7.5" font-weight="800" fill="white" letter-spacing="0.5">PRODUCT OPS HEALTH RADAR</text>
-          <rect x="230" y="5" width="58" height="11" rx="3" fill="rgba(255,255,255,0.15)"/>
-          <text x="259" y="13" text-anchor="middle" font-family="Inter,sans-serif" font-size="6.5" font-weight="700" fill="rgba(255,255,255,0.6)">IN DEVELOPMENT</text>
-          <!-- Radar center: the tool's nine dimensions (five product ops indicators, four DORA metrics) -->
-          <g transform="translate(100,95)">
-            <!-- Rings -->
-            <polygon points="0.0,-46.0 29.6,-35.2 45.3,-8.0 39.8,23.0 15.7,43.2 -15.7,43.2 -39.8,23.0 -45.3,-8.0 -29.6,-35.2" fill="none" stroke="#e8e8e8" stroke-width="1"/>
-            <polygon points="0.0,-34.5 22.2,-26.4 34.0,-6.0 29.9,17.2 11.8,32.4 -11.8,32.4 -29.9,17.2 -34.0,-6.0 -22.2,-26.4" fill="none" stroke="#e8e8e8" stroke-width="1"/>
-            <polygon points="0.0,-23.0 14.8,-17.6 22.7,-4.0 19.9,11.5 7.9,21.6 -7.9,21.6 -19.9,11.5 -22.7,-4.0 -14.8,-17.6" fill="none" stroke="#e8e8e8" stroke-width="1"/>
-            <polygon points="0.0,-11.5 7.4,-8.8 11.3,-2.0 10.0,5.7 3.9,10.8 -3.9,10.8 -10.0,5.7 -11.3,-2.0 -7.4,-8.8" fill="none" stroke="#e8e8e8" stroke-width="0.75"/>
-            <!-- Axis lines -->
-            <line x1="0" y1="0" x2="0.0" y2="-46.0" stroke="#e8e8e8" stroke-width="0.75"/>
-            <line x1="0" y1="0" x2="29.6" y2="-35.2" stroke="#e8e8e8" stroke-width="0.75"/>
-            <line x1="0" y1="0" x2="45.3" y2="-8.0" stroke="#e8e8e8" stroke-width="0.75"/>
-            <line x1="0" y1="0" x2="39.8" y2="23.0" stroke="#e8e8e8" stroke-width="0.75"/>
-            <line x1="0" y1="0" x2="15.7" y2="43.2" stroke="#e8e8e8" stroke-width="0.75"/>
-            <line x1="0" y1="0" x2="-15.7" y2="43.2" stroke="#e8e8e8" stroke-width="0.75"/>
-            <line x1="0" y1="0" x2="-39.8" y2="23.0" stroke="#e8e8e8" stroke-width="0.75"/>
-            <line x1="0" y1="0" x2="-45.3" y2="-8.0" stroke="#e8e8e8" stroke-width="0.75"/>
-            <line x1="0" y1="0" x2="-29.6" y2="-35.2" stroke="#e8e8e8" stroke-width="0.75"/>
-            <!-- Filled radar shape (sample scores) -->
-            <polygon points="0.0,-36.8 16.3,-19.4 31.7,-5.6 15.9,9.2 10.2,28.1 -13.4,36.7 -23.9,13.8 -34.0,-6.0 -20.7,-24.7" fill="#1a3a5c" fill-opacity="0.18" stroke="#1a3a5c" stroke-width="1.5" stroke-opacity="0.6"/>
-            <!-- Axis labels -->
-            <text x="0.0" y="-50.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Stakeholder</text>
-            <text x="33.4" y="-37.8" text-anchor="start" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Planning</text>
-            <text x="51.2" y="-7.0" text-anchor="start" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Dependencies</text>
-            <text x="45.0" y="28.0" text-anchor="start" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">WIP</text>
-            <text x="17.8" y="50.9" text-anchor="start" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Incidents</text>
-            <text x="-17.8" y="50.9" text-anchor="end" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Deploys</text>
-            <text x="-45.0" y="28.0" text-anchor="end" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Lead time</text>
-            <text x="-51.2" y="-7.0" text-anchor="end" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Change fail</text>
-            <text x="-33.4" y="-37.8" text-anchor="end" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Recovery</text>
-          </g>
-          <!-- Score legend on right: lowest-scoring dimensions first -->
-          <rect x="210" y="28" width="80" height="120" rx="5" fill="white" stroke="#e8e8e8" stroke-width="1"/>
-          <text x="250" y="41" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" font-weight="700" fill="#c8662a" letter-spacing="0.5">TOP PRIORITIES</text>
-          <text x="218" y="54" font-family="Inter,sans-serif" font-size="6" fill="#6b6b6b">WIP control</text>
-          <rect x="218" y="57" width="64" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="218" y="57" width="26" height="4" rx="2" fill="#c8662a" fill-opacity="0.7"/>
-          <text x="218" y="74" font-family="Inter,sans-serif" font-size="6" fill="#6b6b6b">Planning accuracy</text>
-          <rect x="218" y="77" width="64" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="218" y="77" width="35" height="4" rx="2" fill="#c8662a" fill-opacity="0.7"/>
-          <text x="218" y="94" font-family="Inter,sans-serif" font-size="6" fill="#6b6b6b">Change lead time</text>
-          <rect x="218" y="97" width="64" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="218" y="97" width="38" height="4" rx="2" fill="#1a3a5c" fill-opacity="0.5"/>
-          <text x="218" y="114" font-family="Inter,sans-serif" font-size="6" fill="#6b6b6b">Incident-to-insight</text>
-          <rect x="218" y="117" width="64" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="218" y="117" width="42" height="4" rx="2" fill="#1a3a5c" fill-opacity="0.5"/>
-          <text x="218" y="138" font-family="Inter,sans-serif" font-size="5.5" font-style="italic" fill="#6b6b6b">Focus: 2 areas flagged</text>
-        </svg>
-      </div>
-      <div class="tool-right-label">What it will produce</div>
-      <ul class="feature-list">
-        <li class="feature-item">Radar chart across nine dimensions: stakeholder alignment, planning accuracy, dependency resolution, WIP control, incident-to-insight time, and the four DORA delivery metrics</li>
-        <li class="feature-item">Scored self-assessment with dimension-level commentary</li>
-        <li class="feature-item">AI-generated interpretation of the pattern: what the shape of the radar means organizationally</li>
-        <li class="feature-item">Prioritized recommendation set ranked by impact and effort</li>
-        <li class="feature-item">Export for leadership review or team retrospective facilitation</li>
-      </ul>
-    </div>
-  </div>
-
-
-
-  </div>
 
 <div class="reading-strip" style="border-top:2px solid var(--accent);">
   <div class="reading-inner" style="max-width:1060px;margin:0 auto;flex-direction:column;align-items:flex-start;">
-    <div class="reading-eyebrow">What this portfolio demonstrates</div>
-    <ul style="list-style:none;padding-left:0;margin-top:6px;display:flex;flex-direction:column;gap:6px;max-width:720px;">
-      <li style="font-size:13px;color:#2a2a2a;line-height:1.65;padding-left:14px;position:relative;"><span style="position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent2);"></span>Product Operations workflow design</li>
-      <li style="font-size:13px;color:#2a2a2a;line-height:1.65;padding-left:14px;position:relative;"><span style="position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent2);"></span>Structured transitions from strategy to execution</li>
-      <li style="font-size:13px;color:#2a2a2a;line-height:1.65;padding-left:14px;position:relative;"><span style="position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent2);"></span>Requirements and artifact traceability</li>
-      <li style="font-size:13px;color:#2a2a2a;line-height:1.65;padding-left:14px;position:relative;"><span style="position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent2);"></span>Separation of AI drafting from deterministic validation</li>
-      <li style="font-size:13px;color:#2a2a2a;line-height:1.65;padding-left:14px;position:relative;"><span style="position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent2);"></span>Human review gates and the limits of those gates</li>
-      <li style="font-size:13px;color:#2a2a2a;line-height:1.65;padding-left:14px;position:relative;"><span style="position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent2);"></span>Practical prototyping across product and delivery artifacts</li>
-      <li style="font-size:13px;color:#2a2a2a;line-height:1.65;padding-left:14px;position:relative;"><span style="position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent2);"></span>Technical and operating-model trade-offs</li>
-    </ul>
-    <p style="font-size:12.5px;color:var(--muted);margin-top:10px;max-width:720px;">It does not demonstrate customer adoption, production reliability, enterprise integration, security approval, or measured business outcomes.</p>
+    <div class="reading-eyebrow">What this shows</div>
+    <p style="font-size:14px;color:#2a2a2a;line-height:1.7;max-width:720px;">How I design a product workflow: what each step hands to the next, where a person has to decide, and which checks belong in code instead of a model. In a production version, the funding decision, requirement sign-off, and the Jira import would stay with named people; gathering evidence, formatting, and coverage checks are the parts worth automating.</p>
+    <p style="font-size:12.5px;color:var(--muted);margin-top:10px;max-width:720px;">It doesn&rsquo;t show customer adoption, production reliability, enterprise integration, security approval, or measured business outcomes.</p>
   </div>
 </div>
 
@@ -1295,10 +365,10 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <div class="reading-inner">
     <div class="reading-left">
       <div class="reading-eyebrow">Limited Evaluation Beta</div>
-      <div class="reading-title">I'm recruiting a small group of practitioners to test the <em>working prototype</em>.</div>
-      <div class="reading-desc">The objective is not to prove that the system can replace professional judgment. It is to learn whether the workflow produces useful first drafts, where continuity survives the handoffs, where unsupported claims enter the chain, and which controls would be required before the approach could be used in a real organization. Use fictional, public, or sanitized information only.</div>
+      <div class="reading-title">Test the prototype with a fictional, public, or <em>sanitized initiative</em>.</div>
+      <div class="reading-desc">I want to learn whether the drafts are useful, where context survives the handoffs, where unsupported claims get in, and which controls a real organization would need first.</div>
     </div>
-    <a href="AI-native-prodops/for-evaluators.html" class="reading-btn">Evaluate the prototype &#8599;</a>
+    <a href="AI-native-prodops/for-evaluators.html" class="reading-btn">Evaluation guide &#8599;</a>
   </div>
 </div>
 
@@ -1307,8 +377,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <div class="side-section-header">
       <div>
         <div class="side-section-eyebrow">Side Projects</div>
-        <div class="side-section-title">Built for <em>fun</em>, engineered with care.</div>
-        <p class="side-section-desc">Not everything here is a PM tool. This is what I build when the constraint is a friend group and a weekend, not a product roadmap.</p>
+        <div class="side-section-title">Not everything here is a <em>PM tool</em></div>
       </div>
     </div>
 
@@ -1342,6 +411,45 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
           <img src="500-screenshots/bidding.png" alt="500 Card Night bidding" style="width:100%;border-radius:6px;border:1.5px solid var(--rule);display:block;"/>
           <img src="500-screenshots/bidding-2.png" alt="500 Card Night bidding round 2" style="width:100%;border-radius:6px;border:1.5px solid var(--rule);display:block;"/>
         </div>
+      </div>
+    </div>
+
+    <div class="tool-row" id="project-mahjong" style="border-bottom:none;border-top:1px solid var(--rule);">
+      <div class="tool-left">
+        <div class="tool-category">Browser game · In beta testing</div>
+        <div class="tool-name">Mahjong Night</div>
+        <div class="tool-status beta">In beta testing</div>
+        <div class="tool-workflow beta-note">
+          <div class="tool-workflow-label">Work in progress</div>
+          <div class="tool-workflow-text">Mahjong Night is still being built and is in beta testing. Expect rough edges, and expect things to change.</div>
+        </div>
+        <p class="tool-desc">Its main purpose is a tutorial mode for learners that walks through setting up the wall the way it&rsquo;s done at a real table: rolling to choose East, counting around the table and into the wall to find the break, breaking the wall, and dealing the tiles out in turn. None of the digital mahjong games I&rsquo;ve found teach wall setup, and it&rsquo;s the biggest barrier to playing in person.</p>
+        <p class="tool-desc" style="margin-top:-8px;">Hong Kong rules with faan scoring. You can also play a hand against bots; four-player online play is part of what&rsquo;s in beta testing.</p>
+        <div class="tool-workflow">
+          <div class="tool-workflow-label">Start here</div>
+          <div class="tool-workflow-text">Open the game and choose <strong>Tutorial: deal a hand</strong>.</div>
+        </div>
+        <div class="tool-chips">
+          <span class="chip">Tutorial mode</span>
+          <span class="chip">Wall setup</span>
+          <span class="chip">Hong Kong rules</span>
+          <span class="chip">TypeScript</span>
+          <span class="chip">React / Vite</span>
+          <span class="chip">No backend</span>
+        </div>
+        <a href="https://robdull.com/mahjong-night/" class="tool-cta" target="_blank" rel="noopener">Try the beta &#8599;</a>
+      </div>
+      <div class="tool-right">
+        <img src="mahjong-screenshots/tutorial-break.jpg" alt="Mahjong Night tutorial: the wall broken open, with East about to draw the first four tiles" style="width:100%;border-radius:6px;border:1.5px solid var(--rule);display:block;"/>
+        <div class="tool-right-label" style="margin-top:18px;">What the tutorial walks through</div>
+        <ul class="feature-list">
+          <li class="feature-item">Rolling to choose who sits East, the dealer</li>
+          <li class="feature-item">Counting around the table to pick the wall that breaks</li>
+          <li class="feature-item">Counting into that wall, two tiles at a time, to find the break</li>
+          <li class="feature-item">Breaking the wall and marking the dead wall</li>
+          <li class="feature-item">Dealing in fours for three rounds, then the final round</li>
+          <li class="feature-item">Why East starts with 14 tiles</li>
+        </ul>
       </div>
     </div>
   </div>
