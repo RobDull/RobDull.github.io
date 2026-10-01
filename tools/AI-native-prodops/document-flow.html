@@ -14,12 +14,12 @@
   gtag('js', new Date());
   gtag('config', 'G-0Y1JYXTE5J');
 </script>
-<meta name="description" content="The real document flow of the agentic PDLC toolchain: primary and secondary inputs/outputs for each of the nine tools, links to real sample runs, and (toggleable) the external/tertiary inputs and outputs from the full network diagram.">
+<meta name="description" content="What each of the nine tools in the AI-assisted workflow takes in and produces, with links to sample runs and an optional view of proposed external inputs and outputs.">
 <link rel="canonical" href="https://robdull.com/tools/AI-native-prodops/document-flow.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://robdull.com/tools/AI-native-prodops/document-flow.html">
 <meta property="og:title" content="PDLC Document Flow | Rob Dull">
-<meta property="og:description" content="The real document flow of the agentic PDLC toolchain: primary/secondary inputs and outputs, sample-run links, and the external/tertiary inputs and outputs from the network diagram.">
+<meta property="og:description" content="What each of the nine tools in the AI-assisted workflow takes in and produces, with links to sample runs and an optional view of proposed external inputs and outputs.">
 <meta property="og:site_name" content="Rob Dull">
 <meta property="og:image" content="https://robdull.com/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -188,7 +188,7 @@ footer p{font-size:13px;color:var(--muted);}
 </div>
 
 <div class="page-head">
-  <div class="eyebrow">Agentic PDLC &bull; Real Toolchain, Real Handoffs</div>
+  <div class="eyebrow">AI-assisted workflow &bull; Nine tools, shared records</div>
   <h1>The <em>document flow</em>, tool by tool.</h1>
   <p>
     What each of the nine tools in the chain produces, and where it goes next: every
@@ -198,11 +198,11 @@ footer p{font-size:13px;color:var(--muted);}
     artifacts produced alongside it. Four primary outputs carry the most weight for program
     stakeholders: the <strong>BRD</strong>, the <strong>Roadmap</strong>, the
     <strong>Feature list</strong> (the extended backlog), and the <strong>Jira export</strong>.
-    Every step links to a real sample run: click through to see real output, not a mockup.
+    Most steps link to a saved sample run; the Persona Generator is its own demonstration.
   </p>
   <a href="prodops-network.html" class="net-link">↗ See the full aspirational system in the Network Diagram</a>
   <span style="color:var(--rule);margin:0 6px;">&middot;</span>
-  <a href="AI-prodops-overview.html" class="net-link">New here? Start with the plain-language explainer ↗</a>
+  <a href="AI-prodops-overview.html" class="net-link">New here? Start with the overview ↗</a>
 </div>
 
 <div class="toggle-wrap">
@@ -212,7 +212,7 @@ footer p{font-size:13px;color:var(--muted);}
       <button class="tbtn active" data-level="0" onclick="setMode(0)">Core Flow</button>
       <button class="tbtn" data-level="1" onclick="setMode(1)">+ External (Network)</button>
     </div>
-    <span id="toggle-hint">Primary and secondary inputs/outputs for the nine tools: wired and real.</span>
+    <span id="toggle-hint">What the nine tools take in and produce today.</span>
   </div>
 </div>
 
@@ -271,11 +271,10 @@ footer p{font-size:13px;color:var(--muted);}
               <div class="io-tier-head">Primary</div>
               <div class="io-tier-body">
                 <div>
-                  <div class="io-group-label" style="color:var(--gold);">MCP</div>
+                  <div class="io-group-label" style="color:var(--purple);">Human-supplied</div>
                   <div class="chip-row">
-                    <span class="chip-mcp">Research repo (Dovetail/Notion)</span>
-                    <span class="chip-mcp">Analytics</span>
-                    <span class="chip-mcp">Customer support (Zendesk)</span>
+                    <span class="chip-org">Job statement (when, I want to, so I can)</span>
+                    <span class="chip-org">Role and organizational context</span>
                   </div>
                 </div>
               </div>
@@ -297,6 +296,9 @@ footer p{font-size:13px;color:var(--muted);}
         <div class="ttertiary">
           <div class="tert-row">
             <span class="tert-label">External inputs</span>
+            <span class="chip-net">Research repo (Dovetail/Notion)</span>
+            <span class="chip-net">Analytics</span>
+            <span class="chip-net">Customer support (Zendesk)</span>
             <span class="chip-net">Sales transcripts (Gong)</span>
             <span class="chip-net">Stakeholder input</span>
             <span class="tert-src">(seen in the <a href="prodops-network.html">network diagram</a>, not wired into this tool)</span>
@@ -335,7 +337,7 @@ footer p{font-size:13px;color:var(--muted);}
               <div class="io-tier-head">Secondary</div>
               <div class="io-tier-body">
                 <div>
-                  <div class="io-group-label" style="color:var(--gold);">MCP</div>
+                  <div class="io-group-label" style="color:var(--gold);">Sample evidence</div>
                   <div class="chip-row">
                     <span class="chip-mcp">Research repo (Dovetail/Notion)</span>
                     <span class="chip-mcp">Customer support (Zendesk)</span>
@@ -383,7 +385,7 @@ footer p{font-size:13px;color:var(--muted);}
       <div class="tcard">
         <div class="tcard-head">
           <a href="../feature-intake/" class="tname">Initiative Intake</a>
-          <span class="tcat">Portfolio Tradeoff</span>
+          <span class="tcat">Intake</span>
         </div>
         <div class="tdesc">Frames one Initiative against competitors, then decomposes it into Business and Architecture Epics with Demand/Feasibility/Viability assumptions and a benefits-realization plan.</div>
 
@@ -403,7 +405,7 @@ footer p{font-size:13px;color:var(--muted);}
               <div class="io-tier-head">Secondary</div>
               <div class="io-tier-body">
                 <div>
-                  <div class="io-group-label" style="color:var(--gold);">MCP</div>
+                  <div class="io-group-label" style="color:var(--gold);">Sample evidence</div>
                   <div class="chip-row">
                     <span class="chip-mcp">Internal comms</span>
                     <span class="chip-mcp">Financial tracking</span>
@@ -482,7 +484,7 @@ footer p{font-size:13px;color:var(--muted);}
               <div class="io-tier-head">Secondary</div>
               <div class="io-tier-body">
                 <div>
-                  <div class="io-group-label" style="color:var(--gold);">MCP</div>
+                  <div class="io-group-label" style="color:var(--gold);">Sample evidence</div>
                   <div class="chip-row">
                     <span class="chip-mcp">Financial tracking</span>
                     <span class="chip-mcp">External comms</span>
@@ -545,7 +547,7 @@ footer p{font-size:13px;color:var(--muted);}
               <div class="io-tier-head">Secondary</div>
               <div class="io-tier-body">
                 <div>
-                  <div class="io-group-label" style="color:var(--gold);">MCP</div>
+                  <div class="io-group-label" style="color:var(--gold);">Sample evidence</div>
                   <div class="chip-row">
                     <span class="chip-mcp">Internal comms (leadership weighting)</span>
                     <span class="chip-mcp">Customer support (reach/severity)</span>
@@ -614,7 +616,7 @@ footer p{font-size:13px;color:var(--muted);}
               <div class="io-tier-head">Secondary</div>
               <div class="io-tier-body">
                 <div>
-                  <div class="io-group-label" style="color:var(--gold);">MCP</div>
+                  <div class="io-group-label" style="color:var(--gold);">Sample evidence</div>
                   <div class="chip-row">
                     <span class="chip-mcp">Delivery systems (sprint velocity)</span>
                     <span class="chip-mcp">Internal comms (approvals)</span>
@@ -680,7 +682,7 @@ footer p{font-size:13px;color:var(--muted);}
               <div class="io-tier-head">Secondary</div>
               <div class="io-tier-body">
                 <div>
-                  <div class="io-group-label" style="color:var(--gold);">MCP</div>
+                  <div class="io-group-label" style="color:var(--gold);">Sample evidence</div>
                   <div class="chip-row">
                     <span class="chip-mcp">Internal comms (stakeholders, sign-off)</span>
                     <span class="chip-mcp">Analytics (what's instrumentable today)</span>
@@ -746,7 +748,7 @@ footer p{font-size:13px;color:var(--muted);}
               <div class="io-tier-head">Secondary</div>
               <div class="io-tier-body">
                 <div>
-                  <div class="io-group-label" style="color:var(--gold);">MCP</div>
+                  <div class="io-group-label" style="color:var(--gold);">Sample evidence</div>
                   <div class="chip-row"><span class="chip-mcp">Customer support (edge cases → acceptance criteria)</span></div>
                 </div>
                 <div>
@@ -804,7 +806,7 @@ footer p{font-size:13px;color:var(--muted);}
           <a href="../sprint-plan/" class="tname">Sprint Planner</a>
           <span class="tcat">Deliver</span>
         </div>
-        <div class="tdesc">MVP scope, a sprint-by-sprint allocation, and a RAID log. Capacity AND dependsOn ordering are both recomputed in code: a story landing no earlier than its dependency raises a visible warning wherever the plan is consumed.</div>
+        <div class="tdesc">MVP scope, a sprint-by-sprint allocation, and a RAID log. Capacity and dependency order are both rechecked in code: a story placed in the same sprint as, or an earlier sprint than, a story it depends on raises a visible warning wherever the plan is used.</div>
 
         <div class="io-cols">
           <div class="io-col io-col-in">
@@ -816,7 +818,7 @@ footer p{font-size:13px;color:var(--muted);}
                   <div class="io-group-label" style="color:var(--teal);">Toolchain</div>
                   <div class="chip-row"><span class="chip-key">Feature list (extended backlog)</span></div>
                 </div>
-                <span class="no-inputs-note">Also carries the DoR/DoD flag through from Step 08. No dedicated MCP evidence yet.</span>
+                <span class="no-inputs-note">Also carries the DoR/DoD flag through from Step 08. No dedicated sample evidence yet.</span>
               </div>
             </div>
           </div>
@@ -826,7 +828,7 @@ footer p{font-size:13px;color:var(--muted);}
               <div class="io-tier-head">Primary</div>
               <div class="io-tier-body">
                 <div class="chip-row"><span class="chip-key">Jira bulk-import CSV</span></div>
-                <span class="no-inputs-note">Terminal: exports to Jira, no further handoff.</span>
+                <span class="no-inputs-note">Terminal: downloads a CSV you import into Jira yourself; no further handoff.</span>
               </div>
             </div>
             <div class="io-tier">
@@ -885,7 +887,7 @@ footer p{font-size:13px;color:var(--muted);}
   <div class="legend-inner">
     <div class="legend-item"><span class="legend-dot" style="background:var(--gold);"></span> ★ = primary output. "Primary/Secondary" labels rank each step's own inputs by importance, independent of chip color below</div>
     <div class="legend-item"><span class="legend-dot" style="background:rgba(42,107,107,.5);"></span> Teal: a same-origin tool handoff (this step's output, or an upstream step's, consumed directly)</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--gold);"></span> Gold: MCP evidence source, machine-fetched, fixture-based</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--gold);"></span> Gold: sample evidence, fictional PetHealth records loaded in the browser, with no live connection</div>
     <div class="legend-item"><span class="legend-dot" style="background:var(--purple);"></span> Purple: organizational input, human-supplied, never generated</div>
     <div class="legend-item"><span class="legend-dot" style="background:var(--accent2);border:1px dashed var(--accent2);"></span> Dashed orange: recommended for this flow, not yet built</div>
     <div class="legend-item"><span class="legend-dot dotted"></span> Dotted steel: external/tertiary, seen only in the network diagram, not wired into this flow</div>
@@ -897,9 +899,9 @@ footer p{font-size:13px;color:var(--muted);}
 <div class="note-strip">
   <div class="note-inner">
     <strong>What's real vs. recommended:</strong> every chip above except "Strategic KPIs" and the
-    dotted external chips reflects code that runs today. The MCP evidence is fixture-based
-    (PetHealth-flavored, keyless demo data with the same shape a live connector would have) but
-    genuinely wired into each tool's prompts, and every handoff key is a real
+    dotted external chips reflects code that runs today. The sample evidence is fictional PetHealth data
+    shaped like what a live connector could return. It is quoted into the prompts of the tools that
+    list it above; there are no live connections, MCP or otherwise. Every handoff key is a real
     <code>localStorage</code> write you can inspect in devtools after a run. Every sample-run link
     goes to that tool's own built-in demo: no API key, real output, not staged for this page.
   </div>
@@ -908,13 +910,13 @@ footer p{font-size:13px;color:var(--muted);}
     and outputs that exist in the full <a href="prodops-network.html">Network Diagram</a> (CRM/win-loss,
     competitive intel, regulatory signals, ITSM, delivery telemetry, retros, and their downstream
     outputs: release notes, stakeholder comms, ROI telemetry) but are <em>not</em> wired into any
-    of the nine tools on this page. They're the natural next inputs/outputs, not fiction: each one
-    corresponds to a real node in the network diagram with its own MCP recommendation.
+    of the nine tools on this page. They are proposed, not built: each one
+    appears as a node in the network diagram.
   </div>
 </div>
 
 <footer>
-  <p>Rob Dull &bull; Product Management Practitioner and Product Operations Transformation Consultant</p>
+  <p>Rob Dull &bull; Product Operations &amp; Delivery Leadership</p>
 </footer>
 
 <script>
@@ -923,9 +925,9 @@ function setMode(level) {
   document.querySelectorAll('.tbtn').forEach(b => b.classList.toggle('active', Number(b.dataset.level) === level));
   const hint = document.getElementById('toggle-hint');
   if (level === 0) {
-    hint.textContent = 'Primary and secondary inputs/outputs for the nine tools: wired and real.';
+    hint.textContent = 'What the nine tools take in and produce today.';
   } else {
-    hint.textContent = 'Adds external/tertiary inputs and outputs from the full network diagram: real nodes, not yet wired into this flow.';
+    hint.textContent = 'Adds proposed external inputs and outputs from the network diagram. None are wired into this flow.';
   }
 }
 </script>

@@ -231,7 +231,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <div class="api-note" style="border-color:var(--accent2);background:rgba(200,102,42,.04);">
-  <strong>Scope: AI-assisted Product Management, not full Product Operations.</strong> Product Operations spans six practice areas. This toolchain works with three of them: <strong>Data Collection</strong> (customer and market evidence feeding the persona, journey, and intake tools), <strong>Feedback Management</strong> (support tickets, sales notes, and user requests synthesized into initiatives and business cases), and <strong>Roadmap Alignment</strong> (prioritizing initiatives by data, strategy, and capacity in the epic prioritizer and roadmap). It does not cover <strong>Release Operations</strong> (feature flags, beta testing, deployment communications), <strong>Enablement and Training</strong> (preparing sales, marketing, and support for launches), or <strong>Performance Analytics</strong> (measuring post-launch impact against KPIs). See the <a href="AI-native-prodops/AI-prodops-overview.html#divide" style="color:var(--accent2);font-weight:700;">full PM vs. ProdOps breakdown &#8599;</a>.
+  <strong>Scope: the tools support Product Management work; designing them is Product Operations work.</strong> Using a six-area view of Product Operations to scope the project, the toolchain works with three of them: <strong>Data Collection</strong> (customer and market evidence feeding the persona, journey, and intake tools), <strong>Feedback Management</strong> (support tickets, sales notes, and user requests synthesized into initiatives and business cases), and <strong>Roadmap Alignment</strong> (prioritizing initiatives by data, strategy, and capacity in the epic prioritizer and roadmap). It does not cover <strong>Release Operations</strong> (feature flags, beta testing, deployment communications), <strong>Enablement and Training</strong> (preparing sales, marketing, and support for launches), or <strong>Performance Analytics</strong> (measuring post-launch impact against KPIs). See <a href="AI-native-prodops/AI-prodops-overview.html#divide" style="color:var(--accent2);font-weight:700;">how the work splits between PM and Product Operations &#8599;</a>.
 </div>
 
 <div class="api-note">
@@ -271,7 +271,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
 
     <div class="continuum-node">
-      <div class="continuum-node-num">04 — PITCH</div>
+      <div class="continuum-node-num">04 — JUSTIFY</div>
       <div class="continuum-node-name">Business cases</div>
       <a href="business-case/" class="continuum-node-tool">Open ↗</a>
     </div>
@@ -416,7 +416,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <p class="tool-desc">A journey map is only useful if it reflects what actually happens, not what teams assume. This tool provides an editable, stage-by-stage canvas for mapping customer actions, goals, touchpoints, emotions, and organizational responses, with a draggable sentiment curve and one-click AI export for analysis.</p>
       <div class="tool-workflow">
         <div class="tool-workflow-label">Produces &middot; passes forward &middot; status &middot; human responsibility</div>
-        <div class="tool-workflow-text"><strong>Produces:</strong> Journey map and structured opportunity seeds. <strong>Passes forward:</strong> Candidate pain clusters for initiative framing. <strong>Status:</strong> Working prototype &middot; Client-side. <strong>Human responsibility:</strong> Separate observed evidence from team assumptions.</div>
+        <div class="tool-workflow-text"><strong>Produces:</strong> Journey map and structured opportunity seeds. <strong>Passes forward:</strong> Candidate pain clusters for initiative framing. <strong>Status:</strong> Working prototype &middot; Client-side, with an optional AI fill that uses your API key. <strong>Human responsibility:</strong> Separate observed evidence from team assumptions.</div>
       </div>
       <div class="tool-chips">
         <span class="chip">Editable stages</span>
@@ -507,7 +507,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
   <div class="tool-row" id="tool-03">
     <div class="tool-left">
-      <div class="tool-category">Agentic PDLC Demo</div>
+      <div class="tool-category">AI-assisted workflow</div>
       <div class="tool-name">Initiative<br><em>Intake</em></div>
       <div class="tool-status live">Working prototype</div>
       <p class="tool-desc">Four sequential AI calls that weigh one Initiative against competing initiatives with strategy, budget, and demand evidence, then decompose it into front-stage Business Epics and backstage Architecture Epics, exploring both together, splitting only where an epic genuinely needs runway before front-stage work can start. Each epic gets its riskiest Demand/Feasibility/Viability assumptions and a benefits-realization plan naming the measurement instrumentation that must be built.</p>
@@ -589,7 +589,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
   <div class="tool-row" id="tool-04">
       <div class="tool-left">
-      <div class="tool-category">Agentic PDLC Demo</div>
+      <div class="tool-category">AI-assisted workflow</div>
       <div class="tool-name">Business<br><em>Cases</em></div>
       <div class="tool-status live">Working prototype</div>
       <p class="tool-desc">One executive-ready pitch per epic, Business or Architecture, grounded in financial and demand evidence, with a rough order-of-magnitude effort estimate for the Epic Prioritizer's WSJF/RICE job size. Pitch framing follows the epic's caseType, not its kind: a backstage Architecture epic with a customer-facing case (fraud analytics protecting member trust) still gets the customer-value narrative, not a generic technical writeup.</p>
@@ -664,7 +664,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
   <div class="tool-row" id="tool-05">
     <div class="tool-left">
-      <div class="tool-category">Agentic PDLC Demo</div>
+      <div class="tool-category">AI-assisted workflow</div>
       <div class="tool-name">Epic<br><em>Prioritizer</em></div>
       <div class="tool-status live">Working prototype</div>
       <p class="tool-desc">Two sequential AI calls that rank every Business and Architecture epic in one pass, scored on BOTH the WSJF components and the RICE components at once, so the board toggles between methods instantly with no re-run. Architecture epics take their business value from what they unblock and typically dominate risk-reduction; the board recomputes every score in code and anchors job size to the epic's Business Case effort.</p>
@@ -741,7 +741,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
   <div class="tool-row" id="tool-06">
     <div class="tool-left">
-      <div class="tool-category">Agentic PDLC Demo</div>
+      <div class="tool-category">AI-assisted workflow</div>
       <div class="tool-name">Roadmap<br><em>&amp; Milestones</em></div>
       <div class="tool-status live">Working prototype</div>
       <p class="tool-desc">One AI call that sequences every prioritized epic, funded this increment or profitable and awaiting capacity, into a milestone plan spanning up to 18 months. Funded epics fill the earliest release windows; the rest follow in rank order as capacity frees. The dependency list stays deliberately light: a named approval or a genuine architecture-epic runway prerequisite, nothing more.</p>
@@ -813,7 +813,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
   <div class="tool-row" id="tool-07">
     <div class="tool-left">
-      <div class="tool-category">Agentic PDLC Demo</div>
+      <div class="tool-category">AI-assisted workflow</div>
       <div class="tool-name">Business<br><em>Documents</em></div>
       <div class="tool-status live">Working prototype</div>
       <p class="tool-desc">Two sequential AI calls that write a standard-template Business Requirements Document for ONE funded epic: never a feature, story, or technical breakdown. A requirements core (scope boundary, prioritized business requirements with measurement enablers flagged, high-level NFRs each tied to the epic's Feasibility assumption) followed by the executive package: summary, objectives, stakeholders, constraints, cost-benefit, and sign-off.</p>
@@ -898,7 +898,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
   <div class="tool-row" id="tool-08">
     <div class="tool-left">
-      <div class="tool-category">Agentic PDLC Demo</div>
+      <div class="tool-category">AI-assisted workflow</div>
       <div class="tool-name">Backlog<br><em>Builder</em></div>
       <div class="tool-status live">Working prototype</div>
       <p class="tool-desc">Five sequential AI calls that turn one funded epic's BRD into its full delivery-doc suite: MoSCoW'd Features with feature-level NFRs and refined sizing (stories inherit their feature's priority, never prioritized themselves), a Solution Outline with target-state architecture and simple user flows, a Security &amp; UAT plan, and Developer/User documentation. Requirement coverage is computed in code, not generated.</p>
@@ -987,10 +987,10 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
   <div class="tool-row" id="tool-09">
     <div class="tool-left">
-      <div class="tool-category">Agentic PDLC Demo</div>
+      <div class="tool-category">AI-assisted workflow</div>
       <div class="tool-name">Sprint Planner<br><em>&amp; Jira Export</em></div>
       <div class="tool-status live">Working prototype</div>
-      <p class="tool-desc">Two sequential AI calls that turn one epic's extended backlog into a delivery plan: MVP scope, a sprint-by-sprint allocation, baseline and worst-case estimates, and a RAID log. Sprint loads and dependsOn ordering are recomputed in code: an over-capacity sprint or a story landing no earlier than its dependency both raise a visible warning, wherever the plan is consumed. Finishes with a Jira bulk-import CSV.</p>
+      <p class="tool-desc">Two sequential AI calls that turn one epic's extended backlog into a delivery plan: MVP scope, a sprint-by-sprint allocation, baseline and worst-case estimates, and a RAID log. Sprint loads and dependency order are rechecked in code: an over-capacity sprint, or a story placed in the same sprint as or an earlier sprint than a story it depends on, raises a visible warning wherever the plan is used. Finishes with a Jira bulk-import CSV.</p>
       <div class="tool-workflow">
         <div class="tool-workflow-label">Produces &middot; status &middot; human responsibility</div>
         <div class="tool-workflow-text"><strong>Produces:</strong> Delivery-plan proposal, RAID log, and Jira CSV. <strong>Status:</strong> Working prototype &middot; AI-assisted planning &middot; Deterministic load and dependency checks. <strong>Human responsibility:</strong> Own the plan, validate team capacity, and inspect the CSV before importing it into a delivery system.</div>
@@ -1071,7 +1071,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="tool-category">Strategy and Execution</div>
       <div class="tool-name">Hoshin Kanri<br><em>+ V2MOM Alignment</em></div>
       <div class="tool-status live">Working prototype</div>
-      <p class="tool-desc">Enter your V2MOM (vision, values, methods, and measures) and this tool cascades it directly into a Hoshin Kanri X-matrix. Values become annual objectives. Methods map exactly to activities. Measures drive key metrics. The matrix is color-coded by value group, correlation dots are interactive, and Claude can align and refine the whole thing on demand.</p>
+      <p class="tool-desc">Enter your V2MOM (vision, values, methods, obstacles, and measures) and this tool maps it onto a Hoshin Kanri X-matrix. Values become annual objectives, methods become activities, and measures become key metrics. The matrix is color-coded by value group, correlation dots are interactive, and Claude can align and refine the whole thing on demand.</p>
       <div class="tool-workflow">
         <div class="tool-workflow-label">Off-chain prototype</div>
         <div class="tool-workflow-text">Explores how a V2MOM can be represented as a Hoshin Kanri X-matrix. This is a standalone strategy-alignment tool, not a step in the nine-stage initiative workflow. <strong>Status:</strong> Working prototype.</div>
@@ -1191,7 +1191,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="tool-category">Organizational Health</div>
       <div class="tool-name">Product Operations<br><em>Health Radar</em></div>
       <div class="tool-status dev">In development</div>
-      <p class="tool-desc">A structured self-assessment across the core dimensions of product operations delivery. Surfaces where teams are strong, where they are struggling, and what to prioritize first.</p>
+      <p class="tool-desc">A structured self-assessment across nine dimensions: five product operations indicators and the four DORA delivery metrics. Meant to show where teams are strong, where they struggle, and what to work on first.</p>
       <div class="tool-workflow">
         <div class="tool-workflow-label">Off-chain prototype</div>
         <div class="tool-workflow-text">Explores a structured self-assessment of Product Operations practices and delivery conditions. <strong>Status:</strong> In development.</div>
@@ -1212,56 +1212,57 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
           <text x="12" y="14" font-family="Inter,sans-serif" font-size="7.5" font-weight="800" fill="white" letter-spacing="0.5">PRODUCT OPS HEALTH RADAR</text>
           <rect x="230" y="5" width="58" height="11" rx="3" fill="rgba(255,255,255,0.15)"/>
           <text x="259" y="13" text-anchor="middle" font-family="Inter,sans-serif" font-size="6.5" font-weight="700" fill="rgba(255,255,255,0.6)">IN DEVELOPMENT</text>
-          <!-- Radar center -->
+          <!-- Radar center: the tool's nine dimensions (five product ops indicators, four DORA metrics) -->
           <g transform="translate(100,95)">
             <!-- Rings -->
-            <polygon points="0,-58 50,-29 50,29 0,58 -50,29 -50,-29" fill="none" stroke="#e8e8e8" stroke-width="1"/>
-            <polygon points="0,-43 37,-21 37,21 0,43 -37,21 -37,-21" fill="none" stroke="#e8e8e8" stroke-width="1"/>
-            <polygon points="0,-28 24,-14 24,14 0,28 -24,14 -24,-14" fill="none" stroke="#e8e8e8" stroke-width="1"/>
-            <polygon points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7" fill="none" stroke="#e8e8e8" stroke-width="0.75"/>
+            <polygon points="0.0,-46.0 29.6,-35.2 45.3,-8.0 39.8,23.0 15.7,43.2 -15.7,43.2 -39.8,23.0 -45.3,-8.0 -29.6,-35.2" fill="none" stroke="#e8e8e8" stroke-width="1"/>
+            <polygon points="0.0,-34.5 22.2,-26.4 34.0,-6.0 29.9,17.2 11.8,32.4 -11.8,32.4 -29.9,17.2 -34.0,-6.0 -22.2,-26.4" fill="none" stroke="#e8e8e8" stroke-width="1"/>
+            <polygon points="0.0,-23.0 14.8,-17.6 22.7,-4.0 19.9,11.5 7.9,21.6 -7.9,21.6 -19.9,11.5 -22.7,-4.0 -14.8,-17.6" fill="none" stroke="#e8e8e8" stroke-width="1"/>
+            <polygon points="0.0,-11.5 7.4,-8.8 11.3,-2.0 10.0,5.7 3.9,10.8 -3.9,10.8 -10.0,5.7 -11.3,-2.0 -7.4,-8.8" fill="none" stroke="#e8e8e8" stroke-width="0.75"/>
             <!-- Axis lines -->
-            <line x1="0" y1="-58" x2="0" y2="58" stroke="#e8e8e8" stroke-width="0.75"/>
-            <line x1="-50" y1="-29" x2="50" y2="29" stroke="#e8e8e8" stroke-width="0.75"/>
-            <line x1="50" y1="-29" x2="-50" y2="29" stroke="#e8e8e8" stroke-width="0.75"/>
-            <!-- Filled radar shape -->
-            <polygon points="0,-48 42,-18 38,22 0,44 -44,20 -40,-24" fill="#1a3a5c" fill-opacity="0.18" stroke="#1a3a5c" stroke-width="1.5" stroke-opacity="0.6"/>
+            <line x1="0" y1="0" x2="0.0" y2="-46.0" stroke="#e8e8e8" stroke-width="0.75"/>
+            <line x1="0" y1="0" x2="29.6" y2="-35.2" stroke="#e8e8e8" stroke-width="0.75"/>
+            <line x1="0" y1="0" x2="45.3" y2="-8.0" stroke="#e8e8e8" stroke-width="0.75"/>
+            <line x1="0" y1="0" x2="39.8" y2="23.0" stroke="#e8e8e8" stroke-width="0.75"/>
+            <line x1="0" y1="0" x2="15.7" y2="43.2" stroke="#e8e8e8" stroke-width="0.75"/>
+            <line x1="0" y1="0" x2="-15.7" y2="43.2" stroke="#e8e8e8" stroke-width="0.75"/>
+            <line x1="0" y1="0" x2="-39.8" y2="23.0" stroke="#e8e8e8" stroke-width="0.75"/>
+            <line x1="0" y1="0" x2="-45.3" y2="-8.0" stroke="#e8e8e8" stroke-width="0.75"/>
+            <line x1="0" y1="0" x2="-29.6" y2="-35.2" stroke="#e8e8e8" stroke-width="0.75"/>
+            <!-- Filled radar shape (sample scores) -->
+            <polygon points="0.0,-36.8 16.3,-19.4 31.7,-5.6 15.9,9.2 10.2,28.1 -13.4,36.7 -23.9,13.8 -34.0,-6.0 -20.7,-24.7" fill="#1a3a5c" fill-opacity="0.18" stroke="#1a3a5c" stroke-width="1.5" stroke-opacity="0.6"/>
             <!-- Axis labels -->
-            <text x="0" y="-63" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Discovery</text>
-            <text x="58" y="-32" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Delivery</text>
-            <text x="58" y="36" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Metrics</text>
-            <text x="0" y="70" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Tooling</text>
-            <text x="-82" y="36" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Collab</text>
-            <text x="-82" y="-32" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Strategy</text>
+            <text x="0.0" y="-50.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Stakeholder</text>
+            <text x="33.4" y="-37.8" text-anchor="start" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Planning</text>
+            <text x="51.2" y="-7.0" text-anchor="start" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Dependencies</text>
+            <text x="45.0" y="28.0" text-anchor="start" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">WIP</text>
+            <text x="17.8" y="50.9" text-anchor="start" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Incidents</text>
+            <text x="-17.8" y="50.9" text-anchor="end" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Deploys</text>
+            <text x="-45.0" y="28.0" text-anchor="end" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Lead time</text>
+            <text x="-51.2" y="-7.0" text-anchor="end" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Change fail</text>
+            <text x="-33.4" y="-37.8" text-anchor="end" font-family="Inter,sans-serif" font-size="5.5" font-weight="700" fill="#6b6b6b">Recovery</text>
           </g>
-          <!-- Score legend on right -->
+          <!-- Score legend on right: lowest-scoring dimensions first -->
           <rect x="210" y="28" width="80" height="120" rx="5" fill="white" stroke="#e8e8e8" stroke-width="1"/>
           <text x="250" y="41" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" font-weight="700" fill="#c8662a" letter-spacing="0.5">TOP PRIORITIES</text>
-          <rect x="218" y="46" width="64" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="218" y="46" width="48" height="4" rx="2" fill="#1a3a5c" fill-opacity="0.5"/>
-          <text x="218" y="62" font-family="Inter,sans-serif" font-size="6" fill="#6b6b6b">Discovery</text>
-          <rect x="218" y="58" width="64" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="218" y="58" width="54" height="4" rx="2" fill="#1a3a5c" fill-opacity="0.5"/>
-          <text x="218" y="74" font-family="Inter,sans-serif" font-size="6" fill="#6b6b6b">Delivery</text>
-          <rect x="218" y="70" width="64" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="218" y="70" width="38" height="4" rx="2" fill="#c8662a" fill-opacity="0.7"/>
-          <text x="218" y="86" font-family="Inter,sans-serif" font-size="6" fill="#6b6b6b">Metrics</text>
-          <rect x="218" y="82" width="64" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="218" y="82" width="58" height="4" rx="2" fill="#1a3a5c" fill-opacity="0.5"/>
-          <text x="218" y="98" font-family="Inter,sans-serif" font-size="6" fill="#6b6b6b">Tooling</text>
-          <rect x="218" y="94" width="64" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="218" y="94" width="44" height="4" rx="2" fill="#1a3a5c" fill-opacity="0.5"/>
-          <text x="218" y="110" font-family="Inter,sans-serif" font-size="6" fill="#6b6b6b">Collab</text>
-          <rect x="218" y="106" width="64" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="218" y="106" width="60" height="4" rx="2" fill="#1a3a5c" fill-opacity="0.5"/>
-          <text x="218" y="122" font-family="Inter,sans-serif" font-size="6" fill="#6b6b6b">Strategy</text>
-          <rect x="218" y="118" width="64" height="4" rx="2" fill="#e8e8e8"/>
-          <rect x="218" y="118" width="30" height="4" rx="2" fill="#c8662a" fill-opacity="0.7"/>
+          <text x="218" y="54" font-family="Inter,sans-serif" font-size="6" fill="#6b6b6b">WIP control</text>
+          <rect x="218" y="57" width="64" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="218" y="57" width="26" height="4" rx="2" fill="#c8662a" fill-opacity="0.7"/>
+          <text x="218" y="74" font-family="Inter,sans-serif" font-size="6" fill="#6b6b6b">Planning accuracy</text>
+          <rect x="218" y="77" width="64" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="218" y="77" width="35" height="4" rx="2" fill="#c8662a" fill-opacity="0.7"/>
+          <text x="218" y="94" font-family="Inter,sans-serif" font-size="6" fill="#6b6b6b">Change lead time</text>
+          <rect x="218" y="97" width="64" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="218" y="97" width="38" height="4" rx="2" fill="#1a3a5c" fill-opacity="0.5"/>
+          <text x="218" y="114" font-family="Inter,sans-serif" font-size="6" fill="#6b6b6b">Incident-to-insight</text>
+          <rect x="218" y="117" width="64" height="4" rx="2" fill="#e8e8e8"/>
+          <rect x="218" y="117" width="42" height="4" rx="2" fill="#1a3a5c" fill-opacity="0.5"/>
           <text x="218" y="138" font-family="Inter,sans-serif" font-size="5.5" font-style="italic" fill="#6b6b6b">Focus: 2 areas flagged</text>
         </svg>
       </div>
       <div class="tool-right-label">What it will produce</div>
       <ul class="feature-list">
-        <li class="feature-item">Radar chart across eight product operations dimensions: discovery, delivery, metrics, tooling, and more</li>
+        <li class="feature-item">Radar chart across nine dimensions: stakeholder alignment, planning accuracy, dependency resolution, WIP control, incident-to-insight time, and the four DORA delivery metrics</li>
         <li class="feature-item">Scored self-assessment with dimension-level commentary</li>
         <li class="feature-item">AI-generated interpretation of the pattern: what the shape of the radar means organizationally</li>
         <li class="feature-item">Prioritized recommendation set ranked by impact and effort</li>
@@ -1347,7 +1348,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <footer>
-  <p>Rob Dull &bull; Product Management Practitioner and Product Operations Transformation Consultant</p>
+  <p>Rob Dull &bull; Product Operations &amp; Delivery Leadership</p>
 </footer>
 
 </body>

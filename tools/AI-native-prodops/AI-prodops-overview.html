@@ -14,7 +14,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-<title>Where This Prototype Sits on the Path to AI-Native Product Operations | Rob Dull</title>
+<title>Between AI Assistance and Agentic Operations | Rob Dull</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -231,12 +231,12 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   .art-tags{margin-left:0;}
 }
 </style>
-<meta name="description" content="AI can help draft a document without changing how an organization works. This page explains where a working prototype fits between AI-assisted drafting and a fully agentic Product Operations system, and what separates the two.">
+<meta name="description" content="Where a Product Management prototype sits between AI-assisted drafting and an agentic system: what's built, what's proposed, and how review works.">
 <link rel="canonical" href="https://robdull.com/tools/AI-native-prodops/AI-prodops-overview.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://robdull.com/tools/AI-native-prodops/AI-prodops-overview.html">
-<meta property="og:title" content="Where This Prototype Sits on the Path to AI-Native Product Operations | Rob Dull">
-<meta property="og:description" content="AI can help draft a document without changing how an organization works. This page explains where a working prototype fits between AI-assisted drafting and a fully agentic Product Operations system.">
+<meta property="og:title" content="Between AI Assistance and Agentic Operations | Rob Dull">
+<meta property="og:description" content="Where a Product Management prototype sits between AI-assisted drafting and an agentic system: what's built, what's proposed, and how review works.">
 <meta property="og:site_name" content="Rob Dull">
 <meta property="og:image" content="https://robdull.com/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -264,16 +264,16 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 </div>
 
 <div class="art-head">
-  <div class="eyebrow">Plain-Language Guide · From AI Assistance to Agentic Operations</div>
-  <h1>Where this prototype sits <em>on the path to AI-native Product Operations</em></h1>
-  <p style="font-size:15px;color:var(--muted);margin-top:10px;max-width:640px;line-height:1.6;">AI can help draft a document without changing how an organization works. An agentic operating model goes further: systems retrieve context, perform multi-step work, invoke tools, pause for review, record decisions, and respond to new information. This portfolio contains a working prototype of the middle ground and a target architecture for the longer-term system.</p>
+  <div class="eyebrow">Overview · From AI assistance to agentic operations</div>
+  <h1>Where this prototype sits <em>between AI assistance and agentic operations</em></h1>
+  <p style="font-size:15px;color:var(--muted);margin-top:10px;max-width:640px;line-height:1.6;">AI can help draft a document without changing how an organization works. An agentic system goes further: it retrieves context, does multi-step work, uses tools, pauses for review, records decisions, and responds to new information. This site has a working prototype of the middle ground and a proposed architecture for the rest.</p>
   <div class="art-meta">
     <span class="art-meta-item"><strong>Published</strong> June 2026</span>
-    <span class="art-meta-item"><strong>Reading level</strong> No prior business or AI jargon assumed</span>
+    <span class="art-meta-item"><strong>Updated</strong> October 2026</span>
     <div class="art-tags">
-      <span class="tag">AI Basics</span>
-      <span class="tag">MCP</span>
-      <span class="tag">How Software Gets Built</span>
+      <span class="tag">AI-assisted workflow</span>
+      <span class="tag">Human review</span>
+      <span class="tag">Target architecture</span>
     </div>
   </div>
 </div>
@@ -282,13 +282,12 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <div class="toc">
     <div class="toc-label">In this piece</div>
     <ul class="toc-list">
-      <li><a href="#native">The problem is not document creation alone</a></li>
+      <li><a href="#native">The problem is continuity</a></li>
       <li><a href="#divide">Product Management vs. Product Operations</a></li>
       <li><a href="#modes">Three operating modes</a></li>
-      <li><a href="#connect">How AI tools plug into a company's data</a></li>
+      <li><a href="#built">What's built and what isn't</a></li>
       <li><a href="#check">Why human review is still required</a></li>
-      <li><a href="#workflow">Where this shows up, step by step</a></li>
-      <li><a href="#takeaway">The big idea</a></li>
+      <li><a href="#connect">Connecting to live data</a></li>
       <li><a href="#tools">Explore the evidence</a></li>
     </ul>
   </div>
@@ -296,113 +295,36 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
 <div class="art-body">
 
-  <p class="lead">AI can help draft a document without changing how an organization works. An agentic operating model goes further: systems retrieve context, perform multi-step work, invoke tools, pause for review, record decisions, and respond to new information. This portfolio contains a working prototype of the middle ground, and a target architecture for the longer-term system.</p>
-
-  <div class="glossary">
-    <div class="glossary-label">Quick definitions, refer back any time</div>
-    <dl>
-      <dt>Product Manager (PM)</dt>
-      <dd>The person who decides what a software team should build next, and why. Not the person writing the code, the person deciding what's worth coding.</dd>
-      <dt>AI agent</dt>
-      <dd>AI that can take multiple steps on its own: read some data, make a decision, take an action, instead of just answering one question and stopping.</dd>
-      <dt>LLM (large language model)</dt>
-      <dd>The underlying AI model, like Claude or GPT, that powers a chatbot or an AI agent. The "engine" inside the tool.</dd>
-      <dt>MCP (Model Context Protocol)</dt>
-      <dd>An open standard that lets AI tools connect to a company's software and data the same way every time, instead of needing custom one-off code for every connection.</dd>
-      <dt>HITL (human-in-the-loop)</dt>
-      <dd>A specific point in a process where a person reviews the AI's work before it's allowed to move forward.</dd>
-    </dl>
-  </div>
-
   <div class="section-head" id="native">
     <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><line x1="0" y1="24" x2="24" y2="24" stroke-width=".5" opacity=".35"/><polygon points="0,24 2.5,17 5,24" stroke-width=".5" opacity=".28"/><polygon points="4,24 7,15 10,24" stroke-width=".6" opacity=".32"/><polygon points="9,24 12.5,13 16,24" stroke-width=".6" opacity=".3"/><polygon points="14,24 17,16 20,24" stroke-width=".5" opacity=".28"/><polygon points="19,24 21.5,18 24,24" stroke-width=".5" opacity=".25"/><line x1="3" y1="24" x2="3" y2="17" stroke-width="1.1" opacity=".55"/><polygon points="-1,17 3,7 7,17" stroke-width=".9" opacity=".55"/><line x1="20.5" y1="24" x2="20.5" y2="17" stroke-width="1.1" opacity=".5"/><polygon points="16.5,17 20.5,7 24.5,17" stroke-width=".9" opacity=".5"/><line x1="12" y1="24" x2="12" y2="16" stroke-width="1.5" opacity=".97"/><polygon points="12,1 5,16 19,16" stroke-width="1" opacity=".97"/></svg></div>
     <div class="section-head-text">
       <p>Getting oriented</p>
-      <h2>The problem is not <em>document creation alone</em></h2>
+      <h2>The problem is <em>continuity</em></h2>
     </div>
   </div>
 
-  <p>Product organizations already produce large numbers of documents: research summaries, initiative proposals, business cases, prioritization records, roadmaps, requirements, features, stories, delivery plans, and status updates.</p>
-
-  <p>The harder problem is maintaining continuity between them.</p>
+  <p>Product teams already produce plenty of documents: research summaries, initiative proposals, business cases, prioritization records, roadmaps, requirements, stories, and delivery plans. The harder part is keeping them connected.</p>
 
   <p>Evidence is summarized into an initiative. The initiative becomes a business case. The business case becomes a score. The score influences a roadmap. The roadmap becomes requirements. Requirements become a backlog. The backlog becomes a delivery plan. At every translation, context can be lost, assumptions can become facts, and a decision made for one reason can later appear to have been made for another.</p>
 
-  <div class="callout-orange">
-    <strong>The prototype on this site explores whether structured AI-assisted handoffs can reduce that loss while preserving human review.</strong> It is not a claim that the loss has been eliminated.
-  </div>
-
-  <div class="callout-orange">
-    <strong>Scope: AI-assisted Product Management, not full Product Operations.</strong> Product Operations spans six practice areas. This toolchain works with three: Data Collection, Feedback Management, and Roadmap Alignment. It does not cover Release Operations (feature flags, beta testing, deployment communications), Enablement and Training (preparing sales, marketing, and support for a launch), or Performance Analytics (measuring post-launch impact against KPIs). Those three remain target architecture, not built.
+  <div class="callout">
+    <strong>What the prototype tests:</strong> whether a structured AI-assisted workflow can reduce first-draft effort and lost context across product documents, as long as evidence, assumptions, generated content, code checks, and human decisions stay distinguishable. That still needs outside evaluation.
   </div>
 
   <div class="section-head" id="divide">
     <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="12" r="8" stroke-width="1.6" opacity=".85"/><circle cx="15" cy="12" r="8" stroke-width="1.6" opacity=".85"/></svg></div>
     <div class="section-head-text">
-      <p>Where the line actually falls</p>
+      <p>Where the line falls</p>
       <h2>Product Management vs. <em>Product Operations</em></h2>
     </div>
   </div>
 
-  <p>The two roles share the same raw material &mdash; user data, customer feedback, release plans, and planning frameworks &mdash; which is exactly why the boundary gets blurry. In each of the four areas below, Product Operations builds and runs the underlying system; Product Management uses what that system produces to decide what to build and communicate why.</p>
+  <p>Product Operations builds and runs the systems Product Managers work in: data tools, feedback pipelines, templates, and the planning cadence. Product Managers use what those systems produce to decide what to build and explain why. Who owns which piece varies by organization.</p>
 
-  <div class="divide-grid">
-    <div class="divide-card">
-      <div class="divide-num">01</div>
-      <div class="divide-title">Data and Insights Infrastructure</div>
-      <div class="divide-row">
-        <div class="divide-row-label overlap">Overlap</div>
-        <div class="divide-row-text">Both roles depend on user data to make decisions.</div>
-      </div>
-      <div class="divide-row">
-        <div class="divide-row-label division">Division</div>
-        <div class="divide-row-text">Product Operations selects, sets up, and cleans the data tools (e.g., Mixpanel, Pendo). <strong>Product Managers</strong> use those tools to analyze feature performance and decide what to build next.</div>
-      </div>
-    </div>
-    <div class="divide-card">
-      <div class="divide-num">02</div>
-      <div class="divide-title">Customer Feedback Aggregation</div>
-      <div class="divide-row">
-        <div class="divide-row-label overlap">Overlap</div>
-        <div class="divide-row-text">Both need to understand user pain points from support tickets, sales calls, and surveys.</div>
-      </div>
-      <div class="divide-row">
-        <div class="divide-row-label division">Division</div>
-        <div class="divide-row-text">Product Operations builds the pipeline to collect, categorize, and centralize feedback from across departments. <strong>Product Managers</strong> review the centralized data to identify specific user problems and prioritize the roadmap.</div>
-      </div>
-    </div>
-    <div class="divide-card">
-      <div class="divide-num">03</div>
-      <div class="divide-title">Release Management and Launch Readiness</div>
-      <div class="divide-row">
-        <div class="divide-row-label overlap">Overlap</div>
-        <div class="divide-row-text">Both ensure new features roll out smoothly to users and internal teams.</div>
-      </div>
-      <div class="divide-row">
-        <div class="divide-row-label division">Division</div>
-        <div class="divide-row-text"><strong>Product Managers</strong> define the feature value and launch timeline. Product Operations coordinates beta testing programs, manages feature flags, and updates internal documentation for sales, marketing, and support teams.</div>
-      </div>
-    </div>
-    <div class="divide-card">
-      <div class="divide-num">04</div>
-      <div class="divide-title">Process Standardization</div>
-      <div class="divide-row">
-        <div class="divide-row-label overlap">Overlap</div>
-        <div class="divide-row-text">Both want consistent frameworks for planning and roadmapping.</div>
-      </div>
-      <div class="divide-row">
-        <div class="divide-row-label division">Division</div>
-        <div class="divide-row-text">Product Operations designs the templates, runs the tools (e.g., Jira, Productboard), and establishes the operating cadence. <strong>Product Managers</strong> apply these templates to write PRDs and present their roadmaps.</div>
-      </div>
-    </div>
-    <div class="divide-foot">
-      <strong>Where this toolchain sits:</strong> on the Product Manager side of every row above. It assumes the data tools, feedback pipeline, and templates already exist, and it does not select, build, or administer any of them. It analyzes what those systems produce (area 1), works from already-centralized feedback (area 2), stops at defining feature value and timeline rather than coordinating the release itself (area 3), and applies standard frameworks rather than designing or operating the tooling behind them (area 4).
-    </div>
-  </div>
+  <p>The tools here support Product Management work: describing customers, framing initiatives, writing business cases, prioritizing, specifying, and planning delivery. Building them was Product Operations work: designing the templates, the handoffs between documents, the review points, and the checks that run in code.</p>
 
-  <div class="stat-pull">
-    <div class="stat-num">15×</div>
-    <div class="stat-text"><strong>more AI agents were running inside Microsoft's workplace software in 2026 than a year earlier.</strong> But most companies still haven't gotten an AI project past the testing phase: a widely-cited 2026 study found that 88% of AI agent pilot projects never reach everyday, real-world use. Microsoft Work Trend Index, 2026; Forrester / Anaconda, 2026.</div>
+  <div class="callout-orange">
+    <strong>Scope.</strong> Using a six-area view of Product Operations to scope the project, the toolchain covers three: data collection, feedback management, and roadmap alignment. Release operations, enablement and training, and performance analytics are not built.
   </div>
 
   <div class="section-head" id="modes">
@@ -413,90 +335,71 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
   </div>
 
-  <p>It helps to think of this as three modes, not a single before-and-after switch. The working prototype on this site is primarily in the middle mode.</p>
+  <p>The prototype sits in the middle one.</p>
 
   <div class="mode-grid">
     <div class="mode-card">
       <div class="mode-label">1. Manual workflow</div>
       <div class="mode-title">A person carries the context</div>
       <ul>
-        <li>A practitioner gathers information, creates each artifact, and manually carries the relevant context into the next document or system.</li>
-        <li>This provides direct human control but creates repeated drafting, reformatting, and translation work. Continuity depends heavily on individual discipline.</li>
+        <li>A practitioner gathers information, writes each document, and carries the relevant context into the next one.</li>
+        <li>Full human control, with a lot of repeated drafting and reformatting. Continuity depends on individual discipline.</li>
       </ul>
     </div>
     <div class="mode-card is-native">
       <div class="mode-label">2. AI-assisted workflow</div>
-      <div class="mode-title">A person still operates the workflow</div>
+      <div class="mode-title">A person still runs every step</div>
       <ul>
-        <li>A practitioner supplies context to an AI tool and receives a draft, still choosing the task, initiating each step, reviewing the result, and moving the output forward.</li>
-        <li>This can reduce drafting time, but it can also accelerate weak reasoning: if generated claims are not visibly distinguished from supplied evidence, polished output can be mistaken for validated output. The prototype here adds structured handoffs, selected multi-step chains, and deterministic checks, but a person still operates the workflow.</li>
+        <li>A practitioner supplies context, gets a draft, reviews it, and decides whether it moves forward.</li>
+        <li>Drafting gets faster, and so can weak reasoning: if generated claims aren't marked apart from supplied evidence, polished output can pass for validated output. This prototype adds structured handoffs, fixed multi-step AI chains, and code checks.</li>
       </ul>
     </div>
     <div class="mode-card">
-      <div class="mode-label">3. Agentic operating system</div>
-      <div class="mode-title">Target architecture, not built</div>
+      <div class="mode-label">3. Agentic system</div>
+      <div class="mode-title">Proposed, not built</div>
       <ul>
-        <li>Would retrieve live context, select and invoke approved tools, perform multi-step work toward a defined objective, test portions of its own output, pause at enforceable human gates, record its decisions, recover from failures, and respond to scheduled or event-driven triggers.</li>
-        <li>That target state also requires identity, access control, observability, cost management, data governance, schema versioning, and clear limits on what agents are allowed to change. Most of that surrounding integration and governance layer is not implemented.</li>
+        <li>Would retrieve live context, choose and use approved tools, work toward a defined objective, check parts of its own output, stop at enforceable approval points, record its decisions, recover from failures, and respond to scheduled or event-driven triggers.</li>
+        <li>It would also need identity, access control, observability, cost limits, data governance, schema versioning, and clear limits on what agents may change. Most of that is not built.</li>
       </ul>
     </div>
   </div>
 
-  <div class="section-head" id="connect">
-    <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round"><rect x="0" y="8" width="8" height="9" rx="1.3" stroke-width="1.5" opacity=".9"/><line x1="2.2" y1="8" x2="2.2" y2="5" stroke-width="1.8" opacity=".92"/><line x1="5.8" y1="8" x2="5.8" y2="5" stroke-width="1.8" opacity=".92"/><line x1="4" y1="8" x2="4" y2="6.2" stroke-width="1.4" opacity=".6"/><line x1="8" y1="12.5" x2="12" y2="12.5" stroke-width="1.2" stroke-dasharray="1.8 1.8" opacity=".7"/><rect x="12" y="6" width="12" height="13" rx="2" stroke-width="1.5" opacity=".9"/><rect x="14.5" y="9" width="2" height="3.5" rx=".7" fill="white" stroke="none" opacity=".75"/><rect x="18.5" y="9" width="2" height="3.5" rx=".7" fill="white" stroke="none" opacity=".75"/><path d="M15,15.5 Q15,18 18,18 Q21,18 21,15.5" stroke-width="1.2" opacity=".65"/></svg></div>
+  <p>Several tools run fixed chains of two to five AI calls, but a person starts each chain and reviews what it produces. That keeps them in the middle mode: the workflow doesn't choose its own objectives, pick among tools, pull live enterprise data, write into other systems, or watch outcomes after release.</p>
+
+  <div class="section-head" id="built">
+    <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/></marker></defs><circle cx="12" cy="2" r="2" stroke-width="1.5"/><circle cx="22" cy="12" r="2" stroke-width="1.5"/><circle cx="12" cy="22" r="2" stroke-width="1.5"/><circle cx="2" cy="12" r="2" stroke-width="1.5"/><line x1="14" y1="3.7" x2="20.3" y2="10" stroke-width="1.3" marker-end="url(#arr)"/><line x1="20.3" y1="14" x2="14" y2="20.3" stroke-width="1.3" marker-end="url(#arr)"/><line x1="10" y1="20.3" x2="3.7" y2="14" stroke-width="1.3" marker-end="url(#arr)"/><path d="M2,10 Q0,4 10,2.2" fill="none" stroke-width="1.1" stroke-dasharray="2 2" marker-end="url(#arr)" opacity=".7"/></svg></div>
     <div class="section-head-text">
-      <p>The connection layer</p>
-      <h2>How AI tools plug into <em>a company's data</em></h2>
+      <p>Inventory</p>
+      <h2>What's built <em>and what isn't</em></h2>
     </div>
   </div>
 
-  <p>Here's a problem that doesn't get talked about enough: an AI agent is only as useful as the data it can see. If an AI tool can't read a company's support tickets, it can't summarize them, no matter how smart the underlying model is.</p>
-
-  <p>For years, connecting an AI tool to each different piece of software required custom, one-off code: a different "plug" for every system. <strong>Model Context Protocol (MCP)</strong> fixed that. It's an open standard, first released by Anthropic in late 2024, that lets any AI tool connect to any data source the same standardized way, read a support ticket, edit a file, look something up in a database, through one shared connection method instead of custom code for every single pairing. People sometimes call it <strong>the USB-C of AI</strong>: one universal plug shape instead of a different cable for every device.</p>
-
-  <div class="stat-pull">
-    <div class="stat-num">970×</div>
-    <div class="stat-text"><strong>growth in MCP's monthly downloads in about 18 months</strong>, from roughly 100,000 downloads a month at its November 2024 launch to more than 97 million a month by early 2026. By the end of 2025 it had been handed over to a neutral nonprofit, the Linux Foundation, so no single company controls the standard going forward. Anthropic / Linux Foundation, 2025–2026.</div>
-  </div>
-
-  <p>In practice, this might mean an AI agent automatically reads new customer support tickets overnight, groups them by topic, and flags the handful that look like a brand-new problem, instead of a person scrolling through hundreds of tickets every Monday morning.</p>
-
-  <div class="callout">
-    <strong>Want to see the target architecture?</strong> The <a href="prodops-network.html" style="color:var(--accent);font-weight:600;">network diagram</a> on this site maps every data source, connection, and AI agent that a mature version of this system would need, with each node labeled by whether it's a working prototype, fixture-backed, in development, or designed and not built. Unless a node is explicitly marked working prototype, it isn't implemented.
-  </div>
-
-  <p>The network diagram shows the target wiring. If you want to see what's actually implemented today, the <a href="document-flow.html" style="color:var(--accent);font-weight:600;">document flow</a> page is the tool-by-tool version: nine real steps, each one showing what it consumes and produces, and which conditions are checked in code. Every step links to that tool's own real sample run, not a mockup.</p>
-
-  <h3>What "agentic" means here</h3>
-  <p>An AI agent does more than produce one response. It performs multiple related steps, maintains state, uses tools or data sources, and decides or acts within defined boundaries. The Initiative Intake, Business Documents, Backlog Builder, and Sprint Planner tools contain multi-step AI chains, so calling those subchains agentic is reasonable when the term is tied to their actual behavior. Calling the complete portfolio an autonomous or end-to-end agentic Product Development Lifecycle would be inaccurate: the current workflow does not independently choose its objectives, select among the tools, retrieve live enterprise data, write into operating systems, or monitor outcomes after release.</p>
-
-  <h3>What is working today</h3>
-  <p>The working prototype includes:</p>
+  <h3>Built and testable on this site</h3>
   <ul class="element-list" style="margin-top:0;">
-    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Nine connected browser tools</div></li>
-    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Structured artifact handoffs stored in the browser</div></li>
-    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Multi-step AI calls in selected tools</div></li>
-    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Worked examples that can be inspected without an API key</div></li>
-    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Fixture-backed evidence records for the fictional PetHealth scenario</div></li>
-    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Deterministic recalculation of WSJF and RICE scores</div></li>
-    <li class="element-item" style="padding:9px 0;"><div class="element-desc">A code-enforced funding gate before BRD generation</div></li>
-    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Computed requirement-to-feature coverage</div></li>
-    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Computed sprint load and declared dependency-order checks</div></li>
-    <li class="element-item" style="padding:9px 0;border-bottom:none;"><div class="element-desc">Downloadable run files and Jira bulk-import CSV export</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Nine connected browser tools, from persona to sprint plan</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Structured handoffs between tools, stored in the browser</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Fixed multi-step AI chains in several tools</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Worked examples you can inspect without an API key</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Fictional PetHealth sample evidence, cited by reference in the prompts of steps 3 to 8</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">WSJF and RICE scores recalculated in code</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">A funding gate, enforced in code, before a BRD can be written</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">A gate that holds a BRD back from the backlog builder until a named person confirms or defers each assumed requirement</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Requirement-to-feature coverage computed in code</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Sprint load and dependency order checked in code</div></li>
+    <li class="element-item" style="padding:9px 0;border-bottom:none;"><div class="element-desc">Downloadable run files and a Jira bulk-import CSV</div></li>
   </ul>
-  <p>The practitioner still initiates and reviews every stage.</p>
+  <p>A person starts and reviews every stage.</p>
 
-  <h3>What is not working today</h3>
-  <p>The following appear only in the target architecture:</p>
+  <h3>Proposed, not built</h3>
   <ul class="element-list" style="margin-top:0;">
-    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Live retrieval from research repositories, support platforms, analytics, CRM, financial systems, internal communications, or ITSM systems</div></li>
-    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Production MCP servers</div></li>
-    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Scheduled signal-synthesis, competitive-monitoring, release-note, or ROI-validation agents</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Live data from research, support, analytics, CRM, finance, internal chat, or incident systems</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">MCP servers or any other live connections</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Scheduled agents for signal synthesis, competitive monitoring, release notes, or ROI checks</div></li>
     <li class="element-item" style="padding:9px 0;"><div class="element-desc">Authenticated approvals and a persistent audit and observability service</div></li>
-    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Team workspaces and enterprise access controls</div></li>
-    <li class="element-item" style="padding:9px 0;border-bottom:none;"><div class="element-desc">Jira write-back and post-release telemetry validation</div></li>
+    <li class="element-item" style="padding:9px 0;"><div class="element-desc">Team workspaces and enterprise access control</div></li>
+    <li class="element-item" style="padding:9px 0;border-bottom:none;"><div class="element-desc">Jira write-back and post-release outcome tracking</div></li>
   </ul>
-  <p>Fixture data is used to explore how evidence might be shaped and cited. It does not prove that a live connector exists or that the underlying evidence is accurate.</p>
+  <p>The sample evidence shows how evidence could be shaped and cited. It doesn't show that a live connector would work or that real evidence would hold up.</p>
 
   <div class="section-head" id="check">
     <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><path d="M0,12 Q6,2 13,12 Q6,22 0,12Z" stroke-width="1.6" opacity=".9"/><circle cx="7" cy="12" r="4" stroke-width="1.3" opacity=".85"/><circle cx="7" cy="12" r="1.7" fill="white" stroke="none" opacity=".95"/><line x1="13" y1="12" x2="16" y2="12" stroke-width="1.2" stroke-dasharray="1.5 1.5" opacity=".65"/><rect x="16" y="7" width="8" height="7" rx="1.5" stroke-width="1.4" opacity=".88"/><line x1="17.5" y1="10" x2="22.5" y2="10" stroke-width=".9" opacity=".45"/><line x1="17.5" y1="12" x2="21" y2="12" stroke-width=".9" opacity=".38"/></svg></div>
@@ -506,7 +409,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </div>
   </div>
 
-  <p>Human review is not a decorative approval at the end of the chain. The reviewer must be able to identify what came from evidence, what was inferred, what was generated, and what remains unresolved. At each stage, the reviewer should ask five questions.</p>
+  <p>A reviewer has to be able to tell what came from evidence, what was inferred, what was generated, and what is still open. Five questions for each stage:</p>
 
   <ul class="element-list">
     <li class="element-item">
@@ -546,16 +449,16 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </li>
   </ul>
 
-  <p>The more consequential the decision, the more the review must be grounded in real evidence and accountable authority.</p>
+  <p>The more consequential the decision, the more the review has to rest on evidence and on authority the reviewer actually holds.</p>
 
   <div class="callout-orange">
-    <strong>A January 2026 study from Anthropic found that engineers who relied heavily on AI assistance saw a 17% drop in certain hands-on skills over time</strong>, even as their output got faster. The risk isn't that the AI did a bad job. It's that if a person stops doing the work themselves, they can eventually lose the ability to tell when the AI got it wrong.
+    <strong>In a January 2026 Anthropic study, 52 mostly junior engineers learned a new Python library, some with AI help and some without.</strong> The AI group scored 50% on a quiz taken right afterward, against 67% for those who coded by hand, and finished only about two minutes faster, a difference that was not statistically significant. How people used the AI mattered: those who asked it questions to understand the code kept more of what they learned. For review, that matters: if the AI did the work, the reviewer may not know enough to catch its mistakes.
   </div>
 
-  <p>This idea, that real authority requires real understanding, isn't new. It comes from David Marquet, a U.S. Navy submarine commander who argued that no one should approve a decision they don't understand, no matter how senior they are or how much they trust the person (or system) that made it. <a href="../../perspectives/marquet-ai-cert.html" style="color:var(--accent);font-weight:600;">Read the full story →</a></p>
+  <p>David Marquet, a former U.S. Navy submarine commander, argues that no one should approve a decision they don't understand. My article <a href="../../perspectives/marquet-ai-cert.html" style="color:var(--accent);font-weight:600;">Is it Safe to Use AI?</a> applies that idea to AI-assisted work.</p>
 
-  <h3>Why deterministic checks matter</h3>
-  <p>Language models are useful for synthesis and drafting. They are not reliable authorities for arithmetic, schema compliance, dependency order, or whether every requirement has been represented downstream. The prototype therefore recalculates a small number of structural conditions in code:</p>
+  <h3>Why code checks matter</h3>
+  <p>Language models are useful for synthesis and drafting. They are not reliable for arithmetic, schema rules, dependency order, or whether every requirement made it downstream. So the prototype recalculates a few structural conditions in code:</p>
   <ul class="element-list" style="margin-top:0;">
     <li class="element-item" style="padding:9px 0;"><div class="element-desc">WSJF and RICE calculations</div></li>
     <li class="element-item" style="padding:9px 0;"><div class="element-desc">Funding-line eligibility for BRD generation</div></li>
@@ -563,7 +466,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <li class="element-item" style="padding:9px 0;"><div class="element-desc">Sprint capacity based on declared points</div></li>
     <li class="element-item" style="padding:9px 0;border-bottom:none;"><div class="element-desc">Story order based on declared dependency relationships</div></li>
   </ul>
-  <p>These checks are useful but narrow. They do not validate:</p>
+  <p>These checks are narrow. They don't tell you:</p>
   <ul class="element-list" style="margin-top:0;">
     <li class="element-item" style="padding:9px 0;"><div class="element-desc">Whether a requirement is correct</div></li>
     <li class="element-item" style="padding:9px 0;"><div class="element-desc">Whether a feature adequately satisfies a requirement</div></li>
@@ -573,126 +476,41 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     <li class="element-item" style="padding:9px 0;"><div class="element-desc">Whether a stakeholder has actually approved anything</div></li>
     <li class="element-item" style="padding:9px 0;border-bottom:none;"><div class="element-desc">Whether the product should be built</div></li>
   </ul>
+  <p>Correct arithmetic can also make weak inputs look authoritative. In the Epic Prioritizer, changing one weight can move an architecture epic to #1, which is why someone has to own the weights.</p>
+
   <div class="callout-gold">
-    <strong>&ldquo;Computed&rdquo; should never be treated as synonymous with &ldquo;true.&rdquo;</strong> A related, more general framework for this idea is written up in <a href="../../perspectives/four-guardrails-ai-pipelines.html" style="color:var(--accent);font-weight:600;">The Four Guardrails</a>.
+    <strong>&ldquo;Computed&rdquo; should never be treated as &ldquo;true.&rdquo;</strong> <a href="../../perspectives/four-guardrails-ai-pipelines.html" style="color:var(--accent);font-weight:600;">The Four Guardrails</a> covers this idea more generally.
   </div>
 
-  <div class="section-head" id="workflow">
-    <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/></marker></defs><circle cx="12" cy="2" r="2" stroke-width="1.5"/><circle cx="22" cy="12" r="2" stroke-width="1.5"/><circle cx="12" cy="22" r="2" stroke-width="1.5"/><circle cx="2" cy="12" r="2" stroke-width="1.5"/><line x1="14" y1="3.7" x2="20.3" y2="10" stroke-width="1.3" marker-end="url(#arr)"/><line x1="20.3" y1="14" x2="14" y2="20.3" stroke-width="1.3" marker-end="url(#arr)"/><line x1="10" y1="20.3" x2="3.7" y2="14" stroke-width="1.3" marker-end="url(#arr)"/><path d="M2,10 Q0,4 10,2.2" fill="none" stroke-width="1.1" stroke-dasharray="2 2" marker-end="url(#arr)" opacity=".7"/></svg></div>
+  <div class="section-head" id="connect">
+    <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round"><rect x="0" y="8" width="8" height="9" rx="1.3" stroke-width="1.5" opacity=".9"/><line x1="2.2" y1="8" x2="2.2" y2="5" stroke-width="1.8" opacity=".92"/><line x1="5.8" y1="8" x2="5.8" y2="5" stroke-width="1.8" opacity=".92"/><line x1="4" y1="8" x2="4" y2="6.2" stroke-width="1.4" opacity=".6"/><line x1="8" y1="12.5" x2="12" y2="12.5" stroke-width="1.2" stroke-dasharray="1.8 1.8" opacity=".7"/><rect x="12" y="6" width="12" height="13" rx="2" stroke-width="1.5" opacity=".9"/><rect x="14.5" y="9" width="2" height="3.5" rx=".7" fill="white" stroke="none" opacity=".75"/><rect x="18.5" y="9" width="2" height="3.5" rx=".7" fill="white" stroke="none" opacity=".75"/><path d="M15,15.5 Q15,18 18,18 Q21,18 21,15.5" stroke-width="1.2" opacity=".65"/></svg></div>
     <div class="section-head-text">
-      <p>Putting it together</p>
-      <h2>Where this shows up, <em>step by step</em></h2>
+      <p>What comes next</p>
+      <h2>Connecting to <em>live data</em></h2>
     </div>
   </div>
 
-  <p>Inside an actual product team, this plays out across four stages, and at every stage, AI tools handle more of the drafting and synthesis while a person still signs off on the result.</p>
+  <p>A production version would need live evidence. Model Context Protocol (MCP), an open standard for connecting AI applications to approved tools and data, is one way to provide it. Direct APIs and ordinary code are others.</p>
 
-  <div class="phase-grid">
+  <p>A connection alone wouldn't make the workflow agentic, accurate, or safe. Quality would still depend on which sources are authorized, what an agent may read or change, how evidence provenance is kept, how stale or conflicting data is handled, where approval is enforceable, what gets logged, and how failures are caught.</p>
 
-    <div class="phase-card">
-      <div class="phase-card-head">
-        <span class="phase-num">Stage 01 &middot; Steps 01&ndash;02</span>
-        <span class="phase-title">Figure out what people need</span>
-      </div>
-      <div class="phase-body">
-        <ul>
-          <li>The <a href="document-flow.html#step-01" style="color:var(--accent);font-weight:600;">persona generator</a> and <a href="document-flow.html#step-02" style="color:var(--accent);font-weight:600;">journey map</a> turn research and support signal into a grounded user context, instead of someone manually reading through all of it every few months.</li>
-          <li>A person still decides which patterns matter enough to act on.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="phase-card">
-      <div class="phase-card-head">
-        <span class="phase-num">Stage 02 &middot; Steps 03&ndash;05</span>
-        <span class="phase-title">Decide what to build next</span>
-      </div>
-      <div class="phase-body">
-        <ul>
-          <li><a href="document-flow.html#step-03" style="color:var(--accent);font-weight:600;">Initiative intake</a> and the <a href="document-flow.html#step-05" style="color:var(--accent);font-weight:600;">epic prioritizer</a> draft a first-pass WSJF ranking, a starting point, not a final answer.</li>
-          <li>A person adjusts the ranking weights against context the AI doesn't have, like a leadership commitment. Watching that single adjustment flip an architecture epic to #1 is the clearest proof the review isn't cosmetic.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="phase-card">
-      <div class="phase-card-head">
-        <span class="phase-num">Stage 03 &middot; Steps 06&ndash;08</span>
-        <span class="phase-title">Write the plan and build it</span>
-      </div>
-      <div class="phase-body">
-        <ul>
-          <li>The <a href="document-flow.html#step-07" style="color:var(--accent);font-weight:600;">BRD generator</a> and <a href="document-flow.html#step-08" style="color:var(--accent);font-weight:600;">backlog builder</a> draft the detailed spec (requirements, assumptions, acceptance criteria) starting from a funded epic on the <a href="document-flow.html#step-06" style="color:var(--accent);font-weight:600;">roadmap</a>.</li>
-          <li>A person reviews it before any code gets written, catching the parts the AI got wrong or missed.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="phase-card">
-      <div class="phase-card-head">
-        <span class="phase-num">Stage 04 &middot; Step 09</span>
-        <span class="phase-title">Ship it and see what happens</span>
-      </div>
-      <div class="phase-body">
-        <ul>
-          <li>The <a href="document-flow.html#step-09" style="color:var(--accent);font-weight:600;">sprint planner</a> drafts MVP scope and a RAID log, and flags any story scheduled before its own dependency instead of shipping the conflict silently.</li>
-          <li>A person still makes the final call on rolling it out to everyone.</li>
-        </ul>
-      </div>
-    </div>
-
+  <div class="callout">
+    The <a href="prodops-network.html" style="color:var(--accent);font-weight:600;">network diagram</a> maps the proposed architecture, and its legend says which parts are built. The <a href="document-flow.html" style="color:var(--accent);font-weight:600;">document flow</a> shows what each built tool takes in and produces.
   </div>
 
-  <div class="section-head" id="takeaway">
+  <div class="section-head" id="tools">
     <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round"><defs><marker id="arri" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/></marker></defs><line x1="12" y1="0" x2="12" y2="9.5" stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="24" y1="0" x2="14.5" y2="9.5" stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="24" y1="12" x2="14.5" y2="12" stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="24" y1="24" x2="14.5" y2="14.5" stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="12" y1="24" x2="12" y2="14.5" stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="0" y1="24" x2="9.5" y2="14.5" stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="0" y1="12" x2="9.5" y2="12" stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><line x1="0" y1="0" x2="9.5" y2="9.5" stroke-width="1.5" marker-end="url(#arri)" opacity=".88"/><circle cx="12" cy="12" r="2.3" fill="white" stroke="none"/></svg></div>
     <div class="section-head-text">
-      <p>Wrapping up</p>
-      <h2>The <em>big idea</em></h2>
+      <p>Go deeper</p>
+      <h2>Explore <em>the evidence</em></h2>
     </div>
   </div>
 
   <ul class="element-list">
     <li class="element-item">
-      <span class="element-num">01</span>
       <div>
-        <div class="element-title">AI does the busywork, not the thinking</div>
-        <div class="element-desc">The tools handle synthesis and the first draft. People still own the judgment calls: what matters, what's risky, what's worth doing.</div>
-      </div>
-    </li>
-    <li class="element-item">
-      <span class="element-num">02</span>
-      <div>
-        <div class="element-title">The connections matter more than the AI model itself</div>
-        <div class="element-desc">MCP sounds like boring plumbing, but it's the actual reason any of this works at scale: without it, AI can't see the data it needs to be useful.</div>
-      </div>
-    </li>
-    <li class="element-item">
-      <span class="element-num">03</span>
-      <div>
-        <div class="element-title">Checking the work is not optional</div>
-        <div class="element-desc">The more autonomous AI gets, the more a human who understands the work matters, not less.</div>
-      </div>
-    </li>
-  </ul>
-
-  <p>None of this requires you to be a product manager, an engineer, or even particularly technical. It just requires understanding that AI tools are now a real part of how software gets built, and knowing enough to ask good questions about it.</p>
-
-  <h3>The role of MCP in the target architecture</h3>
-  <p>Model Context Protocol can provide a standard way for AI applications to access approved tools and data sources. In a future Product Operations system, MCP services could expose research, support, analytics, strategy, delivery, or financial context without requiring every workflow component to implement a separate integration pattern.</p>
-  <p>MCP alone does not make a workflow agentic, accurate, or safe. The quality of the system would still depend on which sources are authorized, what the agent is allowed to read or change, how evidence provenance is preserved, how stale or conflicting data is handled, where human approval is enforceable, what is logged, and how failures are detected and recovered. The MCP nodes in the network diagram are architectural proposals, not working connections.</p>
-
-  <h3>The practical proposition</h3>
-  <p>The proposition being tested is narrower than &ldquo;AI can run Product Management.&rdquo; It is:</p>
-  <div class="callout">
-    <strong>A structured AI-assisted workflow may reduce first-draft effort and context loss across product artifacts, provided that evidence, assumptions, generated content, deterministic checks, and human decisions remain distinguishable.</strong> That proposition still requires external evaluation.
-  </div>
-
-  <h3>Explore the evidence</h3>
-  <ul class="element-list">
-    <li class="element-item">
-      <div>
-        <div class="element-title">See the current implementation</div>
-        <div class="element-desc">The <a href="document-flow.html" style="color:var(--accent);font-weight:600;">Document Flow</a> page shows what each working tool consumes and produces.</div>
+        <div class="element-title">See what's built</div>
+        <div class="element-desc"><a href="document-flow.html" style="color:var(--accent);font-weight:600;">Document Flow</a> shows what each tool takes in and produces, step by step.</div>
       </div>
     </li>
     <li class="element-item">
@@ -703,14 +521,14 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
     </li>
     <li class="element-item">
       <div>
-        <div class="element-title">Review the target architecture</div>
-        <div class="element-desc">The <a href="prodops-network.html" style="color:var(--accent);font-weight:600;">Network Diagram</a> shows what would be required to evolve the prototype into an agentic Product Operations system.</div>
+        <div class="element-title">Inspect the implementation decisions</div>
+        <div class="element-desc">The <a href="technical-notes.html" style="color:var(--accent);font-weight:600;">Technical Notes</a> describe the stack, data contracts, checks, limitations, security boundary, deployment model, and test gaps.</div>
       </div>
     </li>
     <li class="element-item">
       <div>
-        <div class="element-title">Inspect the implementation decisions</div>
-        <div class="element-desc">The <a href="technical-notes.html" style="color:var(--accent);font-weight:600;">Technical Notes</a> describe the stack, data contracts, checks, limitations, security boundary, deployment model, and test gaps.</div>
+        <div class="element-title">Review the proposed architecture</div>
+        <div class="element-desc">The <a href="prodops-network.html" style="color:var(--accent);font-weight:600;">network diagram</a> shows what would surround the built tools in a production system.</div>
       </div>
     </li>
     <li class="element-item">
@@ -719,134 +537,24 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
         <div class="element-desc">The <a href="for-evaluators.html" style="color:var(--accent);font-weight:600;">Limited Evaluation Beta</a> is for practitioners willing to test a fictional, public, or sanitized initiative and identify where the workflow helps or fails.</div>
       </div>
     </li>
+    <li class="element-item">
+      <div>
+        <div class="element-title">Open the tools</div>
+        <div class="element-desc">The <a href="../tools-index.html" style="color:var(--accent);font-weight:600;">tools index</a> links to all nine tools.</div>
+      </div>
+    </li>
   </ul>
 
   <div class="footnotes">
     <div class="footnotes-label">Sources</div>
-    <p class="footnote">Microsoft, "2026 Work Trend Index: Agents, Human Agency, and Opportunity," May 2026. 15x year-over-year growth in active Microsoft 365 Copilot agents.</p>
-    <p class="footnote">Forrester / Anaconda, 2026 agentic AI pilot data. 88% of AI agent pilot projects never reach production use.</p>
-    <p class="footnote">Anthropic, "MCP and the Agentic AI Foundation," December 2025, and Model Context Protocol ecosystem update, early 2026. MCP downloads growing from ~100,000/month at November 2024 launch to 97 million+/month by early 2026; donation to the Linux Foundation's Agentic AI Foundation (AAIF).</p>
-    <p class="footnote">Anthropic, Randomized Controlled Trial on AI-assisted software development, January 2026. 17% decline in a measured developer skill among heavy AI tool users.</p>
-    <p class="footnote">Dull, R., "Is it Safe to Use AI? A Submarine Commander vs. YOLO Mode and Loss of Skill," <a href="../../perspectives/marquet-ai-cert.html">robdull.com/perspectives</a>, May 2026. David Marquet's Leader-Leader model applied to AI-native workflows.</p>
-    <p class="footnote">Gartner, 2026 Hype Cycle for Agentic AI. 40% of enterprise applications projected to embed task-specific AI agents by end of 2026, up from under 5% in 2025.</p>
+    <p class="footnote">Anthropic, "How AI assistance impacts the formation of coding skills," January 29, 2026. Randomized trial with 52 engineers learning a new Python library: 50% vs. 67% on a quiz taken right after the task. <a href="https://www.anthropic.com/research/AI-assistance-coding-skills">anthropic.com/research</a></p>
+    <p class="footnote">Dull, R., "Is it Safe to Use AI? A Submarine Commander vs. YOLO Mode and Loss of Skill," <a href="../../perspectives/marquet-ai-cert.html">robdull.com/perspectives</a>, May 2026. David Marquet's Leader-Leader model applied to AI-assisted work.</p>
   </div>
 
 </div><!-- /art-body -->
 
-<div class="tools-grid-strip" id="tools">
-  <div class="tools-grid-inner">
-    <div class="tools-grid-head">
-      <div class="tools-grid-eyebrow">The tools, direct links</div>
-      <h2 class="tools-grid-title">Nine connected tools, not a loose collection of demos</h2>
-      <p class="tools-grid-desc">Each one hands its output to the next via a same-origin <code>localStorage</code> write, the same handoffs mapped in the <a href="document-flow.html" style="color:var(--accent);font-weight:600;">Document Flow</a> page below. Start at Step 01 and follow the chain, or jump straight to whichever stage you care about.</p>
-    </div>
-    <div class="tools-grid">
-
-      <a href="../persona-generator/persona-index.html" class="tool-card">
-        <div class="tool-card-label">Step 01 · Discover</div>
-        <div class="tool-card-name">Persona generator</div>
-        <div class="tool-card-desc">The seed step, no upstream input. Produces the JTBD-framed persona every downstream tool builds on.</div>
-        <div class="tool-card-tags"><span class="tc-tag">JTBD framing</span><span class="tc-tag">Client-side</span><span class="tc-tag tc-live">Live</span></div>
-      </a>
-
-      <a href="../journey-map/journey-map-index.html" class="tool-card">
-        <div class="tool-card-label">Step 02 · Map</div>
-        <div class="tool-card-name">Journey map builder</div>
-        <div class="tool-card-desc">Seeded from the persona. Stage-by-stage canvas for touchpoints, emotions, and pain points; exports opportunity seeds forward.</div>
-        <div class="tool-card-tags"><span class="tc-tag">Pain clusters</span><span class="tc-tag">JSON export</span><span class="tc-tag tc-live">Live</span></div>
-      </a>
-
-      <a href="../feature-intake/feature-intake-index.html" class="tool-card">
-        <div class="tool-card-label">Step 03 · Portfolio Tradeoff</div>
-        <div class="tool-card-name">Initiative intake pipeline</div>
-        <div class="tool-card-desc">4-step agentic chain: portfolio tradeoff → epic framing → D/F/V assumptions → benefits realization, with a human checkpoint mid-chain.</div>
-        <div class="tool-card-tags"><span class="tc-tag">Agentic chain</span><span class="tc-tag">HITL mid-chain</span><span class="tc-tag tc-live">Live</span></div>
-      </a>
-
-      <a href="../business-case/business-case-index.html" class="tool-card">
-        <div class="tool-card-label">Step 04 · Justify</div>
-        <div class="tool-card-name">Business case generator</div>
-        <div class="tool-card-desc">ROI · risk · cost of inaction, one case per epic. Sits at the case approval HITL gate, and its output isn't just evidence: it's the literal candidate record Step 05 scores.</div>
-        <div class="tool-card-tags"><span class="tc-tag">Claude API</span><span class="tc-tag">HITL gate</span><span class="tc-tag tc-live">Live</span></div>
-      </a>
-
-      <a href="../portfolio-wsjf/" class="tool-card">
-        <div class="tool-card-label">Step 05 · Rank</div>
-        <div class="tool-card-name">Epic prioritizer</div>
-        <div class="tool-card-desc">WSJF + RICE scored live in the browser. Editable weights recompute the board with no re-run; raising risk-reduction can flip an architecture epic to #1.</div>
-        <div class="tool-card-tags"><span class="tc-tag">WSJF + RICE</span><span class="tc-tag">Live re-weighting</span><span class="tc-tag tc-live">Live</span></div>
-      </a>
-
-      <a href="../roadmap/" class="tool-card">
-        <div class="tool-card-label">Step 06 · Schedule</div>
-        <div class="tool-card-name">Roadmap &amp; milestones</div>
-        <div class="tool-card-desc">Sequences every prioritized epic (funded first) into release windows. One of the four documents that matter most downstream.</div>
-        <div class="tool-card-tags"><span class="tc-tag">★ Key document</span><span class="tc-tag">Client-side</span><span class="tc-tag tc-live">Live</span></div>
-      </a>
-
-      <a href="../docs-generator/" class="tool-card">
-        <div class="tool-card-label">Step 07 · Spec</div>
-        <div class="tool-card-name">Business documents</div>
-        <div class="tool-card-desc">Standard-template BRD per funded epic: requirements, executive package, and an explicit Constraints &amp; Assumptions section.</div>
-        <div class="tool-card-tags"><span class="tc-tag">★ Key document</span><span class="tc-tag">Assumptions section</span><span class="tc-tag tc-live">Live</span></div>
-      </a>
-
-      <a href="../backlog-builder/" class="tool-card">
-        <div class="tool-card-label">Step 08 · Plan</div>
-        <div class="tool-card-name">Backlog builder</div>
-        <div class="tool-card-desc">Turns the BRD into MoSCoW'd features, Gherkin-style stories, a security/UAT plan, and dev/user docs. Requirement coverage is computed, not generated.</div>
-        <div class="tool-card-tags"><span class="tc-tag">★ Key document</span><span class="tc-tag">Gherkin AC</span><span class="tc-tag tc-live">Live</span></div>
-      </a>
-
-      <a href="../sprint-plan/" class="tool-card">
-        <div class="tool-card-label">Step 09 · Deliver</div>
-        <div class="tool-card-name">Sprint planner</div>
-        <div class="tool-card-desc">MVP scope, sprint-by-sprint allocation, and a RAID log. Capacity and dependency ordering are both recomputed in code, never assumed.</div>
-        <div class="tool-card-tags"><span class="tc-tag">★ Key document</span><span class="tc-tag">RAID log</span><span class="tc-tag tc-live">Live</span></div>
-      </a>
-
-      <a href="../hoshin-kanri/hoshin-v2mom-index.html" class="tool-card">
-        <div class="tool-card-label">Off-chain · Align</div>
-        <div class="tool-card-name">Hoshin Kanri + V2MOM</div>
-        <div class="tool-card-desc">Enterprise strategy alignment: the layer the whole portfolio should trace back to, not a step any single initiative passes through.</div>
-        <div class="tool-card-tags"><span class="tc-tag">Strategy cascade</span><span class="tc-tag">Client-side</span><span class="tc-tag tc-live">Live</span></div>
-      </a>
-
-      <a href="../prod-ops-radar/prod-ops-radar-index.html" class="tool-card tool-card-dev">
-        <div class="tool-card-label">Off-chain · Measure</div>
-        <div class="tool-card-name">Product ops health radar</div>
-        <div class="tool-card-desc">Scored self-assessment across eight product operations dimensions. Auto-population from live metrics is target architecture, not built.</div>
-        <div class="tool-card-tags"><span class="tc-tag">8 dimensions</span><span class="tc-tag">Radar chart</span><span class="tc-tag tc-dev">In development</span></div>
-      </a>
-
-    </div>
-    <div class="tools-grid-footer">
-      <a href="../tools-index.html" class="tools-hub-link">← Back to tools hub</a>
-      <span style="display:flex;gap:16px;flex-wrap:wrap;">
-        <a href="document-flow.html" class="tools-hub-link">See every real handoff, step by step &#8599;</a>
-        <a href="prodops-network.html" class="tools-hub-link">View the full network diagram &#8599;</a>
-      </span>
-    </div>
-  </div>
-</div>
-
-<div class="tools-cta-strip">
-  <div class="tools-cta-inner">
-    <div>
-      <h2>Want the more technical<br>version of <em>this same idea</em>?</h2>
-      <p>The network diagram shows the target architecture: every data source, agent, and connection a mature system would need. Document Flow shows the nine steps that are actually implemented today and what moves between them, built for anyone who wants to go deeper than the plain-language version above.</p>
-    </div>
-    <div class="cta-links">
-      <a href="../../perspectives/four-guardrails-ai-pipelines.html" class="cta-btn filled">The Four Guardrails &#8599;</a>
-      <a href="../../perspectives/marquet-ai-cert.html" class="cta-btn">Is it safe? &#8599;</a>
-      <a href="document-flow.html" class="cta-btn">Document flow &#8599;</a>
-      <a href="prodops-network.html" class="cta-btn">Network diagram &#8599;</a>
-    </div>
-  </div>
-</div>
-
 <footer>
-  <p>Rob Dull &bull; Product Management Practitioner and Product Operations Transformation Consultant</p>
+  <p>Rob Dull &bull; Product Operations &amp; Delivery Leadership</p>
 </footer>
 
 </body>
