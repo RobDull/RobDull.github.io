@@ -14,7 +14,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-<title>Target Architecture: The Product Operations Network | Rob Dull</title>
+<title>Proposed Architecture | Rob Dull</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -202,13 +202,65 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
   .bc,.page-head,.legend-bar,.detail-wrap,.about-strip{padding-left:20px;padding-right:20px;}
   .obs-wrap,.gov-bar{padding:0 20px;}
 }
+
+/* ── PROPOSED ARCHITECTURE: five parts, one specified extension, ranked list (2026-10-01) ── */
+.np-sec{max-width:1100px;margin:44px auto 0;padding:0 32px;}
+.np-h2{font-size:clamp(22px,2.6vw,30px);font-weight:900;letter-spacing:-.03em;line-height:1.15;color:var(--ink);}
+.np-h2 em{font-style:normal;color:var(--accent);}
+.np-h3{font-size:17px;font-weight:900;letter-spacing:-.02em;color:var(--ink);}
+.np-lead{font-size:14.5px;color:#3a3a3a;line-height:1.7;max-width:760px;margin-top:10px;}
+.np-note{font-size:13px;color:#3a3a3a;line-height:1.65;max-width:760px;margin-top:14px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--off);border-radius:0 6px 6px 0;}
+.flow{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-top:18px;padding:0;}
+.flow-card{position:relative;border:1px solid var(--rule);border-radius:10px;padding:14px 14px 16px;background:white;}
+.flow-card:not(:last-child)::after{content:'\2192';position:absolute;right:-12px;top:18px;font-size:13px;color:var(--muted);}
+.flow-num{font-size:10px;font-weight:800;color:var(--accent2);letter-spacing:.1em;}
+.flow-card h3{font-size:16px;font-weight:900;letter-spacing:-.02em;margin:2px 0 4px;color:var(--ink);}
+.flow-card p{font-size:12.5px;color:#3a3a3a;line-height:1.55;margin-top:8px;}
+.flow-tag{display:block;font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:2px;}
+.flow-tag.today{color:var(--accent);}
+.flow-tag.add{color:var(--accent2);}
+.spec{margin-top:16px;border:1px solid var(--rule);border-radius:10px;overflow:hidden;max-width:900px;}
+.spec>div{display:grid;grid-template-columns:190px minmax(0,1fr);border-top:1px solid var(--rule);}
+.spec>div:first-child{border-top:none;}
+.spec dt{padding:12px 16px;font-size:12px;font-weight:800;color:var(--ink);background:var(--off);}
+.spec dd{margin:0;padding:12px 16px;font-size:13.5px;color:#3a3a3a;line-height:1.6;}
+.table-scroll{overflow-x:auto;margin-top:16px;}
+.rank{width:100%;border-collapse:collapse;font-size:13px;min-width:560px;}
+.rank th{text-align:left;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:8px 12px;border-bottom:2px solid var(--rule);}
+.rank td{padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:top;color:#3a3a3a;line-height:1.55;}
+.rank td:first-child{font-weight:700;color:var(--ink);}
+.q-list{margin:12px 0 0 20px;font-size:14px;color:#3a3a3a;line-height:1.85;max-width:760px;}
+.fullmap{margin-top:52px;}
+.fullmap>summary{list-style:none;cursor:pointer;max-width:1280px;margin:0 auto;padding:0 32px;}
+.fullmap>summary::-webkit-details-marker{display:none;}
+.fullmap-box{display:flex;flex-direction:column;gap:4px;border:1px solid var(--rule);border-radius:10px;background:var(--off);padding:16px 20px 16px 44px;position:relative;}
+.fullmap-box::before{content:'\25B8';position:absolute;left:20px;top:15px;font-size:14px;color:var(--accent);}
+.fullmap[open] .fullmap-box::before{content:'\25BE';}
+.fullmap-title{font-size:15px;font-weight:800;color:var(--ink);}
+.fullmap-sub{font-size:12.5px;color:var(--muted);line-height:1.5;}
+.fullmap>summary:focus-visible .fullmap-box{outline:2px solid var(--accent2);outline-offset:2px;}
+.map-list{margin-top:28px;margin-bottom:8px;}
+g.n:focus{outline:none;}
+g.n:focus-visible rect{stroke:#c8662a;stroke-width:1.6;}
+.gov-item:focus-visible{outline:2px solid var(--accent2);outline-offset:1px;}
+@media(max-width:900px){
+  .flow{grid-template-columns:1fr;gap:16px;}
+  .flow-card:not(:last-child)::after{content:'\2193';right:auto;left:22px;top:auto;bottom:-16px;}
+  .spec>div{grid-template-columns:1fr;}
+  .spec dt{padding-bottom:6px;}
+}
+.about-links{flex-wrap:wrap;max-width:100%;}
+@media(max-width:640px){
+  .np-sec{padding:0 20px;}
+  .fullmap>summary{padding:0 20px;}
+}
 </style>
-<meta name="description" content="What would be required to turn the working prototype into an agentic Product Operations system: target-architecture diagram of data sources, MCP services, agents, HITL gates, and outputs, labeled by what's built versus designed.">
+<meta name="description" content="What a production version of the nine-tool prototype would add, ranked by need, with Jira write-back specified: input, owner, permissions, and failures.">
 <link rel="canonical" href="https://robdull.com/tools/AI-native-prodops/prodops-network.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://robdull.com/tools/AI-native-prodops/prodops-network.html">
-<meta property="og:title" content="Target Architecture: The Product Operations Network | Rob Dull">
-<meta property="og:description" content="What would be required to turn the working prototype into an agentic Product Operations system: target-architecture diagram labeled by what's built versus designed.">
+<meta property="og:title" content="Proposed Architecture | Rob Dull">
+<meta property="og:description" content="What a production version of the nine-tool prototype would add, ranked by need, with Jira write-back specified: input, owner, permissions, and failures.">
 <meta property="og:site_name" content="Rob Dull">
 <meta property="og:image" content="https://robdull.com/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -233,15 +285,108 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <span class="bc-sep">/</span>
     <a href="AI-prodops-overview.html">AI ProdOps</a>
     <span class="bc-sep">/</span>
-    <span>Network diagram</span>
+    <span>Proposed architecture</span>
   </div>
 </div>
 
 <div class="page-head">
-  <div class="eyebrow">Target Architecture · Agentic Product Operations</div>
-  <h1>What would be required to turn <em>the prototype</em><br>into an operating system.</h1>
-  <p>The working nine-step browser toolchain is shown at the center of this diagram (highlighted below). The surrounding data sources, MCP services, scheduled agents, authenticated human gates, observability, and system write-backs describe a target architecture. Only the parts the legend below lists as <strong>built</strong> are implemented. Click any node to learn more.</p>
+  <div class="eyebrow">Proposed architecture · Not built</div>
+  <h1>What a production version <em>would add</em></h1>
+  <p>The nine tools on this site run in a browser on fictional data, and a person starts and reviews every step. This page shows what a production version would add around them, ranks those additions, and works one of them through in detail. Apart from the tools themselves, nothing here is built.</p>
 </div>
+
+<section class="np-sec" id="five-parts" aria-labelledby="five-parts-h">
+  <h2 class="np-h2" id="five-parts-h">From prototype to production, <em>in five parts</em></h2>
+  <p class="np-lead">Each part says what exists today and what a production version would add.</p>
+  <ol class="flow">
+    <li class="flow-card">
+      <div class="flow-num">01</div>
+      <h3>Evidence</h3>
+      <p><span class="flow-tag today">Today</span>Fictional PetHealth sample records, plus whatever the practitioner types or pastes in.</p>
+      <p><span class="flow-tag add">Would add</span>Live, read-only connections to research, support, analytics, and finance systems, keeping the source of every excerpt.</p>
+    </li>
+    <li class="flow-card">
+      <div class="flow-num">02</div>
+      <h3>Drafting</h3>
+      <p><span class="flow-tag today">Today</span>Nine tools. Most run a fixed chain of AI calls, and a person starts each one.</p>
+      <p><span class="flow-tag add">Would add</span>Records that note which upstream records they were built from, and a flag when one of those changes.</p>
+    </li>
+    <li class="flow-card">
+      <div class="flow-num">03</div>
+      <h3>Code checks</h3>
+      <p><span class="flow-tag today">Today</span>WSJF and RICE scores, the funding cutoff, requirement coverage, the assumption gate, sprint load, and dependency order.</p>
+      <p><span class="flow-tag add">Would add</span>The same checks, rerun on every regeneration, with failures logged.</p>
+    </li>
+    <li class="flow-card">
+      <div class="flow-num">04</div>
+      <h3>Human review</h3>
+      <p><span class="flow-tag today">Today</span>A person reviews each draft in the browser. Sign-offs are names typed into the tool.</p>
+      <p><span class="flow-tag add">Would add</span>Approvals by authenticated, named roles, recorded in an audit log.</p>
+    </li>
+    <li class="flow-card">
+      <div class="flow-num">05</div>
+      <h3>Export</h3>
+      <p><span class="flow-tag today">Today</span>A CSV that a person imports into Jira by hand.</p>
+      <p><span class="flow-tag add">Would add</span>Write-back to Jira after a signed approval, specified below.</p>
+    </li>
+  </ol>
+</section>
+
+<section class="np-sec" id="jira-write-back" aria-labelledby="jwb-h">
+  <h2 class="np-h2" id="jwb-h">One extension, specified: <em>Jira write-back</em></h2>
+  <p class="np-lead">Today the last step ends with a CSV someone imports into Jira by hand. Writing straight into Jira is the one place the workflow would act on another system, so it needs the clearest rules. The write would be ordinary code calling Jira&rsquo;s API. The model&rsquo;s work ends at the draft plan; it never decides what gets written.</p>
+  <dl class="spec">
+    <div><dt>Input</dt><dd>An approved sprint plan from step 9 (features, stories with acceptance criteria, points, sprint assignments, and dependency links) plus an approval record: who approved it, when, and which version of the plan.</dd></div>
+    <div><dt>Owner</dt><dd>The delivery lead for the team whose Jira project receives the work. Whoever generated the plan can&rsquo;t approve its write-back.</dd></div>
+    <div><dt>Permitted actions</dt><dd>Create the epic and its stories, with their fields and dependency links, in one named Jira project. No edits or deletions of existing issues, and no other projects. The access token is scoped to that project and expires when the run ends.</dd></div>
+    <div><dt>Checks before writing</dt><dd>Code reruns the sprint-load and dependency checks, confirms the approval matches this exact version of the plan, and shows a preview of every issue it will create. Any change to the plan after approval voids the approval.</dd></div>
+    <div><dt>When something fails</dt><dd>Stop at the first failed write, report what was and wasn&rsquo;t created, and don&rsquo;t retry automatically. Running it again skips issues that already exist for this plan, so nothing is duplicated.</dd></div>
+    <div><dt>Record kept</dt><dd>Who approved, when, which plan version, and the Jira issue keys created, in an append-only log.</dd></div>
+    <div><dt>Success measures</dt><dd>Plans reach Jira with no manual re-entry; no issue is ever created without a matching approval; no duplicates; and the issues in Jira match the approved plan (count, points, and links).</dd></div>
+  </dl>
+  <p class="np-note"><strong>Why code and not an agent:</strong> creating issues is a side effect with a fixed shape. Handing it to a model, or routing it through a general-purpose connector, adds ambiguity without adding judgment.</p>
+</section>
+
+<section class="np-sec" id="ranked" aria-labelledby="ranked-h">
+  <h2 class="np-h2" id="ranked-h">Everything else, <em>in order</em></h2>
+  <p class="np-lead">Each addition is listed with the problem it would solve. The order is a proposal.</p>
+  <div class="table-scroll">
+  <table class="rank">
+    <thead><tr><th scope="col">Addition</th><th scope="col">Problem it would solve</th><th scope="col">When</th></tr></thead>
+    <tbody>
+      <tr><td>Live, read-only evidence connections</td><td>The tools run on sample data, so drafts can&rsquo;t be checked against real evidence.</td><td>First</td></tr>
+      <tr><td>Out-of-date flags on saved records</td><td>When an earlier step changes, later steps aren&rsquo;t told.</td><td>First</td></tr>
+      <tr><td>Authenticated approvals and an audit log</td><td>Sign-offs are names typed into the tool.</td><td>Before write-back</td></tr>
+      <tr><td>Operating controls: cost limits per run, pinned model versions with regression tests before upgrades, and versioned record formats</td><td>Production use needs predictable cost and behavior.</td><td>Alongside approvals</td></tr>
+      <tr><td>Jira write-back (specified above)</td><td>Plans are re-entered into Jira by hand.</td><td>After approvals</td></tr>
+      <tr><td>Post-release outcome checks</td><td>Business-case claims aren&rsquo;t checked after release.</td><td>Later. Needs a baseline and a comparison method, because an observed change doesn&rsquo;t show the release caused it.</td></tr>
+      <tr><td>Scheduled agents for signal synthesis, competitive monitoring, and release notes</td><td>Evidence goes stale between planning cycles.</td><td>Optional</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section class="np-sec" id="questions" aria-labelledby="questions-h">
+  <h2 class="np-h2" id="questions-h">The questions <em>this is for</em></h2>
+  <p class="np-lead">None of this is evidence that the system exists. It&rsquo;s a way to work through the operating-model questions the prototype raises:</p>
+  <ul class="q-list">
+    <li>What context must survive each decision?</li>
+    <li>Which actions may be delegated?</li>
+    <li>Which conditions should be deterministic?</li>
+    <li>Where must a human exercise accountable judgment?</li>
+    <li>What evidence must be retained?</li>
+    <li>What should cause the system to stop?</li>
+    <li>How should post-release evidence challenge the original investment case?</li>
+  </ul>
+</section>
+
+<details class="fullmap" id="full-map">
+  <summary>
+    <div class="fullmap-box">
+      <span class="fullmap-title">Show the full proposed map</span>
+      <span class="fullmap-sub">The original, broader proposal: about 60 parts, of which only the tools are built. The ranked list above is the current view.</span>
+    </div>
+  </summary>
 
 <div class="legend-bar" style="margin-top:24px;">
   <div class="legend-inner" style="flex-direction:column;align-items:flex-start;gap:10px;">
@@ -251,7 +396,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
       <span><strong style="color:var(--ink);">In development:</strong> the Product Ops Radar and its health report.</span>
       <span><strong style="color:var(--ink);">Proposed, not built:</strong> every other node, including all data sources, MCP services, agents, approval gates, Jira write-back, and the remaining outputs.</span>
     </div>
-    <span style="font-size:12px;color:var(--muted);">The solid center path represents the current browser workflow. Connections outside that path represent the capabilities that would be required for a production agentic Product Operations system.</span>
+    <span style="font-size:12px;color:var(--muted);">The solid center path is the current browser workflow. Everything around it is a possible addition; the ranked list above says which ones matter first.</span>
   </div>
 </div>
 
@@ -325,8 +470,8 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
   <rect x="105" y="16" width="80" height="414" rx="4" fill="#c8921a" fill-opacity=".03" stroke="#c8921a" stroke-width=".3" stroke-opacity=".18"/>
   <!-- Unified "toolchain spine" band — bolder than the other columns since the top workflow strip was removed -->
   <rect x="183" y="13" width="145" height="535" rx="7" fill="#1a3a5c" fill-opacity=".05" stroke="#1a3a5c" stroke-width="1" stroke-opacity=".45"/>
-  <text x="256.5" y="24" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" font-weight="800" letter-spacing=".04em" fill="#1a3a5c">★ THE TOOLCHAIN — REAL, BUILT, 01 → 09</text>
-  <text x="256.5" y="29.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.6" fill="#5b7290">same-origin localStorage handoffs, not conceptual</text>
+  <text x="256.5" y="24" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" font-weight="800" letter-spacing=".04em" fill="#1a3a5c">★ THE TOOLCHAIN · BUILT · 01 → 09</text>
+  <text x="256.5" y="29.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.6" fill="#5b7290">records handed off in the browser</text>
   <rect x="188" y="34" width="33" height="514" rx="4" fill="#5b7290" fill-opacity=".05" stroke="#5b7290" stroke-width=".4" stroke-opacity=".3" stroke-dasharray="2 2"/>
   <rect x="225" y="34" width="63" height="514" rx="4" fill="#1a3a5c" fill-opacity=".04" stroke="#1a3a5c" stroke-width=".4" stroke-opacity=".25"/>
   <rect x="292" y="34" width="33" height="514" rx="4" fill="#5b7290" fill-opacity=".05" stroke="#5b7290" stroke-width=".4" stroke-opacity=".3" stroke-dasharray="2 2"/>
@@ -545,7 +690,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="109" y="96" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
     <text x="145"  y="100.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Research ingest MCP</text>
  <text x="145"  y="106.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">a">Interviews · surveys → structured</text>
-    <rect x="109" y="108.0" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <rect x="109" y="108.0" width="72" height="6" fill="#c8921a" fill-opacity=".12"/>
     <text x="145"  y="111.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
   </g>
 
@@ -553,7 +698,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="109" y="130" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
     <text x="145"  y="134.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Signal aggregator MCP</text>
     <text x="145"  y="140.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Zendesk · Gong · analytics</text>
-    <rect x="109" y="142.0" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <rect x="109" y="142.0" width="72" height="6" fill="#c8921a" fill-opacity=".12"/>
     <text x="145"  y="145.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
   </g>
 
@@ -561,7 +706,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="109" y="164" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
     <text x="145"  y="168.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Intake source MCP</text>
     <text x="145"  y="174.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Jira · Linear · backlog sync</text>
-    <rect x="109" y="176.0" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <rect x="109" y="176.0" width="72" height="6" fill="#c8921a" fill-opacity=".12"/>
     <text x="145"  y="179.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
   </g>
 
@@ -569,7 +714,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="109" y="198" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
     <text x="145"  y="202.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Strategy context MCP</text>
     <text x="145"  y="208.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">OKRs · planning docs · wiki</text>
-    <rect x="109" y="210.0" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <rect x="109" y="210.0" width="72" height="6" fill="#c8921a" fill-opacity=".12"/>
     <text x="145"  y="213.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
   </g>
 
@@ -577,7 +722,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="109" y="232" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
     <text x="145"  y="236.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Metrics MCP</text>
     <text x="145"  y="242.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">DataDog · Mixpanel · GA4</text>
-    <rect x="109" y="244.0" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <rect x="109" y="244.0" width="72" height="6" fill="#c8921a" fill-opacity=".12"/>
     <text x="145"  y="247.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
   </g>
 
@@ -586,7 +731,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="109" y="266" width="72" height="18" rx="3" fill="#fceaeb" stroke="#b0303a" stroke-width="1"/>
     <text x="145"  y="270.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#7a1a22">Audit log MCP</text>
     <text x="145"  y="276.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#b0303a">All agent decisions logged</text>
-    <rect x="109" y="278.0" width="72" height="6" rx="0 0 3 3" fill="#b0303a" fill-opacity=".12"/>
+    <rect x="109" y="278.0" width="72" height="6" fill="#b0303a" fill-opacity=".12"/>
     <text x="145"  y="281.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#7a1a22" letter-spacing=".07em">GOVERNANCE · MCP</text>
   </g>
 
@@ -594,7 +739,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="109" y="300" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
     <text x="145"  y="304.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">CRM / sales MCP</text>
     <text x="145"  y="310.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Salesforce · HubSpot · deals</text>
-    <rect x="109" y="312.0" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <rect x="109" y="312.0" width="72" height="6" fill="#c8921a" fill-opacity=".12"/>
     <text x="145"  y="315.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
   </g>
 
@@ -602,7 +747,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="109" y="334" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
     <text x="145"  y="338.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Competitive intel MCP</text>
     <text x="145"  y="344.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Crayon · Klue · web scrape</text>
-    <rect x="109" y="346.0" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <rect x="109" y="346.0" width="72" height="6" fill="#c8921a" fill-opacity=".12"/>
     <text x="145"  y="349.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
   </g>
 
@@ -610,7 +755,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="109" y="368" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
     <text x="145"  y="372.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">Comms MCP</text>
   <text x="145"  y="378.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">Slack · Teams · signal mining</text>
-    <rect x="109" y="380.0" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <rect x="109" y="380.0" width="72" height="6" fill="#c8921a" fill-opacity=".12"/>
     <text x="145"  y="383.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
   </g>
 
@@ -618,7 +763,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="109" y="402" width="72" height="18" rx="3" fill="#fef8e7" stroke="#c8921a" stroke-width="1"/>
     <text x="145"  y="406.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#6b4700">ITSM MCP</text>
     <text x="145"  y="412.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8921a">ServiceNow · PagerDuty</text>
-    <rect x="109" y="414.0" width="72" height="6" rx="0 0 3 3" fill="#c8921a" fill-opacity=".12"/>
+    <rect x="109" y="414.0" width="72" height="6" fill="#c8921a" fill-opacity=".12"/>
     <text x="145"  y="417.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b4700" letter-spacing=".07em">MCP SERVER</text>
   </g>
 
@@ -630,7 +775,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <text x="227"  y="74.5" font-family="Inter,sans-serif" font-size="2.9" font-weight="800" fill="#c8662a" letter-spacing=".06em">01 · DISCOVER</text>
     <text x="256.5"  y="80" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="800" fill="#0a1e30">Persona generator</text>
     <text x="256.5"  y="85.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" fill="#1a3a5c">JTBD + segment synthesis</text>
-    <rect x="225" y="88" width="63" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <rect x="225" y="88" width="63" height="6" fill="#1a3a5c" fill-opacity=".1"/>
     <text x="256.5"  y="91.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.6" font-weight="700" fill="#1a3a5c" letter-spacing=".06em">TOOL · CLIENT-SIDE</text>
   </g>
   <text x="204.5" y="80" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-style="italic" fill="#8a97a3">seed input</text>
@@ -644,7 +789,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <text x="227"  y="120.5" font-family="Inter,sans-serif" font-size="2.9" font-weight="800" fill="#c8662a" letter-spacing=".06em">02 · MAP</text>
     <text x="256.5"  y="126" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="800" fill="#0a1e30">Journey map builder</text>
     <text x="256.5"  y="131.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" fill="#1a3a5c">Touchpoints · pain · moments</text>
-    <rect x="225" y="134" width="63" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <rect x="225" y="134" width="63" height="6" fill="#1a3a5c" fill-opacity=".1"/>
     <text x="256.5"  y="137.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.6" font-weight="700" fill="#1a3a5c" letter-spacing=".06em">TOOL · CLAUDE API (OPTIONAL)</text>
   </g>
   <g onclick="showDetail('tool-persona')" style="cursor:pointer;">
@@ -661,7 +806,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <text x="227"  y="166.5" font-family="Inter,sans-serif" font-size="2.9" font-weight="800" fill="#c8662a" letter-spacing=".06em">03 · INTAKE</text>
     <text x="256.5"  y="172" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="800" fill="#0a1e30">Initiative Intake</text>
     <text x="256.5"  y="177.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" fill="#1a3a5c">Tradeoff · epics · D/F/V · benefits</text>
-    <rect x="225" y="180" width="63" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <rect x="225" y="180" width="63" height="6" fill="#1a3a5c" fill-opacity=".1"/>
     <text x="256.5"  y="183.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.6" font-weight="700" fill="#1a3a5c" letter-spacing=".06em">TOOL · CLAUDE API</text>
   </g>
   <g onclick="showDetail('tool-journey')" style="cursor:pointer;">
@@ -678,7 +823,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <text x="227"  y="212.5" font-family="Inter,sans-serif" font-size="2.9" font-weight="800" fill="#c8662a" letter-spacing=".06em">04 · JUSTIFY</text>
     <text x="256.5"  y="218" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="800" fill="#0a1e30">Business case gen.</text>
     <text x="256.5"  y="223.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" fill="#1a3a5c">ROI · risk · inaction cost</text>
-    <rect x="225" y="226" width="63" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <rect x="225" y="226" width="63" height="6" fill="#1a3a5c" fill-opacity=".1"/>
     <text x="256.5"  y="229.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.6" font-weight="700" fill="#1a3a5c" letter-spacing=".06em">TOOL · CLAUDE API</text>
   </g>
   <g onclick="showDetail('tool-intake')" style="cursor:pointer;">
@@ -695,7 +840,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <text x="227"  y="258.5" font-family="Inter,sans-serif" font-size="2.9" font-weight="800" fill="#c8662a" letter-spacing=".06em">05 · RANK</text>
     <text x="256.5"  y="264" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="800" fill="#0a1e30">Epic Prioritizer</text>
     <text x="256.5"  y="269.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" fill="#1a3a5c">WSJF + RICE, editable weights</text>
-    <rect x="225" y="272" width="63" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <rect x="225" y="272" width="63" height="6" fill="#1a3a5c" fill-opacity=".1"/>
     <text x="256.5"  y="275.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.6" font-weight="700" fill="#1a3a5c" letter-spacing=".06em">TOOL · CLAUDE API</text>
   </g>
   <g onclick="showDetail('tool-bizcase')" style="cursor:pointer;">
@@ -712,7 +857,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <text x="227"  y="304.5" font-family="Inter,sans-serif" font-size="2.9" font-weight="800" fill="#c8662a" letter-spacing=".06em">06 · SCHEDULE</text>
     <text x="256.5"  y="310" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="800" fill="#0a1e30">Roadmap &amp; Milestones</text>
     <text x="256.5"  y="315.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" fill="#1a3a5c">Release windows, funded first</text>
-    <rect x="225" y="318" width="63" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <rect x="225" y="318" width="63" height="6" fill="#1a3a5c" fill-opacity=".1"/>
     <text x="256.5"  y="321.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.6" font-weight="700" fill="#1a3a5c" letter-spacing=".06em">TOOL · CLAUDE API</text>
   </g>
   <g onclick="showDetail('tool-wsjf')" style="cursor:pointer;">
@@ -729,7 +874,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <text x="227"  y="350.5" font-family="Inter,sans-serif" font-size="2.9" font-weight="800" fill="#c8662a" letter-spacing=".06em">07 · SPEC</text>
     <text x="256.5"  y="356" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="800" fill="#0a1e30">Business Documents</text>
     <text x="256.5"  y="361.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" fill="#1a3a5c">BRD: requirements + exec pkg</text>
-    <rect x="225" y="364" width="63" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <rect x="225" y="364" width="63" height="6" fill="#1a3a5c" fill-opacity=".1"/>
     <text x="256.5"  y="367.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.6" font-weight="700" fill="#1a3a5c" letter-spacing=".06em">TOOL · CLAUDE API</text>
   </g>
   <g onclick="showDetail('tool-roadmap')" style="cursor:pointer;">
@@ -746,7 +891,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <text x="227"  y="396.5" font-family="Inter,sans-serif" font-size="2.9" font-weight="800" fill="#c8662a" letter-spacing=".06em">08 · PLAN</text>
     <text x="256.5"  y="402" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="800" fill="#0a1e30">Backlog Builder</text>
     <text x="256.5"  y="407.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" fill="#1a3a5c">Features, stories, sec/UAT, docs</text>
-    <rect x="225" y="410" width="63" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <rect x="225" y="410" width="63" height="6" fill="#1a3a5c" fill-opacity=".1"/>
     <text x="256.5"  y="413.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.6" font-weight="700" fill="#1a3a5c" letter-spacing=".06em">TOOL · CLAUDE API</text>
   </g>
   <g onclick="showDetail('tool-docs')" style="cursor:pointer;">
@@ -763,7 +908,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <text x="227"  y="442.5" font-family="Inter,sans-serif" font-size="2.9" font-weight="800" fill="#c8662a" letter-spacing=".06em">09 · DELIVER</text>
     <text x="256.5"  y="448" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="800" fill="#0a1e30">Sprint Planner</text>
     <text x="256.5"  y="453.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" fill="#1a3a5c">MVP scope, sprints, RAID log</text>
-    <rect x="225" y="456" width="63" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <rect x="225" y="456" width="63" height="6" fill="#1a3a5c" fill-opacity=".1"/>
     <text x="256.5"  y="459.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.6" font-weight="700" fill="#1a3a5c" letter-spacing=".06em">TOOL · CLAUDE API</text>
   </g>
   <g onclick="showDetail('tool-backlog')" style="cursor:pointer;">
@@ -793,7 +938,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <text x="227"  y="522.5" font-family="Inter,sans-serif" font-size="2.9" font-weight="800" fill="#c8662a" letter-spacing=".06em">MEASURE</text>
     <text x="256.5"  y="528" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="800" fill="#0a1e30">Product ops radar</text>
     <text x="256.5"  y="533.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" fill="#1a3a5c">Health · gaps · dim. scoring</text>
-    <rect x="225" y="536" width="63" height="6" rx="0 0 3 3" fill="#1a3a5c" fill-opacity=".1"/>
+    <rect x="225" y="536" width="63" height="6" fill="#1a3a5c" fill-opacity=".1"/>
     <text x="256.5"  y="539.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.6" font-weight="700" fill="#1a3a5c" letter-spacing=".06em">TOOL · CLIENT-SIDE · IN DEV</text>
   </g>
 
@@ -804,7 +949,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="330" y="72" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
     <text x="362"  y="76.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Signal synthesis</text>
   <text x="362"  y="82.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Clusters themes · weekly delta</text>
-    <rect x="330" y="84.0" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <rect x="330" y="84.0" width="64" height="6" fill="#c8662a" fill-opacity=".1"/>
     <text x="362"  y="87.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · SCHEDULED</text>
   </g>
 
@@ -812,7 +957,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="330" y="106" width="64" height="18" rx="3" fill="#eeeafb" stroke="#7c5cbf" stroke-width="1"/>
     <text x="362"  y="110.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#2e1060">✋ Strategic review</text>
     <text x="362"  y="116.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#7c5cbf">PM ratifies opportunity map</text>
-    <rect x="330" y="118.0" width="64" height="6" rx="0 0 3 3" fill="#7c5cbf" fill-opacity=".12"/>
+    <rect x="330" y="118.0" width="64" height="6" fill="#7c5cbf" fill-opacity=".12"/>
     <text x="362"  y="121.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#2e1060" letter-spacing=".07em">HUMAN IN THE LOOP</text>
   </g>
 
@@ -820,7 +965,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="330" y="140" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
     <text x="362"  y="144.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Case enrichment</text>
     <text x="362"  y="150.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Merges signal + financials</text>
-    <rect x="330" y="152.0" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <rect x="330" y="152.0" width="64" height="6" fill="#c8662a" fill-opacity=".1"/>
     <text x="362"  y="155.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT</text>
   </g>
 
@@ -828,7 +973,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="330" y="174" width="64" height="18" rx="3" fill="#eeeafb" stroke="#7c5cbf" stroke-width="1"/>
     <text x="362"  y="178.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#2e1060">✋ Case approval</text>
     <text x="362"  y="184.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#7c5cbf">Sponsor sign-off required</text>
-    <rect x="330" y="186.0" width="64" height="6" rx="0 0 3 3" fill="#7c5cbf" fill-opacity=".12"/>
+    <rect x="330" y="186.0" width="64" height="6" fill="#7c5cbf" fill-opacity=".12"/>
     <text x="362"  y="189.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#2e1060" letter-spacing=".07em">HUMAN IN THE LOOP</text>
   </g>
 
@@ -836,7 +981,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="330" y="208" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
     <text x="362"  y="212.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Intake chain</text>
   <text x="362"  y="218.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">4-step agentic pipeline</text>
-    <rect x="330" y="220.0" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <rect x="330" y="220.0" width="64" height="6" fill="#c8662a" fill-opacity=".1"/>
     <text x="362"  y="223.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · SEQUENTIAL</text>
   </g>
 
@@ -844,7 +989,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="330" y="242" width="64" height="18" rx="3" fill="#eeeafb" stroke="#7c5cbf" stroke-width="1"/>
     <text x="362"  y="246.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#2e1060">✋ Intake review</text>
     <text x="362"  y="252.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#7c5cbf">PM + stakeholders sign off</text>
-    <rect x="330" y="254.0" width="64" height="6" rx="0 0 3 3" fill="#7c5cbf" fill-opacity=".12"/>
+    <rect x="330" y="254.0" width="64" height="6" fill="#7c5cbf" fill-opacity=".12"/>
     <text x="362"  y="257.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#2e1060" letter-spacing=".07em">HUMAN IN THE LOOP</text>
   </g>
 
@@ -853,7 +998,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="330" y="276" width="64" height="18" rx="3" fill="#fceaeb" stroke="#b0303a" stroke-width="1"/>
     <text x="362"  y="280.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#7a1a22">Policy enforcement</text>
   <text x="362"  y="286.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#b0303a">Access · credentials · scope</text>
-    <rect x="330" y="288.0" width="64" height="6" rx="0 0 3 3" fill="#b0303a" fill-opacity=".12"/>
+    <rect x="330" y="288.0" width="64" height="6" fill="#b0303a" fill-opacity=".12"/>
     <text x="362"  y="291.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#7a1a22" letter-spacing=".07em">GOVERNANCE</text>
   </g>
   <!-- policy feeds outputs -->
@@ -865,7 +1010,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="437" y="90.7" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
     <text x="465"  y="95.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Opportunity map</text>
     <text x="465"  y="100.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Ranked pain clusters</text>
-    <rect x="437" y="102.7" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <rect x="437" y="102.7" width="56" height="6" fill="#1a5c3a" fill-opacity=".1"/>
     <text x="465"  y="106.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
@@ -873,7 +1018,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="437" y="124.7" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
     <text x="465"  y="129.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Approved biz case</text>
     <text x="465"  y="134.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Funded · signed</text>
-    <rect x="437" y="136.7" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <rect x="437" y="136.7" width="56" height="6" fill="#1a5c3a" fill-opacity=".1"/>
     <text x="465"  y="140.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
@@ -881,7 +1026,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="437" y="158.7" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
     <text x="465"  y="163.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Feature brief</text>
     <text x="465"  y="168.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">RICE · assumptions</text>
-    <rect x="437" y="170.7" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <rect x="437" y="170.7" width="56" height="6" fill="#1a5c3a" fill-opacity=".1"/>
     <text x="465"  y="174.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
@@ -889,7 +1034,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="437" y="192.7" width="56" height="18" rx="3" fill="#eeeafb" stroke="#7c5cbf" stroke-width="1"/>
     <text x="458"  y="197.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#2e1060">✋ Review gates</text>
     <text x="458"  y="202.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#7c5cbf">Arch · sec · business</text>
-    <rect x="437" y="204.7" width="56" height="6" rx="0 0 3 3" fill="#7c5cbf" fill-opacity=".12"/>
+    <rect x="437" y="204.7" width="56" height="6" fill="#7c5cbf" fill-opacity=".12"/>
     <text x="458"  y="208.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#2e1060" letter-spacing=".07em">3× HITL PARALLEL</text>
   </g>
 
@@ -904,7 +1049,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="437" y="247.7" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
     <text x="465"  y="252.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Strategy cascade</text>
   <text x="465"  y="257.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Hoshin · V2MOM</text>
-    <rect x="437" y="259.7" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <rect x="437" y="259.7" width="56" height="6" fill="#1a5c3a" fill-opacity=".1"/>
     <text x="465"  y="263.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
@@ -912,7 +1057,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="437" y="281.7" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
     <text x="465"  y="286.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Ops health report</text>
     <text x="465"  y="291.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Radar · gaps · recs</text>
-    <rect x="437" y="293.7" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <rect x="437" y="293.7" width="56" height="6" fill="#1a5c3a" fill-opacity=".1"/>
     <text x="465"  y="297.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
@@ -920,7 +1065,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="330" y="310" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
     <text x="362"  y="314.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Win/loss synthesis</text>
     <text x="362"  y="320.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Patterns · theme clustering</text>
-    <rect x="330" y="322.0" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <rect x="330" y="322.0" width="64" height="6" fill="#c8662a" fill-opacity=".1"/>
     <text x="362"  y="325.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · TRIGGERED</text>
   </g>
 
@@ -928,7 +1073,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="330" y="344" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
     <text x="362"  y="348.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Competitive monitor</text>
   <text x="362"  y="354.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Weekly delta · gap alerts</text>
-    <rect x="330" y="356.0" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <rect x="330" y="356.0" width="64" height="6" fill="#c8662a" fill-opacity=".1"/>
     <text x="362"  y="359.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · SCHEDULED</text>
   </g>
 
@@ -936,7 +1081,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="330" y="378" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
     <text x="362"  y="382.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Retro summarizer</text>
     <text x="362"  y="388.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Sprint health · action items</text>
-    <rect x="330" y="390.0" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <rect x="330" y="390.0" width="64" height="6" fill="#c8662a" fill-opacity=".1"/>
     <text x="362"  y="393.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · ON-DEMAND</text>
   </g>
 
@@ -944,7 +1089,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="330" y="412" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
     <text x="362"  y="416.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ Release notes drafter</text>
     <text x="362"  y="422.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">Commits → audience-scoped notes</text>
-    <rect x="330" y="424.0" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <rect x="330" y="424.0" width="64" height="6" fill="#c8662a" fill-opacity=".1"/>
     <text x="362"  y="427.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · TRIGGERED ON DEPLOY</text>
   </g>
 
@@ -952,7 +1097,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="330" y="446" width="64" height="18" rx="3" fill="#fdeee4" stroke="#c8662a" stroke-width="1"/>
     <text x="362"  y="450.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.3" font-weight="700" fill="#6b1f00">⟳ ROI validation agent</text>
     <text x="362"  y="456.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#c8662a">30 / 60 / 90-day telemetry checks</text>
-    <rect x="330" y="458.0" width="64" height="6" rx="0 0 3 3" fill="#c8662a" fill-opacity=".1"/>
+    <rect x="330" y="458.0" width="64" height="6" fill="#c8662a" fill-opacity=".1"/>
     <text x="362"  y="461.4" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#6b1f00" letter-spacing=".07em">AGENT · SCHEDULED POST-DEPLOY</text>
   </g>
 
@@ -967,7 +1112,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="437" y="315.7" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
     <text x="465"  y="320.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Win/loss report</text>
   <text x="465"  y="325.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Patterns · deal themes</text>
-    <rect x="437" y="327.7" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <rect x="437" y="327.7" width="56" height="6" fill="#1a5c3a" fill-opacity=".1"/>
     <text x="465"  y="331.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
@@ -975,7 +1120,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="437" y="349.7" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
     <text x="465"  y="354.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Competitive brief</text>
     <text x="465"  y="359.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Gaps · positioning delta</text>
-    <rect x="437" y="361.7" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <rect x="437" y="361.7" width="56" height="6" fill="#1a5c3a" fill-opacity=".1"/>
     <text x="465"  y="365.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
@@ -983,7 +1128,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="437" y="383.7" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
     <text x="465"  y="388.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Retro summary</text>
     <text x="465"  y="393.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Health · action items</text>
-    <rect x="437" y="395.7" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <rect x="437" y="395.7" width="56" height="6" fill="#1a5c3a" fill-opacity=".1"/>
     <text x="465"  y="399.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
@@ -991,7 +1136,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="437" y="417.7" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
     <text x="465"  y="422.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Release notes</text>
   <text x="465"  y="427.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">PM · sales · customer scoped</text>
-    <rect x="437" y="429.7" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <rect x="437" y="429.7" width="56" height="6" fill="#1a5c3a" fill-opacity=".1"/>
     <text x="465"  y="433.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
@@ -999,7 +1144,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="437" y="451.7" width="56" height="18" rx="3" fill="#fceaeb" stroke="#b0303a" stroke-width="1"/>
     <text x="465"  y="456.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#7a1a22">Regulatory impact</text>
   <text x="465"  y="461.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#b0303a">Compliance · risk flags</text>
-    <rect x="437" y="463.7" width="56" height="6" rx="0 0 3 3" fill="#b0303a" fill-opacity=".1"/>
+    <rect x="437" y="463.7" width="56" height="6" fill="#b0303a" fill-opacity=".1"/>
     <text x="465"  y="467.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#7a1a22" letter-spacing=".07em">OUTPUT · GOVERNANCE</text>
   </g>
 
@@ -1007,7 +1152,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <rect x="437" y="485.7" width="56" height="18" rx="3" fill="#dff2e8" stroke="#1a5c3a" stroke-width="1"/>
     <text x="465"  y="490.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="700" fill="#0a3320">Stakeholder comms</text>
   <text x="465"  y="495.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.7" fill="#1a5c3a">Roadmap · update briefs</text>
-    <rect x="437" y="497.7" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".1"/>
+    <rect x="437" y="497.7" width="56" height="6" fill="#1a5c3a" fill-opacity=".1"/>
     <text x="465"  y="501.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT</text>
   </g>
 
@@ -1022,7 +1167,7 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
     <text x="459"  y="531.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="4.0" font-weight="800" fill="#0a3320">Telemetry monitor</text>
     <text x="459"  y="537.2" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.5" fill="#1a5c3a">Verify / deny post-release</text>
   <text x="459"  y="542.7" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.4" fill="#1a5c3a">ROI claims from biz case</text>
-    <rect x="437" y="545.7" width="56" height="6" rx="0 0 3 3" fill="#1a5c3a" fill-opacity=".12"/>
+    <rect x="437" y="545.7" width="56" height="6" fill="#1a5c3a" fill-opacity=".12"/>
     <text x="459"  y="549.1" text-anchor="middle" font-family="Inter,sans-serif" font-size="2.9" font-weight="700" fill="#0a3320" letter-spacing=".07em">OUTPUT · CONTINUOUS</text>
   </g>
 
@@ -1087,120 +1232,11 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
 </div>
 
 <!-- AGENT DECISION LOG — below Trust & Governance -->
-<div class="obs-wrap">
-  <div class="obs-panel">
-    <div class="obs-header">
-      <div class="obs-header-title">Illustrative target-state decision log</div>
-      <span class="obs-badge" style="background:rgba(107,107,107,.1);color:var(--muted);border-color:var(--muted);">ILLUSTRATIVE · Not live</span>
-    </div>
-
-    <div class="obs-explainer">
-      <div class="obs-explainer-col">
-        <div class="obs-explainer-head">What this is</div>
-        <p class="obs-explainer-text">The entries below show the kinds of events a production observability service could record: agent identity, input sources, model and schema versions, warnings, policy blocks, human decisions, cost, and downstream actions. They are illustrative examples, not live events emitted by the current prototype.</p>
-      </div>
-      <div class="obs-explainer-col">
-        <div class="obs-explainer-head">Why this would matter</div>
-        <p class="obs-explainer-text">A decision log would allow reviewers to reconstruct what an agent did, what evidence it used, which checks ran, what was changed by a person, and why the workflow continued or stopped. Building that capability would require a persistent service, authenticated identities, policy enforcement, and a defined audit schema. Those capabilities are not present today.</p>
-      </div>
-      <div class="obs-explainer-col">
-        <div class="obs-explainer-head">Hypothetical PM-specific benefits, once built</div>
-        <ul class="obs-benefit-list">
-          <li><strong>Retrospective review:</strong> "Why did the intake chain recommend REJECT for this feature?": the log shows every step and every input.</li>
-          <li><strong>Stakeholder accountability:</strong> Named HITL sign-offs are recorded with timestamps, not just implied by an email chain.</li>
-          <li><strong>Quality signals:</strong> WARN entries flag AI outputs that need PM attention before flowing downstream, catching low-confidence claims before they reach a sponsor.</li>
-          <li><strong>Audit readiness:</strong> Every approved business case, signed intake output, and gate decision is timestamped and attributable to a named person.</li>
-          <li><strong>Cost visibility:</strong> Token spend per agent run is tracked: AI operational costs become visible, budget-able, and attributable to the team or feature that incurred them.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="obs-log-label">Example log format, with invented events</div>
-    <div class="obs-log" id="obsLog">
-      <div class="obs-entry">
-        <span class="obs-time">09:14:02</span>
-        <span class="obs-agent">Signal synthesis</span>
-        <span class="obs-msg">Weekly delta complete — 3 new themes surfaced, 1 trending down. Persona refresh recommended.</span>
-        <span class="obs-status ok">OK</span>
-      </div>
-      <div class="obs-entry">
-        <span class="obs-time">09:14:08</span>
-        <span class="obs-agent">Research ingest MCP</span>
-        <span class="obs-msg">4 Dovetail transcripts ingested — 12 themes extracted, 2 contradict existing persona assumptions</span>
-        <span class="obs-status warn">WARN</span>
-      </div>
-      <div class="obs-entry">
-        <span class="obs-time">09:15:33</span>
-        <span class="obs-agent">Intake chain — step 2</span>
-        <span class="obs-msg">JTBD frame produced — pipeline paused, awaiting PM review before assumption mapping proceeds</span>
-        <span class="obs-status hitl">HITL</span>
-      </div>
-      <div class="obs-entry">
-        <span class="obs-time">09:22:11</span>
-        <span class="obs-agent">Case enrichment</span>
-        <span class="obs-msg">Financial claim slide 4 low-confidence — benchmark data 14 months old. PM should verify before sponsor review.</span>
-        <span class="obs-status warn">WARN</span>
-      </div>
-      <div class="obs-entry">
-        <span class="obs-time">09:22:14</span>
-        <span class="obs-agent">Audit log MCP</span>
-        <span class="obs-msg">Case enrichment run logged — model: claude-sonnet-4-6 · tokens: 1,840 · caller: rob.dull@co.com</span>
-        <span class="obs-status ok">OK</span>
-      </div>
-      <div class="obs-entry">
-        <span class="obs-time">09:31:05</span>
-        <span class="obs-agent">Policy enforcement</span>
-        <span class="obs-msg">Jira write-back BLOCKED for feature #1042 — no signed business case approval record found in audit log</span>
-        <span class="obs-status warn">BLOCKED</span>
-      </div>
-      <div class="obs-entry">
-        <span class="obs-time">09:44:17</span>
-        <span class="obs-agent">Win/loss synthesis</span>
-        <span class="obs-msg">14 deals analysed — top loss theme: "missing SSO support" (6/14). Opportunity map flag raised.</span>
-        <span class="obs-status ok">OK</span>
-      </div>
-      <div class="obs-entry">
-        <span class="obs-time">10:02:50</span>
-        <span class="obs-agent">ROI validation agent</span>
-        <span class="obs-msg">Feature #1031 · 30-day check — conversion claim CONFIRMED (+4.2% vs +3% predicted) · ticket reduction claim REFUTED (volume unchanged)</span>
-        <span class="obs-status warn">PARTIAL</span>
-      </div>
-      <div class="obs-entry">
-        <span class="obs-time">10:15:00</span>
-        <span class="obs-agent">Strategic review gate</span>
-        <span class="obs-msg">Opportunity map ratified — rob.dull@co.com · Q2 cycle unlocked · next business case generation window open</span>
-        <span class="obs-status ok">HITL · SIGNED</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- HITL GATES / FEEDBACK LOOPS / DESIGN QUESTIONS -->
-<div class="legend-bar" style="margin-top:24px;">
-  <div class="legend-inner" style="flex-direction:column;align-items:flex-start;gap:10px;">
-    <span class="legend-label" style="margin-right:0;">Human-in-the-loop gates</span>
-    <span style="font-size:12px;color:var(--muted);">The diagram identifies places where human review would be appropriate: opportunity framing, initiative and assumption review, business-case approval, funding decision, architecture/security/business requirements review, delivery-plan ownership, and production-system write-back. In the current prototype, these are recommended review points in a human-operated workflow. They are not authenticated approvals, electronic signatures, or audit records.</span>
-  </div>
-</div>
-
-<div class="legend-bar" style="margin-top:16px;">
-  <div class="legend-inner" style="flex-direction:column;align-items:flex-start;gap:10px;">
-    <span class="legend-label" style="margin-right:0;">Feedback loops (the ↻ toggle above)</span>
-    <span style="font-size:12px;color:var(--muted);">The target architecture includes post-release feedback loops because producing a backlog is not the end of Product Management: a mature system would need to compare predicted benefits with observed outcomes and route new evidence back into prioritization. The proposed loops: support and usage-signal updates, win/loss synthesis, competitive and regulatory change detection, retrospective themes, release communications, and 30-, 60-, and 90-day outcome checks. These are architectural hypotheses; their value, cadence, ownership, and governance would need to be validated before implementation.</span>
-  </div>
-</div>
-
-<div class="legend-bar" style="margin-top:16px;">
-  <div class="legend-inner" style="flex-direction:column;align-items:flex-start;gap:10px;">
-    <span class="legend-label" style="margin-right:0;">The design question</span>
-    <span style="font-size:12px;color:var(--muted);">This diagram is not evidence that the full system exists. It is evidence of the operating-model questions the prototype is intended to explore: What context must survive each decision? Which actions may be delegated? Which conditions should be deterministic? Where must a human exercise accountable judgment? What evidence must be retained? What should cause the system to stop? How should post-release evidence challenge the original investment case?</span>
-  </div>
-</div>
 
 <!-- DETAIL PANEL -->
 <div class="detail-wrap">
 <div class="detail-panel" id="detailPanel">
-  <button class="detail-close" onclick="closeDetail()">&times;</button>
+  <button class="detail-close" onclick="closeDetail()" aria-label="Close details">&times;</button>
   <div class="detail-eyebrow" id="detailEyebrow"></div>
   <div class="detail-title" id="detailTitle"></div>
   <div class="detail-body" id="detailBody"></div>
@@ -1208,14 +1244,27 @@ footer{padding:28px 32px;text-align:center;font-size:12px;color:var(--muted);bor
 </div>
 </div>
 
+<section class="np-sec map-list" aria-labelledby="map-list-h">
+  <h3 class="np-h3" id="map-list-h">The same map as a list</h3>
+  <div class="table-scroll">
+  <table class="rank" id="mapTable">
+    <thead><tr><th scope="col">Part</th><th scope="col">Kind</th><th scope="col">Status</th><th scope="col">What it would do</th></tr></thead>
+    <tbody></tbody>
+  </table>
+  </div>
+</section>
+
+</details>
+
 <div class="about-strip">
   <div class="about-inner">
     <div>
-      <h2>Each tool works today.<br>The rest is <em>target architecture</em>.</h2>
-      <p>This network diagram shows the full target architecture (data sources, MCP connections, agents, HITL gates, and outputs) that a mature version of this system would need. The AI ProdOps overview explains where the working prototype sits on that path, and what separates AI-assisted drafting from a truly agentic operating system.</p>
+      <h2>The tools are built.<br>Everything else here is <em>proposed</em>.</h2>
+      <p>See what each built tool takes in and produces, or where the prototype sits between AI assistance and agentic operations.</p>
     </div>
     <div class="about-links">
-      <a href="AI-prodops-overview.html" class="about-btn primary">AI ProdOps overview &#8599;</a>
+      <a href="document-flow.html" class="about-btn primary">Document Flow &#8599;</a>
+      <a href="AI-prodops-overview.html" class="about-btn ghost">Overview &#8599;</a>
       <a href="../tools-index.html" class="about-btn ghost">All tools &#8599;</a>
     </div>
   </div>
@@ -1307,7 +1356,7 @@ const nodes = {
   // STEPS 08-09 — live and built, superseding the older "recommended companion tool" sketches
   'tool-backlog': {t:'tool', l:'Tool · Claude API · Step 08 · Plan', title:'Backlog Builder', body:'Turns the BRD into the full delivery-doc suite: MoSCoW\'d Features with feature-level NFRs and refined sizing, ordered Stories with BDD (Given/When/Then) acceptance criteria and dependsOn sequencing, a solution outline, a security/UAT plan, and dev/user docs. Requirement coverage is computed, not generated: every BRD business requirement is checked off against a feature.\n\nThis is the real, built version of what two earlier concept sketches (a separate "backlog generator" and "story writer + AC generator") assumed would be two tools. In the shipped product it\'s one pipeline producing both epics/stories and their Gherkin acceptance criteria together.\n\nToolchain in: ★ BRD (robdull:brds) from Business Documents (Step 07). Toolchain out: ★ Feature list / extended backlog (robdull:backlogs v2) to Sprint Planner (Step 09).\n\nTry the real sample run: backlog-builder/demo.html.', chips:['Claude API','Step 08 · Plan','Gherkin AC','robdull:backlogs (v2)','★ Key document','Real sample run']},
 
-  'tool-jira-sync': {t:'tool', l:'MCP Write · Recommended, not built', title:'Jira write-back', body:'The one genuinely aspirational piece left in the 08→09 handoff: today Sprint Planner (Step 09) exports a Jira bulk-import CSV that a human uploads, and there is no live API write-back yet. This node represents what that would look like: an MCP write endpoint gated behind a signed approval record, writing epic, stories with AC, labels, and story points directly to Jira.\n\nPolicy enforcement: no Jira write without an audit log approval record, the same HITL-gating pattern already used elsewhere in this diagram.', chips:['Intake source MCP','Write-gated','HITL approval required','Not yet built','Real gap, not fiction']},
+  'tool-jira-sync': {t:'tool', l:'Proposed · specified above', title:'Jira write-back', body:'Today the Sprint Planner (Step 09) exports a CSV that a person imports into Jira by hand. The proposed write-back is specified in full near the top of this page: ordinary code writing one approved plan into one Jira project after a signed approval, with no edits or deletions of existing issues.', chips:['Proposed','Signed approval required','One project only','Specified above']},
 
   'tool-sprint': {t:'tool', l:'Tool · Claude API · Step 09 · Deliver', title:'Sprint Planner', body:'MVP scope, a sprint-by-sprint allocation at a fixed capacity model (32 pts/sprint), and a RAID log. Capacity and dependency order are both rechecked in code: a story placed in the same sprint as, or an earlier sprint than, a story it depends on raises a visible warning wherever the plan is used. Terminal step: downloads a Jira bulk-import CSV for manual import, no further same-origin handoff.\n\nToolchain in: ★ Feature list (robdull:backlogs v2) from Backlog Builder (Step 08). Toolchain out: ★ Jira bulk-import CSV, terminal.\n\nTry the real sample run: sprint-plan/demo.html, includes the RAID log.', chips:['Claude API','Step 09 · Deliver','RAID log','★ Key document','Terminal step','Real sample run']},
 
@@ -1396,6 +1445,36 @@ function updateViewBox() {
 ro.observe(svgEl.parentElement);
 updateViewBox(); // initial call
 
+
+// Keyboard access: every map node and governance item opens its details with Enter or Space.
+function nodeId(el){ const m = (el.getAttribute('onclick')||'').match(/showDetail\('([^']+)'\)/); return m ? m[1] : null; }
+document.querySelectorAll('g.n[onclick], .gov-item[onclick]').forEach(el => {
+  const id = nodeId(el); const d = id && nodes[id];
+  el.setAttribute('tabindex', '0');
+  el.setAttribute('role', 'button');
+  if (d) el.setAttribute('aria-label', d.title + ' (' + (d.l || d.t) + ')');
+  el.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && id) { e.preventDefault(); showDetail(id); } });
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+document.getElementById('full-map').addEventListener('toggle', () => updateViewBox());
+
+// The same map as a list, built from the node data so the two never disagree.
+(function fillMapTable(){
+  const KIND = {data:'Data source', mcp:'Connection (MCP)', tool:'Tool', agent:'Agent', hitl:'Approval point', output:'Output', governance:'Governance'};
+  const BUILT = new Set(['tool-persona','tool-journey','tool-intake','tool-bizcase','tool-wsjf','tool-roadmap','tool-docs','tool-backlog','tool-sprint','tool-hoshin','out-hoshin']);
+  const DEV = new Set(['tool-radar','out-radar']);
+  const body = document.querySelector('#mapTable tbody');
+  if (!body) return;
+  Object.entries(nodes).forEach(([id, d]) => {
+    const tr = document.createElement('tr');
+    const text = (d.body || '').replace(/<[^>]+>/g, '').split(/\n/)[0];
+    const first = (text.match(/^.*?[.!?](\s|$)/) || [text])[0].trim();
+    [d.title, KIND[d.t] || d.t, BUILT.has(id) ? 'Built' : DEV.has(id) ? 'In development' : 'Proposed', first].forEach(v => {
+      const td = document.createElement('td'); td.textContent = v; tr.appendChild(td);
+    });
+    body.appendChild(tr);
+  });
+})();
 </script>
 </body>
 </html>
