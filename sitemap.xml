@@ -4,18 +4,35 @@
   <url><loc>https://robdull.com/tools/tools-index.html</loc><priority>0.9</priority></url>
   <url><loc>https://robdull.com/tools/AI-native-prodops/AI-prodops-overview.html</loc><priority>0.9</priority></url>
   <url><loc>https://robdull.com/tools/AI-native-prodops/prodops-network.html</loc><priority>0.8</priority></url>
+  <url><loc>https://robdull.com/tools/AI-native-prodops/for-evaluators.html</loc><priority>0.8</priority></url>
+  <url><loc>https://robdull.com/tools/AI-native-prodops/case-study-pethealth.html</loc><priority>0.8</priority></url>
   <url><loc>https://robdull.com/tools/business-case/</loc><priority>0.8</priority></url>
   <url><loc>https://robdull.com/tools/feature-intake/</loc><priority>0.8</priority></url>
   <url><loc>https://robdull.com/tools/persona-generator/persona-index.html</loc><priority>0.8</priority></url>
   <url><loc>https://robdull.com/tools/journey-map/</loc><priority>0.8</priority></url>
   <url><loc>https://robdull.com/tools/hoshin-kanri/</loc><priority>0.8</priority></url>
   <url><loc>https://robdull.com/tools/prod-ops-radar/prod-ops-radar-index.html</loc><priority>0.8</priority></url>
+  <url><loc>https://robdull.com/tools/portfolio-wsjf/</loc><priority>0.8</priority></url>
+  <url><loc>https://robdull.com/tools/roadmap/</loc><priority>0.8</priority></url>
+  <url><loc>https://robdull.com/tools/docs-generator/</loc><priority>0.8</priority></url>
+  <url><loc>https://robdull.com/tools/backlog-builder/</loc><priority>0.8</priority></url>
+  <url><loc>https://robdull.com/tools/sprint-plan/</loc><priority>0.8</priority></url>
   <url><loc>https://robdull.com/about_me/work-history.html</loc><priority>0.8</priority></url>
   <url><loc>https://robdull.com/perspectives/perspectives-index.html</loc><priority>0.8</priority></url>
   <url><loc>https://robdull.com/perspectives/marquet-ai-cert.html</loc><priority>0.8</priority></url>
   <url><loc>https://robdull.com/perspectives/four-guardrails-ai-pipelines.html</loc><priority>0.7</priority></url>
   <url><loc>https://robdull.com/perspectives/pm-roles-ai.html</loc><priority>0.7</priority></url>
   <url><loc>https://robdull.com/perspectives/write-it-right.html</loc><priority>0.7</priority></url>
+  <url><loc>https://robdull.com/tools/AI-native-prodops/document-flow.html</loc><priority>0.7</priority></url>
+  <url><loc>https://robdull.com/tools/AI-native-prodops/rebuild-retrospective.html</loc><priority>0.7</priority></url>
+  <url><loc>https://robdull.com/tools/AI-native-prodops/technical-notes.html</loc><priority>0.7</priority></url>
+  <url><loc>https://robdull.com/tools/feature-intake/feature-intake-explainer.html</loc><priority>0.7</priority></url>
   <url><loc>https://robdull.com/workshops/workshops-index.html</loc><priority>0.7</priority></url>
   <url><loc>https://robdull.com/about_me/resume.html</loc><priority>0.7</priority></url>
+  <url><loc>https://robdull.com/tools/feature-intake/demo.html</loc><priority>0.6</priority></url>
+  <url><loc>https://robdull.com/tools/portfolio-wsjf/demo.html</loc><priority>0.6</priority></url>
+  <url><loc>https://robdull.com/tools/roadmap/demo.html</loc><priority>0.6</priority></url>
+  <url><loc>https://robdull.com/tools/docs-generator/demo.html</loc><priority>0.6</priority></url>
+  <url><loc>https://robdull.com/tools/backlog-builder/demo.html</loc><priority>0.6</priority></url>
+  <url><loc>https://robdull.com/tools/sprint-plan/demo.html</loc><priority>0.6</priority></url>
 </urlset>
