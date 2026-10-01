@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-<title>PDLC Document Flow | Rob Dull</title>
+<title>Document Flow, Tool by Tool | Rob Dull</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y1JYXTE5J"></script>
@@ -14,12 +14,12 @@
   gtag('js', new Date());
   gtag('config', 'G-0Y1JYXTE5J');
 </script>
-<meta name="description" content="What each of the nine tools in the AI-assisted workflow takes in and produces, with links to sample runs and an optional view of proposed external inputs and outputs.">
+<meta name="description" content="What each of the nine tools in the AI-assisted workflow takes in and produces, what code checks, and what a person must review, with sample-run links.">
 <link rel="canonical" href="https://robdull.com/tools/AI-native-prodops/document-flow.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://robdull.com/tools/AI-native-prodops/document-flow.html">
-<meta property="og:title" content="PDLC Document Flow | Rob Dull">
-<meta property="og:description" content="What each of the nine tools in the AI-assisted workflow takes in and produces, with links to sample runs and an optional view of proposed external inputs and outputs.">
+<meta property="og:title" content="Document Flow, Tool by Tool | Rob Dull">
+<meta property="og:description" content="What each of the nine tools in the AI-assisted workflow takes in and produces, what code checks, and what a person must review, with sample-run links.">
 <meta property="og:site_name" content="Rob Dull">
 <meta property="og:image" content="https://robdull.com/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -164,6 +164,21 @@ body.show-tertiary .ttertiary{display:flex;}
 
 footer{border-top:1px solid var(--rule);padding:28px 40px;max-width:1100px;margin:0 auto;}
 footer p{font-size:13px;color:var(--muted);}
+
+/* checked-in-code line and the upstream-changes card */
+.tcheck{margin-top:8px;padding:6px 10px;border-left:3px solid var(--steel);background:rgba(91,114,144,.06);border-radius:0 6px 6px 0;font-size:12px;color:#3a3a3a;line-height:1.55;max-width:640px;}
+.tcheck strong{color:var(--ink);font-weight:800;}
+.upstream-wrap{max-width:1100px;margin:40px auto 0;padding:0 32px;}
+.upstream-card{border:1px solid var(--rule);border-left:4px solid var(--steel);border-radius:0 10px 10px 0;padding:18px 22px;background:white;}
+.upstream-card h2{font-size:18px;font-weight:900;letter-spacing:-.02em;color:var(--ink);}
+.upstream-card p{font-size:13.5px;color:#3a3a3a;line-height:1.7;margin-top:8px;max-width:760px;}
+.upstream-card ul{margin:10px 0 0 18px;font-size:13.5px;color:#3a3a3a;line-height:1.7;max-width:760px;}
+.upstream-card li{margin-top:4px;}
+.upstream-card strong{color:var(--ink);}
+@media(max-width:640px){.upstream-wrap{padding:0 20px;}.upstream-card{padding:16px 16px;}}
+/* long sample-run labels must wrap on phones or the whole page widens */
+.sample-link{max-width:100%;}
+@media(max-width:640px){.sample-link{white-space:normal;}}
 </style>
 </head>
 <body>
@@ -191,58 +206,46 @@ footer p{font-size:13px;color:var(--muted);}
   <div class="eyebrow">AI-assisted workflow &bull; Nine tools, shared records</div>
   <h1>The <em>document flow</em>, tool by tool.</h1>
   <p>
-    What each of the nine tools in the chain produces, and where it goes next: every
-    handoff below is a real same-origin <code>localStorage</code> key written by one tool and read
-    by the next, not a conceptual diagram. Each step's <strong>primary output</strong> is the
-    document that gates the next step; <strong>secondary outputs</strong> are the other real
-    artifacts produced alongside it. Four primary outputs carry the most weight for program
-    stakeholders: the <strong>BRD</strong>, the <strong>Roadmap</strong>, the
-    <strong>Feature list</strong> (the extended backlog), and the <strong>Jira export</strong>.
-    Most steps link to a saved sample run; the Persona Generator is its own demonstration.
+    What each of the nine tools takes in and produces, and where its output goes next. The
+    tools share records stored in this browser: each one saves its output, and the next one picks
+    it up. A step's <strong>primary</strong> inputs and outputs are the ones the next step depends
+    on; <strong>secondary</strong> ones are used or produced alongside them. Most steps link to a
+    saved sample run you can open without an API key; the Persona Generator is its own
+    demonstration.
   </p>
-  <a href="prodops-network.html" class="net-link">↗ See the full aspirational system in the Network Diagram</a>
+  <a href="prodops-network.html" class="net-link">Proposed architecture: network diagram ↗</a>
   <span style="color:var(--rule);margin:0 6px;">&middot;</span>
   <a href="AI-prodops-overview.html" class="net-link">New here? Start with the overview ↗</a>
 </div>
 
-<div class="toggle-wrap">
-  <div class="toggle-inner">
-    <span class="toggle-label">View:</span>
-    <div class="toggle-btns">
-      <button class="tbtn active" data-level="0" onclick="setMode(0)">Core Flow</button>
-      <button class="tbtn" data-level="1" onclick="setMode(1)">+ External (Network)</button>
-    </div>
-    <span id="toggle-hint">What the nine tools take in and produce today.</span>
-  </div>
-</div>
-
 <div class="legend-wrap">
   <div class="legend-inner">
-    <div class="legend-item"><span class="legend-dot" style="background:rgba(42,107,107,.5);"></span> Toolchain: structured state produced by another working tool</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--gold);"></span> Fixture evidence: fictional PetHealth records shaped like potential enterprise evidence</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--purple);"></span> Human-supplied: context entered by the practitioner</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--accent2);border:1px dashed var(--accent2);"></span> Target architecture: proposed data or service connection that is not implemented</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--steel);"></span> Deterministic check: a specific condition recalculated in code, not asserted by the model</div>
+    <div class="legend-item"><span class="legend-dot" style="background:rgba(42,107,107,.5);"></span> Toolchain: a record saved by an earlier tool</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--gold);"></span> Sample evidence: fictional PetHealth records, no live connection</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--purple);"></span> Human-supplied: entered by the person running the step</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--accent2);border:1px dashed var(--accent2);"></span> Recommended, not built</div>
+    <div class="legend-item"><span style="color:var(--gold);font-weight:800;">★</span> One of the four main outputs</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--steel);"></span> Checked in code: recalculated by the tool, not asserted by the model</div>
   </div>
 </div>
 
 <div class="keydocs-wrap">
-  <div class="keydocs-label">The four primary outputs that matter most</div>
+  <div class="keydocs-label">The four main outputs</div>
   <div class="keydocs-grid">
-    <a href="#step-07" class="keydoc-card">
-      <div class="keydoc-num">STEP 07</div>
-      <div class="keydoc-name">BRD</div>
-      <div class="keydoc-desc">Standard-template Business Requirements Document, one per funded epic.</div>
-    </a>
     <a href="#step-06" class="keydoc-card">
       <div class="keydoc-num">STEP 06</div>
       <div class="keydoc-name">Roadmap</div>
-      <div class="keydoc-desc">Release windows across up to 18 months, funded epics first.</div>
+      <div class="keydoc-desc">Release windows over up to 18 months, funded epics first.</div>
+    </a>
+    <a href="#step-07" class="keydoc-card">
+      <div class="keydoc-num">STEP 07</div>
+      <div class="keydoc-name">BRD</div>
+      <div class="keydoc-desc">Standard-template business requirements for one funded epic.</div>
     </a>
     <a href="#step-08" class="keydoc-card">
       <div class="keydoc-num">STEP 08</div>
       <div class="keydoc-name">Feature list</div>
-      <div class="keydoc-desc">MoSCoW'd features + ordered stories, the extended backlog.</div>
+      <div class="keydoc-desc">Features prioritized with MoSCoW, plus ordered stories.</div>
     </a>
     <a href="#step-09" class="keydoc-card">
       <div class="keydoc-num">STEP 09</div>
@@ -262,7 +265,7 @@ footer p{font-size:13px;color:var(--muted);}
           <a href="../persona-generator/persona-index.html" class="tname">Persona Generator</a>
           <span class="tcat">Discover</span>
         </div>
-        <div class="tdesc">A rough user description becomes a detailed enterprise persona: JTBD statement, org context, key interactions, relationship friction.</div>
+        <div class="tdesc">A job statement and role context become a persona card: JTBD statement, org context, key interactions, and relationship friction. No AI call.</div>
 
         <div class="io-cols">
           <div class="io-col io-col-in">
@@ -293,17 +296,6 @@ footer p{font-size:13px;color:var(--muted);}
 
         <div class="trisk"><p><strong>Primary risk:</strong> A plausible composite can be mistaken for research.</p><p><strong>Required review:</strong> Confirm which attributes are supported, inferred, or invented.</p></div>
 
-        <div class="ttertiary">
-          <div class="tert-row">
-            <span class="tert-label">External inputs</span>
-            <span class="chip-net">Research repo (Dovetail/Notion)</span>
-            <span class="chip-net">Analytics</span>
-            <span class="chip-net">Customer support (Zendesk)</span>
-            <span class="chip-net">Sales transcripts (Gong)</span>
-            <span class="chip-net">Stakeholder input</span>
-            <span class="tert-src">(seen in the <a href="prodops-network.html">network diagram</a>, not wired into this tool)</span>
-          </div>
-        </div>
 
         <div class="trow-foot">
           <a href="../persona-generator/persona-index.html" class="sample-link muted">↗ Open tool</a>
@@ -319,7 +311,7 @@ footer p{font-size:13px;color:var(--muted);}
           <a href="../journey-map/" class="tname">Journey Map</a>
           <span class="tcat">Map</span>
         </div>
-        <div class="tdesc">Stage-by-stage canvas (actions, goals, touchpoints, emotions, and pain points) seeded from a persona.</div>
+        <div class="tdesc">A stage-by-stage canvas for actions, goals, touchpoints, emotions, and pain points, seeded from a persona, with an optional AI fill. Produces opportunity seeds for intake.</div>
 
         <div class="io-cols">
           <div class="io-col io-col-in">
@@ -365,14 +357,6 @@ footer p{font-size:13px;color:var(--muted);}
 
         <div class="trisk"><p><strong>Primary risk:</strong> Team assumptions can be rendered with the visual authority of research.</p><p><strong>Required review:</strong> Separate observed evidence from hypotheses.</p></div>
 
-        <div class="ttertiary">
-          <div class="tert-row">
-            <span class="tert-label">External inputs</span>
-            <span class="chip-net">Usage analytics</span>
-            <span class="chip-net">NPS / CSAT</span>
-            <span class="tert-src">(seen in the <a href="prodops-network.html">network diagram</a>, not wired into this tool)</span>
-          </div>
-        </div>
 
         <div class="trow-foot">
           <a href="../journey-map/" class="sample-link">↗ View live sample (PetHealth &amp; Enterprise Data Export)</a>
@@ -387,7 +371,7 @@ footer p{font-size:13px;color:var(--muted);}
           <a href="../feature-intake/" class="tname">Initiative Intake</a>
           <span class="tcat">Intake</span>
         </div>
-        <div class="tdesc">Frames one Initiative against competitors, then decomposes it into Business and Architecture Epics with Demand/Feasibility/Viability assumptions and a benefits-realization plan.</div>
+        <div class="tdesc">Four AI calls: weigh one initiative against competing ones, break it into business and architecture epics, record each epic&rsquo;s demand, feasibility, and viability assumptions, and propose how to measure benefits.</div>
 
         <div class="io-cols">
           <div class="io-col io-col-in">
@@ -442,16 +426,6 @@ footer p{font-size:13px;color:var(--muted);}
 
         <div class="trisk"><p><strong>Primary risk:</strong> Missing portfolio context may be filled with plausible competitors, budgets, or benefits.</p><p><strong>Required review:</strong> Validate the comparison set, epic boundaries, assumptions, KPIs, baselines, and proposed instrumentation.</p></div>
 
-        <div class="ttertiary">
-          <div class="tert-row">
-            <span class="tert-label">External inputs</span>
-            <span class="chip-net">Product backlog (dedup)</span>
-            <span class="chip-net">Win/loss data</span>
-            <span class="chip-net">Competitive signals</span>
-            <span class="chip-net">Org strategy / OKRs</span>
-            <span class="tert-src">(seen in the <a href="prodops-network.html">network diagram</a>, not wired into this tool)</span>
-          </div>
-        </div>
 
         <div class="trow-foot">
           <a href="../feature-intake/demo.html" class="sample-link">↗ View sample run (PetHealth Claims)</a>
@@ -466,7 +440,7 @@ footer p{font-size:13px;color:var(--muted);}
           <a href="../business-case/" class="tname">Business Cases</a>
           <span class="tcat">Justify</span>
         </div>
-        <div class="tdesc">One case per epic: value, cost, strategic alignment, and a rough order-of-magnitude effort estimate that anchors the Epic Prioritizer's job size.</div>
+        <div class="tdesc">One business case per epic: value, cost, strategic alignment, and a rough effort estimate the Epic Prioritizer uses for job size.</div>
 
         <div class="io-cols">
           <div class="io-col io-col-in">
@@ -506,15 +480,6 @@ footer p{font-size:13px;color:var(--muted);}
 
         <div class="trisk"><p><strong>Primary risk:</strong> Generated cost, benefit, and effort statements can appear more certain than the evidence supports.</p><p><strong>Required review:</strong> Replace unsupported estimates and financial precision with sourced values or explicit unknowns.</p></div>
 
-        <div class="ttertiary">
-          <div class="tert-row">
-            <span class="tert-label">External inputs</span>
-            <span class="chip-net">Org strategy / OKRs</span>
-            <span class="chip-net">Market research</span>
-            <span class="chip-net">Win/loss data</span>
-            <span class="tert-src">(seen in the <a href="prodops-network.html">network diagram</a>, not wired into this tool)</span>
-          </div>
-        </div>
 
         <div class="trow-foot">
           <a href="../business-case/#examples" class="sample-link">↗ View example gallery (PetHealth Claim Status Tracking tab)</a>
@@ -529,7 +494,8 @@ footer p{font-size:13px;color:var(--muted);}
           <a href="../portfolio-wsjf/" class="tname">Epic Prioritizer</a>
           <span class="tcat">Rank</span>
         </div>
-        <div class="tdesc">Reads each epic's Business Case as its candidate record: value statement, cost/benefit, strategic alignment, and the rough effort (LOE) from Step 04, and scores every one on WSJF and RICE components in one pass. Editable weights recompute the board live: raising risk-reduction can flip an architecture epic to #1 with no re-run.</div>
+        <div class="tdesc">Two AI calls propose WSJF and RICE inputs for every epic from its business case. The tool ranks the epics and draws a funding cutoff. Changing a weight re-ranks the board at once and can move an architecture epic to #1.</div>
+        <div class="tcheck"><strong>Checked in code:</strong> every WSJF and RICE score is recalculated, and job size comes from the business case&rsquo;s effort estimate.</div>
 
         <div class="io-cols">
           <div class="io-col io-col-in">
@@ -575,15 +541,6 @@ footer p{font-size:13px;color:var(--muted);}
 
         <div class="trisk"><p><strong>Primary risk:</strong> Correct arithmetic can lend false authority to weak input values.</p><p><strong>Required review:</strong> Own every input, weight, and funding decision.</p></div>
 
-        <div class="ttertiary">
-          <div class="tert-row">
-            <span class="tert-label">External inputs</span>
-            <span class="chip-net">NPS / CSAT</span>
-            <span class="chip-net">Competitive signals</span>
-            <span class="chip-net">ITSM / incidents</span>
-            <span class="tert-src">(seen in the <a href="prodops-network.html">network diagram</a>, not wired into this tool)</span>
-          </div>
-        </div>
 
         <div class="trow-foot">
           <a href="../portfolio-wsjf/demo.html" class="sample-link">↗ View sample run (customer feature vs. infra epic ranked together)</a>
@@ -598,7 +555,7 @@ footer p{font-size:13px;color:var(--muted);}
           <a href="../roadmap/" class="tname">Roadmap &amp; Milestones</a>
           <span class="tcat">Schedule</span>
         </div>
-        <div class="tdesc">Sequences every prioritized epic (funded first, the rest as capacity frees) into release windows across up to 18 months. Dependencies stay light: named approvals or genuine architecture-epic runway only.</div>
+        <div class="tdesc">One AI call sequences the ranked epics into release windows over up to 18 months, funded epics first. The dependency list stays short: named approvals, and architecture work another epic is waiting on.</div>
 
         <div class="io-cols">
           <div class="io-col io-col-in">
@@ -638,18 +595,6 @@ footer p{font-size:13px;color:var(--muted);}
 
         <div class="trisk"><p><strong>Primary risk:</strong> Release windows can imply capacity knowledge the workflow does not possess.</p><p><strong>Required review:</strong> Confirm capacity, runway, dependencies, commitments, and rollout assumptions.</p></div>
 
-        <div class="ttertiary">
-          <div class="tert-row">
-            <span class="tert-label">External inputs</span>
-            <span class="chip-net">Delivery metrics (DORA)</span>
-            <span class="chip-net">Team health surveys</span>
-          </div>
-          <div class="tert-row">
-            <span class="tert-label">External outputs</span>
-            <span class="chip-net">Stakeholder comms (roadmap narrative)</span>
-            <span class="tert-src">(seen in the <a href="prodops-network.html">network diagram</a>, not wired into this tool)</span>
-          </div>
-        </div>
 
         <div class="trow-foot">
           <a href="../roadmap/demo.html" class="sample-link">↗ View sample run (Claims Transparency &amp; Leakage Reduction)</a>
@@ -664,7 +609,8 @@ footer p{font-size:13px;color:var(--muted);}
           <a href="../docs-generator/" class="tname">Business Documents</a>
           <span class="tcat">Spec</span>
         </div>
-        <div class="tdesc">Standard-template BRD for one funded epic: requirements core (scope, prioritized business requirements, high-level NFRs) plus the executive package (summary, objectives, stakeholders, cost-benefit, sign-off). Refuses epics below the funding line.</div>
+        <div class="tdesc">Two AI calls draft a standard-template BRD for one funded epic: scope, prioritized business requirements, high-level non-functional requirements, and an executive package. Each requirement is marked explicit, inferred, or assumed, and a named person confirms or defers each assumed one.</div>
+        <div class="tcheck"><strong>Checked in code:</strong> refuses epics below the funding cutoff.</div>
 
         <div class="io-cols">
           <div class="io-col io-col-in">
@@ -704,18 +650,6 @@ footer p{font-size:13px;color:var(--muted);}
 
         <div class="trisk"><p><strong>Primary risk:</strong> NFR thresholds, costs, stakeholders, and sign-offs may be inferred or invented.</p><p><strong>Required review:</strong> Confirm scope, requirement quality, evidence, assumptions, NFRs, financials, stakeholders, and approval authority.</p></div>
 
-        <div class="ttertiary">
-          <div class="tert-row">
-            <span class="tert-label">External inputs</span>
-            <span class="chip-net">Regulatory signals</span>
-            <span class="chip-net">ITSM / incidents</span>
-          </div>
-          <div class="tert-row">
-            <span class="tert-label">External outputs</span>
-            <span class="chip-net">Regulatory impact assessment</span>
-            <span class="tert-src">(seen in the <a href="prodops-network.html">network diagram</a>, not wired into this tool)</span>
-          </div>
-        </div>
 
         <div class="trow-foot">
           <a href="../docs-generator/demo.html" class="sample-link">↗ View sample run: BRD with Assumptions section</a>
@@ -730,7 +664,8 @@ footer p{font-size:13px;color:var(--muted);}
           <a href="../backlog-builder/" class="tname">Backlog Builder</a>
           <span class="tcat">Plan</span>
         </div>
-        <div class="tdesc">Turns the BRD into the full delivery-doc suite: MoSCoW'd Features with feature-level NFRs and refined sizing, ordered Stories with BDD acceptance criteria and dependsOn sequencing, a solution outline, security/UAT plan, and dev/user docs. Requirement coverage is computed, not generated.</div>
+        <div class="tdesc">Five AI calls turn the BRD into features prioritized with MoSCoW, stories with acceptance criteria and a dependency order, a solution outline, security and user-acceptance test plans, and documentation.</div>
+        <div class="tcheck"><strong>Checked in code:</strong> which business requirements each feature covers. A BRD with an unresolved assumed requirement is refused.</div>
 
         <div class="io-cols">
           <div class="io-col io-col-in">
@@ -784,14 +719,6 @@ footer p{font-size:13px;color:var(--muted);}
 
         <div class="trisk"><p><strong>Primary risk:</strong> Identifier coverage can be mistaken for adequate design or requirement satisfaction.</p><p><strong>Required review:</strong> Engineers, architecture, security, QA, and product stakeholders must assess substance.</p></div>
 
-        <div class="ttertiary">
-          <div class="tert-row">
-            <span class="tert-label">External inputs</span>
-            <span class="chip-net">Regulatory signals</span>
-            <span class="chip-net">ITSM / incidents</span>
-            <span class="tert-src">(seen in the <a href="prodops-network.html">network diagram</a>, not wired into this tool)</span>
-          </div>
-        </div>
 
         <div class="trow-foot">
           <a href="../backlog-builder/demo.html" class="sample-link">↗ View sample run: features, stories, security &amp; UAT</a>
@@ -806,7 +733,8 @@ footer p{font-size:13px;color:var(--muted);}
           <a href="../sprint-plan/" class="tname">Sprint Planner</a>
           <span class="tcat">Deliver</span>
         </div>
-        <div class="tdesc">MVP scope, a sprint-by-sprint allocation, and a RAID log. Capacity and dependency order are both rechecked in code: a story placed in the same sprint as, or an earlier sprint than, a story it depends on raises a visible warning wherever the plan is used.</div>
+        <div class="tdesc">Two AI calls draft MVP scope, a sprint-by-sprint plan, baseline and worst-case estimates, and a RAID log (risks, assumptions, issues, dependencies), then export a CSV for Jira&rsquo;s bulk import.</div>
+        <div class="tcheck"><strong>Checked in code:</strong> sprint load against capacity, and dependency order. A story placed in the same sprint as, or an earlier sprint than, a story it depends on raises a warning wherever the plan is used.</div>
 
         <div class="io-cols">
           <div class="io-col io-col-in">
@@ -818,7 +746,7 @@ footer p{font-size:13px;color:var(--muted);}
                   <div class="io-group-label" style="color:var(--teal);">Toolchain</div>
                   <div class="chip-row"><span class="chip-key">Feature list (extended backlog)</span></div>
                 </div>
-                <span class="no-inputs-note">Also carries the DoR/DoD flag through from Step 08. No dedicated sample evidence yet.</span>
+                <span class="no-inputs-note">Also carries the Definition of Ready and Done from step 8. No sample evidence of its own yet.</span>
               </div>
             </div>
           </div>
@@ -845,20 +773,6 @@ footer p{font-size:13px;color:var(--muted);}
 
         <div class="trisk"><p><strong>Primary risk:</strong> The plan can only check the estimates and dependencies it was given. It cannot discover missing work or hidden capacity constraints.</p><p><strong>Required review:</strong> Delivery leadership owns the plan and must inspect the CSV before import.</p></div>
 
-        <div class="ttertiary">
-          <div class="tert-row">
-            <span class="tert-label">External inputs</span>
-            <span class="chip-net">Delivery metrics (DORA / velocity)</span>
-            <span class="chip-net">Team retros</span>
-            <span class="chip-net">Team health surveys</span>
-          </div>
-          <div class="tert-row">
-            <span class="tert-label">External outputs</span>
-            <span class="chip-net">Release notes</span>
-            <span class="chip-net">ROI telemetry monitor (30/60/90-day)</span>
-            <span class="tert-src">(seen in the <a href="prodops-network.html">network diagram</a>, not wired into this tool)</span>
-          </div>
-        </div>
 
         <div class="trow-foot">
           <a href="../sprint-plan/demo.html" class="sample-link">↗ View sample run: sprint plan &amp; RAID log</a>
@@ -869,49 +783,38 @@ footer p{font-size:13px;color:var(--muted);}
   </div>
 </div>
 
-<div class="offchain-wrap">
-  <div class="offchain-label">Off-chain by design, not part of the numbered flow</div>
-  <div class="offchain-grid">
-    <div class="offchain-card">
-      <div class="offchain-name"><a href="../hoshin-kanri/">Hoshin Kanri + V2MOM</a></div>
-      <div class="offchain-desc">Strategic alignment: the layer the whole portfolio should trace back to, not a step any one initiative passes through. Cascades a V2MOM into an X-matrix.</div>
-    </div>
-    <div class="offchain-card">
-      <div class="offchain-name"><a href="../prod-ops-radar/prod-ops-radar-index.html">Prod Ops Radar</a></div>
-      <div class="offchain-desc">Measurement: watches whether the ops system itself is healthy across every initiative, not any single one. In development.</div>
-    </div>
+<div class="upstream-wrap">
+  <div class="upstream-card" id="upstream">
+    <h2>When something upstream changes</h2>
+    <p>Each tool saves its output in this browser, newest first, one record per persona, initiative, or epic. The next tool lists the saved records, and you pick the one to build on.</p>
+    <ul>
+      <li><strong>Saving a step again replaces its earlier record</strong> for the same initiative or epic.</li>
+      <li><strong>Later steps aren&rsquo;t told.</strong> Their saved records stay as they were, and nothing marks them out of date. You rerun each later step yourself.</li>
+      <li><strong>Corrections don&rsquo;t carry over.</strong> Regenerating a step produces a new record; corrections or sign-offs a person made to the old one aren&rsquo;t kept.</li>
+    </ul>
+    <p>A production version would need each record to note which upstream records it was built from, a visible out-of-date flag when one of them changes, and a way to keep a person&rsquo;s corrections when a step is regenerated.</p>
   </div>
 </div>
 
-<div class="legend-wrap">
-  <div class="legend-inner">
-    <div class="legend-item"><span class="legend-dot" style="background:var(--gold);"></span> ★ = primary output. "Primary/Secondary" labels rank each step's own inputs by importance, independent of chip color below</div>
-    <div class="legend-item"><span class="legend-dot" style="background:rgba(42,107,107,.5);"></span> Teal: a same-origin tool handoff (this step's output, or an upstream step's, consumed directly)</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--gold);"></span> Gold: sample evidence, fictional PetHealth records loaded in the browser, with no live connection</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--purple);"></span> Purple: organizational input, human-supplied, never generated</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--accent2);border:1px dashed var(--accent2);"></span> Dashed orange: recommended for this flow, not yet built</div>
-    <div class="legend-item"><span class="legend-dot dotted"></span> Dotted steel: external/tertiary, seen only in the network diagram, not wired into this flow</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--steel);"></span> Deterministic check: a specific condition recalculated in code, not asserted by the model</div>
-    <div class="legend-item"><span style="color:var(--accent2);font-weight:700;">↗</span> Link to a real sample run, not a mockup</div>
+<div class="offchain-wrap">
+  <div class="offchain-label">Outside the numbered steps</div>
+  <div class="offchain-grid">
+    <div class="offchain-card">
+      <div class="offchain-name"><a href="../hoshin-kanri/">Hoshin Kanri + V2MOM</a></div>
+      <div class="offchain-desc">An experiment in laying a V2MOM onto a Hoshin Kanri X-matrix. It sits outside the steps because strategy is what the whole portfolio traces back to.</div>
+    </div>
+    <div class="offchain-card">
+      <div class="offchain-name"><a href="../prod-ops-radar/prod-ops-radar-index.html">Prod Ops Radar</a></div>
+      <div class="offchain-desc">In development. A self-assessment of delivery and product operations health across nine dimensions, outside the steps because it looks across every initiative.</div>
+    </div>
   </div>
 </div>
 
 <div class="note-strip">
   <div class="note-inner">
-    <strong>What's real vs. recommended:</strong> every chip above except "Strategic KPIs" and the
-    dotted external chips reflects code that runs today. The sample evidence is fictional PetHealth data
-    shaped like what a live connector could return. It is quoted into the prompts of the tools that
-    list it above; there are no live connections, MCP or otherwise. Every handoff key is a real
-    <code>localStorage</code> write you can inspect in devtools after a run. Every sample-run link
-    goes to that tool's own built-in demo: no API key, real output, not staged for this page.
-  </div>
-  <div class="note-inner">
-    <strong>What "External (Network)" adds:</strong> toggling to that view surfaces the data sources
-    and outputs that exist in the full <a href="prodops-network.html">Network Diagram</a> (CRM/win-loss,
-    competitive intel, regulatory signals, ITSM, delivery telemetry, retros, and their downstream
-    outputs: release notes, stakeholder comms, ROI telemetry) but are <em>not</em> wired into any
-    of the nine tools on this page. They are proposed, not built: each one
-    appears as a node in the network diagram.
+    <strong>For technical evaluators:</strong> each handoff is a record in your browser&rsquo;s local
+    storage, which you can inspect in the developer tools after a run. Storage keys, data contracts,
+    and the code checks are documented in the <a href="technical-notes.html">technical notes</a>.
   </div>
 </div>
 
@@ -919,18 +822,6 @@ footer p{font-size:13px;color:var(--muted);}
   <p>Rob Dull &bull; Product Operations &amp; Delivery Leadership</p>
 </footer>
 
-<script>
-function setMode(level) {
-  document.body.classList.toggle('show-tertiary', level >= 1);
-  document.querySelectorAll('.tbtn').forEach(b => b.classList.toggle('active', Number(b.dataset.level) === level));
-  const hint = document.getElementById('toggle-hint');
-  if (level === 0) {
-    hint.textContent = 'What the nine tools take in and produce today.';
-  } else {
-    hint.textContent = 'Adds proposed external inputs and outputs from the network diagram. None are wired into this flow.';
-  }
-}
-</script>
 
 </body>
 </html>
