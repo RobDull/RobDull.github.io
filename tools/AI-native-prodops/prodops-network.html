@@ -334,11 +334,11 @@ g.n:focus-visible rect{stroke:#c8662a;stroke-width:1.6;}
 
 <section class="np-sec" id="jira-write-back" aria-labelledby="jwb-h">
   <h2 class="np-h2" id="jwb-h">One extension, specified: <em>Jira write-back</em></h2>
-  <p class="np-lead">Today the last step ends with a CSV someone imports into Jira by hand. Writing straight into Jira is the one place the workflow would act on another system, so it needs the clearest rules. The write would be ordinary code calling Jira&rsquo;s API. The model&rsquo;s work ends at the draft plan; it never decides what gets written.</p>
+  <p class="np-lead">Today the last step ends with a CSV someone imports into Jira by hand. Writing straight into Jira is the one place the workflow would act on another system, so it needs the clearest rules. The write would be ordinary code calling Jira&rsquo;s API. The model&rsquo;s work ends at a rough draft. People refine the backlog, revising and editing it, and its owner approves the result; the model never decides what gets written.</p>
   <dl class="spec">
-    <div><dt>Input</dt><dd>An approved sprint plan from step 9 (features, stories with acceptance criteria, points, sprint assignments, and dependency links) plus an approval record: who approved it, when, and which version of the plan.</dd></div>
-    <div><dt>Owner</dt><dd>The delivery lead for the team whose Jira project receives the work. Whoever generated the plan can&rsquo;t approve its write-back.</dd></div>
-    <div><dt>Permitted actions</dt><dd>Create the epic and its stories, with their fields and dependency links, in one named Jira project. No edits or deletions of existing issues, and no other projects. The access token is scoped to that project and expires when the run ends.</dd></div>
+    <div><dt>Input</dt><dd>A sprint plan from step 9 that people have refined from the model&rsquo;s rough draft (features, stories with acceptance criteria, points, sprint assignments, and dependency links), plus an approval record: who approved it, when, and which version of the plan.</dd></div>
+    <div><dt>Owner</dt><dd>The product owner approves smaller work; the product manager approves feature-level work and larger. They approve the refined plan, never the model&rsquo;s draft.</dd></div>
+    <div><dt>Permitted actions</dt><dd>Create the epic and its stories, with their fields and dependency links, in one named Jira project. No edits or deletions of existing issues, so it never overwrites refinement people do in Jira later, and no other projects. The access token is scoped to that project and expires when the run ends.</dd></div>
     <div><dt>Checks before writing</dt><dd>Code reruns the sprint-load and dependency checks, confirms the approval matches this exact version of the plan, and shows a preview of every issue it will create. Any change to the plan after approval voids the approval.</dd></div>
     <div><dt>When something fails</dt><dd>Stop at the first failed write, report what was and wasn&rsquo;t created, and don&rsquo;t retry automatically. Running it again skips issues that already exist for this plan, so nothing is duplicated.</dd></div>
     <div><dt>Record kept</dt><dd>Who approved, when, which plan version, and the Jira issue keys created, in an append-only log.</dd></div>
@@ -349,7 +349,7 @@ g.n:focus-visible rect{stroke:#c8662a;stroke-width:1.6;}
 
 <section class="np-sec" id="ranked" aria-labelledby="ranked-h">
   <h2 class="np-h2" id="ranked-h">Everything else, <em>in order</em></h2>
-  <p class="np-lead">Each addition is listed with the problem it would solve. The order is a proposal.</p>
+  <p class="np-lead">Each addition is listed with the problem it would solve. This is the order I&rsquo;d build them in, though it may be different depending on the levels of approval throughout an organization&rsquo;s budgeting, planning, delivery, and monitoring queues.</p>
   <div class="table-scroll">
   <table class="rank">
     <thead><tr><th scope="col">Addition</th><th scope="col">Problem it would solve</th><th scope="col">When</th></tr></thead>
