@@ -403,6 +403,17 @@ let current=null;
 // step, so it writes robdull:personas directly rather than importing
 // @robdull/toolkit's persona.ts — same key, same shape, same-origin
 // localStorage. The Journey Map's "From Persona Generator" funnel reads it.
+//
+// The tools flag a record as out of date when a source's id changes, so
+// reopening a persona that hasn't changed keeps its saved record (same id and
+// savedAt) and only moves it to the top of the list, where the Journey Map
+// picks it by default. A changed persona is saved as a new record.
+function sameSavedPersona(a,b){
+  if(!a||a.v!==1)return false;
+  return ['name','role','stage','summary','quote'].every(function(k){return a[k]===b[k];})&&
+    JSON.stringify(a.goals)===JSON.stringify(b.goals)&&
+    JSON.stringify(a.frustrations)===JSON.stringify(b.frustrations);
+}
 function saveCurrentPersonaToHandoff(){
   if(!current) return;
   var p=current.persona;
@@ -423,6 +434,8 @@ function saveCurrentPersonaToHandoff(){
     var raw=localStorage.getItem('robdull:personas');
     var arr=raw?JSON.parse(raw):[];
     if(!Array.isArray(arr))arr=[];
+    var prior=arr.filter(function(x){return x&&x.title===handoff.title;})[0];
+    if(sameSavedPersona(prior,handoff))handoff=prior;
     var rest=arr.filter(function(x){return x&&x.title!==handoff.title;});
     localStorage.setItem('robdull:personas', JSON.stringify([handoff].concat(rest).slice(0,12)));
   }catch(e){ /* storage unavailable — handoff silently degrades */ }
