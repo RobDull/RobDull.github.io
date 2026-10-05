@@ -267,6 +267,8 @@ footer p{font-size:13px;color:var(--muted);}
       <li>The Business Documents tool refuses to generate a BRD for an epic below the funding cutoff calculated in the prioritizer.</li>
       <li>WSJF and RICE scores recompute live when weights change, in the shared scoring module, without a model call.</li>
         <li>The Backlog Builder won't accept a BRD until a named person confirms or defers each requirement marked as assumed.</li>
+      <li>Every saved record notes the exact version of each record it was built from, and one freshness check in the shared package compares those with what is saved now, up to nine steps back. A record whose sources changed is flagged out of date in every tool's list, with the path when the change was further back; the tools ask before continuing and never block.</li>
+      <li>Business Documents carries an assumed-requirement sign-off into a new BRD only when the requirement's id and wording are unchanged; a reworded requirement needs a fresh decision.</li>
     </ul>
   </div>
 

@@ -786,13 +786,14 @@ footer p{font-size:13px;color:var(--muted);}
 <div class="upstream-wrap">
   <div class="upstream-card" id="upstream">
     <h2>When something upstream changes</h2>
-    <p>Each tool saves its output in this browser, newest first, one record per persona, initiative, or epic. The next tool lists the saved records, and you pick the one to build on.</p>
+    <p>Each tool saves its output in this browser, newest first, one record per persona, initiative, or epic. The next tool lists the saved records, and you pick the one to build on. Each record also notes the exact version of every record it was built from.</p>
     <ul>
-      <li><strong>Saving a step again replaces its earlier record</strong> for the same initiative or epic.</li>
-      <li><strong>Later steps aren&rsquo;t told.</strong> Their saved records stay as they were, and nothing marks them out of date. You rerun each later step yourself.</li>
-      <li><strong>Corrections don&rsquo;t carry over.</strong> Regenerating a step produces a new record; corrections or sign-offs a person made to the old one aren&rsquo;t kept.</li>
+      <li><strong>Saving a step again replaces its earlier record</strong> for the same initiative or epic. The tool warns you first and names the saved records that will go out of date, because the older version isn&rsquo;t kept.</li>
+      <li><strong>Later records are marked out of date.</strong> In each tool&rsquo;s list, a record built from an earlier version shows &ldquo;Out of date&rdquo; with what changed and when, including a change two or three steps back. Picking one shows a notice above Run: rerun the step that needs it, or continue with the older version. Nothing is blocked, and a record built from an older version says so.</li>
+      <li><strong>Sign-offs carry over only when the requirement is unchanged.</strong> When Business Documents writes a new BRD for an epic, an assumed requirement keeps its sign-off if its wording is the same. A reworded requirement asks for a fresh decision.</li>
+      <li><strong>Other corrections don&rsquo;t carry over.</strong> Regenerating a step produces a new record; edits a person made to the old one aren&rsquo;t kept.</li>
     </ul>
-    <p>A production version would need each record to note which upstream records it was built from, a visible out-of-date flag when one of them changes, and a way to keep a person&rsquo;s corrections when a step is regenerated.</p>
+    <p>A production version would add a history for each saved record, so an earlier version could be compared or restored, carry a person&rsquo;s edits across a rerun, and share records across a team instead of one browser.</p>
   </div>
 </div>
 

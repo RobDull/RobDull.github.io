@@ -308,8 +308,8 @@ g.n:focus-visible rect{stroke:#c8662a;stroke-width:1.6;}
     <li class="flow-card">
       <div class="flow-num">02</div>
       <h3>Drafting</h3>
-      <p><span class="flow-tag today">Today</span>Nine tools. Most run a fixed chain of AI calls, and a person starts each one.</p>
-      <p><span class="flow-tag add">Would add</span>Records that note which upstream records they were built from, and a flag when one of those changes.</p>
+      <p><span class="flow-tag today">Today</span>Nine tools. Most run a fixed chain of AI calls, and a person starts each one. Each saved record notes what it was built from, and the tools flag it when one of those changes.</p>
+      <p><span class="flow-tag add">Would add</span>A history for each saved record, so an earlier version can be compared or restored, shared across a team instead of one browser.</p>
     </li>
     <li class="flow-card">
       <div class="flow-num">03</div>
@@ -355,7 +355,6 @@ g.n:focus-visible rect{stroke:#c8662a;stroke-width:1.6;}
     <thead><tr><th scope="col">Addition</th><th scope="col">Problem it would solve</th><th scope="col">When</th></tr></thead>
     <tbody>
       <tr><td>Live, read-only evidence connections</td><td>The tools run on sample data, so drafts can&rsquo;t be checked against real evidence.</td><td>First</td></tr>
-      <tr><td>Out-of-date flags on saved records</td><td>When an earlier step changes, later steps aren&rsquo;t told.</td><td>First</td></tr>
       <tr><td>Authenticated approvals and an audit log</td><td>Sign-offs are names typed into the tool.</td><td>Before write-back</td></tr>
       <tr><td>Operating controls: cost limits per run, pinned model versions with regression tests before upgrades, and versioned record formats</td><td>Production use needs predictable cost and behavior.</td><td>Alongside approvals</td></tr>
       <tr><td>Jira write-back (specified above)</td><td>Plans are re-entered into Jira by hand.</td><td>After approvals</td></tr>
@@ -364,6 +363,7 @@ g.n:focus-visible rect{stroke:#c8662a;stroke-width:1.6;}
     </tbody>
   </table>
   </div>
+  <p class="np-note"><strong>Built from this list so far:</strong> out-of-date flags on saved records (October 2026), which solved &ldquo;when an earlier step changes, later steps aren&rsquo;t told.&rdquo; <a href="document-flow.html">How they work</a>.</p>
 </section>
 
 <section class="np-sec" id="questions" aria-labelledby="questions-h">
