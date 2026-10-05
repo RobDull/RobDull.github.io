@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-<title>Case Study: Rebuilding the PDLC Chain | Rob Dull</title>
+<title>Rebuild Retrospective | Rob Dull</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y1JYXTE5J"></script>
@@ -14,12 +14,12 @@
   gtag('js', new Date());
   gtag('config', 'G-0Y1JYXTE5J');
 </script>
-<meta name="description" content="A first-person retrospective on rebuilding nine disconnected AI-assisted product tools into one chain: the problem, the tools used, how instructions were structured, what got checked in code, how traceability was enforced, where humans stayed in the loop, and what the process taught.">
+<meta name="description" content="A retrospective on rebuilding eight disconnected AI-assisted product tools into one nine-step workflow: process, checks, traceability, lessons.">
 <link rel="canonical" href="https://robdull.com/tools/AI-native-prodops/rebuild-retrospective.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://robdull.com/tools/AI-native-prodops/rebuild-retrospective.html">
 <meta property="og:title" content="Case Study: Rebuilding the PDLC Chain | Rob Dull">
-<meta property="og:description" content="A first-person retrospective on rebuilding nine disconnected AI-assisted product tools into one chain: process, guardrails, traceability, and what the work taught.">
+<meta property="og:description" content="A retrospective on rebuilding eight disconnected AI-assisted product tools into one nine-step workflow: process, checks, traceability, lessons.">
 <meta property="og:site_name" content="Rob Dull">
 <meta property="og:image" content="https://robdull.com/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -171,22 +171,22 @@ footer p{font-size:13px;color:var(--muted);}
 
 <div class="page-head">
   <div class="eyebrow">Build Process · Retrospective</div>
-  <h1>Rebuilding nine tools into <em>one chain.</em></h1>
-  <p>This page covers the process behind the toolchain: the problem that forced a rebuild, what got built, which tools did the work, how instructions were structured, what got checked in code, how traceability was enforced end to end, where a human stayed in the loop, and what the process taught. The <a href="case-study-pethealth.html" style="color:var(--accent);font-weight:700;">PetHealth case study</a> walks the chain in action; this page covers how it got built.</p>
+  <h1>Rebuilding eight separate tools into <em>one workflow</em></h1>
+  <p>This page covers the process behind the toolchain: the problem that forced a rebuild, what got built, which tools did the work, how instructions were structured, what got checked in code, how traceability was enforced end to end, where a human stayed in the loop, and what the process taught. The <a href="case-study-pethealth.html" style="color:var(--accent);font-weight:700;">PetHealth case study</a> shows the workflow running; this page covers how it got built.</p>
 </div>
 
 <div class="wrap">
 
   <div class="context">
     <div class="context-label">The starting point</div>
-    <p>Eight separate AI-assisted tools spanning the product-delivery lifecycle — persona research, journey mapping, feature intake, business-case generation, prioritization, requirements docs, backlog building, sprint planning. Each one worked in isolation. Tracing the actual data flow between them told a different story.</p>
+    <p>Eight separate AI-assisted tools spanning the product-delivery lifecycle: persona research, journey mapping, feature intake, business-case generation, prioritization, requirements docs, backlog building, and sprint planning. Each one worked in isolation. Tracing the actual data flow between them told a different story.</p>
   </div>
 
   <div class="stats">
-    <div class="stat"><div class="stat-num">8&nbsp;&rarr;&nbsp;9</div><div class="stat-lbl">Disconnected tools rebuilt into one real nine-stage chain</div></div>
+    <div class="stat"><div class="stat-num">8&nbsp;&rarr;&nbsp;9</div><div class="stat-lbl">Disconnected tools rebuilt into one nine-step workflow</div></div>
     <div class="stat"><div class="stat-num">2&nbsp;&rarr;&nbsp;1</div><div class="stat-lbl">Independent scoring implementations, collapsed to a shared source of truth</div></div>
-    <div class="stat"><div class="stat-num">5</div><div class="stat-lbl">Deterministic guard classes computed in code, never trusted from a model</div></div>
-    <div class="stat"><div class="stat-num">3</div><div class="stat-lbl">Real bugs found only by human testing, missed entirely by scripted checks</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-lbl">Kinds of checks that run in code instead of trusting the model</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-lbl">Bugs found only by a person testing, missed by scripted checks</div></div>
   </div>
 
   <div class="timeline-wrap">
@@ -198,8 +198,8 @@ footer p{font-size:13px;color:var(--muted);}
         <div class="tcard">
           <div class="tcard-head"><span class="tname">The problem</span><span class="tcat">Diagnosis</span></div>
           <div class="tdesc">
-            <p>Eight cards sat on the tools index page, each one claiming to hand its output to the next. The prioritization tool wrote no output another tool could consume — it only exported a static file. The backlog tool downstream re-implemented its own prioritization math from scratch, so two independent scoring implementations could silently disagree. Persona data had to be manually copy-pasted into the journey-mapping tool. Epic-level and feature-level planning were conflated in the shared schema, so prioritization decisions and delivery-team sizing decisions were happening on the same object when they needed to be separable.</p>
-            <p><strong>The work behind "automated" was several people's worth of manual copy-paste, run by hand behind a clean UI.</strong></p>
+            <p>Eight cards sat on the tools index page, each one claiming to hand its output to the next. The prioritization tool wrote no output another tool could use; it only exported a static file. The backlog tool downstream re-implemented its own prioritization math from scratch, so two independent scoring implementations could silently disagree. Persona data had to be manually copy-pasted into the journey-mapping tool. Epic-level and feature-level planning were conflated in the shared schema, so prioritization decisions and delivery-team sizing decisions were happening on the same object when they needed to be separable.</p>
+            <p><strong>Behind the "automated" label, the handoffs were manual copy-paste.</strong></p>
           </div>
         </div>
       </div>
@@ -210,8 +210,8 @@ footer p{font-size:13px;color:var(--muted);}
         <div class="tcard">
           <div class="tcard-head"><span class="tname">What got built</span><span class="tcat">Rebuild</span></div>
           <div class="tdesc">
-            <p>A restructured, nine-stage chain, deployed live: Persona &rarr; Journey Mapping &rarr; Initiative Intake &rarr; Business Cases &rarr; Epic Prioritizer &rarr; Roadmap &amp; Milestones &rarr; Business Documents (the BRD) &rarr; Backlog Builder &rarr; Sprint Planner, ending in a Jira-importable CSV. Every stage's output became the next stage's real input, through the tools' same-origin handoffs.</p>
-            <p>The demo runs an insurance-claims initiative through the whole chain with both a front-stage persona and a backstage persona, deliberately, so the chain has to handle customer-facing and infrastructure work correctly — exactly where the original tool broke down: backstage work kept getting mis-scoped as if it were customer-facing.</p>
+            <p>A restructured, nine-step workflow, deployed live: Persona &rarr; Journey Mapping &rarr; Initiative Intake &rarr; Business Cases &rarr; Epic Prioritizer &rarr; Roadmap &amp; Milestones &rarr; Business Documents (the BRD) &rarr; Backlog Builder &rarr; Sprint Planner, ending in a CSV file for Jira's bulk import. Each step's output became the next step's input, passed along inside the browser.</p>
+            <p>The demo runs an insurance-claims initiative through the whole chain with both a front-stage persona and a backstage persona, deliberately, so the workflow has to handle customer-facing and infrastructure work correctly. That's where the original tools broke down: backstage work kept getting scoped as if it were customer-facing.</p>
           </div>
           <div class="trow-foot">
             <a class="sample-link" href="document-flow.html">See the full document flow &#8599;</a>
@@ -227,10 +227,10 @@ footer p{font-size:13px;color:var(--muted);}
           <div class="tcard-head"><span class="tname">Tools used</span><span class="tcat">Stack</span></div>
           <div class="tdesc">The build leaned on a deliberate set of tools, each doing a specific job.</div>
           <div class="tool-grid">
-            <div class="tool-item"><span class="tn">Claude</span><span class="td">Multiple model tiers by phase — a faster model to scaffold a stage, a stronger model for a dedicated adversarial review pass.</span></div>
+            <div class="tool-item"><span class="tn">Claude</span><span class="td">Different model tiers by phase: a faster model to scaffold a stage, and a stronger model for a separate adversarial review pass.</span></div>
             <div class="tool-item"><span class="tn">Claude Code</span><span class="td">The agentic build environment: multi-step builds, live browser verification, and file-level review in one loop.</span></div>
             <div class="tool-item"><span class="tn">React + TypeScript monorepo</span><span class="td">One shared toolkit package for data types and scoring math, so the duplicate-implementation bug can't recur by construction.</span></div>
-            <div class="tool-item"><span class="tn">MCP-style evidence layer</span><span class="td">Fixture data standing in for real connectors, so every generated artifact has something real to cite.</span></div>
+            <div class="tool-item"><span class="tn">Sample-evidence layer</span><span class="td">Fictional records shaped like MCP responses, standing in for live connections, so every generated document has evidence to cite.</span></div>
           </div>
           <div class="trow-foot">
             <a class="sample-link" href="technical-notes.html">Full engineering notes &#8599;</a>
@@ -245,7 +245,7 @@ footer p{font-size:13px;color:var(--muted);}
           <div class="tcard-head"><span class="tname">Structured instructions</span><span class="tcat">Prompting</span></div>
           <div class="tdesc">
             <p>Nothing in the chain runs on free-text handoffs. Every stage has a typed input/output contract defined once in a shared package, and the model fills in that fixed schema.</p>
-            <p>Two instruction patterns did the most work. <strong>Cite only what's present:</strong> every generative step references evidence by a <span class="mono">[REF]</span> id and may only use ids actually included in its input — anything it lacks evidence for is marked <span class="mono">ASSUMED</span>. <strong>Keep independently-varying concepts decoupled:</strong> an early version conflated "is this epic customer-facing or infrastructure" with "does its business case rest on a customer metric or an engineering one" — two genuinely independent questions collapsed into one field, producing wrong framing downstream. Splitting them into two fields, classified independently, was verified with a controlled test: two epics with identical infrastructure classification produced correctly divergent business-case framing.</p>
+            <p>Two instruction patterns did the most work. <strong>Cite only what's present:</strong> every generative step references evidence by a <span class="mono">[REF]</span> id and may only use ids included in its input; anything it lacks evidence for is marked <span class="mono">ASSUMED</span>. <strong>Keep independently-varying concepts decoupled:</strong> an early version conflated "is this epic customer-facing or infrastructure" with "does its business case rest on a customer metric or an engineering one." Two independent questions were collapsed into one field, which produced the wrong framing downstream. Splitting them into two fields, classified independently, was verified with a controlled test: two epics with identical infrastructure classification produced correctly divergent business-case framing.</p>
           </div>
         </div>
       </div>
@@ -255,18 +255,19 @@ footer p{font-size:13px;color:var(--muted);}
         <div class="tbadge">05</div>
         <div class="tcard">
           <div class="tcard-head"><span class="tname">Quality checks</span><span class="tcat">Guardrails</span></div>
-          <div class="tdesc">The rule running through the whole build: <strong>the model never gets to be the source of truth for anything checkable.</strong> Wherever an output could be computed or verified deterministically, it is — in code, downstream of the model, every time.</div>
+          <div class="tdesc">The rule running through the whole build: <strong>the model never gets to be the source of truth for anything checkable.</strong> Wherever an output can be computed or verified exactly, it is checked in code, after the model, every time.</div>
           <div class="artifact">
             <div class="artifact-label">★ Enforced in code</div>
             <ul>
               <li>Prioritization scores recomputed from structured inputs in code</li>
-              <li>Requirement coverage checked: every business requirement must be addressed by a downstream feature before a run proceeds</li>
-              <li>Dependency ordering enforced: a plan that schedules a story before something it depends on is rejected, checked against every export path</li>
+              <li>Requirement coverage computed: each business requirement is checked for at least one downstream feature</li>
+              <li>Dependency order rechecked: a story placed in the same sprint as, or an earlier sprint than, a story it depends on raises a visible warning, on screen and in every export</li>
               <li>Output shape defended everywhere: one missing field from a model response can't take down a page</li>
+              <li>References checked: nothing can cite an id that doesn't exist upstream</li>
             </ul>
           </div>
           <div class="trow-foot">
-            <a class="sample-link" href="technical-notes.html#guardrails">See the guardrails in the codebase &#8599;</a>
+            <a class="sample-link" href="technical-notes.html#checks">See how the checks work &#8599;</a>
           </div>
         </div>
       </div>
@@ -276,7 +277,7 @@ footer p{font-size:13px;color:var(--muted);}
         <div class="tbadge">06</div>
         <div class="tcard">
           <div class="tcard-head"><span class="tname">Traceability</span><span class="tcat">Provenance</span></div>
-          <div class="tdesc">Every artifact downstream carries forward the ids of what produced it. Code enforces that nothing references an id that doesn't actually exist upstream.</div>
+          <div class="tdesc">Every artifact downstream carries forward the ids of what produced it. Code checks that nothing references an id that doesn't exist upstream.</div>
           <div class="trace-row">
             <span class="mono">BR-04</span><span class="arr">&rarr;</span>
             <span class="mono">FEAT-02</span><span class="arr">&rarr;</span>
@@ -294,11 +295,11 @@ footer p{font-size:13px;color:var(--muted);}
         <div class="tcard">
           <div class="tcard-head"><span class="tname">Human review</span><span class="tcat">Judgment</span></div>
           <div class="tdesc">
-            <p>Two tiers. First, a second AI pass on complex phases, framed as adversarial review, hunting for bugs. Second, and more important: every phase was live-tested with real inputs, separate from the fixture data used for automated verification.</p>
-            <p><strong>Scripted verification proved every code path executed. Hand-authored test fixtures are too clean to surface real bugs.</strong></p>
+            <p>Two tiers. First, a second AI pass on complex phases, framed as adversarial review, hunting for bugs. Second, and more important: a person tested every phase by entering realistic inputs, separate from the fixture data used for automated checks.</p>
+            <p><strong>Scripted checks confirmed the code paths ran, but hand-authored test fixtures were too clean to surface these bugs.</strong></p>
           </div>
           <div class="artifact">
-            <div class="artifact-label">★ Caught only by a human running the real workflow</div>
+            <div class="artifact-label">★ Caught only by a person running the full workflow</div>
             <ul>
               <li>A paste box silently accepted the wrong shape of data because two nearly-identical text boxes sat next to each other on the same screen</li>
               <li>A rule displayed a correct warning on screen but silently vanished from the exported file</li>
@@ -306,7 +307,7 @@ footer p{font-size:13px;color:var(--muted);}
             </ul>
           </div>
           <div class="trow-foot">
-            <span class="gate">✋ Human gate: every phase reviewed with real inputs before it counted as done</span>
+            <span class="gate">✋ Human gate: every phase reviewed with realistic inputs before it counted as done</span>
           </div>
         </div>
       </div>
@@ -317,10 +318,10 @@ footer p{font-size:13px;color:var(--muted);}
         <div class="tcard">
           <div class="tcard-head"><span class="tname">What the process taught</span><span class="tcat">Retrospective</span></div>
           <div class="lessons">
-            <div class="lesson"><div class="ln">01</div><div><h4>Scripted and human testing catch different bugs</h4><p>Skipping the human pass on anything with a paste or free-form intake step is exactly where the real bugs hide.</p></div></div>
-            <div class="lesson"><div class="ln">02</div><div><h4>Never trust a model's own math or ordering</h4><p>Recompute deterministically downstream, every time — even after it gets something right once.</p></div></div>
+            <div class="lesson"><div class="ln">01</div><div><h4>Scripted and human testing catch different bugs</h4><p>Skip the human pass on a step with pasted or free-form input, and that's where bugs hide.</p></div></div>
+            <div class="lesson"><div class="ln">02</div><div><h4>Never trust a model's own math or ordering</h4><p>Recompute it in code afterward, every time, even after the model gets it right once.</p></div></div>
             <div class="lesson"><div class="ln">03</div><div><h4>Design for visible failure</h4><p>A system that marks content <span class="mono">ASSUMED</span> or refuses below a threshold is more trustworthy than one that always sounds confident.</p></div></div>
-            <div class="lesson"><div class="ln">04</div><div><h4>Test the connections end to end</h4><p>Each individual tool working in isolation is exactly the gap that caused the original failure and started this rebuild.</p></div></div>
+            <div class="lesson"><div class="ln">04</div><div><h4>Test the connections end to end</h4><p>Tools that each work on their own were the gap that caused the original failure and started this rebuild.</p></div></div>
             <div class="lesson"><div class="ln">05</div><div><h4>Decouple concepts that vary independently</h4><p>Folding two real distinctions into one field for simplicity produces silently wrong downstream framing that's hard to trace back to its cause.</p></div></div>
           </div>
         </div>
@@ -334,10 +335,10 @@ footer p{font-size:13px;color:var(--muted);}
     <div class="prove-card does">
       <h3>What this process demonstrates</h3>
       <ul>
-        <li>Every stage was tested against the next stage's real handoff, end to end</li>
-        <li>Deterministic guards ran downstream of every generative step</li>
+        <li>Every step was tested against the next step's handoff, end to end</li>
+        <li>Checks in code ran after every AI step</li>
         <li>Traceability held across the full chain: an id from an early stage is still checkable at the last one</li>
-        <li>Live human testing with real inputs found real bugs that scripted, fixture-based verification missed</li>
+        <li>A person testing with realistic inputs found bugs that scripted, fixture-based checks missed</li>
       </ul>
     </div>
     <div class="prove-card doesnt">
@@ -353,7 +354,7 @@ footer p{font-size:13px;color:var(--muted);}
 
   <div class="next">
     <h2>See it working, or see how it's built</h2>
-    <p>This page is the process behind the chain. To see the chain itself running against one real fictional initiative, walk the captured run. To see the actual code — data contracts, guardrails, and the trust boundary around API keys — read the engineering notes.</p>
+    <p>This page is the process behind the workflow. To see it run on one fictional initiative, walk the captured run. For how it's built (data contracts, code checks, and API key handling), read the technical notes.</p>
     <div class="next-links">
       <a class="next-a" href="case-study-pethealth.html">Walk the PetHealth case study</a>
       <a class="next-b" href="technical-notes.html">Read the technical notes</a>
