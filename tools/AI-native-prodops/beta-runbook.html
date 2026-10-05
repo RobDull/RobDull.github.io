@@ -140,22 +140,22 @@ footer p{font-size:13px;color:var(--muted);}
 
 <div class="page-head">
   <div class="eyebrow">Limited Evaluation Beta · Operator Guide</div>
-  <h1>The beta runbook: <em>one initiative, one sitting.</em></h1>
-  <p>You've read the <a href="for-evaluators.html" style="color:var(--accent);font-weight:700;">pitch</a> and decided to try it. This page is the operator guide: what to have ready, the suggested 60-to-90-minute path through the chain, what to pay attention to at each gate, and how to send your run back when you're done. Nothing here requires reading anything else first.</p>
+  <h1>The beta runbook: <em>one initiative, one sitting</em></h1>
+  <p>You've read the <a href="for-evaluators.html" style="color:var(--accent);font-weight:700;">evaluation guide</a> and decided to try the tools. This page is the operator guide: what to have ready, the suggested 60-to-90-minute path through the chain, what to pay attention to at each gate, and how to send your run back when you're done. Nothing here requires reading anything else first.</p>
 </div>
 
 <div class="wrap">
 
   <div class="info-box amber" style="margin-top:24px;">
     <h3>Use fictional, public, or sanitized information only</h3>
-    <p>This is a single-user proof of concept, not a secure or production system. Do not enter confidential strategy, customer personal data, proprietary financials, source code, security architecture, or regulated or export-controlled information. A realistically disguised initiative, with names and numbers changed, works just as well as the real thing for evaluating the tool.</p>
+    <p>This is a single-user proof of concept, not a secure or production system. Do not enter confidential strategy, customer personal data, proprietary financials, source code, security architecture, or regulated or export-controlled information. A realistically disguised initiative, with names and numbers changed, works just as well for evaluating the tools.</p>
   </div>
 
   <!-- PREP -->
   <div class="section">
     <div class="section-label">Before you start</div>
     <h2>What to bring</h2>
-    <p>Two tiers. Tier 1 is enough to run the chain end to end and judge the mechanics. Tier 2 is what turns the run into a genuine test of output quality, because a few of the steps below quietly invent plausible-sounding detail when you don't give them anything real to work with. Bring what your time allows; more real input produces a more honest verdict.</p>
+    <p>Two tiers. Tier 1 is enough to run the chain end to end and judge the mechanics. Tier 2 makes the run a fair test of output quality, because a few of the steps below make up plausible-sounding detail when you don't give them specifics. Bring what your time allows; more specific input gives a fairer test.</p>
 
     <div class="tier-block">
       <div class="tier-head"><h3>Tier 1 · Minimum</h3><span class="tier-time">~5 min prep</span></div>
@@ -163,7 +163,7 @@ footer p{font-size:13px;color:var(--muted);}
         <div class="prep-card">
           <div class="prep-num">01</div>
           <div class="prep-title">One initiative, one paragraph</div>
-          <div class="prep-desc">A real problem from your org, or a realistically disguised one: what's broken, who it hurts, and one number that shows it matters.</div>
+          <div class="prep-desc">A problem from your organization with the names and numbers disguised, or a fictional or public one: what's broken, who it hurts, and one number that shows it matters.</div>
         </div>
         <div class="prep-card">
           <div class="prep-num">02</div>
@@ -179,16 +179,16 @@ footer p{font-size:13px;color:var(--muted);}
     </div>
 
     <div class="tier-block">
-      <div class="tier-head"><h3>Tier 2 · Recommended for a genuinely evaluative run</h3><span class="tier-time">+15&ndash;20 min prep</span></div>
-      <div class="tier-why">Without the items below, Initiative Intake (step 03) will invent plausible-sounding competing initiatives and a budget assumption to fill the gap, because that's what the prompt is designed to do when nothing real is given. That's a reasonable fallback for a five-minute look, but it isn't a fair test of the quality of the tool's draft and structure. Bring the real thing and you're testing the tool; skip it and you're mostly testing the model's imagination.</div>
+      <div class="tier-head"><h3>Tier 2 · Recommended for a fair test</h3><span class="tier-time">+15&ndash;20 min prep</span></div>
+      <div class="tier-why">Without the items below, Initiative Intake (step 03) will invent plausible-sounding competing initiatives and a budget assumption to fill the gap, because that's what the prompt is designed to do when it's given nothing specific. That's a reasonable fallback for a five-minute look, but it isn't a fair test of the quality of the tool's draft and structure. With specific input you're testing the tool; without it, you're mostly testing what the model makes up.</div>
       <ul class="fb-list">
-        <li><strong>Two named competing initiatives</strong>, each with a one-line reason they lose the capacity to yours. This is what actually exercises the portfolio-tradeoff step instead of letting it improvise.</li>
-        <li><strong>A real quote, stat, or budget line</strong>, pasted below your paragraph as an evidence line so the model cites it with provenance instead of assuming it. The format:
+        <li><strong>Two named competing initiatives</strong>, each with a one-line reason they lose the capacity to yours. This gives the portfolio-tradeoff step something to weigh instead of letting it improvise.</li>
+        <li><strong>A quote, figure, or budget line</strong> (disguised if needed), pasted below your paragraph as an evidence line so the model cites it with provenance instead of assuming it. The format:
           <div class="mono-block">[REF-SUPPORT-01 support-ticket] "Members message support asking where their claim is; we can't tell them anything past 'still processing.'"</div>
-          Any short id and kind works, e.g. <span style="font-family:var(--mono);font-size:12px;">[REF-BUDGET-Q3 financial-tracking]</span> or <span style="font-family:var(--mono);font-size:12px;">[REF-NPS-091 external-comms]</span>. This format isn't shown anywhere in the tool itself, the visible evidence chips are fixture demo data, so bringing your own only works if you know to paste it this way. A citation like this associates a claim with the record you supplied; it does not verify that the record itself is accurate.</li>
-        <li><strong>A one-line budget ceiling or OKR</strong> the initiative should ladder to, so the tradeoff rationale grounds in something real.</li>
-        <li><strong>If you'll reach Backlog Builder (step 08):</strong> an excerpt of your org's actual DoR/DoD, a style-guide snippet, and one line on your current-state architecture. All three are real optional fields on that tool and visibly change the NFRs and solution outline from generic to grounded.</li>
-        <li><strong>If you're starting from the top (steps 01&ndash;02):</strong> real persona or interview notes for the Journey Map input rather than a cold start. Its own placeholder text says it plainly: the more specific, the better the suggestions.</li>
+          Any short id and kind works, e.g. <span style="font-family:var(--mono);font-size:12px;">[REF-BUDGET-Q3 financial-tracking]</span> or <span style="font-family:var(--mono);font-size:12px;">[REF-NPS-091 external-comms]</span>. This format isn't shown in the tool itself (the evidence chips you see are sample data), so your own evidence only works if you paste it this way. A citation like this associates a claim with the record you supplied; it does not verify that the record itself is accurate.</li>
+        <li><strong>A one-line budget ceiling or OKR</strong> the initiative should support, so the tradeoff has something specific to work from.</li>
+        <li><strong>If you'll reach Backlog Builder (step 08):</strong> a sanitized excerpt of your organization's Definition of Ready or Definition of Done, a style-guide snippet, and one general line about your current architecture (no security details). All three are optional fields in that tool and make the non-functional requirements and solution outline noticeably more specific.</li>
+        <li><strong>If you're starting from the top (steps 01&ndash;02):</strong> persona or interview notes for the Journey Map input, with names and personal details removed, rather than a cold start. As the tool's own placeholder text says, the more specific the notes, the better the suggestions.</li>
       </ul>
     </div>
   </div>
@@ -197,7 +197,7 @@ footer p{font-size:13px;color:var(--muted);}
   <div class="section">
     <div class="section-label">The path · 60 to 90 minutes</div>
     <h2>Intake to sprint plan, seven stops</h2>
-    <p>This is the recommended beta path. It starts at Initiative Intake (step 03) rather than the very top of the chain: personas and journey maps are worth a look later, but the intake-to-Jira stretch is where the system earns or loses your trust. Each stop names what to watch for, because where the output falls short of your org's bar is exactly the feedback this beta exists to collect.</p>
+    <p>This is the recommended beta path. It starts at Initiative Intake (step 03) rather than the very top of the chain: personas and journey maps are worth a look later, but the stretch from intake to the Jira file is where the tools do most of their drafting. Each stop names what to watch for, because where the output falls short of your organization's standards is the feedback this beta is for.</p>
     <div class="path">
 
       <div class="prow">
@@ -205,7 +205,7 @@ footer p{font-size:13px;color:var(--muted);}
         <div class="pcard">
           <h3><a href="../feature-intake/">Initiative Intake</a> · ~15 min</h3>
           <p>Paste your one-paragraph initiative and run the four-step chain: portfolio tradeoff, epic decomposition, riskiest assumptions, benefits realization. Review each step before running the next; edit anything that's wrong before it flows downstream.</p>
-          <div class="watch"><strong>Watch for</strong> Would the Demand / Feasibility / Viability assumptions survive your stakeholders? Are the epics it framed genuinely yours, or generic? What did the model introduce that was not in your input?</div>
+          <div class="watch"><strong>Watch for</strong> Would the demand, feasibility, and viability assumptions hold up with your stakeholders? Do the epics fit your initiative, or are they generic? What did the model introduce that was not in your input?</div>
         </div>
       </div>
 
@@ -213,7 +213,7 @@ footer p{font-size:13px;color:var(--muted);}
         <div class="pbadge">04</div>
         <div class="pcard">
           <h3><a href="../business-case/">Business Cases</a> · ~10 min</h3>
-          <p>One click on a framed epic pre-fills the case form. Generate a case for one or two epics, not all of them; the point is judging the quality bar, not exhaustive coverage.</p>
+          <p>One click on a framed epic pre-fills the case form. Generate a case for one or two epics; you're judging quality, so you don't need all of them.</p>
           <div class="watch"><strong>Watch for</strong> Would you put this case in front of your sponsor? Is the rough effort estimate credible enough to anchor prioritization? What did the model introduce that was not in your input?</div>
         </div>
       </div>
@@ -222,8 +222,8 @@ footer p{font-size:13px;color:var(--muted);}
         <div class="pbadge">05</div>
         <div class="pcard">
           <h3><a href="../portfolio-wsjf/">Epic Prioritizer</a> · ~10 min</h3>
-          <p>Score your cases on WSJF and RICE in one pass, then drag the weights around. The board recomputes live, including the funding line.</p>
-          <div class="watch"><strong>Watch for</strong> Does the ranking hold up when you raise risk-reduction? Would this board survive your loudest stakeholder? What did the model introduce that was not in your input?</div>
+          <p>Run the two AI calls that propose WSJF and RICE inputs for your cases, then adjust the weights. The board recalculates as you go, including the funding cutoff.</p>
+          <div class="watch"><strong>Watch for</strong> Does the ranking hold up when you raise risk-reduction? Would the ranking hold up in your funding discussion? What did the model introduce that was not in your input?</div>
         </div>
       </div>
 
@@ -231,8 +231,8 @@ footer p{font-size:13px;color:var(--muted);}
         <div class="pbadge">06</div>
         <div class="pcard">
           <h3><a href="../roadmap/">Roadmap &amp; Milestones</a> · ~5 min</h3>
-          <p>One click carries the ranking here; the funded epics sequence into release windows with a deliberately light dependency list.</p>
-          <div class="watch"><strong>Watch for</strong> Are the dependencies real blockers or invented ceremony? What did the model introduce that was not in your input?</div>
+          <p>One click carries the ranking here, and one AI call places the funded epics in release windows with a short list of dependencies.</p>
+          <div class="watch"><strong>Watch for</strong> Are the dependencies real blockers? What did the model introduce that was not in your input?</div>
         </div>
       </div>
 
@@ -240,8 +240,8 @@ footer p{font-size:13px;color:var(--muted);}
         <div class="pbadge">07</div>
         <div class="pcard">
           <h3><a href="../docs-generator/">Business Documents</a> · ~10 min</h3>
-          <p>Generate the BRD for your funded epic. Note that the tool refuses epics below the funding line; that's a guardrail, not a bug.</p>
-          <div class="watch"><strong>Watch for</strong> The requirements core and the executive package: which sections would your org keep, cut, or fight about? Flag any NFR threshold, financial figure, stakeholder name, or sign-off that reads as more certain or more approved than the evidence supports. What did the model introduce that was not in your input?</div>
+          <p>Generate the BRD for your funded epic. The tool refuses epics below the funding cutoff; that refusal is a deliberate check.</p>
+          <div class="watch"><strong>Watch for</strong> The requirements core and the executive package: which sections would your organization keep, cut, or argue about? Flag any NFR threshold, financial figure, stakeholder name, or sign-off that reads as more certain or more approved than the evidence supports. What did the model introduce that was not in your input?</div>
         </div>
       </div>
 
@@ -249,7 +249,7 @@ footer p{font-size:13px;color:var(--muted);}
         <div class="pbadge">08</div>
         <div class="pcard">
           <h3><a href="../backlog-builder/">Backlog Builder</a> · ~15 min</h3>
-          <p>The BRD becomes MoSCoW'd features and ordered stories with BDD acceptance criteria. Requirement coverage is computed against the BRD, not claimed.</p>
+          <p>The BRD becomes features prioritized with MoSCoW and ordered stories with Given-When-Then acceptance criteria. Requirement coverage is checked against the BRD in code, and the tool asks a named person to confirm or defer each assumed requirement before it accepts the BRD.</p>
           <div class="watch"><strong>Watch for</strong> Would your engineers pick up these stories? Are the acceptance criteria testable or vague? What did the model introduce that was not in your input?</div>
         </div>
       </div>
@@ -258,7 +258,7 @@ footer p{font-size:13px;color:var(--muted);}
         <div class="pbadge">09</div>
         <div class="pcard">
           <h3><a href="../sprint-plan/">Sprint Planner</a> · ~10 min</h3>
-          <p>MVP scope, a capacity-and-dependency-checked sprint plan, baseline and worst-case estimates, a RAID log, and the Jira bulk-import CSV that ends the chain.</p>
+          <p>MVP scope, a capacity-and-dependency-checked sprint plan, baseline and worst-case estimates, a RAID log, and the CSV file for Jira's bulk import that ends the workflow.</p>
           <div class="watch"><strong>Watch for</strong> Do the sprint loads and the worst-case gap reflect how delivery actually goes where you work? What did the model introduce that was not in your input?</div>
         </div>
       </div>
@@ -291,19 +291,19 @@ footer p{font-size:13px;color:var(--muted);}
     <div class="info-box amber">
       <h3>Download early, download often</h3>
       <p>At the bottom of every tool there's a <span class="mono">Run file</span> row with <strong>Download</strong> and <strong>Load</strong> buttons. Download snapshots everything the chain has saved, from any tool, into one JSON file. Load restores it in any browser, on any machine. Download whenever you finish a stage; if a cache clear or a browser switch would otherwise lose your session, the file gets it all back.</p>
-      <p>It's also how you can send me your run: attach the JSON to your feedback email and I can load your exact state, see what you saw, and debug or improve from the real thing instead of a screenshot. The run file can contain everything you entered and everything the chain generated, so review it before sending and remove anything you wouldn't otherwise share. Notes alone, without a run file, are a complete response too.</p>
+      <p>It's also how you can send me your run: attach the JSON to your feedback email and I can load your exact state, see what you saw, and debug or improve from your actual run instead of a screenshot. The run file can contain everything you entered and everything the chain generated, so review it before sending and remove anything you wouldn't otherwise share. Notes alone, without a run file, are a complete response too.</p>
     </div>
   </div>
 
   <!-- FEEDBACK -->
   <div class="section">
     <div class="section-label">What to note as you go</div>
-    <h2>The feedback that actually helps</h2>
+    <h2>Useful feedback</h2>
     <p>You don't need a structured report. A few honest sentences on any of these is a full contribution:</p>
     <ul class="fb-list">
-      <li>Where an artifact would pass review in your org as-is, and where it would get torn apart. Name the section.</li>
+      <li>Where a document would pass review in your organization as is, and where it would be sent back for rework. Name the section.</li>
       <li>Anywhere you stopped trusting the output, and what triggered it.</li>
-      <li>Anywhere you got stuck, confused, or hit an error. The run file plus one sentence beats any bug template.</li>
+      <li>Anywhere you got stuck, confused, or hit an error. A run file plus one sentence is better than a formal bug report.</li>
       <li>The one thing that, if added or fixed, would make you run a second initiative through it.</li>
     </ul>
   </div>
