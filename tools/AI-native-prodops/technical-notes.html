@@ -14,12 +14,12 @@
   gtag('js', new Date());
   gtag('config', 'G-0Y1JYXTE5J');
 </script>
-<meta name="description" content="How the AI-native PDLC toolchain is actually built: two build systems by design, a shared TypeScript package instead of nine forks, versioned data contracts between tools, guardrails enforced in code, the API key trust boundary, deploy model, and known technical debt, stated plainly for a technical or delivery-systems reviewer.">
+<meta name="description" content="How the workflow tools are built: two build systems, a shared TypeScript package, versioned handoffs, checks in code, API key handling, deploys, and debt.">
 <link rel="canonical" href="https://robdull.com/tools/AI-native-prodops/technical-notes.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://robdull.com/tools/AI-native-prodops/technical-notes.html">
 <meta property="og:title" content="Technical Notes | Rob Dull">
-<meta property="og:description" content="How the toolchain is actually built: the stack, the shared package, the data contracts between tools, guardrails enforced in code, the trust boundary, deploy model, and known debt, stated plainly.">
+<meta property="og:description" content="How the workflow tools are built: two build systems, a shared TypeScript package, versioned handoffs, checks in code, API key handling, deploys, and debt.">
 <meta property="og:site_name" content="Rob Dull">
 <meta property="og:image" content="https://robdull.com/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -162,9 +162,9 @@ footer p{font-size:13px;color:var(--muted);}
 </div>
 
 <div class="page-head">
-  <div class="eyebrow">Agentic PDLC · Engineering Notes</div>
-  <h1>How this is <em>actually built.</em></h1>
-  <p>This page is for a technical program manager, delivery systems leader, or engineer sizing up the judgment behind the toolchain rather than the product pitch. It states the stack, the component boundaries, the data contracts between tools, what's enforced in code versus asserted by a model, the trust boundary around API keys, the deploy model, and the debt that's tracked but not yet paid. Plainly, not promotionally.</p>
+  <div class="eyebrow">AI-assisted workflow · Technical notes</div>
+  <h1>How the tools <em>are built</em></h1>
+  <p>This page is for technical program managers, delivery systems leaders, and engineers who want to judge how the tools are built. It covers the stack, the component boundaries, the data contracts between tools, what's checked in code and what's left to the model, how API keys are handled, the deploy model, and the known technical debt.</p>
   <div class="stack-chips">
     <span class="stack-chip">React</span>
     <span class="stack-chip">Vite</span>
@@ -181,7 +181,7 @@ footer p{font-size:13px;color:var(--muted);}
   <!-- TWO BUILD SYSTEMS -->
   <div class="section">
     <div class="section-label">Build systems</div>
-    <h2>Two build systems, deliberately, not one</h2>
+    <h2>Two build systems, each for a different kind of page</h2>
     <div class="build-grid">
       <div class="build-card static">
         <h3>Hand-authored HTML</h3>
@@ -189,7 +189,7 @@ footer p{font-size:13px;color:var(--muted);}
         <ul>
           <li>The résumé, work history, every Perspectives essay, the tools hub, workshops</li>
           <li>Two of the eleven tools: the persona generator and the product ops radar, which make no network calls at all</li>
-          <li>Zero dependencies, trivial to edit, nothing to build or version</li>
+          <li>No dependencies, easy to edit, and nothing to build or version</li>
         </ul>
       </div>
       <div class="build-card spine">
@@ -198,7 +198,7 @@ footer p{font-size:13px;color:var(--muted);}
         <ul>
           <li>Each app builds independently with <span style="font-family:var(--mono);">vite build</span></li>
           <li>The hashed output is copied into this site's <span style="font-family:var(--mono);">/tools/&lt;app&gt;/</span> directory</li>
-          <li>A shared internal package (below) is what keeps nine apps from becoming nine forks</li>
+          <li>A shared internal package (below) keeps the nine apps from drifting into nine separate copies</li>
         </ul>
       </div>
     </div>
@@ -208,8 +208,8 @@ footer p{font-size:13px;color:var(--muted);}
   <!-- SHARED PACKAGE -->
   <div class="section">
     <div class="section-label">Reuse</div>
-    <h2>One shared package, not nine forks</h2>
-    <p>Every spine app imports the same internal <span style="font-family:var(--mono);font-size:13px;">@robdull/toolkit</span> package rather than re-implementing its own client, scoring math, or handoff logic.</p>
+    <h2>One shared package for the nine apps</h2>
+    <p>Every app in the monorepo imports the same internal <span style="font-family:var(--mono);font-size:13px;">@robdull/toolkit</span> package for its API client, scoring math, and handoff logic.</p>
     <div class="pkg-grid">
       <div class="pkg-col">
         <h3>Shared runtime</h3>
@@ -217,26 +217,26 @@ footer p{font-size:13px;color:var(--muted);}
           <li>An API client shared by all nine apps</li>
           <li>A generic <span class="mono">useAgenticChain(steps)</span> hook that drives run, edit, back, and reset for any array of pipeline steps</li>
           <li>Shared React components: PipelineBar, RunButton, ResponseSurface, KeyModal</li>
-          <li>Design-token CSS shared across the spine apps</li>
+          <li>Design-token CSS shared across the nine apps</li>
         </ul>
       </div>
       <div class="pkg-col">
         <h3>Shared domain logic</h3>
         <ul>
-          <li>A single scoring module: the one WSJF and RICE implementation every prioritization-touching app calls into, so there is exactly one formula to get right</li>
-          <li>A fixture-based MCP evidence layer, keyless, that grounds prompts in cited PetHealth data until live connectors exist</li>
+          <li>A single scoring module: the one WSJF and RICE implementation every app that ranks work calls, so there is one formula to get right</li>
+          <li>A sample-evidence layer: fictional PetHealth records with source-like identifiers, shaped like MCP responses and served from fixtures with no key needed, which the prompts cite until live connections exist</li>
           <li>Every cross-tool handoff module (next section)</li>
         </ul>
       </div>
     </div>
-    <p style="margin-top:14px;">Each pipeline step is a declarative config object: <span style="font-family:var(--mono);font-size:12.5px;">{ id, buildPrompt, parse, render, maxTokens }</span>. The hook is generic over an array of these, so no app hand-rolls its own step state machine. Every spine app also ships a keyless sample: for most, a <span style="font-family:var(--mono);font-size:12.5px;">demo.html</span> rendering a real captured run through the same step renderers as the live tool; for Business Cases, a worked-example gallery on the tool itself (including the PetHealth EPIC-03 case the demo thread follows). Evaluating any tool costs a visitor nothing and needs no key.</p>
+    <p style="margin-top:14px;">Each pipeline step is a declarative config object: <span style="font-family:var(--mono);font-size:12.5px;">{ id, buildPrompt, parse, render, maxTokens }</span>. The hook is generic over an array of these, so no app hand-rolls its own step state machine. Every app also ships a sample that needs no key: for most, a <span style="font-family:var(--mono);font-size:12.5px;">demo.html</span> that renders a captured run through the same step renderers as the live tool; for Business Cases, a worked-example gallery on the tool itself (including the PetHealth EPIC-03 case the demo thread follows). Evaluating any tool costs a visitor nothing and needs no key.</p>
   </div>
 
   <!-- DATA CONTRACTS -->
   <div class="section">
     <div class="section-label">Interfaces</div>
     <h2>The data contracts between tools</h2>
-    <p>The chain runs entirely same-origin through <span style="font-family:var(--mono);">localStorage</span>, not a backend. Each arrow below is a small versioned TypeScript module, not a loose object shape passed by convention, playing the same role an internal API schema plays between two services.</p>
+    <p>The tools pass data to each other through the browser's <span style="font-family:var(--mono);">localStorage</span>, on the same site, with no backend. Each handoff below is defined by a small, versioned TypeScript module, which plays the role an internal API schema plays between two services.</p>
     <div class="contract-wrap">
       <table class="contract-table">
         <thead><tr><th>Handoff key</th><th>Stage</th><th>What crosses</th></tr></thead>
@@ -244,13 +244,13 @@ footer p{font-size:13px;color:var(--muted);}
           <tr><td class="mono">robdull:personas</td><td class="stage">01 → 02</td><td>Persona → journey seed</td></tr>
           <tr><td class="mono">robdull:opportunity-seeds</td><td class="stage">02 → 03</td><td>Journey pain clusters → intake candidates</td></tr>
           <tr><td class="mono">robdull:journey-seeds</td><td class="stage">03 → 02</td><td>Bidirectional: intake can request more journey detail</td></tr>
-          <tr><td class="mono">robdull:epics</td><td class="stage">03 → 04</td><td>Business + Architecture epics, D/F/V, benefits-realization plan</td></tr>
+          <tr><td class="mono">robdull:epics</td><td class="stage">03 → 04</td><td>Business and architecture epics, demand/feasibility/viability assumptions, benefits plan</td></tr>
           <tr><td class="mono">robdull:business-cases</td><td class="stage">04 → 05</td><td>kind, caseType, roughEffort, execSummarySeed</td></tr>
-          <tr><td class="mono">robdull:epic-ranking</td><td class="stage">05 → 06</td><td>Method, weights, scores, funding line</td></tr>
+          <tr><td class="mono">robdull:epic-ranking</td><td class="stage">05 → 06</td><td>Method, weights, scores, funding cutoff</td></tr>
           <tr><td class="mono">robdull:roadmaps</td><td class="stage">06 → 07</td><td>Milestones, release windows</td></tr>
           <tr><td class="mono">robdull:brds</td><td class="stage">07 → 08</td><td>One BRD per funded epic</td></tr>
           <tr><td class="mono">robdull:backlogs</td><td class="stage">08 → 09</td><td>One backlog per epic</td></tr>
-          <tr><td class="mono">Jira CSV</td><td class="stage">09 → Jira</td><td>File download; terminal handoff, no further chain</td></tr>
+          <tr><td class="mono">Jira CSV</td><td class="stage">09 → Jira</td><td>File download; the last handoff, imported into Jira by a person</td></tr>
         </tbody>
       </table>
     </div>
@@ -259,13 +259,14 @@ footer p{font-size:13px;color:var(--muted);}
   <!-- GUARDRAILS -->
   <div class="section">
     <div class="section-label">Correctness</div>
-    <h2>Guardrails enforced in code, not asserted by the model</h2>
-    <p>The AI drafts every artifact. It does not get the final word on whether that artifact is internally consistent; a handful of checks are computed in plain code and cannot be talked around by a confident-sounding response.</p>
+    <h2>Checks enforced in code</h2>
+    <p>The AI drafts most artifacts, but it doesn't get the final word on whether they hang together: a few checks run in plain code, and a confident-sounding response can't talk its way past them.</p>
     <ul class="guard-list">
-      <li>Requirement coverage in the Backlog Builder is computed against the BRD, not claimed by the model that wrote the backlog.</li>
-      <li>Sprint load and <span style="font-family:var(--mono);font-size:12.5px;">dependsOn</span> ordering are recomputed in code in the Sprint Planner; an over-capacity sprint or an out-of-order dependency raises a visible warning wherever the plan is read.</li>
-      <li>The Business Documents tool refuses to generate a BRD for an epic that hasn't cleared the funding line computed upstream in the prioritizer.</li>
+      <li>The Backlog Builder computes requirement coverage against the BRD in code.</li>
+      <li>The Sprint Planner recomputes sprint load and dependency order (<span style="font-family:var(--mono);font-size:12.5px;">dependsOn</span>) in code; an over-capacity sprint, or a story placed in the same sprint as, or an earlier sprint than, a story it depends on, raises a visible warning wherever the plan is read.</li>
+      <li>The Business Documents tool refuses to generate a BRD for an epic below the funding cutoff calculated in the prioritizer.</li>
       <li>WSJF and RICE scores recompute live when weights change, in the shared scoring module, without a model call.</li>
+        <li>The Backlog Builder won't accept a BRD until a named person confirms or defers each requirement marked as assumed.</li>
     </ul>
   </div>
 
@@ -289,7 +290,7 @@ footer p{font-size:13px;color:var(--muted);}
     <div class="info-box">
       <h3>Visitor-supplied key, direct to Anthropic, no server in the path</h3>
       <p>All nine apps in the shared workspace, including the strategy-alignment tool, call <span style="font-family:var(--mono);">api.anthropic.com</span> directly from the visitor's browser using a key the visitor supplies. The key lives in <span style="font-family:var(--mono);">sessionStorage</span> and clears on tab close. Two tools, the persona generator and the product ops radar, make no network calls at all. There is no server anywhere in this system holding anyone's key.</p>
-      <p>A Cloudflare Worker pattern that would hold a server-side key was evaluated and deliberately not adopted for this deployment. The full reasoning, cost per session, blast radius of a leaked key, and the UX trade-off of asking a visitor for their own key, is written up on its own page rather than asserted here. <a href="../../worker-vs-direct.html">Read the trade-off ↗</a></p>
+      <p>A Cloudflare Worker pattern that would hold a server-side key was evaluated and not adopted for this deployment. The full reasoning, covering cost per session, the blast radius of a leaked key, and the trade-off of asking visitors for their own key, is on its own page. <a href="../../worker-vs-direct.html">Read the trade-off ↗</a></p>
       <p style="margin-top:8px;"><strong>Relevant risks</strong> include malicious or compromised site JavaScript, compromised third-party dependencies, browser extensions, shared or unmanaged devices, cross-site scripting, accidental exposure through debugging or screenshots, broadly privileged API keys, and sensitive content transmitted to the model provider.</p>
       <p style="margin-top:8px;"><strong>Appropriate controls before broader testing</strong> include a strict Content Security Policy, a dependency inventory and update process, no unnecessary third-party scripts, clear model-provider disclosure, restricted-key guidance, usage monitoring, a sanitized-data requirement, a documented incident contact, and a security review before accepting confidential data.</p>
     </div>
@@ -299,30 +300,30 @@ footer p{font-size:13px;color:var(--muted);}
   <div class="section">
     <div class="section-label">Client state</div>
     <h2>Browser state and run files</h2>
-    <p>Workflow state is stored in browser local storage, which enables same-origin handoffs without a backend but creates real limits: state belongs to one browser profile, clearing site data removes it, shared work and concurrent edits aren't supported, there is no server backup, and local data may remain on the device.</p>
+    <p>Workflow state is stored in browser local storage, which allows handoffs between tools without a backend but has limits: state belongs to one browser profile, clearing site data removes it, shared work and concurrent edits aren't supported, there is no server backup, and local data may remain on the device.</p>
     <p style="margin-top:8px;">Run-file download and restore provide portability, but a run file can contain everything entered and generated, and should be treated as potentially sensitive. Before a run file changes hands: it should be reviewed and sanitized first, notes alone are an acceptable substitute for the file, how received files are stored and eventually deleted should be stated, and files containing employer-confidential content shouldn't be collected.</p>
   </div>
 
   <!-- DEPLOY -->
   <div class="section">
     <div class="section-label">Operations</div>
-    <h2>Deploy model, plainly stated</h2>
+    <h2>Deploy model</h2>
     <div class="info-box amber">
       <h3>Manual, no CI/CD, no staging</h3>
-      <p><span style="font-family:var(--mono);">main</span> is production on both repos. GitHub Pages republishes on every push to this repo's <span style="font-family:var(--mono);">main</span>. There is no staging environment and no automated pipeline. For a solo-maintained portfolio project this is a scope choice, not an oversight: a broken push is caught by hand within minutes, and the alternative, a pipeline maintained for two repos with no team behind them, buys safety this project doesn't currently need.</p>
-      <p>One deploy-safety habit worth naming: at least one spine app's site directory holds a hand-authored page that is not a build artifact and would be silently deleted by a naive copy-and-overwrite. Deploys diff the existing directory against the fresh build output before wiping anything, specifically to catch that class of mistake before it ships.</p>
+      <p><span style="font-family:var(--mono);">main</span> is production on both repos. GitHub Pages republishes on every push to this repo's <span style="font-family:var(--mono);">main</span>. There is no staging environment and no automated pipeline. That's a deliberate scope choice for a portfolio project with one maintainer: a broken push is caught by hand within minutes, and a pipeline for two repos with no team behind it would add safety this project doesn't need yet.</p>
+      <p>One deploy habit: at least one app's site directory holds a hand-authored page that isn't a build artifact and would be deleted by a naive copy-and-overwrite. Deploys diff the existing directory against the fresh build output before wiping anything, specifically to catch that class of mistake before it ships.</p>
       <p style="margin-top:8px;"><strong>Release checklist:</strong> build every application, confirm no unexpected file deletion, open each public route, test one complete handoff path, verify sample pages, verify key-modal and API-error behavior, verify run-file download and load, verify Jira CSV generation, check console errors, and record the release version and date.</p>
     </div>
   </div>
 
   <!-- DEBT -->
   <div class="section">
-    <div class="section-label">Honesty</div>
-    <h2>Debt tracked, not hidden</h2>
-    <p>A short, current list, not an exhaustive one:</p>
+    <div class="section-label">Debt</div>
+    <h2>Known technical debt</h2>
+    <p>A short, current list:</p>
     <ul class="debt-list">
       <li>A legacy backlog data shape is read by nothing live but is kept in the handoff types so older saved runs don't corrupt on load.</li>
-      <li>Design tokens (color, spacing, type scale) are duplicated inline across roughly twenty static HTML files rather than centralized. That's the next static-page refactor, not a hypothetical one.</li>
+      <li>Design tokens (color, spacing, type scale) are duplicated inline across roughly twenty static HTML files instead of in one shared file. Centralizing them is the next static-page refactor.</li>
     </ul>
   </div>
 
@@ -332,7 +333,7 @@ footer p{font-size:13px;color:var(--muted);}
     <h2>What isn't verifiable from here</h2>
     <div class="info-box muted">
       <h3>The monorepo is private</h3>
-      <p>The repository behind the nine-tool spine is private, so this page describes the architecture rather than lets you inspect it directly. The shared package has unit test coverage for scoring parity, chain-state handling, and API client behavior. There is no CI gate, no per-app test suite, and no end-to-end test; correctness beyond that unit coverage currently leans on the computed guardrails above and manual verification at each release. If you'd like to look at representative code directly, the scoring module or a single handoff contract, I'm glad to walk through it on request: <a href="mailto:rob.dull@gmail.com?subject=Toolchain%20code%20walkthrough">rob.dull@gmail.com</a>.</p>
+      <p>The repository behind the nine apps is private, so this page describes the architecture instead of letting you inspect it. The shared package has unit test coverage for scoring parity, chain-state handling, and API client behavior. There is no CI gate, no per-app test suite, and no end-to-end test; correctness beyond that unit coverage currently leans on the computed guardrails above and manual verification at each release. If you'd like to look at representative code directly, the scoring module or a single handoff contract, I'm glad to walk through it on request: <a href="mailto:rob.dull@gmail.com?subject=Toolchain%20code%20walkthrough">rob.dull@gmail.com</a>.</p>
     </div>
     <div class="pkg-grid">
       <div class="pkg-col">
@@ -371,12 +372,12 @@ footer p{font-size:13px;color:var(--muted);}
 
   <div class="next">
     <h2>Looking for the product case instead?</h2>
-    <p>This page covers the engineering. For what the system actually produces, the end-to-end case study traces one initiative through all nine tools with the real captured output at each step, and the evaluator guide routes PM, ProdOps, and delivery leaders to the proof points for their seat.</p>
+    <p>This page covers the engineering. For what the tools produce, the case study follows one initiative through all nine steps with the captured output at each step, and the evaluation guide points product managers, product operations staff, and delivery leaders to what matters for their role.</p>
     <div class="next-links">
       <a class="next-a" href="case-study-pethealth.html">End-to-end case study</a>
       <a class="next-b" href="rebuild-retrospective.html">How this got built: a retrospective</a>
       <a class="next-b" href="for-evaluators.html">Evaluation guide by role</a>
-      <a class="next-b" href="prodops-network.html">Network diagram</a>
+      <a class="next-b" href="prodops-network.html">Proposed architecture</a>
     </div>
   </div>
 
