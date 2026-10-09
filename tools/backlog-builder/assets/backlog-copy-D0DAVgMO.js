@@ -130,7 +130,7 @@ Target architecture: ${s.targetArchitecture}
 Features: ${z.features.map(N=>`${N.id} [${N.moscow}] ${N.name}`).join("; ")}
 
 Rules:
-- developerDoc (120–200 words): integration points, data touched, the target-architecture pieces a developer needs before picking up a story from this backlog. Reference Feature ids, not story-level detail (stories are the sprint's job).
+- developerDoc (120–200 words): integration points, data touched, the target-architecture pieces a developer needs before picking up a story from this backlog. Reference Feature ids, not story-level detail (stories are the build planner's job).
 - userDoc (100–160 words): end-user-facing walkthrough of what changes for them, covering the Must/Should features ONLY. NEVER mention a Could or Won't feature's capability here, in any form, regardless of USER DOC SCOPE. Could-priority features belong exclusively in stretchGoals, never blended into this prose.
 - stretchGoals: ONLY when USER DOC SCOPE says to include stretch goals AND at least one Could-priority feature exists above. 40–90 words: one short mention per Could feature (name it, one sentence on the value it would add), explicitly framed as a stretch goal not guaranteed for this release. Otherwise (scope says no, or there is no Could feature), return exactly "".
 - styleGuideNote: one sentence. If a style guide was provided in the input, name ONE concrete convention from it you applied (tone, terminology, structure); if NOT PROVIDED, say so plainly rather than inventing a style guide.
