@@ -140,7 +140,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
   <p>That diagnosis is correct. Where most advice stops short is the prescription. "Add human review" and "use structured JSON outputs" are the two most common answers, and neither one solves the problem it's describing. Structured output only constrains the <em>shape</em> of what a model produces, not whether the numbers in it are right. And "a human reviews it" describes a checkpoint, not a mechanism. It says nothing about whether the human reviewing it can catch what's wrong.</p>
 
   <div class="callout">
-    <strong>The difference between a pipeline that hallucinates and one that doesn't isn't how much review it gets. It's whether the review is structurally capable of catching the specific failure modes that compound.</strong> I built a nine-tool, AI-native product pipeline, persona through sprint plan, around four guardrails that do exactly that. None of them are novel ideas. What's uncommon is having all four built, in running code, rather than described as a future best practice.
+    <strong>The difference between a pipeline that hallucinates and one that doesn't isn't how much review it gets. It's whether the review is structurally capable of catching the specific failure modes that compound.</strong> I built a nine-tool, AI-native product pipeline, persona through batch plan, around four guardrails that do exactly that. None of them are novel ideas. What's uncommon is having all four built, in running code, rather than described as a future best practice.
   </div>
 
   <p>Here's what each one is, why the generic version of the advice doesn't go far enough, and where to see it running for real.</p>
@@ -154,7 +154,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="guardrail-label">The failure mode</div>
       <p>Hallucination compounding is usually framed as a text problem: the model says something untrue. In a pipeline, the more dangerous version is a <em>number</em> problem: a priority score, a coverage percentage, a capacity total that the model asserts and every downstream step then treats as fact. "Structured JSON output" doesn't fix this. A model can emit a perfectly schema-valid object with a wrong number inside it.</p>
       <div class="guardrail-label fix">The guardrail</div>
-      <p>Anything quantitative (WSJF and RICE scores, requirement-coverage percentages, sprint capacity) is recomputed in code from the underlying data, every time, not asserted by the model and trusted as-is. The LLM drafts the qualitative reasoning; a deterministic function owns the number. You can watch this directly: the <a href="../tools/portfolio-wsjf/demo.html">epic prioritizer</a> recomputes its entire ranking board live in the browser when you change a weight. The same five epics, re-scored from the same evidence, with an architecture epic jumping to #1 with no model call involved.</p>
+      <p>Anything quantitative (WSJF and RICE scores, requirement-coverage percentages, batch capacity) is recomputed in code from the underlying data, every time, not asserted by the model and trusted as-is. The LLM drafts the qualitative reasoning; a deterministic function owns the number. You can watch this directly: the <a href="../tools/portfolio-wsjf/demo.html">epic prioritizer</a> recomputes its entire ranking board live in the browser when you change a weight. The same five epics, re-scored from the same evidence, with an architecture epic jumping to #1 with no model call involved.</p>
     </div>
   </div>
 
@@ -167,7 +167,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
       <div class="guardrail-label">The failure mode</div>
       <p>Most pipelines produce an artifact (a sprint plan, a roadmap) and then trust it indefinitely. Real engineering constraints don't hold still: a dependency shifts, a story gets reordered, and the plan quietly becomes wrong in a way nothing surfaces.</p>
       <div class="guardrail-label fix">The guardrail</div>
-      <p>Dependency ordering is recomputed in code at the point the plan is read, not just at the point it was generated. If a story is scheduled before the story it depends on, that raises a visible warning wherever the plan is consumed, not a note buried in a comment. The <a href="../tools/sprint-plan/demo.html">sprint planner's sample run</a> ships with exactly this: a RAID log that names the two dependencies most likely to push delivery out, because the system checked, rather than assumed the plan would stay valid.</p>
+      <p>Dependency ordering is recomputed in code at the point the plan is read, not just at the point it was generated. If a story is scheduled before the story it depends on, that raises a visible warning wherever the plan is consumed, not a note buried in a comment. The <a href="../tools/sprint-plan/demo.html">Build Planner's sample run</a> ships with exactly this: a RAID log that names the two dependencies most likely to push delivery out, because the system checked, rather than assumed the plan would stay valid.</p>
     </div>
   </div>
 
@@ -199,7 +199,7 @@ footer p{font-size:12px;font-weight:500;color:var(--muted);}
 
   <h2>Where to see the whole chain</h2>
 
-  <p>These four guardrails aren't scattered examples. They're consistently applied across a real nine-step pipeline, from persona generation through sprint planning. <a href="../tools/AI-native-prodops/document-flow.html">Document Flow</a> maps every step's real primary input and output, with links to that tool's own live sample run. <a href="../tools/AI-native-prodops/prodops-network.html">The network diagram</a> shows the same system zoomed out: every data source, every MCP connection, every agent and human gate in one picture. Neither is a mockup; every linked sample run is the tool's real output, not staged content.</p>
+  <p>These four guardrails aren't scattered examples. They're consistently applied across a real nine-step pipeline, from persona generation through batch planning. <a href="../tools/AI-native-prodops/document-flow.html">Document Flow</a> maps every step's real primary input and output, with links to that tool's own live sample run. <a href="../tools/AI-native-prodops/prodops-network.html">The network diagram</a> shows the same system zoomed out: every data source, every MCP connection, every agent and human gate in one picture. Neither is a mockup; every linked sample run is the tool's real output, not staged content.</p>
 
   <h2>The bottom line</h2>
 

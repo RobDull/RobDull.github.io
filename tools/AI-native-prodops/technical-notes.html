@@ -263,7 +263,7 @@ footer p{font-size:13px;color:var(--muted);}
     <p>The AI drafts most artifacts, but it doesn't get the final word on whether they hang together: a few checks run in plain code, and a confident-sounding response can't talk its way past them.</p>
     <ul class="guard-list">
       <li>The Backlog Builder computes requirement coverage against the BRD in code.</li>
-      <li>The Sprint Planner recomputes sprint load and dependency order (<span style="font-family:var(--mono);font-size:12.5px;">dependsOn</span>) in code; an over-capacity sprint, or a story placed in the same sprint as, or an earlier sprint than, a story it depends on, raises a visible warning wherever the plan is read.</li>
+      <li>The Build Planner recomputes batch load and dependency order (<span style="font-family:var(--mono);font-size:12.5px;">dependsOn</span>) in code; an over-capacity batch, or a story placed in the same batch as, or an earlier batch than, a story it depends on, raises a visible warning wherever the plan is read.</li>
       <li>The Business Documents tool refuses to generate a BRD for an epic below the funding cutoff calculated in the prioritizer.</li>
       <li>WSJF and RICE scores recompute live when weights change, in the shared scoring module, without a model call.</li>
         <li>The Backlog Builder won't accept a BRD until a named person confirms or defers each requirement marked as assumed.</li>
@@ -346,7 +346,7 @@ footer p{font-size:13px;color:var(--muted);}
           <li>Browser handoffs can be exercised</li>
           <li>Scoring behavior can be changed interactively</li>
           <li>The BRD funding restriction can be tested</li>
-          <li>Requirement mapping and sprint warnings can be observed</li>
+          <li>Requirement mapping and batch warnings can be observed</li>
           <li>Run-file behavior can be tested</li>
           <li>Jira CSV output can be inspected</li>
         </ul>
