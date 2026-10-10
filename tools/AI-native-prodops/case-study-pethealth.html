@@ -333,7 +333,7 @@ footer p{font-size:13px;color:var(--muted);}
             <div class="artifact-label">★ What came out</div>
             <ul>
               <li><strong>7 features prioritized with MoSCoW</strong> (<span class="mono">FEAT-01</span> to <span class="mono">FEAT-07</span>), with feature-level NFRs and refined sizing</li>
-              <li><strong>15 ordered stories</strong> with Given-When-Then acceptance criteria, story points, and dependencies</li>
+              <li><strong>15 ordered stories</strong> with Given-When-Then acceptance criteria, builder-day estimates (no story above 8 days), and dependencies</li>
               <li>Coverage checked in code: <strong>8 of 8 business requirements mapped to features</strong>, with the difference between refined and rough sizing flagged</li>
             </ul>
           </div>
@@ -353,7 +353,7 @@ footer p{font-size:13px;color:var(--muted);}
           <div class="tdesc">Two AI calls turn the backlog into a delivery plan: MVP scope from the Must-have features, a batch-by-batch plan, baseline and worst-case estimates with what drives the difference, and a RAID log (risks, assumptions, issues, dependencies). A batch is a regular delivery cycle of 2 days to 2 weeks; this run uses the 2-week default. <strong>Code rechecks batch load and dependency order:</strong> an over-capacity batch, or a story placed in the same batch as, or an earlier batch than, a story it depends on, raises a visible warning wherever the plan is used.</div>
           <div class="artifact">
             <div class="artifact-label">★ What came out</div>
-            <p>The delivery plan, plus the workflow's last handoff: a <strong>CSV file for Jira's bulk import</strong>, with Summary, Issue Type, Epic Link, Priority, Story Points, Sprint, Acceptance Criteria, and Issue Links columns. A person reviews it and imports it into Jira.</p>
+            <p>The delivery plan, plus the workflow's last handoff: a <strong>CSV file for Jira's bulk import</strong>, with Summary, Issue Type, Epic Link, Priority, Original Estimate, Sprint, Acceptance Criteria, and Issue Links columns. A person reviews it and imports it into Jira.</p>
           </div>
           <div class="evalq"><strong>What to evaluate:</strong> Are the estimates credible? What work or constraints are missing? Would the CSV import cleanly and preserve the intended relationships?</div>
           <div class="trow-foot">
