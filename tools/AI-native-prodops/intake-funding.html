@@ -14,12 +14,12 @@
   gtag('js', new Date());
   gtag('config', 'G-0Y1JYXTE5J');
 </script>
-<meta name="description" content="A proposed operating model for product development: 28 sources of ideas, sorted into an Invest lane with funded discovery and a Run lane for fixes and enhancements, per value-stream portfolio.">
+<meta name="description" content="A proposed lightweight, Kanban-based alternative to scaled agile: idea intake, funded discovery, run work, and AI-assisted inputs, workflows, verification and support.">
 <link rel="canonical" href="https://robdull.com/tools/AI-native-prodops/intake-funding.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://robdull.com/tools/AI-native-prodops/intake-funding.html">
 <meta property="og:title" content="Intake &amp; Funding Framework | Rob Dull">
-<meta property="og:description" content="A proposed operating model for product development: 28 sources of ideas, sorted into an Invest lane with funded discovery and a Run lane for fixes and enhancements, per value-stream portfolio.">
+<meta property="og:description" content="A proposed lightweight, Kanban-based alternative to scaled agile: idea intake, funded discovery, run work, and AI-assisted inputs, workflows, verification and support.">
 <meta property="og:site_name" content="Rob Dull">
 <meta property="og:image" content="https://robdull.com/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -247,7 +247,29 @@ sup a{text-decoration:none;font-weight:700;font-size:10px;}
 footer{border-top:1px solid var(--rule);padding:28px 40px;max-width:1100px;margin:56px auto 0;}
 footer p{font-size:13px;color:var(--muted);}
 
+/* AI TABLE */
+.ai-table td:last-child{white-space:nowrap;}
+
+/* KANBAN BOARDS */
+.board{margin-top:18px;}
+.board-name{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;}
+.board.inv .board-name{color:var(--accent);}
+.board.run .board-name{color:var(--teal);}
+.cols{list-style:none;display:flex;gap:6px;flex-wrap:wrap;}
+.cols li{flex:1 1 0;min-width:112px;border:1px solid var(--rule);border-top:3px solid var(--accent);border-radius:6px;background:white;padding:8px 10px 10px;font-size:12.5px;font-weight:700;line-height:1.3;}
+.board.run .cols li{border-top-color:var(--teal);}
+.cols li small{display:block;font-size:10.5px;font-weight:700;color:var(--accent2);margin-top:4px;}
+
+/* SAFE COMPARISON */
+.cmp td:first-child{width:130px;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px 32px;margin-top:20px;max-width:900px;}
+.two h3{font-size:14px;font-weight:800;}
+.two .art-list{margin-top:8px;}
+
 /* RESPONSIVE */
+@media(max-width:700px){
+  .two{grid-template-columns:1fr;}
+}
 @media(max-width:1080px){
   .lanes{grid-template-columns:1fr;gap:6px;}
   .to-deliver{grid-template-columns:1fr;}
@@ -282,6 +304,7 @@ footer p{font-size:13px;color:var(--muted);}
   .arr::before{content:'\2193';}
   .gate{flex-direction:row;flex-basis:auto;justify-content:flex-start;padding:6px 0 6px 12px;gap:16px;}
   .gtx{align-items:flex-start;text-align:left;}
+  .cols li{flex:0 0 calc(50% - 3px);min-width:0;}
   .plats{grid-template-columns:1fr 1fr;}
   .read4{grid-template-columns:1fr;}
   .pf{padding:12px;}
@@ -311,7 +334,7 @@ footer p{font-size:13px;color:var(--muted);}
 <div class="page-head">
   <div class="eyebrow">Operating model · Proposed</div>
   <h1>Where development ideas come from, <em>and how they get funded</em></h1>
-  <p>The nine tools on this site start from an initiative someone has already chosen. This page covers what happens before and around that: where ideas for development come from, how they're sorted, and how each kind of work gets funded. It's a proposal, and the toolchain changes it calls for aren't built yet.</p>
+  <p>The nine tools on this site start from an initiative someone has already chosen. This page covers what happens before and around that: where ideas for development come from, how they're sorted, and how each kind of work gets funded. I'm designing it as a lightweight, Kanban-based alternative to scaled agile frameworks, with AI assisting four things: inputs, the workflow, verification, and support after release. It's a proposal, and the toolchain changes it calls for aren't built yet.</p>
 </div>
 
 <div class="wrap">
@@ -413,6 +436,22 @@ footer p{font-size:13px;color:var(--muted);}
     <div><h3>One sort, three exits</h3><p>The size test is one feature: one to four team-weeks, the toolchain's own feature size. Signals that aren't actionable yet go to the insight pool.</p></div>
     <div><h3>Two funding gates</h3><p>Invest pays twice. A small amount, fixed before work starts, buys discovery. A large amount buys the build, after discovery has sized it.</p></div>
     <div><h3>A standing run budget</h3><p>Run work is ordered continuously against a fixed share of capacity, with no business case per ticket.</p></div>
+  </div>
+</section>
+
+<section class="sec" id="ai" aria-labelledby="ai-h">
+  <h2 class="h2" id="ai-h">Where AI <em>assists</em></h2>
+  <p class="lead">AI drafts and people decide at each of the four points. Code recomputes every number a draft states, so a model's figures are never taken on trust.</p>
+  <div class="table-scroll">
+    <table class="rank ai-table">
+      <thead><tr><th>Point</th><th>What AI drafts</th><th>What people own</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Inputs</td><td>Clusters tickets, account notes, research and reviews into themes, and proposes how each theme should be sorted, citing every excerpt. Code counts the tickets, accounts and revenue.</td><td>The sort and its thresholds</td><td><span class="pill new">Proposed</span></td></tr>
+        <tr><td>Workflow</td><td>Drafts each step's document: initiative and epics, business case, ranking inputs, roadmap, requirements, backlog, batch plan, and a build prompt for each story. Code recomputes scores, the funding cutoff, requirement coverage, batch loads and dependency order.</td><td>Review and edits at every step, and both funding decisions</td><td><span class="pill part">Built, on sample data</span></td></tr>
+        <tr><td>Verification</td><td>Today, a named person must confirm or defer each assumed requirement before the backlog is built. Proposed: tests drafted from acceptance criteria, and a check that each build meets its requirements before release.</td><td>Release approval</td><td><span class="pill chg">Partly built</span></td></tr>
+        <tr><td>Support after release</td><td>Sorts incoming tickets into Fix and Enhance, summarizes incidents, and compares results with the benefits plan set at Initiative Intake (03).</td><td>Severity, on-call, and whether an initiative keeps its funding</td><td><span class="pill new">Proposed</span></td></tr>
+      </tbody>
+    </table>
   </div>
 </section>
 
@@ -565,6 +604,80 @@ footer p{font-size:13px;color:var(--muted);}
   <p class="small-muted">Two more groups usually stay with corporate IT, outside this framework: the digital workplace (chat, email, office suites, laptops) and corporate systems of record (ERP, CRM, HR and finance, often including payments and billing).</p>
 </section>
 
+<section class="sec" id="kanban" aria-labelledby="kanban-h">
+  <h2 class="h2" id="kanban-h">Run as a <em>Kanban system</em></h2>
+  <p class="lead">Both lanes are boards with work-in-progress limits. Work moves when the next column has room, and teams deliver in batches of two days to two weeks. There are no planning intervals or release trains.</p>
+  <div class="board inv">
+    <div class="board-name">Invest board</div>
+    <ol class="cols">
+      <li>Sorted</li>
+      <li>Shaping<small>03 Intake</small></li>
+      <li>Validating<small>WIP limit · 03b</small></li>
+      <li>Ready for build funding</li>
+      <li>In delivery<small>WIP limit</small></li>
+      <li>Measuring benefits</li>
+      <li>Done</li>
+    </ol>
+  </div>
+  <div class="board run">
+    <div class="board-name">Run board</div>
+    <ol class="cols">
+      <li>Sorted</li>
+      <li>Ready</li>
+      <li>In progress<small>WIP limit</small></li>
+      <li>Verifying</li>
+      <li>Released</li>
+      <li>Done</li>
+    </ol>
+  </div>
+  <ul class="art-list">
+    <li><strong>WIP limits set the pace.</strong> Each portfolio sets its own WIP limits. A team pulls the next item when a column has room, so there's no fixed plan to defend.</li>
+    <li><strong>Flow metrics.</strong> Cycle time, throughput, work in progress and work-item age replace velocity and interval objectives.</li>
+    <li><strong>One replenishment point.</strong> The weekly intake review refills the Sorted columns and looks at any item older than the portfolio's usual cycle time.</li>
+    <li><strong>The boards end after release.</strong> Invest work stays on the board until its benefits are measured against the plan set at Initiative Intake.</li>
+  </ul>
+</section>
+
+<section class="sec" id="safe" aria-labelledby="safe-h">
+  <h2 class="h2" id="safe-h">Compared with SAFe <em>Lean Portfolio Management</em></h2>
+  <p class="lead">SAFe's Lean Portfolio Management tackles the same funding problem with more structure. This framework keeps a few of its ideas and drops the rest. The bet is that continuous flow with explicit limits, plus AI-drafted evidence that a person checks, can replace most of SAFe's planning events and role layers.</p>
+  <div class="table-scroll">
+    <table class="rank cmp">
+      <thead><tr><th></th><th>SAFe Lean Portfolio Management</th><th>This framework</th></tr></thead>
+      <tbody>
+        <tr><td>Funding</td><td>Lean budgets per value stream, set in a recurring Strategic Investment Planning event (formerly participatory budgeting).<sup><a href="#fn5">5</a></sup></td><td>One budget per value-stream portfolio. Executives set the Invest and Run split, and each initiative earns discovery money first, then build money.</td></tr>
+        <tr><td>Spending rules</td><td>Four guardrails: investment horizons, capacity allocation, approval of significant initiatives, and continuous Business Owner engagement.<sup><a href="#fn4">4</a></sup></td><td>One size line (one feature), two funding gates, and a capacity split held in each batch.</td></tr>
+        <tr><td>Portfolio flow</td><td>A portfolio Kanban (Funnel, Reviewing, Analyzing, Ready, Implementing, Done) with an Epic Owner, a Lean business case and an MVP.<sup><a href="#fn3">3</a></sup></td><td>One sort, then Shape, Validate and the build. The toolchain drafts the case from cited evidence, and a person decides at each gate.</td></tr>
+        <tr><td>Learning first</td><td>Build and evaluate an MVP, then persevere or pivot.<sup><a href="#fn3">3</a></sup></td><td>Validate (03b): two to eight weeks of UX research, architecture and a proof of concept, ending in proceed, pivot or stop, before any build money is committed.</td></tr>
+        <tr><td>Cadence</td><td>Planning Intervals of 8 to 12 weeks, opened by a two-day PI Planning event for the whole Agile Release Train.<sup><a href="#fn6">6</a></sup> SAFe's AI-native guidance shortens that event to one day and keeps the interval.<sup><a href="#fn7">7</a></sup></td><td>Continuous pull with WIP limits. Teams deliver in batches of two days to two weeks, and nothing ties them to a shared interval.</td></tr>
+        <tr><td>Roles and events</td><td>Epic Owners, Release Train Engineers, Business Owners and a Lean Portfolio Management function, plus portfolio reviews and Inspect and Adapt.</td><td>No new roles. A weekly intake review, the two gates, and the product, engineering and design leaders a team already has.</td></tr>
+        <tr><td>Prioritization</td><td>WSJF with relative estimates.<sup><a href="#fn8">8</a></sup></td><td>WSJF or RICE, with every score recomputed in code from cited evidence. This part is built, in the Epic Prioritizer.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="two">
+    <div>
+      <h3>What it keeps</h3>
+      <ul class="art-list">
+        <li>Funding value streams instead of projects</li>
+        <li>A capacity split between kinds of work</li>
+        <li>A size line above which work needs a portfolio decision</li>
+        <li>Learning before the full investment</li>
+        <li>WSJF, which comes from Don Reinertsen's work on product development flow<sup><a href="#fn8">8</a></sup></li>
+      </ul>
+    </div>
+    <div>
+      <h3>What it leaves out</h3>
+      <ul class="art-list">
+        <li>Planning Intervals and release trains</li>
+        <li>Big-room planning events</li>
+        <li>New role layers between teams and executives</li>
+        <li>A separate budgeting event; the split is an executive decision for each portfolio</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="toolchain" aria-labelledby="toolchain-h">
   <h2 class="h2" id="toolchain-h">What it would change <em>in the toolchain</em></h2>
   <div class="table-scroll">
@@ -587,11 +700,12 @@ footer p{font-size:13px;color:var(--muted);}
 <section class="sec" id="choices" aria-labelledby="choices-h">
   <h2 class="h2" id="choices-h">The choices <em>behind it</em></h2>
   <div class="choices">
-    <div class="choice"><span class="cn">01</span><div><h3>The line between Invest and Run is one feature.</h3><p>One to four team-weeks. It matches the toolchain's own feature size, so the sort uses a unit the tools already understand.</p></div></div>
-    <div class="choice"><span class="cn">02</span><div><h3>Discovery is time-boxed at two to eight weeks.</h3><p>The first gate picks the length to fit the unknowns: about two weeks for one technical question, up to eight for a new product area. The length holds once it's picked, so the gate approves a known cost.</p></div></div>
-    <div class="choice"><span class="cn">03</span><div><h3>Discovery gets its own step, 03b.</h3><p>It has its own outputs and its own funding gate. Numbering it 03b keeps every existing step number and link stable.</p></div></div>
-    <div class="choice"><span class="cn">04</span><div><h3>The capacity split belongs to executives.</h3><p>Each portfolio's executives set its split, and it will differ by portfolio. A new product may run mostly Invest, while a mature one with a heavy support load may carry more Run. The 60/25/15 in the diagram is only a placeholder.</p></div></div>
-    <div class="choice"><span class="cn">05</span><div><h3>Shared platforms are portfolios too.</h3><p>They're funded on their own, grouped by theme, with the value-stream portfolios as their customers.</p></div></div>
+    <div class="choice"><span class="cn">01</span><div><h3>Continuous flow.</h3><p>Both lanes run as Kanban boards with WIP limits. Teams deliver in batches of two days to two weeks, with no planning intervals, release trains or added roles.</p></div></div>
+    <div class="choice"><span class="cn">02</span><div><h3>The line between Invest and Run is one feature.</h3><p>One to four team-weeks. It matches the toolchain's own feature size, so the sort uses a unit the tools already understand.</p></div></div>
+    <div class="choice"><span class="cn">03</span><div><h3>Discovery is time-boxed at two to eight weeks.</h3><p>The first gate picks the length to fit the unknowns: about two weeks for one technical question, up to eight for a new product area. The length holds once it's picked, so the gate approves a known cost.</p></div></div>
+    <div class="choice"><span class="cn">04</span><div><h3>Discovery gets its own step, 03b Validate.</h3><p>It has its own outputs and its own funding gate. Numbering it 03b keeps every existing step number and link stable.</p></div></div>
+    <div class="choice"><span class="cn">05</span><div><h3>The capacity split belongs to executives.</h3><p>Each portfolio's executives set its split, and it will differ by portfolio. A new product may run mostly Invest, while a mature one with a heavy support load may carry more Run. The 60/25/15 in the diagram is only a placeholder.</p></div></div>
+    <div class="choice"><span class="cn">06</span><div><h3>Shared platforms are portfolios too.</h3><p>They're funded on their own, grouped by theme, with the value-stream portfolios as their customers.</p></div></div>
   </div>
 
   <div class="next">
@@ -609,6 +723,12 @@ footer p{font-size:13px;color:var(--muted);}
     <ol>
       <li id="fn1">FASB, <a href="https://storage.fasb.org/ASU%202025-06.pdf">Accounting Standards Update 2025-06, Intangibles: Goodwill and Other, Internal-Use Software (Subtopic 350-40)</a>, September 2025.</li>
       <li id="fn2">PKF O'Connor Davies, <a href="https://www.pkfod.com/insights/fasbs-internal-use-software-guidance-what-companies-need-to-know/">FASB's internal-use software guidance: what companies need to know</a>.</li>
+      <li id="fn3">Scaled Agile, <a href="https://framework.scaledagile.com/blog/glossary_term/portfolio-kanban/">Portfolio Kanban</a> and <a href="https://framework.scaledagile.com/lean-portfolio-management-discipline">Lean Portfolio Management Discipline</a>.</li>
+      <li id="fn4">Scaled Agile, <a href="https://framework.scaledagile.com/guardrails/">Lean Budget Guardrails</a>.</li>
+      <li id="fn5">Scaled Agile, <a href="https://framework.scaledagile.com/participatory-budgeting">Strategic Investment Planning (formerly Participatory Budgeting)</a>.</li>
+      <li id="fn6">Scaled Agile, <a href="https://framework.scaledagile.com/pi-planning/">PI Planning</a>.</li>
+      <li id="fn7">Scaled Agile, <a href="https://framework.scaledagile.com/ain-safe-pi-outcome-planning/">PI Outcome Planning</a> (AI-native SAFe).</li>
+      <li id="fn8">Scaled Agile, <a href="https://framework.scaledagile.com/wsjf/">Weighted Shortest Job First</a>, which credits Donald G. Reinertsen, <em>The Principles of Product Development Flow</em> (2009).</li>
     </ol>
   </div>
 </section>
