@@ -39,8 +39,6 @@ workshops/
 about_me/
   resume.html                                 ← Resume (linked from main nav)
   work-history.html                           ← Selected Cases (result-first cases; links to and from the resume)
-worker.js                                     ← Cloudflare Worker API proxy
-WORKER_README.md                              ← Deploy instructions for the Worker
 DESIGN_NOTES.md                              ← This file
 worker-vs-direct.html                         ← Infrastructure decision reference (noindex)
 sitemap.xml                                   ← XML sitemap for all public pages
@@ -170,10 +168,9 @@ Two tools call the Anthropic Claude API: **Business Case Generator** and **Featu
 | Model | `claude-sonnet-4-6` |
 | Key storage | Browser `sessionStorage` only — cleared on tab close |
 | Key modal | Shown on first Run click if no key in session |
-| Worker URL | `https://tools.rob-dull.workers.dev` (deployed, not currently used by tool pages) |
 | Max tokens | 1000–2000 depending on tool step |
 
-The Cloudflare Worker is deployed and operational. Switching from direct API to Worker requires ~10 minutes of file edits per tool (see `worker-vs-direct.html` for the exact steps).
+A Cloudflare Worker proxy was evaluated and retired. Every tool uses the visitor-supplied key model; `worker-vs-direct.html` keeps the reasoning.
 
 ---
 

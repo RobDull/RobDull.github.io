@@ -118,32 +118,9 @@ p{font-size:15px;line-height:1.8;color:#1a1a1a;margin-bottom:18px;}
     </tbody>
   </table>
 
-  <h2>What you'd need to change to use the Worker</h2>
+  <h2>Status</h2>
 
-  <p>Four changes to <code>business-case-index.html</code> and <code>feature-intake-index.html</code>. Nothing changes in Cloudflare: the Worker is already deployed and your API key is already set.</p>
-
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-text"><strong>Set the Worker URL.</strong> Find <code>YOUR_WORKER_URL_HERE</code> (or the current <code>api.anthropic.com</code> fetch URL) and replace with <code>https://tools.rob-dull.workers.dev</code>.</div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-text"><strong>Revert the fetch headers.</strong> Remove <code>x-api-key</code> and <code>anthropic-dangerous-direct-browser-access</code> from the fetch call. The Worker adds its own key server-side; the browser doesn't send one.</div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-text"><strong>Remove the API key modal.</strong> Delete the modal HTML, modal CSS, and the <code>showApiKeyModal()</code>, <code>submitApiKey()</code>, and <code>clearApiKey()</code> functions. Remove the key-status pill from the nav.</div>
-    </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <div class="step-text"><strong>Remove the key check before each run.</strong> Delete the <code>if (!getApiKey())</code> block at the start of the <code>generate()</code> and <code>runStep1()</code> functions.</div>
-    </div>
-  </div>
-
-  <div class="callout">
-    <strong>What the Worker already does for you:</strong> it locks incoming requests to <code>robdull.com</code> only, forces the model to <code>claude-sonnet-4-6</code>, caps output at 2000 tokens regardless of what the browser requests, and keeps your API key off the client entirely. None of that requires any changes.
-  </div>
+  <p>The Worker proxy is no longer in use, and its setup steps have been removed from this page. Every tool uses the visitor-supplied key model described above.</p>
 
   <h2>The tradeoff in one sentence each</h2>
 
