@@ -2,7 +2,7 @@
 
 ## Site overview
 
-A portfolio site for Rob Dull, positioned as Product Operations & Delivery Leadership (since 2026-09-30; facts follow career-mktg-ai/career-facts.md). The site serves two audiences: practitioners who use the tools, and hiring managers evaluating PM and Product Operations capability. Tools use the Anthropic Claude API either via direct browser call (with visitor-supplied API key modal) or a Cloudflare Worker proxy.
+A portfolio site for Rob Dull, positioned as Organizational Design · Product Operations · Program Management · Delivery Leadership (site tagline since 2026-11-24; Product Operations & Delivery Leadership from 2026-09-30; facts follow career-mktg-ai/career-facts.md). The site serves two audiences: practitioners who use the tools, and hiring managers evaluating PM and Product Operations capability. Tools use the Anthropic Claude API either via direct browser call (with visitor-supplied API key modal) or a Cloudflare Worker proxy.
 
 ---
 
